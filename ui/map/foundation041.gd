@@ -7,10 +7,10 @@ extends RefCounted
 const SQRT3 := 1.7320508075688772
 const CELL_RADIUS := 64.0
 const ROW_STEP := 96.0
-const MAP_BUILDING_WIDTH := 2.85
+const AtlasStyle=preload("res://ui/map/atlas_style.gd")
 const BIN_SIZE := 128.0
-const MIN_BLEND := 28.0
-const MAX_BLEND := 104.0
+const MIN_BLEND := 20.0
+const MAX_BLEND := 60.0
 const BLEND_PER_HEIGHT := 2.8
 const MIN_HALF_X := 18.0
 const MIN_HALF_Y := 16.0
@@ -262,8 +262,8 @@ static func _footprint_for(def_id: String) -> Dictionary:
 	var size: Array = _asset_sizes.get(asset_id, [20.0, 18.0])
 	return {
 		"asset_id": asset_id,
-		"half_x": clampf(float(size[0]) * MAP_BUILDING_WIDTH * 0.5 + FOOTPRINT_MARGIN, MIN_HALF_X, MAX_HALF_X),
-		"half_y": clampf(float(size[1]) * MAP_BUILDING_WIDTH * 0.5 + FOOTPRINT_MARGIN, MIN_HALF_Y, MAX_HALF_Y),
+		"half_x": clampf(float(size[0]) * AtlasStyle.building_scale(def_id) * 0.5 + FOOTPRINT_MARGIN, MIN_HALF_X, MAX_HALF_X),
+		"half_y": clampf(float(size[1]) * AtlasStyle.building_scale(def_id) * 0.5 + FOOTPRINT_MARGIN, MIN_HALF_Y, MAX_HALF_Y),
 	}
 
 

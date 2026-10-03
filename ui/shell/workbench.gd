@@ -1,5 +1,5 @@
 extends PanelContainer
-## The real map remains interactive. Candidate selection never commits gameplay.
+## L3 decision workbench. Candidate selection never commits gameplay.
 const W=preload("res://ui/widgets.gd")
 const C031=preload("res://ui/components031/components.gd")
 const D031=preload("res://ui/components031/design.gd")
@@ -25,9 +25,9 @@ func _group(parent:Node,title:String,bg:Color=W.PANEL) -> VBoxContainer:
 	var content=C031.group(parent,title,bg)
 	var panel=content.get_parent()
 	if panel is PanelContainer:
-		var style=W.box(bg,W.SOFT,8);style.content_margin_left=7;style.content_margin_right=7;style.content_margin_top=6;style.content_margin_bottom=6
+		var style=W.box(bg,W.SOFT,12);style.content_margin_left=14;style.content_margin_right=14;style.content_margin_top=12;style.content_margin_bottom=12
 		panel.add_theme_stylebox_override("panel",style)
-		content.add_theme_constant_override("separation",5)
+		content.add_theme_constant_override("separation",10)
 	return content
 func show_tender():
 	mode="tender";page="summary";selected_offer="";rebuild()
@@ -94,12 +94,11 @@ func rebuild():
 			if mode=="tender":
 				var card=_group(body,title,W.SOFT if selected else W.PANEL);card.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 				var button=W.button(("✓ 已选择" if selected else subtitle),func():choose(o.id));button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-				if selected:W.primary(button)
+				_selection_style(button,selected)
 				card.add_child(button);buttons[o.id]=button;cards[o.id]=card
-				if compact:
-					for h in highlights:
-						if str(h)!="":
-							var summary=W.label(str(h),14,W.MUTED);summary.max_lines_visible=2;card.add_child(summary)
+				for h in highlights:
+					if str(h)!="":
+						var summary=W.label(str(h),15,W.MUTED);summary.max_lines_visible=2;card.add_child(summary)
 				var candidate_preview=app.planner.compare(g,g.s.draft.base,g.s.draft.tile,o)
 				if candidate_preview.get("ok",false):
 					var service_gain=0.
@@ -108,11 +107,12 @@ func rebuild():
 					var outputs=candidate_preview.get("outputs",{})
 					card.add_child(W.label("粮食 %.1f · 材料 %.1f · 制成品 %.1f /月"%[float(outputs.get("food",0)),float(outputs.get("material",0)),float(outputs.get("goods",0))],14,W.TEXT))
 				else:card.add_child(W.label(str(candidate_preview.get("error","当前无法生成预测。")),14,W.MUTED))
+				card.add_child(W.label("成长槽位 · T1 → T2 → T3",13,W.MUTED))
 				card.add_child(Art.slot_strip(g,o.get("slot_track",[])))
 			else:
 				var card=_group(body,"制度 · "+policy_slot)
 				var button=W.button(title,func():choose(o.id));button.custom_minimum_size.x=0;card.add_child(button);buttons[o.id]=button
-				if selected:W.primary(button)
+				_selection_style(button,selected)
 				card.add_child(W.label(subtitle,14,W.MUTED))
 				for h in highlights:card.add_child(W.label(h,16))
 	if not compact and page=="summary":
@@ -130,10 +130,18 @@ func rebuild():
 		detail.text="";detail.icon=Art.icon("ledger" if page=="summary" else "back");detail.expand_icon=true;detail.add_theme_constant_override("icon_max_width",22)
 	var action_label="采用政策" if mode=="policy" else ("采用并建设" if g.s.draft.kind=="development" else "采用方案")
 	apply_button=W.primary(W.button(action_label,commit))
+	apply_button.name="TenderConfirmPrimary";apply_button.set_meta("ui_role","primary_action")
 	apply_button.custom_minimum_size.x=84 if compact else 160;apply_button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;footer.add_child(apply_button)
 	if not compact:footer.add_child(W.button("返回地图",func():app.exit_workbench()))
 	app.request_layout();update_preview()
 func compact_gap() -> int:return 4 if app.compact else 6
+func _selection_style(button:Button,selected:bool):
+	# Selection is a reversible comparison state, not the purchase action.
+	button.set_meta("ui_role","candidate_selection")
+	button.add_theme_stylebox_override("normal",W.button_box(W.SOFT if selected else W.PANEL,W.ACCENT if selected else W.DIVIDER))
+	button.add_theme_stylebox_override("hover",W.button_box(W.SOFT,W.ACCENT))
+	button.add_theme_stylebox_override("pressed",W.button_box(W.BASE,W.ACCENT))
+	for key in ["font_color","font_hover_color","font_pressed_color"]:button.add_theme_color_override(key,W.TEXT)
 func choose(id:String):
 	selected_offer=id;app.play_cue("select")
 	if page!="summary":page="summary";rebuild();return
@@ -141,12 +149,7 @@ func choose(id:String):
 	for key in buttons:
 		var selected=key==selected_offer
 		buttons[key].text="✓ 已选择" if selected else "选择这家运营者"
-		if selected:W.primary(buttons[key])
-		else:
-			buttons[key].add_theme_stylebox_override("normal",W.button_box(W.SOFT,W.SOFT))
-			buttons[key].add_theme_stylebox_override("hover",W.button_box(W.PANEL,W.GREEN))
-			buttons[key].add_theme_stylebox_override("pressed",W.button_box(W.PANEL,W.GREEN))
-			for color_key in ["font_color","font_hover_color","font_pressed_color"]:buttons[key].add_theme_color_override(color_key,W.TEXT)
+		_selection_style(buttons[key],selected)
 		if cards.has(key):cards[key].get_parent().add_theme_stylebox_override("panel",W.box(W.SOFT if selected else W.PANEL,W.GREEN if selected else W.SOFT,8))
 	update_preview()
 func update_preview():

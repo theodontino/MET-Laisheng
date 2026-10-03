@@ -1,4 +1,4 @@
-# MET 0.5.0-beta.1：构建与验证
+# MET 0.5.0-beta.2：构建与验证
 
 本指南描述当前源码的复现入口。验收结论、总检查数和产物校验值应以对应运行生成的证据及最终验收报告为准。设计包列出的目标不是测试结果；历史 0.4 报告不能替代本次结果。
 
@@ -73,7 +73,22 @@ bash tools/test_beta.sh
 
 ## 原生窗口与 UI 截图
 
-在有桌面的环境运行：
+整个 pre-1.0 默认桌面全屏，最低 **1920×1080**。本轮只验证该全屏基准；用户明确不要求不同大小窗口测试。新四层界面与地图重置入口：
+
+```bash
+bash tools/test_ui_reset.sh
+```
+
+该脚本需要有效 `DISPLAY`，使用真实鼠标/键盘输入检查 L0/L1/L2/L3 与地图选址、主动作和返回，校验测试期间产品源码指纹不变，生成 JSON、日志与原生截图。底层入口是 `--script res://tests/ui_reset.gd`。原有 Beta 决策流程回归也在同一全屏基准运行：
+
+次级／三级页面另有专门的原生交互套件，检查资源来源、人口需求、政策预演、升级、施工、奖励队列、安装、市场报价和实际订单；报告与主界面分开保存：
+
+```bash
+MET_UI_SUITE=desk MET_EVIDENCE_DIR="$MET_TEST_ROOT/desk-evidence" \
+  bash tools/test_ui_reset.sh
+```
+
+正常主场景的 Beta 决策流程回归使用以下入口，不附加窗口尺寸或全屏命令参数，直接验证游戏的默认启动行为：
 
 ```bash
 "$GODOT" --path "$MET_PROJECT_ROOT" -- --beta-ui
@@ -82,17 +97,31 @@ bash tools/test_beta.sh
 没有显示器的 Linux 环境可使用 Xvfb 与 Mesa：
 
 ```bash
-xvfb-run -a -s '-screen 0 1440x900x24' \
+xvfb-run -a -s '-screen 0 1920x1080x24' \
+  env LIBGL_ALWAYS_SOFTWARE=1 bash tools/test_ui_reset.sh
+xvfb-run -a -s '-screen 0 1920x1080x24' \
   env LIBGL_ALWAYS_SOFTWARE=1 "$GODOT" --path "$MET_PROJECT_ROOT" -- --beta-ui
 ```
 
 该入口加载真实 App 与原生渲染器，通过 UI 回调检查时间档、奖励、升级、告警、尾声等，并把帧缓冲截图写入证据目录。它使用显式状态夹具；不能把这些画面描述成自然游玩路线。`--headless` 无法代替真实窗口截图。
 
-检查截图时同时看内容、布局、文本缩放、滚动与可操作按钮。Godot 的“帧已保存”只证明生成了图像，不自动证明视觉验收通过。Xvfb + llvmpipe 的帧率属于软件渲染环境，不能代表桌面 GPU、M 系列 Mac 或 Windows 实机性能。
+检查截图时同时看信息分层、图形含义、地貌与建筑尺度、滚动及可操作按钮。Godot 的“帧已保存”只证明生成了图像，不自动证明视觉验收通过。Xvfb + llvmpipe 的帧率属于软件渲染环境，不能代表桌面 GPU、M 系列 Mac 或 Windows 实机性能。此前小窗口截图仅为历史证据，不属于本轮验收。
+
+已通过且源码稳定的主界面和档案报告可生成独立 HTML 画廊。地图目录需含同脚本的 `before/after-{2,12,53}.png` 及对应 JSON；工具校验场景元数据与原图尺寸，不修改图片：
+
+```bash
+python3 tools/build_ui_reset_gallery.py \
+  --ui /path/to/final-ui-evidence --desks /path/to/desk-evidence \
+  --beta-ui /path/to/default-main-beta-evidence \
+  --maps /path/to/matched-map-evidence \
+  --output build/MET_Laisheng_Beta_2_Visual.html
+```
 
 ## 性能基线
 
 性能探针使用真实 App，分别创建 2／12／53 栋建筑规模夹具，记录静止、平移、缩放与时间推进阶段，以及规则编译、快照、反馈等只读成本。默认每阶段采样 20 秒；短时冒烟可用 `MET_PERF_STAGE_SECONDS` 调整，但报告必须保留实际采样时长。
+
+原生探针显式设置根 App 全屏锚点，记录实际显示器、窗口、根节点与地图尺寸，并检查绘制回调、全部地格投影和截图。地形网格构建数只作诊断，因为新地格直接绘制多边形。Beta.1 旧探针漏设根锚点，未测到完整地图；旧帧耗时不能用作本轮地图性能基线，见[历史性能报告的更正](PERFORMANCE.md)。比较时必须让两个版本使用同一修正脚本，并在运行期间停止其他 Godot 进程。
 
 无窗口 CPU 检查：
 
@@ -104,9 +133,9 @@ xvfb-run -a -s '-screen 0 1440x900x24' \
 Linux 原生窗口基线：
 
 ```bash
-xvfb-run -a -s '-screen 0 1440x900x24' \
+xvfb-run -a -s '-screen 0 1920x1080x24' \
   env LIBGL_ALWAYS_SOFTWARE=1 "$GODOT" --path "$MET_PROJECT_ROOT" \
-  --script res://tests/beta_performance.gd
+  --fullscreen --resolution 1920x1080 --script res://tests/beta_performance.gd
 ```
 
 也可以在全部核心与路线检查后附加无窗口性能探针：
@@ -120,16 +149,16 @@ MET_BETA_PERFORMANCE=1 bash tools/test_beta.sh
 ## 源码交付与独立解包
 
 ```bash
-python3 tools/package_beta.py
+python3 tools/package_beta.py --output build/MET_Laisheng_Beta_2_Source.zip
 ```
 
-默认生成 `build/MET_Laisheng_Beta_Source.zip` 和同名 `.zip.sha256`。包内 `SOURCE_MANIFEST.json` 记录基础提交、是否包含未提交修改及成员 SHA-256；脚本检查成员哈希和 ZIP CRC。它不收集 `.git`、`.godot`、用户存档目录或历史证据目录，不会自动发布 GitHub。
+本轮使用独立文件名，保留之前交付的 Beta.1 包及其校验值。包内 `SOURCE_MANIFEST.json` 记录基础提交、是否包含未提交修改及成员 SHA-256；脚本检查成员哈希和 ZIP CRC。它不收集 `.git`、`.godot`、用户存档目录或历史证据目录，不会自动发布 GitHub。
 
 哈希正确只说明包内容一致，不能证明包可以独立运行。至少在全新目录导入并启动：
 
 ```bash
 export MET_EXTRACT_ROOT="$(mktemp -d /tmp/met-beta-extract.XXXXXX)"
-python3 -m zipfile -e build/MET_Laisheng_Beta_Source.zip "$MET_EXTRACT_ROOT"
+python3 -m zipfile -e build/MET_Laisheng_Beta_2_Source.zip "$MET_EXTRACT_ROOT"
 "$GODOT" --headless --path "$MET_EXTRACT_ROOT/MET_Laisheng_Beta" \
   --editor --import --quit
 "$GODOT" --headless --path "$MET_EXTRACT_ROOT/MET_Laisheng_Beta" \

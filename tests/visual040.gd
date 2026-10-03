@@ -80,8 +80,8 @@ func start(a):
 	for bid in app.game.playable_ids():
 		var building=app.game.s.projects[bid]
 		if building.def!="advanced_residence":continue
-		var texture=Art.sprite(building.def);var extent=Vector2.ONE*app.map_view.radius()*app.map_view.BUILDING_WIDTH
-		var origin=app.map_view.point(building.tile)-Art.anchor(building.def)*extent
+		var texture=Art.sprite(building.def);var rectangle=app.map_view.building_screen_rect(bid);var extent=rectangle.size
+		var origin=rectangle.position
 		for y in range(190,350,8):
 			for x in range(240,520,8):
 				var uv=Vector2(x,y)/texture.get_size();var screen=origin+uv*extent

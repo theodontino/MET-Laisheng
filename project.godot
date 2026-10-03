@@ -1,21 +1,22 @@
-; MET 0.4.0 — specialization, commissions, shared construction and single-Block trade.
+; MET Beta — single-Block gameplay and layered desktop city presentation.
 config_version=5
 
 [application]
 config/name="MET · 来生"
-config/version="0.5.0-beta.1"
+config/version="0.5.0-beta.2"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/use_custom_user_dir=true
 config/custom_user_dir_name="MET-Laisheng-Beta"
 
 [display]
-window/size/viewport_width=1440
-window/size/viewport_height=900
-window/size/window_width_override=1440
-window/size/window_height_override=900
-window/size/min_width=640
-window/size/min_height=320
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/size/min_width=1920
+window/size/min_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/dpi/allow_hidpi=true
 window/handheld/orientation=6

@@ -42,7 +42,7 @@ func _init() -> void:
 	for operator in operators.values():
 		for domain in domains:
 			if not operator.domain_weights.has(domain):operator.domain_weights[domain]=2.0
-	data.build="0.5.0-beta.1"
+	data.build="0.5.0-beta.2"
 func tag_name(t:String) -> String:
 	return str({"building.industrial":"工业","building.residential":"住宅","building.medical":"医疗","building.education":"教育","building.agricultural":"农业","building.producer":"生产","building.service":"服务","building.public_service":"公共服务","building.commercial":"商业","building.green":"绿色","building.energy":"能源","building.extractive":"开采","building.logistics":"物流","building.road":"道路接入","tile.waterfront":"水岸","tile.fertile":"肥沃","tile.forest":"森林","tile.highland":"高地","tile.wet":"湿地","tile.water":"水域"}.get(t,t))
 func tags_text(tags:Array) -> String:

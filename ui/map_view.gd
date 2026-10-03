@@ -1,13 +1,13 @@
 extends Control
 const W=preload("res://ui/widgets.gd")
 const GROUND_Y=0.661
-const BUILDING_WIDTH=2.85
-const HEIGHT_Y=0.751
+const HEIGHT_Y=0.42
 const Elevation=preload("res://ui/map/elevation040.gd")
 const Foundation=preload("res://ui/map/foundation041.gd")
 const Connections=preload("res://ui/map/connections041.gd")
 const Hex=preload("res://core/hex.gd")
 const Art=preload("res://ui/map/art.gd")
+const AtlasStyle=preload("res://ui/map/atlas_style.gd")
 const Fabric=preload("res://ui/map/fabric040.gd")
 const Data=preload("res://ui/view_models/map_data.gd")
 signal cell_clicked(key:String,dragging:bool)
@@ -118,12 +118,6 @@ func _ready():
 		world_host=world_viewport
 		resized.connect(_update_world_viewport_size)
 	ground=Node2D.new();world_host.add_child(ground);ground.draw.connect(_draw_ground_world)
-	var land_shader=Shader.new();land_shader.code="""shader_type canvas_item;
-float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-float noise(vec2 p){vec2 i=floor(p);vec2 f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
-void fragment(){float detail=noise(UV*2.0)*0.62+noise(UV*7.0)*0.28+noise(UV*21.0)*0.10;COLOR=vec4(COLOR.rgb*(0.95+detail*0.10),COLOR.a);}
-"""
-	var land_material=ShaderMaterial.new();land_material.shader=land_shader;ground.material=land_material
 	buildings=Node2D.new();world_host.add_child(buildings);buildings.draw.connect(_draw_structures_world)
 	var shader=Shader.new();shader.code="shader_type canvas_item; uniform float saturation=1.0; void fragment(){ vec4 t=COLOR; float grey=dot(t.rgb,vec3(0.2126,0.7152,0.0722)); COLOR=vec4(mix(vec3(grey),t.rgb,saturation),t.a); }"
 	var mat=ShaderMaterial.new();mat.shader=shader;buildings.material=mat
@@ -209,8 +203,7 @@ func _natural_elevation_at(p:Vector2) -> float:
 	var key=Vector2(roundf(p.x*100.)*.01,roundf(p.y*100.)*.01)
 	if not elevation_samples.has(key):
 		var raw=Elevation.height_at(elevation_field,key) if key.length_squared()<2100000. else 0.
-		var relief=landscape_noise.get_noise_2d(key.x*2.3+291.,key.y*2.3-403.)*minf(maxf(raw-10.,0.)*.05,3.)
-		elevation_samples[key]=raw+relief
+		elevation_samples[key]=raw
 	return float(elevation_samples[key])
 func _connector_geometry_key() -> String:
 	var parts:Array[String]=[]
@@ -308,6 +301,26 @@ func world_point(k:String) -> Vector2:
 		if foundation_field.is_empty() or _foundation_source_key()!=_foundation_guard_key:_ensure_foundations()
 	return project_flat(flat_point(k))
 func point(k:String) -> Vector2:return draw_origin()+world_point(k)*draw_scale()
+func tile_screen_anchor(k:String) -> Vector2:
+	return size*.5+pan+world_point(k)*zoom
+func building_visual_scale(def_id:String) -> float:return AtlasStyle.building_scale(def_id)
+func building_screen_rect(id:String) -> Rect2:
+	if game==null or not game.s.projects.has(id):return Rect2()
+	var project:Dictionary=game.s.projects[id];var art_id=str(project.def)
+	var texture=Art.sprite(art_id)
+	if texture==null:return Rect2()
+	var extent=Vector2.ONE*64.*zoom*building_visual_scale(art_id)
+	extent.y*=texture.get_height()/float(texture.get_width())
+	return Rect2(tile_screen_anchor(str(project.tile))-Art.anchor(art_id)*extent,extent)
+func building_visible_rect(id:String) -> Rect2:
+	var rect=building_screen_rect(id)
+	if rect.size==Vector2.ZERO:return rect
+	var info=Art.metadata(str(game.s.projects[id].def));var bounds=info.get("bounds",[]);var pixels=info.get("size",[768,768])
+	if bounds.size()!=4:return rect
+	var ratio=rect.size/Vector2(float(pixels[0]),float(pixels[1]))
+	return Rect2(rect.position+Vector2(float(bounds[0]),float(bounds[1]))*ratio,Vector2(float(bounds[2])-float(bounds[0]),float(bounds[3])-float(bounds[1]))*ratio)
+func terrain_symbols(tile:String) -> Array:
+	return AtlasStyle.terrain_symbols(game.s.cells.get(tile,{})) if game!=null else []
 func _world_footprint(k:String,scale_value:float=1.) -> PackedVector2Array:
 	var points=PackedVector2Array();var center=flat_point(k)
 	for i in 6:
@@ -399,7 +412,7 @@ func building_hit(pos:Vector2) -> String:
 	for id in ids:
 		var b=game.s.projects[id];var texture=Art.sprite(str(b.def))
 		if texture==null:continue
-		var extent=Vector2.ONE*radius()*BUILDING_WIDTH;extent.y*=texture.get_height()/float(texture.get_width())
+		var extent=Vector2.ONE*radius()*building_visual_scale(str(b.def));extent.y*=texture.get_height()/float(texture.get_width())
 		var origin=point(str(b.tile))-Art.anchor(str(b.def))*extent
 		if Art.opaque_at(str(b.def),(pos-origin)/extent):return str(id)
 	return ""
@@ -472,39 +485,13 @@ func _surface_color(p:Vector2) -> Color:
 	surface_colors[p]=col;return col
 func _terrain(c:CanvasItem):
 	var natural=layer in ["normal","terrain","operator"]
-	c.draw_rect(Rect2(Vector2(-8192,-8192),Vector2(16384,16384)),Color("AEB49A") if natural else Color("CDD3CF"))
 	if game==null:return
 	_ensure_elevation();_ensure_foundations()
-	# Mesh topology belongs to the map, not the visible camera rectangle.
-	var mesh_key=elevation_key+foundation_key+str(natural)
-	if terrain_mesh_key!=mesh_key:
-		terrain_mesh_key=mesh_key;render_stats.terrain_mesh_builds+=1
-		var axis=PackedFloat32Array([-8192.,-4096.,-2048.,-1536.,-1280.,-1024.,-768.])
-		for v in range(-756,757,12):axis.append(float(v))
-		axis.append_array(PackedFloat32Array([768.,1024.,1280.,1536.,2048.,4096.,8192.]))
-		var vertices=PackedVector3Array();var colors=PackedColorArray();var indices=PackedInt32Array();var uvs=PackedVector2Array()
-		var columns=axis.size()
-		for gy in columns:
-			for gx in columns:
-				var world=Vector2(axis[gx],axis[gy]);var projected=project_flat(world)
-				vertices.append(Vector3(projected.x,projected.y,0));uvs.append(world*.16)
-				var color=_surface_color(world);colors.append(color if natural else color.lerp(Color("D8E1DB"),.60))
-				if gx<columns-1 and gy<columns-1:
-					var index=gy*columns+gx
-					indices.append_array(PackedInt32Array([index,index+1,index+columns+1,index,index+columns+1,index+columns]))
-		var arrays=[];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX]=vertices;arrays[Mesh.ARRAY_COLOR]=colors;arrays[Mesh.ARRAY_INDEX]=indices;arrays[Mesh.ARRAY_TEX_UV]=uvs
-		terrain_mesh=ArrayMesh.new();terrain_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
-	c.draw_mesh(terrain_mesh,null,Transform2D(Vector2(draw_scale(),0),Vector2(0,draw_scale()),draw_origin()))
-	_draw_foundation_surfaces(c)
+	AtlasStyle.terrain(self,c)
 	var keys=game.s.cells.keys();keys.sort()
-	_draw_river(c)
 	for id in game.playable_ids():
 		var building=game.s.projects[id]
 		if building.def in ["agriculture","modern_agriculture"]:_draw_fields(c,str(building.tile),natural)
-	for k in keys:
-		var ns=Hex.neighbors(k)
-		for i in 6:
-			if not game.s.cells.has(ns[i]) and (mode=="site" or layer=="terrain"):_edge(c,k,i,Color(.32,.46,.34,.45),1.,true)
 	if layer not in ["normal","terrain","operator"]:
 		for k in keys:
 			var info=view_values.get(k,{});var col=Color(0,0,0,0);var hatch=false
@@ -550,14 +537,14 @@ func _draw_foundation_surfaces(c:CanvasItem):
 		_draw_triangle_stream(c,item.get("platform_triangles",PackedVector3Array()),Color("C0B998",.09))
 		_draw_triangle_stream(c,item.get("retaining_walls",PackedVector3Array()),Color("847B65",.36))
 func _draw_fields(c:CanvasItem,key:String,natural:bool):
-	var origin=flat_point(key)+Vector2(-8,14)
+	var origin=flat_point(key)+Vector2(-3,25)
 	var soil=PackedVector2Array()
-	for offset in [Vector2(-36,-24),Vector2(36,-24),Vector2(36,24),Vector2(-36,24)]:soil.append(surface_point(origin+offset))
+	for offset in [Vector2(-27,-12),Vector2(27,-12),Vector2(27,12),Vector2(-27,12)]:soil.append(surface_point(origin+offset))
 	c.draw_colored_polygon(soil,Color("B8A24E") if natural else Color("B8C1A6"))
-	for row in 13:
+	for row in 6:
 		var line=PackedVector2Array();var crop=PackedVector2Array()
 		for j in 9:
-			var p=origin+Vector2(-34.+j*8.5,-21.+row*3.5)
+			var p=origin+Vector2(-25.+j*6.25,-9.+row*3.5)
 			line.append(surface_point(p));crop.append(surface_point(p+Vector2(0,1.1)))
 		c.draw_polyline(line,Color("817C39") if natural else Color("91A291"),1.2*draw_scale(),true)
 		c.draw_polyline(crop,Color("D1C269") if natural else Color("BFC9B2"),.9*draw_scale(),true)
@@ -583,73 +570,25 @@ func _structures(c:CanvasItem):
 	if game==null:return
 	var keys=game.s.cells.keys();keys.sort_custom(func(a,b):return point(a).y<point(b).y if point(a).y!=point(b).y else str(a)<str(b))
 	var r=radius();var neutral=Color(.91,.96,.94,.80) if layer not in ["normal","terrain","operator"] else Color.WHITE
-	for id in game.playable_ids():
-		var building=game.s.projects[id]
-		var opacity=.16 if building.status=="construction" else .24
-		c.draw_set_transform_matrix(Transform2D(Vector2(1,0),Vector2(-.64,-.24),point(building.tile)))
-		_sprite(c,str(building.def),Vector2.ZERO,r*BUILDING_WIDTH,Color(.13,.17,.13,opacity))
-		c.draw_set_transform_matrix(Transform2D.IDENTITY)
-	# Unplayable outer scenery continues the valley beyond the buildable cells.
-	for gy in range(-12,13):
-		for gx in range(-12,13):
-			var flat=Vector2(gx*82.,gy*82.)
-			if flat.length()<565. or flat.length()>1000.:continue
-			var noise=landscape_noise.get_noise_2d(flat.x*1.8+730,flat.y*1.8-412)
-			if noise<.17:continue
-			var pos=surface_point(flat)
-			var beside_river=false
-			if not water_geometry.is_empty():
-				for river_point in water_geometry[0]:
-					if flat.distance_squared_to(river_point)<4900.:beside_river=true;break
-			if beside_river:continue
-			for j in 7:
-				var off=Vector2(sin(gx*4.3+gy+j*2.8),cos(gy*3.7+gx+j*2.1))*32.
-				var tree_pos=surface_point(flat+off)
-				_sprite(c,"prop_tree_conifer" if (gx+gy+j)%3==0 else "prop_tree_broadleaf",tree_pos,r*(.9+noise*.5),Color(neutral.r,neutral.g,neutral.b,.78))
 	for item in connector_render_items:Connections.draw_item(c,self,item)
 	for k in keys:
 		var t=game.s.cells[k];var p=point(k)
-		if t.building=="":
-			var world=flat_point(k)
-			var h=absi(int(landscape_noise.get_noise_2d(world.x*7.13+1294,world.y*6.37-443)*100000))
-			if t.terrain=="water":
-				for j in 3:
-					var ripple=PackedVector2Array();var drift=Vector2(float((h+j*13)%23-11)*.02,float(j-1)*.22)*r
-					for q in 9:ripple.append(p+drift+Vector2(float(q-4)*r*.042,sin(float(q)*.55)*r*.024))
-					c.draw_polyline(ripple,Color(.85,.95,.85,.15),maxf(1.,draw_scale()),true)
-			elif t.terrain=="forest":
-				for j in range(6+h%4):
-					var angle=(j*2.4+float(h%31)*.1);var distance=.18+float((h+j*23)%40)*.012
-					var off=surface_point(world+Vector2(cos(angle),sin(angle))*64.*distance)-p
-					var width=r*(.68+float((h+j*17)%20)*.012)
-					_shadow(c,p+off+Vector2(2,3)*draw_scale(),Vector2(width*.27,width*.11),.065)
-					_sprite(c,"prop_tree_broadleaf" if (h+j)%3 else "prop_tree_conifer",p+off,width,Color(neutral.r,neutral.g,neutral.b,.82))
-			elif t.terrain=="hill":
-				# Hills are the terrain mesh itself; only vegetation sits on top.
-				for j in 5+h%4:
-					var offset=Vector2(sin(h+j*2.2),cos(h+j*3.1))*42.
-					var pos=surface_point(world+offset)
-					_sprite(c,"prop_tree_conifer" if j%3 else "prop_shrub",pos,r*(.52+float((h+j)%5)*.065),Color(neutral.r,neutral.g,neutral.b,.84))
-			elif t.terrain=="wet":
-				_sprite(c,"prop_shrub",surface_point(world+Vector2(64.*.12,0)),r*.6,Color(neutral.r,neutral.g,neutral.b,.74))
-			elif t.terrain=="plain" and h%4==0:
-				_sprite(c,"prop_shrub",surface_point(world+Vector2(.35,.25)*64.),r*.25,Color(neutral.r,neutral.g,neutral.b,.56))
-			continue
+		if t.building=="":continue
 		var b=game.s.projects[t.building];var color=neutral
 		if b.status=="construction":color.a=.40
 		elif b.paused:color=Color(.73,.78,.73,.76)
 		if mode=="site" and hovered!="" and Hex.distance(k,hovered)<=1 and point(k).y>point(hovered).y:color.a*=.35
-		_shadow(c,p+Vector2(0,r*.08),Vector2(r*.60,r*.29))
+		_shadow(c,p+Vector2(0,r*.08),Vector2(r*.40,r*.18))
 		var def=game.c.projects.get(str(b.def),{})
 		var art_id=str(b.def)
 		if Art.sprite(art_id)==null:art_id=str(def.get("art",b.get("art",b.def)))
-		_sprite(c,art_id,p,r*BUILDING_WIDTH,color)
+		AtlasStyle.courtyard(self,c,str(k),def,int(b.get("tier",def.get("tier",1))))
+		_sprite(c,art_id,p,r*building_visual_scale(art_id),color)
 		if b.status=="construction" or not b.get("upgrade_job",{}).is_empty():_construction(c,p,r)
 		if true:
-			if str(def.get("domain","")) in ["residential","public"]:_sprite(c,"flowers",p+Vector2(-.45,.3)*r,r*.43,color)
-			if str(def.get("domain","")) in ["residential","commercial","public"]:_sprite(c,"lamp",p+Vector2(.47,.20)*r,r*.40,color)
+
 			var modules=Art.attachments(game,str(b.id))
-			for j in mini(2,modules.size()):_sprite(c,modules[j],p+Vector2((j*2-1)*.49,.26)*r,r*.62,color)
+			for j in mini(2,modules.size()):_sprite(c,modules[j],p+Vector2((j*2-1)*.49,.26)*r,r*.38,color)
 	_draw_fabric_fillers(c)
 	_draw_capstone(c)
 
@@ -694,8 +633,9 @@ func _construction(c:CanvasItem,p:Vector2,r:float):
 func _draw_fabric_fillers(c:CanvasItem):
 	for item in fabric_snapshot.get("fillers",[]):
 		if not game.s.cells.has(item.a) or not game.s.cells.has(item.b):continue
-		var pos=surface_point(flat_point(item.a).lerp(flat_point(item.b),.48 if int(item.variant)%2==0 else .54))
-		var width=radius()*.52
+		var axis:Vector2=(flat_point(item.b)-flat_point(item.a)).normalized()
+		var pos=surface_point(flat_point(item.a).lerp(flat_point(item.b),.42 if int(item.variant)%2==0 else .61)-axis.orthogonal()*geometry_radius()*.22)
+		var width=radius()*.29
 		_shadow(c,pos+Vector2(0,width*.20),Vector2(width*.38,width*.17),.08)
 		var strength_bucket=roundf(clampf(float(item.strength),0.0,1.0)*4.0)/4.0
 		_sprite(c,str(item.asset),pos,width,Color(1,1,1,clampf(strength_bucket+.18,.36,.82)))
@@ -803,7 +743,7 @@ func _overlays(c:CanvasItem):
 	var tile=plan_tile if plan_tile!="" else (str(selected[0]) if not selected.is_empty() else hovered)
 	if mode=="site" and game.s.cells.has(tile) and game.s.cells[tile].building=="":
 		_outline(c,point(tile),r*.94,Color("8b641d"),3.)
-		if planned_base!="":_sprite(c,planned_base,point(tile),r*BUILDING_WIDTH,Color(1,1,1,.64))
+		if planned_base!="":_sprite(c,planned_base,point(tile),r*building_visual_scale(planned_base),Color(1,1,1,.64))
 		if zoom>.5:marker(c,point(tile)+Vector2(0,r*.65),"规划 · 尚未建设",Color("8b641d"))
 	if flash_time>0 and flash_project_id!="" and game.s.projects.has(flash_project_id) and not reduce_motion:
 		c.draw_arc(point(game.s.projects[flash_project_id].tile),r*(1.0+(2.-flash_time)*.08),0,TAU,40,Color(1,.93,.65,flash_time*.35),3.,true)

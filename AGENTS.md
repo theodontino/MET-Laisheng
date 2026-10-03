@@ -1,5 +1,11 @@
 # MET Laisheng Beta continuation contract
 
+## Current presentation contract
+
+The latest authorized presentation contract is [UI and map reset](docs/beta/UI_RESET.md), which supersedes earlier HUD/inspector layout requirements. Preserve the four layers: L0 only DT/population/food/time, L1 bounded alerts/theme progress/active legend, L2 contextual graphics and one primary action, L3 full management and records. Keep all underlying gameplay and source-backed information reachable.
+
+Throughout pre-1.0, the game defaults to desktop fullscreen with a minimum supported resolution of **1920×1080**. The user explicitly excludes testing different window sizes. Validate this fullscreen baseline; do not reintroduce small-window or mobile layout work as an acceptance requirement.
+
 ## Project vision and scope
 
 Current authorized implementation contract: [Beta v3](docs/beta/design-v3/00_READ_FIRST.md), with [unit audit](docs/beta/UNIT_AUDIT.md). Its explicit replacements supersede the historical 0.4 requirements below and in the constitution. Beta uses finite DT, offline duration recording only (no Reserve gameplay), Local-Time immigration, annual/population drafts, repeated Bonus copies and blueprint upgrades, theme commissions, and naming/capstones at actual DT zero. Preserve all source-backed simulation and display invariants. Work on the existing branch/checkout; do not create a worktree unless explicitly requested.

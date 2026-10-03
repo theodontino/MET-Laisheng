@@ -4,6 +4,7 @@ extends SceneTree
 const Paths=preload("res://tests/paths.gd")
 const Store=preload("res://core/storage.gd")
 const Feedback=preload("res://core/feedback.gd")
+const BASELINE_SIZE=Vector2i(1920,1080)
 class MeasuredGame extends "res://core/game.gd":
 	var perf_enabled=false
 	var cpu={"advance_active":[],"refresh_metrics":[]}
@@ -72,9 +73,16 @@ func first_line(path:String) -> String:
 	return file.get_line() if file!=null else "unavailable"
 func fingerprint() -> Dictionary:
 	var result={}
-	for path in ["core/game.gd","core/hex.gd","core/planning.gd","core/time_model.gd","core/simulation.gd","core/rules.gd","core/fields.gd","core/allocation.gd","core/commission_theme.gd","core/cycles.gd","ui/app.gd","ui/city032/desk.gd","ui/city032/models.gd","ui/map_view.gd","ui/beta_feedback.gd","ui/beta/interface.gd","tests/beta_performance.gd"]:
-		result[path]=FileAccess.get_file_as_string("res://"+path).sha256_text()
+	for path in ["project.godot","core/game.gd","core/hex.gd","core/planning.gd","core/time_model.gd","core/simulation.gd","core/rules.gd","core/fields.gd","core/allocation.gd","core/commission_theme.gd","core/cycles.gd","ui/app.gd","ui/city032/desk.gd","ui/city032/models.gd","ui/map_view.gd","ui/beta_feedback.gd","ui/beta/interface.gd","ui/reset/metric_graphic.gd","ui/reset/building_archive.gd","ui/map/atlas_style.gd","tests/beta_performance.gd"]:
+		result[path]=FileAccess.get_file_as_string("res://"+path).sha256_text() if FileAccess.file_exists("res://"+path) else "<missing>"
+	for directory in ["core","ui"]:_fingerprint_scripts(directory,result)
 	return result
+func _fingerprint_scripts(path:String,result:Dictionary) -> void:
+	var dir=DirAccess.open("res://"+path)
+	if dir==null:return
+	for file in dir.get_files():
+		if str(file).ends_with(".gd"):result[path+"/"+file]=FileAccess.get_file_as_string("res://"+path+"/"+file).sha256_text()
+	for child in dir.get_directories():_fingerprint_scripts(path+"/"+child,result)
 func fixture(count:int):
 	var g=MeasuredGame.new();g.new_game(905003,1000000.);g.select_block(0);g.choose_origin(g.s.origin_choices[0])
 	var ids=g.s.cells.keys();ids.sort_custom(func(a,b):return g.Hex.distance(str(a),"0,0")<g.Hex.distance(str(b),"0,0") if g.Hex.distance(str(a),"0,0")!=g.Hex.distance(str(b),"0,0") else str(a)<str(b))
@@ -129,7 +137,7 @@ func stage(g,kind:String) -> Dictionary:
 	_clear_measurements(g);g.perf_enabled=true;app.perf_enabled=true
 	while (Time.get_ticks_usec()-started)/1000000.<seconds_per_stage if native else count<100:
 		if kind=="pan":app.map_view.pan+=Vector2(1. if count%120<60 else -1.,.2 if count%120<60 else -.2);app.map_view.invalidate_camera()
-		elif kind=="zoom":app.map_view.set_zoom(.90+.08*sin(count*.045),Vector2(720,450))
+		elif kind=="zoom":app.map_view.set_zoom(.90+.08*sin(count*.045),Vector2(BASELINE_SIZE)*.5)
 		await process_frame
 		var now=Time.get_ticks_usec();frames.append((now-previous)/1000.);previous=now;count+=1
 		if count%30==0:memory.append(rss())
@@ -174,26 +182,72 @@ func readonly_probes(g) -> Dictionary:
 	if not output.state_unchanged:failures.append("readonly probe mutated game")
 	return output
 func run():
-	root.size=Vector2i(1440,900);native=DisplayServer.get_name()!="headless"
+	native=DisplayServer.get_name()!="headless"
+	# The same display-only override is used for old packaged sources and the
+	# UI reset. It creates new comparable evidence, not a retroactive assertion
+	# that the previous package had already passed fullscreen 1080p acceptance.
+	root.size=BASELINE_SIZE;root.content_scale_size=BASELINE_SIZE
+	root.content_scale_mode=Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	if native:root.mode=Window.MODE_FULLSCREEN
 	var custom=OS.get_environment("MET_PERF_STAGE_SECONDS")
 	if custom!="":seconds_per_stage=maxf(.1,float(custom))
 	var source_before=fingerprint();var start_seconds=Time.get_ticks_usec()
-	app=MeasuredApp.new();app.test_mode=true;app.ignore_save=true;root.add_child(app);app.test_mode=true;app.ignore_save=true;app.set_process(false)
+	app=MeasuredApp.new();app.test_mode=true;app.ignore_save=true;root.add_child(app)
+	var app_size_before_layout=app.size;var map_size_before_layout=app.map_view.size
+	app.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);app.test_mode=true;app.ignore_save=true;app.set_process(false)
+	# Apply again after startup notifications; CLI --fullscreen creates the old
+	# packaged project in the same native mode as the current project.
+	for i in 2:await process_frame
+	if native:root.mode=Window.MODE_FULLSCREEN
+	root.content_scale_size=BASELINE_SIZE;app.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	for i in 2:await process_frame
 	Engine.max_fps=60 if native else 0
 	_instrument_draws()
-	var result={"evidence_type":"explicit_scale_fixture_actual_app","fixture_population":"75% of real ready housing capacity; 65% starting inventory, deterministic seed; not a player route","renderer":RenderingServer.get_video_adapter_name(),"display":DisplayServer.get_name(),"timing_scope":"Native software-rendered window full wall-frame intervals at 1440x900, capped60; not target GPU hardware" if native else "Headless CPU and SceneTree turnaround only; no FPS claim","godot":Engine.get_version_info().string,"environment":{"cpu":OS.get_processor_name(),"logical_processors":OS.get_processor_count(),"cpu_quota":first_line("/sys/fs/cgroup/cpu.max"),"memory_limit_bytes":first_line("/sys/fs/cgroup/memory.max")},"autosave":"Disabled to preserve user saves; serialization cost measured separately, no disk I/O latency included","source_sha256":source_before,"fixtures":[],"failures":failures}
+	var result={"evidence_type":"explicit_scale_fixture_actual_app","fixture_population":"75% of real ready housing capacity; 65% starting inventory, deterministic seed; not a player route","renderer":RenderingServer.get_video_adapter_name(),"display":DisplayServer.get_name(),"timing_scope":"Native software-rendered fullscreen 1920x1080 wall-frame intervals, capped60; not target GPU hardware" if native else "Headless CPU and SceneTree turnaround only; no FPS claim","godot":Engine.get_version_info().string,"environment":{"cpu":OS.get_processor_name(),"logical_processors":OS.get_processor_count(),"cpu_quota":first_line("/sys/fs/cgroup/cpu.max"),"memory_limit_bytes":first_line("/sys/fs/cgroup/memory.max")},"display_contract":{"resolution":[1920,1080],"fullscreen":native,"harness_override":true,"app_size_before_full_rect":[app_size_before_layout.x,app_size_before_layout.y],"map_size_before_full_rect":[map_size_before_layout.x,map_size_before_layout.y],"note":"Identical 1080p/fullscreen display override applied to both source versions; not historical acceptance evidence."},"autosave":"Disabled to preserve user saves; serialization cost measured separately, no disk I/O latency included","source_sha256":source_before,"fixtures":[],"failures":failures}
 	for count in [2,12,53]:
 		var g=fixture(count);app.game=g;app.map_view.game=g;app.feedback_layer.configure(g,app.map_view);app.overlay.hide();app.display_pending_tick=-1
 		if app.desk.is_open():app.desk.close()
 		app.selected_project="";app.refresh();app.map_view.focus_all()
 		for i in 20:await process_frame
-		var row={"requested_buildings":count,"actual_buildings":g.playable_ids().size(),"population":float(g.s.metrics.population),"population_groups":g.s.groups.size(),"fixture":true,"state_valid":g.validate_state(g.s)=="","stages":[]}
+		var actual_size=DisplayServer.window_get_size() if native else root.size
+		var viewport_size=root.get_visible_rect().size
+		result.display_contract.actual_window_size=[actual_size.x,actual_size.y]
+		result.display_contract.actual_viewport_size=[viewport_size.x,viewport_size.y]
+		result.display_contract.actual_window_mode=int(root.mode)
+		result.display_contract.actual_app_size=[app.size.x,app.size.y]
+		result.display_contract.actual_map_size=[app.map_view.size.x,app.map_view.size.y]
+		if Vector2i(app.size)!=BASELINE_SIZE or Vector2i(app.map_view.size)!=BASELINE_SIZE:failures.append("App/map viewport differs from fullscreen baseline")
+		if not app.map_view.is_visible_in_tree():failures.append("Map is not visible in native fixture")
+		if actual_size!=BASELINE_SIZE or Vector2i(viewport_size)!=BASELINE_SIZE:failures.append("fullscreen baseline resolution differs from 1920x1080")
+		if native and root.mode not in [Window.MODE_FULLSCREEN,Window.MODE_EXCLUSIVE_FULLSCREEN]:failures.append("native baseline is not fullscreen")
+		var map_probe={"ground_draws":int(app.map_view.render_stats.get("ground_draws",0)),"structure_draws":int(app.map_view.render_stats.get("structure_draws",0)),"terrain_mesh_builds":int(app.map_view.render_stats.get("terrain_mesh_builds",0)),"projected_tile_count":app.map_view.ground_footprints.size(),"source_tile_count":g.s.cells.size()}
+		if native:
+			var screenshot=root.get_texture().get_image();var colors={}
+			for x in 13:
+				for y in 9:
+					var pixel=screenshot.get_pixel(int(BASELINE_SIZE.x*(.20+.60*x/12.)),int(BASELINE_SIZE.y*(.25+.45*y/8.)))
+					colors[pixel.to_html(false)]=true
+			map_probe.central_sample_distinct_colors=colors.size()
+			if colors.size()<8:failures.append("Map screenshot center lacks rendered terrain variation")
+			screenshot.save_png(Paths.file("performance_"+str(count)+"_fullscreen.png"))
+		# Both the legacy mesh and the cartographic polygon renderer must draw
+		# the map. Mesh construction is diagnostic, not a shared rendering rule.
+		if map_probe.ground_draws<1 or map_probe.structure_draws<1:failures.append("Map drawing callbacks did not render fixture")
+		if map_probe.projected_tile_count<1 or map_probe.projected_tile_count!=map_probe.source_tile_count:failures.append("Projected map tiles do not cover the source fixture")
+		var row={"requested_buildings":count,"actual_buildings":g.playable_ids().size(),"population":float(g.s.metrics.population),"population_groups":g.s.groups.size(),"fixture":true,"state_valid":g.validate_state(g.s)=="","map_render_probe":map_probe,"stages":[]}
 		if not row.state_valid:failures.append("fixture invalid "+str(count)+": "+g.validate_state(g.s))
+		if not failures.is_empty():
+			row.preflight_failed=true;result.fixtures.append(row)
+			_finish_report(result,start_seconds,source_before);return
 		for kind in ["static","pan","zoom","active"]:row.stages.append(await stage(g,kind))
 		row.readonly_probes=readonly_probes(g);row.render_stats=app.map_view.render_stats.duplicate(true)
 		result.fixtures.append(row)
 		print("BETA PERF fixture ",count," complete")
-	result.duration_seconds=(Time.get_ticks_usec()-start_seconds)/1000000.;result.passed=failures.is_empty();result.process_memory=rss();result.source_changed_during_run=fingerprint()!=source_before
+	_finish_report(result,start_seconds,source_before)
+func _finish_report(result:Dictionary,start_seconds:int,source_before:Dictionary) -> void:
+	result.duration_seconds=(Time.get_ticks_usec()-start_seconds)/1000000.;result.process_memory=rss();result.source_changed_during_run=fingerprint()!=source_before
+	if result.source_changed_during_run:failures.append("Fingerprinted product sources changed during measurement")
+	result.passed=failures.is_empty()
 	var out=Paths.file("beta_performance_native.json" if native else "beta_performance.json")
 	var file=FileAccess.open(out,FileAccess.WRITE);file.store_string(JSON.stringify(result,"\t"));file.close()
 	print("BETA PERFORMANCE ","PASS" if failures.is_empty() else "FAIL", " ",out)

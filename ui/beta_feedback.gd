@@ -37,10 +37,9 @@ func refresh(g,snapshot:Dictionary={}) -> void:
 	_data=model.refresh(g,Time.get_ticks_msec()/1000.0,snapshot)
 	var rows:Array=[]
 	for item in _data.get("alerts",[]):
+		if int(item.get("severity",0))<2:continue
 		var row:Dictionary=item.duplicate(true);row.presentation="alert";rows.append(row)
-	if bubbles_enabled:
-		for item in _data.get("bubbles",[]):
-			var row:Dictionary=item.duplicate(true);row.presentation="bubble";rows.append(row)
+	# Narrative messages stay in the city archive; L1 is reserved for actionable state.
 	var capstone:Dictionary=g.s.get("block",{}).get("capstone",{})
 	if not capstone.is_empty():
 		rows.append({"id":"capstone-marker","source_id":str(capstone.get("source_id",capstone.get("id",""))),"building_id":"","tile":str(capstone.get("tile_anchor","")),"kind":"capstone","layer":"normal","text":str(capstone.get("name","主题建筑")),"presentation":"capstone"})
@@ -77,6 +76,9 @@ func _process(delta:float) -> void:
 func _position_markers() -> void:
 	if map_view==null or game==null:return
 	var offsets:Dictionary={};var occupied:Array[Rect2]=[]
+	var owner=get_parent()
+	if owner.has_method("context_obstacles"):
+		for rectangle in owner.context_obstacles():occupied.append(rectangle)
 	for button in _markers.values():
 		var row:Dictionary=button.get_meta("source")
 		var tile=str(row.get("tile",""))
@@ -92,6 +94,6 @@ func _position_markers() -> void:
 		button.position=anchor
 		var rect=Rect2(button.position,button.size)
 		if not Rect2(Vector2.ZERO,size).encloses(rect):button.visible=false;continue
-		if row.presentation=="bubble" and occupied.any(func(existing):return existing.intersects(rect.grow(3))):
+		if occupied.any(func(existing):return existing.intersects(rect.grow(3))):
 			button.visible=false;continue
 		occupied.append(rect)

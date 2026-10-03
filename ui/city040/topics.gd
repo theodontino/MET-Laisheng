@@ -4,6 +4,7 @@ const W = preload("res://ui/widgets.gd")
 const C = preload("res://ui/components031/components.gd")
 const M = preload("res://ui/city032/models.gd")
 const P = preload("res://ui/presentation.gd")
+const V = preload("res://ui/reset/desk_visuals.gd")
 
 const RESOURCE_NAMES = {"food":"粮食", "material":"材料", "goods":"制成品", "energy":"电力"}
 const NEED_NAMES = {"food":"粮食", "material":"材料", "goods":"制成品", "energy":"电力", "medical":"医疗", "education":"教育", "commercial":"购物", "entertainment":"休闲"}
@@ -24,535 +25,582 @@ class FinanceHistoryChart extends Control:
 		var font=get_theme_default_font()
 		if font==null:return
 		var plot=Rect2(Vector2(62,38),Vector2(maxf(30,size.x-82),maxf(32,size.y-72)))
-		var high=1.;var low=0.
+		draw_line(Vector2(plot.position.x,16),Vector2(plot.position.x+18,16),ThemeColors.GREEN,3.)
+		draw_string(font,Vector2(plot.position.x+25,21),"收入",HORIZONTAL_ALIGNMENT_LEFT,-1,int(13*ThemeColors.text_scale),ThemeColors.TEXT)
+		draw_line(Vector2(plot.position.x+90,16),Vector2(plot.position.x+108,16),ThemeColors.GOLD,3.)
+		draw_string(font,Vector2(plot.position.x+115,21),"支出",HORIZONTAL_ALIGNMENT_LEFT,-1,int(13*ThemeColors.text_scale),ThemeColors.TEXT)
+		var timed=[];var high=1.;var low=0.;var has_values=false
 		for row in samples:
-			high=maxf(high,maxf(float(row.get("income",0)),float(row.get("upkeep",0))))
-			low=minf(low,minf(float(row.get("income",0)),float(row.get("upkeep",0))))
+			if row.get("h")==null:continue
+			timed.append(row)
+			for key in ["income","upkeep"]:
+				if row.get(key)==null:continue
+				has_values=true;high=maxf(high,float(row[key]));low=minf(low,float(row[key]))
+		if timed.is_empty() or not has_values:
+			draw_string(font,plot.position+Vector2(10,plot.size.y*.55),"结算后开始绘制历史，不补造旧数据",HORIZONTAL_ALIGNMENT_LEFT,plot.size.x,int(14*ThemeColors.text_scale),ThemeColors.MUTED);return
 		var span=maxf(1.,high-low)
 		for i in range(4):
 			var y=plot.position.y+plot.size.y*i/3.
 			draw_line(Vector2(plot.position.x,y),Vector2(plot.end.x,y),ThemeColors.SOFT,1.)
 			draw_string(font,Vector2(2,y+5),"%.1f"%(high-span*i/3.),HORIZONTAL_ALIGNMENT_LEFT,-1,int(13*ThemeColors.text_scale),ThemeColors.MUTED)
-		draw_line(Vector2(plot.position.x,16),Vector2(plot.position.x+18,16),ThemeColors.GREEN,3.)
-		draw_string(font,Vector2(plot.position.x+25,21),"收入",HORIZONTAL_ALIGNMENT_LEFT,-1,int(13*ThemeColors.text_scale),ThemeColors.TEXT)
-		draw_line(Vector2(plot.position.x+90,16),Vector2(plot.position.x+108,16),ThemeColors.GOLD,3.)
-		draw_string(font,Vector2(plot.position.x+115,21),"支出",HORIZONTAL_ALIGNMENT_LEFT,-1,int(13*ThemeColors.text_scale),ThemeColors.TEXT)
-		if samples.size()<2:
-			draw_string(font,plot.position+Vector2(10,plot.size.y*.55),"结算后开始绘制历史，不补造旧数据",HORIZONTAL_ALIGNMENT_LEFT,plot.size.x,int(14*ThemeColors.text_scale),ThemeColors.MUTED);return
-		var first=float(samples[0].get("h",0));var last=float(samples[-1].get("h",0));var duration=maxf(.001,last-first)
+		var first=float(timed[0].h);var last=float(timed[-1].h);var duration=maxf(.001,last-first)
 		for key in ["income","upkeep"]:
-			var points=PackedVector2Array()
-			for row in samples:
-				points.append(plot.position+Vector2((float(row.get("h",0))-first)/duration*plot.size.x,(high-float(row.get(key,0)))/span*plot.size.y))
-			draw_polyline(points,ThemeColors.GREEN if key=="income" else ThemeColors.GOLD,2.5,true)
+			var previous=Vector2.ZERO;var continuous=false;var tint=ThemeColors.GREEN if key=="income" else ThemeColors.GOLD
+			for row in timed:
+				if row.get(key)==null:continuous=false;continue
+				var point=plot.position+Vector2((float(row.h)-first)/duration*plot.size.x,(high-float(row[key]))/span*plot.size.y)
+				if continuous:draw_line(previous,point,tint,2.5,true)
+				draw_circle(point,2.5,tint);previous=point;continuous=true
 		draw_string(font,Vector2(plot.position.x,plot.end.y+24),"%.1f月"%first,HORIZONTAL_ALIGNMENT_LEFT,-1,int(13*ThemeColors.text_scale),ThemeColors.MUTED)
-		draw_string(font,Vector2(plot.end.x-70,plot.end.y+24),"%.1f月"%last,HORIZONTAL_ALIGNMENT_RIGHT,70,int(13*ThemeColors.text_scale),ThemeColors.MUTED)
+		if last>first:draw_string(font,Vector2(plot.end.x-70,plot.end.y+24),"%.1f月"%last,HORIZONTAL_ALIGNMENT_RIGHT,70,int(13*ThemeColors.text_scale),ThemeColors.MUTED)
 
 static func _group(parent:Node,title:String="",bg:Color=W.PANEL) -> VBoxContainer:
-	var content=C.group(parent,title,bg)
-	var panel=content.get_parent()
-	if panel is PanelContainer:
-		panel.add_theme_stylebox_override("panel",W.box(bg,W.SOFT,10))
-		var inner=content as VBoxContainer;inner.add_theme_constant_override("separation",8)
-	return content
+	var icon="ledger"
+	for pair in [["预算","currency"],["收支","currency"],["收入","currency"],["支出","currency"],["仓","material"],["住房","home"],["居住","home"],["岗位","population"],["居民","population"],["需求","population"],["制度","policy"]]:
+		if str(pair[0]) in title:icon=str(pair[1]);break
+	return V.card(parent,title,"",icon if title!="" else "",W.INFO if bg==W.PANEL else W.GREEN)
+
+static func _grid(parent:Node,columns:int=3) -> GridContainer:
+	return V.grid(parent,columns)
+
+static func _note(parent:Node,text:String) -> void:
+	parent.add_child(W.label(text,14,W.MUTED))
+
+static func _fold(parent:Node,title:String) -> VBoxContainer:
+	return V.fold(parent,title,"原始记录与精确数值，按需展开")
+
+static func _number(parent:Node,title:String,value:String,note:String="",tone:Color=W.TEXT) -> VBoxContainer:
+	return V.metric(parent,"",title,value,note,tone)
+
+static func _meter(parent:Node,title:String,value:float,total:float,suffix:String,tone:Color=W.GREEN,note:String="",action:Callable=Callable(),known:bool=true) -> VBoxContainer:
+	var box=W.vbox(parent,5);box.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	box.set_meta("desk_visual","meter");box.set_meta("metric_label",title);box.set_meta("metric_value",value if known else null);box.set_meta("metric_total",total if known else null);box.set_meta("metric_known",known);box.set_meta("metric_text",suffix)
+	var line=W.hbox(box,8)
+	if action.is_valid():
+		var button=W.flat(W.button(title+" ›",action));button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;line.add_child(button)
+	else:
+		var label=W.label(title,15,W.TEXT);label.size_flags_horizontal=Control.SIZE_EXPAND_FILL;line.add_child(label)
+	line.add_child(W.label(suffix,17,tone,false))
+	if known:
+		var bar=W.bar(value/total if total>0 else 0.);bar.custom_minimum_size.y=12
+		var bar_tone=tone if total>0 else W.MUTED
+		bar.add_theme_stylebox_override("fill",W.box(bar_tone,bar_tone,4));box.add_child(bar)
+		bar.tooltip_text=title+" · "+suffix+("\n"+note if note!="" else "")
+	if note!="":_note(box,note)
+	return box
+
+static func _record_value(row:Dictionary,key:String,format:String="%.2f") -> String:
+	return "—" if row.get(key)==null else format%float(row[key])
+
+static func _coverage_tone(ratio:float) -> Color:
+	return W.RED.lerp(W.GOLD,clampf(ratio*2,0,1)) if ratio<.5 else W.GOLD.lerp(W.GREEN,clampf((ratio-.5)*2,0,1))
+
+static func _nav(parent:Node,d,label:String,section:String,detail:String="",summary:String="") -> Button:
+	var box=_group(parent,"")
+	var row=W.hbox(box,12);var icon_id="layers"
+	if section in ["income","expense"]:icon_id="currency"
+	elif section=="history":icon_id="clock"
+	elif section=="housing":icon_id="home"
+	elif section=="employment":icon_id="jobs"
+	elif section=="needs":icon_id="population"
+	elif section in ["supply","consumption","storage"]:icon_id=str(d.arg) if RESOURCE_NAMES.has(str(d.arg)) else "material"
+	elif section=="rules":icon_id="policy"
+	V.icon(row,icon_id,32,W.INFO)
+	var button=W.button(label+"  ›",func():d.push_section(section,detail));button.custom_minimum_size.y=46
+	button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;row.add_child(button)
+	if summary!="":_note(box,summary)
+	return button
+
+static func _source_action(d,id:String) -> Callable:
+	if id=="external_market":return func():d.navigate("city040","market")
+	if id=="commission":return func():d.navigate("tasks")
+	if id=="unitemized":return Callable()
+	return func():
+		var g=d.app.game
+		if g.s.projects.has(id) and not g.s.projects[id].get("special",false):
+			d.locate(id);d.app.mode="inspect";d.app.selection=[str(g.s.projects[id].tile)];d.close()
+		else:d.app.message("此项来自城市公共库存或地图外人口；完整数值已计入本页。")
+
+static func _contributions(parent:Node,rows:Array,key:String="rate",color:Color=W.GREEN,limit:int=6,unit:String="/月",d=null) -> void:
+	var merged={}
+	for item in rows:
+		var id=str(item.get("source_id",item.get("id","")))
+		if not merged.has(id):merged[id]={"id":id,"name":str(item.get("source",item.get("name",id))),"value":0.}
+		merged[id].value+=float(item.get(key,0))
+	var ordered=merged.values();ordered.sort_custom(func(a,b):return absf(float(a.value))>absf(float(b.value)))
+	var total=0.
+	for item in ordered:total+=absf(float(item.value))
+	if ordered.is_empty():_note(parent,"当前快照没有这类记录。");return
+	for item in ordered.slice(0,limit):
+		var id=str(item.id);var action=Callable() if d==null else _source_action(d,id)
+		var meter=_meter(parent,str(item.name),absf(float(item.value)),total,"%.2f%s"%[float(item.value),unit],color,"占此组 %.0f%%"%(100.*absf(float(item.value))/maxf(.000001,total)),action)
+		meter.set_meta("source_id",id)
+	if ordered.size()>limit:_note(parent,"另有 %d 项；完整来源在下方展开。"%(ordered.size()-limit))
+
+static func _chart(parent:Node,model:Dictionary) -> void:
+	var chart=FinanceHistoryChart.new();chart.set_data(model.history);chart.custom_minimum_size.y=200*W.text_scale
+	parent.add_child(chart)
 
 static func render_finance(d) -> void:
-	var model:Dictionary = M.budget(d.app.game, d.app.shot)
-	d.title.text = "预算与收支"
-	d.cost.text = "预算 %.1f 通货" % model.balance
-	if d.subtopic == "":
-		d.subtitle.text = "当前余额与持续收支。"
-		_finance_summary(d, model)
-	elif d.subtopic == "income" or d.subtopic == "expense":
-		if d.detail_id == "": _finance_category(d, model, d.subtopic)
-		else: _finance_sources(d, model, d.subtopic, d.detail_id)
-	elif d.subtopic == "history":
-		if d.detail_id == "": _finance_history(d, model)
-		else: _finance_history_detail(d, model, d.detail_id)
-	else:
-		d.subtopic = ""
-		render_finance(d)
+	d.body.set_meta("snapshot_id",str(d.app.shot.get("snapshot_id","")))
+	var model=M.budget(d.app.game,d.app.shot)
+	d.title.text="预算与收支";d.cost.text="";d.subtitle.text=str(model.stamp)+" · 通货 / 来生月"
+	match str(d.subtopic):
+		"":_finance_summary(d,model)
+		"income","expense":
+			if d.detail_id=="":_finance_category(d,model,str(d.subtopic))
+			else:_finance_sources(d,model,str(d.subtopic),str(d.detail_id))
+		"history":
+			if d.detail_id=="":_finance_history(d,model)
+			else:_finance_history_detail(d,model,str(d.detail_id))
+		_:d.subtopic="";render_finance(d)
 
-static func _finance_summary(d, model:Dictionary) -> void:
-	var grid = _grid(d)
-	d._metric(grid, "持续收入", "+%.2f /月" % model.income, "当前结算", W.GREEN)
-	d._metric(grid, "持续支出", "−%.2f /月" % model.expense, "当前结算", W.GOLD)
-	d._metric(grid, "收支平衡", "%+.2f /月" % model.net, "不含一次性收支", W.RED if model.net < 0 else W.GREEN)
-	var chart = FinanceHistoryChart.new()
-	chart.set_data(model.history)
-	chart.custom_minimum_size.y = 144 * W.text_scale
-	d.body.add_child(chart)
-	var actions = W.hbox(d.body, 8)
-	_nav(actions, d, "收入", "income")
-	_nav(actions, d, "支出", "expense")
-	_nav(actions, d, "历史", "history")
+static func _finance_summary(d,model:Dictionary) -> void:
+	var top=_grid(d.body,2)
+	_number(top,"可用预算","%.1f"%float(model.balance),"当前持有通货",W.GREEN if model.balance>=0 else W.GOLD)
+	_number(top,"每月经营余量","%+.2f"%float(model.net),"收入 − 支出；一次性支出单列",W.GREEN if model.net>=0 else W.GOLD)
+	var flow=_group(d.body,"持续收支")
+	var scale=maxf(float(model.income),float(model.expense))
+	_meter(flow,"收入",float(model.income),scale,"+%.2f /月"%float(model.income),W.GREEN)
+	_meter(flow,"支出",float(model.expense),scale,"−%.2f /月"%float(model.expense),W.GOLD)
+	var links=_grid(d.body,3)
+	_nav(links,d,"收入构成","income","","哪些经营活动正在支付城市？")
+	_nav(links,d,"支出构成","expense","","维护由哪些建筑与居民产生？")
+	_nav(links,d,"历史流水","history","","已发生的经营周期与一次性操作")
+	var history=_fold(d.body,"查看已结算收支走势");_chart(history,model)
 
-static func _finance_category(d, model:Dictionary, category:String) -> void:
-	var incoming = category == "income"
-	var rows:Array = model.income_rows if incoming else model.expense_rows
-	var amount = float(model.income if incoming else model.expense)
-	d.title.text = "收入" if incoming else "支出"
-	d.subtitle.text = "按当前经营结算 %.2f 通货/来生月。" % amount
-	d._metric(d.body, "当前合计", ("+" if incoming else "−") + "%.2f /月" % amount, "逐项明细在下一层。", W.GREEN if incoming else W.GOLD)
-	var description = _group(d.body, "本期结构")
-	d._row(description, "记录项目", "%d 项" % rows.size())
-	d._row(description, "核对来源", "打开明细", func(): d.push_section(category, "sources"))
-	var policy = ""
-	if incoming:
-		var mode = str(d.app.game.compiled.get("options", {}).get("tax_mode", ""))
-		policy = {"head":"人头税", "production":"生产税", "trade":"消费税"}.get(mode, "当前税制")
-	else:
-		policy = "建筑与居民维护"
-	var card = _group(d.body, "主要依据")
-	card.add_child(W.label(policy, 18, W.TEXT))
-	if incoming:
-		card.add_child(W.button("查看地区政策", func(): d.navigate("policies")))
+static func _finance_category(d,model:Dictionary,category:String) -> void:
+	var incoming=category=="income";var rows:Array=model.income_rows if incoming else model.expense_rows
+	var value=float(model.income if incoming else model.expense);var tone=W.GREEN if incoming else W.GOLD
+	d.title.text="收入构成" if incoming else "支出构成"
+	var columns=_grid(d.body,2)
+	_number(columns,"本期合计",("+" if incoming else "−")+"%.2f /月"%value,str(model.stamp),tone)
+	var policy_mode=str(d.app.game.compiled.get("options",{}).get("tax_mode",""))
+	var reason={"head":"实际居住人口","production":"实际物资产出","trade":"实际消费活动"}.get(policy_mode,"实际经营记录") if incoming else "建筑维护 + 居民维护"
+	_number(columns,"结算依据",reason,"逐项保留原始来源")
+	var graph=_group(d.body,"贡献最大的来源 · 长度为本组占比")
+	_contributions(graph,rows,"rate",tone,6,"/月",d)
+	_nav(d.body,d,"展开全部来源",category,"sources","%d 条结算记录，可继续查看每项来源"%rows.size())
+	if incoming:d.body.add_child(W.button("比较税制 ›",func():d.navigate("policies")))
 
-static func _finance_sources(d, model:Dictionary, category:String, detail:String) -> void:
-	var incoming = category == "income"
-	var rows:Array = model.income_rows if incoming else model.expense_rows
-	d.title.text = "收入来源" if incoming else "支出来源"
-	d.subtitle.text = "当前周期真实记录 · 点名称可定位建筑。"
+static func _finance_sources(d,model:Dictionary,category:String,detail:String) -> void:
+	var incoming=category=="income";var rows:Array=model.income_rows if incoming else model.expense_rows
+	var tone=W.GREEN if incoming else W.GOLD
+	d.title.text="收入来源" if incoming else "支出来源"
 	if detail.begins_with("source:"):
-		var source_id = detail.trim_prefix("source:")
-		var matches:Array = []
-		for row in rows:
-			if str(row.get("source_id", "")) == source_id: matches.append(row)
-		if matches.is_empty():
-			d.body.add_child(W.label("这项来源已不在当前结算中。", 16, W.MUTED))
-			return
-		var total = 0.0
-		for row in matches: total += float(row.get("rate", 0))
-		d._metric(d.body, "来源合计", ("+" if incoming else "−") + "%.2f /月" % total, d.app.game.project_name(source_id), W.GREEN if incoming else W.GOLD)
-		for row in matches:
-			d._row(d.body, str(row.get("name", "经营记录")), "%.2f /月" % float(row.get("rate", 0)))
+		var id=detail.trim_prefix("source:");var matches=[]
+		for item in rows:
+			if str(item.get("source_id",""))==id:matches.append(item)
+		var total=0.
+		for item in matches:total+=float(item.get("rate",0))
+		_number(d.body,d.app.game.project_name(id),"%.2f /月"%total,str(model.stamp),tone)
+		for item in matches:_meter(d.body,str(item.get("name","经营记录")),absf(float(item.get("rate",0))),absf(total),"%.3f /月"%float(item.get("rate",0)),tone)
+		d.body.add_child(W.button("定位来源 ›",_source_action(d,id)))
 		return
-	var table = _group(d.body, "逐项明细")
-	if rows.is_empty():
-		table.add_child(W.label("当前周期没有记录。", 16, W.MUTED))
-		return
-	var ordered = rows.duplicate(true)
-	ordered.sort_custom(func(a, b):
-		if float(a.get("rate", 0)) != float(b.get("rate", 0)): return float(a.rate) > float(b.rate)
-		return str(a.get("source_id", "")) < str(b.get("source_id", "")))
-	for row in ordered:
-		var item:Dictionary = row
-		var source_id = str(item.get("source_id", ""))
-		var action:Callable = func(): d.push_section(category, "source:" + source_id)
-		d._row(table, str(item.get("name", item.get("source", "经营记录"))), ("+" if incoming else "−") + "%.2f /月" % float(item.get("rate", 0)), action)
-		if str(item.get("source", "")) != "": table.add_child(W.label(str(item.source), 13, W.MUTED))
+	var graph=_group(d.body,"来源占比");_contributions(graph,rows,"rate",tone,8,"/月",d)
+	var table=_fold(d.body,"完整逐项账本 · %d 条"%rows.size())
+	for item in rows:
+		var id=str(item.get("source_id",""))
+		d._row(table,str(item.get("name","经营记录"))+" · "+str(item.get("source","")),"%.3f /月"%float(item.get("rate",0)),func():d.push_section(category,"source:"+id))
 
-static func _finance_history(d, model:Dictionary) -> void:
-	d.title.text = "预算历史"
-	d.subtitle.text = "经营周期与一次性操作分别查看。"
-	var rows:Array = model.history
-	var latest = "尚无完整结算"
-	if not rows.is_empty(): latest = "最近记录 %.1f月 · 余额 %.1f" % [float(rows[-1].get("h", 0)), float(rows[-1].get("balance", 0))]
-	d._metric(d.body, "周期记录", "%d 条" % rows.size(), latest, W.TEXT)
-	var entries = W.vbox(d.body, 8)
-	_nav(entries, d, "经营周期", "history", "cycles")
-	_nav(entries, d, "一次性收支", "history", "transactions")
+static func _finance_history(d,model:Dictionary) -> void:
+	d.title.text="预算历史";d.subtitle.text="仅显示已保存的真实结算，不补造历史"
+	var plot=_group(d.body,"经营收入与支出 · 通货 / 月");_chart(plot,model)
+	var links=_grid(d.body,2)
+	_nav(links,d,"经营周期","history","cycles","%d 条已保存周期"%model.history.size())
+	_nav(links,d,"一次性收支","history","transactions","%d 条建设、政策、贸易与奖励记录"%model.transactions.size())
 
-static func _finance_history_detail(d, model:Dictionary, detail:String) -> void:
-	var rows:Array = model.history
-	if detail == "cycles":
-		d.title.text = "经营周期记录"
-		d.subtitle.text = "最近60个已完成周期。"
-		var table:Array = []
-		for i in range(rows.size() - 1, maxi(-1, rows.size() - 61), -1):
-			var row:Dictionary = rows[i]
-			table.append(["%.1f月" % float(row.get("h", 0)), "+%.2f" % float(row.get("income", 0)), "−%.2f" % float(row.get("upkeep", 0)), "%+.2f" % float(row.get("net", 0)), "%.2f" % float(row.get("balance", 0))])
-		if table.is_empty(): d.body.add_child(W.label("推进一个完整周期后会出现记录。", 16, W.MUTED))
-		else: d._table(d.body, ["本地时间", "收入/月", "支出/月", "净收支/月", "期末余额"], table)
-	elif detail == "transactions":
-		d.title.text = "一次性收支"
-		d.subtitle.text = "最近60项政策、建设、奖励与贸易记录。"
-		var journal:Array = model.transactions
-		var table:Array = []
-		for i in range(journal.size() - 1, maxi(-1, journal.size() - 61), -1):
-			var row:Dictionary = journal[i]
-			table.append(["%.1f月" % float(row.get("h", 0)), str(row.get("label", row.get("kind", "操作"))).left(36), "%+.2f" % float(row.get("cash", 0)), "%+.2f DT" % float(row.get("dt", 0)), "%.2f" % float(row.get("balance", 0))])
-		if table.is_empty(): d.body.add_child(W.label("当前还没有一次性收支记录。", 16, W.MUTED))
-		else: d._table(d.body, ["时间", "操作", "通货", "DT", "余额"], table)
+static func _finance_history_detail(d,model:Dictionary,detail:String) -> void:
+	if detail=="cycles":
+		d.title.text="经营周期记录";d.subtitle.text="真实周期走势；精确账本按需展开"
+		_chart(d.body,model)
+		var table=[];var rows:Array=model.history
+		for i in range(rows.size()-1,maxi(-1,rows.size()-61),-1):
+			var item:Dictionary=rows[i]
+			table.append([_record_value(item,"h","%.2f月"),_record_value(item,"income","+%.2f"),_record_value(item,"upkeep","−%.2f"),_record_value(item,"net","%+.2f"),_record_value(item,"balance")])
+		if table.is_empty():_note(d.body,"首次结算后会出现记录。")
+		else:d._table(_fold(d.body,"最近60个周期的精确数值"),["本地时间","收入/月","支出/月","净收支/月","期末余额"],table)
+	elif detail=="transactions":
+		d.title.text="一次性收支";d.subtitle.text="按保存顺序展示；不混入每月经营收支"
+		var journal:Array=model.transactions;var table=[]
+		var recent=journal.slice(maxi(0,journal.size()-60));var gain=0.;var spent=0.;var cash_known=true
+		for item in recent:
+			if item.get("cash")==null:cash_known=false;continue
+			if float(item.cash)>0:gain+=float(item.cash)
+			else:spent-=float(item.cash)
+		var summary=_grid(d.body,2);_number(summary,"最近60项流入","+%.2f"%gain,"已记录通货"+("；部分记录金额未知" if not cash_known else ""),W.GREEN);_number(summary,"最近60项流出","−%.2f"%spent,"已记录通货"+("；部分记录金额未知" if not cash_known else ""),W.GOLD)
+		var scale=maxf(gain,spent)
+		for i in range(recent.size()-1,maxi(-1,recent.size()-9),-1):
+			var item:Dictionary=recent[i];var cash=float(item.cash) if item.get("cash")!=null else 0.
+			_meter(d.body,_record_value(item,"h","%.2f月")+" · "+str(item.get("label",item.get("kind","操作"))),absf(cash),scale,_record_value(item,"cash","%+.2f"),W.GREEN if cash>=0 else W.GOLD,"DT "+_record_value(item,"dt","%+.2f")+" · 操作后余额 "+_record_value(item,"balance"),Callable(),item.get("cash")!=null)
+		for i in range(recent.size()-1,-1,-1):
+			var item:Dictionary=recent[i];table.append([_record_value(item,"h","%.2f月"),str(item.get("label",item.get("kind","操作"))),_record_value(item,"cash","%+.2f"),_record_value(item,"dt","%+.2f"),_record_value(item,"balance")])
+		if not table.is_empty():d._table(_fold(d.body,"完整60项流水"),["时间","操作","通货","DT","余额"],table)
+		else:_note(d.body,"尚无已保存的一次性收支。")
 	else:
-		d.title.text = "导出记录"
-		d.subtitle.text = "导出当前完整收支记录。"
-		d.body.add_child(W.label("导出会包含存档中已有的结算与操作记录。", 15, W.MUTED))
-		d.body.add_child(W.primary(W.button("导出完整记录", func(): d.app.export_file("record"))))
+		d.title.text="导出记录";_note(d.body,"导出包含已有结算与操作记录。")
+		d.footer.show();d.primary.show();d.primary.text="导出完整记录";d.primary.pressed.connect(func():d.app.export_file("record"));d.footer_text.text="导出已有结算与操作记录"
 
 static func render_resource(d) -> void:
-	var resource_id = str(d.arg)
-	if not RESOURCE_NAMES.has(resource_id): resource_id = "food"
-	var model:Dictionary = M.resource(d.app.game, d.app.shot, resource_id)
-	d.title.text = str(model.get("name", RESOURCE_NAMES[resource_id]))
-	d.cost.text = ""
-	if d.subtopic == "":
-		d.subtitle.text = str(model.get("stamp", ""))
-		_resource_summary(d, model, resource_id)
-	elif d.subtopic == "supply" or d.subtopic == "consumption" or d.subtopic == "storage":
-		if d.detail_id == "": _resource_subtopic(d, model, resource_id, d.subtopic)
-		else: _resource_detail(d, model, resource_id, d.subtopic)
-	else:
-		d.subtopic = ""
-		render_resource(d)
+	d.body.set_meta("snapshot_id",str(d.app.shot.get("snapshot_id","")))
+	var id=str(d.arg) if RESOURCE_NAMES.has(str(d.arg)) else "food"
+	var model=M.resource(d.app.game,d.app.shot,id)
+	d.title.text=str(model.name);d.cost.text="";d.subtitle.text=str(model.stamp)+" · 库存为当前持有"
+	var tabs=W.hbox(d.body,8)
+	for key in RESOURCE_NAMES:
+		var resource=str(key);var button=W.button(str(RESOURCE_NAMES[key]),func():d.navigate("resource",resource))
+		button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		if resource==id:button.disabled=true
+		tabs.add_child(button)
+	if d.subtopic=="":_resource_summary(d,model,id)
+	elif d.subtopic in ["supply","consumption","storage"]:
+		if d.detail_id=="":_resource_subtopic(d,model,id,str(d.subtopic))
+		else:_resource_detail(d,model,id,str(d.subtopic))
+	else:d.subtopic="";render_resource(d)
 
-static func _resource_summary(d, model:Dictionary, resource_id:String) -> void:
-	var grid = _grid(d)
-	if resource_id == "energy":
-		var supply = float(model.get("supply", 0))
-		var need = float(model.get("need", 0))
-		d._metric(grid, "供给", "%.2f" % supply, "当前周期", W.GREEN)
-		d._metric(grid, "需求", "%.2f" % need, "当前周期", W.TEXT)
-		d._metric(grid, "满足率", "%.0f%%" % (100 * float(model.get("ratio", 1))), "实际供电", W.GREEN if float(model.get("ratio", 1)) >= .98 else W.GOLD)
-		d._metric(grid, "电网差额", "%+.2f" % (supply - need), "电力不默认入库", W.TEXT)
-	else:
-		d._metric(grid, "当前库存", "%.1f" % float(model.get("stock", 0)), "跨周期储备", W.TEXT)
-		d._metric(grid, "实际生产", "%.2f/月" % float(model.get("produced", 0)), "当前周期", W.GREEN)
-		d._metric(grid, "实际消耗", "%.2f/月" % float(model.get("consumed", 0)), "当前周期", W.GOLD)
-		d._metric(grid, "库存净变", "%+.2f/月" % float(model.get("net", 0)), str(model.get("status", "")), W.GREEN if float(model.get("net", 0)) >= 0 else W.GOLD)
-	var actions = W.hbox(d.body, 8)
-	_nav(actions, d, "供给", "supply")
-	_nav(actions, d, "消费", "consumption")
-	_nav(actions, d, "仓储", "storage")
+static func _resource_flow(d,model:Dictionary,id:String) -> void:
+	var energy=id=="energy";var unit="" if energy else "/月"
+	var supply=float(model.get("supply",0)) if energy else float(model.get("produced",0))+float(model.get("imported",0))
+	var used=float(model.get("need",0))*float(model.get("ratio",1)) if energy else float(model.get("consumed",0))+float(model.get("exported",0))+float(model.get("delivered",0))+float(model.get("lost",0))
+	V.flow(d.body,[
+		{"id":id,"label":"供给" if energy else "生产 + 进口","value":"%.2f%s"%[supply,unit],"note":str(model.stamp),"color":W.GREEN},
+		{"id":id,"label":"实际供电" if energy else "消耗与流出","value":"%.2f%s"%[used,unit],"note":"满足需求" if energy else "消费 + 出口 + 交付 + 损耗","color":W.GOLD},
+		{"id":id,"label":"未满足需求" if energy else "库存净变化","value":"%.2f"%maxf(0,float(model.get("need",0))-used) if energy else "%+.2f /月"%float(model.get("net",0)),"note":"电网按周期供给" if energy else "储备增加 / 减少","color":W.INFO}
+	],"同一周期的供需关系；库存位置另列")
+	var balance=_group(d.body,"供给与实际使用 · 同一比例尺")
+	_meter(balance,"供给",supply,maxf(supply,used),"%.2f%s"%[supply,unit],W.GREEN)
+	_meter(balance,"供电" if energy else "消耗与流出",used,maxf(supply,used),"%.2f%s"%[used,unit],W.GOLD)
+	if not energy:
+		var terms=_grid(balance,3)
+		for pair in [["produced","生产"],["imported","进口"],["consumed","消耗"],["exported","出口"],["delivered","交付"],["lost","损耗"]]:
+			terms.add_child(W.label("%s  %.2f /月"%[pair[1],float(model.get(pair[0],0))],14,W.MUTED))
+		var shortage=maxf(0,float(model.get("need",0))-float(model.get("consumed",0)))
+		if shortage>.0001:_note(balance,"实际申请仍有 %.2f /月未满足；消耗合计包含施工等实际扣除，细项见使用去向。"%shortage)
 
-static func _resource_subtopic(d, model:Dictionary, resource_id:String, section:String) -> void:
-	var heading = {"supply":"供给", "consumption":"消费", "storage":"仓储"}[section]
-	d.title.text = str(model.get("name", RESOURCE_NAMES[resource_id])) + " · " + heading
-	if section == "supply":
-		var value = float(model.get("supply", 0)) if resource_id == "energy" else float(model.get("produced", 0))
-		d.subtitle.text = "本期供给 %.2f%s。" % [value, "" if resource_id == "energy" else "/月"]
-		d._metric(d.body, "有效供给", "%.2f%s" % [value, "" if resource_id == "energy" else "/月"], "逐建筑来源在详情中。", W.GREEN)
-		_nav(d.body, d, "查看供给来源", section, "records")
-	elif section == "consumption":
-		var value = float(model.get("need", 0)) if resource_id == "energy" else float(model.get("consumed", 0))
-		d.subtitle.text = "需求 %.2f%s · 实际消耗 %.2f%s。" % [float(model.get("need", value)), "/月" if resource_id != "energy" else "", value, "/月" if resource_id != "energy" else ""]
-		d._metric(d.body, "实际使用", "%.2f%s" % [value, "" if resource_id == "energy" else "/月"], "逐项去向在详情中。", W.GOLD)
-		_nav(d.body, d, "查看使用去向", section, "records")
-	else:
-		d.subtitle.text = "库存位置与可用容量。" if resource_id != "energy" else "电力按周期结算，不作为普通仓库存放。"
-		if resource_id == "energy":
-			d.body.add_child(W.label("只有明确配置储能容量的建筑会保存剩余电力。", 15, W.MUTED))
-		else:
-			var total = 0.0
-			for store in model.get("stores", []): total += float(store.get("capacity", 0))
-			d._metric(d.body, "当前库存", "%.1f" % float(model.get("stock", 0)), "可用仓储容量 %.1f" % total, W.TEXT)
-		_nav(d.body, d, "查看库存位置", section, "records")
+static func _resource_summary(d,model:Dictionary,id:String) -> void:
+	if id!="energy":
+		var capacity=0.
+		for store in model.stores:capacity+=float(store.get("capacity",0))
+		var stock=_group(d.body,"当前储备")
+		_meter(stock,RESOURCE_NAMES[id],float(model.stock),capacity,"%.1f / %.1f 容量"%[float(model.stock),capacity],W.INFO,"各仓位置决定实际可用性；总量不等于任一建筑都能取用。")
+	_resource_flow(d,model,id)
+	var links=_grid(d.body,3)
+	_nav(links,d,"供给来源","supply","","谁在生产，进口补了多少？")
+	_nav(links,d,"使用去向","consumption","","居民、配方、施工与外部交付")
+	_nav(links,d,"库存位置","storage","","按真实仓容查看储备" if id!="energy" else "电力按周期供给，不计普通库存")
 
-static func _resource_detail(d, model:Dictionary, resource_id:String, section:String) -> void:
-	var heading = {"supply":"供给来源", "consumption":"实际去向", "storage":"库存位置"}[section]
-	d.title.text = str(model.get("name", RESOURCE_NAMES[resource_id])) + " · " + heading
-	d.subtitle.text = "当前快照中的实际记录。"
-	var field = {"supply":"sources", "consumption":"sinks", "storage":"stores"}[section]
-	var rows:Array = model.get(field, [])
-	if rows.is_empty():
-		d.body.add_child(W.label("当前周期没有可列出的记录。", 16, W.MUTED))
-		return
-	var group = _group(d.body, heading)
-	for row in rows:
-		var item:Dictionary = row
-		var id = str(item.get("id", ""))
-		var action:Callable = func(): d.locate(id)
-		if section == "storage":
-			d._row(group, str(item.get("name", id)), "%.1f / %.1f" % [float(item.get("stock", 0)), float(item.get("capacity", 0))], action)
-			group.add_child(W.label("可接收外部溢出" if item.get("external", false) else "本地产物仓", 13, W.MUTED))
-		else:
-			var unit = "" if resource_id == "energy" else "/月"
-			d._row(group, str(item.get("name", id)), "%.2f%s" % [float(item.get("rate", 0)), unit], action)
-			if str(item.get("note", "")) != "": group.add_child(W.label(str(item.note), 13, W.MUTED))
-			if section == "supply" and (float(item.get("kept", 0)) > 0 or float(item.get("lost", 0)) > 0):
-				group.add_child(W.label("入库 %.2f/月 · 损耗 %.2f/月" % [float(item.get("kept", 0)), float(item.get("lost", 0))], 13, W.GOLD if float(item.get("lost", 0)) > .001 else W.MUTED))
+static func _resource_records(model:Dictionary,id:String,section:String) -> Array:
+	var field={"supply":"sources","consumption":"sinks","storage":"stores"}[section]
+	var rows:Array=model.get(field,[]).duplicate(true)
+	if section=="consumption" and id!="energy":
+		var total=float(model.get("consumed",0))+float(model.get("exported",0))+float(model.get("delivered",0));var listed=0.
+		for item in rows:listed+=float(item.get("rate",0))
+		if total>listed+.000001:
+			rows.append({"id":"unitemized","name":"其他实际扣除 · 总账差额","rate":total-listed,"note":"总账实际消耗与已列去向的差额，包含未单列的施工扣料；没有据此虚构建筑来源。"})
+	return rows
+
+static func _resource_subtopic(d,model:Dictionary,id:String,section:String) -> void:
+	var field={"supply":"sources","consumption":"sinks","storage":"stores"}[section]
+	d.title.text=RESOURCE_NAMES[id]+" · "+{"supply":"供给","consumption":"去向","storage":"仓储"}[section]
+	if section=="storage":
+		if id=="energy":_note(d.body,"电力按当前周期供需结算，本页没有普通电力库存。")
+		for store in model.stores.slice(0,6):
+			_meter(d.body,str(store.name),float(store.stock),float(store.capacity),"%.1f / %.1f"%[float(store.stock),float(store.capacity)],W.INFO,"可接收外部溢出" if store.get("external",false) else "本地产物仓",_source_action(d,str(store.id)))
+	else:
+		var tone=W.GREEN if section=="supply" else W.GOLD
+		var chart=_group(d.body,"来源贡献" if section=="supply" else ("用电申请构成" if id=="energy" else "消耗去向构成"))
+		_contributions(chart,_resource_records(model,id,section),"rate",tone,6,"" if id=="energy" else "/月",d)
+		if id=="energy" and section=="consumption":_note(chart,"条形展示真实用电申请；全城满足率 %.0f%%，申请量不等于实际供电量。"%(100*float(model.get("ratio",1))))
+	_nav(d.body,d,"全部来源与精确记录",section,"records","保留来源、去向、入库与损耗")
+
+static func _resource_detail(d,model:Dictionary,id:String,section:String) -> void:
+	d.title.text=RESOURCE_NAMES[id]+" · "+{"supply":"供给来源","consumption":"使用去向","storage":"库存位置"}[section]
+	var rows:Array=_resource_records(model,id,section)
+	if rows.is_empty():_note(d.body,"当前快照没有这类记录。");return
+	if section=="storage":
+		for item in rows:_meter(d.body,str(item.name),float(item.stock),float(item.capacity),"%.1f / %.1f"%[float(item.stock),float(item.capacity)],W.INFO,"可接收外部溢出" if item.get("external",false) else "本地产物仓",_source_action(d,str(item.id)))
+	else:
+		_contributions(d.body,rows,"rate",W.GREEN if section=="supply" else W.GOLD,8,"" if id=="energy" else "/月",d)
+		var table=_fold(d.body,"完整来源记录 · %d 条"%rows.size())
+		for item in rows:
+			d._row(table,str(item.name),"%.3f%s"%[float(item.rate),"" if id=="energy" else "/月"],_source_action(d,str(item.id)))
+			if str(item.get("note",""))!="":_note(table,str(item.note))
+			if section=="supply" and id!="energy":_note(table,"入库 %.3f /月 · 损耗 %.3f /月"%[float(item.get("kept",0)),float(item.get("lost",0))])
 
 static func render_population(d) -> void:
-	var p:Dictionary = M.population(d.app.game, d.app.shot)
-	d.title.text = "居民"
-	d.cost.text = ""
-	if d.subtopic == "":
-		d.subtitle.text = str(p.stamp)
-		_population_summary(d, p)
-	elif d.subtopic == "housing":
-		if d.detail_id == "": _population_housing(d, p)
-		else: _population_homes(d, p)
-	elif d.subtopic == "employment":
-		if d.detail_id == "": _population_employment(d, p)
-		else: _population_jobs(d, p)
-	elif d.subtopic == "needs":
-		if d.detail_id == "": _population_needs(d, p)
-		else: _population_need_detail(d, p, d.detail_id)
-	else:
-		d.subtopic = ""
-		render_population(d)
+	d.body.set_meta("snapshot_id",str(d.app.shot.get("snapshot_id","")))
+	var p=M.population(d.app.game,d.app.shot)
+	d.title.text="居民";d.cost.text="";d.subtitle.text=str(p.stamp)
+	match str(d.subtopic):
+		"":_population_summary(d,p)
+		"housing":
+			if d.detail_id=="":_population_housing(d,p)
+			else:_population_homes(d,p)
+		"employment":
+			if d.detail_id=="":_population_employment(d,p)
+			else:_population_jobs(d,p)
+		"needs":
+			if d.detail_id=="":_population_needs(d,p)
+			else:_population_need_detail(d,p,str(d.detail_id))
+		_:d.subtopic="";render_population(d)
 
-static func _population_summary(d, p:Dictionary) -> void:
-	var grid = _grid(d)
-	d._metric(grid, "人口 / 住房", "%.0f / %.0f" % [p.count, p.housing], "已安置 %.0f · 待安置 %.0f" % [p.housed, p.homeless], W.TEXT)
-	d._metric(grid, "就业", "%.0f / %.0f" % [p.employed, p.jobs], "岗位已填 / 岗位总数", W.GREEN)
-	var growth = "尚无实际周期" if p.population_rate == null else "%+.2f 人/月" % float(p.population_rate)
-	d._metric(grid, "人口变化", growth, "最近一次实际周期", W.TEXT)
-	d._metric(grid, "幸福", "%.0f / 100" % float(p.happiness), "", W.TEXT)
-	d._metric(grid, "健康", "%.0f / 100" % float(p.health), "", W.GREEN)
-	d._metric(grid, "需求覆盖", "%.0f%%" % (100 * float(p.coverage)), "已启用需求", W.TEXT)
-	var actions = W.hbox(d.body, 8)
-	_nav(actions, d, "居住", "housing")
-	_nav(actions, d, "就业", "employment")
-	_nav(actions, d, "需求", "needs")
+static func _population_summary(d,p:Dictionary) -> void:
+	var capacity=_grid(d.body,2)
+	var homes=_group(capacity,"住得下吗？");_meter(homes,"已安置 / 住房",float(p.housed),float(p.housing),"%.1f / %.1f"%[p.housed,p.housing],W.INFO,"待安置 %.1f 人"%float(p.homeless))
+	var jobs=_group(capacity,"有工作吗？");_meter(jobs,"已就业 / 岗位",float(p.employed),float(p.jobs),"%.1f / %.1f"%[p.employed,p.jobs],W.GREEN,"待就业 %.1f 人"%float(p.unemployed))
+	var wellbeing=_group(d.body,"居民状态 · 人数加权")
+	var stats=_grid(wellbeing,3)
+	_meter(stats,"健康",float(p.health),100,"%.0f / 100"%float(p.health) if float(p.count)>0 else "无居民",W.GREEN,"",Callable(),float(p.count)>0)
+	_meter(stats,"幸福",float(p.happiness),100,"%.0f / 100"%float(p.happiness) if float(p.count)>0 else "无居民",W.INFO,"",Callable(),float(p.count)>0)
+	_number(stats,"人口变化","—" if p.population_rate==null else "%+.2f 人/月"%float(p.population_rate),"最近实际结算")
+	var links=_grid(d.body,3)
+	_nav(links,d,"居住分布","housing","","容量、待安置与各住区")
+	_nav(links,d,"就业分配","employment","","岗位来源与实际到岗")
+	_nav(links,d,"生活需求","needs","","住区 × 需求覆盖矩阵")
 
-static func _population_housing(d, p:Dictionary) -> void:
-	d.title.text = "人口 · 居住"
-	d.subtitle.text = "住房容量与实际安置。"
-	var grid = _grid(d)
-	d._metric(grid, "住房位置", "%.1f" % float(p.housing), "全城容量", W.TEXT)
-	d._metric(grid, "已安置", "%.1f" % float(p.housed), "", W.GREEN)
-	d._metric(grid, "待安置", "%.1f" % float(p.homeless), "", W.GOLD if float(p.homeless) > .1 else W.TEXT)
-	d._metric(grid, "空余位置", "%.1f" % maxf(0, float(p.housing) - float(p.housed)), "", W.TEXT)
-	_nav(d.body, d, "查看住区", "housing", "homes")
+static func _population_housing(d,p:Dictionary) -> void:
+	d.title.text="人口 · 居住"
+	var columns=_grid(d.body,2)
+	var housing=_group(columns,"住房占用");_meter(housing,"已安置",float(p.housed),float(p.housing),"%.1f / %.1f"%[p.housed,p.housing],W.INFO,"空位 %.1f"%maxf(0,float(p.housing)-float(p.housed)))
+	_number(columns,"等待安置","%.1f 人"%float(p.homeless),"仍计入生活需求与城市人口",W.GOLD if p.homeless>.1 else W.TEXT)
+	_population_home_cards(d,p,4)
+	_nav(d.body,d,"查看全部住区","housing","homes")
 
-static func _population_homes(d, p:Dictionary) -> void:
-	d.title.text = "居住 · 住区明细"
-	d.subtitle.text = "按实际居住位置合并展示。"
-	var homes:Dictionary = {}
+static func _home_rows(p:Dictionary) -> Array:
+	var homes={}
 	for row in p.rows:
-		var id = str(row.get("home", "homeless"))
-		if not homes.has(id): homes[id] = {"count":0.0, "employed":0.0, "health":0.0, "happiness":0.0, "education":0.0, "coverage":0.0}
-		var entry:Dictionary = homes[id]
-		var count = float(row.get("count", 0))
-		entry.count += count
-		entry.employed += float(row.get("employed", 0))
-		entry.health += float(row.get("health", 0)) * count
-		entry.happiness += float(row.get("happiness", 0)) * count
-		entry.education += float(row.get("education", 0)) * count
-		entry.coverage += float(row.get("mean_coverage", 0)) * count
-	var ids:Array = homes.keys()
-	ids.sort()
-	if ids.is_empty():
-		d.body.add_child(W.label("当前没有住户记录。", 16, W.MUTED))
-		return
-	for raw_id in ids:
-		var id = str(raw_id)
-		var entry:Dictionary = homes[id]
-		var n = maxf(.000001, float(entry.count))
-		var name = "待安置" if id == "homeless" else d.app.game.project_name(id)
-		var card = _group(d.body, name)
-		var action:Callable = func(): d.locate(id)
-		d._row(card, "居民", "%.1f 人" % float(entry.count), action)
-		card.add_child(W.label("就业 %.1f · 幸福 %.0f · 健康 %.0f · 教育 %.0f · 需求 %.0f%%" % [float(entry.employed), float(entry.happiness) / n, float(entry.health) / n, float(entry.education) / n, 100 * float(entry.coverage) / n], 14, W.MUTED))
+		var id=str(row.get("home","homeless"));var count=float(row.get("count",0))
+		if not homes.has(id):homes[id]={"id":id,"count":0.,"employed":0.,"health":0.,"happiness":0.,"education":0.,"coverage":0.}
+		var entry:Dictionary=homes[id];entry.count+=count;entry.employed+=float(row.employed)
+		for key in ["health","happiness","education"]:entry[key]+=float(row[key])*count
+		entry.coverage+=float(row.get("mean_coverage",0))*count
+	var result=homes.values();result.sort_custom(func(a,b):return float(a.count)>float(b.count));return result
 
-static func _population_employment(d, p:Dictionary) -> void:
-	d.title.text = "人口 · 就业"
-	d.subtitle.text = "已分配岗位与仍可用的岗位。"
-	var grid = _grid(d)
-	d._metric(grid, "已就业", "%.1f" % float(p.employed), "", W.GREEN)
-	d._metric(grid, "岗位总数", "%.1f" % float(p.jobs), "", W.TEXT)
-	d._metric(grid, "待就业", "%.1f" % float(p.unemployed), "", W.GOLD if float(p.unemployed) > .1 else W.TEXT)
-	_nav(d.body, d, "查看岗位来源", "employment", "sources")
+static func _population_home_cards(d,p:Dictionary,limit:int) -> void:
+	var homes=_home_rows(p);var present={}
+	for home in homes:present[str(home.id)]=true
+	var shot:Dictionary=d.app.shot
+	for id in shot.get("projects",{}):
+		var project:Dictionary=shot.projects[id];var st:Dictionary=shot.get("compiled",{}).get("stats",{}).get(id,{})
+		if present.has(str(id)) or project.get("special",false) or project.get("status","")!="running" or float(st.get("housing",0))<=0:continue
+		homes.append({"id":str(id),"count":0.,"employed":0.,"health":0.,"happiness":0.,"education":0.,"coverage":0.})
+	var grid=_grid(d.body,2)
+	for entry in homes.slice(0,limit):
+		var id=str(entry.id);var n=maxf(.000001,float(entry.count));var st:Dictionary=d.app.shot.get("compiled",{}).get("stats",{}).get(id,{})
+		var project:Dictionary=d.app.shot.get("projects",{}).get(id,{})
+		var capacity=float(st.get("housing",0))*float(st.get("efficiency",1)) if id!="homeless" and project.get("status","")=="running" else 0.
+		var name="待安置居民" if id=="homeless" else d.app.game.project_name(id)
+		var box=V.building(grid,str(project.get("def","")),name,"实际住区 · 当前住房与居民") if id!="homeless" and not project.get("special",false) else V.card(grid,name,"","population",W.GOLD)
+		if id=="homeless":_number(box,"等待安置","%.1f 人"%float(entry.count),"当前没有实际住房位置",W.GOLD)
+		else:_meter(box,"人口 / 住房",float(entry.count),capacity,"%.1f / %.1f"%[entry.count,capacity],W.INFO)
+		_meter(box,"就业",float(entry.employed),float(entry.count),"%.1f / %.1f 人"%[entry.employed,entry.count] if float(entry.count)>0 else "无住户",W.GREEN,"",Callable(),float(entry.count)>0)
+		var detail=_fold(box,"居民状态与定位")
+		for key in ["health","happiness","education"]:_meter(detail,{"health":"健康","happiness":"幸福","education":"教育"}[key],float(entry[key])/n,100,"%.1f"%(float(entry[key])/n) if float(entry.count)>0 else "—",W.INFO,"",Callable(),float(entry.count)>0)
+		var coverage_known=float(entry.count)>0
+		for row in p.rows:
+			if str(row.home)!=id or float(row.count)<=0:continue
+			for key in p.active_kinds:
+				if not _need_known(d,row,str(key)):coverage_known=false
+		_note(detail,"已启用需求平均覆盖 %.0f%%"%(100*float(entry.coverage)/n) if coverage_known else ("需求等待结算。" if float(entry.count)>0 else "暂无住户记录。"))
+		if id!="homeless":detail.add_child(W.button("定位住区 ›",_source_action(d,id)))
 
-static func _population_jobs(d, p:Dictionary) -> void:
-	d.title.text = "就业 · 岗位来源"
-	d.subtitle.text = "按实际分配统计；点名称可定位建筑。"
-	var filled:Dictionary = {}
+static func _population_homes(d,p:Dictionary) -> void:
+	d.title.text="居住 · 全部住区";d.subtitle.text=str(p.stamp)+" · 按居住位置合并人口"
+	_population_home_cards(d,p,10000)
+
+static func _population_employment(d,p:Dictionary) -> void:
+	d.title.text="人口 · 就业"
+	var columns=_grid(d.body,2)
+	var capacity=_group(columns,"岗位填充");_meter(capacity,"已就业 / 岗位",float(p.employed),float(p.jobs),"%.1f / %.1f"%[p.employed,p.jobs],W.GREEN)
+	var participation=_group(columns,"居民就业");_meter(participation,"已就业 / 居民",float(p.employed),float(p.count),"%.1f / %.1f"%[p.employed,p.count] if float(p.count)>0 else "无居民",W.INFO,"待就业 %.1f 人；空岗位 %.1f"%[p.unemployed,maxf(0,float(p.jobs)-float(p.employed))],Callable(),float(p.count)>0)
+	_population_jobs(d,p,5)
+	_nav(d.body,d,"全部岗位来源","employment","sources")
+
+static func _population_jobs(d,p:Dictionary,limit:int=10000) -> void:
+	if limit==10000:d.title.text="就业 · 岗位来源"
+	var filled={}
 	for row in p.rows:
-		for raw_id in row.get("jobs", {}):
-			var id = str(raw_id)
-			filled[id] = float(filled.get(id, 0)) + float(row.jobs[raw_id])
-	var g = d.app.game
-	var project_ids:Array = g.playable_ids()
-	project_ids.sort()
-	var found = false
-	for raw_id in project_ids:
-		var id = str(raw_id)
-		if not g.s.projects.has(id) or g.s.projects[id].get("special", false): continue
-		var stats:Dictionary = g.compiled.get("stats", {}).get(id, {})
-		var capacity = float(stats.get("jobs", 0))
-		var employed = float(filled.get(id, 0))
-		if capacity <= .0001 and employed <= .0001: continue
-		found = true
-		var action:Callable = func(): d.locate(id)
-		d._row(d.body, g.project_name(id), "%.1f / %.1f" % [employed, capacity], action)
-	if not found: d.body.add_child(W.label("当前没有开放岗位。", 16, W.MUTED))
+		for id in row.get("jobs",{}):filled[str(id)]=float(filled.get(str(id),0))+float(row.jobs[id])
+	var shot:Dictionary=d.app.shot;var records=[]
+	for id in d.app.game.playable_ids():
+		var stats:Dictionary=shot.get("compiled",{}).get("stats",{}).get(id,{})
+		var project:Dictionary=shot.get("projects",{}).get(id,{})
+		var capacity=float(stats.get("jobs",0)) if project.get("status","")=="running" and not project.get("paused",false) else 0.
+		var count=float(filled.get(id,0))
+		if capacity+count>.0001:records.append({"id":str(id),"capacity":capacity,"count":count})
+	records.sort_custom(func(a,b):return float(a.capacity)>float(b.capacity))
+	var group=_group(d.body,"实际到岗 / 岗位容量")
+	for item in records.slice(0,limit):_meter(group,d.app.game.project_name(str(item.id)),float(item.count),float(item.capacity),"%.1f / %.1f"%[item.count,item.capacity],W.GREEN,"",_source_action(d,str(item.id)))
+	if records.is_empty():_note(group,"当前没有可列出的岗位。")
 
-static func _population_needs(d, p:Dictionary) -> void:
-	d.title.text = "人口 · 需求"
-	d.subtitle.text = "覆盖结果按人口加权；点击一项查看实际服务或物资。"
-	var grid = _grid(d)
-	for raw_key in M.RES + M.SERVICES:
-		var key = str(raw_key)
-		var ratio = float(p.get("coverage_kinds", {}).get(key, 0))
-		var active = key in p.get("active_kinds", [])
-		var value = "%.0f%%" % (100 * ratio) if active else "未启用"
-		var color = W.GREEN if ratio >= .98 else (W.GOLD if ratio < .75 else W.TEXT)
-		var button = W.button(NEED_NAMES.get(key, key) + "  ·  " + value, func(): d.push_section("needs", key))
-		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		grid.add_child(button)
+static func _need_known(d,row:Dictionary,key:String) -> bool:
+	if str(d.app.shot.get("error",""))!="" or float(row.get("count",0))<=0:return false
+	var group:Dictionary=d.app.shot.get("groups",{}).get(str(row.id),{})
+	# A settled group with no service entry received zero, rather than an unknown amount.
+	if key in M.SERVICES:return d.app.shot.get("metrics",{}).get("service_covered",{}).has(str(row.id))
+	return group.get("living",{}).has(key)
 
-static func _population_need_detail(d, p:Dictionary, need:String) -> void:
-	var name = NEED_NAMES.get(need, need)
-	d.title.text = "需求 · " + name
-	var active = need in p.get("active_kinds", [])
-	var ratio = float(p.get("coverage_kinds", {}).get(need, 0))
-	d.subtitle.text = "已启用需求的实际覆盖。" if active else "当前未计入生活需求。"
-	var grid = _grid(d)
-	d._metric(grid, "实际覆盖", "%.0f%%" % (100 * ratio) if active else "未启用", "居民人数加权", W.GREEN if ratio >= .98 else W.GOLD)
-	var g = d.app.game
-	var shot:Dictionary = d.app.shot
-	var sources:Dictionary = {}
-	var units = "人"
+static func _population_needs(d,p:Dictionary) -> void:
+	d.title.text="人口 · 生活需求";d.subtitle.text=str(p.stamp)+" · 每格为该组居民的真实满足率"
+	var grid=_grid(d.body,4)
+	for raw in M.RES+M.SERVICES:
+		var key=str(raw);var active=key in p.active_kinds;var known=p.count>0
+		for row in p.rows:
+			if float(row.count)>0 and not _need_known(d,row,key):known=false
+		var ratio=float(p.coverage_kinds.get(key,0));var box=V.card(grid,NEED_NAMES[key],"",key,W.INFO)
+		_meter(box,"人数加权",ratio,1,"%.0f%%"%(ratio*100) if active and known else ("待结算" if active and float(p.count)>0 else ("无居民" if active else "未启用")),_coverage_tone(ratio) if active and known else W.MUTED,"",Callable(),active and known)
+		box.add_child(W.flat(W.button("查看来源 ›",func():d.push_section("needs",key))))
+	var matrix=_group(d.body,"已启用需求覆盖矩阵");matrix.set_meta("desk_visual","needs_matrix");matrix.set_meta("snapshot_id",str(d.app.shot.get("snapshot_id","")));matrix.set_meta("active_kinds",p.active_kinds.duplicate())
+	var matrix_scroll=ScrollContainer.new();matrix_scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;matrix.add_child(matrix_scroll)
+	var columns=1+p.active_kinds.size();var cells=_grid(matrix_scroll,columns)
+	cells.add_child(W.label("住区 / 人口",14,W.MUTED))
+	for key in p.active_kinds:cells.add_child(W.label(NEED_NAMES[key],14,W.MUTED))
+	for row in p.rows:
+		if float(row.count)<=.000001:continue
+		cells.add_child(W.label(str(row.name)+"\n%.1f 人"%float(row.count),14,W.TEXT))
+		for raw in p.active_kinds:
+			var key=str(raw);var known=_need_known(d,row,key);var ratio=float(row.coverage.get(key,0));var tone=_coverage_tone(ratio) if known else W.MUTED
+			var tile=W.panel(cells,W.SOFT);tile.set_meta("need_id",key);tile.set_meta("population_group",str(row.id));tile.set_meta("coverage_known",known);tile.set_meta("need_active",true)
+			if known:tile.set_meta("coverage_ratio",ratio)
+			tile.add_theme_stylebox_override("panel",W.box(W.PANEL.lerp(tone,.30) if known else W.PANEL,W.SOFT,6))
+			var label=W.label("%.0f%%"%(ratio*100) if known else "—",15,tone,false);label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;tile.add_child(label)
+			tile.tooltip_text=NEED_NAMES[key]+" · "+str(row.name)+(" · 尚无结算记录" if not known else " · 实际满足率")
+	for index in cells.get_child_count():cells.get_child(index).custom_minimum_size.x=140 if index%columns==0 else 64
+	var legend=W.hbox(matrix,12);V.badge(legend,"0% 缺口",W.RED);V.badge(legend,"50% 部分满足",W.GOLD);V.badge(legend,"100% 满足",W.GREEN);V.badge(legend,"— 等待结算",W.MUTED)
+	_note(matrix,"仅已启用需求进入矩阵与平均值。零服务也如实显示 0%；等待结算保持未知。")
+	if float(p.count)<=0:_note(matrix,"当前没有居民；产生实际住户后显示各组覆盖。")
+
+static func _population_need_detail(d,p:Dictionary,need:String) -> void:
+	d.title.text="需求 · "+str(NEED_NAMES.get(need,need));var active=need in p.active_kinds
+	d.subtitle.text=str(p.stamp)+(" · 当前已启用" if active else " · 当前未计入生活需求")
+	var ratio=float(p.coverage_kinds.get(need,0));var known=p.count>0
+	for row in p.rows:
+		if float(row.count)>0 and not _need_known(d,row,need):known=false
+	var summary=_group(d.body,"居民需求覆盖")
+	_meter(summary,"满足率",ratio,1,"%.0f%%"%(100*ratio) if active and known else ("等待结算" if active and float(p.count)>0 else ("无居民" if active else "未启用")),_coverage_tone(ratio) if active and known else W.MUTED,"",Callable(),active and known)
+	var sources={};var shot:Dictionary=d.app.shot;var units="人"
 	if need in M.SERVICES:
-		for link in shot.get("metrics", {}).get("service_links", []):
-			if str(link.get("kind", "")) != need: continue
-			var source = str(link.get("source", ""))
-			sources[source] = float(sources.get(source, 0)) + float(link.get("people", 0))
-	elif need == "energy":
-		units = "供电"
-		for source in shot.get("metrics", {}).get("energy_sources", {}):
-			var id = str(source)
-			sources[id] = float(shot.metrics.energy_sources[source])
+		for link in shot.get("metrics",{}).get("service_links",[]):
+			if str(link.get("kind",""))==need:sources[str(link.source)]=float(sources.get(str(link.source),0))+float(link.people)
+	elif need=="energy":
+		units="供电能力"
+		for id in shot.get("metrics",{}).get("energy_sources",{}):sources[str(id)]=float(shot.metrics.energy_sources[id])
 	else:
-		units = "本周期"
-		for receipt in shot.get("metrics", {}).get("allocation", []):
-			if str(receipt.get("resource", "")) != need or not str(receipt.get("consumer", "")).begins_with("pop:"): continue
-			var source = str(receipt.get("source", ""))
-			sources[source] = float(sources.get(source, 0)) + float(receipt.get("used", 0))
-	var section = _group(d.body, "实际来源")
-	if sources.is_empty():
-		section.add_child(W.label("当前周期没有实际供给记录。", 15, W.MUTED))
+		units="单位 / 本周期"
+		for receipt in shot.get("metrics",{}).get("allocation",[]):
+			if str(receipt.get("resource",""))==need and str(receipt.get("consumer","")).begins_with("pop:"):
+				var id=str(receipt.get("source",""));sources[id]=float(sources.get(id,0))+float(receipt.get("used",0))
+	var graph=V.card(d.body,"服务入口 · 与居民的真实关系" if need in M.SERVICES else ("全城电网供给来源" if need=="energy" else "居民实际收到的物资"),"",need,W.INFO)
+	var rows=[]
+	for id in sources:rows.append({"id":str(id),"name":d.app.game.project_name(str(id)),"rate":float(sources[id])})
+	_contributions(graph,rows,"rate",W.INFO,10000," "+units,d)
+	if need in M.SERVICES:
+		_note(graph,"共享池按最可达入口记录服务关系；入口人数不是这栋建筑独自承担的服务容量。")
+		var pools=_group(d.body,"服务池 · 实际占用 / 有效容量")
+		var found=false
+		for pool in shot.get("metrics",{}).get("service_pools",{}).values():
+			if str(pool.get("kind",""))!=need:continue
+			found=true;var names=[]
+			for member in pool.get("members",[]):names.append(d.app.game.project_name(str(member)))
+			var capacity=float(pool.get("capacity",0));var assigned=maxf(0,capacity-float(pool.get("remaining",0)))
+			_meter(pools," + ".join(names),assigned,capacity,"%.1f / %.1f 人"%[assigned,capacity],W.INFO,"按实际运行与规则计算的共享容量")
+			var members=_fold(pools,"查看池内建筑 · %d 项"%pool.get("members",[]).size())
+			for member in pool.get("members",[]):members.add_child(W.flat(W.button(d.app.game.project_name(str(member))+" ›",_source_action(d,str(member)))))
+		if not found:_note(pools,"本周期没有有效的此类服务池。")
+	elif need=="energy":
+		_note(graph,"电力由全城共享电网分配；本图显示全城来源，账本没有记录某一电源到住户的独立连线。")
+		var energy=shot.get("metrics",{});var requested=0.
+		for value in energy.get("population_energy",{}).values():requested+=float(value)
+		var supplied=requested*float(energy.get("energy_ratio",1))
+		_meter(graph,"居民实际供电 / 申请",supplied,requested,"%.2f / %.2f"%[supplied,requested],W.INFO,"全城电网满足率应用于实际居民申请",Callable(),energy.has("population_energy") and energy.has("energy_ratio"))
 	else:
-		var ids:Array = sources.keys()
-		ids.sort()
-		for raw_id in ids:
-			var id = str(raw_id)
-			var label = "市政电网" if id == "municipal" else g.project_name(id)
-			var action:Callable = func(): d.locate(id)
-			d._row(section, label, "%.1f %s" % [float(sources[id]), units], action)
-	var households = _group(d.body, "各住区覆盖")
+		_note(graph,"按真实分配凭据汇总居民已收到的数量；单位为该次结算周期，不与月速率混用。")
+	var records=_fold(graph,"完整来源数值 · %d 项"%rows.size())
+	for item in rows:d._row(records,str(item.name),"%.3f %s"%[float(item.rate),units],_source_action(d,str(item.id)))
+	var homes=_group(d.body,"各住区覆盖")
 	for row in p.rows:
-		var host = str(row.get("home", "homeless"))
-		var label = "待安置" if host == "homeless" else g.project_name(host)
-		var item_ratio = float(row.get("coverage", {}).get(need, 0))
-		d._row(households, label + " · %.1f人" % float(row.get("count", 0)), "%.0f%%" % (100 * item_ratio))
+		var row_known=_need_known(d,row,need);var n=float(row.coverage.get(need,0))
+		_meter(homes,str(row.name)+" · %.1f人"%float(row.count),n,1,"%.0f%%"%(100*n) if row_known and active else "—",_coverage_tone(n) if row_known and active else W.MUTED,"",Callable(),row_known and active)
 
 static func render_time(d) -> void:
 	preload("res://ui/beta/interface.gd").render_time(d)
 
 static func render_policies(d) -> void:
-	var g = d.app.game
-	d.cost.text = "可用预算 %.0f · 调整 %.0f 通货" % [float(g.s.currency), float(g.c.balance.get("policy_switch_price", 0))]
-	if d.subtopic == "": _policies_overview(d)
-	elif d.subtopic == "preview": _policy_preview(d, str(d.detail_id))
-	elif d.subtopic == "rules": _policy_rules(d, str(d.detail_id))
-	else:
-		d.subtopic = ""
-		render_policies(d)
+	d.body.set_meta("snapshot_id",str(d.app.shot.get("snapshot_id","")))
+	var g=d.app.game
+	var selected:Dictionary=g.c.policies.get(str(d.detail_id),{})
+	var current=not selected.is_empty() and str(g.s.block.policies.get(str(selected.get("slot","")),""))==str(d.detail_id)
+	d.cost.text=("当前制度不重复收费" if current else "更换 %.0f 通货"%float(g.c.balance.get("policy_switch_price",0)))+" · 当前预算 %.0f"%float(g.s.currency)
+	if d.subtopic=="":_policies_overview(d)
+	elif d.subtopic=="preview":_policy_preview(d,str(d.detail_id))
+	elif d.subtopic=="rules":_policy_rules(d,str(d.detail_id))
+	else:d.subtopic="";render_policies(d)
+
+static func _policy_summary(def:Dictionary) -> String:
+	# Legacy economic descriptions use h; Beta keeps that field in economic months.
+	return str(def.get("summary","")).replace("每小时","每来生月").replace("/h","/月")
 
 static func _policies_overview(d) -> void:
-	var g = d.app.game
-	d.title.text = "地区政策"
-	d.subtitle.text = _block_name(g) + " · 五类制度同页查看；点候选进入变化预览。"
-	for row in POLICY_SLOTS:
-		var slot = str(row[0])
-		var current_id = str(g.s.block.get("policies", {}).get(slot, ""))
-		var current:Dictionary = g.c.policies.get(current_id, {})
-		var group = _group(d.body, str(row[1]) + " · " + str(current.get("name", "未设置")), W.SOFT)
-		var grid = GridContainer.new()
-		grid.columns = 1 if d.app.compact else 3
-		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		grid.add_theme_constant_override("h_separation", 8)
-		grid.add_theme_constant_override("v_separation", 8)
-		group.add_child(grid)
+	var g=d.app.game;d.title.text="城市制度";d.subtitle.text=_block_name(g)+" · 同一制度槽只采用一种方案"
+	for pair in POLICY_SLOTS:
+		var slot=str(pair[0]);var current_id=str(g.s.block.policies.get(slot,""));var group=V.card(d.body,str(pair[1]),"同槽互斥 · 只生效一种方案","policy",W.INFO)
+		var choices=_grid(group,3)
 		for raw_id in g.Rules.ids(g.c.policies):
-			var policy_id = str(raw_id)
-			var def:Dictionary = g.c.policies[policy_id]
-			if str(def.get("slot", "")) != slot: continue
-			var is_current = policy_id == current_id
-			var keyword = str(def.get("summary", ""))
-			var card = W.panel(grid, W.SOFT if is_current else W.PANEL)
-			card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			card.add_theme_stylebox_override("panel", W.box(W.SOFT if is_current else W.PANEL, W.GREEN if is_current else W.SOFT, 8))
-			var contents = W.vbox(card, 4)
-			var name = ("✓ " if is_current else "") + str(def.get("name", policy_id))
-			var pid = policy_id
-			var button = W.button(name, func(): d.choose_policy(pid))
-			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			contents.add_child(button)
-			d.policy_buttons[pid] = button
-			contents.add_child(W.label(keyword, 14, W.MUTED))
-	d.footer.hide()
-	d.primary.hide()
-	d.secondary.show()
-	d.secondary.text = "返回地图" if d.nav_stack.is_empty() else "返回"
+			var id=str(raw_id);var def:Dictionary=g.c.policies[id]
+			if str(def.get("slot",""))!=slot:continue
+			var current=id==current_id;var box=_group(choices,"")
+			box.get_parent().add_theme_stylebox_override("panel",W.box(W.SOFT if current else W.PANEL,W.GREEN if current else W.SOFT,10))
+			V.badge(box,"● 当前采用" if current else "○ 可比较",W.GREEN if current else W.MUTED)
+			box.add_child(W.label(str(def.name),19,W.TEXT));_note(box,_policy_summary(def))
+			var button=W.button("查看现行制度" if current else "预览变化 ›",func():d.choose_policy(id));box.add_child(button);d.policy_buttons[id]=button
+	d.footer.hide();d.primary.hide();d.secondary.show();d.secondary.text="返回"
 
-static func _policy_preview(d, policy_id:String) -> void:
-	var g = d.app.game
-	if not g.c.policies.has(policy_id):
-		d.body.add_child(W.label("找不到这项政策。", 16, W.MUTED))
-		return
-	var def:Dictionary = g.c.policies[policy_id]
-	var current_id = str(g.s.block.get("policies", {}).get(str(def.get("slot", "")), ""))
-	var current:Dictionary = g.c.policies.get(current_id, {})
-	d.title.text = "变化预览 · " + str(def.get("name", policy_id))
-	d.subtitle.text = _block_name(g) + " · 当前：%s" % str(current.get("name", "未设置"))
-	var card = _group(d.body, "主要变化")
-	card.add_child(W.label(str(def.get("summary", "")), 16, W.TEXT))
-	if str(d.pending_policy) != policy_id:
-		card.add_child(W.label("已生效。返回政策列表可比较其他方案。", 14, W.MUTED))
-		d.footer.hide()
-		d.primary.hide()
-		d.secondary.show()
-		d.secondary.text = "返回政策列表"
-		return
-	var prediction:Dictionary = d.policy_prediction
-	if d.updating_policy or prediction.is_empty():
-		card.add_child(W.label("正在计算当前城市下一周期影响…", 14, W.MUTED))
-	elif prediction.get("ok", false):
-		var grid = GridContainer.new()
-		grid.columns = 2
-		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		card.add_child(grid)
-		d._metric(grid, "预计持续收支", "%+.2f /月" % float(prediction.get("cashflow", 0)), "更换后", W.GREEN if float(prediction.get("cashflow", 0)) >= 0 else W.GOLD)
-		d._metric(grid, "相对当前变化", "%+.2f /月" % float(prediction.get("delta", 0)), "预测差值", W.GREEN if float(prediction.get("delta", 0)) >= 0 else W.GOLD)
-	else:
-		card.add_child(W.label(str(prediction.get("error", "本次无法生成预测。")), 14, W.GOLD))
-	_nav(d.body, d, "查看完整规则", "rules", policy_id)
-	d.footer.show()
-	d.primary.show()
-	d.primary.pressed.connect(d.apply_policy)
-	d.secondary.show()
-	d.secondary.text = "返回"
-	d.update_policy_footer()
+static func _policy_preview(d,id:String) -> void:
+	var g=d.app.game
+	if not g.c.policies.has(id):_note(d.body,"找不到这项政策。");return
+	var def:Dictionary=g.c.policies[id];var current_id=str(g.s.block.policies.get(str(def.slot),""));var current:Dictionary=g.c.policies.get(current_id,{})
+	d.title.text="制度比较 · "+str(def.name);d.subtitle.text="同一城市下一周期：不更换 → 采用候选"
+	var choices=_grid(d.body,2)
+	_number(choices,"当前 · "+str(current.get("name","未设置")),"保留",_policy_summary(current),W.MUTED)
+	_number(choices,"候选 · "+str(def.name),"采用",_policy_summary(def),W.INFO)
+	var cost=0. if current_id==id else float(g.c.balance.policy_switch_price)
+	var cash=_group(d.body,"一次性调整成本")
+	_meter(cash,"调整后可用预算",maxf(0,float(g.s.currency)-cost),maxf(1,float(g.s.currency)),"%.1f → %.1f 通货"%[float(g.s.currency),float(g.s.currency)-cost],W.GOLD if g.s.currency<cost else W.INFO,"本次 %.1f 通货；持续收支另看预测。"%cost)
+	if str(d.pending_policy)!=id:
+		_note(d.body,"当前已生效；返回列表可比较其他方案。");d.footer.hide();return
+	var prediction:Dictionary=d.policy_prediction
+	if d.updating_policy or prediction.is_empty():_note(d.body,"正在计算当前城市下一周期影响…")
+	elif prediction.get("ok",false):
+		var before:Dictionary=d.app.planner.snapshot(g).get("metrics",{});var after:Dictionary=prediction.get("map_snapshot",{}).get("metrics",{})
+		var comparison=_group(d.body,"不更换 / 更换后 · 同一预测周期")
+		for pair in [["cashflow","净收支","/月"],["income","经营收入","/月"],["upkeep","维护支出","/月"],["energy_ratio","供电满足","%"],["housing","住房容量","人"],["jobs","岗位容量","人"]]:
+			var key=str(pair[0]);var multiplier=100. if key=="energy_ratio" else 1.
+			if before.get(key)==null or after.get(key)==null:
+				_note(comparison,str(pair[1])+" · 当前缺少可比较的预测值");continue
+			var a=float(before.get(key,0))*multiplier;var b=float(after.get(key,0))*multiplier
+			if key!="cashflow" and is_equal_approx(a,b):continue
+			var section=_group(comparison,str(pair[1]));var scale=maxf(absf(a),absf(b))
+			_meter(section,"不更换",absf(a),scale,"%.2f%s"%[a,pair[2]],W.MUTED)
+			_meter(section,"采用候选",absf(b),scale,"%.2f%s · %+.2f"%[b,pair[2],b-a],W.INFO)
+		_note(comparison,"条形长度表示数值绝对量；正负号保留。只显示发生变化的容量项，不把预测当成已发生。")
+	else:_note(d.body,str(prediction.get("error","当前无法生成预测。")))
+	_nav(d.body,d,"完整规则与适用范围","rules",id)
+	d.footer.show();d.primary.show();d.primary.pressed.connect(d.apply_policy);d.secondary.show();d.secondary.text="返回";d.update_policy_footer()
 
-static func _policy_rules(d, policy_id:String) -> void:
-	var g = d.app.game
-	if not g.c.policies.has(policy_id):
-		d.body.add_child(W.label("找不到这项政策。", 16, W.MUTED))
-		return
-	var def:Dictionary = g.c.policies[policy_id]
-	d.title.text = "政策详情 · " + str(def.get("name", policy_id))
-	d.subtitle.text = str(def.get("summary", ""))
-	var rules:Array = def.get("rules", [])
-	if rules.is_empty():
-		d.body.add_child(W.label("这项政策没有单独的规则条目。", 15, W.MUTED))
-		return
-	for rule in rules:
-		var item:Dictionary = rule
-		var group = _group(d.body, str(item.get("id", "规则")))
-		group.add_child(W.label(JSON.stringify(item), 14, W.MUTED))
-	d.footer.hide()
-	d.primary.hide()
-	d.secondary.show()
-	d.secondary.text = "返回"
-
-static func _grid(d) -> GridContainer:
-	var grid = GridContainer.new()
-	grid.columns = 1 if d.app.compact and W.text_scale > 1.2 else (2 if d.app.compact else 3)
-	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation", 10)
-	grid.add_theme_constant_override("v_separation", 10)
-	d.body.add_child(grid)
-	return grid
-
-static func _nav(parent:Node, d, label:String, section:String, detail:String="") -> Button:
-	var button = W.button(label, func(): d.push_section(section, detail))
-	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	parent.add_child(button)
-	return button
+static func _policy_rules(d,id:String) -> void:
+	var g=d.app.game
+	if not g.c.policies.has(id):_note(d.body,"找不到这项政策。");return
+	var def:Dictionary=g.c.policies[id];d.title.text="制度规则 · "+str(def.name);d.subtitle.text=_policy_summary(def)
+	var rules:Array=def.get("rules",[])
+	for item in rules:
+		var box=_group(d.body,str(item.get("field",item.get("key",item.get("op","规则")))))
+		var grid=_grid(box,3)
+		_number(grid,"动作",str(item.get("op","")),str(item.get("mode","")))
+		_number(grid,"数值",str(item.get("value","—")),"规则原始值")
+		_number(grid,"作用对象",str(item.get("targets","self")),"阶段："+str(item.get("phase","")))
+		_fold(box,"完整语法与条件").add_child(W.label(JSON.stringify(item,"  "),14,W.MUTED))
+	if rules.is_empty():_note(d.body,"这项制度没有单独的规则条目。")
+	d.footer.hide();d.primary.hide();d.secondary.show();d.secondary.text="返回"
 
 static func _block_name(g) -> String:
-	return str(g.s.get("block", {}).get("display_name", "当前地区"))
+	return str(g.s.get("block",{}).get("display_name","当前地区"))

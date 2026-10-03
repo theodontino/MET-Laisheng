@@ -97,103 +97,61 @@ static func _polygon_area(points: PackedVector2Array) -> float:
 	return area * 0.5
 
 static func _build_geometry(view: Object, spec: Dictionary, a: Vector2, b: Vector2, radius: float, elevation_a: float, elevation_b: float) -> Dictionary:
-	var height_delta := absf(elevation_b - elevation_a)
-	# A short connector across a cliff face reads as a bridge over empty space. Let
-	# the neighboring buildings stand independently when the grade is too steep.
-	if height_delta > 25.0:
-		return {}
-	var axis := (b - a).normalized()
-	var across := axis.orthogonal()
-	var kind := str(spec.get("kind", "mixed_court"))
-	var industrial := kind.begins_with("industrial_")
-	var residential := kind.begins_with("residential_")
-	var shop := kind == "street_shop"
-	var base_t0 := 0.18
-	var base_t1 := 0.82
-	var half_width := radius * (0.25 if industrial else (0.31 if shop else 0.29))
-	var body_t0 := 0.29
-	var body_t1 := 0.71
-	if kind == "residential_annex":
-		body_t0 = 0.25
-		body_t1 = 0.75
-		half_width = radius * 0.34
-	elif kind == "industrial_shed":
-		body_t0 = 0.24
-		body_t1 = 0.76
-		half_width = radius * 0.34
-	elif kind == "industrial_gallery":
-		body_t0 = 0.22
-		body_t1 = 0.78
-		half_width = radius * 0.22
-	elif shop:
-		body_t0 = 0.27
-		body_t1 = 0.73
-		half_width = radius * 0.36
-	var platform_points := _surface_quad(view, a.lerp(b, base_t0), a.lerp(b, base_t1), across, half_width * 1.35)
-	var shadow_points := _surface_quad(view, a.lerp(b, base_t0) + Vector2(0.0, radius * 0.035), a.lerp(b, base_t1) + Vector2(0.0, radius * 0.035), across, half_width * 1.40)
-	var p0 := a.lerp(b, body_t0)
-	var p1 := a.lerp(b, body_t1)
-	var body_width := half_width * 0.78
-	var ground := _surface_quad(view, p0, p1, across, body_width)
-	var height := radius * (0.19 if industrial else (0.22 if kind == "residential_annex" or shop else 0.16))
-	if int(spec.get("tier_a", 1)) >= 3 or int(spec.get("tier_b", 1)) >= 3:
-		height *= 1.12
-	var top: Array[Vector2] = []
-	for point in ground:
-		top.append(point - Vector2(0.0, height))
-	var ridge_0 := _surface_point(view, p0.lerp(p1, 0.0)) - Vector2(0.0, height * 1.35)
-	var ridge_1 := _surface_point(view, p0.lerp(p1, 1.0)) - Vector2(0.0, height * 1.35)
-	var roof_mid_0 := _surface_point(view, p0 + across * body_width * 0.45) - Vector2(0.0, height * 0.76)
-	var roof_mid_1 := _surface_point(view, p1 + across * body_width * 0.45) - Vector2(0.0, height * 0.76)
-	var roof_mid_2 := _surface_point(view, p1 - across * body_width * 0.45) - Vector2(0.0, height * 0.76)
-	var roof_mid_3 := _surface_point(view, p0 - across * body_width * 0.45) - Vector2(0.0, height * 0.76)
-	var palette := _palette(kind, int(spec.get("variant", 0)))
-	var body_faces: Array[Dictionary] = []
-	body_faces.append({"points": PackedVector2Array([ground[0], ground[1], top[1], top[0]]), "color": palette.wall_far})
-	body_faces.append({"points": PackedVector2Array([ground[1], ground[2], top[2], top[1]]), "color": palette.wall_end})
-	body_faces.append({"points": PackedVector2Array([ground[2], ground[3], top[3], top[2]]), "color": palette.wall_front})
-	body_faces.append({"points": PackedVector2Array([ground[3], ground[0], top[0], top[3]]), "color": palette.wall_side})
-	var roof_faces: Array[Dictionary] = []
-	roof_faces.append({"points": PackedVector2Array([top[0], top[1], ridge_1, ridge_0]), "color": palette.roof_light})
-	roof_faces.append({"points": PackedVector2Array([ridge_0, ridge_1, top[2], top[3]]), "color": palette.roof_dark})
-	var supports: Array[Dictionary] = []
-	if residential or kind == "mixed_court" or kind == "street_shop":
-		for t in [body_t0 + 0.04, body_t1 - 0.04]:
-			for side in [-1.0, 1.0]:
-				var foot := _surface_point(view, a.lerp(b, t) + across * body_width * side * 0.72)
-				var cap := foot - Vector2(0.0, height * 0.78)
-				supports.append({"a": foot, "b": cap, "color": palette.post, "width": maxf(2.0, radius * 0.035)})
-	var details: Array[Dictionary] = []
-	if industrial:
-		var pipe_offset := across * body_width * 0.53
-		for side in [-1.0, 1.0]:
-			var start := _surface_point(view, p0 + pipe_offset * side) - Vector2(0.0, height * 0.68)
-			var finish := _surface_point(view, p1 + pipe_offset * side) - Vector2(0.0, height * 0.68)
-			details.append({"a": start, "b": finish, "color": palette.detail_light, "width": maxf(2.5, radius * 0.055)})
-		for t in [0.37, 0.50, 0.63]:
-			var brace_a := _surface_point(view, a.lerp(b, t) + pipe_offset) - Vector2(0.0, height * 0.68)
-			var brace_b := _surface_point(view, a.lerp(b, t) - pipe_offset) - Vector2(0.0, height * 0.68)
-			details.append({"a": brace_a, "b": brace_b, "color": palette.detail_dark, "width": maxf(1.5, radius * 0.025)})
-	else:
-		details.append({"a": roof_mid_0.lerp(roof_mid_1, 0.50), "b": roof_mid_3.lerp(roof_mid_2, 0.50), "color": palette.ridge, "width": maxf(1.5, radius * 0.025)})
-	var stairs: Array[Dictionary] = []
-	if height_delta >= 8.0:
-		# The footprint remains terrain-conforming; short cross-steps make the grade
-		# legible instead of allowing an elevated bridge to hang over the slope.
-		for t in [0.30, 0.45, 0.60, 0.75]:
-			var center := a.lerp(b, t)
-			var stair := _surface_quad(view, center - axis * radius * 0.055, center + axis * radius * 0.055, across, half_width * 1.15)
-			stairs.append({"points": stair, "color": palette.step})
-	var midpoint := _surface_point(view, a.lerp(b, 0.5))
-	return {
-		"key": str(spec.get("id", "")), "kind": kind,
-		"project_a": str(spec.get("project_a", "")), "project_b": str(spec.get("project_b", "")),
-		"depth": midpoint.y + radius * 0.10,
-		"shadow": shadow_points, "platform": platform_points,
-		"platform_color": palette.platform, "body_faces": body_faces,
-		"roof_faces": roof_faces, "supports": supports, "details": details,
-		"stairs": stairs, "height_mode": "stepped" if height_delta >= 8.0 else "continuous",
-	}
+	# One narrow lane and one small reusable roadside module. The connection is
+	# visual adjacency, never a newly invented logistics/service entity.
+	var height_delta := absf(elevation_b-elevation_a)
+	if height_delta>25.0:return {}
+	var axis:Vector2=(b-a).normalized();var across:Vector2=axis.orthogonal()
+	var kind=str(spec.get("kind","mixed_court"));var variant=int(spec.get("variant",0))
+	var tier=maxi(int(spec.get("tier_a",1)),int(spec.get("tier_b",1)))
+	var industrial=kind.begins_with("industrial_")
+	var residential=kind.begins_with("residential_")
+	var start=a.lerp(b,.19);var finish=a.lerp(b,.81)
+	var road_width=radius*(.062 if tier<3 else .075)
+	var platform=_surface_quad(view,start,finish,across,road_width)
+	var details:Array[Dictionary]=[]
+	for side in [-1.0,1.0]:
+		var curb=across*(road_width+1.3)*side
+		details.append({"a":_surface_point(view,start+curb),"b":_surface_point(view,finish+curb),"color":Color("C5C8AE",.62),"width":.85})
+	var offset=across*radius*.23
+	var center=a.lerp(b,.51)+offset
+	var length=radius*(.16 if tier<3 else .22)
+	var p0=center-axis*length;var p1=center+axis*length
+	var ground=_surface_quad(view,p0,p1,across,radius*.095)
+	var height=radius*(.085 if tier<3 else .12)
+	var top:Array[Vector2]=[]
+	for point in ground:top.append(point-Vector2(0,height))
+	var wall=Color("D9D5BE") if not industrial else Color("B4BEAF")
+	var roof=Color("819F99") if not residential else Color("BB8C73")
+	if kind=="street_shop":roof=Color("C7A06C")
+	var body_faces:Array[Dictionary]=[
+		{"points":PackedVector2Array([ground[0],ground[1],top[1],top[0]]),"color":wall},
+		{"points":PackedVector2Array([ground[1],ground[2],top[2],top[1]]),"color":wall.darkened(.08)},
+		{"points":PackedVector2Array([ground[2],ground[3],top[3],top[2]]),"color":wall.darkened(.15)},
+		{"points":PackedVector2Array([ground[3],ground[0],top[0],top[3]]),"color":wall.darkened(.05)}]
+	var ridge0=_surface_point(view,p0)-Vector2(0,height*1.32)
+	var ridge1=_surface_point(view,p1)-Vector2(0,height*1.32)
+	var roof_faces:Array[Dictionary]=[
+		{"points":PackedVector2Array([top[0],top[1],ridge1,ridge0]),"color":roof.lightened(.06)},
+		{"points":PackedVector2Array([ridge0,ridge1,top[2],top[3]]),"color":roof}]
+	# Early paths have an open shelter; later adjacency adds a compact annex.
+	if tier==1 and not industrial and not residential:body_faces=[]
+	var shadow=_surface_quad(view,p0+Vector2(2,3),p1+Vector2(2,3),across,radius*.12)
+	var supports:Array[Dictionary]=[]
+	for index in [0,3]:supports.append({"a":ground[index],"b":top[index],"color":Color("778C80"),"width":1.2})
+	var door=_surface_point(view,center-across*radius*.096)
+	details.append({"a":door,"b":door-Vector2(0,height*.55),"color":Color("627C73"),"width":2.1})
+	# Keep a continuous lane network, with infill on a subset of edges so that
+	# fully occupied maps still have streets and open space between landmarks.
+	if variant!=0 and not (tier==3 and variant==1 and residential):
+		body_faces=[];roof_faces=[];supports=[];shadow=PackedVector2Array()
+		details.pop_back()
+	var stairs:Array[Dictionary]=[]
+	if height_delta>=8.0:
+		for t in [.28,.40,.52,.64,.76]:
+			var at=a.lerp(b,t)
+			details.append({"a":_surface_point(view,at+across*road_width),"b":_surface_point(view,at-across*road_width),"color":Color("C9CCB7",.65),"width":.8})
+	return {"key":str(spec.get("id","")),"project_a":str(spec.get("project_a","")),"project_b":str(spec.get("project_b","")),"kind":kind,"variant":variant,"depth":_surface_point(view,center).y,"shadow":shadow,"platform":platform,"platform_color":Color("ACB79E",.75),"body_faces":body_faces,"roof_faces":roof_faces,"supports":supports,"details":details,"stairs":stairs,"height_mode":"stepped" if height_delta>=8.0 else "continuous"}
 
 static func _surface_quad(view: Object, start: Vector2, finish: Vector2, across: Vector2, half_width: float) -> PackedVector2Array:
 	return PackedVector2Array([
