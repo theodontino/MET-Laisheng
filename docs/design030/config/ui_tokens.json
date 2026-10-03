@@ -1,0 +1,170 @@
+{
+  "schema": "met030.ui_tokens.v1",
+  "status": "design_config_not_integrated",
+  "color": {
+    "paper": "#F7F4ED",
+    "surface": "#FFFDF7",
+    "ink": "#18313A",
+    "muted": "#53636A",
+    "primary": "#17665A",
+    "on_primary": "#FFFFFF",
+    "warning": "#8D4E16",
+    "danger": "#A53332",
+    "selection": "#8B641D",
+    "border": "#CAD1CE",
+    "analysis_ground": "#E2E8E5",
+    "benefit": "#17665A",
+    "harm": "#A53332",
+    "unknown": "#68727A"
+  },
+  "contrast_pairs": [
+    {
+      "foreground": "ink",
+      "background": "surface",
+      "minimum": 4.5
+    },
+    {
+      "foreground": "muted",
+      "background": "surface",
+      "minimum": 4.5
+    },
+    {
+      "foreground": "on_primary",
+      "background": "primary",
+      "minimum": 4.5
+    },
+    {
+      "foreground": "warning",
+      "background": "surface",
+      "minimum": 4.5
+    },
+    {
+      "foreground": "danger",
+      "background": "surface",
+      "minimum": 4.5
+    },
+    {
+      "foreground": "selection",
+      "background": "surface",
+      "minimum": 4.5
+    }
+  ],
+  "space": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32
+  ],
+  "radius": {
+    "control": 6,
+    "panel": 10
+  },
+  "type": {
+    "desktop_body": 16,
+    "compact_touch_body": 17,
+    "auxiliary_desktop": 13,
+    "auxiliary_touch": 14,
+    "metric": 20,
+    "section_title": 22,
+    "screen_title": 26,
+    "line_height_ratio": 1.35,
+    "ui_scale_options": [
+      1,
+      1.25,
+      1.5
+    ]
+  },
+  "input": {
+    "touch_target_min": 48,
+    "touch_gap_min": 8,
+    "pointer_control_min_height": 36,
+    "drag_threshold_logical": 8,
+    "hover_delay_ms": 250,
+    "tap_commits_on_release": true,
+    "hover_required_for_core_action": false
+  },
+  "layout": {
+    "desktop_reference": [
+      1440,
+      900
+    ],
+    "desktop_min_target": [
+      1024,
+      640
+    ],
+    "compact_safe_area_min_target": [
+      640,
+      320
+    ],
+    "phone_build_orientation": "landscape",
+    "compact_condition": "safe_logical_height < 600 OR safe_logical_width < 900",
+    "desktop_header_height": 64,
+    "compact_header_height": 48,
+    "compact_bottom_height": 56,
+    "desktop_inspector_width": [
+      320,
+      360
+    ],
+    "compact_inspector_width": [
+      280,
+      304
+    ],
+    "desktop_tender_tray_max_height": 300,
+    "max_priority_notices": 2,
+    "compact_tender_row_height": 56,
+    "compact_tender_panel_full_safe_height": true,
+    "compact_tender_low_height_threshold": 380,
+    "compact_tender_min_height_budget": {
+      "vertical_padding": 16,
+      "title": 32,
+      "shared_cost": 32,
+      "three_offer_rows": 168,
+      "row_gaps": 8,
+      "fixed_confirmation": 48,
+      "total": 304,
+      "details_mode": "separate panel page when safe_height < 380 or enlarged font does not fit"
+    }
+  },
+  "motion": {
+    "layer_transition_ms": 180,
+    "panel_transition_ms": 180,
+    "camera_focus_ms": 250,
+    "build_reveal_ms": 450,
+    "reduced_motion_disables": [
+      "particle_drift",
+      "pulses",
+      "camera_tween",
+      "panel_tween"
+    ],
+    "max_default_relation_lines": 6,
+    "max_default_map_labels": 12
+  },
+  "camera": {
+    "world_hex_radius": 64,
+    "free_rotation": false,
+    "default_focus": "built_area_plus_two_rings",
+    "pointer_anchored_zoom": true,
+    "default_cell_width_desktop": [
+      88,
+      132
+    ],
+    "default_cell_width_touch": [
+      64,
+      100
+    ]
+  },
+  "performance_targets": {
+    "world_textures_target_mib": 48,
+    "world_textures_review_limit_mib": 64,
+    "world_atlas_edge": 2048,
+    "world_atlas_target_pages": 2,
+    "preview_lru_entries": 16,
+    "cached_preview_ms": 50,
+    "uncached_preview_p95_ms": 200,
+    "mac_target_fps": 60,
+    "mobile_floor_fps": 30
+  },
+  "units_note": "These are logical design units. Map to platform scale and safe area; never assume pixels == pt == dp."
+}

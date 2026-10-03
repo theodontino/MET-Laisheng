@@ -1,0 +1,150 @@
+[
+  {
+    "id": "food_supply",
+    "name": "稳定口粮",
+    "domain": "agriculture",
+    "trigger": {},
+    "prerequisites": [],
+    "goals": [
+      {
+        "metric": "food_ratio",
+        "min": 0.98,
+        "duration": 1
+      }
+    ],
+    "fail_conditions": {},
+    "reward_pool_tags": [
+      "agriculture"
+    ],
+    "reward_scope": "building",
+    "weight": 100,
+    "repeatable": false,
+    "help": "让农居或农业站持续供粮一小时。"
+  },
+  {
+    "id": "settlement",
+    "name": "新邻里安居",
+    "domain": "community",
+    "trigger": {},
+    "prerequisites": [],
+    "goals": [
+      {
+        "metric": "housed",
+        "min": 24
+      },
+      {
+        "metric": "homeless",
+        "max": 0.1
+      }
+    ],
+    "fail_conditions": {},
+    "reward_pool_tags": [
+      "community"
+    ],
+    "reward_scope": "building",
+    "weight": 95,
+    "repeatable": false,
+    "help": "建设农居或将已有农居升级为住宅，安顿新居民。"
+  },
+  {
+    "id": "public_health",
+    "name": "社区医疗",
+    "domain": "public",
+    "trigger": {
+      "housed": 18
+    },
+    "prerequisites": [],
+    "goals": [
+      {
+        "metric": "medical",
+        "min": 0.65,
+        "duration": 1
+      }
+    ],
+    "fail_conditions": {},
+    "reward_pool_tags": [
+      "public"
+    ],
+    "reward_scope": "building",
+    "weight": 80,
+    "repeatable": true,
+    "help": "用邻里中心或诊所为住区提供真实医疗名额。"
+  },
+  {
+    "id": "industrial_delivery",
+    "name": "工业交付",
+    "domain": "industrial",
+    "trigger": {
+      "tier": 2
+    },
+    "prerequisites": [],
+    "goals": [
+      {
+        "metric": "delivery_goods",
+        "min": 8
+      },
+      {
+        "metric": "energy_ratio",
+        "min": 0.95
+      }
+    ],
+    "fail_conditions": {
+      "deadline_hours": 12,
+      "min_energy_ratio": 0.8
+    },
+    "reward_pool_tags": [
+      "industrial"
+    ],
+    "reward_scope": "building",
+    "weight": 90,
+    "repeatable": true,
+    "help": "保持供电，并主动交付8制成品；12小时内完成。"
+  },
+  {
+    "id": "organization_link",
+    "name": "组织协作",
+    "domain": "community",
+    "trigger": {
+      "buildings": 3
+    },
+    "prerequisites": [],
+    "goals": [
+      {
+        "metric": "organization_links",
+        "min": 2,
+        "duration": 1
+      }
+    ],
+    "fail_conditions": {},
+    "reward_pool_tags": [
+      "operations"
+    ],
+    "reward_scope": "organization",
+    "weight": 65,
+    "repeatable": false,
+    "help": "让同一运营者的项目通过就业、服务或资源形成两条真实联系。"
+  },
+  {
+    "id": "market_contract",
+    "name": "逆势出口合同",
+    "domain": "commercial",
+    "trigger": {
+      "trade_capacity": 1
+    },
+    "prerequisites": [],
+    "goals": [
+      {
+        "metric": "adverse_exports",
+        "min": 10
+      }
+    ],
+    "fail_conditions": {},
+    "reward_pool_tags": [
+      "logistics"
+    ],
+    "reward_scope": "building",
+    "weight": 100,
+    "repeatable": false,
+    "help": "经货运站，在卖价低于基准价时实际出口10单位物资。"
+  }
+]

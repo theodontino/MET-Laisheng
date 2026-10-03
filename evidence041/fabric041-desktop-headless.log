@@ -1,0 +1,34 @@
+Command: /private/tmp/met040-tools/Godot.app/Contents/MacOS/Godot --headless --path . --script res://tests/fabric041.gd
+Exit status: 0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS derive does not change RNG, world state, or saved entities
+PASS same snapshot produces stable connector specs
+PASS adjacent completed residences receive a visible residential connector
+PASS adjacent completed industrial buildings receive a visible industrial connector
+PASS renderer builds depth-sortable retained items
+PASS renderer items are sorted by world depth
+PASS moderate elevation differences use grounded step geometry
+PASS large elevation differences omit the connector instead of spanning a cliff
+PASS foundation grading and mesh data leave saved entities and RNG unchanged
+PASS the occupied footprint core is leveled to its natural center grade
+PASS foundation renderer receives an asset-sized, triangulated footprint
+PASS steep footprint edges retain a visible retaining wall
+PASS foundation transitions extend beyond a sharp footprint edge
+PASS retaining faces remain short where the ground falls away
+PASS green landscape buildings follow the native ground without a pedestal
+PASS water tiles never receive a visual building foundation
+PASS snapshot channels block visual connectors across water
+PASS a building under construction does not grow a visual connector
+PASS clicking a visible connection resolves one of its related buildings
+PASS repeated world-point projection reuses the foundation revision guard
+PASS pan and zoom keep the static terrain mesh
+PASS pan and zoom do not redraw static ground or structures
+PASS pan and zoom do not regenerate city fabric or connector geometry
+PASS a committed tick refreshes snapshot-derived city fabric
+PASS a tick with unchanged visible state does not rebuild or redraw static map layers
+PASS a changed building footprint refreshes terrain and tile-picking polygons together
+PASS building-center picking remains aligned after foundation regeneration
+FABRIC041 27 checks, 0 failed
+
+Environment output also included a `user://logs/godot.log` write failure and macOS `get_system_ca_certificates` noErr diagnostic; neither affected the fixture exit status or checks.

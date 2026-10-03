@@ -1,0 +1,865 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 正在注册全局类…… (2 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Colony041[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mexport[22m | Started 正在为 Android 导出 (105 steps)[39m[0m
+ERROR: No project icon specified. Please specify one in the Project Settings under Application -> Config -> Icon
+   at: load_icon_refs (platform/android/export/export_plugin.cpp:1941)
+0 param: --xr_mode_regular
+1 param: --xr-mode
+2 param: off
+3 param: --fullscreen
+4 param: --background_color
+5 param: #000000
+[   0% ] [90m[1mexport[22m | 正在创建 APK……[39m[0m
+ADDING: classes.dex
+ADDING: classes10.dex
+ADDING: classes11.dex
+ADDING: classes12.dex
+ADDING: classes13.dex
+ADDING: classes2.dex
+ADDING: classes3.dex
+ADDING: classes4.dex
+ADDING: classes5.dex
+ADDING: classes6.dex
+ADDING: classes7.dex
+ADDING: classes8.dex
+ADDING: classes9.dex
+ADDING: lib/arm64-v8a/libc++_shared.so
+ADDING: lib/arm64-v8a/libgodot_android.so
+Adding application metadata org.godotengine.rendering.method
+Adding application metadata org.godotengine.editor.version
+ADDING: AndroidManifest.xml
+ADDING: res/anim-v21/fragment_fast_out_extra_slow_in.xml
+ADDING: res/animator/fragment_close_enter.xml
+ADDING: res/animator/fragment_close_exit.xml
+ADDING: res/animator/fragment_fade_enter.xml
+ADDING: res/animator/fragment_fade_exit.xml
+ADDING: res/animator/fragment_open_enter.xml
+ADDING: res/animator/fragment_open_exit.xml
+ADDING: res/drawable-hdpi-v4/notification_bg_low_normal.9.png
+ADDING: res/drawable-hdpi-v4/notification_bg_low_pressed.9.png
+ADDING: res/drawable-hdpi-v4/notification_bg_normal.9.png
+ADDING: res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png
+ADDING: res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png
+ADDING: res/drawable-mdpi-v4/notification_bg_low_normal.9.png
+ADDING: res/drawable-mdpi-v4/notification_bg_low_pressed.9.png
+ADDING: res/drawable-mdpi-v4/notification_bg_normal.9.png
+ADDING: res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png
+ADDING: res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png
+ADDING: res/drawable-v21/notification_action_background.xml
+ADDING: res/drawable-v23/compat_splash_screen.xml
+ADDING: res/drawable-v23/compat_splash_screen_no_icon_background.xml
+ADDING: res/drawable-xhdpi-v4/notification_bg_low_normal.9.png
+ADDING: res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png
+ADDING: res/drawable-xhdpi-v4/notification_bg_normal.9.png
+ADDING: res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png
+ADDING: res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png
+ADDING: res/drawable/icon_background.xml
+ADDING: res/drawable/notification_bg.xml
+ADDING: res/drawable/notification_bg_low.xml
+ADDING: res/drawable/notification_icon_background.xml
+ADDING: res/drawable/notification_tile_bg.xml
+ADDING: res/drawable/splash_branding_image.webp
+ADDING: res/drawable/splash_icon.webp
+ADDING: res/layout-v21/notification_action.xml
+ADDING: res/layout-v21/notification_action_tombstone.xml
+ADDING: res/layout-v21/notification_template_custom_big.xml
+ADDING: res/layout-v21/notification_template_icon_group.xml
+ADDING: res/layout/custom_dialog.xml
+ADDING: res/layout/godot_app_layout.xml
+ADDING: res/layout/notification_template_part_chronometer.xml
+ADDING: res/layout/notification_template_part_time.xml
+ADDING: res/layout/remote_godot_fragment_layout.xml
+ADDING: res/layout/snackbar.xml
+ADDING: res/layout/splash_screen_view.xml
+ADDING: res/mipmap-anydpi-v26/icon.xml
+ADDING: res/mipmap-hdpi-v4/icon.webp
+ADDING: res/mipmap-hdpi-v4/icon_background.webp
+ADDING: res/mipmap-hdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-hdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap-mdpi-v4/icon.webp
+ADDING: res/mipmap-mdpi-v4/icon_background.webp
+ADDING: res/mipmap-mdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-mdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap-xhdpi-v4/icon.webp
+ADDING: res/mipmap-xhdpi-v4/icon_background.webp
+ADDING: res/mipmap-xhdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-xhdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap-xxhdpi-v4/icon.webp
+ADDING: res/mipmap-xxhdpi-v4/icon_background.webp
+ADDING: res/mipmap-xxhdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-xxhdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap-xxxhdpi-v4/icon.webp
+ADDING: res/mipmap-xxxhdpi-v4/icon_background.webp
+ADDING: res/mipmap-xxxhdpi-v4/icon_foreground.webp
+ADDING: res/mipmap-xxxhdpi-v4/icon_monochrome.webp
+ADDING: res/mipmap/icon.webp
+ADDING: res/mipmap/icon_background.webp
+ADDING: res/mipmap/icon_foreground.webp
+ADDING: res/mipmap/icon_monochrome.webp
+ADDING: res/xml/godot_provider_paths.xml
+ADDING: resources.arsc
+ADDING: DebugProbesKt.bin
+ADDING: kotlin/annotation/annotation.kotlin_builtins
+ADDING: kotlin/collections/collections.kotlin_builtins
+ADDING: kotlin/concurrent/atomics/atomics.kotlin_builtins
+ADDING: kotlin/coroutines/coroutines.kotlin_builtins
+ADDING: kotlin/internal/internal.kotlin_builtins
+ADDING: kotlin/kotlin.kotlin_builtins
+ADDING: kotlin/ranges/ranges.kotlin_builtins
+ADDING: kotlin/reflect/reflect.kotlin_builtins
+[   0% ] [90m[1mexport[22m | 正在添加文件……[39m[0m
+[  97% ] [90m[1mexport[22m | 正在对齐 APK……[39m[0m
+[  98% ] [90m[1mexport[22m | 正在签名调试 APK……[39m[0m
+Signing binary using: 
+/private/tmp/met041-android-sdk/build-tools/36.0.0/apksigner sign --verbose --ks <REDACTED> --ks-pass pass:<REDACTED> --ks-key-alias <REDACTED> /Users/lizhirui/Developer/MET_0.3.2_Source/build/MET_0.4.0_Laisheng_Android.apk
+Signed
+
+[  99% ] [90m[1mexport[22m | 正在校验 APK……[39m[0m
+[92m[ DONE ][39m [1mexport[22m
+[0m
+cannot connect to daemon at tcp:5037: Operation not permitted
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mexport[22m | Started Exporting for iOS (Project Files Only) (2 steps)[39m[0m
+[   0% ] [90m[1mexport[22m | Making .pck[39m[0m
+[   0% ] [90m[1msavepack[22m | Started 打包中 (102 steps)[39m[0m
+[   1% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/back.wav-06eded4a81885e5bb7ffe72fe2f351c6.sample[39m[0m
+[   1% ] [90m[1msavepack[22m | 正在保存文件：res://assets/audio030/back.wav.import[39m[0m
+[   1% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/complete.wav-9a7ab2b74c384f87c600a8ed9493a3d3.sample[39m[0m
+[   1% ] [90m[1msavepack[22m | 正在保存文件：res://assets/audio030/complete.wav.import[39m[0m
+[   1% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/confirm.wav-ac6702a11bed6e963c8c0c438e4d2898.sample[39m[0m
+[   1% ] [90m[1msavepack[22m | 正在保存文件：res://assets/audio030/confirm.wav.import[39m[0m
+[   1% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/layer.wav-7dd0c97fc0e1b9b33e8931f75bb71be1.sample[39m[0m
+[   1% ] [90m[1msavepack[22m | 正在保存文件：res://assets/audio030/layer.wav.import[39m[0m
+[   2% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/notice.wav-1e24aa68812c7f5fa73daf16b213512d.sample[39m[0m
+[   2% ] [90m[1msavepack[22m | 正在保存文件：res://assets/audio030/notice.wav.import[39m[0m
+[   2% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/select.wav-f84317fb1bfb6915ae8be9a7d7ca8fdf.sample[39m[0m
+[   2% ] [90m[1msavepack[22m | 正在保存文件：res://assets/audio030/select.wav.import[39m[0m
+[   2% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/NotoSansSC-VF.ttf-6f6c10a665e6d636cc7d2ac644ca224b.fontdata[39m[0m
+[   2% ] [90m[1msavepack[22m | 正在保存文件：res://assets/fonts/NotoSansSC-VF.ttf.import[39m[0m
+[   3% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/back.svg-0a6de9b5a760276301d1f1377c92ee65.ctex[39m[0m
+[   3% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/back.svg.import[39m[0m
+[   3% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/build.svg-2fb924f050c66ce0dd2696dd5cd2838c.ctex[39m[0m
+[   3% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/build.svg.import[39m[0m
+[   3% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/check.svg-ac5419051ba4ee857247c53f3752913c.ctex[39m[0m
+[   3% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/check.svg.import[39m[0m
+[   4% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/chevron.svg-7e8e7157d9df4b139ea029dc47bae1ea.ctex[39m[0m
+[   4% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/chevron.svg.import[39m[0m
+[   4% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/clock.svg-bb564cff2abc8e6eb37a45a3dc4dae32.ctex[39m[0m
+[   4% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/clock.svg.import[39m[0m
+[   4% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/close.svg-2851ca497d86be3b4c7472effd3c40ea.ctex[39m[0m
+[   4% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/close.svg.import[39m[0m
+[   5% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/commercial.svg-c39d66387fc1c62adb5308770e4b274a.ctex[39m[0m
+[   5% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/commercial.svg.import[39m[0m
+[   5% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/education.svg-44500c8e06a9d3f53da3d84602237369.ctex[39m[0m
+[   5% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/education.svg.import[39m[0m
+[   5% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/employment.svg-018ea57bc9ce798c9bbf03fd27dd3c75.ctex[39m[0m
+[   5% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/employment.svg.import[39m[0m
+[   6% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/energy.svg-f14acb9c31ca5a274613b6f2d2db69db.ctex[39m[0m
+[   6% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/energy.svg.import[39m[0m
+[   6% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/entertainment.svg-0d57807e16e23b79f31c452ad5378708.ctex[39m[0m
+[   6% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/entertainment.svg.import[39m[0m
+[   6% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/eye.svg-2bb8782c32ba0b56314cddc377c297bf.ctex[39m[0m
+[   6% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/eye.svg.import[39m[0m
+[   7% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/focus.svg-dd98a86fa54777e42494237ae66fd04a.ctex[39m[0m
+[   7% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/focus.svg.import[39m[0m
+[   7% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/food.svg-2671220004c42f2bdc25d16fafb91195.ctex[39m[0m
+[   7% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/food.svg.import[39m[0m
+[   7% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/goods.svg-db6bd0ce0986be6590a0473f473b99a1.ctex[39m[0m
+[   7% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/goods.svg.import[39m[0m
+[   8% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/heat.svg-00ce66070c24e436e00602520a8a0e55.ctex[39m[0m
+[   8% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/heat.svg.import[39m[0m
+[   8% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/home.svg-212ce431fc585718cb782885876550c4.ctex[39m[0m
+[   8% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/home.svg.import[39m[0m
+[   8% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/layers.svg-dc8a9f1274caf74d8c9f7df75bc6323e.ctex[39m[0m
+[   8% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/layers.svg.import[39m[0m
+[   9% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/ledger.svg-e94763bb214a028fdb3619693b1e733e.ctex[39m[0m
+[   9% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/ledger.svg.import[39m[0m
+[   9% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/lock.svg-2dfe4c3b76d311557a2278b281cbeef7.ctex[39m[0m
+[   9% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/lock.svg.import[39m[0m
+[   9% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/logistics.svg-edd5bcb1de7ee10c34a973bfe5e5107a.ctex[39m[0m
+[   9% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/logistics.svg.import[39m[0m
+[  10% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/material.svg-0233a6689c4c6bfede42be275f899cfd.ctex[39m[0m
+[  10% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/material.svg.import[39m[0m
+[  10% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/medical.svg-e44f862368c57acda06a38e7aeac518d.ctex[39m[0m
+[  10% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/medical.svg.import[39m[0m
+[  10% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/operations.svg-e8ace920e9888ff9bdd83af333416a85.ctex[39m[0m
+[  10% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/operations.svg.import[39m[0m
+[  10% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_academy.svg-12f343c47af0c6dea27b252fc857caef.ctex[39m[0m
+[  10% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/org_academy.svg.import[39m[0m
+[  11% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_care.svg-727b23dc5fc8131a1b722c0ffc763f9a.ctex[39m[0m
+[  11% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/org_care.svg.import[39m[0m
+[  11% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_circular.svg-9f59da915c82f8e558c2cc964b14401d.ctex[39m[0m
+[  11% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/org_circular.svg.import[39m[0m
+[  11% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_civic.svg-f8509451a159c4eb0fcf23d04e629f65.ctex[39m[0m
+[  11% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/org_civic.svg.import[39m[0m
+[  12% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_commons.svg-77dae29664be1bfe72e2a98a6a9c2c2d.ctex[39m[0m
+[  12% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/org_commons.svg.import[39m[0m
+[  12% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_farmers.svg-9fa2f31f3781afa8729acf35588d31a5.ctex[39m[0m
+[  12% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/org_farmers.svg.import[39m[0m
+[  12% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_river.svg-27a46fd56ed7457e3a572ee32ac2f199.ctex[39m[0m
+[  12% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/org_river.svg.import[39m[0m
+[  13% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_steel.svg-72c09de59a673ecbb2985c695e8fed0a.ctex[39m[0m
+[  13% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/org_steel.svg.import[39m[0m
+[  13% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/pause.svg-b8889df084bf0a67c70a645389b2e653.ctex[39m[0m
+[  13% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/pause.svg.import[39m[0m
+[  13% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/play.svg-1723fbf4975a8e879a50a6b93eed94a3.ctex[39m[0m
+[  13% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/play.svg.import[39m[0m
+[  14% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/policy.svg-c23882f92b6909b7fbcf5429ce083f1c.ctex[39m[0m
+[  14% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/policy.svg.import[39m[0m
+[  14% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/pollution.svg-d30d4fb9da060dc94c5effae655584df.ctex[39m[0m
+[  14% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/pollution.svg.import[39m[0m
+[  14% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/production.svg-2cd4dcaf0fa7c9c4645e24d28d6be3f3.ctex[39m[0m
+[  14% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/production.svg.import[39m[0m
+[  15% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/settings.svg-8a6393cc4930cadd6052e850ce0d86fb.ctex[39m[0m
+[  15% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/settings.svg.import[39m[0m
+[  15% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/warning.svg-61c91ce0b6179602c1c25969486e5c3e.ctex[39m[0m
+[  15% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/warning.svg.import[39m[0m
+[  15% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/world.svg-3e6be25edb6f276ed569f52bc444c0fc.ctex[39m[0m
+[  15% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui030/world.svg.import[39m[0m
+[  16% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/back.svg-949db417d41772f7759d5353eabc4466.ctex[39m[0m
+[  16% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/back.svg.import[39m[0m
+[  16% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/build.svg-54640aed380d60b5918e7bfcfcf14e68.ctex[39m[0m
+[  16% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/build.svg.import[39m[0m
+[  16% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/check.svg-1c5b64a967da4268e47268807bd9b4e4.ctex[39m[0m
+[  16% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/check.svg.import[39m[0m
+[  17% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/chevron.svg-0a90177ac95b446cc51deb01ffaa68e4.ctex[39m[0m
+[  17% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/chevron.svg.import[39m[0m
+[  17% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/clock.svg-8ff55d4d18135294538909556e1be6c5.ctex[39m[0m
+[  17% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/clock.svg.import[39m[0m
+[  17% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/close.svg-db93cf197888cb6fdaaa243a55ca0870.ctex[39m[0m
+[  17% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/close.svg.import[39m[0m
+[  18% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/commercial.svg-425e6800003fbc7d8d649977039251e6.ctex[39m[0m
+[  18% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/commercial.svg.import[39m[0m
+[  18% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/compare.svg-6bd7c404c4b1c4265bb8ceeb7e61d24e.ctex[39m[0m
+[  18% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/compare.svg.import[39m[0m
+[  18% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/education.svg-392407f16ddf2dbb7f8da9cef0d8fe44.ctex[39m[0m
+[  18% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/education.svg.import[39m[0m
+[  19% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/employment.svg-4704f2f1137e8c2d29e82d4df8cf4e19.ctex[39m[0m
+[  19% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/employment.svg.import[39m[0m
+[  19% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/energy.svg-ca0fde268b69305b2362281839209f2b.ctex[39m[0m
+[  19% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/energy.svg.import[39m[0m
+[  19% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/entertainment.svg-381ef5ab3ca559ed04ccf72c3e657fc4.ctex[39m[0m
+[  19% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/entertainment.svg.import[39m[0m
+[  19% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/external.svg-2b6f523bb58fa323f6b022713102d59b.ctex[39m[0m
+[  19% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/external.svg.import[39m[0m
+[  20% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/eye.svg-3f8ddfa657ca20dd31e03b5396812965.ctex[39m[0m
+[  20% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/eye.svg.import[39m[0m
+[  20% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/focus.svg-595743358712c97516ac0972aaf4c4c4.ctex[39m[0m
+[  20% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/focus.svg.import[39m[0m
+[  20% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/food.svg-15a7a3938c42a4df9ca2c3a537d338e0.ctex[39m[0m
+[  20% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/food.svg.import[39m[0m
+[  21% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/goods.svg-afc7d8e012c371e2d89a594ed7825ab0.ctex[39m[0m
+[  21% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/goods.svg.import[39m[0m
+[  21% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/heat.svg-3f2db0cce8fe2dde38a02b384c173fdd.ctex[39m[0m
+[  21% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/heat.svg.import[39m[0m
+[  21% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/home.svg-fc11466b02aa6a165555daa046c2e269.ctex[39m[0m
+[  21% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/home.svg.import[39m[0m
+[  22% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/info.svg-1cda92e78a06e92536e072017e69b1eb.ctex[39m[0m
+[  22% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/info.svg.import[39m[0m
+[  22% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/layers.svg-c2a08ba30833aae3702ca3dd2a0695a0.ctex[39m[0m
+[  22% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/layers.svg.import[39m[0m
+[  22% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/ledger.svg-964b374d49acd126698f9d649bb4956f.ctex[39m[0m
+[  22% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/ledger.svg.import[39m[0m
+[  23% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/lock.svg-7d76d6fb1dae5c27ee65b123c337f65b.ctex[39m[0m
+[  23% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/lock.svg.import[39m[0m
+[  23% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/logistics.svg-20e3bb90edbea43d9630ac4826728c52.ctex[39m[0m
+[  23% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/logistics.svg.import[39m[0m
+[  23% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/material.svg-2b135150ca6a9ac0f2c717dc8c944061.ctex[39m[0m
+[  23% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/material.svg.import[39m[0m
+[  24% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/medical.svg-3ef4ffd1e982b419ceb7915fe82f606d.ctex[39m[0m
+[  24% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/medical.svg.import[39m[0m
+[  24% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/minus.svg-a07c81ad4abc9f31e1515a30e4a1abc7.ctex[39m[0m
+[  24% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/minus.svg.import[39m[0m
+[  24% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/operations.svg-41d49f8ed77f2531a179bfa61126ba75.ctex[39m[0m
+[  24% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/operations.svg.import[39m[0m
+[  25% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_academy.svg-05ca44c57e1781c15fe2d696de1095e3.ctex[39m[0m
+[  25% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/org_academy.svg.import[39m[0m
+[  25% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_care.svg-b3563474836149f8f90e665351d0af03.ctex[39m[0m
+[  25% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/org_care.svg.import[39m[0m
+[  25% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_circular.svg-9eb3f98aa26231546911da219ca77fd7.ctex[39m[0m
+[  25% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/org_circular.svg.import[39m[0m
+[  26% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_civic.svg-339040ba6f28f9653ef8b31cf8d5ab34.ctex[39m[0m
+[  26% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/org_civic.svg.import[39m[0m
+[  26% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_commons.svg-fe743c9d5277ea805d8e1d584d440782.ctex[39m[0m
+[  26% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/org_commons.svg.import[39m[0m
+[  26% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_farmers.svg-e6c85c6a1daecd6c31b292256d95d97f.ctex[39m[0m
+[  26% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/org_farmers.svg.import[39m[0m
+[  27% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_river.svg-074bff0bdf8f97d32c468e03ad107a43.ctex[39m[0m
+[  27% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/org_river.svg.import[39m[0m
+[  27% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/org_steel.svg-1587485b307c01fba1e77a7f269fdd97.ctex[39m[0m
+[  27% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/org_steel.svg.import[39m[0m
+[  27% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/pause.svg-705c464946315c2a81b9c027a763263d.ctex[39m[0m
+[  27% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/pause.svg.import[39m[0m
+[  28% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/play.svg-20eafef6d755aee52f6cbff564a55252.ctex[39m[0m
+[  28% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/play.svg.import[39m[0m
+[  28% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/plus.svg-61e8fb026284897a71860b631c6741da.ctex[39m[0m
+[  28% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/plus.svg.import[39m[0m
+[  28% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/policy.svg-11ab96f5c7f92890ca83ed08b7bdbf2f.ctex[39m[0m
+[  28% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/policy.svg.import[39m[0m
+[  28% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/pollution.svg-b0f15fcbecfa12323d0924d85f90bc97.ctex[39m[0m
+[  28% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/pollution.svg.import[39m[0m
+[  29% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/production.svg-e35cb2b7755041bbd5ef73879c0745d5.ctex[39m[0m
+[  29% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/production.svg.import[39m[0m
+[  29% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/refresh.svg-79a4803f3fafc3e2a95c19c4f56a5418.ctex[39m[0m
+[  29% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/refresh.svg.import[39m[0m
+[  29% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/search.svg-0f88b22ae189cd2dcd41dc0646a32f35.ctex[39m[0m
+[  29% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/search.svg.import[39m[0m
+[  30% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/settings.svg-4c71ace18851d17904711b56390193ec.ctex[39m[0m
+[  30% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/settings.svg.import[39m[0m
+[  30% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/sort.svg-28e3968c373ea036c3b27eca0828fe8a.ctex[39m[0m
+[  30% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/sort.svg.import[39m[0m
+[  30% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/warning.svg-8c0cbe327d8a4d43e9be1a0571d666fe.ctex[39m[0m
+[  30% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/warning.svg.import[39m[0m
+[  31% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/world.svg-36b4752bc5454a8ff5b06ffb60e27b95.ctex[39m[0m
+[  31% ] [90m[1msavepack[22m | 正在保存文件：res://assets/ui040/world.svg.import[39m[0m
+[  31% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/clinic.png-2838721bcdfebcc912bf4f19753f0467.etc2.ctex[39m[0m
+[  31% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/clinic.png.import[39m[0m
+[  31% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/farm.png-22ac517f35282c3707f892d7fc5fc039.etc2.ctex[39m[0m
+[  31% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/farm.png.import[39m[0m
+[  32% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/hamlet.png-655922bc62479b656150f852811fb1ba.etc2.ctex[39m[0m
+[  32% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/hamlet.png.import[39m[0m
+[  32% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/market.png-7ffea3d8ae8e06a0f50ff2cb2089bec4.etc2.ctex[39m[0m
+[  32% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/market.png.import[39m[0m
+[  32% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/park.png-b78e79904e74f78e532b356963247e53.etc2.ctex[39m[0m
+[  32% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/park.png.import[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/power.png-bc75a07d7e05bdaaf05fecf41470073e.etc2.ctex[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/power.png.import[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/school.png-212e4aeca4a0ae8c4914239d40c58098.etc2.ctex[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/school.png.import[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/timber.png-40599b50ed627a0fbe4068e8467adb7b.etc2.ctex[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/timber.png.import[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/warehouse.png-f82285fec6d50952d788a190fa43e122.etc2.ctex[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/warehouse.png.import[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/works.png-ce6def32200edf7be3fcd9214803e900.etc2.ctex[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/buildings/works.png.import[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/drone.png-457c25c51ad0f02fae0c3291312b87ed.etc2.ctex[39m[0m
+[  33% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/modules/drone.png.import[39m[0m
+[  34% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/heat.png-59f941b6720f133e8616eadbd4918618.etc2.ctex[39m[0m
+[  34% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/modules/heat.png.import[39m[0m
+[  34% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/open_court.png-ded5391d52a7a1700f32733d80b1f34f.etc2.ctex[39m[0m
+[  34% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/modules/open_court.png.import[39m[0m
+[  34% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/recycle.png-845a71e6c781eb0aaa4c81ed5509c805.etc2.ctex[39m[0m
+[  34% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/modules/recycle.png.import[39m[0m
+[  35% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/reuse.png-1825db03125f25ae595df7d5e42ef9a1.etc2.ctex[39m[0m
+[  35% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/modules/reuse.png.import[39m[0m
+[  35% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/roof_farm.png-6e28b219aef600dad736d06cb87cb5a3.etc2.ctex[39m[0m
+[  35% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/modules/roof_farm.png.import[39m[0m
+[  35% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/storage.png-06d579c5cb3b7a5fcccbe9135bb4a718.etc2.ctex[39m[0m
+[  35% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/modules/storage.png.import[39m[0m
+[  36% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/workshop.png-1de609223589db50f1862a4c0a0d9c02.etc2.ctex[39m[0m
+[  36% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/modules/workshop.png.import[39m[0m
+[  36% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/bench.png-f0a343c173129c7e5882d83deddcff4f.etc2.ctex[39m[0m
+[  36% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/bench.png.import[39m[0m
+[  36% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/crates.png-2c53e8ec9e3adc4e8eadd745f1318fa8.etc2.ctex[39m[0m
+[  36% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/crates.png.import[39m[0m
+[  36% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/fence.png-81d8b220fc38c98a7cb8fc5fd12a2f01.etc2.ctex[39m[0m
+[  36% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/fence.png.import[39m[0m
+[  37% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/flowers.png-a0d5072da286836058c01e51d75f0f1c.etc2.ctex[39m[0m
+[  37% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/flowers.png.import[39m[0m
+[  37% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/furrows.png-2d820af9d2d101c7959b30140dbe5195.etc2.ctex[39m[0m
+[  37% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/furrows.png.import[39m[0m
+[  37% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/lamp.png-a71a8b891381c599513002621863827b.etc2.ctex[39m[0m
+[  37% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/lamp.png.import[39m[0m
+[  38% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/materials.png-56ee4c4abd76d96128064b4afa0ba44e.etc2.ctex[39m[0m
+[  38% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/materials.png.import[39m[0m
+[  38% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/rocks.png-82adc9394862816456ca6e14b0f998e9.etc2.ctex[39m[0m
+[  38% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/rocks.png.import[39m[0m
+[  38% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/shrub.png-bab1e3357c6201f33f9353056f21094c.etc2.ctex[39m[0m
+[  38% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/shrub.png.import[39m[0m
+[  39% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/stall.png-1df736b123656373ea10a7adf9aff15b.etc2.ctex[39m[0m
+[  39% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/stall.png.import[39m[0m
+[  39% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/tree_broadleaf.png-6cdac526b07610526df375681b1a57eb.etc2.ctex[39m[0m
+[  39% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/tree_broadleaf.png.import[39m[0m
+[  39% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/tree_conifer.png-b38fdf52d1b5ac4a34addbe05f5632d6.etc2.ctex[39m[0m
+[  39% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/props/tree_conifer.png.import[39m[0m
+[  40% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/atlas0.png-0050046433a44440d682fd9bd9653a4b.etc2.ctex[39m[0m
+[  40% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/atlas0.png.import[39m[0m
+[  40% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/atlas1.png-d5d11d6a4a02dd4b2b5dca8f02ca54dd.etc2.ctex[39m[0m
+[  40% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world030/atlas1.png.import[39m[0m
+[  40% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/advanced_residence.png-7b8dc72096a3c86993b9494c5e8ea8bb.etc2.ctex[39m[0m
+[  40% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/advanced_residence.png.import[39m[0m
+[  41% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/agriculture.png-9360894da293a0d730e6ee99b9679daa.etc2.ctex[39m[0m
+[  41% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/agriculture.png.import[39m[0m
+[  41% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/commercial_center.png-539cd1c87dbe751e201bf7f30d0e60a1.etc2.ctex[39m[0m
+[  41% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/commercial_center.png.import[39m[0m
+[  41% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/extraction.png-89a49555f280cc7cc9a299df67090adc.etc2.ctex[39m[0m
+[  41% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/extraction.png.import[39m[0m
+[  42% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/freight.png-5f01ed2e2cc9dd851a6a09ecc5257543.etc2.ctex[39m[0m
+[  42% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/freight.png.import[39m[0m
+[  42% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/garden.png-d343588f95f995ae0d3e79a09a275446.etc2.ctex[39m[0m
+[  42% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/garden.png.import[39m[0m
+[  42% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/homestead.png-46b8fd6e2182c039ece79923956f2e5c.etc2.ctex[39m[0m
+[  42% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/homestead.png.import[39m[0m
+[  43% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/hospital.png-9c670b69277cf20fcd6ab0473269194a.etc2.ctex[39m[0m
+[  43% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/hospital.png.import[39m[0m
+[  43% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/manufacturing.png-3b2a6de9683503f671efe302b55b44d7.etc2.ctex[39m[0m
+[  43% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/manufacturing.png.import[39m[0m
+[  43% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/material_factory.png-3cb7038f1ce6151c68d6341c63ebcb2c.etc2.ctex[39m[0m
+[  43% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/material_factory.png.import[39m[0m
+[  44% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/medical_clinic.png-5fc7d38ef47a05f98a781e83e6241af7.etc2.ctex[39m[0m
+[  44% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/medical_clinic.png.import[39m[0m
+[  44% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/modern_agriculture.png-64e7aa9bb2533c3963ac58cb682d5b1e.etc2.ctex[39m[0m
+[  44% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/modern_agriculture.png.import[39m[0m
+[  44% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/neighborhood.png-bc293f72ada2891ee2ff7782630f6150.etc2.ctex[39m[0m
+[  44% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/neighborhood.png.import[39m[0m
+[  45% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/power_plant.png-e9c714462c699cc50925fe07fd4816b3.etc2.ctex[39m[0m
+[  45% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/power_plant.png.import[39m[0m
+[  45% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/power_station.png-6f310647908f679232662cbebfba04d1.etc2.ctex[39m[0m
+[  45% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/power_station.png.import[39m[0m
+[  45% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/primary_school.png-75cafa58207fc87720825a915f5a1240.etc2.ctex[39m[0m
+[  45% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/primary_school.png.import[39m[0m
+[  45% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/public_center.png-f1604e3cb915860007743fbfec8be284.etc2.ctex[39m[0m
+[  45% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/public_center.png.import[39m[0m
+[  46% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/residence.png-0f512abc93b9508821ed6db0693b1696.etc2.ctex[39m[0m
+[  46% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/residence.png.import[39m[0m
+[  46% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/secondary_school.png-2b7406011b1262de65131342b00f3dc0.etc2.ctex[39m[0m
+[  46% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/secondary_school.png.import[39m[0m
+[  46% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/workshop.png-f05d6b9a45bc70db434bbc3038c23bbd.etc2.ctex[39m[0m
+[  46% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/workshop.png.import[39m[0m
+[  47% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/yard.png-4a26e35ebe0d88d577e7f01134532597.etc2.ctex[39m[0m
+[  47% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/yard.png.import[39m[0m
+[  47% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/drone.png-37285e2a437148c62b7cc4a5087b7925.etc2.ctex[39m[0m
+[  47% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/drone.png.import[39m[0m
+[  47% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/heat.png-0ba5f0298c3dc74b089f08a9b6143997.etc2.ctex[39m[0m
+[  47% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/heat.png.import[39m[0m
+[  48% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/open_court.png-b25a3ba9a6eb00809e9277b3d57272f8.etc2.ctex[39m[0m
+[  48% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/open_court.png.import[39m[0m
+[  48% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/recycle.png-a978aff661d83219adafcfe57a508afc.etc2.ctex[39m[0m
+[  48% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/recycle.png.import[39m[0m
+[  48% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/reuse.png-3bf299079a1f48ad170f06a63325ed1a.etc2.ctex[39m[0m
+[  48% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/reuse.png.import[39m[0m
+[  49% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/roof_farm.png-ea1e2e0629366bad2dbc99d88453ff99.etc2.ctex[39m[0m
+[  49% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/roof_farm.png.import[39m[0m
+[  49% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/storage.png-44063081a5233788128367a0510f2f5a.etc2.ctex[39m[0m
+[  49% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/storage.png.import[39m[0m
+[  49% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/workshop_module.png-63f0b1cadf3ee737d1b4ae1bb349ee3c.etc2.ctex[39m[0m
+[  49% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/workshop_module.png.import[39m[0m
+[  50% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/bench.png-c5cbbe39a81e88c2960c2cdea659fc2b.etc2.ctex[39m[0m
+[  50% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/bench.png.import[39m[0m
+[  50% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/crates.png-c78f5b2db95309c5453e04198c667e94.etc2.ctex[39m[0m
+[  50% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/crates.png.import[39m[0m
+[  50% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/fence.png-7f3df2c7e3cebf6845d6c53204daa7c8.etc2.ctex[39m[0m
+[  50% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/fence.png.import[39m[0m
+[  51% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/flowers.png-2f559019e87ef2543300a638cb68f722.etc2.ctex[39m[0m
+[  51% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/flowers.png.import[39m[0m
+[  51% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/furrows.png-ba1a975b75b6f96a49c3f4ddb4d9cf14.etc2.ctex[39m[0m
+[  51% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/furrows.png.import[39m[0m
+[  51% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/garden_courtyard.png-0bf579ecee0da591dbda17b2b9dee1db.etc2.ctex[39m[0m
+[  51% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/garden_courtyard.png.import[39m[0m
+[  52% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/lamp.png-1cb7add80b633bece319a3a045de264f.etc2.ctex[39m[0m
+[  52% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/lamp.png.import[39m[0m
+[  52% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/materials.png-c6afae7edfcb1e84a237f0bdc02e84c9.etc2.ctex[39m[0m
+[  52% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/materials.png.import[39m[0m
+[  52% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/rocks.png-19b62c51e10dc9eef260db3b37f81df9.etc2.ctex[39m[0m
+[  52% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/rocks.png.import[39m[0m
+[  53% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/shrub.png-12e9809275cffe8fc156de19f7ea9ba8.etc2.ctex[39m[0m
+[  53% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/shrub.png.import[39m[0m
+[  53% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/stall.png-0f0368867078589d12ae2588a0651891.etc2.ctex[39m[0m
+[  53% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/stall.png.import[39m[0m
+[  53% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/tree_broadleaf.png-631bd9fc6eca3c5e1666fe84aea815cb.etc2.ctex[39m[0m
+[  53% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/tree_broadleaf.png.import[39m[0m
+[  54% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/tree_conifer.png-801533b4304e83a7586daca1a237da48.etc2.ctex[39m[0m
+[  54% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/tree_conifer.png.import[39m[0m
+[  54% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/hill_0.png-274e852ee59a01e32ea29856aaa136b8.etc2.ctex[39m[0m
+[  54% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/terrain/hill_0.png.import[39m[0m
+[  54% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/hill_1.png-0cd0d132044738b1f3f65dbca313bbcb.etc2.ctex[39m[0m
+[  54% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/terrain/hill_1.png.import[39m[0m
+[  54% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/hill_2.png-faa0c75b1aae38193cd04a3b0ef03228.etc2.ctex[39m[0m
+[  54% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/terrain/hill_2.png.import[39m[0m
+[  55% ] [90m[1msavepack[22m | 正在保存文件：res://assets/icon.icns[39m[0m
+[  55% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/imported/icon.png-b6a7fb2db36edd3d95dc42f1dc8c1c5d.ctex[39m[0m
+[  55% ] [90m[1msavepack[22m | 正在保存文件：res://assets/icon.png.import[39m[0m
+[  55% ] [90m[1msavepack[22m | 正在保存文件：res://content/040/bonus_economy.json[39m[0m
+[  56% ] [90m[1msavepack[22m | 正在保存文件：res://content/040/buildings.json[39m[0m
+[  56% ] [90m[1msavepack[22m | 正在保存文件：res://content/040/commissions.json[39m[0m
+[  56% ] [90m[1msavepack[22m | 正在保存文件：res://content/040/market.json[39m[0m
+[  57% ] [90m[1msavepack[22m | 正在保存文件：res://content/040/operators.json[39m[0m
+[  57% ] [90m[1msavepack[22m | 正在保存文件：res://content/040/policies.json[39m[0m
+[  57% ] [90m[1msavepack[22m | 正在保存文件：res://content/040/progression.json[39m[0m
+[  58% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation030/art_catalog.json[39m[0m
+[  58% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation030/bonus_visual_bindings.json[39m[0m
+[  58% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation030/map_layers.json[39m[0m
+[  59% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation030/ui_tokens.json[39m[0m
+[  59% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation031/bonus_card_catalog031.json[39m[0m
+[  59% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation031/building_visual_domains031.json[39m[0m
+[  60% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation031/inspector_fixture031.json[39m[0m
+[  60% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation031/ui_tokens031.json[39m[0m
+[  60% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation040/art_catalog.json[39m[0m
+[  61% ] [90m[1msavepack[22m | 正在保存文件：res://content/presentation040/ui_tokens.json[39m[0m
+[  61% ] [90m[1msavepack[22m | 正在保存文件：res://content/balance.json[39m[0m
+[  61% ] [90m[1msavepack[22m | 正在保存文件：res://content/catalog.json[39m[0m
+[  62% ] [90m[1msavepack[22m | 正在保存文件：res://content/core020.json[39m[0m
+[  62% ] [90m[1msavepack[22m | 正在保存文件：res://core/allocation.gdc[39m[0m
+[  62% ] [90m[1msavepack[22m | 正在保存文件：res://core/block040.gdc[39m[0m
+[  63% ] [90m[1msavepack[22m | 正在保存文件：res://core/bonus_economy040.gdc[39m[0m
+[  63% ] [90m[1msavepack[22m | 正在保存文件：res://core/catalog.gdc[39m[0m
+[  63% ] [90m[1msavepack[22m | 正在保存文件：res://core/civic032.gdc[39m[0m
+[  63% ] [90m[1msavepack[22m | 正在保存文件：res://core/commissions040.gdc[39m[0m
+[  64% ] [90m[1msavepack[22m | 正在保存文件：res://core/construction040.gdc[39m[0m
+[  64% ] [90m[1msavepack[22m | 正在保存文件：res://core/development040.gdc[39m[0m
+[  64% ] [90m[1msavepack[22m | 正在保存文件：res://core/fields.gdc[39m[0m
+[  65% ] [90m[1msavepack[22m | 正在保存文件：res://core/game.gdc[39m[0m
+[  65% ] [90m[1msavepack[22m | 正在保存文件：res://core/hex.gdc[39m[0m
+[  65% ] [90m[1msavepack[22m | 正在保存文件：res://core/inventory.gdc[39m[0m
+[  66% ] [90m[1msavepack[22m | 正在保存文件：res://core/market040.gdc[39m[0m
+[  66% ] [90m[1msavepack[22m | 正在保存文件：res://core/planning.gdc[39m[0m
+[  66% ] [90m[1msavepack[22m | 正在保存文件：res://core/population.gdc[39m[0m
+[  66% ] [90m[1msavepack[22m | 正在保存文件：res://core/progress.gdc[39m[0m
+[  66% ] [90m[1msavepack[22m | 正在保存文件：res://core/rng.gdc[39m[0m
+[  66% ] [90m[1msavepack[22m | 正在保存文件：res://core/rules.gdc[39m[0m
+[  67% ] [90m[1msavepack[22m | 正在保存文件：res://core/simulation.gdc[39m[0m
+[  67% ] [90m[1msavepack[22m | 正在保存文件：res://core/storage.gdc[39m[0m
+[  67% ] [90m[1msavepack[22m | 正在保存文件：res://core/tenders.gdc[39m[0m
+[  68% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/rocks.mask[39m[0m
+[  68% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/lamp.mask[39m[0m
+[  68% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/garden_courtyard.mask[39m[0m
+[  69% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/crates.mask[39m[0m
+[  69% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/shrub.mask[39m[0m
+[  69% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/roof_farm.mask[39m[0m
+[  70% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/terrain/hill_0.mask[39m[0m
+[  70% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/flowers.mask[39m[0m
+[  70% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/terrain/hill_2.mask[39m[0m
+[  71% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/tree_conifer.mask[39m[0m
+[  71% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/stall.mask[39m[0m
+[  71% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/open_court.mask[39m[0m
+[  71% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/terrain/hill_1.mask[39m[0m
+[  72% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/furrows.mask[39m[0m
+[  72% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/fence.mask[39m[0m
+[  72% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/materials.mask[39m[0m
+[  73% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/bench.mask[39m[0m
+[  73% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/props/tree_broadleaf.mask[39m[0m
+[  73% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/storage.mask[39m[0m
+[  74% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/drone.mask[39m[0m
+[  74% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/recycle.mask[39m[0m
+[  74% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/reuse.mask[39m[0m
+[  75% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/workshop_module.mask[39m[0m
+[  75% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/modern_agriculture.mask[39m[0m
+[  75% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/modules/heat.mask[39m[0m
+[  76% ] [90m[1msavepack[22m | 正在保存文件：res://assets/fonts/OFL-NotoSansSC.txt[39m[0m
+[  76% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/extraction.mask[39m[0m
+[  76% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/manufacturing.mask[39m[0m
+[  77% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/secondary_school.mask[39m[0m
+[  77% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/primary_school.mask[39m[0m
+[  77% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/homestead.mask[39m[0m
+[  78% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/neighborhood.mask[39m[0m
+[  78% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/freight.mask[39m[0m
+[  78% ] [90m[1msavepack[22m | 正在保存文件：res://tests/acceptance040.gdc[39m[0m
+[  79% ] [90m[1msavepack[22m | 正在保存文件：res://tests/civic032.gdc[39m[0m
+[  79% ] [90m[1msavepack[22m | 正在保存文件：res://tests/colony041.gdc[39m[0m
+[  79% ] [90m[1msavepack[22m | 正在保存文件：res://tests/elevation040.gdc[39m[0m
+[  80% ] [90m[1msavepack[22m | 正在保存文件：res://tests/fabric041.gdc[39m[0m
+[  80% ] [90m[1msavepack[22m | 正在保存文件：res://tests/license_export.gdc[39m[0m
+[  80% ] [90m[1msavepack[22m | 正在保存文件：res://tests/paths.gdc[39m[0m
+[  80% ] [90m[1msavepack[22m | 正在保存文件：res://tests/performance041.gdc[39m[0m
+[  81% ] [90m[1msavepack[22m | 正在保存文件：res://tests/playthrough040.gdc[39m[0m
+[  81% ] [90m[1msavepack[22m | 正在保存文件：res://tests/playthrough.gdc[39m[0m
+[  81% ] [90m[1msavepack[22m | 正在保存文件：res://tests/presentation030.gdc[39m[0m
+[  82% ] [90m[1msavepack[22m | 正在保存文件：res://tests/run040.gdc[39m[0m
+[  82% ] [90m[1msavepack[22m | 正在保存文件：res://tests/runner.gdc[39m[0m
+[  82% ] [90m[1msavepack[22m | 正在保存文件：res://tests/touch032.gdc[39m[0m
+[  83% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui030.gdc[39m[0m
+[  83% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui031.gdc[39m[0m
+[  83% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui032.gdc[39m[0m
+[  84% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui040.gdc[39m[0m
+[  84% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui_regression031.gdc[39m[0m
+[  84% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui_smoke.gdc[39m[0m
+[  85% ] [90m[1msavepack[22m | 正在保存文件：res://tests/viewmodels031.gdc[39m[0m
+[  85% ] [90m[1msavepack[22m | 正在保存文件：res://tests/visual040.gdc[39m[0m
+[  85% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city032/desk.gdc[39m[0m
+[  86% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city032/drag_scroll.gdc[39m[0m
+[  86% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city032/history_chart.gdc[39m[0m
+[  86% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city032/models.gdc[39m[0m
+[  87% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city040/city.gdc[39m[0m
+[  87% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city040/topics.gdc[39m[0m
+[  87% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/card_button.gdc[39m[0m
+[  88% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/components.gdc[39m[0m
+[  88% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/design.gdc[39m[0m
+[  88% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/inspector.gdc[39m[0m
+[  89% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/visual.gdc[39m[0m
+[  89% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/art.gdc[39m[0m
+[  89% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/connections041.gdc[39m[0m
+[  89% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/elevation040.gdc[39m[0m
+[  90% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/fabric040.gdc[39m[0m
+[  90% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/foundation041.gdc[39m[0m
+[  90% ] [90m[1msavepack[22m | 正在保存文件：res://ui/shell/workbench.gdc[39m[0m
+[  91% ] [90m[1msavepack[22m | 正在保存文件：res://ui/view_models/inspector_model.gdc[39m[0m
+[  91% ] [90m[1msavepack[22m | 正在保存文件：res://ui/view_models/map_data.gdc[39m[0m
+[  91% ] [90m[1msavepack[22m | 正在保存文件：res://ui/app.gdc[39m[0m
+[  92% ] [90m[1msavepack[22m | 正在保存文件：res://ui/dialogs.gdc[39m[0m
+[  92% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map_view.gdc[39m[0m
+[  92% ] [90m[1msavepack[22m | 正在保存文件：res://ui/panels.gdc[39m[0m
+[  93% ] [90m[1msavepack[22m | 正在保存文件：res://ui/presentation.gdc[39m[0m
+[  93% ] [90m[1msavepack[22m | 正在保存文件：res://ui/widgets.gdc[39m[0m
+[  93% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/exported/133200997/export-3070c538c03ee49b7677ff960a3f5195-main.scn[39m[0m
+[  94% ] [90m[1msavepack[22m | 正在保存文件：res://assets/licenses/THIRD-PARTY-NOTICES.txt[39m[0m
+[  94% ] [90m[1msavepack[22m | 正在保存文件：res://assets/licenses/GODOT-LICENSE.txt[39m[0m
+[  94% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/advanced_residence.mask[39m[0m
+[  95% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/workshop.mask[39m[0m
+[  95% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/yard.mask[39m[0m
+[  95% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/agriculture.mask[39m[0m
+[  96% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/hospital.mask[39m[0m
+[  96% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/material_factory.mask[39m[0m
+[  96% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/medical_clinic.mask[39m[0m
+[  97% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/garden.mask[39m[0m
+[  97% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/commercial_center.mask[39m[0m
+[  97% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/residence.mask[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/power_station.mask[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/public_center.mask[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://assets/world040/buildings/power_plant.mask[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/allocation.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/block040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/bonus_economy040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/catalog.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/civic032.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/commissions040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/construction040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/development040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/fields.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/game.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/hex.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/inventory.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/market040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/planning.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/population.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/progress.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/rng.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/rules.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/simulation.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/storage.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://core/tenders.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/acceptance040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/civic032.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/colony041.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/elevation040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/fabric041.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/license_export.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/paths.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/performance041.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/playthrough040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/playthrough.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/presentation030.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/run040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/runner.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/touch032.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui030.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui031.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui032.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui_regression031.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/ui_smoke.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/viewmodels031.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://tests/visual040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city032/desk.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city032/drag_scroll.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city032/history_chart.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city032/models.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city040/city.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/city040/topics.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/card_button.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/components.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/design.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/inspector.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/components031/visual.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/art.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/connections041.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/elevation040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/fabric040.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map/foundation041.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/shell/workbench.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/view_models/inspector_model.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/view_models/map_data.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/app.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/dialogs.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/map_view.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/panels.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/presentation.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://ui/widgets.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://main.tscn.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/global_script_class_cache.cfg[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://.godot/uid_cache.bin[39m[0m
+[  98% ] [90m[1msavepack[22m | 正在保存文件：res://project.binary[39m[0m
+[92m[ DONE ][39m [1msavepack[22m
+[0m
+[  33% ] [90m[1mexport[22m | Extracting and configuring Xcode project[39m[0m
+Static framework: libgodot.ios.debug.xcframework
+Unzipping...
+READ: data.pck
+READ: godot_apple_embedded/
+READ: godot_apple_embedded/export_options.plist
+ADDING: METLaisheng/export_options.plist size: 472
+READ: godot_apple_embedded/godot_apple_embedded-Info.plist
+ADDING: METLaisheng/METLaisheng-Info.plist size: 2483
+READ: godot_apple_embedded/godot_apple_embedded.entitlements
+ADDING: METLaisheng/METLaisheng.entitlements size: 190
+READ: godot_apple_embedded/Launch Screen.storyboard
+WARNING: Property not found: application/boot_splash/fullsize
+     at: get_setting_with_override_and_custom_features (core/config/project_settings.cpp:409)
+ADDING: METLaisheng/Launch Screen.storyboard size: 3025
+READ: godot_apple_embedded/dummy.cpp
+ADDING: METLaisheng/dummy.cpp size: 2493
+READ: godot_apple_embedded/dummy.h
+ADDING: METLaisheng/dummy.h size: 2285
+READ: godot_apple_embedded/dummy.swift
+ADDING: METLaisheng/dummy.swift size: 2252
+READ: godot_apple_embedded/dylibs/
+READ: godot_apple_embedded/dylibs/empty
+ADDING: METLaisheng/dylibs/empty size: 42
+Creating /Users/lizhirui/Developer/MET_0.3.2_Source/build/MET_0.4.0_Laisheng_iOS/METLaisheng/dylibs
+READ: godot_apple_embedded/en.lproj/
+READ: godot_apple_embedded/en.lproj/InfoPlist.strings
+ADDING: METLaisheng/en.lproj/InfoPlist.strings size: 44
+Creating /Users/lizhirui/Developer/MET_0.3.2_Source/build/MET_0.4.0_Laisheng_iOS/METLaisheng/en.lproj
+READ: godot_apple_embedded/Images.xcassets/
+READ: godot_apple_embedded/Images.xcassets/SplashImage.imageset/
+READ: godot_apple_embedded/Images.xcassets/SplashImage.imageset/Contents.json
+ADDING: METLaisheng/Images.xcassets/SplashImage.imageset/Contents.json size: 343
+Creating /Users/lizhirui/Developer/MET_0.3.2_Source/build/MET_0.4.0_Laisheng_iOS/METLaisheng/Images.xcassets/SplashImage.imageset
+READ: godot_apple_embedded/Images.xcassets/SplashImage.imageset/splash@2x.png
+ADDING: METLaisheng/Images.xcassets/SplashImage.imageset/splash@2x.png size: 14701
+READ: godot_apple_embedded/Images.xcassets/SplashImage.imageset/splash@3x.png
+ADDING: METLaisheng/Images.xcassets/SplashImage.imageset/splash@3x.png size: 14701
+READ: godot_apple_embedded.xcodeproj/
+READ: godot_apple_embedded.xcodeproj/project.pbxproj
+ADDING: METLaisheng.xcodeproj/project.pbxproj size: 16174
+READ: godot_apple_embedded.xcodeproj/project.xcworkspace/
+READ: godot_apple_embedded.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+ADDING: METLaisheng.xcodeproj/project.xcworkspace/contents.xcworkspacedata size: 157
+Creating /Users/lizhirui/Developer/MET_0.3.2_Source/build/MET_0.4.0_Laisheng_iOS/METLaisheng.xcodeproj/project.xcworkspace
+READ: godot_apple_embedded.xcodeproj/xcshareddata/
+READ: godot_apple_embedded.xcodeproj/xcshareddata/xcschemes/
+READ: godot_apple_embedded.xcodeproj/xcshareddata/xcschemes/godot_apple_embedded.xcscheme
+ADDING: METLaisheng.xcodeproj/xcshareddata/xcschemes/METLaisheng.xcscheme size: 3470
+Creating /Users/lizhirui/Developer/MET_0.3.2_Source/build/MET_0.4.0_Laisheng_iOS/METLaisheng.xcodeproj/xcshareddata/xcschemes
+READ: libgodot_camera.ios.debug.xcframework/
+READ: libgodot_camera.ios.debug.xcframework/ios-arm64_x86_64-simulator/
+READ: libgodot_camera.ios.debug.xcframework/ios-arm64_x86_64-simulator/empty
+READ: libgodot_camera.ios.debug.xcframework/ios-arm64_x86_64-simulator/libgodot_camera.a
+READ: libgodot_camera.ios.debug.xcframework/Info.plist
+READ: libgodot_camera.ios.debug.xcframework/ios-arm64/
+READ: libgodot_camera.ios.debug.xcframework/ios-arm64/empty
+READ: libgodot_camera.ios.debug.xcframework/ios-arm64/libgodot_camera.a
+READ: libgodot_camera.ios.release.xcframework/
+READ: libgodot_camera.ios.release.xcframework/Info.plist
+READ: libgodot_camera.ios.release.xcframework/ios-arm64/
+READ: libgodot_camera.ios.release.xcframework/ios-arm64/empty
+READ: libgodot_camera.ios.release.xcframework/ios-arm64/libgodot_camera.a
+READ: libgodot_camera.ios.release.xcframework/ios-arm64_x86_64-simulator/
+READ: libgodot_camera.ios.release.xcframework/ios-arm64_x86_64-simulator/empty
+READ: libgodot_camera.ios.release.xcframework/ios-arm64_x86_64-simulator/libgodot_camera.a
+READ: libgodot_camera.visionos.debug.xcframework/
+READ: libgodot_camera.visionos.debug.xcframework/Info.plist
+ADDING: libgodot_camera.visionos.debug.xcframework/Info.plist size: 1011
+READ: libgodot_camera.visionos.debug.xcframework/xros-arm64-simulator/
+READ: libgodot_camera.visionos.debug.xcframework/xros-arm64-simulator/empty
+ADDING: libgodot_camera.visionos.debug.xcframework/xros-arm64-simulator/empty size: 42
+READ: libgodot_camera.visionos.debug.xcframework/xros-arm64/
+READ: libgodot_camera.visionos.debug.xcframework/xros-arm64/empty
+ADDING: libgodot_camera.visionos.debug.xcframework/xros-arm64/empty size: 42
+READ: libgodot_camera.visionos.release.xcframework/
+READ: libgodot_camera.visionos.release.xcframework/xros-arm64-simulator/
+READ: libgodot_camera.visionos.release.xcframework/xros-arm64-simulator/empty
+ADDING: libgodot_camera.visionos.release.xcframework/xros-arm64-simulator/empty size: 42
+READ: libgodot_camera.visionos.release.xcframework/xros-arm64/
+READ: libgodot_camera.visionos.release.xcframework/xros-arm64/empty
+ADDING: libgodot_camera.visionos.release.xcframework/xros-arm64/empty size: 42
+READ: libgodot_camera.visionos.release.xcframework/Info.plist
+ADDING: libgodot_camera.visionos.release.xcframework/Info.plist size: 1011
+READ: libgodot.ios.debug.xcframework/
+READ: libgodot.ios.debug.xcframework/Info.plist
+ADDING: METLaisheng.xcframework/Info.plist size: 1028
+READ: libgodot.ios.debug.xcframework/ios-arm64_x86_64-simulator/
+READ: libgodot.ios.debug.xcframework/ios-arm64_x86_64-simulator/empty
+READ: libgodot.ios.debug.xcframework/ios-arm64_x86_64-simulator/libgodot.a
+ADDING: METLaisheng.xcframework/ios-arm64_x86_64-simulator/libgodot.a size: 207733080
+READ: libgodot.ios.debug.xcframework/ios-arm64/
+READ: libgodot.ios.debug.xcframework/ios-arm64/empty
+READ: libgodot.ios.debug.xcframework/ios-arm64/libgodot.a
+ADDING: METLaisheng.xcframework/ios-arm64/libgodot.a size: 220864544
+READ: libgodot.ios.release.xcframework/
+READ: libgodot.ios.release.xcframework/Info.plist
+READ: libgodot.ios.release.xcframework/ios-arm64/
+READ: libgodot.ios.release.xcframework/ios-arm64/empty
+READ: libgodot.ios.release.xcframework/ios-arm64/libgodot.a
+READ: libgodot.ios.release.xcframework/ios-arm64_x86_64-simulator/
+READ: libgodot.ios.release.xcframework/ios-arm64_x86_64-simulator/empty
+READ: libgodot.ios.release.xcframework/ios-arm64_x86_64-simulator/libgodot.a
+READ: MoltenVK.xcframework/
+READ: MoltenVK.xcframework/ios-arm64_x86_64-simulator/
+READ: MoltenVK.xcframework/ios-arm64_x86_64-simulator/libMoltenVK.a
+ADDING: MoltenVK.xcframework/ios-arm64_x86_64-simulator/libMoltenVK.a size: 13712744
+READ: MoltenVK.xcframework/Info.plist
+ADDING: MoltenVK.xcframework/Info.plist size: 3177
+READ: MoltenVK.xcframework/ios-arm64/
+READ: MoltenVK.xcframework/ios-arm64/libMoltenVK.a
+ADDING: MoltenVK.xcframework/ios-arm64/libMoltenVK.a size: 6917632
+READ: PrivacyInfo.xcprivacy
+ADDING: PrivacyInfo.xcprivacy size: 990
+WARNING: 导出图标: Icon (icons/settings_58x58): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (58, 58).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/settings_87x87): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (87, 87).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/notification_40x40): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (40, 40).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/notification_60x60): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (60, 60).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/notification_76x76): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (76, 76).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/notification_114x114): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (114, 114).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/spotlight_80x80): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (80, 80).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/spotlight_120x120): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (120, 120).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/iphone_120x120): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (120, 120).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/iphone_180x180): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (180, 180).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/ipad_167x167): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (167, 167).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/ipad_152x152): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (152, 152).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/ios_128x128): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (128, 128).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/ios_192x192): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (192, 192).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/ios_136x136): 'res://assets/icon.png' has incorrect size (1024, 1024) and was automatically resized to (136, 136).
+     at: add_message (editor/export/editor_export_platform.h:267)
+WARNING: 导出图标: Icon (icons/app_store_1024x1024) must be opaque.
+     at: add_message (editor/export/editor_export_platform.h:267)
+Exporting launch screen storyboard
+Exporting additional assets
+[  66% ] [90m[1mexport[22m | Code-signing dylibs[39m[0m
+[92m[ DONE ][39m [1mexport[22m
+[0m
+WARNING: Project export for preset "iOS" completed with warnings.
+     at: _fs_changed (editor/editor_node.cpp:1422)
+cannot connect to daemon at tcp:5037: Operation not permitted
+Mobile exports completed. Package generation does not establish device acceptance.

@@ -1,0 +1,282 @@
+{
+  "schema": "met030.layers_plan.v1",
+  "status": "runtime_legend_contract_read_by_map_data",
+  "max_primary_layers": 1,
+  "source_fields_are_audit_paths_not_unverified_API_calls": true,
+  "layers": [
+    {
+      "id": "terrain",
+      "label_zh": "地形与规划",
+      "data_source": [
+        "cells.traits",
+        "planning.terrain",
+        "planning.compare"
+      ],
+      "encoding": "边界、功能符号、单格预测",
+      "scale": "not_an_overall_recommendation_score"
+    },
+    {
+      "id": "pollution",
+      "label_zh": "环境",
+      "data_source": [
+        "cells.fields.pollution",
+        "groups.living.pollution",
+        "metrics.exposure_links"
+      ],
+      "encoding": "固定色带＋选中来源",
+      "legend": {
+        "unit": "环境负担指数",
+        "display_breaks": [
+          0,
+          0.25,
+          0.5,
+          1,
+          2
+        ],
+        "breaks_are_health_thresholds": false,
+        "overflow": "arrow_and_exact_number"
+      },
+      "source_aware": true,
+      "signed": true
+    },
+    {
+      "id": "heat",
+      "label_zh": "余热",
+      "data_source": [
+        "cells.fields.heat",
+        "metrics.heat_receipts",
+        "audit.heat_generated",
+        "audit.heat_used"
+      ],
+      "encoding": "覆盖贡献与实际利用分开",
+      "legend": {
+        "unit": "本周期热量／对应场贡献",
+        "display_breaks": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "overflow": "arrow_and_exact_number"
+      },
+      "source_aware": true,
+      "requires_existing_budget_audit_adapter": true
+    },
+    {
+      "id": "service_medical",
+      "label_zh": "医疗",
+      "data_source": [
+        "cells.fields.medical",
+        "groups.living.medical",
+        "metrics.service_links",
+        "compiled.stats.service.medical"
+      ],
+      "encoding": "可达边界＋实际满足率＋不足斜纹",
+      "query_kind": "medical",
+      "denominator": "population_weighted_actual_need",
+      "access_is_not_coverage": true,
+      "source_preservation": [
+        "source_id",
+        "field_id",
+        "via"
+      ],
+      "duplicate_paths_do_not_duplicate_capacity": true,
+      "legend": {
+        "display_breaks": [
+          0,
+          0.5,
+          0.75,
+          1
+        ],
+        "goal_marker_source": "active_city_goal_when_applicable",
+        "empty_tile": "not_applicable",
+        "no_data": "unknown_hatch"
+      }
+    },
+    {
+      "id": "service_education",
+      "label_zh": "教育",
+      "data_source": [
+        "cells.fields.education",
+        "groups.living.education",
+        "metrics.service_links",
+        "compiled.stats.service.education"
+      ],
+      "encoding": "可达边界＋实际满足率＋不足斜纹",
+      "query_kind": "education",
+      "denominator": "population_weighted_actual_need",
+      "access_is_not_coverage": true,
+      "source_preservation": [
+        "source_id",
+        "field_id",
+        "via"
+      ],
+      "duplicate_paths_do_not_duplicate_capacity": true,
+      "legend": {
+        "display_breaks": [
+          0,
+          0.5,
+          0.75,
+          1
+        ],
+        "goal_marker_source": "active_city_goal_when_applicable",
+        "empty_tile": "not_applicable",
+        "no_data": "unknown_hatch"
+      }
+    },
+    {
+      "id": "service_commercial",
+      "label_zh": "购物",
+      "data_source": [
+        "cells.fields.commercial",
+        "groups.living.commercial",
+        "metrics.service_links",
+        "compiled.stats.service.commercial"
+      ],
+      "encoding": "可达边界＋实际满足率＋不足斜纹",
+      "query_kind": "commercial",
+      "denominator": "population_weighted_actual_need",
+      "access_is_not_coverage": true,
+      "source_preservation": [
+        "source_id",
+        "field_id",
+        "via"
+      ],
+      "duplicate_paths_do_not_duplicate_capacity": true,
+      "legend": {
+        "display_breaks": [
+          0,
+          0.5,
+          0.75,
+          1
+        ],
+        "goal_marker_source": "active_city_goal_when_applicable",
+        "empty_tile": "not_applicable",
+        "no_data": "unknown_hatch"
+      }
+    },
+    {
+      "id": "service_entertainment",
+      "label_zh": "休闲",
+      "data_source": [
+        "cells.fields.entertainment",
+        "groups.living.entertainment",
+        "metrics.service_links",
+        "compiled.stats.service.entertainment"
+      ],
+      "encoding": "可达边界＋实际满足率＋不足斜纹",
+      "query_kind": "entertainment",
+      "denominator": "population_weighted_actual_need",
+      "access_is_not_coverage": true,
+      "source_preservation": [
+        "source_id",
+        "field_id",
+        "via"
+      ],
+      "duplicate_paths_do_not_duplicate_capacity": true,
+      "legend": {
+        "display_breaks": [
+          0,
+          0.5,
+          0.75,
+          1
+        ],
+        "goal_marker_source": "active_city_goal_when_applicable",
+        "empty_tile": "not_applicable",
+        "no_data": "unknown_hatch"
+      }
+    },
+    {
+      "id": "employment",
+      "label_zh": "就业",
+      "data_source": [
+        "metrics.employment_links",
+        "groups.employment",
+        "metrics.utilization"
+      ],
+      "encoding": "居民失业/建筑缺人两个子视图",
+      "subviews": [
+        "resident_jobs",
+        "building_staffing"
+      ],
+      "access_is_not_personnel_efficiency": true
+    },
+    {
+      "id": "resource_food",
+      "label_zh": "粮食",
+      "data_source": [
+        "metrics.activity_ledger",
+        "audit.resources",
+        "projects.inventory",
+        "allocation_receipts"
+      ],
+      "encoding": "生产/消耗/库存/缺口",
+      "query_resource": "food",
+      "electricity_has_no_ordinary_stock": false,
+      "show_no_fake_vehicle_routes": true
+    },
+    {
+      "id": "resource_material",
+      "label_zh": "材料",
+      "data_source": [
+        "metrics.activity_ledger",
+        "audit.resources",
+        "projects.inventory",
+        "allocation_receipts"
+      ],
+      "encoding": "生产/消耗/库存/缺口",
+      "query_resource": "material",
+      "electricity_has_no_ordinary_stock": false,
+      "show_no_fake_vehicle_routes": true
+    },
+    {
+      "id": "resource_goods",
+      "label_zh": "制成品",
+      "data_source": [
+        "metrics.activity_ledger",
+        "audit.resources",
+        "projects.inventory",
+        "allocation_receipts"
+      ],
+      "encoding": "生产/消耗/库存/缺口",
+      "query_resource": "goods",
+      "electricity_has_no_ordinary_stock": false,
+      "show_no_fake_vehicle_routes": true
+    },
+    {
+      "id": "resource_energy",
+      "label_zh": "电力",
+      "data_source": [
+        "metrics.activity_ledger",
+        "audit.resources",
+        "projects.inventory",
+        "allocation_receipts"
+      ],
+      "encoding": "生产/消耗/库存/缺口",
+      "query_resource": "energy",
+      "electricity_has_no_ordinary_stock": true,
+      "show_no_fake_vehicle_routes": true
+    },
+    {
+      "id": "operator",
+      "label_zh": "运营商",
+      "data_source": [
+        "projects.operator_org",
+        "bonus_instances.provider_org",
+        "bonus_instances.contract_org (fallback provider_org)"
+      ],
+      "encoding": "徽记、外圈、选中组织高亮",
+      "function_colors_preserved": true
+    },
+    {
+      "id": "plan_delta",
+      "label_zh": "改变预览",
+      "data_source": [
+        "planning_same_snapshot_before_after"
+      ],
+      "encoding": "正号实线/负号虚线/影响人数",
+      "forecast": true,
+      "requires_new_read_only_diff_adapter": true
+    }
+  ]
+}

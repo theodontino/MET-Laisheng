@@ -1,0 +1,486 @@
+{
+  "benchmark": "MET 0.4.1 baseline-compatible camera probe",
+  "errors": [],
+  "fixtures": [
+    {
+      "buildings": 2,
+      "cells": 61,
+      "memory_monitors": {
+        "memory_static_bytes_lower_bound_not_rss": 207432940.0,
+        "render_texture_mem_used_bytes": 0.0,
+        "scope": "Godot monitors; MEMORY_STATIC is not process RSS."
+      },
+      "name": "starter",
+      "ready_buildings": 2,
+      "snapshot_initial_ms": 4.078,
+      "stages": [
+        {
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.018,
+              "mean_ms": 0.0165,
+              "n": 2,
+              "p50_ms": 0.015,
+              "p95_ms": 0.018,
+              "p99_ms": 0.018
+            },
+            "structures": {
+              "max_ms": 5.24,
+              "mean_ms": 5.24,
+              "n": 1,
+              "p50_ms": 5.24,
+              "p95_ms": 5.24,
+              "p99_ms": 5.24
+            },
+            "terrain": {
+              "max_ms": 21.17,
+              "mean_ms": 21.17,
+              "n": 1,
+              "p50_ms": 21.17,
+              "p95_ms": 21.17,
+              "p99_ms": 21.17
+            }
+          },
+          "headless_frame_turnaround_ms": 28.514,
+          "name": "cold_build",
+          "process_cpu_ms": 0.17
+        },
+        {
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.206,
+              "mean_ms": 0.0987377049180328,
+              "n": 61,
+              "p50_ms": 0.104,
+              "p95_ms": 0.165,
+              "p99_ms": 0.206
+            },
+            "structures": {
+              "max_ms": 0.0,
+              "mean_ms": 0.0,
+              "n": 0,
+              "p50_ms": 0.0,
+              "p95_ms": 0.0,
+              "p99_ms": 0.0
+            },
+            "terrain": {
+              "max_ms": 0.0,
+              "mean_ms": 0.0,
+              "n": 0,
+              "p50_ms": 0.0,
+              "p95_ms": 0.0,
+              "p99_ms": 0.0
+            }
+          },
+          "headless_frame_turnaround_ms": {
+            "max_ms": 9.938,
+            "mean_ms": 6.76986666666666,
+            "n": 120,
+            "p50_ms": 6.843,
+            "p95_ms": 9.387,
+            "p99_ms": 9.855
+          },
+          "name": "static_120_frames",
+          "process_cpu_ms": {
+            "max_ms": 0.12,
+            "mean_ms": 0.040125,
+            "n": 120,
+            "p50_ms": 0.037,
+            "p95_ms": 0.083,
+            "p99_ms": 0.099
+          }
+        },
+        {
+          "camera_handler_cpu_ms": {
+            "max_ms": 0.012,
+            "mean_ms": 0.00233333333333333,
+            "n": 48,
+            "p50_ms": 0.002,
+            "p95_ms": 0.004,
+            "p99_ms": 0.012
+          },
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.06,
+              "mean_ms": 0.0153833333333333,
+              "n": 60,
+              "p50_ms": 0.014,
+              "p95_ms": 0.021,
+              "p99_ms": 0.06
+            },
+            "structures": {
+              "max_ms": 10.782,
+              "mean_ms": 5.45422916666667,
+              "n": 48,
+              "p50_ms": 5.138,
+              "p95_ms": 7.709,
+              "p99_ms": 10.782
+            },
+            "terrain": {
+              "max_ms": 25.329,
+              "mean_ms": 8.01195833333333,
+              "n": 48,
+              "p50_ms": 0.321,
+              "p95_ms": 20.957,
+              "p99_ms": 25.329
+            }
+          },
+          "headless_frame_turnaround_ms": {
+            "max_ms": 31.183,
+            "mean_ms": 13.8304166666667,
+            "n": 48,
+            "p50_ms": 7.42,
+            "p95_ms": 26.114,
+            "p99_ms": 31.183
+          },
+          "name": "pan_48_frames_at_min_zoom_0_28"
+        },
+        {
+          "camera_handler_cpu_ms": {
+            "max_ms": 0.006,
+            "mean_ms": 0.003,
+            "n": 48,
+            "p50_ms": 0.003,
+            "p95_ms": 0.004,
+            "p99_ms": 0.006
+          },
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.032,
+              "mean_ms": 0.0141894736842105,
+              "n": 95,
+              "p50_ms": 0.015,
+              "p95_ms": 0.019,
+              "p99_ms": 0.032
+            },
+            "structures": {
+              "max_ms": 7.683,
+              "mean_ms": 7.0786875,
+              "n": 48,
+              "p50_ms": 7.05,
+              "p95_ms": 7.265,
+              "p99_ms": 7.683
+            },
+            "terrain": {
+              "max_ms": 323.671,
+              "mean_ms": 61.9825208333334,
+              "n": 48,
+              "p50_ms": 55.234,
+              "p95_ms": 59.068,
+              "p99_ms": 323.671
+            }
+          },
+          "headless_frame_turnaround_ms": {
+            "max_ms": 331.429,
+            "mean_ms": 69.1503125,
+            "n": 48,
+            "p50_ms": 62.494,
+            "p95_ms": 66.296,
+            "p99_ms": 331.429
+          },
+          "name": "zoom_48_frames_0_96_to_1_0"
+        },
+        {
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.017,
+              "mean_ms": 0.0137647058823529,
+              "n": 17,
+              "p50_ms": 0.013,
+              "p95_ms": 0.017,
+              "p99_ms": 0.017
+            },
+            "structures": {
+              "max_ms": 6.917,
+              "mean_ms": 6.76608333333333,
+              "n": 12,
+              "p50_ms": 6.759,
+              "p95_ms": 6.917,
+              "p99_ms": 6.917
+            },
+            "terrain": {
+              "max_ms": 0.338,
+              "mean_ms": 0.31075,
+              "n": 12,
+              "p50_ms": 0.31,
+              "p95_ms": 0.338,
+              "p99_ms": 0.338
+            }
+          },
+          "headless_frame_turnaround_ms": {
+            "max_ms": 7.279,
+            "mean_ms": 7.13375,
+            "n": 12,
+            "p50_ms": 7.134,
+            "p95_ms": 7.279,
+            "p99_ms": 7.279
+          },
+          "name": "active_sim_12_forced_ticks",
+          "simulation_cpu_ms_per_tick": {
+            "max_ms": 3.074,
+            "mean_ms": 2.94,
+            "n": 12,
+            "p50_ms": 2.947,
+            "p95_ms": 3.074,
+            "p99_ms": 3.074
+          },
+          "snapshot_cpu_ms_after_tick": {
+            "max_ms": 0.005,
+            "mean_ms": 0.0045,
+            "n": 12,
+            "p50_ms": 0.004,
+            "p95_ms": 0.005,
+            "p99_ms": 0.005
+          },
+          "tick_hours_per_sample": 0.1
+        }
+      ]
+    },
+    {
+      "buildings": 53,
+      "cells": 61,
+      "memory_monitors": {
+        "memory_static_bytes_lower_bound_not_rss": 226466240.0,
+        "render_texture_mem_used_bytes": 0.0,
+        "scope": "Godot monitors; MEMORY_STATIC is not process RSS."
+      },
+      "name": "fullmap",
+      "ready_buildings": 53,
+      "snapshot_initial_ms": 56.896,
+      "stages": [
+        {
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.176,
+              "mean_ms": 0.17,
+              "n": 2,
+              "p50_ms": 0.164,
+              "p95_ms": 0.176,
+              "p99_ms": 0.176
+            },
+            "structures": {
+              "max_ms": 7.305,
+              "mean_ms": 7.305,
+              "n": 1,
+              "p50_ms": 7.305,
+              "p95_ms": 7.305,
+              "p99_ms": 7.305
+            },
+            "terrain": {
+              "max_ms": 3.531,
+              "mean_ms": 3.531,
+              "n": 1,
+              "p50_ms": 3.531,
+              "p95_ms": 3.531,
+              "p99_ms": 3.531
+            }
+          },
+          "headless_frame_turnaround_ms": 11.243,
+          "name": "cold_build",
+          "process_cpu_ms": 0.749
+        },
+        {
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 1.274,
+              "mean_ms": 0.665933333333333,
+              "n": 60,
+              "p50_ms": 0.667,
+              "p95_ms": 1.121,
+              "p99_ms": 1.274
+            },
+            "structures": {
+              "max_ms": 0.0,
+              "mean_ms": 0.0,
+              "n": 0,
+              "p50_ms": 0.0,
+              "p95_ms": 0.0,
+              "p99_ms": 0.0
+            },
+            "terrain": {
+              "max_ms": 0.0,
+              "mean_ms": 0.0,
+              "n": 0,
+              "p50_ms": 0.0,
+              "p95_ms": 0.0,
+              "p99_ms": 0.0
+            }
+          },
+          "headless_frame_turnaround_ms": {
+            "max_ms": 10.23,
+            "mean_ms": 6.80653333333333,
+            "n": 120,
+            "p50_ms": 6.498,
+            "p95_ms": 9.687,
+            "p99_ms": 10.223
+          },
+          "name": "static_120_frames",
+          "process_cpu_ms": {
+            "max_ms": 0.098,
+            "mean_ms": 0.0416416666666667,
+            "n": 120,
+            "p50_ms": 0.043,
+            "p95_ms": 0.074,
+            "p99_ms": 0.098
+          }
+        },
+        {
+          "camera_handler_cpu_ms": {
+            "max_ms": 0.009,
+            "mean_ms": 0.00208333333333333,
+            "n": 48,
+            "p50_ms": 0.002,
+            "p95_ms": 0.003,
+            "p99_ms": 0.009
+          },
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.522,
+              "mean_ms": 0.172357894736842,
+              "n": 95,
+              "p50_ms": 0.169,
+              "p95_ms": 0.193,
+              "p99_ms": 0.522
+            },
+            "structures": {
+              "max_ms": 7.618,
+              "mean_ms": 7.44377083333334,
+              "n": 48,
+              "p50_ms": 7.435,
+              "p95_ms": 7.608,
+              "p99_ms": 7.618
+            },
+            "terrain": {
+              "max_ms": 122.592,
+              "mean_ms": 86.3934791666667,
+              "n": 48,
+              "p50_ms": 83.532,
+              "p95_ms": 98.682,
+              "p99_ms": 122.592
+            }
+          },
+          "headless_frame_turnaround_ms": {
+            "max_ms": 130.614,
+            "mean_ms": 94.2535625,
+            "n": 48,
+            "p50_ms": 91.313,
+            "p95_ms": 106.587,
+            "p99_ms": 130.614
+          },
+          "name": "pan_48_frames_at_min_zoom_0_28"
+        },
+        {
+          "camera_handler_cpu_ms": {
+            "max_ms": 0.007,
+            "mean_ms": 0.0031875,
+            "n": 48,
+            "p50_ms": 0.003,
+            "p95_ms": 0.004,
+            "p99_ms": 0.007
+          },
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.257,
+              "mean_ms": 0.171989583333333,
+              "n": 96,
+              "p50_ms": 0.17,
+              "p95_ms": 0.191,
+              "p99_ms": 0.257
+            },
+            "structures": {
+              "max_ms": 7.819,
+              "mean_ms": 6.76966666666667,
+              "n": 48,
+              "p50_ms": 6.738,
+              "p95_ms": 6.991,
+              "p99_ms": 7.819
+            },
+            "terrain": {
+              "max_ms": 79.476,
+              "mean_ms": 61.5196041666667,
+              "n": 48,
+              "p50_ms": 62.247,
+              "p95_ms": 63.614,
+              "p99_ms": 79.476
+            }
+          },
+          "headless_frame_turnaround_ms": {
+            "max_ms": 87.834,
+            "mean_ms": 68.7050625,
+            "n": 48,
+            "p50_ms": 69.512,
+            "p95_ms": 70.827,
+            "p99_ms": 87.834
+          },
+          "name": "zoom_48_frames_0_96_to_1_0"
+        },
+        {
+          "draw_cpu_ms": {
+            "overlays": {
+              "max_ms": 0.213,
+              "mean_ms": 0.174958333333333,
+              "n": 24,
+              "p50_ms": 0.172,
+              "p95_ms": 0.205,
+              "p99_ms": 0.213
+            },
+            "structures": {
+              "max_ms": 6.488,
+              "mean_ms": 6.378,
+              "n": 12,
+              "p50_ms": 6.386,
+              "p95_ms": 6.488,
+              "p99_ms": 6.488
+            },
+            "terrain": {
+              "max_ms": 3.861,
+              "mean_ms": 3.79066666666667,
+              "n": 12,
+              "p50_ms": 3.793,
+              "p95_ms": 3.861,
+              "p99_ms": 3.861
+            }
+          },
+          "headless_frame_turnaround_ms": {
+            "max_ms": 10.727,
+            "mean_ms": 10.5956666666667,
+            "n": 12,
+            "p50_ms": 10.593,
+            "p95_ms": 10.727,
+            "p99_ms": 10.727
+          },
+          "name": "active_sim_12_forced_ticks",
+          "simulation_cpu_ms_per_tick": {
+            "max_ms": 67.582,
+            "mean_ms": 65.97925,
+            "n": 12,
+            "p50_ms": 66.825,
+            "p95_ms": 67.582,
+            "p99_ms": 67.582
+          },
+          "snapshot_cpu_ms_after_tick": {
+            "max_ms": 0.041,
+            "mean_ms": 0.02675,
+            "n": 12,
+            "p50_ms": 0.025,
+            "p95_ms": 0.041,
+            "p99_ms": 0.041
+          },
+          "tick_hours_per_sample": 0.1
+        }
+      ]
+    }
+  ],
+  "godot": "4.7.2-stable (official)",
+  "memory_monitors": {
+    "memory_static_bytes_lower_bound_not_rss": 190755504.0,
+    "render_texture_mem_used_bytes": 0.0,
+    "scope": "Godot monitors; MEMORY_STATIC is not process RSS."
+  },
+  "mode": "headless CPU; not a native frame-rate claim",
+  "passed": true,
+  "viewport": [
+    1440,
+    900
+  ]
+}

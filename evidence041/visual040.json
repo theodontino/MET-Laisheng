@@ -1,0 +1,460 @@
+{
+	"captures": [
+		{
+			"font_scale": 1.0,
+			"name": "01-city-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/01-city-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "02-building-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/02-building-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "03-upgrade-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/03-upgrade-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "04-tender-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/04-tender-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "05-budget-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/05-budget-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "06-policies-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/06-policies-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "07-policy-preview-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/07-policy-preview-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "08-grown-town-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/08-grown-town-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "09-town-art",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/09-town-art.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "14-elevation-1440",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/14-elevation-1440.png",
+			"viewport": "(1440.0, 900.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "10-town-1920",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/10-town-1920.png",
+			"viewport": "(1920.0, 976.0)"
+		},
+		{
+			"font_scale": 1.0,
+			"name": "11-market-1920",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/11-market-1920.png",
+			"viewport": "(1920.0, 976.0)"
+		},
+		{
+			"font_scale": 1.5,
+			"name": "12-compact-150",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/12-compact-150.png",
+			"viewport": "(1024.0, 640.0)"
+		},
+		{
+			"font_scale": 1.5,
+			"name": "13-policies-compact-150",
+			"path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/visual/13-policies-compact-150.png",
+			"viewport": "(1024.0, 640.0)"
+		}
+	],
+	"checks": [
+		{
+			"name": "capture 01-city-1440",
+			"pass": true
+		},
+		{
+			"name": "desktop HUD stays inside viewport",
+			"pass": true
+		},
+		{
+			"name": "all 21 building definitions have new artwork: []",
+			"pass": true
+		},
+		{
+			"name": "all sprite silhouettes clear image edges: []",
+			"pass": true
+		},
+		{
+			"name": "terrain has real raised vertices and a level river",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -4,0",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -4,1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -4,2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -4,3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -4,4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -3,-1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -3,0",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -3,1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -3,2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -3,3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -3,4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -2,-2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -2,-1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -2,0",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -2,1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -2,2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -2,3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -2,4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -1,-3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -1,-2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -1,-1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -1,0",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -1,1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -1,2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -1,3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking -1,4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,-4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,-3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,-2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,-1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,0",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 0,4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 1,-4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 1,-3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 1,-2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 1,-1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 1,0",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 1,1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 1,2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 1,3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 2,-4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 2,-3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 2,-2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 2,-1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 2,0",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 2,1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 2,2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 3,-4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 3,-3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 3,-2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 3,-1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 3,0",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 3,1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 4,-4",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 4,-3",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 4,-2",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 4,-1",
+			"pass": true
+		},
+		{
+			"name": "projected map picking 4,0",
+			"pass": true
+		},
+		{
+			"name": "pointer-anchored zoom preserves world position",
+			"pass": true
+		},
+		{
+			"name": "drawing and camera changes preserve simulation and RNG",
+			"pass": true
+		},
+		{
+			"name": "capture 02-building-1440",
+			"pass": true
+		},
+		{
+			"name": "building inspector fits desktop",
+			"pass": true
+		},
+		{
+			"name": "capture 03-upgrade-1440",
+			"pass": true
+		},
+		{
+			"name": "upgrade window fits desktop",
+			"pass": true
+		},
+		{
+			"name": "capture 04-tender-1440",
+			"pass": true
+		},
+		{
+			"name": "operator comparison fits desktop",
+			"pass": true
+		},
+		{
+			"name": "capture 05-budget-1440",
+			"pass": true
+		},
+		{
+			"name": "capture 06-policies-1440",
+			"pass": true
+		},
+		{
+			"name": "capture 07-policy-preview-1440",
+			"pass": true
+		},
+		{
+			"name": "capture 08-grown-town-1440",
+			"pass": true
+		},
+		{
+			"name": "tall building roof selects the visible building across ground-cell boundaries",
+			"pass": true
+		},
+		{
+			"name": "capture 09-town-art",
+			"pass": true
+		},
+		{
+			"name": "capture 14-elevation-1440",
+			"pass": true
+		},
+		{
+			"name": "capture 10-town-1920",
+			"pass": true
+		},
+		{
+			"name": "capture 11-market-1920",
+			"pass": true
+		},
+		{
+			"name": "capture 12-compact-150",
+			"pass": true
+		},
+		{
+			"name": "compact time controls remain visible at 150%",
+			"pass": true
+		},
+		{
+			"name": "compact resource control stays inside viewport at 150%",
+			"pass": true
+		},
+		{
+			"name": "compact budget and population use one line after resize",
+			"pass": true
+		},
+		{
+			"name": "compact status retains full detail in tooltips",
+			"pass": true
+		},
+		{
+			"name": "capture 13-policies-compact-150",
+			"pass": true
+		},
+		{
+			"name": "compact management return remains visible at 150%",
+			"pass": true
+		}
+	],
+	"failed": 0,
+	"method": "Native framebuffer and callbacks using explicit visual fixtures; camera/picking math checked independently. Pointer acceptance reported separately.",
+	"passed": 90,
+	"performance": {
+		"median_frame_ms": 16.664,
+		"method": "Native rendered 21-building fixture; includes vsync and desktop scheduling. Not Windows acceptance.",
+		"os": "macOS",
+		"p95_frame_ms": 16.984,
+		"rendering_method": "gl_compatibility"
+	}
+}

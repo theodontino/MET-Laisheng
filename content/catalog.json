@@ -1,0 +1,2191 @@
+{
+  "tags": {
+    "waterfront": "水岸",
+    "agriculture": "农业",
+    "industry": "工业",
+    "community": "社区",
+    "logistics": "流通",
+    "education": "教育",
+    "precision": "精密",
+    "coldchain": "冷链",
+    "circular": "循环",
+    "basic": "初级",
+    "advanced": "高级",
+    "heavy": "重型",
+    "light": "轻型",
+    "fresh": "易朽",
+    "preserved": "耐储",
+    "public": "公共",
+    "research": "研究",
+    "resilient": "韧性",
+    "housing": "住房",
+    "materials": "建材",
+    "energy": "供能",
+    "health": "医疗",
+    "leisure": "休闲",
+    "commerce": "商业",
+    "efficient": "集约",
+    "pasture": "牧养",
+    "forestry": "林业"
+  },
+  "projects": [
+    {
+      "id": "hamlet",
+      "name": "河谷合院",
+      "zone": "settlement",
+      "tags": [
+        "housing",
+        "community"
+      ],
+      "desc": "24人低密度住房。居民逐步迁入，不是落成就赠送24人口；庭院自产少量食物。",
+      "cost": 95,
+      "material": 16,
+      "goods": 0,
+      "hours": 1.0,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "food",
+          "rate": 0.55,
+          "tags": []
+        }
+      ],
+      "energy": 0.35,
+      "upkeep": 0.7,
+      "income": 0,
+      "population": 24,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 0,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "housing"
+      ]
+    },
+    {
+      "id": "workers",
+      "name": "木构里坊",
+      "zone": "settlement",
+      "tags": [
+        "housing",
+        "community",
+        "industry"
+      ],
+      "desc": "28人住房；靠工场不再凭空加钱。工业噪音会真实影响这里居民，宜留出缓冲带。",
+      "cost": 115,
+      "material": 20,
+      "goods": 0,
+      "hours": 1.3,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0.8,
+      "upkeep": 1.1,
+      "income": 0,
+      "population": 28,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 0,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "housing"
+      ]
+    },
+    {
+      "id": "riverside",
+      "name": "水岸长屋",
+      "zone": "settlement",
+      "tags": [
+        "housing",
+        "community",
+        "waterfront"
+      ],
+      "desc": "18人住房。临水提供8人休闲容量；保留岸边公共空间，既能住人，也能服务邻居。",
+      "cost": 135,
+      "material": 18,
+      "goods": 0,
+      "hours": 1.5,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0.6,
+      "upkeep": 0.9,
+      "income": 0,
+      "population": 18,
+      "services": {},
+      "effects": [
+        {
+          "op": "terrain_service",
+          "trait": "waterfront",
+          "service": "leisure",
+          "value": 8
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 0,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "housing"
+      ]
+    },
+    {
+      "id": "scholars",
+      "name": "学人庭院",
+      "zone": "settlement",
+      "tags": [
+        "housing",
+        "education"
+      ],
+      "desc": "20人住房兼6人学习空间；迁入居民不会凭空受过高等教育，仍需实际接受教育。",
+      "cost": 150,
+      "material": 18,
+      "goods": 0,
+      "hours": 1.7,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0.7,
+      "upkeep": 1.5,
+      "income": 0,
+      "population": 20,
+      "services": {
+        "education": 6
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 2,
+      "jobs": 1,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "housing"
+      ]
+    },
+    {
+      "id": "farm",
+      "name": "河谷谷物农场",
+      "zone": "production",
+      "tags": [
+        "agriculture"
+      ],
+      "desc": "基础粮食的稳妥方案；5个岗位，肥沃平地使产出增加25%。没有加工品或接口门槛。",
+      "cost": 110,
+      "material": 15,
+      "goods": 0,
+      "hours": 1.1,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "food",
+          "rate": 5.8,
+          "tags": []
+        }
+      ],
+      "energy": 0.4,
+      "upkeep": 0.9,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "terrain_output",
+          "terrain": "plain",
+          "value": 1.25
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 5,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "agriculture"
+      ]
+    },
+    {
+      "id": "timber",
+      "name": "林缘料场",
+      "zone": "production",
+      "tags": [
+        "materials",
+        "forestry"
+      ],
+      "desc": "4个岗位，把本地林木整理成通用材料。林地增产30%；周边有少量噪音。",
+      "cost": 110,
+      "material": 16,
+      "goods": 0,
+      "hours": 1.1,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "material",
+          "rate": 4.2,
+          "tags": []
+        }
+      ],
+      "energy": 0.7,
+      "upkeep": 1.1,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "terrain_output",
+          "terrain": "forest",
+          "value": 1.3
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 4,
+      "skill": 0,
+      "noise": 3,
+      "pollution": 1,
+      "service_range": 2,
+      "families": [
+        "materials"
+      ]
+    },
+    {
+      "id": "quarry",
+      "name": "岩丘采掘所",
+      "zone": "production",
+      "tags": [
+        "materials",
+        "industry"
+      ],
+      "desc": "只在岩丘开采，5个岗位。材料产能高，但两格内的住宅会承受粉尘和噪音。",
+      "cost": 130,
+      "material": 19,
+      "goods": 0,
+      "hours": 1.5,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "material",
+          "rate": 5.5,
+          "tags": []
+        }
+      ],
+      "energy": 1.2,
+      "upkeep": 1.2,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [
+        {
+          "has": "hill"
+        }
+      ],
+      "stage": 0,
+      "jobs": 5,
+      "skill": 0,
+      "noise": 12,
+      "pollution": 9,
+      "service_range": 2,
+      "families": [
+        "materials"
+      ]
+    },
+    {
+      "id": "mill",
+      "name": "食品加工合作社",
+      "zone": "production",
+      "tags": [
+        "industry",
+        "agriculture"
+      ],
+      "desc": "城镇阶段才出现：把食物加工为低级制成品。需要5个岗位，教育不足会降低有效产能。",
+      "cost": 140,
+      "material": 22,
+      "goods": 0,
+      "hours": 1.7,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "food",
+          "rate": 2.0,
+          "tags": []
+        }
+      ],
+      "outputs": [
+        {
+          "resource": "goods",
+          "rate": 2.0,
+          "tags": []
+        }
+      ],
+      "energy": 1.1,
+      "upkeep": 1.5,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 2,
+      "jobs": 5,
+      "skill": 20,
+      "noise": 6,
+      "pollution": 2,
+      "service_range": 2,
+      "families": [
+        "industry"
+      ]
+    },
+    {
+      "id": "works",
+      "name": "重型构件厂",
+      "zone": "production",
+      "tags": [
+        "industry",
+        "materials"
+      ],
+      "desc": "7个岗位生产低级制成品；高产但耗能、有污染，需要受教育劳动力。直接挨住宅不是白赚。",
+      "cost": 185,
+      "material": 28,
+      "goods": 0,
+      "hours": 2.1,
+      "min_cells": 2,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "material",
+          "rate": 2.2,
+          "tags": []
+        }
+      ],
+      "outputs": [
+        {
+          "resource": "goods",
+          "rate": 3.0,
+          "tags": []
+        }
+      ],
+      "energy": 1.8,
+      "upkeep": 2.0,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 2,
+      "jobs": 7,
+      "skill": 35,
+      "noise": 18,
+      "pollution": 16,
+      "service_range": 2,
+      "families": [
+        "industry"
+      ]
+    },
+    {
+      "id": "recycler",
+      "name": "循环再造所",
+      "zone": "production",
+      "tags": [
+        "materials",
+        "industry",
+        "circular"
+      ],
+      "desc": "回收低级制成品为通用材料。是否值得建设取决于真实剩余供给，而不是接口拼图。",
+      "cost": 145,
+      "material": 20,
+      "goods": 0,
+      "hours": 1.6,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "goods",
+          "rate": 0.8,
+          "tags": []
+        }
+      ],
+      "outputs": [
+        {
+          "resource": "material",
+          "rate": 1.5,
+          "tags": []
+        }
+      ],
+      "energy": 1,
+      "upkeep": 1.4,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 2,
+      "jobs": 4,
+      "skill": 25,
+      "noise": 5,
+      "pollution": 4,
+      "service_range": 2,
+      "families": [
+        "materials",
+        "industry"
+      ]
+    },
+    {
+      "id": "market",
+      "name": "邻里集市",
+      "zone": "circulation",
+      "tags": [
+        "commerce",
+        "community",
+        "logistics"
+      ],
+      "desc": "3个岗位、28人消费服务。早期用食物交易；城镇阶段也消耗低级制成品。只有实际服务顾客才产生商业税收。",
+      "cost": 100,
+      "material": 15,
+      "goods": 0,
+      "hours": 1.0,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "food",
+          "rate": 0.4,
+          "tags": []
+        }
+      ],
+      "outputs": [],
+      "energy": 0.3,
+      "upkeep": 1.3,
+      "income": 10,
+      "population": 0,
+      "services": {
+        "market": 28
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 3,
+      "skill": 0,
+      "noise": 4,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "commerce"
+      ]
+    },
+    {
+      "id": "warehouse",
+      "name": "统配货栈",
+      "zone": "circulation",
+      "tags": [
+        "logistics",
+        "materials"
+      ],
+      "desc": "扩大材料和制成品仓储，2个岗位；不再把材料换一组标签。适合较长DT集中开发，不是开局必修建筑。",
+      "cost": 145,
+      "material": 25,
+      "goods": 0,
+      "hours": 1.6,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0.5,
+      "upkeep": 1.1,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "storage",
+          "resource": "material",
+          "value": 120
+        },
+        {
+          "op": "storage",
+          "resource": "goods",
+          "value": 70
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "stage": 2,
+      "jobs": 2,
+      "skill": 0,
+      "noise": 3,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "logistics"
+      ]
+    },
+    {
+      "id": "dock",
+      "name": "河岸运销社",
+      "zone": "circulation",
+      "tags": [
+        "commerce",
+        "waterfront",
+        "logistics"
+      ],
+      "desc": "临水才可建造。38人消费容量和4个岗位，收入随真实顾客而定；沿岸住户也会听到搬运噪音。",
+      "cost": 150,
+      "material": 24,
+      "goods": 0,
+      "hours": 1.8,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "food",
+          "rate": 0.55,
+          "tags": []
+        }
+      ],
+      "outputs": [],
+      "energy": 0.6,
+      "upkeep": 1.9,
+      "income": 14,
+      "population": 0,
+      "services": {
+        "market": 38
+      },
+      "effects": [
+        {
+          "op": "storage",
+          "resource": "material",
+          "value": 80
+        }
+      ],
+      "weight": 1,
+      "hard": [
+        {
+          "has": "waterfront"
+        }
+      ],
+      "stage": 1,
+      "jobs": 4,
+      "skill": 0,
+      "noise": 6,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "commerce",
+        "logistics"
+      ]
+    },
+    {
+      "id": "exchange",
+      "name": "联营展销所",
+      "zone": "circulation",
+      "tags": [
+        "commerce",
+        "industry"
+      ],
+      "desc": "用低级制成品满足55人消费需求。规模经济与固定维护并存，没有人口或货源就不会自动印钱。",
+      "cost": 160,
+      "material": 18,
+      "goods": 0,
+      "hours": 1.8,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "goods",
+          "rate": 1.0,
+          "tags": []
+        }
+      ],
+      "outputs": [],
+      "energy": 0.6,
+      "upkeep": 2.8,
+      "income": 22,
+      "population": 0,
+      "services": {
+        "market": 55
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 2,
+      "jobs": 5,
+      "skill": 0,
+      "noise": 8,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "commerce"
+      ]
+    },
+    {
+      "id": "coldstore",
+      "name": "冷链共配站",
+      "zone": "circulation",
+      "tags": [
+        "logistics",
+        "agriculture",
+        "coldchain"
+      ],
+      "desc": "通过能源与维护换取更大的粮食缓冲。资源标签已停用，不再做易朽/耐储接口转换。",
+      "cost": 155,
+      "material": 21,
+      "goods": 0,
+      "hours": 1.7,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 1.2,
+      "upkeep": 1.3,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "storage",
+          "resource": "food",
+          "value": 120
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "stage": 2,
+      "jobs": 2,
+      "skill": 0,
+      "noise": 2,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "logistics"
+      ]
+    },
+    {
+      "id": "school",
+      "name": "河谷学堂",
+      "zone": "public",
+      "tags": [
+        "education",
+        "public"
+      ],
+      "desc": "26人教育容量、3个岗位。实际覆盖居民才逐步提高教育；有效教学产生知识，用于研究与技能升级。",
+      "cost": 125,
+      "material": 21,
+      "goods": 0,
+      "hours": 1.5,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "knowledge",
+          "rate": 0.65,
+          "tags": []
+        }
+      ],
+      "energy": 0.7,
+      "upkeep": 2.0,
+      "income": 0,
+      "population": 0,
+      "services": {
+        "education": 26
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 3,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "education"
+      ]
+    },
+    {
+      "id": "clinic",
+      "name": "社区诊所",
+      "zone": "public",
+      "tags": [
+        "health",
+        "public",
+        "community"
+      ],
+      "desc": "28人医疗容量。健康逐步改善，支持有效劳动；有维护和岗位成本，不能消除所有工业污染。",
+      "cost": 140,
+      "material": 18,
+      "goods": 0,
+      "hours": 1.6,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0.8,
+      "upkeep": 2.4,
+      "income": 0,
+      "population": 0,
+      "services": {
+        "care": 28
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 3,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "health"
+      ]
+    },
+    {
+      "id": "park",
+      "name": "街坊公共园",
+      "zone": "public",
+      "tags": [
+        "leisure",
+        "public",
+        "community"
+      ],
+      "desc": "30人休闲容量，1个岗位；每小时维护2.2。附近住宅获得休闲与幸福改善，不会直接增加医疗席位。",
+      "cost": 75,
+      "material": 10,
+      "goods": 0,
+      "hours": 0.8,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0,
+      "upkeep": 2.2,
+      "income": 0,
+      "population": 0,
+      "services": {
+        "leisure": 30
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 1,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "leisure"
+      ]
+    },
+    {
+      "id": "power",
+      "name": "地方动力站",
+      "zone": "public",
+      "tags": [
+        "energy",
+        "industry",
+        "waterfront"
+      ],
+      "desc": "2个岗位提供6能源容量；临水再加3。运行有噪音，不能把供能和居民健康都当作免费。",
+      "cost": 165,
+      "material": 26,
+      "goods": 0,
+      "hours": 1.9,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0,
+      "upkeep": 1.3,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "terrain_energy",
+          "trait": "waterfront",
+          "value": 3
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "supply_energy": 6,
+      "stage": 0,
+      "jobs": 2,
+      "skill": 0,
+      "noise": 7,
+      "pollution": 3,
+      "service_range": 2,
+      "families": [
+        "energy"
+      ]
+    },
+    {
+      "id": "research",
+      "name": "应用研究站",
+      "zone": "public",
+      "tags": [
+        "education",
+        "research",
+        "precision",
+        "public"
+      ],
+      "desc": "高教育居民才能高效参与，消耗制成品产生知识；知识用于解锁节能、循环与技能改造。",
+      "cost": 180,
+      "material": 22,
+      "goods": 0,
+      "hours": 2.0,
+      "min_cells": 2,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "goods",
+          "rate": 0.3,
+          "tags": []
+        }
+      ],
+      "outputs": [
+        {
+          "resource": "knowledge",
+          "rate": 2,
+          "tags": []
+        }
+      ],
+      "energy": 1.3,
+      "upkeep": 2.4,
+      "income": 0,
+      "population": 0,
+      "services": {
+        "education": 6
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 2,
+      "jobs": 4,
+      "skill": 40,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "education"
+      ]
+    },
+    {
+      "id": "orchard",
+      "name": "河谷果园",
+      "zone": "production",
+      "tags": [
+        "agriculture",
+        "community"
+      ],
+      "desc": "3个岗位，早期仅60%产出；有效运行4小时后进入丰产期。适合愿意等待、劳力较少的聚落。",
+      "cost": 135,
+      "material": 16,
+      "goods": 0,
+      "hours": 1.8,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "food",
+          "rate": 6.8,
+          "tags": []
+        }
+      ],
+      "energy": 0.4,
+      "upkeep": 0.9,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "terrain_output",
+          "terrain": "plain",
+          "value": 1.25
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 3,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "agriculture"
+      ],
+      "mature_hours": 4
+    },
+    {
+      "id": "pasture",
+      "name": "河坡牧场",
+      "zone": "production",
+      "tags": [
+        "agriculture",
+        "pasture"
+      ],
+      "desc": "2个岗位即可维持，丘陵增产25%；比谷物更省劳力，但有畜牧气味和噪音。",
+      "cost": 120,
+      "material": 15,
+      "goods": 0,
+      "hours": 1.3,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "food",
+          "rate": 4.8,
+          "tags": []
+        }
+      ],
+      "energy": 0.4,
+      "upkeep": 0.9,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "terrain_output",
+          "terrain": "hill",
+          "value": 1.25
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 2,
+      "skill": 0,
+      "noise": 5,
+      "pollution": 3,
+      "service_range": 2,
+      "families": [
+        "agriculture"
+      ]
+    },
+    {
+      "id": "vegetables",
+      "name": "集约菜圃",
+      "zone": "production",
+      "tags": [
+        "agriculture",
+        "efficient",
+        "waterfront"
+      ],
+      "desc": "小地块可高产，代价是7个岗位和更多能源。缺工时未必胜过低劳动需求的果园。",
+      "cost": 110,
+      "material": 14,
+      "goods": 0,
+      "hours": 0.9,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "food",
+          "rate": 7.8,
+          "tags": []
+        }
+      ],
+      "energy": 0.8,
+      "upkeep": 0.9,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 7,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "agriculture"
+      ]
+    },
+    {
+      "id": "stoneworks",
+      "name": "石木整备场",
+      "zone": "production",
+      "tags": [
+        "materials",
+        "industry"
+      ],
+      "desc": "不挑地形的基础建材方案；3个岗位，产能较低。无需先抽到某种原料接口才能起步。",
+      "cost": 95,
+      "material": 16,
+      "goods": 0,
+      "hours": 1.1,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "material",
+          "rate": 3.2,
+          "tags": []
+        }
+      ],
+      "energy": 0.7,
+      "upkeep": 1.1,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 3,
+      "skill": 0,
+      "noise": 7,
+      "pollution": 4,
+      "service_range": 2,
+      "families": [
+        "materials"
+      ]
+    },
+    {
+      "id": "bamboo",
+      "name": "速生林圃",
+      "zone": "production",
+      "tags": [
+        "materials",
+        "forestry",
+        "agriculture"
+      ],
+      "desc": "材料产量温和，但几乎不污染周边；3个岗位，平地增产20%。可把好生活和产业留在一起。",
+      "cost": 115,
+      "material": 16,
+      "goods": 0,
+      "hours": 1.1,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "material",
+          "rate": 3.4,
+          "tags": []
+        }
+      ],
+      "energy": 0.7,
+      "upkeep": 1.1,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "terrain_output",
+          "terrain": "plain",
+          "value": 1.2
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 3,
+      "skill": 0,
+      "noise": 1,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "materials"
+      ]
+    },
+    {
+      "id": "cabins",
+      "name": "拓荒木屋",
+      "zone": "settlement",
+      "tags": [
+        "housing",
+        "community"
+      ],
+      "desc": "16人住房，便宜而低密度。居民按岗位和生活条件逐步迁入；需要自己解决食物。",
+      "cost": 70,
+      "material": 11,
+      "goods": 0,
+      "hours": 0.65,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0.35,
+      "upkeep": 0.4,
+      "income": 0,
+      "population": 16,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 0,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "housing"
+      ]
+    },
+    {
+      "id": "wind",
+      "name": "山风动力坊",
+      "zone": "public",
+      "tags": [
+        "energy",
+        "community"
+      ],
+      "desc": "1个岗位供4能源，丘陵额外3；无空气污染，仍有局部噪音。",
+      "cost": 115,
+      "material": 19,
+      "goods": 0,
+      "hours": 1.2,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0,
+      "upkeep": 0.9,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [
+        {
+          "op": "terrain_energy",
+          "trait": "hill",
+          "value": 3
+        }
+      ],
+      "weight": 1,
+      "hard": [],
+      "supply_energy": 4,
+      "stage": 0,
+      "jobs": 1,
+      "skill": 0,
+      "noise": 5,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "energy"
+      ]
+    },
+    {
+      "id": "solar",
+      "name": "小型光能场",
+      "zone": "public",
+      "tags": [
+        "energy",
+        "efficient"
+      ],
+      "desc": "昂贵的低干扰供能选项，1个岗位供7能源。这里抽象为平均供能，不额外模拟昼夜电网。",
+      "cost": 200,
+      "material": 28,
+      "goods": 0,
+      "hours": 1.8,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0,
+      "upkeep": 1.1,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "supply_energy": 7,
+      "stage": 0,
+      "jobs": 1,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "energy"
+      ]
+    },
+    {
+      "id": "square",
+      "name": "乡间活动广场",
+      "zone": "public",
+      "tags": [
+        "leisure",
+        "public",
+        "community"
+      ],
+      "desc": "18人休闲容量，维护低；人多以后会饱和。不能无限叠加同一群居民的幸福奖励。",
+      "cost": 60,
+      "material": 7,
+      "goods": 0,
+      "hours": 0.7,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0,
+      "upkeep": 1.0,
+      "income": 0,
+      "population": 0,
+      "services": {
+        "leisure": 18
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 1,
+      "skill": 0,
+      "noise": 1,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "leisure"
+      ]
+    },
+    {
+      "id": "tavern",
+      "name": "集市茶馆",
+      "zone": "circulation",
+      "tags": [
+        "leisure",
+        "commerce",
+        "community"
+      ],
+      "desc": "消费与休闲混合空间，真实客流带来税收，也制造噪音；同一批人不会被重复算成额外人口。",
+      "cost": 115,
+      "material": 15,
+      "goods": 0,
+      "hours": 1.0,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "food",
+          "rate": 0.4,
+          "tags": []
+        }
+      ],
+      "outputs": [],
+      "energy": 0.3,
+      "upkeep": 1.8,
+      "income": 7,
+      "population": 0,
+      "services": {
+        "leisure": 22,
+        "market": 10
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 3,
+      "skill": 0,
+      "noise": 7,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "leisure",
+        "commerce"
+      ]
+    },
+    {
+      "id": "stall",
+      "name": "农产直销摊",
+      "zone": "circulation",
+      "tags": [
+        "commerce",
+        "agriculture",
+        "logistics"
+      ],
+      "desc": "用本地食物满足18人消费，2个岗位；比大商区便宜，却容易随人口增长而饱和。",
+      "cost": 65,
+      "material": 8,
+      "goods": 0,
+      "hours": 0.6,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [
+        {
+          "resource": "food",
+          "rate": 0.4,
+          "tags": []
+        }
+      ],
+      "outputs": [],
+      "energy": 0.3,
+      "upkeep": 0.8,
+      "income": 6,
+      "population": 0,
+      "services": {
+        "market": 18
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 2,
+      "skill": 0,
+      "noise": 2,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "commerce"
+      ]
+    },
+    {
+      "id": "medic",
+      "name": "巡回医护点",
+      "zone": "public",
+      "tags": [
+        "health",
+        "public"
+      ],
+      "desc": "廉价的16人医疗覆盖，2个岗位。先补缺口，再决定是否需要更大的诊所。",
+      "cost": 80,
+      "material": 9,
+      "goods": 0,
+      "hours": 0.8,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0.8,
+      "upkeep": 1.3,
+      "income": 0,
+      "population": 0,
+      "services": {
+        "care": 16
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 2,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "health"
+      ]
+    },
+    {
+      "id": "night_school",
+      "name": "社区夜校",
+      "zone": "public",
+      "tags": [
+        "education",
+        "community",
+        "public"
+      ],
+      "desc": "低维护教育方案，16人容量、2个岗位。教育随时间积累，不是瞬间获得熟练人口。",
+      "cost": 85,
+      "material": 11,
+      "goods": 0,
+      "hours": 0.9,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [
+        {
+          "resource": "knowledge",
+          "rate": 0.35,
+          "tags": []
+        }
+      ],
+      "energy": 0.7,
+      "upkeep": 1.1,
+      "income": 0,
+      "population": 0,
+      "services": {
+        "education": 16
+      },
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 1,
+      "jobs": 2,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "education"
+      ]
+    },
+    {
+      "id": "hall",
+      "name": "特许议事所",
+      "zone": "public",
+      "tags": [
+        "community",
+        "public"
+      ],
+      "desc": "特许开局的行政中心，提供4个基础岗位；不是早期学校，不凭空生成知识。",
+      "cost": 125,
+      "material": 21,
+      "goods": 0,
+      "hours": 1.5,
+      "min_cells": 1,
+      "max_cells": 7,
+      "inputs": [],
+      "outputs": [],
+      "energy": 0.7,
+      "upkeep": 1,
+      "income": 0,
+      "population": 0,
+      "services": {},
+      "effects": [],
+      "weight": 1,
+      "hard": [],
+      "stage": 0,
+      "jobs": 4,
+      "skill": 0,
+      "noise": 0,
+      "pollution": 0,
+      "service_range": 2,
+      "families": [
+        "community"
+      ],
+      "starter_only": true
+    }
+  ],
+  "origins": [
+    {
+      "id": "village",
+      "name": "自然村落",
+      "story": "几户人家已经在河谷落脚。他们把第一批粮食留给了新社区，也盼着孩子有地方读书。",
+      "anchor": "farm",
+      "cash": 0,
+      "food": 18,
+      "material": 0,
+      "goods": 0,
+      "dt": 3,
+      "tags": [
+        "agriculture"
+      ],
+      "hint": "谷物农场与18位居民已经在这里，建材和空缺住房决定下一步。"
+    },
+    {
+      "id": "charter",
+      "name": "希望城特许",
+      "story": "希望城送来特许状与测绘工具。临时议事所已经落成，首先要让跟随你的人住下、吃饭、有活干。",
+      "anchor": "hall",
+      "cash": 150,
+      "food": 0,
+      "material": 12,
+      "goods": 0,
+      "dt": 0,
+      "tags": [
+        "community"
+      ],
+      "hint": "额外资金和4个行政岗位；需要补本地粮食与建材。"
+    },
+    {
+      "id": "miners",
+      "name": "工矿定居",
+      "story": "北坡的矿工把棚屋搭在岩丘旁。他们找到了石料，也留下了需要改善的生活条件。",
+      "anchor": "quarry",
+      "cash": 0,
+      "food": 0,
+      "material": 12,
+      "goods": 0,
+      "dt": 1,
+      "tags": [],
+      "hint": "采石岗位与材料充足，但需要关注住宅粉尘，尽快补粮食。"
+    },
+    {
+      "id": "free",
+      "name": "自由拓荒",
+      "story": "一支小队带着工具与自己的打算抵达。没有被写好的产业使命，林缘工坊先为大家搭起第一批房子。",
+      "anchor": "timber",
+      "cash": 60,
+      "food": 5,
+      "material": 4,
+      "goods": 0,
+      "dt": 2,
+      "tags": [
+        "community"
+      ],
+      "hint": "林缘建材起步；自由选择下一项需求，不受预涂用途限制。"
+    }
+  ],
+  "upgrades": [
+    {
+      "id": "u_standard",
+      "name": "工序精简",
+      "desc": "减少2个岗位需求，维护减少0.4/h。相同产能更省劳力，但不再提供那么多就业。",
+      "zones": [
+        "production",
+        "circulation"
+      ],
+      "tags": [
+        "efficient",
+        "industry"
+      ],
+      "effects": [
+        {
+          "op": "jobs",
+          "value": -2
+        },
+        {
+          "op": "upkeep",
+          "value": -0.4
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 0
+    },
+    {
+      "id": "u_quality",
+      "name": "清洁生产带",
+      "desc": "降低污染8、噪音6，额外消耗0.5能源；让工业与住宅能更近地共存。",
+      "zones": [
+        "production"
+      ],
+      "tags": [
+        "community",
+        "energy"
+      ],
+      "effects": [
+        {
+          "op": "pollution",
+          "value": -8
+        },
+        {
+          "op": "noise",
+          "value": -6
+        },
+        {
+          "op": "energy",
+          "value": 0.5
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 0,
+      "condition": "has_emissions"
+    },
+    {
+      "id": "u_reclaim",
+      "name": "副产物回收",
+      "desc": "运行时增加轻型材料副产物；同时增加能耗。形成第二条输出，而非给原产量乘倍率。",
+      "zones": [
+        "production",
+        "circulation"
+      ],
+      "tags": [
+        "circular"
+      ],
+      "effects": [
+        {
+          "op": "add_output",
+          "resource": "material",
+          "rate": 0.65,
+          "tags": []
+        },
+        {
+          "op": "energy",
+          "value": 0.3
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 0
+    },
+    {
+      "id": "u_apprentice",
+      "name": "驻厂学徒制",
+      "desc": "工业增加6人教育容量，工学结合；只有实际教学才积累知识。",
+      "zones": [
+        "production"
+      ],
+      "tags": [
+        "education",
+        "precision"
+      ],
+      "effects": [
+        {
+          "op": "add_tag",
+          "tag": "education"
+        },
+        {
+          "op": "service",
+          "service": "education",
+          "value": 6
+        },
+        {
+          "op": "add_output",
+          "resource": "knowledge",
+          "rate": 0.45,
+          "tags": []
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 1
+    },
+    {
+      "id": "u_balcony",
+      "name": "共享生活层",
+      "desc": "增加8人住房，不直接生成人口。用维护增加0.5/h换更集约的土地利用。",
+      "zones": [
+        "settlement"
+      ],
+      "tags": [
+        "housing",
+        "community"
+      ],
+      "effects": [
+        {
+          "op": "population",
+          "value": 8
+        },
+        {
+          "op": "upkeep",
+          "value": 0.5
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 0
+    },
+    {
+      "id": "u_atelier",
+      "name": "家庭工艺间",
+      "desc": "住宅增加3个岗位，把材料转为低级制成品；家庭副业也需要劳力并产生轻微噪音。",
+      "zones": [
+        "settlement"
+      ],
+      "tags": [
+        "industry",
+        "community"
+      ],
+      "effects": [
+        {
+          "op": "jobs",
+          "value": 3
+        },
+        {
+          "op": "add_input",
+          "resource": "material",
+          "rate": 0.4,
+          "tags": []
+        },
+        {
+          "op": "add_output",
+          "resource": "goods",
+          "rate": 0.6,
+          "tags": []
+        },
+        {
+          "op": "noise",
+          "value": 3
+        },
+        {
+          "op": "add_tag",
+          "tag": "industry"
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 2
+    },
+    {
+      "id": "u_openhall",
+      "name": "公共前厅",
+      "desc": "增加10人休闲和8人教育容量，也增加1个岗位及0.6/h维护。不是免费把民生一次填满。",
+      "zones": [
+        "settlement",
+        "public",
+        "circulation"
+      ],
+      "tags": [
+        "education",
+        "community"
+      ],
+      "effects": [
+        {
+          "op": "service",
+          "service": "education",
+          "value": 8
+        },
+        {
+          "op": "service",
+          "service": "leisure",
+          "value": 10
+        },
+        {
+          "op": "jobs",
+          "value": 1
+        },
+        {
+          "op": "upkeep",
+          "value": 0.6
+        },
+        {
+          "op": "add_tag",
+          "tag": "education"
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 1
+    },
+    {
+      "id": "u_energy",
+      "name": "共享能源环",
+      "desc": "项目增加供能，并在邻接工业时为其减少能源需求；摆放位置会改变收益。",
+      "zones": [
+        "public",
+        "production",
+        "circulation"
+      ],
+      "tags": [
+        "industry",
+        "circular"
+      ],
+      "effects": [
+        {
+          "op": "supply_energy",
+          "value": 2
+        },
+        {
+          "op": "aura_energy_discount",
+          "value": 0.3,
+          "tag": "industry"
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 0
+    },
+    {
+      "id": "u_reserve",
+      "name": "公共储备协议",
+      "desc": "扩大食物和材料仓容；让短期过剩支持后续集中开发，不改变资源标签。",
+      "zones": [
+        "circulation",
+        "public",
+        "settlement"
+      ],
+      "tags": [
+        "logistics",
+        "coldchain"
+      ],
+      "effects": [
+        {
+          "op": "storage",
+          "resource": "food",
+          "value": 50
+        },
+        {
+          "op": "storage",
+          "resource": "material",
+          "value": 90
+        },
+        {
+          "op": "add_tag",
+          "tag": "logistics"
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 0
+    },
+    {
+      "id": "u_water",
+      "name": "水岸共生工艺",
+      "desc": "项目增加食物输出与农业身份。临水才有资格，给原本非农业的项目另一种发展语言。",
+      "zones": [
+        "production",
+        "settlement",
+        "public",
+        "circulation"
+      ],
+      "tags": [
+        "waterfront",
+        "agriculture"
+      ],
+      "effects": [
+        {
+          "op": "add_output",
+          "resource": "food",
+          "rate": 1.2,
+          "tags": []
+        },
+        {
+          "op": "add_tag",
+          "tag": "agriculture"
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 0,
+      "condition": "waterfront"
+    },
+    {
+      "id": "u_civic",
+      "name": "地方协作章程",
+      "desc": "增设8人医疗和8人休闲服务，增加1岗位、0.8/h维护，取得社区身份。",
+      "zones": [
+        "production",
+        "settlement",
+        "public",
+        "circulation"
+      ],
+      "tags": [
+        "community"
+      ],
+      "effects": [
+        {
+          "op": "service",
+          "service": "care",
+          "value": 8
+        },
+        {
+          "op": "service",
+          "service": "leisure",
+          "value": 8
+        },
+        {
+          "op": "jobs",
+          "value": 1
+        },
+        {
+          "op": "upkeep",
+          "value": 0.8
+        },
+        {
+          "op": "add_tag",
+          "tag": "community"
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 1
+    },
+    {
+      "id": "u_technical",
+      "name": "技术工作室",
+      "desc": "消耗少量制成品提供知识，研究不再由空置设施无条件产生。",
+      "zones": [
+        "production",
+        "settlement",
+        "public",
+        "circulation"
+      ],
+      "tags": [
+        "education",
+        "precision"
+      ],
+      "effects": [
+        {
+          "op": "add_input",
+          "resource": "goods",
+          "rate": 0.15,
+          "tags": []
+        },
+        {
+          "op": "add_output",
+          "resource": "knowledge",
+          "rate": 0.85,
+          "tags": []
+        },
+        {
+          "op": "add_tag",
+          "tag": "research"
+        }
+      ],
+      "cost": 115,
+      "material": 12,
+      "goods": 0,
+      "hours": 1.2,
+      "stage": 2
+    }
+  ],
+  "fusions": [
+    {
+      "id": "learn",
+      "name": "产学协作",
+      "a": "education",
+      "b": "industry",
+      "hours": 2.5,
+      "choices": [
+        {
+          "id": "learn_quality",
+          "name": "在岗联合培养",
+          "desc": "工业伙伴的技能需求降低15，教育容量增加8；通过真实培训改善技能瓶颈，不升级资源标签。",
+          "effect": "advanced_output"
+        },
+        {
+          "id": "learn_research",
+          "name": "校企实验室",
+          "desc": "共同运行时额外生成知识，并为这一对项目增加研究身份。",
+          "effect": "joint_research"
+        }
+      ]
+    },
+    {
+      "id": "harvest",
+      "name": "丰收联运",
+      "a": "agriculture",
+      "b": "logistics",
+      "hours": 2.5,
+      "choices": [
+        {
+          "id": "harvest_goods",
+          "name": "农产直供协议",
+          "desc": "农业伙伴增加12人消费服务；把现有农场变成消费需求的另一个解，不要求制成品先解锁。",
+          "effect": "harvest_goods"
+        },
+        {
+          "id": "harvest_buffer",
+          "name": "共营储备库",
+          "desc": "共营粮食储备，增加食物仓容90；低级资源不再分轻重或易朽接口。",
+          "effect": "harvest_buffer"
+        }
+      ]
+    },
+    {
+      "id": "civic",
+      "name": "街坊公共联盟",
+      "a": "community",
+      "b": "public",
+      "hours": 2.5,
+      "choices": [
+        {
+          "id": "civic_education",
+          "name": "社区夜校",
+          "desc": "联合提供12人教育容量，有效教学产生知识；两个原项目都保留。",
+          "effect": "civic_education"
+        },
+        {
+          "id": "civic_care",
+          "name": "邻里共治厅",
+          "desc": "联合提供12人医疗和12人休闲容量；实际受益住户才改善健康与幸福。",
+          "effect": "civic_care"
+        }
+      ]
+    },
+    {
+      "id": "network",
+      "name": "工业统配",
+      "a": "industry",
+      "b": "logistics",
+      "hours": 2.5,
+      "choices": [
+        {
+          "id": "network_ports",
+          "name": "共同后勤班",
+          "desc": "工业伙伴减少2个岗位需求、能耗减少0.4；把重复后勤集中，释放居民去新的岗位。",
+          "effect": "dual_ports"
+        },
+        {
+          "id": "network_cycle",
+          "name": "循环包装联盟",
+          "desc": "联合运行时回收0.7/h材料，扩大材料仓容90。",
+          "effect": "joint_recycle"
+        }
+      ]
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "water",
+      "name": "承包商：把河岸留给所有人",
+      "context": "waterfront",
+      "body": "施工队建议让出一条公共河岸，减少封闭围墙。需要额外建材，但它将带来社区服务能力。",
+      "cost": 25,
+      "material": 4,
+      "hours": 0.25,
+      "effects": [
+        {
+          "op": "service",
+          "service": "leisure",
+          "value": 5
+        },
+        {
+          "op": "add_tag",
+          "tag": "community"
+        }
+      ],
+      "stage": 0
+    },
+    {
+      "id": "soil",
+      "name": "测绘队：顺着这片沃土",
+      "context": "plain",
+      "body": "地基测绘揭示了可保留的菜圃与集雨带。不是每一格都必须铺满混凝土。",
+      "cost": 20,
+      "material": 3,
+      "hours": 0.2,
+      "effects": [
+        {
+          "op": "add_output",
+          "resource": "food",
+          "rate": 0.6,
+          "tags": []
+        },
+        {
+          "op": "add_tag",
+          "tag": "agriculture"
+        }
+      ],
+      "stage": 0
+    },
+    {
+      "id": "stone",
+      "name": "工匠：留下可复用的石料",
+      "context": "hill",
+      "body": "整理开挖材料需要额外工期，投产后可形成小规模材料回收。",
+      "cost": 20,
+      "material": 0,
+      "hours": 0.4,
+      "effects": [
+        {
+          "op": "add_output",
+          "resource": "material",
+          "rate": 0.5,
+          "tags": []
+        },
+        {
+          "op": "add_tag",
+          "tag": "circular"
+        }
+      ],
+      "stage": 0
+    },
+    {
+      "id": "forest",
+      "name": "居民：保留林间通道",
+      "context": "forest",
+      "body": "保留几棵老树和步行空间，不追求每一寸场地的产量。长期休闲能力取代一次性民心奖励。",
+      "cost": 20,
+      "material": 2,
+      "hours": 0.2,
+      "effects": [
+        {
+          "op": "service",
+          "service": "leisure",
+          "value": 6
+        },
+        {
+          "op": "add_tag",
+          "tag": "community"
+        }
+      ],
+      "stage": 0
+    },
+    {
+      "id": "craft",
+      "name": "工匠团体：附带培训工位",
+      "context": "any",
+      "body": "承包人愿意把培训工位留在项目里。你的项目将有机会和教育系统建立关系。",
+      "cost": 35,
+      "material": 3,
+      "hours": 0.3,
+      "effects": [
+        {
+          "op": "service",
+          "service": "education",
+          "value": 3
+        },
+        {
+          "op": "add_tag",
+          "tag": "education"
+        }
+      ],
+      "stage": 1
+    },
+    {
+      "id": "store",
+      "name": "合作社：共用储备空间",
+      "context": "any",
+      "body": "与邻里共同管理储備，能承受更长的集中开发。不是让你手工修小仓库。",
+      "cost": 30,
+      "material": 5,
+      "hours": 0.25,
+      "effects": [
+        {
+          "op": "storage",
+          "resource": "material",
+          "value": 50
+        },
+        {
+          "op": "add_tag",
+          "tag": "logistics"
+        }
+      ],
+      "stage": 0
+    }
+  ]
+}

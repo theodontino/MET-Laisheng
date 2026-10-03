@@ -1,0 +1,165 @@
+Archived, non-runtime prototype: retained after the pre-alpha scope was narrowed to one Block.
+
+This file records the earlier District Shell implementation for later reference. It is
+plain text so it cannot be loaded as a Godot script. The active implementation is
+core/block040.gd; no active code preloads this prototype.
+
+extends RefCounted
+## A small district shell that archives completed blocks and carries forward only
+## selected Portable licenses plus active District doctrines.
+const Market = preload("res://core/market040.gd")
+
+static func ensure(g) -> void:
+	if not g.s.get("city") is Dictionary:
+		g.s.city = {"id":"city:1","name":"河谷新城","active_block_id":str(g.s.get("block", {}).get("id", "block:1"))}
+	var city:Dictionary = g.s.city
+	if not city.has("id"): city.id = "city:1"
+	if not city.has("name"): city.name = "河谷新城"
+	if not city.has("active_block_id"): city.active_block_id = str(g.s.get("block", {}).get("id", "block:1"))
+	if not g.s.get("district") is Dictionary:
+		g.s.district = {"id":"district:1","name":"","legacy_bonus_pool":[],"district_bonus_instances":[],
+			"market_state":{"resources":{}},"completed_blocks":[],"active_block_id":str(g.s.get("block", {}).get("id", "block:1")),"naming_right":false}
+	var district:Dictionary = g.s.district
+	if not district.has("id"): district.id = "district:1"
+	if not district.has("name"): district.name = ""
+	if not district.get("legacy_bonus_pool") is Array: district.legacy_bonus_pool = []
+	if not district.get("district_bonus_instances") is Array: district.district_bonus_instances = []
+	if not district.get("completed_blocks") is Array: district.completed_blocks = []
+	if not district.has("active_block_id"): district.active_block_id = str(g.s.get("block", {}).get("id", "block:1"))
+	if not district.has("naming_right"): district.naming_right = false
+	g.s.district = district
+	if not g.s.get("block") is Dictionary: g.s.block = {"id":"block:1"}
+	var block:Dictionary = g.s.block
+	if not block.has("stage"): block.stage = 0
+	if not block.get("bonus_wallet") is Dictionary: block.bonus_wallet = {}
+	if not block.get("deployed_bonuses") is Dictionary: block.deployed_bonuses = {}
+	if not block.get("reward_choices") is Array: block.reward_choices = []
+	if not block.get("commissions") is Dictionary: block.commissions = {"active":{},"history":[],"completed":[],"pending_reward":""}
+	if not block.get("trade_orders") is Array: block.trade_orders = []
+	if not block.get("trade_history") is Array: block.trade_history = []
+	if not block.get("trade_ledger") is Array: block.trade_ledger = []
+	if not block.has("naming_right"): block.naming_right = false
+	if not block.has("handover_ready"): block.handover_ready = false
+	if not block.has("name"): block.name = "街区 " + str(int(g.s.get("block_index", 0)) + 1)
+	g.s.block = block
+	city.active_block_id = str(block.get("id", "block:1"))
+	g.s.city = city
+	district.active_block_id = str(block.get("id", "block:1"))
+	g.s.district = district
+	if not g.s.get("rng") is Dictionary: g.s.rng = {}
+	if not g.s.rng.has("reward"):
+		g.s.rng.reward = posmod(int(g.s.get("seed", 1)) * 48271 + 104729, 2147483646) + 1
+	Market.ensure(g)
+
+static func grant_naming(g) -> void:
+	ensure(g)
+	var block:Dictionary = g.s.block
+	var completed = bool(block.get("goal_complete", false)) or bool(block.get("handover_ready", false))
+	if g.s.get("city_goal", {}).get("completed", false): completed = true
+	if not completed: return
+	if not bool(block.get("naming_right", false)): block.naming_right = true
+	var district:Dictionary = g.s.district
+	if str(district.get("name", "")) == "" and not bool(district.get("naming_right", false)):
+		district.naming_right = true
+	g.s.block = block
+	g.s.district = district
+
+static func name_block(g, name:String) -> String:
+	ensure(g)
+	var value = name.strip_edges()
+	var max_length = int(g.c.v040.get("progression", {}).get("name_max_length", 24))
+	if value == "" or value.length() > max_length: return "街区名称不能为空，且最多%d个字符。" % max_length
+	if not bool(g.s.block.get("naming_right", false)) and not bool(g.s.district.get("naming_right", false)):
+		return "完成本Block目标后才能命名。"
+	g.s.block.name = value
+	g.s.block.display_name = value
+	g.s.block.naming_right = false
+	if str(g.s.district.get("name", "")) == "":
+		g.s.district.name = value
+		g.s.district.naming_right = false
+	g.s.city.name = value if str(g.s.city.get("name", "")) == "河谷新城" else g.s.city.name
+	return ""
+
+static func _persistence(g, bonus_id:String) -> String:
+	var metadata:Dictionary = g.c.v040.get("bonus_economy", {}).get("metadata", {})
+	var entry:Dictionary = metadata.get(bonus_id, {})
+	return str(entry.get("persistence_class", entry.get("persistence", "Local"))).to_lower()
+
+static func _portable_ids(g) -> Array:
+	var result:Array = []
+	var wallet:Dictionary = g.s.block.get("bonus_wallet", {})
+	for bonus_id in wallet:
+		if int(wallet[bonus_id].get("charges", 0)) < 0: continue
+		if bool(wallet[bonus_id].get("portable", false)) or _persistence(g, str(bonus_id)) == "portable": result.append(str(bonus_id))
+	result.sort()
+	return result
+
+static func _next_id_after(instances:Dictionary, current:int) -> int:
+	var result = current
+	for id in instances:
+		var text_id = str(id)
+		var suffix = ""
+		for index in text_id.length():
+			if text_id[index].is_valid_int(): suffix += text_id[index]
+		if suffix != "": result = maxi(result, int(suffix) + 1)
+	return result
+
+static func handover(g, selected_bonus_ids:Array, block_index:int=0) -> String:
+	ensure(g)
+	if str(g.s.get("phase", "")) != "play": return "当前Block尚未开始。"
+	if block_index < 0 or block_index > 2: return "无效的新Block起点。"
+	var old_block:Dictionary = g.s.block
+	if not bool(old_block.get("handover_ready", false)) and not bool(old_block.get("goal_complete", false)) and not bool(g.s.get("city_goal", {}).get("completed", false)):
+		return "完成本Block目标后才能移交。"
+	var portable = _portable_ids(g)
+	var required_count = mini(2, portable.size())
+	if selected_bonus_ids.size() != required_count: return "请选择%d张可携方案作为启动资产。" % required_count
+	var selected:Array = []
+	for value in selected_bonus_ids:
+		var bonus_id = str(value)
+		if bonus_id in selected: return "不能重复选择同一方案。"
+		if not bonus_id in portable: return "只能携带本Block获得过的Portable方案。"
+		selected.append(bonus_id)
+	var old_state:Dictionary = g.s.duplicate(true)
+	var archive:Dictionary = old_state.duplicate(true)
+	archive.erase("district")
+	var district:Dictionary = old_state.district.duplicate(true)
+	var old_id = str(old_block.get("id", "block:1"))
+	var new_id = "block:" + str(district.completed_blocks.size() + 2)
+	var district_instances:Dictionary = {}
+	var keep_ids:Array = district.get("district_bonus_instances", [])
+	for instance_id in old_state.get("bonus_instances", {}):
+		var instance:Dictionary = old_state.bonus_instances[instance_id]
+		if instance.get("host_type", "") != "district" or not instance.get("active", false): continue
+		if str(instance.get("host_id", "")) != str(district.get("id", "district:1")): continue
+		if not keep_ids.is_empty() and not str(instance_id) in keep_ids: continue
+		district_instances[instance_id] = instance.duplicate(true)
+	var record = {"id":old_id,"name":str(old_block.get("name", old_block.get("display_name", old_id))),
+		"block_index":int(old_state.get("block_index", -1)),"completed_at":float(old_state.get("local_hours", 0)),
+		"completed_tick":int(old_state.get("simulation_tick", 0)),"carryover_bonus_ids":selected.duplicate(true),"snapshot":archive}
+	district.completed_blocks.append(record)
+	district.legacy_bonus_pool = selected.duplicate(true)
+	var next_seed = posmod(int(old_state.get("seed", 1)) + 104729 + district.completed_blocks.size() * 7919, 2147483000) + 1
+	var now = float(old_state.get("global_now", old_state.get("wall_mark", 0)))
+	g.new_game(next_seed, now)
+	var error = str(g.select_block(block_index))
+	if error != "": return error
+	if g.s.origin_choices.is_empty(): return "新Block没有可选起点。"
+	error = str(g.choose_origin(str(g.s.origin_choices[0])))
+	if error != "": return error
+	g.s.city = old_state.get("city", {"id":"city:1","name":"河谷新城"}).duplicate(true)
+	g.s.district = district
+	g.s.block.id = new_id
+	g.s.block.name = "街区 " + str(district.completed_blocks.size() + 1)
+	g.s.block.display_name = g.s.block.name
+	g.s.block_index = block_index
+	g.s.city.active_block_id = new_id
+	g.s.district.active_block_id = new_id
+	g.s.bonus_instances = district_instances
+	g.s.next_id = _next_id_after(g.s.bonus_instances, maxi(int(old_state.get("next_id", 1)), int(g.s.get("next_id", 1))))
+	for bonus_id in selected:
+		var grant_error = str(g.Bonus.grant(g, bonus_id, "handover:" + old_id + ":" + bonus_id))
+		if grant_error != "": return grant_error
+		if not bool(g.s.block.bonus_wallet[bonus_id].get("portable", false)): g.s.block.bonus_wallet[bonus_id].portable = true
+	g.refresh_metrics()
+	return ""

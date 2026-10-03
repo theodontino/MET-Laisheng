@@ -1,0 +1,409 @@
+{
+  "schema": "met030.bonus_visuals_plan.v1",
+  "status": "runtime_bound_by_ui_map_art",
+  "baseline_count": 40,
+  "max_physical_attachments_per_building": 2,
+  "bindings": [
+    {
+      "bonus_id": "P01",
+      "name_zh": "粗野制造",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "P02",
+      "name_zh": "研究型医院",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_public_courtyard",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "P03",
+      "name_zh": "实践教育",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "P04",
+      "name_zh": "生物质能公共设施",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_recycling",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "P05",
+      "name_zh": "热量管理",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_heat",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "P06",
+      "name_zh": "高级回收",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_recycling",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "P07",
+      "name_zh": "家庭农场",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_urban_farm",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "P08",
+      "name_zh": "水基工厂",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "L01",
+      "name_zh": "电商仓储店",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_storage",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "L02",
+      "name_zh": "无人机站",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_drone",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "L03",
+      "name_zh": "零库存生产",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "L04",
+      "name_zh": "邻里中心",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "L05",
+      "name_zh": "中转仓",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_storage",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "O01",
+      "name_zh": "商业医疗",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "O02",
+      "name_zh": "工厂家属区",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "O03",
+      "name_zh": "密集住宅",
+      "visual_strategy": "occupancy_lights_and_courtyard_activity_no_new_housing_model",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "O04",
+      "name_zh": "开放大学",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_public_courtyard",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "O05",
+      "name_zh": "义务教师",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "O06",
+      "name_zh": "东郊记忆",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_heritage",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "O07",
+      "name_zh": "商业综合体",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B01",
+      "name_zh": "服务集中",
+      "visual_strategy": "selected_real_relationships_only",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B02",
+      "name_zh": "市政暖气",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_heat",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B03",
+      "name_zh": "市政管廊",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_heat",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B04",
+      "name_zh": "地下快速路",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B05",
+      "name_zh": "战略储备",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_storage",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B06",
+      "name_zh": "用爱发电",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B07",
+      "name_zh": "联合采购",
+      "visual_strategy": "selected_real_relationships_only",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B08",
+      "name_zh": "污染产业园",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "B09",
+      "name_zh": "热电共生",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_heat",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "G01",
+      "name_zh": "企业内部协同",
+      "visual_strategy": "selected_real_relationships_only",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "G02",
+      "name_zh": "内部供应链",
+      "visual_strategy": "selected_real_relationships_only",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "M01",
+      "name_zh": "模块化设计",
+      "visual_strategy": "slot_structure_UI_no_freeform_building_footprint_change",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "R05",
+      "name_zh": "社区诊所",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "R08",
+      "name_zh": "社区商业",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "R10",
+      "name_zh": "都市农业",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_urban_farm",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "R14",
+      "name_zh": "农家乐",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_public_courtyard",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "R15",
+      "name_zh": "精耕小农",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "R16",
+      "name_zh": "家庭作坊",
+      "visual_strategy": "physical_attachment_if_host_compatible",
+      "asset_id": "module_workshop",
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "R17",
+      "name_zh": "职住一体",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    },
+    {
+      "bonus_id": "R18",
+      "name_zh": "公共厨房",
+      "visual_strategy": "effect_overlay_and_slot_icon",
+      "asset_id": null,
+      "activation": "only_when_active_and_effective_for_this_host",
+      "no_gameplay_mutation": true,
+      "fallback": "icon_and_accurate_explanation",
+      "notes": "Same rendering class is reusable. Do not make one new city model for every combination."
+    }
+  ],
+  "asset_source": "original_parametric_illustration"
+}

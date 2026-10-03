@@ -1,0 +1,73 @@
+{
+  "schema": "met031.building_domains.v1",
+  "is_new_gameplay_category": false,
+  "existing_palette_categories": [
+    "homes",
+    "production",
+    "commerce",
+    "public"
+  ],
+  "buildings": {
+    "hamlet": {
+      "name": "河谷住宅",
+      "domain": "residential",
+      "source": "content/core020.json/buildings/hamlet",
+      "minimum_name_lines": 2
+    },
+    "farm": {
+      "name": "基础农场",
+      "domain": "agriculture",
+      "source": "content/core020.json/buildings/farm",
+      "minimum_name_lines": 2
+    },
+    "timber": {
+      "name": "基础料场",
+      "domain": "industrial",
+      "source": "content/core020.json/buildings/timber",
+      "minimum_name_lines": 2
+    },
+    "works": {
+      "name": "基础工业厂",
+      "domain": "industrial",
+      "source": "content/core020.json/buildings/works",
+      "minimum_name_lines": 2
+    },
+    "market": {
+      "name": "基础市场",
+      "domain": "commercial",
+      "source": "content/core020.json/buildings/market",
+      "minimum_name_lines": 2
+    },
+    "school": {
+      "name": "基础学校",
+      "domain": "public",
+      "source": "content/core020.json/buildings/school",
+      "minimum_name_lines": 2
+    },
+    "clinic": {
+      "name": "基础诊所",
+      "domain": "public",
+      "source": "content/core020.json/buildings/clinic",
+      "minimum_name_lines": 2
+    },
+    "park": {
+      "name": "街坊公园",
+      "domain": "public",
+      "source": "content/core020.json/buildings/park",
+      "minimum_name_lines": 2
+    },
+    "power": {
+      "name": "基础动力站",
+      "domain": "infrastructure",
+      "source": "content/core020.json/buildings/power",
+      "minimum_name_lines": 2
+    },
+    "warehouse": {
+      "name": "公共仓储站",
+      "domain": "infrastructure",
+      "source": "content/core020.json/buildings/warehouse",
+      "minimum_name_lines": 2
+    }
+  },
+  "status": "installed_in_native_0.3.1"
+}

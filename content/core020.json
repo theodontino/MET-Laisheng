@@ -1,0 +1,3660 @@
+{
+  "schema": 3,
+  "build": "0.3.2-citydesk.1",
+  "buildings": {
+    "hamlet": {
+      "id": "hamlet",
+      "name": "河谷住宅",
+      "traits": [
+        "building.residential",
+        "building.road"
+      ],
+      "zone": "settlement",
+      "cost": 80,
+      "material": 10,
+      "hours": 0.6,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 0,
+        "energy_demand": 0.25,
+        "maintenance": 0.6,
+        "housing": 24,
+        "pollution": 0,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 0,
+        "storage.food": 8,
+        "input.material": 0,
+        "output.material": 0,
+        "storage.material": 8,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 8,
+        "output.energy": 0,
+        "service.medical": 0,
+        "service.education": 0,
+        "service.entertainment": 0,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "为新居民留出住处；住户会工作，也会消耗粮食和电力。"
+    },
+    "farm": {
+      "id": "farm",
+      "name": "基础农场",
+      "traits": [
+        "building.agricultural",
+        "building.producer",
+        "building.road"
+      ],
+      "zone": "production",
+      "cost": 90,
+      "material": 12,
+      "hours": 0.7,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 5,
+        "energy_demand": 0.4,
+        "maintenance": 1,
+        "housing": 0,
+        "pollution": 0,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 4.2,
+        "storage.food": 22,
+        "input.material": 0,
+        "output.material": 0,
+        "storage.material": 8,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 8,
+        "output.energy": 0,
+        "service.medical": 0,
+        "service.education": 0,
+        "service.entertainment": 0,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "补足粮食。肥沃地更高产，先看能否招到5位工人。"
+    },
+    "timber": {
+      "id": "timber",
+      "name": "基础料场",
+      "traits": [
+        "building.extractive",
+        "building.producer",
+        "building.road"
+      ],
+      "zone": "production",
+      "cost": 90,
+      "material": 12,
+      "hours": 0.7,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 5,
+        "energy_demand": 0.5,
+        "maintenance": 1.2,
+        "housing": 0,
+        "pollution": 3.2,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 0,
+        "storage.food": 8,
+        "input.material": 0,
+        "output.material": 4.6,
+        "storage.material": 22,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 8,
+        "output.energy": 0,
+        "service.medical": 0,
+        "service.education": 0,
+        "service.entertainment": 0,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "供给建设和制造用料。森林与高地更合适，远离住户可以少扰民。"
+    },
+    "power": {
+      "id": "power",
+      "name": "基础动力站",
+      "traits": [
+        "building.energy",
+        "building.producer",
+        "building.road"
+      ],
+      "zone": "public",
+      "cost": 110,
+      "material": 15,
+      "hours": 0.8,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 3,
+        "energy_demand": 0,
+        "maintenance": 1.5,
+        "housing": 0,
+        "pollution": 5,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 0,
+        "storage.food": 8,
+        "input.material": 0,
+        "output.material": 0,
+        "storage.material": 8,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 8,
+        "output.energy": 12,
+        "service.medical": 0,
+        "service.education": 0,
+        "service.entertainment": 0,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "为住房和设施供电；缺工也会让发电量下降。"
+    },
+    "works": {
+      "id": "works",
+      "name": "基础工业厂",
+      "traits": [
+        "building.industrial",
+        "building.producer",
+        "building.road"
+      ],
+      "zone": "production",
+      "cost": 150,
+      "material": 22,
+      "hours": 1.2,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 7,
+        "energy_demand": 3,
+        "maintenance": 2.6,
+        "housing": 0,
+        "pollution": 14,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 0,
+        "storage.food": 8,
+        "input.material": 2.2,
+        "output.material": 0,
+        "storage.material": 8,
+        "input.goods": 0,
+        "output.goods": 3.2,
+        "storage.goods": 22,
+        "output.energy": 0,
+        "service.medical": 0,
+        "service.education": 0,
+        "service.entertainment": 0,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "把材料变成生活用品和交付物资；耗电，并影响附近住户。"
+    },
+    "market": {
+      "id": "market",
+      "name": "基础市场",
+      "traits": [
+        "building.commercial",
+        "building.service",
+        "building.road"
+      ],
+      "zone": "circulation",
+      "cost": 100,
+      "material": 12,
+      "hours": 0.8,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 3,
+        "energy_demand": 0.8,
+        "maintenance": 1.5,
+        "housing": 0,
+        "pollution": 2,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0.45,
+        "output.food": 0,
+        "storage.food": 8,
+        "input.material": 0,
+        "output.material": 0,
+        "storage.material": 8,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 8,
+        "output.energy": 0,
+        "service.medical": 0,
+        "service.education": 0,
+        "service.entertainment": 6,
+        "service.commercial": 24,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "满足居民购物与部分休闲；有真实顾客才形成交易收入。"
+    },
+    "school": {
+      "id": "school",
+      "name": "基础学校",
+      "traits": [
+        "building.education",
+        "building.service",
+        "building.public_service",
+        "building.road"
+      ],
+      "zone": "public",
+      "cost": 110,
+      "material": 14,
+      "hours": 0.8,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 3,
+        "energy_demand": 1,
+        "maintenance": 1.8,
+        "housing": 0,
+        "pollution": 0,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 0,
+        "storage.food": 8,
+        "input.material": 0,
+        "output.material": 0,
+        "storage.material": 8,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 8,
+        "output.energy": 0,
+        "service.medical": 0,
+        "service.education": 24,
+        "service.entertainment": 0,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "让住户获得教育、提升人员效率；教育同时积累研究知识。"
+    },
+    "clinic": {
+      "id": "clinic",
+      "name": "基础诊所",
+      "traits": [
+        "building.medical",
+        "building.service",
+        "building.public_service",
+        "building.road"
+      ],
+      "zone": "public",
+      "cost": 115,
+      "material": 14,
+      "hours": 0.8,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 3,
+        "energy_demand": 1,
+        "maintenance": 2.2,
+        "housing": 0,
+        "pollution": 0,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 0,
+        "storage.food": 8,
+        "input.material": 0,
+        "output.material": 0,
+        "storage.material": 8,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 8,
+        "output.energy": 0,
+        "service.medical": 24,
+        "service.education": 0,
+        "service.entertainment": 0,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "为周边居民改善健康；够得到并不等于还有服务名额。"
+    },
+    "park": {
+      "id": "park",
+      "name": "街坊公园",
+      "traits": [
+        "building.leisure",
+        "building.service",
+        "building.public_service",
+        "building.green",
+        "building.road"
+      ],
+      "zone": "public",
+      "cost": 80,
+      "material": 10,
+      "hours": 0.6,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 1.5,
+        "energy_demand": 0.3,
+        "maintenance": 1.8,
+        "housing": 0,
+        "pollution": 0,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 0,
+        "storage.food": 8,
+        "input.material": 0,
+        "output.material": 0,
+        "storage.material": 8,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 8,
+        "output.energy": 0,
+        "service.medical": 0,
+        "service.education": 0,
+        "service.entertainment": 28,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "提供休闲，在住户身边留出绿色空间。"
+    },
+    "warehouse": {
+      "id": "warehouse",
+      "name": "公共仓储站",
+      "traits": [
+        "building.logistics",
+        "building.road"
+      ],
+      "zone": "circulation",
+      "cost": 90,
+      "material": 12,
+      "hours": 0.7,
+      "stats": {
+        "efficiency": 1.0,
+        "jobs": 1,
+        "energy_demand": 0.3,
+        "maintenance": 1.2,
+        "housing": 0,
+        "pollution": 0,
+        "service_range": 3,
+        "service_decay": 0.5,
+        "employment_range": 99,
+        "employment_decay": 0.12,
+        "pollution_range": 2,
+        "pollution_decay": 0.5,
+        "personnel_mult": 1.0,
+        "allocation_priority": 0,
+        "distance_cost": 1.0,
+        "population_maintenance": 0.22,
+        "population_food": 0.18,
+        "population_material": 0.025,
+        "population_goods": 0.075,
+        "population_energy": 0.08,
+        "exposure_multiplier": 1.0,
+        "shortage_multiplier": 1.0,
+        "jit_cap": 1.0,
+        "heat_discount": 0.0,
+        "heat_service": 0.0,
+        "heat_cap": 0.3,
+        "input.food": 0,
+        "output.food": 0,
+        "storage.food": 100,
+        "input.material": 0,
+        "output.material": 0,
+        "storage.material": 100,
+        "input.goods": 0,
+        "output.goods": 0,
+        "storage.goods": 100,
+        "output.energy": 0,
+        "service.medical": 0,
+        "service.education": 0,
+        "service.entertainment": 0,
+        "service.commercial": 0,
+        "synergy.same_industrial": 1.0,
+        "utilization_exponent": 1.08
+      },
+      "description": "接收生产建筑的溢出物资，减少浪费；自身也需要维护。"
+    }
+  },
+  "bonuses": {
+    "P01": {
+      "id": "P01",
+      "name": "粗野制造",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "原料和能源需求×1.5，污染×1.5，物资产出×2。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "input.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P01.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "energy_demand",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P01.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P01.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 2,
+          "id": "P01.4",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "物资产出翻倍",
+        "原料、用电和污染各增加50%"
+      ]
+    },
+    "P02": {
+      "id": "P02",
+      "name": "研究型医院",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.medical"
+      ],
+      "summary": "30%基础医疗容量转为教育；邻接教育建筑效率+20%。",
+      "rules": [
+        {
+          "op": "capacity_convert",
+          "phase": "spatial",
+          "from": "service.medical",
+          "to": "service.education",
+          "fraction": 0.3,
+          "id": "P02.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "adjacent",
+          "mode": "multiply",
+          "value": 1.2,
+          "when": {
+            "traits": [
+              "building.education"
+            ]
+          },
+          "id": "P02.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "把30%医疗名额改为教育名额",
+        "邻接学校效率提高20%"
+      ]
+    },
+    "P03": {
+      "id": "P03",
+      "name": "实践教育",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.education"
+      ],
+      "summary": "自身效率×0.85；邻接岗位获得的有效劳动力×1.2。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.85,
+          "id": "P03.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "personnel_mult",
+          "targets": "adjacent",
+          "mode": "multiply",
+          "value": 1.2,
+          "id": "P03.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "邻接岗位的人工作得更有效率",
+        "代价：学校自身效率降低15%"
+      ]
+    },
+    "P04": {
+      "id": "P04",
+      "name": "生物质能公共设施",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.public_service"
+      ],
+      "summary": "维护×1.5；覆盖住宅获得两项配方：5食物→2材料、5食物→2即时能源。每项独立付费。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P04.1",
+          "priority": 0
+        },
+        {
+          "op": "grant_recipe",
+          "phase": "production",
+          "targets": "service_area",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "input": {
+            "food": 5
+          },
+          "output": {
+            "material": 2
+          },
+          "rate": 0.3,
+          "id": "P04.2",
+          "priority": 0
+        },
+        {
+          "op": "grant_recipe",
+          "phase": "distribution",
+          "targets": "service_area",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "input": {
+            "food": 5
+          },
+          "output": {
+            "energy": 2
+          },
+          "rate": 0.3,
+          "id": "P04.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "附近住宅可用粮食制造材料、供电",
+        "两种用途分别耗粮；维护增加50%"
+      ]
+    },
+    "P05": {
+      "id": "P05",
+      "name": "热量管理",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "从实际物资产出分走10%、污染分走40%变成余热，不能同时保留原产物。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "redirect_product_heat",
+          "value": 0.1,
+          "targets": "self",
+          "id": "P05.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "redirect_pollution_heat",
+          "value": 0.4,
+          "targets": "self",
+          "id": "P05.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "分出10%产品、40%污染用于供热",
+        "余热需要供暖或节电方案来利用"
+      ]
+    },
+    "P06": {
+      "id": "P06",
+      "name": "高级回收",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [],
+      "summary": "维护×1.5；每小时最多消耗本格10污染额度，按每10点共同产出3材料+3制成品。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P06.1",
+          "priority": 0
+        },
+        {
+          "op": "field_convert",
+          "phase": "environment",
+          "input_type": "pollution",
+          "amount": 10,
+          "output": {
+            "material": 3,
+            "goods": 3
+          },
+          "rate": 1,
+          "id": "P06.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "本地污染 → 材料和制成品",
+        "没有污染就没收益；维护增加50%"
+      ]
+    },
+    "P07": {
+      "id": "P07",
+      "name": "家庭农场",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.agricultural"
+      ],
+      "summary": "提供8人住房，粮食产出×0.85；住在本建筑的人优先填本建筑岗位。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "housing",
+          "targets": "self",
+          "mode": "add",
+          "value": 8,
+          "id": "P07.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.85,
+          "id": "P07.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "local_employment",
+          "value": true,
+          "targets": "self",
+          "id": "P07.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "增加8个住房位置，住户就地工作",
+        "代价：粮食产出降低15%"
+      ]
+    },
+    "P08": {
+      "id": "P08",
+      "name": "水基工厂",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "需水岸；材料采购的排序距离减半；污染沿水岸的衰减系数×0.7。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "material_distance",
+          "value": 0.5,
+          "targets": "self",
+          "id": "P08.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "water_pollution_decay",
+          "value": 0.7,
+          "targets": "self",
+          "id": "P08.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "gate": {
+        "tile_traits": [
+          "tile.waterfront"
+        ]
+      },
+      "player_highlights": [
+        "水岸工厂，短缺时更容易拿到材料",
+        "污染也会沿水岸传得更远"
+      ]
+    },
+    "L01": {
+      "id": "L01",
+      "name": "电商仓储店",
+      "slot": "Logistics",
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.commercial"
+      ],
+      "summary": "服务衰减×0.7，娱乐容量归零，与工业的已有协同×2，库存×1.5。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service_decay",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.7,
+          "id": "L01.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.entertainment",
+          "targets": "self",
+          "mode": "override",
+          "value": 0,
+          "id": "L01.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "industrial_adjacency",
+          "value": 2,
+          "targets": "self",
+          "id": "L01.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "storage.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "L01.4",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "服务够得更远，仓储增加50%",
+        "更善于邻接工业；不再提供休闲"
+      ]
+    },
+    "L02": {
+      "id": "L02",
+      "name": "无人机站",
+      "slot": "Logistics",
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [],
+      "summary": "产生两格配送可达场；覆盖建筑的采购距离权重×0.4。能源需求×1.25、维护×1.3。",
+      "rules": [
+        {
+          "op": "emit",
+          "phase": "spatial",
+          "type": "drone",
+          "strength": 1,
+          "range": 2,
+          "decay": 0.3,
+          "id": "L02.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "energy_demand",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "L02.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.3,
+          "id": "L02.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "两格内建筑，短缺时采购更有利",
+        "代价：用电+25%，维护+30%"
+      ]
+    },
+    "L03": {
+      "id": "L03",
+      "name": "零库存生产",
+      "slot": "Logistics",
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [],
+      "summary": "仓容×0.2，优先采购，效率×1.2；任一所需投入缺供，运行率上限50%。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "storage.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.2,
+          "id": "L03.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "allocation_priority",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "id": "L03.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.2,
+          "id": "L03.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "jit_cap",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.5,
+          "id": "L03.4",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "gate": {
+        "has_inputs": true
+      },
+      "player_highlights": [
+        "优先拿原料，效率提高20%",
+        "只留20%仓容；断供时最多半速"
+      ]
+    },
+    "L04": {
+      "id": "L04",
+      "name": "邻里中心",
+      "slot": "Logistics",
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.public_service",
+        "building.commercial"
+      ],
+      "summary": "把邻接服务源以50%可达性转播一格；保留原服务源与容量，维护×1.2。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "service_relay",
+          "value": 0.5,
+          "targets": "self",
+          "id": "L04.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.2,
+          "id": "L04.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "把邻接医院、学校等服务接力一格",
+        "不增加服务名额；维护增加20%"
+      ]
+    },
+    "L05": {
+      "id": "L05",
+      "name": "中转仓",
+      "slot": "Logistics",
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [],
+      "summary": "仓容×2，优先收邻接生产者的溢出。自身效率×0.9。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "storage.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 2,
+          "id": "L05.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "overflow_relay",
+          "value": true,
+          "targets": "self",
+          "id": "L05.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.9,
+          "id": "L05.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "仓容翻倍，收下邻近多余产物",
+        "代价：建筑效率降低10%"
+      ]
+    },
+    "O01": {
+      "id": "O01",
+      "name": "商业医疗",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.medical"
+      ],
+      "summary": "医疗—商业邻接建立协同；医疗不再额外加幸福；实际医疗服务形成交易税基。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "medical_commercial_relation",
+          "value": true,
+          "targets": "self",
+          "id": "O01.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "medical_happiness",
+          "value": false,
+          "targets": "self",
+          "id": "O01.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "medical_activity",
+          "value": 1.2,
+          "targets": "self",
+          "id": "O01.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "医院可和商业协同，并形成交易税源",
+        "医疗服务不再额外增加幸福"
+      ]
+    },
+    "O02": {
+      "id": "O02",
+      "name": "工厂家属区",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "与本住宅同运营商的工业岗位可达性更高，同条件优先接纳。污染不减免。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "family_employment",
+          "value": true,
+          "targets": "self",
+          "id": "O02.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "本住宅更容易进入同公司工厂就业",
+        "仍然承受工业污染"
+      ]
+    },
+    "O03": {
+      "id": "O03",
+      "name": "密集住宅",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "住房×1.75，人口维护费×0.85；污染和服务缺口负面影响×1.25。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "housing",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.75,
+          "id": "O03.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "population_maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.85,
+          "id": "O03.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "exposure_multiplier",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "O03.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "shortage_multiplier",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "O03.4",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "住房增加75%，每人维护降低15%",
+        "更怕污染和服务不足"
+      ]
+    },
+    "O04": {
+      "id": "O04",
+      "name": "开放大学",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.education"
+      ],
+      "summary": "同一教育覆盖网新增相当于基础教育容量30%的娱乐容量。",
+      "rules": [
+        {
+          "op": "capacity_copy",
+          "phase": "spatial",
+          "from": "service.education",
+          "to": "service.entertainment",
+          "fraction": 0.3,
+          "id": "O04.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "学校额外提供休闲服务",
+        "休闲名额为基础教育名额的30%"
+      ]
+    },
+    "O05": {
+      "id": "O05",
+      "name": "义务教师",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "本住宅教育≥35的居民每人提供0.3教育容量；人员效率×0.85。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "volunteer_education",
+          "value": {
+            "threshold": 35,
+            "capacity_per_pop": 0.3,
+            "labor_mult": 0.85
+          },
+          "targets": "self",
+          "id": "O05.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "教育达到35的居民可兼任义务教师",
+        "代价：参与居民工作效率降低15%"
+      ]
+    },
+    "O06": {
+      "id": "O06",
+      "name": "东郊记忆",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "保留原工业Trait与历史，按商业用途结算；原工业产出、污染归零。同运营商提供的方案保留20%原产出。",
+      "rules": [
+        {
+          "op": "relate",
+          "phase": "spatial",
+          "relation": "commercial_use",
+          "id": "O06.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "targets": "self",
+          "mode": "override",
+          "value": 0,
+          "id": "O06.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "input.material",
+          "targets": "self",
+          "mode": "override",
+          "value": 0,
+          "id": "O06.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "override",
+          "value": 0,
+          "id": "O06.4",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.commercial",
+          "targets": "self",
+          "mode": "add",
+          "value": 24,
+          "id": "O06.5",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.entertainment",
+          "targets": "self",
+          "mode": "add",
+          "value": 10,
+          "id": "O06.6",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.6400000000000001,
+          "when": {
+            "same_provider": true
+          },
+          "priority": 10,
+          "id": "O06.7"
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "input.material",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.44000000000000006,
+          "when": {
+            "same_provider": true
+          },
+          "priority": 10,
+          "id": "O06.8"
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 0.6,
+      "player_highlights": [
+        "旧厂房直接改为商用，停止工业污染",
+        "停止工业产出；自营方案可保留20%"
+      ]
+    },
+    "O07": {
+      "id": "O07",
+      "name": "商业综合体",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.commercial"
+      ],
+      "summary": "以50%强度参与相邻建筑的基本协同。占地+1仍列未来，不在本版启用。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "universal_adjacency",
+          "value": 0.5,
+          "targets": "self",
+          "id": "O07.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "商业可与各种邻接建筑形成协同",
+        "跨类型协同只有通常的一半"
+      ]
+    },
+    "B01": {
+      "id": "B01",
+      "name": "服务集中",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "block"
+      ],
+      "traits": [],
+      "summary": "同类相邻服务设施合成有限容量共享池，内部可达×1.25，向外衰减×1.3。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "service_pool",
+          "value": true,
+          "targets": "self",
+          "id": "B01.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "同类相邻服务共享名额，中心更强",
+        "离开服务集群后，覆盖衰减更快"
+      ]
+    },
+    "B02": {
+      "id": "B02",
+      "name": "市政暖气",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "block"
+      ],
+      "traits": [],
+      "summary": "有限余热分配到住宅和服务建筑，每份提升5%效率，最多30%；下一周期生效。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "heat_service",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.05,
+          "when": {
+            "any_traits": [
+              "building.residential",
+              "building.service"
+            ]
+          },
+          "id": "B02.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "把实际余热送给住宅与服务设施",
+        "效率最多提高30%；下周期生效"
+      ]
+    },
+    "B03": {
+      "id": "B03",
+      "name": "市政管廊",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "block"
+      ],
+      "traits": [],
+      "summary": "道路建筑网络传递余热，维护×1.3，所在地污染的负面解释×0.5；不复制余热。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "heat_network",
+          "value": true,
+          "targets": "self",
+          "id": "B03.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.3,
+          "when": {
+            "traits": [
+              "building.road"
+            ]
+          },
+          "id": "B03.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "exposure_multiplier",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.5,
+          "when": {
+            "traits": [
+              "building.road"
+            ]
+          },
+          "id": "B03.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "通过相连道路延伸供热，减轻污染影响",
+        "代价：接入建筑维护增加30%"
+      ]
+    },
+    "B04": {
+      "id": "B04",
+      "name": "地下快速路",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "block"
+      ],
+      "traits": [],
+      "summary": "道路连接项目的就业与服务场衰减×0.6，固定维护×1.25。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "access_network",
+          "value": true,
+          "targets": "self",
+          "id": "B04.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "when": {
+            "traits": [
+              "building.road"
+            ]
+          },
+          "id": "B04.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "道路沿线更方便上班和接受服务",
+        "代价：相关建筑维护增加25%"
+      ]
+    },
+    "B05": {
+      "id": "B05",
+      "name": "战略储备",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "block"
+      ],
+      "traits": [],
+      "summary": "公共仓库仓容×2；住宅与公共服务在短缺分配中优先。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "municipal_storage",
+          "value": 2,
+          "targets": "self",
+          "id": "B05.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "allocation_priority",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "when": {
+            "any_traits": [
+              "building.residential",
+              "building.public_service"
+            ]
+          },
+          "id": "B05.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "市政仓储翻倍",
+        "物资短缺时，先保住宅与公共服务"
+      ]
+    },
+    "B06": {
+      "id": "B06",
+      "name": "用爱发电",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "block"
+      ],
+      "traits": [],
+      "summary": "上周期幸福≥75的人群每人提供0.12即时能源。掉出阈值就停止。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "happiness_energy",
+          "value": {
+            "threshold": 75,
+            "per_pop": 0.12
+          },
+          "targets": "self",
+          "id": "B06.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "幸福达到75的居民可以少量供电",
+        "一旦跌出阈值，供电就停止"
+      ]
+    },
+    "B07": {
+      "id": "B07",
+      "name": "联合采购",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "block",
+        "organization"
+      ],
+      "traits": [],
+      "summary": "同运营商成为采购组，短缺额度先到采购组、组内再按来源距离分配。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "group_procurement",
+          "value": true,
+          "targets": "self",
+          "id": "B07.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "同公司建筑一起采购，再内部调配",
+        "改变谁先拿到物资，不凭空加货"
+      ]
+    },
+    "B08": {
+      "id": "B08",
+      "name": "污染产业园",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "block"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "高污染工业获得最多25%维护折扣，但污染×1.2；读取上周期污染，避免同周期自我放大。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.75,
+          "when": {
+            "field_min": {
+              "pollution": 2
+            }
+          },
+          "id": "B08.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.2,
+          "when": {
+            "field_min": {
+              "pollution": 2
+            }
+          },
+          "id": "B08.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "高污染地区的工业，最多省25%维护",
+        "代价：这些工业的污染增加20%"
+      ]
+    },
+    "B09": {
+      "id": "B09",
+      "name": "热电共生",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "从有限余热中预留热量，下一周期抵扣能源需求，最多50%；与民生供暖争同一热源。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "heat_discount",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.5,
+          "id": "B09.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "把实际余热用于节电，最多抵扣50%",
+        "和居民供暖争同一份热量"
+      ]
+    },
+    "G01": {
+      "id": "G01",
+      "name": "企业内部协同",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "organization"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "同组织相邻工业之间的基础协同×2；不改变物理邻接。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "value": 2,
+          "targets": "self",
+          "id": "G01.1",
+          "priority": 0,
+          "field": "synergy.same_industrial",
+          "mode": "multiply"
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "同公司相邻工业，协同效果翻倍",
+        "不同公司不享受这项内部加成"
+      ]
+    },
+    "G02": {
+      "id": "G02",
+      "name": "内部供应链",
+      "slot": null,
+      "allowed_slots": [],
+      "hosts": [
+        "organization"
+      ],
+      "traits": [],
+      "summary": "本组织建筑先从同组织来源采购，不足再用其他来源。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "same_supplier",
+          "value": true,
+          "targets": "self",
+          "id": "G02.1",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "先向同公司生产者拿货",
+        "内部不够，再向全地区采购"
+      ]
+    },
+    "M01": {
+      "id": "M01",
+      "name": "模块化设计",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [],
+      "summary": "增加一个可放生产/物流方案的Flex槽；维护×1.25。拆走它会被检查，不能让附加槽变成幽灵位。",
+      "rules": [
+        {
+          "op": "slot_add",
+          "phase": "spatial",
+          "name": "Flex",
+          "accepts": [
+            "Production",
+            "Logistics"
+          ],
+          "id": "M01.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "M01.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 0.35,
+      "player_highlights": [
+        "多一个可装生产或物流方案的位置",
+        "代价：维护增加25%"
+      ]
+    },
+    "R05": {
+      "id": "R05",
+      "name": "社区诊所",
+      "slot": "Logistics",
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.medical"
+      ],
+      "summary": "医疗容量×0.7，服务衰减×0.5；邻接住户优先。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.medical",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.7,
+          "id": "R05.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service_decay",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.5,
+          "id": "R05.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "adjacent_service_priority",
+          "value": true,
+          "targets": "self",
+          "id": "R05.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "更远住户也能接受医疗，邻接优先",
+        "代价：医疗名额减少30%"
+      ]
+    },
+    "R08": {
+      "id": "R08",
+      "name": "社区商业",
+      "slot": "Logistics",
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.commercial"
+      ],
+      "summary": "只服务邻接格，消费容量×1.5。与远覆盖电商方案竞争物流槽。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service_range",
+          "targets": "self",
+          "mode": "override",
+          "value": 1,
+          "id": "R08.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.commercial",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "R08.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "购物服务名额增加50%",
+        "只服务紧挨着的住区"
+      ]
+    },
+    "R10": {
+      "id": "R10",
+      "name": "都市农业",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.residential",
+        "building.commercial"
+      ],
+      "summary": "建筑额外产1.5食物/h，维护+0.7/h，岗位需求+1。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "add",
+          "value": 1.5,
+          "id": "R10.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.7,
+          "id": "R10.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "jobs",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "id": "R10.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "额外种出1.5粮食/小时",
+        "代价：多1岗位、0.7维护/小时"
+      ]
+    },
+    "R14": {
+      "id": "R14",
+      "name": "农家乐",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.agricultural"
+      ],
+      "summary": "食物产出×0.8，提供12人娱乐容量，维护+0.6/h。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.8,
+          "id": "R14.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.entertainment",
+          "targets": "self",
+          "mode": "add",
+          "value": 12,
+          "id": "R14.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.6,
+          "id": "R14.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "农场额外提供12个休闲名额",
+        "粮食少20%，维护多0.6/小时"
+      ]
+    },
+    "R15": {
+      "id": "R15",
+      "name": "精耕小农",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.agricultural"
+      ],
+      "summary": "粮食潜力×1.4，岗位需求×1.25；低运行率时的损失更陡。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.4,
+          "id": "R15.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "jobs",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "R15.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "utilization_exponent",
+          "value": 1.6,
+          "targets": "self",
+          "id": "R15.3",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "农业产出潜力提高40%",
+        "多用25%人手；低负荷损失更大"
+      ]
+    },
+    "R16": {
+      "id": "R16",
+      "name": "家庭作坊",
+      "slot": "Production",
+      "allowed_slots": [
+        "Production"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "住宅新增2个岗位，消耗0.5材料/h产0.8制成品/h，产生1污染/h，维护+0.6。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "jobs",
+          "targets": "self",
+          "mode": "add",
+          "value": 2,
+          "id": "R16.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "input.material",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.5,
+          "id": "R16.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.8,
+          "id": "R16.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "id": "R16.4",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.6,
+          "id": "R16.5",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "住宅消耗材料，制造少量生活用品",
+        "新增2岗位，同时增加污染和维护"
+      ]
+    },
+    "R17": {
+      "id": "R17",
+      "name": "职住一体",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "住房×0.9，本群与邻接岗位的可达排序提高；不把距离当额外效率惩罚。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "housing",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.9,
+          "id": "R17.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "neighbor_employment",
+          "value": true,
+          "targets": "self",
+          "id": "R17.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "更方便进入紧挨着的建筑工作",
+        "代价：住房减少10%"
+      ]
+    },
+    "R18": {
+      "id": "R18",
+      "name": "公共厨房",
+      "slot": "Operations",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "hosts": [
+        "building",
+        "block"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "邻接住宅形成共享厨房，每处最多覆盖24人；覆盖者食物需求×0.8。每处维护+1/h。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "kitchen_capacity",
+          "value": 24,
+          "targets": "self",
+          "id": "R18.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "id": "R18.2",
+          "priority": 0
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0,
+      "player_highlights": [
+        "邻接住宅共用厨房，覆盖者省20%口粮",
+        "每处最多服务24人，维护增加1/小时"
+      ]
+    }
+  },
+  "operators": {
+    "civic": {
+      "id": "civic",
+      "name": "城投合作社",
+      "traits": [
+        "organization.public",
+        "organization.integrated"
+      ],
+      "preferred_buildings": [
+        "hamlet",
+        "market",
+        "warehouse",
+        "park"
+      ],
+      "preferred_bonuses": [
+        "O06",
+        "L04",
+        "L05",
+        "O03"
+      ],
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "storage.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.2,
+          "id": "org.civic.0"
+        }
+      ],
+      "summary": "同样基础造价，提供20%额外仓容。",
+      "slot_layout": [
+        "Production",
+        "Logistics",
+        "Operations"
+      ],
+      "cohesion_efficiency": 0.03
+    },
+    "steel": {
+      "id": "steel",
+      "name": "白霭重工",
+      "traits": [
+        "organization.industrial",
+        "organization.scale"
+      ],
+      "preferred_buildings": [
+        "works",
+        "timber",
+        "power"
+      ],
+      "preferred_bonuses": [
+        "P01",
+        "L03",
+        "G01",
+        "B07"
+      ],
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "value": 2,
+          "targets": "self",
+          "id": "org.steel.0",
+          "field": "synergy.same_industrial",
+          "mode": "multiply"
+        }
+      ],
+      "summary": "同组织邻接工业的基础协同加倍。",
+      "slot_layout": [
+        "Production",
+        "Production",
+        "Operations"
+      ],
+      "cohesion_efficiency": 0.03
+    },
+    "circular": {
+      "id": "circular",
+      "name": "循生工程",
+      "traits": [
+        "organization.circular",
+        "organization.industrial"
+      ],
+      "preferred_buildings": [
+        "works",
+        "power",
+        "warehouse"
+      ],
+      "preferred_bonuses": [
+        "P05",
+        "P06",
+        "B09",
+        "L05"
+      ],
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.9,
+          "id": "org.circular.0"
+        }
+      ],
+      "summary": "所运营建筑的污染系数×0.9。",
+      "slot_layout": [
+        "Production",
+        "Logistics",
+        "Operations"
+      ],
+      "cohesion_efficiency": 0.03
+    },
+    "river": {
+      "id": "river",
+      "name": "河运商社",
+      "traits": [
+        "organization.trade",
+        "organization.logistics"
+      ],
+      "preferred_buildings": [
+        "market",
+        "warehouse",
+        "timber"
+      ],
+      "preferred_bonuses": [
+        "L01",
+        "L02",
+        "G02",
+        "L05"
+      ],
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "storage.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "org.river.0"
+        }
+      ],
+      "summary": "所运营建筑的仓容×1.25。",
+      "slot_layout": [
+        "Production",
+        "Logistics",
+        "Logistics"
+      ],
+      "cohesion_efficiency": 0.03
+    },
+    "farmers": {
+      "id": "farmers",
+      "name": "耕林联社",
+      "traits": [
+        "organization.agriculture",
+        "organization.local"
+      ],
+      "preferred_buildings": [
+        "farm",
+        "timber",
+        "hamlet"
+      ],
+      "preferred_bonuses": [
+        "P07",
+        "R10",
+        "R14",
+        "R15"
+      ],
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.1,
+          "when": {
+            "traits": [
+              "building.agricultural"
+            ]
+          },
+          "id": "org.farmers.0"
+        }
+      ],
+      "summary": "所运营农业的基础粮食输出×1.1。",
+      "slot_layout": [
+        "Production",
+        "Production",
+        "Operations"
+      ],
+      "cohesion_efficiency": 0.03
+    },
+    "academy": {
+      "id": "academy",
+      "name": "白霭学社",
+      "traits": [
+        "organization.knowledge",
+        "organization.medical"
+      ],
+      "preferred_buildings": [
+        "school",
+        "clinic",
+        "park"
+      ],
+      "preferred_bonuses": [
+        "P02",
+        "P03",
+        "O04",
+        "O05"
+      ],
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.education",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.1,
+          "id": "org.academy.0"
+        }
+      ],
+      "summary": "所运营建筑的教育容量×1.1。",
+      "slot_layout": [
+        "Production",
+        "Operations",
+        "Operations"
+      ],
+      "cohesion_efficiency": 0.03
+    },
+    "care": {
+      "id": "care",
+      "name": "公共卫生局",
+      "traits": [
+        "organization.public",
+        "organization.care"
+      ],
+      "preferred_buildings": [
+        "clinic",
+        "school",
+        "hamlet",
+        "park"
+      ],
+      "preferred_bonuses": [
+        "P02",
+        "R05",
+        "P04",
+        "L04"
+      ],
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "exposure_multiplier",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.9,
+          "id": "org.care.0"
+        }
+      ],
+      "summary": "所运营建筑承受的污染负面解释×0.9。",
+      "slot_layout": [
+        "Production",
+        "Logistics",
+        "Operations"
+      ],
+      "cohesion_efficiency": 0.03
+    },
+    "commons": {
+      "id": "commons",
+      "name": "街坊营造社",
+      "traits": [
+        "organization.community",
+        "organization.general"
+      ],
+      "preferred_buildings": [
+        "hamlet",
+        "farm",
+        "timber",
+        "power",
+        "works",
+        "market",
+        "school",
+        "clinic",
+        "park",
+        "warehouse"
+      ],
+      "preferred_bonuses": [
+        "O02",
+        "R17",
+        "R18",
+        "R08"
+      ],
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.entertainment",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.1,
+          "id": "org.commons.0"
+        }
+      ],
+      "summary": "所运营建筑娱乐容量×1.1。",
+      "slot_layout": [
+        "Production",
+        "Operations",
+        "Operations"
+      ],
+      "cohesion_efficiency": 0.03
+    }
+  },
+  "policies": {
+    "tax_head": {
+      "id": "tax_head",
+      "name": "人头税",
+      "slot": "Tax",
+      "summary": "按真实人群每人每小时征0.85通货。空房不缴税。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "tax_mode",
+          "value": "head",
+          "targets": "self",
+          "id": "policy.tax_head.0"
+        }
+      ]
+    },
+    "tax_production": {
+      "id": "tax_production",
+      "name": "生产税",
+      "slot": "Tax",
+      "summary": "按实际物资产出征税；能源、知识与场不算普通产物税基。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "tax_mode",
+          "value": "production",
+          "targets": "self",
+          "id": "policy.tax_production.0"
+        }
+      ]
+    },
+    "tax_trade": {
+      "id": "tax_trade",
+      "name": "交易税",
+      "slot": "Tax",
+      "summary": "按真实消费服务、商业化医疗活动征税；未接纳顾客不缴容量税。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "tax_mode",
+          "value": "trade",
+          "targets": "self",
+          "id": "policy.tax_trade.0"
+        }
+      ]
+    },
+    "jobs_access": {
+      "id": "jobs_access",
+      "name": "就近就业",
+      "slot": "Labor",
+      "summary": "可达性最高先分配；同分时保持现有工作，再以稳定ID决胜。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "labor_mode",
+          "value": "access",
+          "targets": "self",
+          "id": "policy.jobs_access.0"
+        }
+      ]
+    },
+    "jobs_merit": {
+      "id": "jobs_merit",
+      "name": "择优而录",
+      "slot": "Labor",
+      "summary": "优先人员效率较高的人群；可达性决定资格并作次级排序。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "labor_mode",
+          "value": "merit",
+          "targets": "self",
+          "id": "policy.jobs_merit.0"
+        }
+      ]
+    },
+    "pollution_default": {
+      "id": "pollution_default",
+      "name": "默认排放",
+      "slot": "Environment",
+      "summary": "默认来源强度、范围与衰减。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "pollution_mode",
+          "value": "normal",
+          "targets": "self",
+          "id": "policy.pollution_default.0"
+        }
+      ]
+    },
+    "pollution_spread": {
+      "id": "pollution_spread",
+      "name": "开放排污",
+      "slot": "Environment",
+      "summary": "传播范围×2、源头影响系数×0.3；属于主动减量+扩散，不宣称总量守恒。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution_range",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 2,
+          "id": "policy.pollution_spread.0"
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.3,
+          "id": "policy.pollution_spread.1"
+        }
+      ]
+    },
+    "pollution_fee": {
+      "id": "pollution_fee",
+      "name": "污染计源",
+      "slot": "Environment",
+      "summary": "按实际排放源分别产生排污费；不是按每个接收格反复收费。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "pollution_fee",
+          "value": 0.3,
+          "targets": "self",
+          "id": "policy.pollution_fee.0"
+        }
+      ]
+    },
+    "procure_near": {
+      "id": "procure_near",
+      "name": "就近采购",
+      "slot": "Procurement",
+      "summary": "短缺时距离库存来源近者先获得资源。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "procure_mode",
+          "value": "near",
+          "targets": "self",
+          "id": "policy.procure_near.0"
+        }
+      ]
+    },
+    "procure_split": {
+      "id": "procure_split",
+      "name": "分散采购",
+      "slot": "Procurement",
+      "summary": "每个消费者的同类需求对同一来源最高占60%；可能拿不满换来源分散。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "procure_mode",
+          "value": "split",
+          "targets": "self",
+          "id": "policy.procure_split.0"
+        }
+      ]
+    },
+    "land_normal": {
+      "id": "land_normal",
+      "name": "常规用地",
+      "slot": "Land",
+      "summary": "不另征土地年金。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "land_rent",
+          "value": 0,
+          "targets": "self",
+          "id": "policy.land_normal.0"
+        }
+      ]
+    },
+    "land_rent": {
+      "id": "land_rent",
+      "name": "土地出让年金",
+      "slot": "Land",
+      "summary": "经营项目每栋每小时交1.8通货，建筑效率×0.9。",
+      "rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "land_rent",
+          "value": 1.8,
+          "targets": "self",
+          "id": "policy.land_rent.0"
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.9,
+          "id": "policy.land_rent.1"
+        }
+      ]
+    }
+  },
+  "world_rules": [
+    {
+      "op": "modify",
+      "phase": "spatial",
+      "field": "output.food",
+      "targets": "self",
+      "mode": "multiply",
+      "value": 1.45,
+      "when": {
+        "traits": [
+          "building.agricultural"
+        ],
+        "tile_traits": [
+          "tile.fertile"
+        ]
+      },
+      "id": "world.0"
+    },
+    {
+      "op": "modify",
+      "phase": "spatial",
+      "field": "output.material",
+      "targets": "self",
+      "mode": "multiply",
+      "value": 1.25,
+      "when": {
+        "traits": [
+          "building.extractive"
+        ],
+        "tile_traits": [
+          "tile.forest"
+        ]
+      },
+      "id": "world.1"
+    },
+    {
+      "id": "world.highland_quarry",
+      "op": "modify",
+      "phase": "spatial",
+      "field": "output.material",
+      "targets": "self",
+      "mode": "multiply",
+      "value": 1.35,
+      "when": {
+        "traits": [
+          "building.extractive"
+        ],
+        "tile_traits": [
+          "tile.highland"
+        ]
+      }
+    },
+    {
+      "id": "world.waterfront_industry",
+      "op": "modify",
+      "phase": "spatial",
+      "field": "energy_demand",
+      "targets": "self",
+      "mode": "multiply",
+      "value": 0.8,
+      "when": {
+        "traits": [
+          "building.industrial"
+        ],
+        "tile_traits": [
+          "tile.waterfront"
+        ]
+      }
+    },
+    {
+      "id": "world.waterfront_leisure",
+      "op": "modify",
+      "phase": "spatial",
+      "field": "service.entertainment",
+      "targets": "self",
+      "mode": "multiply",
+      "value": 1.25,
+      "when": {
+        "traits": [
+          "building.leisure"
+        ],
+        "tile_traits": [
+          "tile.waterfront"
+        ]
+      }
+    }
+  ],
+  "backlog": [
+    {
+      "id": "P01",
+      "name": "粗野制造",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "P02",
+      "name": "研究型医院",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "P03",
+      "name": "实践教育",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "P04",
+      "name": "生物质能公共设施",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "P05",
+      "name": "热量管理",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "P06",
+      "name": "高级回收",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "P07",
+      "name": "家庭农场",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "P08",
+      "name": "水基工厂",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "P09",
+      "name": "污物固化",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "L01",
+      "name": "电商仓储店",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "L02",
+      "name": "无人机站",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "L03",
+      "name": "零库存生产",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "L04",
+      "name": "邻里中心",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "L05",
+      "name": "中转仓",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "O01",
+      "name": "商业医疗",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "O02",
+      "name": "工厂家属区",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "O03",
+      "name": "密集住宅",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "O04",
+      "name": "开放大学",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "O05",
+      "name": "义务教师",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "O06",
+      "name": "东郊记忆",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B01",
+      "name": "服务集中",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B02",
+      "name": "市政暖气",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B03",
+      "name": "市政管廊",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B04",
+      "name": "地下快速路",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B05",
+      "name": "战略储备",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B06",
+      "name": "用爱发电",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B07",
+      "name": "联合采购",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B08",
+      "name": "污染产业园",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "B09",
+      "name": "热电共生",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "G01",
+      "name": "企业内部协同",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "G02",
+      "name": "内部供应链",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "M01",
+      "name": "模块化设计",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "O07",
+      "name": "商业综合体",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R01",
+      "name": "产业学院",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R02",
+      "name": "社区夜校",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R03",
+      "name": "学术园区",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R04",
+      "name": "预防医学",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R05",
+      "name": "社区诊所",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R06",
+      "name": "医疗产业园",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R07",
+      "name": "工厂直营",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R08",
+      "name": "社区商业",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R09",
+      "name": "批发市场",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R10",
+      "name": "都市农业",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R11",
+      "name": "农业循环",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R12",
+      "name": "农业合作社",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R13",
+      "name": "自给农庄",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R14",
+      "name": "农家乐",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R15",
+      "name": "精耕小农",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R16",
+      "name": "家庭作坊",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R17",
+      "name": "职住一体",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R18",
+      "name": "公共厨房",
+      "implemented": true,
+      "reason": ""
+    },
+    {
+      "id": "R19",
+      "name": "副产品经济",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R20",
+      "name": "污染资源化",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R21",
+      "name": "服务外包",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R22",
+      "name": "共享仓储",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R23",
+      "name": "专业化采购",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R24",
+      "name": "服务共址",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R25",
+      "name": "工业余热直供",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R26",
+      "name": "产业共生",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R27",
+      "name": "自营改造",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R28",
+      "name": "多用途许可",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R29",
+      "name": "复合方案",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    },
+    {
+      "id": "R30",
+      "name": "专项改造",
+      "implemented": false,
+      "reason": "保持原文候选；缺乏冻结参数或依赖未来子系统，本次不发进可玩池。"
+    }
+  ],
+  "balance": {
+    "initial_money": 640,
+    "initial_dt": 42,
+    "dt_cap": 96,
+    "offline_dt_per_hour": 0.5,
+    "tick_hours": 0.1,
+    "base_load": 0.65,
+    "building_load": 0.04,
+    "initial_people": 18,
+    "base_energy": 3,
+    "bonus_offer_price": 48,
+    "block_offer_price": 95,
+    "policy_switch_price": 16,
+    "birth_per_hour": 0.009,
+    "population_maintenance": 0.22,
+    "initial_stock": {
+      "food": 32,
+      "material": 55,
+      "goods": 0
+    },
+    "municipal_capacity": {
+      "food": 64,
+      "material": 80,
+      "goods": 32
+    },
+    "group_events_hours": [
+      3,
+      6,
+      9,
+      12
+    ],
+    "service_kinds": [
+      "medical",
+      "education",
+      "entertainment",
+      "commercial"
+    ],
+    "service_start_hours": 3.0,
+    "service_grace_hours": 2.0,
+    "goods_grace_hours": 2.0,
+    "population_food": 0.18,
+    "population_material": 0.025,
+    "population_goods": 0.075,
+    "population_energy": 0.08,
+    "target_people": 30,
+    "target_stable_hours": 1.0,
+    "goal_duration": 1.2,
+    "head_tax": 0.9,
+    "production_tax": 2.6,
+    "trade_tax": 1.1,
+    "recontract_cost": 40,
+    "reforge_cost": 90,
+    "reforge_material": 6,
+    "reforge_dt": 1.5,
+    "operator_change_cost": 150,
+    "arrival_count": 6,
+    "goal_delivery_material": 20,
+    "goal_delivery_goods": 12
+  },
+  "original_origins": [
+    {
+      "id": "village",
+      "name": "自然村落",
+      "story": "几户人家已经在河谷落脚。他们把第一批粮食留给了新社区，也盼着孩子有地方读书。",
+      "anchor": "farm",
+      "cash": 0,
+      "food": 18,
+      "material": 0,
+      "goods": 0,
+      "dt": 3,
+      "tags": [
+        "agriculture"
+      ],
+      "hint": "谷物农场与18位居民已经在这里，建材和空缺住房决定下一步。"
+    },
+    {
+      "id": "charter",
+      "name": "希望城特许",
+      "story": "希望城送来特许状与基础供能队。先建好了动力站，接下来要让跟随你的人住下、吃饭、有活干。",
+      "anchor": "hall",
+      "cash": 150,
+      "food": 0,
+      "material": 12,
+      "goods": 0,
+      "dt": 0,
+      "tags": [
+        "community"
+      ],
+      "hint": "额外资金和4个行政岗位；需要补本地粮食与建材。"
+    },
+    {
+      "id": "miners",
+      "name": "工矿定居",
+      "story": "北坡的矿工把棚屋搭在岩丘旁。他们找到了石料，也留下了需要改善的生活条件。",
+      "anchor": "quarry",
+      "cash": 0,
+      "food": 0,
+      "material": 12,
+      "goods": 0,
+      "dt": 1,
+      "tags": [],
+      "hint": "采石岗位与材料充足，但需要关注住宅粉尘，尽快补粮食。"
+    },
+    {
+      "id": "free",
+      "name": "自由拓荒",
+      "story": "一支小队带着工具与自己的打算抵达。没有被写好的产业使命，林缘工坊先为大家搭起第一批房子。",
+      "anchor": "timber",
+      "cash": 60,
+      "food": 5,
+      "material": 4,
+      "goods": 0,
+      "dt": 2,
+      "tags": [
+        "community"
+      ],
+      "hint": "林缘建材起步；自由选择下一项需求，不受预涂用途限制。"
+    }
+  ],
+  "city_goals": {
+    "community": {
+      "name": "宜居河谷",
+      "description": "让安顿下来的居民持续获得医疗、购物与休闲，健康和幸福都达到72。",
+      "hours": 1.2
+    },
+    "delivery": {
+      "name": "供给之城",
+      "description": "建立稳定生活供给，再实际交付20材料与12制成品。",
+      "material": 20,
+      "goods": 12
+    },
+    "renewal": {
+      "name": "旧区新生",
+      "description": "为最初的住户补齐两类服务：平均覆盖改善25个百分点并达到70%，健康不下降。",
+      "hours": 1.2
+    }
+  }
+}

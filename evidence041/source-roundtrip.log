@@ -1,0 +1,50 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Condition "ret != noErr" is true. Returning: ""
+   at: get_system_ca_certificates (platform/macos/os_macos.mm:1035)
+040 PASS new game uses schema5
+040 PASS new schema5 game validates
+040 PASS opening contains an upgradeable Tier1 project
+040 PASS upgrade preview returns a usable model
+040 PASS upgrade preview exposes price/resources and construction points
+040 PASS upgrade preview changes neither state nor RNG
+040 PASS specialization preview includes abilities absent from the new node
+040 PASS bonus reward draft can be created
+040 PASS reward is three distinct Bonus choices
+040 PASS drawing a reward commits the draft
+040 PASS reward choices survive save/load exactly
+040 PASS same reward source returns the stable choices without mutating state
+040 PASS choosing once grants exactly one deployment license
+040 PASS completed reward cannot be claimed twice
+040 PASS direct reward source grants one license
+040 PASS same source cannot duplicate a normal license
+040 PASS fixture finds a legally installable licensed Bonus
+040 PASS install consumes the one deployment charge
+040 PASS spent license cannot deploy the same Bonus again
+040 PASS fixture has two upgrades competing for construction capacity
+040 PASS upgrade job starts for B000001
+040 PASS upgrade job starts for B000003
+040 PASS shared construction capacity exposes a two-job queue
+040 PASS construction queue is independent of project dictionary order
+040 PASS one tick shares no more construction points than capacity allows
+040 PASS zero material cannot complete queued upgrades
+040 PASS construction consumes finite material without negative stock
+040 PASS upgrade completion transition succeeds
+040 PASS upgrade preserves project ID, tile and operator
+040 PASS upgrade advances exactly to the chosen node
+040 PASS upgrade completion preserves the project's exact inventory
+040 PASS upgrade retains prior slot identities and unlocks one stable track slot
+040 PASS trade fixture can create a freight-capable project
+040 PASS Block market exposes resource pressure
+040 PASS negative market still keeps buy strictly above sell
+040 PASS two orders share one tick's freight capacity instead of each receiving a fresh allowance
+040 PASS negative-price buy order accepted
+040 PASS negative buy adds stock and pays the city
+040 PASS negative-price disposal order accepted
+040 PASS negative sell removes stock and charges disposal cost
+040 PASS negative-price trades leave a valid conserved state
+040 PASS unfinished city goal cannot grant naming
+040 PASS completed Block receives one naming action
+040 PASS naming spends no money, DT or inventory
+040 PASS Block naming right is consumed and cannot be replayed
+ACCEPTANCE040 45/45 evidence=/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/source-roundtrip/acceptance040.json

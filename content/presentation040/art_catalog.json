@@ -1,0 +1,2459 @@
+{
+  "schema": "met.art.040",
+  "style": "laisheng_near_future_open_colony_miniature_3d",
+  "render_pipeline": "Blender 4.5.1 LTS; original parameterized 3D geometry, hand-authored mineral materials and EEVEE area-light shading",
+  "world_units": "Blender world units; X and Y are footprint axes, Z is height; the fixed camera faces the negative-Y front",
+  "camera": {
+    "direction_vector_to_camera": [
+      9,
+      -12,
+      13.2
+    ],
+    "elevation_degrees": 41.35,
+    "azimuth_degrees": -53.1301,
+    "aim_point_offset_screen_up_world_units": 8.96,
+    "orthographic_scale_world_units": 64.0,
+    "prop_scales_world_units": {
+      "common_props": 20.0,
+      "modules": 26.0,
+      "terrain_hills": 42.0,
+      "courtyard": 26.0
+    },
+    "ground_projection_compression": 0.661,
+    "height_projection_compression": 0.751,
+    "ground_anchor_normalized": [
+      0.5,
+      0.64
+    ]
+  },
+  "assets": {
+    "building_homestead": {
+      "id": "building_homestead",
+      "path": "assets/world040/buildings/homestead.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        227,
+        328,
+        547,
+        545
+      ],
+      "world_bounds": [
+        -14.430000305175781,
+        -4.515000343322754,
+        0.0,
+        12.420000076293945,
+        9.469138145446777,
+        6.400000095367432
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 1,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -14.430000305175781,
+        -3.0250000953674316,
+        12.350000381469727,
+        7.868655204772949
+      ],
+      "roof_world_bounds": [
+        -10.210000038146973,
+        -3.0,
+        4.320000171661377,
+        9.40999984741211,
+        9.469138145446777,
+        6.3672943115234375
+      ],
+      "connector_anchors": {
+        "front": [
+          -1.0399999618530273,
+          -3.0250000953674316
+        ],
+        "right": [
+          12.350000381469727,
+          2.421827554702759
+        ],
+        "rear": [
+          -1.0399999618530273,
+          7.868655204772949
+        ],
+        "left": [
+          -14.430000305175781,
+          2.421827554702759
+        ]
+      }
+    },
+    "building_neighborhood": {
+      "id": "building_neighborhood",
+      "path": "assets/world040/buildings/neighborhood.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        199,
+        346,
+        583,
+        607
+      ],
+      "world_bounds": [
+        -15.494999885559082,
+        -10.199999809265137,
+        0.0,
+        14.246232032775879,
+        10.246232032775879,
+        9.100000381469727
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 1,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -15.494999885559082,
+        -10.199999809265137,
+        12.75,
+        8.319999694824219
+      ],
+      "roof_world_bounds": [
+        -12.960000038146973,
+        -3.4000000953674316,
+        4.820000171661377,
+        12.710000038146973,
+        5.699999809265137,
+        5.760876655578613
+      ],
+      "connector_anchors": {
+        "front": [
+          -1.372499942779541,
+          -10.199999809265137
+        ],
+        "right": [
+          12.75,
+          -0.940000057220459
+        ],
+        "rear": [
+          -1.372499942779541,
+          8.319999694824219
+        ],
+        "left": [
+          -15.494999885559082,
+          -0.940000057220459
+        ]
+      }
+    },
+    "building_workshop": {
+      "id": "building_workshop",
+      "path": "assets/world040/buildings/workshop.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        193,
+        329,
+        548,
+        619
+      ],
+      "world_bounds": [
+        -16.850000381469727,
+        -11.627827644348145,
+        0.0,
+        15.876025199890137,
+        8.260000228881836,
+        7.110000133514404
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 1,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -16.850000381469727,
+        -11.627827644348145,
+        14.694999694824219,
+        8.225000381469727
+      ],
+      "roof_world_bounds": [
+        -16.809999465942383,
+        -6.260000228881836,
+        4.019999980926514,
+        10.774999618530273,
+        8.260000228881836,
+        6.925000190734863
+      ],
+      "connector_anchors": {
+        "front": [
+          -1.077500343322754,
+          -11.627827644348145
+        ],
+        "right": [
+          14.694999694824219,
+          -1.701413631439209
+        ],
+        "rear": [
+          -1.077500343322754,
+          8.225000381469727
+        ],
+        "left": [
+          -16.850000381469727,
+          -1.701413631439209
+        ]
+      }
+    },
+    "building_advanced_residence": {
+      "id": "building_advanced_residence",
+      "path": "assets/world040/buildings/advanced_residence.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        151,
+        214,
+        639,
+        621
+      ],
+      "world_bounds": [
+        -18.639999389648438,
+        -7.574999809265137,
+        0.0,
+        18.96500015258789,
+        17.790000915527344,
+        21.05000114440918
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -18.610000610351562,
+        -6.640000343322754,
+        18.809999465942383,
+        17.739999771118164
+      ],
+      "roof_world_bounds": [
+        -18.639999389648438,
+        -7.574999809265137,
+        0.5115999579429626,
+        18.84000015258789,
+        17.790000915527344,
+        20.19999885559082
+      ],
+      "connector_anchors": {
+        "front": [
+          0.09999942779541016,
+          -6.640000343322754
+        ],
+        "right": [
+          18.809999465942383,
+          5.549999713897705
+        ],
+        "rear": [
+          0.09999942779541016,
+          17.739999771118164
+        ],
+        "left": [
+          -18.610000610351562,
+          5.549999713897705
+        ]
+      }
+    },
+    "building_residence": {
+      "id": "building_residence",
+      "path": "assets/world040/buildings/residence.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        151,
+        288,
+        619,
+        632
+      ],
+      "world_bounds": [
+        -17.5,
+        -8.949999809265137,
+        0.0,
+        17.614999771118164,
+        12.17668342590332,
+        12.050000190734863
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 2,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -17.5,
+        -8.899999618530273,
+        17.5,
+        11.799999237060547
+      ],
+      "roof_world_bounds": [
+        -16.790000915527344,
+        -6.190000057220459,
+        6.489999771118164,
+        17.489999771118164,
+        9.289999961853027,
+        11.199999809265137
+      ],
+      "connector_anchors": {
+        "front": [
+          0.0,
+          -8.899999618530273
+        ],
+        "right": [
+          17.5,
+          1.4499998092651367
+        ],
+        "rear": [
+          0.0,
+          11.799999237060547
+        ],
+        "left": [
+          -17.5,
+          1.4499998092651367
+        ]
+      }
+    },
+    "building_agriculture": {
+      "id": "building_agriculture",
+      "path": "assets/world040/buildings/agriculture.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        138,
+        331,
+        602,
+        636
+      ],
+      "world_bounds": [
+        -18.332500457763672,
+        -10.734972953796387,
+        0.0,
+        17.76506996154785,
+        16.40399932861328,
+        6.480000019073486
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 2,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -18.332500457763672,
+        -9.899999618530273,
+        15.0,
+        10.800000190734863
+      ],
+      "roof_world_bounds": [
+        -15.809999465942383,
+        -4.940000057220459,
+        3.6579999923706055,
+        13.0,
+        16.40399932861328,
+        6.480000019073486
+      ],
+      "connector_anchors": {
+        "front": [
+          -1.666250228881836,
+          -9.899999618530273
+        ],
+        "right": [
+          15.0,
+          0.4500002861022949
+        ],
+        "rear": [
+          -1.666250228881836,
+          10.800000190734863
+        ],
+        "left": [
+          -18.332500457763672,
+          0.4500002861022949
+        ]
+      }
+    },
+    "building_public_center": {
+      "id": "building_public_center",
+      "path": "assets/world040/buildings/public_center.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        139,
+        289,
+        615,
+        643
+      ],
+      "world_bounds": [
+        -17.5,
+        -10.600000381469727,
+        0.0,
+        17.764999389648438,
+        8.489999771118164,
+        9.449999809265137
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 2,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -17.5,
+        -10.600000381469727,
+        17.610000610351562,
+        8.4399995803833
+      ],
+      "roof_world_bounds": [
+        -16.889999389648438,
+        -4.890000343322754,
+        6.889999866485596,
+        17.639999389648438,
+        8.489999771118164,
+        8.600000381469727
+      ],
+      "connector_anchors": {
+        "front": [
+          0.05500030517578125,
+          -10.600000381469727
+        ],
+        "right": [
+          17.610000610351562,
+          -1.080000400543213
+        ],
+        "rear": [
+          0.05500030517578125,
+          8.4399995803833
+        ],
+        "left": [
+          -17.5,
+          -1.080000400543213
+        ]
+      }
+    },
+    "building_medical_clinic": {
+      "id": "building_medical_clinic",
+      "path": "assets/world040/buildings/medical_clinic.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        178,
+        297,
+        615,
+        612
+      ],
+      "world_bounds": [
+        -15.190000534057617,
+        -9.450000762939453,
+        0.0,
+        17.710628509521484,
+        8.989999771118164,
+        12.050000190734863
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 2,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -15.15999984741211,
+        -8.308189392089844,
+        16.735000610351562,
+        8.9399995803833
+      ],
+      "roof_world_bounds": [
+        -15.190000534057617,
+        -5.390000343322754,
+        6.489999771118164,
+        11.739999771118164,
+        8.989999771118164,
+        11.199999809265137
+      ],
+      "connector_anchors": {
+        "front": [
+          0.7875003814697266,
+          -8.308189392089844
+        ],
+        "right": [
+          16.735000610351562,
+          0.3159050941467285
+        ],
+        "rear": [
+          0.7875003814697266,
+          8.9399995803833
+        ],
+        "left": [
+          -15.15999984741211,
+          0.3159050941467285
+        ]
+      }
+    },
+    "building_primary_school": {
+      "id": "building_primary_school",
+      "path": "assets/world040/buildings/primary_school.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        195,
+        291,
+        605,
+        623
+      ],
+      "world_bounds": [
+        -16.59000015258789,
+        -13.5,
+        0.0,
+        16.315000534057617,
+        9.946231842041016,
+        8.199999809265137
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 2,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -16.559999465942383,
+        -13.5,
+        16.15999984741211,
+        8.9399995803833
+      ],
+      "roof_world_bounds": [
+        -16.59000015258789,
+        -3.390000104904175,
+        6.489999771118164,
+        16.189998626708984,
+        8.989999771118164,
+        8.199999809265137
+      ],
+      "connector_anchors": {
+        "front": [
+          -0.19999980926513672,
+          -13.5
+        ],
+        "right": [
+          16.15999984741211,
+          -2.2800002098083496
+        ],
+        "rear": [
+          -0.19999980926513672,
+          8.9399995803833
+        ],
+        "left": [
+          -16.559999465942383,
+          -2.2800002098083496
+        ]
+      }
+    },
+    "building_power_station": {
+      "id": "building_power_station",
+      "path": "assets/world040/buildings/power_station.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        141,
+        298,
+        557,
+        646
+      ],
+      "world_bounds": [
+        -16.690000534057617,
+        -12.197284698486328,
+        0.0,
+        16.19021224975586,
+        8.260000228881836,
+        8.84000015258789
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 2,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -16.65999984741211,
+        -12.197284698486328,
+        16.19021224975586,
+        8.225000381469727
+      ],
+      "roof_world_bounds": [
+        -16.690000534057617,
+        -6.260000228881836,
+        6.489999771118164,
+        6.774999618530273,
+        8.260000228881836,
+        8.84000015258789
+      ],
+      "connector_anchors": {
+        "front": [
+          -0.234893798828125,
+          -12.197284698486328
+        ],
+        "right": [
+          16.19021224975586,
+          -1.9861421585083008
+        ],
+        "rear": [
+          -0.234893798828125,
+          8.225000381469727
+        ],
+        "left": [
+          -16.65999984741211,
+          -1.9861421585083008
+        ]
+      }
+    },
+    "building_extraction": {
+      "id": "building_extraction",
+      "path": "assets/world040/buildings/extraction.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        163,
+        338,
+        566,
+        624
+      ],
+      "world_bounds": [
+        -15.527544975280762,
+        -10.12841510772705,
+        -1.6663254499435425,
+        15.645742416381836,
+        8.643436431884766,
+        12.40000057220459
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 2,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -14.057177543640137,
+        -10.12841510772705,
+        15.645742416381836,
+        8.643436431884766
+      ],
+      "roof_world_bounds": [
+        -8.024999618530273,
+        -4.010000228881836,
+        6.760000228881836,
+        6.025000095367432,
+        8.010000228881836,
+        7.039999961853027
+      ],
+      "connector_anchors": {
+        "front": [
+          0.7942824363708496,
+          -10.12841510772705
+        ],
+        "right": [
+          15.645742416381836,
+          -0.7424893379211426
+        ],
+        "rear": [
+          0.7942824363708496,
+          8.643436431884766
+        ],
+        "left": [
+          -14.057177543640137,
+          -0.7424893379211426
+        ]
+      }
+    },
+    "building_yard": {
+      "id": "building_yard",
+      "path": "assets/world040/buildings/yard.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        137,
+        293,
+        585,
+        646
+      ],
+      "world_bounds": [
+        -20.100000381469727,
+        -11.5,
+        0.0,
+        17.0,
+        8.760000228881836,
+        8.039999961853027
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 2,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -20.100000381469727,
+        -11.5,
+        17.0,
+        8.725000381469727
+      ],
+      "roof_world_bounds": [
+        -20.059999465942383,
+        -4.760000228881836,
+        3.820000171661377,
+        0.7750000953674316,
+        8.760000228881836,
+        8.039999961853027
+      ],
+      "connector_anchors": {
+        "front": [
+          -1.5500001907348633,
+          -11.5
+        ],
+        "right": [
+          17.0,
+          -1.3874998092651367
+        ],
+        "rear": [
+          -1.5500001907348633,
+          8.725000381469727
+        ],
+        "left": [
+          -20.100000381469727,
+          -1.3874998092651367
+        ]
+      }
+    },
+    "building_modern_agriculture": {
+      "id": "building_modern_agriculture",
+      "path": "assets/world040/buildings/modern_agriculture.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        152,
+        280,
+        647,
+        634
+      ],
+      "world_bounds": [
+        -19.5,
+        -10.824999809265137,
+        0.0,
+        19.5,
+        18.09000015258789,
+        15.050000190734863
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -19.397499084472656,
+        -10.824999809265137,
+        18.049999237060547,
+        13.050000190734863
+      ],
+      "roof_world_bounds": [
+        -19.5,
+        -8.712934494018555,
+        4.105999946594238,
+        19.5,
+        18.09000015258789,
+        14.199999809265137
+      ],
+      "connector_anchors": {
+        "front": [
+          -0.6737499237060547,
+          -10.824999809265137
+        ],
+        "right": [
+          18.049999237060547,
+          1.1125001907348633
+        ],
+        "rear": [
+          -0.6737499237060547,
+          13.050000190734863
+        ],
+        "left": [
+          -19.397499084472656,
+          1.1125001907348633
+        ]
+      }
+    },
+    "building_commercial_center": {
+      "id": "building_commercial_center",
+      "path": "assets/world040/buildings/commercial_center.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        118,
+        217,
+        641,
+        653
+      ],
+      "world_bounds": [
+        -19.5,
+        -12.515779495239258,
+        0.0,
+        19.515779495239258,
+        9.9399995803833,
+        21.450000762939453
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -19.5,
+        -10.800000190734863,
+        19.5,
+        9.875
+      ],
+      "roof_world_bounds": [
+        -19.239999771118164,
+        -7.539999961853027,
+        4.849999904632568,
+        19.239999771118164,
+        9.9399995803833,
+        20.599998474121094
+      ],
+      "connector_anchors": {
+        "front": [
+          0.0,
+          -10.800000190734863
+        ],
+        "right": [
+          19.5,
+          -0.46250009536743164
+        ],
+        "rear": [
+          0.0,
+          9.875
+        ],
+        "left": [
+          -19.5,
+          -0.46250009536743164
+        ]
+      }
+    },
+    "building_garden": {
+      "id": "building_garden",
+      "path": "assets/world040/buildings/garden.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        128,
+        301,
+        640,
+        656
+      ],
+      "world_bounds": [
+        -16.5,
+        -13.5,
+        0.0,
+        16.5,
+        13.5,
+        10.600000381469727
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -16.5,
+        -13.5,
+        16.5,
+        13.5
+      ],
+      "roof_world_bounds": [
+        -3.940000057220459,
+        -8.440000534057617,
+        3.490000009536743,
+        3.940000057220459,
+        -1.559999942779541,
+        5.200000286102295
+      ],
+      "connector_anchors": {
+        "front": [
+          0.0,
+          -13.5
+        ],
+        "right": [
+          16.5,
+          0.0
+        ],
+        "rear": [
+          0.0,
+          13.5
+        ],
+        "left": [
+          -16.5,
+          0.0
+        ]
+      }
+    },
+    "building_hospital": {
+      "id": "building_hospital",
+      "path": "assets/world040/buildings/hospital.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        137,
+        236,
+        655,
+        653
+      ],
+      "world_bounds": [
+        -20.440000534057617,
+        -14.800000190734863,
+        0.0,
+        20.565000534057617,
+        13.336081504821777,
+        18.05000114440918
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -20.40999984741211,
+        -14.800000190734863,
+        20.40999984741211,
+        10.568750381469727
+      ],
+      "roof_world_bounds": [
+        -20.440000534057617,
+        -6.989999771118164,
+        9.489999771118164,
+        20.440000534057617,
+        10.389999389648438,
+        17.19999885559082
+      ],
+      "connector_anchors": {
+        "front": [
+          0.0,
+          -14.800000190734863
+        ],
+        "right": [
+          20.40999984741211,
+          -2.1156249046325684
+        ],
+        "rear": [
+          0.0,
+          10.568750381469727
+        ],
+        "left": [
+          -20.40999984741211,
+          -2.1156249046325684
+        ]
+      }
+    },
+    "building_secondary_school": {
+      "id": "building_secondary_school",
+      "path": "assets/world040/buildings/secondary_school.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        152,
+        261,
+        644,
+        632
+      ],
+      "world_bounds": [
+        -17.190000534057617,
+        -10.045000076293945,
+        0.0,
+        17.315000534057617,
+        14.75,
+        11.779999732971191
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -17.15999984741211,
+        -9.140000343322754,
+        17.15999984741211,
+        13.140000343322754
+      ],
+      "roof_world_bounds": [
+        -17.190000534057617,
+        -9.350000381469727,
+        3.200000047683716,
+        17.190000534057617,
+        14.75,
+        11.680000305175781
+      ],
+      "connector_anchors": {
+        "front": [
+          0.0,
+          -9.140000343322754
+        ],
+        "right": [
+          17.15999984741211,
+          2.0
+        ],
+        "rear": [
+          0.0,
+          13.140000343322754
+        ],
+        "left": [
+          -17.15999984741211,
+          2.0
+        ]
+      }
+    },
+    "building_power_plant": {
+      "id": "building_power_plant",
+      "path": "assets/world040/buildings/power_plant.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        134,
+        211,
+        610,
+        617
+      ],
+      "world_bounds": [
+        -21.690000534057617,
+        -9.838500022888184,
+        0.0,
+        19.059999465942383,
+        10.260000228881836,
+        17.469999313354492
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -21.65999984741211,
+        -9.79949951171875,
+        19.0,
+        10.225000381469727
+      ],
+      "roof_world_bounds": [
+        -21.690000534057617,
+        -8.260000228881836,
+        9.489999771118164,
+        8.274999618530273,
+        10.260000228881836,
+        17.469999313354492
+      ],
+      "connector_anchors": {
+        "front": [
+          -1.3299999237060547,
+          -9.79949951171875
+        ],
+        "right": [
+          19.0,
+          0.21275043487548828
+        ],
+        "rear": [
+          -1.3299999237060547,
+          10.225000381469727
+        ],
+        "left": [
+          -21.65999984741211,
+          0.21275043487548828
+        ]
+      }
+    },
+    "building_material_factory": {
+      "id": "building_material_factory",
+      "path": "assets/world040/buildings/material_factory.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        138,
+        242,
+        624,
+        629
+      ],
+      "world_bounds": [
+        -21.440000534057617,
+        -8.795500755310059,
+        0.0,
+        20.703718185424805,
+        10.260000228881836,
+        14.0
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -21.40999984741211,
+        -8.758500099182129,
+        20.649999618530273,
+        10.225000381469727
+      ],
+      "roof_world_bounds": [
+        -21.440000534057617,
+        -8.260000228881836,
+        9.489999771118164,
+        7.274999618530273,
+        10.260000228881836,
+        11.199999809265137
+      ],
+      "connector_anchors": {
+        "front": [
+          -0.38000011444091797,
+          -8.758500099182129
+        ],
+        "right": [
+          20.649999618530273,
+          0.7332501411437988
+        ],
+        "rear": [
+          -0.38000011444091797,
+          10.225000381469727
+        ],
+        "left": [
+          -21.40999984741211,
+          0.7332501411437988
+        ]
+      }
+    },
+    "building_manufacturing": {
+      "id": "building_manufacturing",
+      "path": "assets/world040/buildings/manufacturing.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        130,
+        213,
+        571,
+        662
+      ],
+      "world_bounds": [
+        -21.739999771118164,
+        -13.699999809265137,
+        0.0,
+        17.399999618530273,
+        10.760000228881836,
+        16.049999237060547
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -21.709999084472656,
+        -13.699999809265137,
+        17.399999618530273,
+        10.725000381469727
+      ],
+      "roof_world_bounds": [
+        -21.739999771118164,
+        -8.760000228881836,
+        9.489999771118164,
+        11.274999618530273,
+        10.760000228881836,
+        16.049999237060547
+      ],
+      "connector_anchors": {
+        "front": [
+          -2.1549997329711914,
+          -13.699999809265137
+        ],
+        "right": [
+          17.399999618530273,
+          -1.487499713897705
+        ],
+        "rear": [
+          -2.1549997329711914,
+          10.725000381469727
+        ],
+        "left": [
+          -21.709999084472656,
+          -1.487499713897705
+        ]
+      }
+    },
+    "building_freight": {
+      "id": "building_freight",
+      "path": "assets/world040/buildings/freight.png",
+      "size": [
+        768,
+        768
+      ],
+      "ground_anchor": [
+        384.0,
+        491.52
+      ],
+      "bounds": [
+        105,
+        217,
+        594,
+        660
+      ],
+      "world_bounds": [
+        -22.440000534057617,
+        -17.57499885559082,
+        0.0,
+        19.152456283569336,
+        12.0600004196167,
+        12.039999961853027
+      ],
+      "ortho_world_units": 64.0,
+      "pixels_per_world_unit": 12.0,
+      "tier": 3,
+      "kind": "building",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -22.40999984741211,
+        -17.5,
+        18.202499389648438,
+        12.02500057220459
+      ],
+      "roof_world_bounds": [
+        -22.440000534057617,
+        -6.460000038146973,
+        9.489999771118164,
+        12.774999618530273,
+        12.0600004196167,
+        12.039999961853027
+      ],
+      "connector_anchors": {
+        "front": [
+          -2.103750228881836,
+          -17.5
+        ],
+        "right": [
+          18.202499389648438,
+          -2.737499713897705
+        ],
+        "rear": [
+          -2.103750228881836,
+          12.02500057220459
+        ],
+        "left": [
+          -22.40999984741211,
+          -2.737499713897705
+        ]
+      }
+    },
+    "prop_tree_broadleaf": {
+      "id": "prop_tree_broadleaf",
+      "path": "assets/world040/props/tree_broadleaf.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        79,
+        29,
+        177,
+        167
+      ],
+      "world_bounds": [
+        -3.9533679485321045,
+        -3.9533679485321045,
+        0.0,
+        3.9533679485321045,
+        3.9533679485321045,
+        13.779999732971191
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -0.31513845920562744,
+        -0.3007016181945801,
+        0.31513845920562744,
+        0.3199999928474426
+      ]
+    },
+    "prop_tree_conifer": {
+      "id": "prop_tree_conifer",
+      "path": "assets/world040/props/tree_conifer.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        98,
+        24,
+        159,
+        167
+      ],
+      "world_bounds": [
+        -2.5644195079803467,
+        -2.4970614910125732,
+        0.0,
+        2.1910080909729004,
+        2.525742530822754,
+        14.3100004196167
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -0.31513845920562744,
+        -0.3007016181945801,
+        0.31513845920562744,
+        0.3199999928474426
+      ]
+    },
+    "prop_shrub": {
+      "id": "prop_shrub",
+      "path": "assets/world040/props/shrub.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        107,
+        141,
+        145,
+        165
+      ],
+      "world_bounds": [
+        -1.2846996784210205,
+        -1.335349678993225,
+        0.4399999678134918,
+        1.3857421875,
+        1.481101155281067,
+        1.2400000095367432
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "prop_rocks": {
+      "id": "prop_rocks",
+      "path": "assets/world040/props/rocks.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        96,
+        129,
+        159,
+        179
+      ],
+      "world_bounds": [
+        -2.7971715927124023,
+        -1.799548625946045,
+        -0.16499996185302734,
+        2.3857359886169434,
+        1.4282360076904297,
+        2.4089999198913574
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -2.7971715927124023,
+        -1.799548625946045,
+        2.3857359886169434,
+        1.4282360076904297
+      ]
+    },
+    "prop_bench": {
+      "id": "prop_bench",
+      "path": "assets/world040/props/bench.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        111,
+        138,
+        145,
+        172
+      ],
+      "world_bounds": [
+        -1.350000023841858,
+        -0.3100000023841858,
+        0.0,
+        1.350000023841858,
+        0.3450000286102295,
+        1.649999976158142
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -1.0700000524520874,
+        -0.27000001072883606,
+        1.0700000524520874,
+        0.27000001072883606
+      ]
+    },
+    "prop_lamp": {
+      "id": "prop_lamp",
+      "path": "assets/world040/props/lamp.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        119,
+        55,
+        144,
+        168
+      ],
+      "world_bounds": [
+        -0.75,
+        -0.5110331177711487,
+        0.0,
+        1.125,
+        0.5110331177711487,
+        10.9399995803833
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -0.4300000071525574,
+        -0.4300000071525574,
+        0.4300000071525574,
+        0.4300000071525574
+      ]
+    },
+    "prop_fence": {
+      "id": "prop_fence",
+      "path": "assets/world040/props/fence.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        63,
+        110,
+        193,
+        196
+      ],
+      "world_bounds": [
+        -6.178884983062744,
+        -0.1701280027627945,
+        0.0,
+        6.178884983062744,
+        0.1701280027627945,
+        2.240000009536743
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -6.099999904632568,
+        -0.10999999940395355,
+        6.099999904632568,
+        0.10999999940395355
+      ]
+    },
+    "prop_stall": {
+      "id": "prop_stall",
+      "path": "assets/world040/props/stall.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        64,
+        70,
+        192,
+        194
+      ],
+      "world_bounds": [
+        -4.599999904632568,
+        -2.0999999046325684,
+        0.0,
+        4.599999904632568,
+        2.0999999046325684,
+        5.865000247955322
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -4.0,
+        -1.5,
+        4.0,
+        1.5
+      ]
+    },
+    "prop_crates": {
+      "id": "prop_crates",
+      "path": "assets/world040/props/crates.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        82,
+        110,
+        166,
+        191
+      ],
+      "world_bounds": [
+        -3.4000000953674316,
+        -1.5199999809265137,
+        0.0,
+        3.4000000953674316,
+        0.3999999761581421,
+        4.099999904632568
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -3.4000000953674316,
+        -1.399999976158142,
+        3.4000000953674316,
+        0.3999999761581421
+      ]
+    },
+    "prop_materials": {
+      "id": "prop_materials",
+      "path": "assets/world040/props/materials.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        54,
+        108,
+        186,
+        208
+      ],
+      "world_bounds": [
+        -4.728588581085205,
+        -3.7825889587402344,
+        -0.09999996423721313,
+        4.728588581085205,
+        2.799999952316284,
+        2.0999999046325684
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -4.728588581085205,
+        -3.7825889587402344,
+        4.728588581085205,
+        -2.2174110412597656
+      ]
+    },
+    "prop_furrows": {
+      "id": "prop_furrows",
+      "path": "assets/world040/props/furrows.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        25,
+        94,
+        231,
+        230
+      ],
+      "world_bounds": [
+        -6.0,
+        -5.25,
+        0.0,
+        6.0,
+        5.25,
+        1.4900000095367432
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -6.0,
+        -5.25,
+        6.0,
+        5.25
+      ]
+    },
+    "prop_flowers": {
+      "id": "prop_flowers",
+      "path": "assets/world040/props/flowers.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        36,
+        102,
+        220,
+        223
+      ],
+      "world_bounds": [
+        -5.5,
+        -4.5,
+        0.0,
+        5.5,
+        4.5,
+        1.350000023841858
+      ],
+      "ortho_world_units": 20.0,
+      "pixels_per_world_unit": 12.8,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -5.5,
+        -4.5,
+        5.5,
+        4.5
+      ]
+    },
+    "module_storage": {
+      "id": "module_storage",
+      "path": "assets/world040/modules/storage.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        42,
+        59,
+        214,
+        219
+      ],
+      "world_bounds": [
+        -6.78000020980835,
+        -6.965000152587891,
+        -0.19999992847442627,
+        6.78000020980835,
+        5.389999866485596,
+        9.449999809265137
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "module",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -6.5,
+        -6.965000152587891,
+        6.5,
+        5.0
+      ],
+      "roof_world_bounds": [
+        -6.78000020980835,
+        -5.28000020980835,
+        6.079999923706055,
+        6.78000020980835,
+        5.28000020980835,
+        9.300000190734863
+      ]
+    },
+    "module_heat": {
+      "id": "module_heat",
+      "path": "assets/world040/modules/heat.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        62,
+        79,
+        194,
+        208
+      ],
+      "world_bounds": [
+        -5.332870006561279,
+        -4.0,
+        -0.34275946021080017,
+        5.332870006561279,
+        4.0,
+        9.600000381469727
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "module",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -5.332870006561279,
+        -4.0,
+        5.332870006561279,
+        4.0
+      ]
+    },
+    "module_recycle": {
+      "id": "module_recycle",
+      "path": "assets/world040/modules/recycle.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        60,
+        94,
+        188,
+        202
+      ],
+      "world_bounds": [
+        -6.162752151489258,
+        -3.680511951446533,
+        -0.10000002384185791,
+        6.162752151489258,
+        2.25,
+        4.700000286102295
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "module",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -6.162752151489258,
+        -3.680511951446533,
+        6.162752151489258,
+        2.0999999046325684
+      ]
+    },
+    "module_open_court": {
+      "id": "module_open_court",
+      "path": "assets/world040/modules/open_court.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        16,
+        89,
+        240,
+        237
+      ],
+      "world_bounds": [
+        -8.5,
+        -7.800000190734863,
+        0.0,
+        8.5,
+        7.5,
+        5.099999904632568
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "module",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -8.5,
+        -7.5,
+        8.5,
+        7.5
+      ]
+    },
+    "module_reuse": {
+      "id": "module_reuse",
+      "path": "assets/world040/modules/reuse.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        61,
+        70,
+        195,
+        202
+      ],
+      "world_bounds": [
+        -5.78000020980835,
+        -3.490000009536743,
+        0.0,
+        5.78000020980835,
+        3.9750001430511475,
+        9.5
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "module",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -5.5,
+        -3.0999999046325684,
+        5.5,
+        3.9750001430511475
+      ],
+      "roof_world_bounds": [
+        -5.78000020980835,
+        -3.380000114440918,
+        6.329999923706055,
+        5.78000020980835,
+        3.380000114440918,
+        9.350000381469727
+      ]
+    },
+    "module_roof_farm": {
+      "id": "module_roof_farm",
+      "path": "assets/world040/modules/roof_farm.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        26,
+        86,
+        230,
+        230
+      ],
+      "world_bounds": [
+        -8.0,
+        -6.5,
+        0.0,
+        8.0,
+        6.5,
+        2.8499999046325684
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "module",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -8.0,
+        -6.5,
+        8.0,
+        6.5
+      ],
+      "roof_world_bounds": [
+        -8.0,
+        -6.5,
+        0.0,
+        8.0,
+        6.5,
+        2.799999952316284
+      ]
+    },
+    "module_drone": {
+      "id": "module_drone",
+      "path": "assets/world040/modules/drone.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        16,
+        88,
+        240,
+        237
+      ],
+      "world_bounds": [
+        -8.5,
+        -7.5,
+        0.0,
+        8.5,
+        7.5,
+        2.569999933242798
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "module",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -8.5,
+        -7.5,
+        8.5,
+        7.5
+      ]
+    },
+    "module_workshop": {
+      "id": "module_workshop",
+      "path": "assets/world040/modules/workshop_module.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        43,
+        61,
+        213,
+        218
+      ],
+      "world_bounds": [
+        -6.5,
+        -6.865000247955322,
+        -0.20000004768371582,
+        6.5,
+        5.5,
+        10.204999923706055
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "module",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -6.5,
+        -6.865000247955322,
+        6.5,
+        5.5
+      ],
+      "roof_world_bounds": [
+        -6.28000020980835,
+        -5.28000020980835,
+        6.079999923706055,
+        6.28000020980835,
+        5.28000020980835,
+        9.300000190734863
+      ]
+    },
+    "prop_hill_0": {
+      "id": "prop_hill_0",
+      "path": "assets/world040/terrain/hill_0.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        66,
+        110,
+        183,
+        200
+      ],
+      "world_bounds": [
+        -9.838674545288086,
+        -6.80511999130249,
+        -2.9000000953674316,
+        9.838674545288086,
+        6.80511999130249,
+        7.419999599456787
+      ],
+      "ortho_world_units": 42.0,
+      "pixels_per_world_unit": 6.095238095238095,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -9.838674545288086,
+        -6.80511999130249,
+        9.838674545288086,
+        6.80511999130249
+      ]
+    },
+    "prop_hill_1": {
+      "id": "prop_hill_1",
+      "path": "assets/world040/terrain/hill_1.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        44,
+        86,
+        203,
+        211
+      ],
+      "world_bounds": [
+        -13.416374206542969,
+        -9.357040405273438,
+        -4.640000343322754,
+        13.416374206542969,
+        9.357040405273438,
+        12.15999984741211
+      ],
+      "ortho_world_units": 42.0,
+      "pixels_per_world_unit": 6.095238095238095,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -13.416374206542969,
+        -9.357040405273438,
+        13.416374206542969,
+        9.357040405273438
+      ]
+    },
+    "prop_hill_2": {
+      "id": "prop_hill_2",
+      "path": "assets/world040/terrain/hill_2.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        22,
+        55,
+        233,
+        225
+      ],
+      "world_bounds": [
+        -18.070098876953125,
+        -13.999999046325684,
+        -6.380000114440918,
+        18.070098876953125,
+        13.999999046325684,
+        16.720001220703125
+      ],
+      "ortho_world_units": 42.0,
+      "pixels_per_world_unit": 6.095238095238095,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -18.070098876953125,
+        -13.999999046325684,
+        18.070098876953125,
+        13.999999046325684
+      ]
+    },
+    "prop_garden_courtyard": {
+      "id": "prop_garden_courtyard",
+      "path": "assets/world040/props/garden_courtyard.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        163.84
+      ],
+      "bounds": [
+        22,
+        95,
+        234,
+        232
+      ],
+      "world_bounds": [
+        -8.5,
+        -6.5,
+        0.0,
+        8.5,
+        6.5,
+        2.4499998092651367
+      ],
+      "ortho_world_units": 26.0,
+      "pixels_per_world_unit": 9.846153846153847,
+      "tier": null,
+      "kind": "prop",
+      "camera": "orthographic; direction vector (9,-12,13.2); fixed orientation, asset anchor sets framing",
+      "source_script": "tools/make_art040.py",
+      "footprint_world_bounds": [
+        -8.5,
+        -6.5,
+        8.5,
+        6.5
+      ]
+    }
+  },
+  "aliases": {
+    "hamlet": "building_homestead",
+    "farm": "building_agriculture",
+    "timber": "building_yard",
+    "power": "building_power_station",
+    "works": "building_workshop",
+    "market": "building_public_center",
+    "school": "building_primary_school",
+    "clinic": "building_medical_clinic",
+    "park": "building_garden",
+    "warehouse": "building_freight",
+    "storage": "module_storage",
+    "heat": "module_heat",
+    "recycle": "module_recycle",
+    "open_court": "module_open_court",
+    "reuse": "module_reuse",
+    "roof_farm": "module_roof_farm",
+    "drone": "module_drone",
+    "workshop": "module_workshop",
+    "tree_broadleaf": "prop_tree_broadleaf",
+    "tree_conifer": "prop_tree_conifer",
+    "shrub": "prop_shrub",
+    "rocks": "prop_rocks",
+    "bench": "prop_bench",
+    "lamp": "prop_lamp",
+    "fence": "prop_fence",
+    "stall": "prop_stall",
+    "crates": "prop_crates",
+    "materials": "prop_materials",
+    "furrows": "prop_furrows",
+    "flowers": "prop_flowers",
+    "garden_courtyard": "prop_garden_courtyard",
+    "hill_0": "prop_hill_0",
+    "hill_1": "prop_hill_1",
+    "hill_2": "prop_hill_2",
+    "module_recycling": "module_recycle",
+    "module_public_courtyard": "module_open_court",
+    "module_heritage": "module_reuse",
+    "module_urban_farm": "module_roof_farm"
+  },
+  "bindings": {
+    "building.homestead": "building_homestead",
+    "building.neighborhood": "building_neighborhood",
+    "building.workshop": "building_workshop",
+    "building.residence": "building_residence",
+    "building.agriculture": "building_agriculture",
+    "building.public_center": "building_public_center",
+    "building.medical_clinic": "building_medical_clinic",
+    "building.primary_school": "building_primary_school",
+    "building.power_station": "building_power_station",
+    "building.extraction": "building_extraction",
+    "building.yard": "building_yard",
+    "building.advanced_residence": "building_advanced_residence",
+    "building.modern_agriculture": "building_modern_agriculture",
+    "building.commercial_center": "building_commercial_center",
+    "building.garden": "building_garden",
+    "building.hospital": "building_hospital",
+    "building.secondary_school": "building_secondary_school",
+    "building.power_plant": "building_power_plant",
+    "building.material_factory": "building_material_factory",
+    "building.manufacturing": "building_manufacturing",
+    "building.freight": "building_freight",
+    "homestead": "building_homestead",
+    "neighborhood": "building_neighborhood",
+    "workshop": "building_workshop",
+    "residence": "building_residence",
+    "agriculture": "building_agriculture",
+    "public_center": "building_public_center",
+    "medical_clinic": "building_medical_clinic",
+    "primary_school": "building_primary_school",
+    "power_station": "building_power_station",
+    "extraction": "building_extraction",
+    "yard": "building_yard",
+    "advanced_residence": "building_advanced_residence",
+    "modern_agriculture": "building_modern_agriculture",
+    "commercial_center": "building_commercial_center",
+    "garden": "building_garden",
+    "hospital": "building_hospital",
+    "secondary_school": "building_secondary_school",
+    "power_plant": "building_power_plant",
+    "material_factory": "building_material_factory",
+    "manufacturing": "building_manufacturing",
+    "freight": "building_freight"
+  },
+  "legacy_aliases": {
+    "buildings": {
+      "hamlet": "building_homestead",
+      "farm": "building_agriculture",
+      "timber": "building_yard",
+      "power": "building_power_station",
+      "works": "building_workshop",
+      "market": "building_public_center",
+      "school": "building_primary_school",
+      "clinic": "building_medical_clinic",
+      "park": "building_garden",
+      "warehouse": "building_freight"
+    },
+    "modules": {
+      "storage": "module_storage",
+      "heat": "module_heat",
+      "recycle": "module_recycle",
+      "open_court": "module_open_court",
+      "reuse": "module_reuse",
+      "roof_farm": "module_roof_farm",
+      "drone": "module_drone",
+      "workshop": "module_workshop"
+    },
+    "props": {
+      "tree_broadleaf": "prop_tree_broadleaf",
+      "tree_conifer": "prop_tree_conifer",
+      "shrub": "prop_shrub",
+      "rocks": "prop_rocks",
+      "bench": "prop_bench",
+      "lamp": "prop_lamp",
+      "fence": "prop_fence",
+      "stall": "prop_stall",
+      "crates": "prop_crates",
+      "materials": "prop_materials",
+      "furrows": "prop_furrows",
+      "flowers": "prop_flowers"
+    },
+    "environment": {
+      "rocks": "prop_rocks",
+      "garden_courtyard": "prop_garden_courtyard",
+      "hill_0": "prop_hill_0",
+      "hill_1": "prop_hill_1",
+      "hill_2": "prop_hill_2"
+    }
+  },
+  "art_direction": {
+    "body_shadow": "soft form shadow from left-above; no ground-plane/contact shadow baked into PNG",
+    "ground_shadow": "draw one shared soft game-side ground shadow beneath each footprint",
+    "light": "neutral-warm upper-left daylight softened by a large area key and broad frontal fill",
+    "palette": [
+      "warm mineral light walls",
+      "blue-gray roof and service metal",
+      "restrained clay and ochre accents",
+      "muted fern and lichen greens"
+    ]
+  }
+}

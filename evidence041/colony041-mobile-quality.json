@@ -1,0 +1,945 @@
+{
+  "captures": [
+    {
+      "camera": {
+        "available_rect": [
+          16.0,
+          74.0,
+          1408.0,
+          744.0
+        ],
+        "pan": [
+          -27.1585559844971,
+          -31.1562366485596
+        ],
+        "zoom": 0.98
+      },
+      "description": "official two-building starter town",
+      "name": "01-initial-town",
+      "path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/mobile_quality/colony041-01-initial-town.png",
+      "viewport": [
+        2880,
+        1800
+      ]
+    },
+    {
+      "camera": {
+        "available_rect": [
+          16.0,
+          74.0,
+          1408.0,
+          744.0
+        ],
+        "pan": [
+          -81.4756774902344,
+          -62.6914520263672
+        ],
+        "zoom": 0.98
+      },
+      "description": "12-cell colony, growth tier 1",
+      "name": "02-tier1",
+      "path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/mobile_quality/colony041-02-tier1.png",
+      "viewport": [
+        2880,
+        1800
+      ]
+    },
+    {
+      "camera": {
+        "available_rect": [
+          16.0,
+          74.0,
+          1408.0,
+          744.0
+        ],
+        "pan": [
+          -81.4756774902344,
+          -62.6914520263672
+        ],
+        "zoom": 0.98
+      },
+      "description": "12-cell colony, growth tier 2",
+      "name": "03-tier2",
+      "path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/mobile_quality/colony041-03-tier2.png",
+      "viewport": [
+        2880,
+        1800
+      ]
+    },
+    {
+      "camera": {
+        "available_rect": [
+          16.0,
+          74.0,
+          1408.0,
+          744.0
+        ],
+        "pan": [
+          -81.4756774902344,
+          -62.6914520263672
+        ],
+        "zoom": 0.98
+      },
+      "description": "12-cell colony, growth tier 3",
+      "name": "04-tier3",
+      "path": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/mobile_quality/colony041-04-tier3.png",
+      "viewport": [
+        2880,
+        1800
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "name": "start deterministic River Valley fixture: ",
+      "pass": true
+    },
+    {
+      "name": "mobile-quality native branch maps the world to a 720-pixel short side",
+      "pass": true
+    },
+    {
+      "name": "mobile-quality world geometry renders inside its scaled viewport",
+      "pass": true
+    },
+    {
+      "name": "mobile-quality overlays stay on the full-resolution UI layer",
+      "pass": true
+    },
+    {
+      "name": "render screenshot 01-initial-town",
+      "pass": true
+    },
+    {
+      "name": "build 12-cell plain-terrain colony fixture",
+      "pass": true
+    },
+    {
+      "name": "all 12 fixture buildings share plain terrain",
+      "pass": true
+    },
+    {
+      "name": "render screenshot 02-tier1",
+      "pass": true
+    },
+    {
+      "name": "tier1 state passes current schema validation",
+      "pass": true
+    },
+    {
+      "name": "tier1 keeps 12 building identities across growth",
+      "pass": true
+    },
+    {
+      "name": "advance actual project definitions to tier 2: ",
+      "pass": true
+    },
+    {
+      "name": "render screenshot 03-tier2",
+      "pass": true
+    },
+    {
+      "name": "tier2 state passes current schema validation",
+      "pass": true
+    },
+    {
+      "name": "tier2 keeps 12 building identities across growth",
+      "pass": true
+    },
+    {
+      "name": "advance actual project definitions to tier 3: ",
+      "pass": true
+    },
+    {
+      "name": "render screenshot 04-tier3",
+      "pass": true
+    },
+    {
+      "name": "tier3 state passes current schema validation",
+      "pass": true
+    },
+    {
+      "name": "tier3 keeps 12 building identities across growth",
+      "pass": true
+    },
+    {
+      "name": "mature-12-cell static, pan, and zoom presentation do not mutate game state",
+      "pass": true
+    },
+    {
+      "name": "mature-12-cell pan and zoom reuse the terrain mesh",
+      "pass": true
+    },
+    {
+      "name": "mature-12-cell pan and zoom do not rebuild town fabric",
+      "pass": true
+    },
+    {
+      "name": "starter static, pan, and zoom presentation do not mutate game state",
+      "pass": true
+    },
+    {
+      "name": "starter pan and zoom reuse the terrain mesh",
+      "pass": true
+    },
+    {
+      "name": "starter pan and zoom do not rebuild town fabric",
+      "pass": true
+    },
+    {
+      "name": "fill all non-water map cells for fullmap probe",
+      "pass": true
+    },
+    {
+      "name": "fullmap static, pan, and zoom presentation do not mutate game state",
+      "pass": true
+    },
+    {
+      "name": "fullmap pan and zoom reuse the terrain mesh",
+      "pass": true
+    },
+    {
+      "name": "fullmap pan and zoom do not rebuild town fabric",
+      "pass": true
+    },
+    {
+      "name": "fullmap camera stages preserve simulation state",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "godot": "4.7.2-stable (official)",
+  "hardware_context": {
+    "display_refresh_rate_hz": 120.0,
+    "display_server": "macOS",
+    "effects_remain_full_resolution": true,
+    "logical_viewport": [
+      1440,
+      900
+    ],
+    "mobile_quality_requested": true,
+    "os_name": "macOS",
+    "os_version": "26.6.2",
+    "processor": "Apple M5 Max",
+    "renderer": "Apple M5 Max",
+    "renderer_vendor": "Apple",
+    "rendering_method": "gl_compatibility",
+    "screen_pixels": [
+      3456,
+      2234
+    ],
+    "viewport_pixels": [
+      5760,
+      3600
+    ],
+    "window_pixels": [
+      2880,
+      1800
+    ],
+    "world_render_target_pixels": [
+      1152,
+      720
+    ]
+  },
+  "memory_monitors": {
+    "memory_static_bytes_lower_bound_not_rss": 183359432.0,
+    "render_texture_mem_used_bytes": 81373095.0,
+    "scope": "Godot monitors; MEMORY_STATIC is not process RSS."
+  },
+  "method": "Game entities and valid tier transitions rendered in the native application window; not a physical input or mobile-device test.",
+  "native_performance": [
+    {
+      "camera_handler_cpu_ms": {
+        "pan": {
+          "max_ms": 0.023,
+          "mean_ms": 0.0135833333333333,
+          "n": 36,
+          "p50_ms": 0.013,
+          "p95_ms": 0.023,
+          "p99_ms": 0.023
+        },
+        "zoom": {
+          "max_ms": 0.026,
+          "mean_ms": 0.0164166666666667,
+          "n": 36,
+          "p50_ms": 0.016,
+          "p95_ms": 0.02,
+          "p99_ms": 0.026
+        }
+      },
+      "camera_preserved_state": true,
+      "display_refresh_rate_hz": 120.0,
+      "effects_remain_full_resolution": true,
+      "map_cells": 61,
+      "max_fps_setting": 30,
+      "memory_monitors": {
+        "memory_static_bytes_lower_bound_not_rss": 167264564.0,
+        "render_texture_mem_used_bytes": 81373095.0,
+        "scope": "Godot monitors; MEMORY_STATIC is not process RSS."
+      },
+      "method": "Native rendered window; static, pan, and zoom intervals are between RenderingServer post-draw signals. The post_draw_wait_after_tick_refresh interval starts only after advance_online and app.refresh return, so it excludes synchronous simulation and snapshot/UI CPU, which are reported separately.",
+      "name": "mature-12-cell",
+      "occupied_land_cells": 12,
+      "pan_zoom_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 0,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 0,
+        "ground_draws": 0,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "playable_buildings": 12,
+      "real_window_frame_interval_ms": {
+        "pan": {
+          "max_ms": 33.942,
+          "mean_ms": 33.25275,
+          "n": 36,
+          "p50_ms": 33.284,
+          "p95_ms": 33.846,
+          "p99_ms": 33.942
+        },
+        "static": {
+          "max_ms": 35.716,
+          "mean_ms": 33.117825,
+          "n": 120,
+          "p50_ms": 33.27,
+          "p95_ms": 34.842,
+          "p99_ms": 35.652
+        },
+        "zoom": {
+          "max_ms": 35.262,
+          "mean_ms": 33.3698055555556,
+          "n": 36,
+          "p50_ms": 33.209,
+          "p95_ms": 35.11,
+          "p99_ms": 35.262
+        },
+        "post_draw_wait_after_tick_refresh": {
+          "max_ms": 42.405,
+          "mean_ms": 20.2775,
+          "n": 12,
+          "p50_ms": 20.197,
+          "p95_ms": 42.405,
+          "p99_ms": 42.405
+        }
+      },
+      "rendering_method": "gl_compatibility",
+      "simulation_cpu_ms_per_tick": {
+        "max_ms": 11.858,
+        "mean_ms": 11.5756666666667,
+        "n": 12,
+        "p50_ms": 11.546,
+        "p95_ms": 11.858,
+        "p99_ms": 11.858
+      },
+      "simulation_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 12,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 12,
+        "ground_draws": 1,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "snapshot_and_ui_refresh_cpu_ms": {
+        "max_ms": 1.517,
+        "mean_ms": 1.23516666666667,
+        "n": 12,
+        "p50_ms": 1.205,
+        "p95_ms": 1.517,
+        "p99_ms": 1.517
+      },
+      "static_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 0,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 0,
+        "ground_draws": 0,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "world_render_scale": 0.8,
+      "world_render_target_pixels": [
+        1152,
+        720
+      ]
+    },
+    {
+      "camera_handler_cpu_ms": {
+        "pan": {
+          "max_ms": 0.024,
+          "mean_ms": 0.0145277777777778,
+          "n": 36,
+          "p50_ms": 0.014,
+          "p95_ms": 0.022,
+          "p99_ms": 0.024
+        },
+        "zoom": {
+          "max_ms": 0.028,
+          "mean_ms": 0.0219444444444445,
+          "n": 36,
+          "p50_ms": 0.023,
+          "p95_ms": 0.028,
+          "p99_ms": 0.028
+        }
+      },
+      "camera_preserved_state": true,
+      "display_refresh_rate_hz": 120.0,
+      "effects_remain_full_resolution": true,
+      "map_cells": 61,
+      "max_fps_setting": 30,
+      "memory_monitors": {
+        "memory_static_bytes_lower_bound_not_rss": 165056676.0,
+        "render_texture_mem_used_bytes": 81373095.0,
+        "scope": "Godot monitors; MEMORY_STATIC is not process RSS."
+      },
+      "method": "Native rendered window; static, pan, and zoom intervals are between RenderingServer post-draw signals. The post_draw_wait_after_tick_refresh interval starts only after advance_online and app.refresh return, so it excludes synchronous simulation and snapshot/UI CPU, which are reported separately.",
+      "name": "starter",
+      "occupied_land_cells": 2,
+      "pan_zoom_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 0,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 0,
+        "ground_draws": 0,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "playable_buildings": 2,
+      "real_window_frame_interval_ms": {
+        "pan": {
+          "max_ms": 38.932,
+          "mean_ms": 33.1853055555556,
+          "n": 36,
+          "p50_ms": 33.691,
+          "p95_ms": 38.65,
+          "p99_ms": 38.932
+        },
+        "static": {
+          "max_ms": 41.591,
+          "mean_ms": 33.0996,
+          "n": 120,
+          "p50_ms": 33.366,
+          "p95_ms": 39.743,
+          "p99_ms": 41.205
+        },
+        "zoom": {
+          "max_ms": 40.928,
+          "mean_ms": 33.4502222222222,
+          "n": 36,
+          "p50_ms": 33.241,
+          "p95_ms": 38.022,
+          "p99_ms": 40.928
+        },
+        "post_draw_wait_after_tick_refresh": {
+          "max_ms": 27.7,
+          "mean_ms": 27.0574166666667,
+          "n": 12,
+          "p50_ms": 27.491,
+          "p95_ms": 27.7,
+          "p99_ms": 27.7
+        }
+      },
+      "rendering_method": "gl_compatibility",
+      "simulation_cpu_ms_per_tick": {
+        "max_ms": 4.684,
+        "mean_ms": 4.43316666666667,
+        "n": 12,
+        "p50_ms": 4.388,
+        "p95_ms": 4.684,
+        "p99_ms": 4.684
+      },
+      "simulation_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 12,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 12,
+        "ground_draws": 1,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "snapshot_and_ui_refresh_cpu_ms": {
+        "max_ms": 1.794,
+        "mean_ms": 1.49783333333333,
+        "n": 12,
+        "p50_ms": 1.427,
+        "p95_ms": 1.794,
+        "p99_ms": 1.794
+      },
+      "static_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 0,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 0,
+        "ground_draws": 0,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "world_render_scale": 0.8,
+      "world_render_target_pixels": [
+        1152,
+        720
+      ]
+    },
+    {
+      "camera_handler_cpu_ms": {
+        "pan": {
+          "max_ms": 0.024,
+          "mean_ms": 0.0134444444444445,
+          "n": 36,
+          "p50_ms": 0.013,
+          "p95_ms": 0.021,
+          "p99_ms": 0.024
+        },
+        "zoom": {
+          "max_ms": 0.018,
+          "mean_ms": 0.0141666666666667,
+          "n": 36,
+          "p50_ms": 0.014,
+          "p95_ms": 0.017,
+          "p99_ms": 0.018
+        }
+      },
+      "camera_preserved_state": true,
+      "display_refresh_rate_hz": 120.0,
+      "effects_remain_full_resolution": true,
+      "map_cells": 61,
+      "max_fps_setting": 30,
+      "memory_monitors": {
+        "memory_static_bytes_lower_bound_not_rss": 183354020.0,
+        "render_texture_mem_used_bytes": 81373095.0,
+        "scope": "Godot monitors; MEMORY_STATIC is not process RSS."
+      },
+      "method": "Native rendered window; static, pan, and zoom intervals are between RenderingServer post-draw signals. The post_draw_wait_after_tick_refresh interval starts only after advance_online and app.refresh return, so it excludes synchronous simulation and snapshot/UI CPU, which are reported separately.",
+      "name": "fullmap",
+      "occupied_land_cells": 53,
+      "pan_zoom_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 0,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 0,
+        "ground_draws": 0,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "playable_buildings": 53,
+      "real_window_frame_interval_ms": {
+        "pan": {
+          "max_ms": 37.123,
+          "mean_ms": 33.3271388888889,
+          "n": 36,
+          "p50_ms": 33.32,
+          "p95_ms": 34.695,
+          "p99_ms": 37.123
+        },
+        "static": {
+          "max_ms": 35.163,
+          "mean_ms": 33.2565083333333,
+          "n": 120,
+          "p50_ms": 33.219,
+          "p95_ms": 34.823,
+          "p99_ms": 35.135
+        },
+        "zoom": {
+          "max_ms": 34.785,
+          "mean_ms": 33.2861388888889,
+          "n": 36,
+          "p50_ms": 33.212,
+          "p95_ms": 34.38,
+          "p99_ms": 34.785
+        },
+        "post_draw_wait_after_tick_refresh": {
+          "max_ms": 198.239,
+          "mean_ms": 44.97575,
+          "n": 12,
+          "p50_ms": 30.788,
+          "p95_ms": 198.239,
+          "p99_ms": 198.239
+        }
+      },
+      "rendering_method": "gl_compatibility",
+      "simulation_cpu_ms_per_tick": {
+        "max_ms": 66.855,
+        "mean_ms": 65.281,
+        "n": 12,
+        "p50_ms": 66.016,
+        "p95_ms": 66.855,
+        "p99_ms": 66.855
+      },
+      "simulation_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 12,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 12,
+        "ground_draws": 1,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "snapshot_and_ui_refresh_cpu_ms": {
+        "max_ms": 2.659,
+        "mean_ms": 2.53333333333333,
+        "n": 12,
+        "p50_ms": 2.587,
+        "p95_ms": 2.659,
+        "p99_ms": 2.659
+      },
+      "static_render_counter_delta": {
+        "connector_builds": 0,
+        "fabric_derives": 0,
+        "foundation_builds": 0,
+        "foundation_signature_scans": 0,
+        "ground_draws": 0,
+        "structure_draws": 0,
+        "terrain_mesh_builds": 0
+      },
+      "world_render_scale": 0.8,
+      "world_render_target_pixels": [
+        1152,
+        720
+      ]
+    }
+  ],
+  "passed": true,
+  "town_stages": [
+    {
+      "building_ids": [
+        "B000001",
+        "B000003",
+        "B000006",
+        "B000008",
+        "B000010",
+        "B000012",
+        "B000014",
+        "B000016",
+        "B000018",
+        "B000020",
+        "B000022",
+        "B000024"
+      ],
+      "cells": [
+        "0,1",
+        "0,0",
+        "-1,1",
+        "-1,2",
+        "0,2",
+        "1,0",
+        "-1,0",
+        "-1,3",
+        "0,-1",
+        "0,3",
+        "1,-1",
+        "2,1"
+      ],
+      "city_stage": 0,
+      "definitions": [
+        "homestead",
+        "workshop",
+        "neighborhood",
+        "homestead",
+        "workshop",
+        "neighborhood",
+        "homestead",
+        "workshop",
+        "neighborhood",
+        "homestead",
+        "workshop",
+        "neighborhood"
+      ],
+      "name": "tier1",
+      "terrain_profile": [
+        {
+          "elevation": 5.23594495094759,
+          "terrain": "plain",
+          "tile": "0,1"
+        },
+        {
+          "elevation": 5.46326412310951,
+          "terrain": "plain",
+          "tile": "0,0"
+        },
+        {
+          "elevation": 5.77607866077851e-09,
+          "terrain": "plain",
+          "tile": "-1,1"
+        },
+        {
+          "elevation": 0.0,
+          "terrain": "plain",
+          "tile": "-1,2"
+        },
+        {
+          "elevation": 4.77244917082426,
+          "terrain": "plain",
+          "tile": "0,2"
+        },
+        {
+          "elevation": 18.8949464306503,
+          "terrain": "plain",
+          "tile": "1,0"
+        },
+        {
+          "elevation": 4.53196982638947e-10,
+          "terrain": "plain",
+          "tile": "-1,0"
+        },
+        {
+          "elevation": 1.20141043288712e-08,
+          "terrain": "plain",
+          "tile": "-1,3"
+        },
+        {
+          "elevation": 5.40035186038244,
+          "terrain": "plain",
+          "tile": "0,-1"
+        },
+        {
+          "elevation": 4.33596179765357,
+          "terrain": "plain",
+          "tile": "0,3"
+        },
+        {
+          "elevation": 9.49870096367147,
+          "terrain": "plain",
+          "tile": "1,-1"
+        },
+        {
+          "elevation": 22.6636744709677,
+          "terrain": "plain",
+          "tile": "2,1"
+        }
+      ],
+      "tier_counts": {
+        "1": 12,
+        "2": 0,
+        "3": 0
+      }
+    },
+    {
+      "building_ids": [
+        "B000001",
+        "B000003",
+        "B000006",
+        "B000008",
+        "B000010",
+        "B000012",
+        "B000014",
+        "B000016",
+        "B000018",
+        "B000020",
+        "B000022",
+        "B000024"
+      ],
+      "cells": [
+        "0,1",
+        "0,0",
+        "-1,1",
+        "-1,2",
+        "0,2",
+        "1,0",
+        "-1,0",
+        "-1,3",
+        "0,-1",
+        "0,3",
+        "1,-1",
+        "2,1"
+      ],
+      "city_stage": 1,
+      "definitions": [
+        "residence",
+        "yard",
+        "public_center",
+        "agriculture",
+        "extraction",
+        "medical_clinic",
+        "residence",
+        "power_station",
+        "primary_school",
+        "agriculture",
+        "yard",
+        "public_center"
+      ],
+      "name": "tier2",
+      "terrain_profile": [
+        {
+          "elevation": 5.23594495094759,
+          "terrain": "plain",
+          "tile": "0,1"
+        },
+        {
+          "elevation": 5.46326412310951,
+          "terrain": "plain",
+          "tile": "0,0"
+        },
+        {
+          "elevation": 5.77607866077851e-09,
+          "terrain": "plain",
+          "tile": "-1,1"
+        },
+        {
+          "elevation": 0.0,
+          "terrain": "plain",
+          "tile": "-1,2"
+        },
+        {
+          "elevation": 4.77244917082426,
+          "terrain": "plain",
+          "tile": "0,2"
+        },
+        {
+          "elevation": 18.8949464306503,
+          "terrain": "plain",
+          "tile": "1,0"
+        },
+        {
+          "elevation": 4.53196982638947e-10,
+          "terrain": "plain",
+          "tile": "-1,0"
+        },
+        {
+          "elevation": 1.20141043288712e-08,
+          "terrain": "plain",
+          "tile": "-1,3"
+        },
+        {
+          "elevation": 5.40035186038244,
+          "terrain": "plain",
+          "tile": "0,-1"
+        },
+        {
+          "elevation": 4.33596179765357,
+          "terrain": "plain",
+          "tile": "0,3"
+        },
+        {
+          "elevation": 9.49870096367147,
+          "terrain": "plain",
+          "tile": "1,-1"
+        },
+        {
+          "elevation": 22.6636744709677,
+          "terrain": "plain",
+          "tile": "2,1"
+        }
+      ],
+      "tier_counts": {
+        "1": 0,
+        "2": 12,
+        "3": 0
+      }
+    },
+    {
+      "building_ids": [
+        "B000001",
+        "B000003",
+        "B000006",
+        "B000008",
+        "B000010",
+        "B000012",
+        "B000014",
+        "B000016",
+        "B000018",
+        "B000020",
+        "B000022",
+        "B000024"
+      ],
+      "cells": [
+        "0,1",
+        "0,0",
+        "-1,1",
+        "-1,2",
+        "0,2",
+        "1,0",
+        "-1,0",
+        "-1,3",
+        "0,-1",
+        "0,3",
+        "1,-1",
+        "2,1"
+      ],
+      "city_stage": 2,
+      "definitions": [
+        "advanced_residence",
+        "freight",
+        "commercial_center",
+        "modern_agriculture",
+        "material_factory",
+        "hospital",
+        "advanced_residence",
+        "power_plant",
+        "secondary_school",
+        "modern_agriculture",
+        "freight",
+        "garden"
+      ],
+      "name": "tier3",
+      "terrain_profile": [
+        {
+          "elevation": 5.23594495094759,
+          "terrain": "plain",
+          "tile": "0,1"
+        },
+        {
+          "elevation": 5.46326412310951,
+          "terrain": "plain",
+          "tile": "0,0"
+        },
+        {
+          "elevation": 5.77607866077851e-09,
+          "terrain": "plain",
+          "tile": "-1,1"
+        },
+        {
+          "elevation": 0.0,
+          "terrain": "plain",
+          "tile": "-1,2"
+        },
+        {
+          "elevation": 4.77244917082426,
+          "terrain": "plain",
+          "tile": "0,2"
+        },
+        {
+          "elevation": 18.8949464306503,
+          "terrain": "plain",
+          "tile": "1,0"
+        },
+        {
+          "elevation": 4.53196982638947e-10,
+          "terrain": "plain",
+          "tile": "-1,0"
+        },
+        {
+          "elevation": 1.20141043288712e-08,
+          "terrain": "plain",
+          "tile": "-1,3"
+        },
+        {
+          "elevation": 5.40035186038244,
+          "terrain": "plain",
+          "tile": "0,-1"
+        },
+        {
+          "elevation": 4.33596179765357,
+          "terrain": "plain",
+          "tile": "0,3"
+        },
+        {
+          "elevation": 9.49870096367147,
+          "terrain": "plain",
+          "tile": "1,-1"
+        },
+        {
+          "elevation": 22.6636744709677,
+          "terrain": "plain",
+          "tile": "2,1"
+        }
+      ],
+      "tier_counts": {
+        "1": 0,
+        "2": 0,
+        "3": 12
+      }
+    }
+  ]
+}

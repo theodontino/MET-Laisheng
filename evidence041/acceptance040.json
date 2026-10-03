@@ -1,0 +1,233 @@
+{
+	"build": "MET 0.4.0",
+	"checks": [
+		{
+			"detail": "",
+			"name": "new game uses schema5",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "new schema5 game validates",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "opening contains an upgradeable Tier1 project",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade preview returns a usable model",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade preview exposes price/resources and construction points",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade preview changes neither state nor RNG",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "specialization preview includes abilities absent from the new node",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "bonus reward draft can be created",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "reward is three distinct Bonus choices",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "drawing a reward commits the draft",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "reward choices survive save/load exactly",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "same reward source returns the stable choices without mutating state",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "choosing once grants exactly one deployment license",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "completed reward cannot be claimed twice",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "direct reward source grants one license",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "same source cannot duplicate a normal license",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "fixture finds a legally installable licensed Bonus",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "install consumes the one deployment charge",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "spent license cannot deploy the same Bonus again",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "fixture has two upgrades competing for construction capacity",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade job starts for B000001",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade job starts for B000003",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "shared construction capacity exposes a two-job queue",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "construction queue is independent of project dictionary order",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "one tick shares no more construction points than capacity allows",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "zero material cannot complete queued upgrades",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "construction consumes finite material without negative stock",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade completion transition succeeds",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade preserves project ID, tile and operator",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade advances exactly to the chosen node",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade completion preserves the project's exact inventory",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "upgrade retains prior slot identities and unlocks one stable track slot",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "trade fixture can create a freight-capable project",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "Block market exposes resource pressure",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "negative market still keeps buy strictly above sell",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "two orders share one tick's freight capacity instead of each receiving a fresh allowance",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "negative-price buy order accepted",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "negative buy adds stock and pays the city",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "negative-price disposal order accepted",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "negative sell removes stock and charges disposal cost",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "negative-price trades leave a valid conserved state",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "unfinished city goal cannot grant naming",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "completed Block receives one naming action",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "naming spends no money, DT or inventory",
+			"pass": true
+		},
+		{
+			"detail": "",
+			"name": "Block naming right is consumed and cannot be replayed",
+			"pass": true
+		}
+	],
+	"failed": 0,
+	"method": "Native Godot headless core acceptance using direct fixtures; not UI, macOS hardware, or human playthrough evidence.",
+	"passed": 45
+}

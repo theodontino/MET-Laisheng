@@ -1,0 +1,61 @@
+{
+  "version": "0.1.1-b-population",
+  "initial_currency": 720,
+  "initial_dt": 42,
+  "dt_cap": 96,
+  "offline_dt_per_hour": 0.5,
+  "base_food": 0.9,
+  "base_material": 0.6,
+  "base_energy": 4,
+  "stock_caps": {
+    "food": 100,
+    "material": 260,
+    "goods": 120
+  },
+  "initial_stock": {
+    "food": 42,
+    "material": 70,
+    "goods": 0
+  },
+  "base_policy_tags": [
+    "housing",
+    "agriculture",
+    "materials",
+    "energy",
+    "community",
+    "waterfront"
+  ],
+  "tick_hours": 0.08333333333333333,
+  "load_project": 0.03,
+  "load_people": 0.0025,
+  "relationship_hours": 2.5,
+  "milestone_hours": [
+    2.5,
+    6.5
+  ],
+  "reroll_currency": [
+    18,
+    32,
+    55,
+    85,
+    125,
+    180
+  ],
+  "content_seed": 20260922,
+  "checksum": "b-population-v2",
+  "population": {
+    "initial": 18,
+    "labor_fraction": 0.65,
+    "base_jobs": 4,
+    "food_per_person": 0.13,
+    "migration_per_hour": 1.8,
+    "tax_per_person": 0.82,
+    "community_population": 22,
+    "town_population": 30,
+    "town_education": 25,
+    "need_grace_hours": 3.0,
+    "support_response": 0.16,
+    "health_response": 0.2,
+    "happiness_response": 0.4
+  }
+}

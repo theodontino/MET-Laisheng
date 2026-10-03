@@ -1,0 +1,364 @@
+{
+  "metadata": {
+    "P01": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "industrial",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "P02": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "public",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "P03": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "public",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "P04": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "public",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "P05": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "industrial",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "P06": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "P07": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "agriculture",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "P08": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "industrial",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "L01": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "logistics"
+      ],
+      "max_deployments": 1
+    },
+    "L02": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "logistics"
+      ],
+      "max_deployments": 1
+    },
+    "L03": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "logistics"
+      ],
+      "max_deployments": 1
+    },
+    "L04": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "public",
+        "logistics"
+      ],
+      "max_deployments": 1
+    },
+    "L05": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "logistics"
+      ],
+      "max_deployments": 1
+    },
+    "O01": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "public",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "O02": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "O03": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "O04": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "public",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "O05": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "O06": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "industrial",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "O07": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B01": {
+      "scope": "block",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B02": {
+      "scope": "block",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B03": {
+      "scope": "block",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B04": {
+      "scope": "block",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B05": {
+      "scope": "block",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B06": {
+      "scope": "block",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B07": {
+      "scope": "block",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B08": {
+      "scope": "block",
+      "persistence": "Local",
+      "tags": [
+        "industrial",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "B09": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "industrial",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "G01": {
+      "scope": "organization",
+      "persistence": "Local",
+      "tags": [
+        "industrial",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "G02": {
+      "scope": "organization",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "M01": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "R05": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "public",
+        "logistics"
+      ],
+      "max_deployments": 1
+    },
+    "R08": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "logistics"
+      ],
+      "max_deployments": 1
+    },
+    "R10": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "R14": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "agriculture",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "R15": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "agriculture",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "R16": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "production"
+      ],
+      "max_deployments": 1
+    },
+    "R17": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    },
+    "R18": {
+      "scope": "building",
+      "persistence": "Local",
+      "tags": [
+        "community",
+        "operations"
+      ],
+      "max_deployments": 1
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema": "met031.specimen_fixture.v1",
+  "status": "layout_reference_not_game_snapshot",
+  "source": "用户截图：截屏2026-09-26 下午1.36.00.png + 0.3.0内容基准",
+  "is_live_simulation": false,
+  "identity": {
+    "building_id": "sample:home",
+    "definition_id": "hamlet",
+    "name": "河谷住宅",
+    "operator_org": "commons",
+    "operator_label": "街坊营造社"
+  },
+  "reading": {
+    "kind": "forecast",
+    "label": "下一周期预计",
+    "snapshot_id": null,
+    "tick": null
+  },
+  "housing": {
+    "people": 18,
+    "capacity": 24,
+    "health": 78,
+    "happiness": 73,
+    "education": 15
+  },
+  "inputs": {
+    "food_people_per_hour": 3.24,
+    "material_people_per_hour": 0.45,
+    "electricity_building": 0.25,
+    "electricity_people": 1.44,
+    "electricity_total": 1.69
+  },
+  "fees": {
+    "building_per_hour": 0.6,
+    "people_per_hour": 3.96,
+    "total_per_hour": 4.56
+  },
+  "jobs": {
+    "demand": 0,
+    "show_priority_control": false
+  },
+  "slots": [
+    {
+      "id": "Production",
+      "type": "Production",
+      "bonus_instance": null
+    },
+    {
+      "id": "Operations",
+      "type": "Operations",
+      "bonus_instance": null
+    },
+    {
+      "id": "Operations:2",
+      "type": "Operations",
+      "bonus_instance": null
+    }
+  ],
+  "guards": [
+    "住户用电按18×0.08、住户维护按18×0.22计算；仅解释样本，不执行预测。",
+    "示例运营者最终名称以内容表读取结果为准。",
+    "不能据此宣称在游戏中安装了任何卡。"
+  ]
+}

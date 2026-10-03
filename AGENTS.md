@@ -1,0 +1,3 @@
+# MET 0.3.0 continuation contract
+
+Continue this exact B-lineage game. Do not substitute another demo. Read README.md, docs/v030 and the locked design030 package. Preserve gameplay content unless explicitly authorized. Presentation reads snapshots; never alter RNG, wallets or entities to draw previews. Keep operator/provider/slot history and source-aware service capacities. Inspect exact source and use the delivered final evidence; do not rebrand old evidence. No automatic GitHub publishing. Mac/mobile hardware results must be distinguished from Linux/headless tests. New artwork is original parameterized illustration, not a verified pure image-model pipeline.

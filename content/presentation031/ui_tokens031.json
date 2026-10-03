@@ -1,0 +1,297 @@
+{
+  "schema": "met031.ui_tokens.v1",
+  "status": "installed_in_native_0.3.1",
+  "date": "2026-09-26",
+  "source_zip_sha256": "8aa876daea4571d50dbfd0c1e8eceba08c956a06de3a97bd049fd83843121b95",
+  "surfaces": {
+    "canvas": "#E8EDDF",
+    "panel": "#F7F6F0",
+    "card": "#FFFFFF",
+    "inset": "#E9EDE6",
+    "text": "#213831",
+    "muted": "#5B6C65",
+    "divider": "#D3DDD3",
+    "outline": "#819188",
+    "shell": "#213E35",
+    "on_shell": "#FFFFFF"
+  },
+  "domains": {
+    "residential": {
+      "label": "居住",
+      "accent": "#54A374",
+      "ink": "#22563C",
+      "tint": "#E8F3EB",
+      "icon": "home"
+    },
+    "agriculture": {
+      "label": "农业",
+      "accent": "#8DA248",
+      "ink": "#485B21",
+      "tint": "#F0F3E1",
+      "icon": "food"
+    },
+    "industrial": {
+      "label": "工业",
+      "accent": "#E7AF36",
+      "ink": "#72500B",
+      "tint": "#FFF3D1",
+      "icon": "production"
+    },
+    "commercial": {
+      "label": "商业",
+      "accent": "#4A8BCE",
+      "ink": "#245184",
+      "tint": "#E9F2FD",
+      "icon": "commercial"
+    },
+    "public": {
+      "label": "公共服务",
+      "accent": "#9B80C8",
+      "ink": "#654486",
+      "tint": "#F2EBFA",
+      "icon": "medical"
+    },
+    "infrastructure": {
+      "label": "基础设施",
+      "accent": "#49A8B0",
+      "ink": "#245E65",
+      "tint": "#E5F3F3",
+      "icon": "logistics"
+    },
+    "general": {
+      "label": "通用",
+      "accent": "#84959C",
+      "ink": "#455860",
+      "tint": "#ECF0F1",
+      "icon": "operations"
+    }
+  },
+  "quantities": {
+    "currency": {
+      "label": "通货",
+      "ink": "#825918",
+      "tint": "#FFF2D9",
+      "icon": "ledger",
+      "kind": "wallet",
+      "unit": "通货"
+    },
+    "dt": {
+      "label": "DT",
+      "ink": "#934B30",
+      "tint": "#F9EBE3",
+      "icon": "clock",
+      "kind": "wallet",
+      "unit": "DT"
+    },
+    "food": {
+      "label": "粮食",
+      "ink": "#34652B",
+      "tint": "#ECF4E6",
+      "icon": "food",
+      "kind": "resource",
+      "unit": "/h"
+    },
+    "material": {
+      "label": "材料",
+      "ink": "#76533C",
+      "tint": "#F4EBE3",
+      "icon": "material",
+      "kind": "resource",
+      "unit": "/h"
+    },
+    "goods": {
+      "label": "制成品",
+      "ink": "#375677",
+      "tint": "#EAF0F8",
+      "icon": "goods",
+      "kind": "resource",
+      "unit": "/h"
+    },
+    "energy": {
+      "label": "电力",
+      "ink": "#806208",
+      "tint": "#FFF6D5",
+      "icon": "energy",
+      "kind": "instant_supply",
+      "unit": "电力"
+    },
+    "population": {
+      "label": "人口",
+      "ink": "#335D66",
+      "tint": "#E8F2F3",
+      "icon": "home",
+      "kind": "count",
+      "unit": "人"
+    },
+    "health": {
+      "label": "健康",
+      "ink": "#1D6B60",
+      "tint": "#E5F4EF",
+      "icon": "medical",
+      "kind": "state",
+      "unit": "指数"
+    },
+    "happiness": {
+      "label": "幸福",
+      "ink": "#9D475F",
+      "tint": "#F8EAF0",
+      "icon": "entertainment",
+      "kind": "state",
+      "unit": "指数"
+    },
+    "education": {
+      "label": "教育",
+      "ink": "#66498C",
+      "tint": "#F0EBF7",
+      "icon": "education",
+      "kind": "state",
+      "unit": "指数"
+    },
+    "pollution": {
+      "label": "环境负担",
+      "ink": "#75652C",
+      "tint": "#F5F0DE",
+      "icon": "pollution",
+      "kind": "field",
+      "unit": "指数"
+    },
+    "heat": {
+      "label": "余热",
+      "ink": "#A1552B",
+      "tint": "#FCEDDF",
+      "icon": "heat",
+      "kind": "field_budget",
+      "unit": "额度"
+    }
+  },
+  "slots": {
+    "Production": {
+      "label": "生产",
+      "icon": "production",
+      "shape": "square_notch",
+      "badge_ink": "#475B52",
+      "badge_bg": "#E6ECE7"
+    },
+    "Logistics": {
+      "label": "物流",
+      "icon": "logistics",
+      "shape": "hex_notch",
+      "badge_ink": "#475B52",
+      "badge_bg": "#E6ECE7"
+    },
+    "Operations": {
+      "label": "运营",
+      "icon": "operations",
+      "shape": "round_notch",
+      "badge_ink": "#475B52",
+      "badge_bg": "#E6ECE7"
+    }
+  },
+  "flex": {
+    "label": "弹性",
+    "shape": "double_notch",
+    "accepts_from": "runtime slot definition",
+    "is_fourth_universal_slot": false
+  },
+  "statuses": {
+    "ok": {
+      "label": "运行正常",
+      "ink": "#24634B",
+      "bg": "#E6F2EA",
+      "icon": "check"
+    },
+    "warning": {
+      "label": "需要留意",
+      "ink": "#815515",
+      "bg": "#FFF1D8",
+      "icon": "warning"
+    },
+    "danger": {
+      "label": "严重缺口",
+      "ink": "#A13439",
+      "bg": "#FBE9E9",
+      "icon": "warning"
+    },
+    "inactive": {
+      "label": "已暂停",
+      "ink": "#586761",
+      "bg": "#EDF0EB",
+      "icon": "pause"
+    },
+    "unknown": {
+      "label": "未结算",
+      "ink": "#586761",
+      "bg": "#EDF0EB",
+      "pattern": "diagonal"
+    },
+    "conditional": {
+      "label": "条件未满足",
+      "ink": "#815515",
+      "bg": "#FFF1D8",
+      "icon": "lock"
+    }
+  },
+  "type": {
+    "panel_title": 24,
+    "section_title": 16,
+    "body": 16,
+    "touch_body": 17,
+    "metric": 28,
+    "caption": 14,
+    "button": 16,
+    "scales": [
+      1,
+      1.25,
+      1.5
+    ]
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32
+  ],
+  "radius": {
+    "panel": 16,
+    "card": 10,
+    "control": 7,
+    "slot": 8,
+    "pill": 999
+  },
+  "stroke": {
+    "divider": 1,
+    "slot": 1.5,
+    "selection": 2.5,
+    "focus": 3
+  },
+  "layout": {
+    "desktop_panel_width": 400,
+    "desktop_panel_max": 432,
+    "touch_panel_width": 296,
+    "minimum_touch_target": 48,
+    "minimum_gap": 8,
+    "title_fixed": true,
+    "body_scroll": "single",
+    "actions_fixed": true
+  },
+  "motion": {
+    "select_ms": 120,
+    "insert_ms": 160,
+    "reduced_motion_ms": 0,
+    "empty_slot_pulses": false
+  },
+  "polarity_rule": "颜色先表示对象类别；状态和收益/代价使用独立图标与文字，不按数字正负猜好坏。",
+  "contrast_design_targets": {
+    "body_text": 4.5,
+    "important_outline": 3.0,
+    "accent_is_not_text": true
+  },
+  "icon_aliases": {
+    "currency": "ledger",
+    "population": "home",
+    "health": "medical",
+    "happiness": "entertainment"
+  }
+}

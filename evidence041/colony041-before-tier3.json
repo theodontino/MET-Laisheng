@@ -1,0 +1,65 @@
+{
+  "baseline_project": "/private/tmp/met041-performance-before/project",
+  "building_ids": [
+    "B000001",
+    "B000003",
+    "B000006",
+    "B000008",
+    "B000010",
+    "B000012",
+    "B000014",
+    "B000016",
+    "B000018",
+    "B000020",
+    "B000022",
+    "B000024"
+  ],
+  "camera": {
+    "pan": "(-103.2143, -82.35099)",
+    "zoom": 1.24147502439379
+  },
+  "cells": [
+    "0,1",
+    "0,0",
+    "-1,1",
+    "-1,2",
+    "0,2",
+    "1,0",
+    "-1,0",
+    "-1,3",
+    "0,-1",
+    "0,3",
+    "1,-1",
+    "2,1"
+  ],
+  "city_stage": 2,
+  "definitions": [
+    "advanced_residence",
+    "freight",
+    "commercial_center",
+    "modern_agriculture",
+    "material_factory",
+    "hospital",
+    "advanced_residence",
+    "power_plant",
+    "secondary_school",
+    "modern_agriculture",
+    "freight",
+    "garden"
+  ],
+  "fixture_source": "shared tests/colony041.gd static start_town/build_town/grow_to helpers",
+  "method": "Original baseline app/map renderer with same seed, fixture helper, stage 3 entities, and community focus; capture only, no simulation tick.",
+  "screenshot": "/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/colony041-before-tier3.png",
+  "screenshot_pixels": [
+    2880,
+    1800
+  ],
+  "seed": 410041,
+  "terrain": "plain at all 12 occupied cells; native elevations retained",
+  "tier_counts": {
+    "1": 0,
+    "2": 0,
+    "3": 12
+  },
+  "validation": ""
+}

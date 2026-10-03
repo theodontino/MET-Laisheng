@@ -1,0 +1,87 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M5 Max
+
+UI040 PASS framebuffer 040-01-origin
+UI040 PASS origin screen has a playable start action
+UI040 PASS action available: 接手
+UI040 PASS origin UI enters current city
+UI040 PASS framebuffer 040-02-city
+UI040 PASS initial build selection is a current Tier1
+UI040 PASS precise advance buttons are absent from HUD
+UI040 PASS desktop HUD fits viewport
+UI040 PASS urban fabric is deterministic and state/RNG read-only
+UI040 PASS framebuffer 040-03-tender
+UI040 PASS UI tender contains three operator-only offers
+UI040 PASS tender UI commits actual cost and construction
+UI040 PASS framebuffer 040-04-construction
+UI040 PASS framebuffer 040-05-upgrade
+UI040 PASS action available: 开始升级
+UI040 PASS upgrade UI starts shared-CP job
+UI040 PASS framebuffer 040-06-commissions
+UI040 PASS reward fixture has an immediately usable choice
+UI040 PASS action available: 污染产业园
+UI040 PASS reward UI grants one license
+UI040 PASS framebuffer 040-06b-permits
+UI040 PASS action available: 安装到
+UI040 PASS permit UI consumes the deployment charge
+UI040 PASS framebuffer 040-07-market
+UI040 PASS action available: 提交订单
+UI040 PASS market UI creates an actual order
+UI040 PASS industrial UI fixture can accept delivery commission
+UI040 PASS action available: 交付
+UI040 PASS active industrial commission UI deducts real goods
+UI040 PASS UI fixture records actual operating history
+UI040 PASS navigation back restores one level
+UI040 PASS second back restores the original topic
+UI040 PASS information navigation is read-only
+UI040 PASS framebuffer 040-08-population
+UI040 PASS framebuffer 040-09-budget
+UI040 PASS framebuffer 040-10-resource
+UI040 PASS framebuffer 040-11-policies
+UI040 PASS all five policy categories remain on one page
+UI040 PASS framebuffer 040-12-policy-preview
+UI040 PASS policy preview uses live simulation
+UI040 PASS policy preview does not adopt or charge
+UI040 PASS framebuffer 040-12b-policy-rules
+UI040 PASS policy rules return to the selected preview
+UI040 PASS policy preview returns to the complete overview
+UI040 PASS topic detail renders: finance/income/sources
+UI040 PASS topic detail renders: finance/expense/sources
+UI040 PASS topic detail renders: finance/history/cycles
+UI040 PASS topic detail renders: finance/history/transactions
+UI040 PASS topic detail renders: resource/supply/records
+UI040 PASS topic detail renders: resource/consumption/records
+UI040 PASS topic detail renders: resource/storage/records
+UI040 PASS topic detail renders: resource/supply/records
+UI040 PASS topic detail renders: population/housing/homes
+UI040 PASS topic detail renders: population/employment/sources
+UI040 PASS topic detail renders: population/needs/medical
+UI040 PASS topic detail renders: population/needs/food
+UI040 PASS topic detail renders: time/advance/
+UI040 PASS topic detail renders: time/rules/pause
+UI040 PASS all new topic details preserve simulation and RNG
+UI040 PASS return restores policy overview scroll position
+UI040 PASS framebuffer 040-13-time
+UI040 PASS pause blocks DT advancement
+UI040 PASS framebuffer 040-14-naming
+UI040 PASS naming can be deferred without losing its right
+UI040 PASS naming screen exposes name input
+UI040 PASS action available: 保存名称
+UI040 PASS name entry and submit consume the naming right
+UI040 PASS framebuffer 040-1024x640-100-hud
+UI040 PASS time HUD fits [1024, 640, 1.0]
+UI040 PASS framebuffer 040-1024x640-100-tasks
+UI040 PASS task return fits [1024, 640, 1.0]
+UI040 PASS framebuffer 040-1024x640-100-policies
+UI040 PASS policy overview return fits [1024, 640, 1.0]
+UI040 PASS framebuffer 040-1024x640-100-policy-preview
+UI040 PASS policy preview controls fit [1024, 640, 1.0]
+UI040 PASS framebuffer 040-640x320-150-hud
+UI040 PASS time HUD fits [640, 320, 1.5]
+UI040 PASS framebuffer 040-640x320-150-tasks
+UI040 PASS task return fits [640, 320, 1.5]
+UI040 PASS framebuffer 040-640x320-150-policies
+UI040 PASS policy overview return fits [640, 320, 1.5]
+UI040 PASS framebuffer 040-640x320-150-policy-preview
+UI040 PASS policy preview controls fit [640, 320, 1.5]
+UI040 83/83

@@ -1,0 +1,35 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M5 Max
+
+COLONY041 PASS start deterministic River Valley fixture: 
+COLONY041 PASS render screenshot 01-initial-town
+COLONY041_CAPTURE=/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/colony041-01-initial-town.png
+COLONY041 PASS build 12-cell plain-terrain colony fixture
+COLONY041 PASS all 12 fixture buildings share plain terrain
+COLONY041 PASS render screenshot 02-tier1
+COLONY041_CAPTURE=/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/colony041-02-tier1.png
+COLONY041 PASS tier1 state passes current schema validation
+COLONY041 PASS tier1 keeps 12 building identities across growth
+COLONY041 PASS advance actual project definitions to tier 2: 
+COLONY041 PASS render screenshot 03-tier2
+COLONY041_CAPTURE=/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/colony041-03-tier2.png
+COLONY041 PASS tier2 state passes current schema validation
+COLONY041 PASS tier2 keeps 12 building identities across growth
+COLONY041 PASS advance actual project definitions to tier 3: 
+COLONY041 PASS render screenshot 04-tier3
+COLONY041_CAPTURE=/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/colony041-04-tier3.png
+COLONY041 PASS tier3 state passes current schema validation
+COLONY041 PASS tier3 keeps 12 building identities across growth
+COLONY041 PASS mature-12-cell static, pan, and zoom presentation do not mutate game state
+COLONY041 PASS mature-12-cell pan and zoom reuse the terrain mesh
+COLONY041 PASS mature-12-cell pan and zoom do not rebuild town fabric
+COLONY041 PASS starter static, pan, and zoom presentation do not mutate game state
+COLONY041 PASS starter pan and zoom reuse the terrain mesh
+COLONY041 PASS starter pan and zoom do not rebuild town fabric
+COLONY041 PASS fill all non-water map cells for fullmap probe
+COLONY041 PASS fullmap static, pan, and zoom presentation do not mutate game state
+COLONY041 PASS fullmap pan and zoom reuse the terrain mesh
+COLONY041 PASS fullmap pan and zoom do not rebuild town fabric
+COLONY041 PASS fullmap camera stages preserve simulation state
+COLONY041 26/26
+COLONY041_RESULT=/Users/lizhirui/Developer/MET_0.3.2_Source/evidence041/colony041.json

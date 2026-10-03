@@ -1,0 +1,350 @@
+{
+  "schema": "met040.ui_tokens.v1",
+  "status": "runtime_source",
+  "surfaces": {
+    "base": "#182125",
+    "canvas": "#182125",
+    "panel": "#222D32",
+    "surface": "#222D32",
+    "card": "#29363B",
+    "raised": "#334249",
+    "inset": "#1C272C",
+    "text": "#F1E8D8",
+    "muted": "#B8B7AF",
+    "divider": "#3B4D52",
+    "outline": "#587178",
+    "focus": "#8AD5C0",
+    "shell": "#182125",
+    "on_shell": "#F1E8D8",
+    "accent": "#79C9B4",
+    "on_accent": "#152D29",
+    "warning": "#E0B56D",
+    "danger": "#E58C83",
+    "success": "#91C6A1",
+    "info": "#9FC2D9",
+    "disabled": "#7C8B98",
+    "background": "#182125",
+    "titlebar": "#2B393E",
+    "ink": "#F1E8D8",
+    "secondary_text": "#B8B7AF",
+    "selection": "#8AD5C0"
+  },
+  "domains": {
+    "residential": {
+      "label": "居住",
+      "accent": "#C6A56B",
+      "ink": "#E2CF9E",
+      "tint": "#302F2B",
+      "icon": "home"
+    },
+    "agriculture": {
+      "label": "农业",
+      "accent": "#ADB880",
+      "ink": "#D0D6A0",
+      "tint": "#292E27",
+      "icon": "food"
+    },
+    "industrial": {
+      "label": "工业",
+      "accent": "#D09C72",
+      "ink": "#E5B78E",
+      "tint": "#352C28",
+      "icon": "production"
+    },
+    "commercial": {
+      "label": "商业",
+      "accent": "#9DBDD5",
+      "ink": "#BED4E3",
+      "tint": "#26323E",
+      "icon": "commercial"
+    },
+    "public": {
+      "label": "公共服务",
+      "accent": "#B5A3C6",
+      "ink": "#D4C6E1",
+      "tint": "#302B3A",
+      "icon": "medical"
+    },
+    "infrastructure": {
+      "label": "基础设施",
+      "accent": "#8EBBBB",
+      "ink": "#B1D4D1",
+      "tint": "#243537",
+      "icon": "logistics"
+    },
+    "general": {
+      "label": "通用",
+      "accent": "#AFB4B4",
+      "ink": "#D5D7D2",
+      "tint": "#273341",
+      "icon": "operations"
+    }
+  },
+  "quantities": {
+    "currency": {
+      "label": "通货",
+      "ink": "#E3C783",
+      "tint": "#352E21",
+      "icon": "ledger",
+      "kind": "wallet",
+      "unit": "通货"
+    },
+    "dt": {
+      "label": "DT",
+      "ink": "#D9A18C",
+      "tint": "#3A2D29",
+      "icon": "clock",
+      "kind": "wallet",
+      "unit": "DT"
+    },
+    "food": {
+      "label": "粮食",
+      "ink": "#BAC995",
+      "tint": "#2B3128",
+      "icon": "food",
+      "kind": "resource",
+      "unit": "/h"
+    },
+    "material": {
+      "label": "材料",
+      "ink": "#D7BDA0",
+      "tint": "#342E29",
+      "icon": "material",
+      "kind": "resource",
+      "unit": "/h"
+    },
+    "goods": {
+      "label": "制成品",
+      "ink": "#AFC6D9",
+      "tint": "#263747",
+      "icon": "goods",
+      "kind": "resource",
+      "unit": "/h"
+    },
+    "energy": {
+      "label": "电力",
+      "ink": "#E2CC83",
+      "tint": "#353123",
+      "icon": "energy",
+      "kind": "instant_supply",
+      "unit": "电力"
+    },
+    "population": {
+      "label": "人口",
+      "ink": "#AAC6D2",
+      "tint": "#26383A",
+      "icon": "home",
+      "kind": "count",
+      "unit": "人"
+    },
+    "health": {
+      "label": "健康",
+      "ink": "#9FC6A4",
+      "tint": "#26372D",
+      "icon": "medical",
+      "kind": "state",
+      "unit": "指数"
+    },
+    "happiness": {
+      "label": "幸福",
+      "ink": "#D2A4B2",
+      "tint": "#382A31",
+      "icon": "entertainment",
+      "kind": "state",
+      "unit": "指数"
+    },
+    "education": {
+      "label": "教育",
+      "ink": "#C2B2D5",
+      "tint": "#302B3A",
+      "icon": "education",
+      "kind": "state",
+      "unit": "指数"
+    },
+    "pollution": {
+      "label": "环境负担",
+      "ink": "#C8C38B",
+      "tint": "#343127",
+      "icon": "pollution",
+      "kind": "field",
+      "unit": "指数"
+    },
+    "heat": {
+      "label": "余热",
+      "ink": "#D99C7D",
+      "tint": "#3A2D29",
+      "icon": "heat",
+      "kind": "field_budget",
+      "unit": "额度"
+    }
+  },
+  "slots": {
+    "Production": {
+      "label": "生产",
+      "icon": "production",
+      "shape": "square_notch",
+      "badge_ink": "#D5D7D2",
+      "badge_bg": "#223549"
+    },
+    "Logistics": {
+      "label": "物流",
+      "icon": "logistics",
+      "shape": "hex_notch",
+      "badge_ink": "#D5D7D2",
+      "badge_bg": "#223549"
+    },
+    "Operations": {
+      "label": "运营",
+      "icon": "operations",
+      "shape": "round_notch",
+      "badge_ink": "#D5D7D2",
+      "badge_bg": "#223549"
+    }
+  },
+  "flex": {
+    "label": "弹性",
+    "shape": "double_notch",
+    "accepts_from": "runtime slot definition",
+    "is_fourth_universal_slot": false
+  },
+  "statuses": {
+    "ok": {
+      "label": "运行正常",
+      "ink": "#91C6A1",
+      "bg": "#26372D",
+      "icon": "check"
+    },
+    "warning": {
+      "label": "需要留意",
+      "ink": "#E0B56D",
+      "bg": "#352B1D",
+      "icon": "warning"
+    },
+    "danger": {
+      "label": "严重缺口",
+      "ink": "#E58C83",
+      "bg": "#39272A",
+      "icon": "warning"
+    },
+    "inactive": {
+      "label": "已暂停",
+      "ink": "#B8B7AF",
+      "bg": "#223549",
+      "icon": "pause"
+    },
+    "unknown": {
+      "label": "未结算",
+      "ink": "#B8B7AF",
+      "bg": "#223549",
+      "pattern": "diagonal"
+    },
+    "conditional": {
+      "label": "条件未满足",
+      "ink": "#E0B56D",
+      "bg": "#352B1D",
+      "icon": "lock"
+    }
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32
+  ],
+  "radius": {
+    "panel": 6,
+    "card": 5,
+    "control": 5,
+    "slot": 4,
+    "pill": 999
+  },
+  "stroke": {
+    "divider": 1,
+    "selection": 2,
+    "focus": 2,
+    "standard_panel": 1
+  },
+  "layout": {
+    "desktop_panel_width": 400,
+    "desktop_panel_max": 432,
+    "touch_panel_width": 296,
+    "minimum_touch_target": 48,
+    "minimum_gap": 8,
+    "title_fixed": true,
+    "body_scroll": "single",
+    "actions_fixed": true
+  },
+  "motion": {
+    "select_ms": 120,
+    "insert_ms": 160,
+    "reduced_motion_ms": 0,
+    "empty_slot_pulses": false
+  },
+  "polarity_rule": "颜色先表示对象类别；状态和收益/代价使用独立图标与文字，不按数字正负猜好坏。",
+  "contrast_design_targets": {
+    "body_text": 4.5,
+    "important_outline": 3.0,
+    "accent_is_not_text": true
+  },
+  "icon_aliases": {
+    "currency": "ledger",
+    "population": "home",
+    "health": "medical",
+    "happiness": "entertainment"
+  },
+  "typography": {
+    "panel_title": 24,
+    "section_title": 22,
+    "body": 16,
+    "touch_body": 16,
+    "metric": 28,
+    "caption": 14,
+    "button": 16,
+    "scales": [
+      1,
+      1.25,
+      1.5
+    ],
+    "font_regular": "res://assets/fonts/NotoSansSC-VF.ttf",
+    "font_weight_regular": 400,
+    "font_weight_semibold": 600
+  },
+  "buttons": {
+    "desktop_min_height": 40,
+    "touch_min_height": 48,
+    "radius": 5,
+    "focus_width": 2,
+    "default_style": "secondary",
+    "primary_fill": "#79C9B4",
+    "primary_text": "#152D29"
+  },
+  "icons": {
+    "directory": "res://assets/ui040/",
+    "canvas": [
+      32,
+      32
+    ],
+    "monochrome_marker": "#79C9B4",
+    "stroke_width": 1.8,
+    "line_cap": "round",
+    "line_join": "round"
+  },
+  "legacy_color_map": {
+    "text": "#F1E8D8",
+    "muted": "#B8B7AF",
+    "success": "#91C6A1",
+    "warning": "#E0B56D",
+    "danger": "#E58C83",
+    "canvas": "#182125",
+    "panel": "#222D32",
+    "card": "#29363B",
+    "inset": "#1C272C",
+    "divider": "#3B4D52",
+    "outline": "#587178",
+    "shell": "#182125",
+    "on_shell": "#F1E8D8",
+    "soft": "#223549"
+  }
+}

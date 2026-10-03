@@ -1,0 +1,1525 @@
+{
+  "schema": "met030.asset_plan.v1",
+  "status": "planning_not_runtime_manifest",
+  "counts": {
+    "building": 10,
+    "prop": 12,
+    "bonus_module": 8,
+    "ui_icon": 32,
+    "operator_badge": 8,
+    "audio": 6
+  },
+  "assets": [
+    {
+      "id": "bld_hamlet",
+      "name_zh": "河谷住宅",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/hamlet.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "hamlet",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "联排小楼与两到三户院落",
+      "notes": "住宅不靠文字辨认",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_farm",
+      "name_zh": "基础农场",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/farm.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "farm",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "农舍、成行田块、低矮棚架",
+      "notes": "田块与地面组件分开",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_timber",
+      "name_zh": "基础料场",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/timber.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "timber",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "材料棚、露天木石堆场",
+      "notes": "不是重工业烟囱",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_power",
+      "name_zh": "基础动力站",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/power.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "power",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "动力房、风轮塔座",
+      "notes": "风轮作为独立运动部件",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_works",
+      "name_zh": "基础工业厂",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/works.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "works",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "红砖锯齿屋顶、短烟囱",
+      "notes": "烟不烘焙",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_market",
+      "name_zh": "基础市场",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/market.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "market",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "连续檐篷、开放摊位",
+      "notes": "与闭合仓库区分",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_school",
+      "name_zh": "基础学校",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/school.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "school",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "U形教学楼、庭院",
+      "notes": "教学活动配景",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_clinic",
+      "name_zh": "基础诊所",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/clinic.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "clinic",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "紧凑平顶楼、入口雨棚",
+      "notes": "使用自制青色心形标记",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_park",
+      "name_zh": "街坊公园",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/park.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "park",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "环形步道、亭、树冠",
+      "notes": "不做成大楼",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "bld_warehouse",
+      "name_zh": "公共仓储站",
+      "group": "building",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        512,
+        512
+      ],
+      "target_path": "assets/world030/buildings/warehouse.webp",
+      "status": "planned_not_produced",
+      "baseline_building_id": "warehouse",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "anchor_normalized": [
+        0.5,
+        0.75
+      ],
+      "silhouette": "大跨度仓棚、连续卸货门",
+      "notes": "场外箱堆可随库存变化",
+      "requires_alpha": true,
+      "preview_sizes": [
+        64,
+        96,
+        128
+      ],
+      "atlas_group": "world",
+      "immutable_art_only": true
+    },
+    {
+      "id": "prop_tree_broadleaf",
+      "name_zh": "阔叶树",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/tree_broadleaf.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_tree_conifer",
+      "name_zh": "针叶树",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/tree_conifer.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_shrub",
+      "name_zh": "低矮灌木",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/shrub.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_rock",
+      "name_zh": "岩石簇",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/rock.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_bench",
+      "name_zh": "公共座椅",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/bench.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_lamp",
+      "name_zh": "路灯",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/lamp.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_fence",
+      "name_zh": "短围栏",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/fence.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_awning",
+      "name_zh": "摊位遮阳棚",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/awning.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_crates",
+      "name_zh": "货箱组",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/crates.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_material_stack",
+      "name_zh": "木石料堆",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/material_stack.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_crop_rows",
+      "name_zh": "田垄组",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/crop_rows.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "prop_planter",
+      "name_zh": "花坛组",
+      "group": "prop",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/props/planter.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "anchor_normalized": [
+        0.5,
+        0.8
+      ],
+      "gameplay_effect": "none",
+      "atlas_group": "world"
+    },
+    {
+      "id": "module_storage",
+      "name_zh": "仓棚／仓储配件",
+      "group": "bonus_module",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/modules/storage.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "example_bonus_ids": [
+        "L01",
+        "L05",
+        "B05"
+      ],
+      "display_only": true,
+      "atlas_group": "world",
+      "notes": "最多显示两类配件；其余效果仍在方案与数据层准确显示"
+    },
+    {
+      "id": "module_heat",
+      "name_zh": "换热器与短管组",
+      "group": "bonus_module",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/modules/heat.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "example_bonus_ids": [
+        "P05",
+        "B02",
+        "B03",
+        "B09"
+      ],
+      "display_only": true,
+      "atlas_group": "world",
+      "notes": "最多显示两类配件；其余效果仍在方案与数据层准确显示"
+    },
+    {
+      "id": "module_recycling",
+      "name_zh": "回收设备",
+      "group": "bonus_module",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/modules/recycling.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "example_bonus_ids": [
+        "P06",
+        "P04"
+      ],
+      "display_only": true,
+      "atlas_group": "world",
+      "notes": "最多显示两类配件；其余效果仍在方案与数据层准确显示"
+    },
+    {
+      "id": "module_public_courtyard",
+      "name_zh": "活动庭院配件",
+      "group": "bonus_module",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/modules/public_courtyard.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "example_bonus_ids": [
+        "P02",
+        "O04",
+        "R14"
+      ],
+      "display_only": true,
+      "atlas_group": "world",
+      "notes": "最多显示两类配件；其余效果仍在方案与数据层准确显示"
+    },
+    {
+      "id": "module_heritage",
+      "name_zh": "旧厂房商业入口",
+      "group": "bonus_module",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/modules/heritage.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "example_bonus_ids": [
+        "O06"
+      ],
+      "display_only": true,
+      "atlas_group": "world",
+      "notes": "最多显示两类配件；其余效果仍在方案与数据层准确显示"
+    },
+    {
+      "id": "module_urban_farm",
+      "name_zh": "屋顶菜园／温室配件",
+      "group": "bonus_module",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/modules/urban_farm.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "example_bonus_ids": [
+        "P07",
+        "R10"
+      ],
+      "display_only": true,
+      "atlas_group": "world",
+      "notes": "最多显示两类配件；其余效果仍在方案与数据层准确显示"
+    },
+    {
+      "id": "module_drone",
+      "name_zh": "无人机平台",
+      "group": "bonus_module",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/modules/drone.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "example_bonus_ids": [
+        "L02"
+      ],
+      "display_only": true,
+      "atlas_group": "world",
+      "notes": "最多显示两类配件；其余效果仍在方案与数据层准确显示"
+    },
+    {
+      "id": "module_workshop",
+      "name_zh": "小型作坊配件",
+      "group": "bonus_module",
+      "production_method": "gpt_generate_then_normalize",
+      "runtime_size": [
+        256,
+        256
+      ],
+      "target_path": "assets/world030/modules/workshop.webp",
+      "status": "planned_not_produced",
+      "requires_alpha": true,
+      "example_bonus_ids": [
+        "R16"
+      ],
+      "display_only": true,
+      "atlas_group": "world",
+      "notes": "最多显示两类配件；其余效果仍在方案与数据层准确显示"
+    },
+    {
+      "id": "icon_home",
+      "name_zh": "住房",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/home.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_farm",
+      "name_zh": "农业",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/farm.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_materials",
+      "name_zh": "材料生产",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/materials.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_power",
+      "name_zh": "动力",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/power.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_factory",
+      "name_zh": "工业",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/factory.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_market",
+      "name_zh": "市场",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/market.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_school",
+      "name_zh": "教育",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/school.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_clinic",
+      "name_zh": "医疗",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/clinic.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_park",
+      "name_zh": "休闲",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/park.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_warehouse",
+      "name_zh": "仓库",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/warehouse.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_food",
+      "name_zh": "粮食",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/food.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_material",
+      "name_zh": "材料",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/material.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_goods",
+      "name_zh": "制成品",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/goods.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_electricity",
+      "name_zh": "电力",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/electricity.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_currency",
+      "name_zh": "通货",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/currency.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_dt",
+      "name_zh": "DT",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/dt.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_people",
+      "name_zh": "居民",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/people.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_construction",
+      "name_zh": "施工",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/construction.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_paused",
+      "name_zh": "停运",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/paused.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_labor_shortage",
+      "name_zh": "缺工",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/labor_shortage.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_resource_shortage",
+      "name_zh": "缺料",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/resource_shortage.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_electricity_shortage",
+      "name_zh": "缺电",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/electricity_shortage.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_waste",
+      "name_zh": "溢出损耗",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/waste.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_layers",
+      "name_zh": "图层",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/layers.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_inspect",
+      "name_zh": "观察",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/inspect.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_confirm",
+      "name_zh": "确认",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/confirm.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_back",
+      "name_zh": "返回",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/back.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_next_change",
+      "name_zh": "下一变化",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/next_change.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_slot_production",
+      "name_zh": "生产槽",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/slot_production.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_slot_logistics",
+      "name_zh": "物流槽",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/slot_logistics.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_slot_operations",
+      "name_zh": "运营槽",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/slot_operations.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "icon_menu",
+      "name_zh": "菜单",
+      "group": "ui_icon",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/icons/menu.svg",
+      "status": "planned_not_produced",
+      "viewbox": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "stroke_width": 2,
+      "notes": "无文字、可着色；可点击目标尺寸与图标画面分开"
+    },
+    {
+      "id": "org_civic",
+      "name_zh": "城投合作社",
+      "group": "operator_badge",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/organizations/civic.svg",
+      "status": "planned_not_produced",
+      "operator_id": "civic",
+      "notes": "每家不同轮廓及内部图形；不只用颜色区分"
+    },
+    {
+      "id": "org_steel",
+      "name_zh": "白霭重工",
+      "group": "operator_badge",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/organizations/steel.svg",
+      "status": "planned_not_produced",
+      "operator_id": "steel",
+      "notes": "每家不同轮廓及内部图形；不只用颜色区分"
+    },
+    {
+      "id": "org_circular",
+      "name_zh": "循生工程",
+      "group": "operator_badge",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/organizations/circular.svg",
+      "status": "planned_not_produced",
+      "operator_id": "circular",
+      "notes": "每家不同轮廓及内部图形；不只用颜色区分"
+    },
+    {
+      "id": "org_river",
+      "name_zh": "河运商社",
+      "group": "operator_badge",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/organizations/river.svg",
+      "status": "planned_not_produced",
+      "operator_id": "river",
+      "notes": "每家不同轮廓及内部图形；不只用颜色区分"
+    },
+    {
+      "id": "org_farmers",
+      "name_zh": "耕林联社",
+      "group": "operator_badge",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/organizations/farmers.svg",
+      "status": "planned_not_produced",
+      "operator_id": "farmers",
+      "notes": "每家不同轮廓及内部图形；不只用颜色区分"
+    },
+    {
+      "id": "org_academy",
+      "name_zh": "白霭学社",
+      "group": "operator_badge",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/organizations/academy.svg",
+      "status": "planned_not_produced",
+      "operator_id": "academy",
+      "notes": "每家不同轮廓及内部图形；不只用颜色区分"
+    },
+    {
+      "id": "org_care",
+      "name_zh": "公共卫生局",
+      "group": "operator_badge",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/organizations/care.svg",
+      "status": "planned_not_produced",
+      "operator_id": "care",
+      "notes": "每家不同轮廓及内部图形；不只用颜色区分"
+    },
+    {
+      "id": "org_commons",
+      "name_zh": "街坊营造社",
+      "group": "operator_badge",
+      "production_method": "code_svg",
+      "runtime_size": [
+        32,
+        32
+      ],
+      "target_path": "assets/ui030/organizations/commons.svg",
+      "status": "planned_not_produced",
+      "operator_id": "commons",
+      "notes": "每家不同轮廓及内部图形；不只用颜色区分"
+    },
+    {
+      "id": "snd_select",
+      "name_zh": "选定方案",
+      "group": "audio",
+      "production_method": "procedural_or_cleared_original",
+      "runtime_size": "mono_48kHz",
+      "target_path": "assets/audio030/select.ogg",
+      "status": "planned_not_produced",
+      "notes": "短促、低音量、不按悬停重复触发；必须可关闭"
+    },
+    {
+      "id": "snd_confirm",
+      "name_zh": "确认建设",
+      "group": "audio",
+      "production_method": "procedural_or_cleared_original",
+      "runtime_size": "mono_48kHz",
+      "target_path": "assets/audio030/confirm.ogg",
+      "status": "planned_not_produced",
+      "notes": "短促、低音量、不按悬停重复触发；必须可关闭"
+    },
+    {
+      "id": "snd_error",
+      "name_zh": "不可执行",
+      "group": "audio",
+      "production_method": "procedural_or_cleared_original",
+      "runtime_size": "mono_48kHz",
+      "target_path": "assets/audio030/error.ogg",
+      "status": "planned_not_produced",
+      "notes": "短促、低音量、不按悬停重复触发；必须可关闭"
+    },
+    {
+      "id": "snd_complete",
+      "name_zh": "施工完成",
+      "group": "audio",
+      "production_method": "procedural_or_cleared_original",
+      "runtime_size": "mono_48kHz",
+      "target_path": "assets/audio030/complete.ogg",
+      "status": "planned_not_produced",
+      "notes": "短促、低音量、不按悬停重复触发；必须可关闭"
+    },
+    {
+      "id": "snd_achievement",
+      "name_zh": "社区成果",
+      "group": "audio",
+      "production_method": "procedural_or_cleared_original",
+      "runtime_size": "mono_48kHz",
+      "target_path": "assets/audio030/achievement.ogg",
+      "status": "planned_not_produced",
+      "notes": "短促、低音量、不按悬停重复触发；必须可关闭"
+    },
+    {
+      "id": "snd_panel",
+      "name_zh": "工作面板开启",
+      "group": "audio",
+      "production_method": "procedural_or_cleared_original",
+      "runtime_size": "mono_48kHz",
+      "target_path": "assets/audio030/panel.ogg",
+      "status": "planned_not_produced",
+      "notes": "短促、低音量、不按悬停重复触发；必须可关闭"
+    }
+  ]
+}

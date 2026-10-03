@@ -1,0 +1,509 @@
+{
+	"captures": [
+		{
+			"name": "040-01-origin",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-02-city",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-03-tender",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-04-construction",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-05-upgrade",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-06-commissions",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-06b-permits",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-07-market",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-08-population",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-09-budget",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-10-resource",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-11-policies",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-12-policy-preview",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-12b-policy-rules",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-13-time",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-14-naming",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1440.0, 900.0)",
+			"window_pixels": "(2880, 1800)"
+		},
+		{
+			"name": "040-1024x640-100-hud",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1024.0, 640.0)",
+			"window_pixels": "(2048, 1280)"
+		},
+		{
+			"name": "040-1024x640-100-tasks",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1024.0, 640.0)",
+			"window_pixels": "(2048, 1280)"
+		},
+		{
+			"name": "040-1024x640-100-policies",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1024.0, 640.0)",
+			"window_pixels": "(2048, 1280)"
+		},
+		{
+			"name": "040-1024x640-100-policy-preview",
+			"scale": 2.0,
+			"text_scale": 1.0,
+			"viewport": "(1024.0, 640.0)",
+			"window_pixels": "(2048, 1280)"
+		},
+		{
+			"name": "040-640x320-150-hud",
+			"scale": 2.0,
+			"text_scale": 1.5,
+			"viewport": "(640.0, 320.0)",
+			"window_pixels": "(1280, 640)"
+		},
+		{
+			"name": "040-640x320-150-tasks",
+			"scale": 2.0,
+			"text_scale": 1.5,
+			"viewport": "(640.0, 320.0)",
+			"window_pixels": "(1280, 640)"
+		},
+		{
+			"name": "040-640x320-150-policies",
+			"scale": 2.0,
+			"text_scale": 1.5,
+			"viewport": "(640.0, 320.0)",
+			"window_pixels": "(1280, 640)"
+		},
+		{
+			"name": "040-640x320-150-policy-preview",
+			"scale": 2.0,
+			"text_scale": 1.5,
+			"viewport": "(640.0, 320.0)",
+			"window_pixels": "(1280, 640)"
+		}
+	],
+	"checks": [
+		{
+			"name": "framebuffer 040-01-origin",
+			"pass": true
+		},
+		{
+			"name": "origin screen has a playable start action",
+			"pass": true
+		},
+		{
+			"name": "action available: 接手",
+			"pass": true
+		},
+		{
+			"name": "origin UI enters current city",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-02-city",
+			"pass": true
+		},
+		{
+			"name": "initial build selection is a current Tier1",
+			"pass": true
+		},
+		{
+			"name": "precise advance buttons are absent from HUD",
+			"pass": true
+		},
+		{
+			"name": "desktop HUD fits viewport",
+			"pass": true
+		},
+		{
+			"name": "urban fabric is deterministic and state/RNG read-only",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-03-tender",
+			"pass": true
+		},
+		{
+			"name": "UI tender contains three operator-only offers",
+			"pass": true
+		},
+		{
+			"name": "tender UI commits actual cost and construction",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-04-construction",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-05-upgrade",
+			"pass": true
+		},
+		{
+			"name": "action available: 开始升级",
+			"pass": true
+		},
+		{
+			"name": "upgrade UI starts shared-CP job",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-06-commissions",
+			"pass": true
+		},
+		{
+			"name": "reward fixture has an immediately usable choice",
+			"pass": true
+		},
+		{
+			"name": "action available: 污染产业园",
+			"pass": true
+		},
+		{
+			"name": "reward UI grants one license",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-06b-permits",
+			"pass": true
+		},
+		{
+			"name": "action available: 安装到",
+			"pass": true
+		},
+		{
+			"name": "permit UI consumes the deployment charge",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-07-market",
+			"pass": true
+		},
+		{
+			"name": "action available: 提交订单",
+			"pass": true
+		},
+		{
+			"name": "market UI creates an actual order",
+			"pass": true
+		},
+		{
+			"name": "industrial UI fixture can accept delivery commission",
+			"pass": true
+		},
+		{
+			"name": "action available: 交付",
+			"pass": true
+		},
+		{
+			"name": "active industrial commission UI deducts real goods",
+			"pass": true
+		},
+		{
+			"name": "UI fixture records actual operating history",
+			"pass": true
+		},
+		{
+			"name": "navigation back restores one level",
+			"pass": true
+		},
+		{
+			"name": "second back restores the original topic",
+			"pass": true
+		},
+		{
+			"name": "information navigation is read-only",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-08-population",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-09-budget",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-10-resource",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-11-policies",
+			"pass": true
+		},
+		{
+			"name": "all five policy categories remain on one page",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-12-policy-preview",
+			"pass": true
+		},
+		{
+			"name": "policy preview uses live simulation",
+			"pass": true
+		},
+		{
+			"name": "policy preview does not adopt or charge",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-12b-policy-rules",
+			"pass": true
+		},
+		{
+			"name": "policy rules return to the selected preview",
+			"pass": true
+		},
+		{
+			"name": "policy preview returns to the complete overview",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: finance/income/sources",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: finance/expense/sources",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: finance/history/cycles",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: finance/history/transactions",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: resource/supply/records",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: resource/consumption/records",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: resource/storage/records",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: resource/supply/records",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: population/housing/homes",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: population/employment/sources",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: population/needs/medical",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: population/needs/food",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: time/advance/",
+			"pass": true
+		},
+		{
+			"name": "topic detail renders: time/rules/pause",
+			"pass": true
+		},
+		{
+			"name": "all new topic details preserve simulation and RNG",
+			"pass": true
+		},
+		{
+			"name": "return restores policy overview scroll position",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-13-time",
+			"pass": true
+		},
+		{
+			"name": "pause blocks DT advancement",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-14-naming",
+			"pass": true
+		},
+		{
+			"name": "naming can be deferred without losing its right",
+			"pass": true
+		},
+		{
+			"name": "naming screen exposes name input",
+			"pass": true
+		},
+		{
+			"name": "action available: 保存名称",
+			"pass": true
+		},
+		{
+			"name": "name entry and submit consume the naming right",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-1024x640-100-hud",
+			"pass": true
+		},
+		{
+			"name": "time HUD fits [1024, 640, 1.0]",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-1024x640-100-tasks",
+			"pass": true
+		},
+		{
+			"name": "task return fits [1024, 640, 1.0]",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-1024x640-100-policies",
+			"pass": true
+		},
+		{
+			"name": "policy overview return fits [1024, 640, 1.0]",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-1024x640-100-policy-preview",
+			"pass": true
+		},
+		{
+			"name": "policy preview controls fit [1024, 640, 1.0]",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-640x320-150-hud",
+			"pass": true
+		},
+		{
+			"name": "time HUD fits [640, 320, 1.5]",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-640x320-150-tasks",
+			"pass": true
+		},
+		{
+			"name": "task return fits [640, 320, 1.5]",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-640x320-150-policies",
+			"pass": true
+		},
+		{
+			"name": "policy overview return fits [640, 320, 1.5]",
+			"pass": true
+		},
+		{
+			"name": "framebuffer 040-640x320-150-policy-preview",
+			"pass": true
+		},
+		{
+			"name": "policy preview controls fit [640, 320, 1.5]",
+			"pass": true
+		}
+	],
+	"failed": 0,
+	"method": "Native macOS rendered UI, logical viewport sizes, programmatic callbacks and explicit fixtures; not human pointer/touch testing.",
+	"passed": 83
+}

@@ -1,0 +1,882 @@
+{
+  "schema": "met.art.030",
+  "style": "humanist_industrial_miniature",
+  "generated_concepts_used_as_reference_only": true,
+  "assets": {
+    "hamlet": {
+      "id": "hamlet",
+      "path": "assets/world030/buildings/hamlet.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        28,
+        5,
+        483,
+        404
+      ],
+      "sha256": "e8404f31140184a18fca3fdcb015c8bf9fe4d2008a949ebcb38c09514949e7cf",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        8,
+        8,
+        496,
+        496
+      ]
+    },
+    "farm": {
+      "id": "farm",
+      "path": "assets/world030/buildings/farm.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        26,
+        67,
+        486,
+        404
+      ],
+      "sha256": "55c00be936394e5cb3c2827260a60e6c84d8b56c4ab829d48310d2573c58d803",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        520,
+        8,
+        496,
+        496
+      ]
+    },
+    "timber": {
+      "id": "timber",
+      "path": "assets/world030/buildings/timber.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        49,
+        5,
+        462,
+        404
+      ],
+      "sha256": "c6d227d2a7894a35bc80bcc6be958607e31ca25980919102184329dc92e8e595",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        1032,
+        8,
+        496,
+        496
+      ]
+    },
+    "power": {
+      "id": "power",
+      "path": "assets/world030/buildings/power.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        56,
+        5,
+        455,
+        404
+      ],
+      "sha256": "01fed989246b32586c64a92fbd23dd98810021b534cfc02afb22e78607da7d18",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        1544,
+        8,
+        496,
+        496
+      ]
+    },
+    "works": {
+      "id": "works",
+      "path": "assets/world030/buildings/works.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        26,
+        12,
+        486,
+        404
+      ],
+      "sha256": "88e529421e56e69d73638d8a723f0b70ea160f7d6c972bbbf1d3d67b45e87d12",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        8,
+        520,
+        496,
+        496
+      ]
+    },
+    "market": {
+      "id": "market",
+      "path": "assets/world030/buildings/market.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        26,
+        85,
+        486,
+        404
+      ],
+      "sha256": "6fac74ec567ed48fc7ea4979bd854a84ab588863af1b8bf9db13e55cb350b005",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        520,
+        520,
+        496,
+        496
+      ]
+    },
+    "school": {
+      "id": "school",
+      "path": "assets/world030/buildings/school.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        26,
+        53,
+        486,
+        404
+      ],
+      "sha256": "a795d725c29ca7215f054e437d9346fab367823291f4c2974798dcd11776d841",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        1032,
+        520,
+        496,
+        496
+      ]
+    },
+    "clinic": {
+      "id": "clinic",
+      "path": "assets/world030/buildings/clinic.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        45,
+        5,
+        467,
+        404
+      ],
+      "sha256": "1420fcc2051961b9ebcbc3a4c48639046e80e10e17c100eae305a74a9bcd0e50",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        1544,
+        520,
+        496,
+        496
+      ]
+    },
+    "park": {
+      "id": "park",
+      "path": "assets/world030/buildings/park.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        66,
+        5,
+        446,
+        404
+      ],
+      "sha256": "5a72f4ef8834bfdedf3c93ac15f990db11f777fef57537ace16c1185b6919953",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        8,
+        1032,
+        496,
+        496
+      ]
+    },
+    "warehouse": {
+      "id": "warehouse",
+      "path": "assets/world030/buildings/warehouse.png",
+      "size": [
+        512,
+        512
+      ],
+      "ground_anchor": [
+        256.0,
+        358.4
+      ],
+      "bounds": [
+        26,
+        36,
+        486,
+        404
+      ],
+      "sha256": "dd02e9902130ccc4c7eb68536bc8eca862671d7e2f03537b86cc54d9c6616c44",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 0,
+      "atlas_rect": [
+        520,
+        1032,
+        496,
+        496
+      ]
+    },
+    "tree_broadleaf": {
+      "id": "tree_broadleaf",
+      "path": "assets/world030/props/tree_broadleaf.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        52,
+        3,
+        203,
+        202
+      ],
+      "sha256": "78d6daa466582f3c124ebcb89f0564ae6fd1e5a0a73ce86480c62b2ab44cdb8a",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        8,
+        8,
+        256,
+        256
+      ]
+    },
+    "tree_conifer": {
+      "id": "tree_conifer",
+      "path": "assets/world030/props/tree_conifer.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        66,
+        3,
+        190,
+        202
+      ],
+      "sha256": "9f21074734f2bd0c59a1086b7fa0c349b606119692477ccbf2b93e85e5f1e32c",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        280,
+        8,
+        256,
+        256
+      ]
+    },
+    "shrub": {
+      "id": "shrub",
+      "path": "assets/world030/props/shrub.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        65,
+        243,
+        202
+      ],
+      "sha256": "10c42b28983e2cecf12cefc5bddeb4b34cbc786c52ce8336177d99d8d0a86d69",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        552,
+        8,
+        256,
+        256
+      ]
+    },
+    "rocks": {
+      "id": "rocks",
+      "path": "assets/world030/props/rocks.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        43,
+        243,
+        202
+      ],
+      "sha256": "2fe6b956fdf2ec0e69c66e252f11cbfe5a9d7989bdc5ad9536580464efdc31b5",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        824,
+        8,
+        256,
+        256
+      ]
+    },
+    "bench": {
+      "id": "bench",
+      "path": "assets/world030/props/bench.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        31,
+        3,
+        225,
+        202
+      ],
+      "sha256": "957e619a9113af8fd5e70a33033c0a06188747f80c902b5b89a3775f98bfdf81",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        1096,
+        8,
+        256,
+        256
+      ]
+    },
+    "lamp": {
+      "id": "lamp",
+      "path": "assets/world030/props/lamp.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        90,
+        3,
+        165,
+        202
+      ],
+      "sha256": "cfaef8ec42975c7f09c69d1e3f3cd4a446fc2ea201d27aa6ebd680e577eed1cb",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        1368,
+        8,
+        256,
+        256
+      ]
+    },
+    "fence": {
+      "id": "fence",
+      "path": "assets/world030/props/fence.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        18,
+        3,
+        237,
+        202
+      ],
+      "sha256": "5a74521dc0bc1bf90effc46fcf978a08de140f7391cdd5ec51b6740457d2f807",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        1640,
+        8,
+        256,
+        256
+      ]
+    },
+    "stall": {
+      "id": "stall",
+      "path": "assets/world030/props/stall.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        29,
+        3,
+        226,
+        202
+      ],
+      "sha256": "7f823f8e056d77e0a889d0b4d2a94431cf67b3f35d159ef58f535f1571ffeab3",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        8,
+        280,
+        256,
+        256
+      ]
+    },
+    "crates": {
+      "id": "crates",
+      "path": "assets/world030/props/crates.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        37,
+        3,
+        219,
+        202
+      ],
+      "sha256": "5dbbfb002bd0d6558a5cd97120df94026566846bff5ca881f89498dd83a8d6e0",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        280,
+        280,
+        256,
+        256
+      ]
+    },
+    "materials": {
+      "id": "materials",
+      "path": "assets/world030/props/materials.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        55,
+        243,
+        202
+      ],
+      "sha256": "bcad17c84bb88241ea23a911084ebc6a71b802215ed26dc4c3fadfcab3b0bbb2",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        552,
+        280,
+        256,
+        256
+      ]
+    },
+    "furrows": {
+      "id": "furrows",
+      "path": "assets/world030/props/furrows.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        68,
+        243,
+        202
+      ],
+      "sha256": "40f454dcac6c4bd01fb8d5e07b4b5254410086c299dc370958175eb9662d746a",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        824,
+        280,
+        256,
+        256
+      ]
+    },
+    "flowers": {
+      "id": "flowers",
+      "path": "assets/world030/props/flowers.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        53,
+        243,
+        202
+      ],
+      "sha256": "6c6abf6853499f55d21ebb6fe398b3c0bb497f2d88ef74f23b39437c3628e0d6",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        1096,
+        280,
+        256,
+        256
+      ]
+    },
+    "storage": {
+      "id": "storage",
+      "path": "assets/world030/modules/storage.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        14,
+        3,
+        242,
+        202
+      ],
+      "sha256": "7e1b1744c25d106dfa7782766b61533b4a9035ca94852f9275825ebd23ea96b0",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        1368,
+        280,
+        256,
+        256
+      ]
+    },
+    "heat": {
+      "id": "heat",
+      "path": "assets/world030/modules/heat.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        45,
+        3,
+        211,
+        202
+      ],
+      "sha256": "62397b8f32acd4b5e42edbae0b589064db2c160c1bba9fb4553d8101ac6d79a1",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        1640,
+        280,
+        256,
+        256
+      ]
+    },
+    "recycle": {
+      "id": "recycle",
+      "path": "assets/world030/modules/recycle.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        8,
+        243,
+        202
+      ],
+      "sha256": "ae643e6bd54e4e7d94c7f6354ebc3cf7c33b55c9eba03b2b2581fb51b61f1e87",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        8,
+        552,
+        256,
+        256
+      ]
+    },
+    "open_court": {
+      "id": "open_court",
+      "path": "assets/world030/modules/open_court.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        69,
+        243,
+        202
+      ],
+      "sha256": "cb7fc60c25da1a9bbacbac9cf8eef81f53fd11ccf7770d75dd757cc6f7025b33",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        280,
+        552,
+        256,
+        256
+      ]
+    },
+    "reuse": {
+      "id": "reuse",
+      "path": "assets/world030/modules/reuse.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        15,
+        3,
+        240,
+        202
+      ],
+      "sha256": "1f670e9adea139142b8be16620aeef91cedfdf55fbafdc2bcd454932b87ae85e",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        552,
+        552,
+        256,
+        256
+      ]
+    },
+    "roof_farm": {
+      "id": "roof_farm",
+      "path": "assets/world030/modules/roof_farm.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        51,
+        243,
+        202
+      ],
+      "sha256": "d2f6082e07b2c93adbcb144853bcec8f43177a691a2d82b9f0efc8f6e1edd31a",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        824,
+        552,
+        256,
+        256
+      ]
+    },
+    "drone": {
+      "id": "drone",
+      "path": "assets/world030/modules/drone.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        13,
+        54,
+        243,
+        202
+      ],
+      "sha256": "8f086f0fbb91229a7f8431273d839a9010c50e2aa867e65ed1a1cd751a64bc1c",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        1096,
+        552,
+        256,
+        256
+      ]
+    },
+    "workshop": {
+      "id": "workshop",
+      "path": "assets/world030/modules/workshop.png",
+      "size": [
+        256,
+        256
+      ],
+      "ground_anchor": [
+        128.0,
+        179.2
+      ],
+      "bounds": [
+        24,
+        3,
+        232,
+        202
+      ],
+      "sha256": "bf243fb2ad8c69b02643400a41c6834d02ff2a25b2664e76cf911678e7b534eb",
+      "method": "original_parametric_illustration",
+      "camera": "fixed high oblique, orthographic",
+      "source_script": "tools/make_art030.py",
+      "atlas_page": 1,
+      "atlas_rect": [
+        1368,
+        552,
+        256,
+        256
+      ]
+    }
+  },
+  "atlases": [
+    "assets/world030/atlas0.png",
+    "assets/world030/atlas1.png"
+  ],
+  "font": "OS SystemFont only; no font binaries distributed"
+}

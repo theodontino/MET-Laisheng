@@ -1,0 +1,32 @@
+{
+  "MET_0.4.0_Laisheng_Android.apk": {
+    "bytes": 78250001,
+    "members": 656,
+    "zip_crc_ok": true,
+    "native_libraries": [
+      "lib/arm64-v8a/libc++_shared.so",
+      "lib/arm64-v8a/libgodot_android.so"
+    ],
+    "alpha_masks": 45,
+    "licenses": [
+      "assets/assets/licenses/THIRD-PARTY-NOTICES.txt",
+      "assets/assets/licenses/GODOT-LICENSE.txt"
+    ]
+  },
+  "MET_0.4.0_Laisheng_iOS.zip": {
+    "bytes": 130957337,
+    "members": 71,
+    "zip_crc_ok": true,
+    "xcodeproject": true
+  },
+  "MET_0.4.0_Laisheng_macOS.zip": {
+    "bytes": 76722136,
+    "members": 10,
+    "zip_crc_ok": true
+  },
+  "MET_0.4.0_Laisheng_Windows_x64.zip": {
+    "bytes": 55159900,
+    "members": 6,
+    "zip_crc_ok": true
+  }
+}

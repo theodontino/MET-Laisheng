@@ -1,0 +1,37 @@
+; MET 0.4.0 — specialization, commissions, shared construction and single-Block trade.
+config_version=5
+
+[application]
+config/name="MET · 来生"
+config/version="0.4.0-prealpha.3"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/use_custom_user_dir=true
+config/custom_user_dir_name="MET-RiverValley-040"
+
+[display]
+window/size/viewport_width=1440
+window/size/viewport_height=900
+window/size/window_width_override=1440
+window/size/window_height_override=900
+window/size/min_width=640
+window/size/min_height=320
+window/stretch/mode="canvas_items"
+window/dpi/allow_hidpi=true
+window/handheld/orientation=6
+
+[rendering]
+textures/vram_compression/import_etc2_astc=true
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.039,0.075,0.09,1)
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=3
+
+[debug]
+gdscript/warnings/untyped_declaration=0
+gdscript/warnings/inference_on_variant=0
+
+[input_devices]
+pointing/emulate_mouse_from_touch=false
+pointing/emulate_touch_from_mouse=false

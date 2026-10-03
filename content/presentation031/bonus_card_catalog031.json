@@ -1,0 +1,2957 @@
+{
+  "schema": "met031.bonus_card_catalog.v1",
+  "status": "installed_in_native_0.3.1",
+  "baseline_source_sha256": "8aa876daea4571d50dbfd0c1e8eceba08c956a06de3a97bd049fd83843121b95",
+  "count": 40,
+  "notes": [
+    "仅包含当前core020.json的40个活跃Bonus，不收录未实现脑暴项。",
+    "颜色是主题提示，不能用作挂载权限；权限继续由引擎判定。",
+    "卡面词条来自当前代码与文案；具体产能与生效状态仍从运行时读取。"
+  ],
+  "cards": [
+    {
+      "bonus_id": "P01",
+      "name": "粗野制造",
+      "visual_domain": "industrial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.industrial"
+      ],
+      "hero_asset": "assets/world030/buildings/works.png",
+      "motif": "blueprint_hatch",
+      "flavor": "车间不停，产线加速。",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "goods",
+          "role": "benefit",
+          "text": "制成品产出 ×2",
+          "rule_ids": [
+            "P01.4"
+          ]
+        },
+        {
+          "icon": "material",
+          "role": "cost",
+          "text": "原料、用电各 +50%",
+          "rule_ids": [
+            "P01.1",
+            "P01.2"
+          ]
+        },
+        {
+          "icon": "pollution",
+          "role": "cost",
+          "text": "环境负担 +50%",
+          "rule_ids": [
+            "P01.3"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "input.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P01.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "energy_demand",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P01.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P01.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 2,
+          "id": "P01.4",
+          "priority": 0
+        }
+      ],
+      "source_summary": "原料和能源需求×1.5，污染×1.5，物资产出×2。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "P02",
+      "name": "研究型医院",
+      "visual_domain": "public",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.medical"
+      ],
+      "hero_asset": "assets/world030/buildings/clinic.png",
+      "motif": "courtyard_grid",
+      "flavor": "治疗之外，也让知识生长。",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "medical",
+          "role": "tradeoff",
+          "text": "30%基础医疗名额 → 教育名额",
+          "rule_ids": [
+            "P02.1"
+          ]
+        },
+        {
+          "icon": "education",
+          "role": "benefit",
+          "text": "邻接教育建筑效率 +20%",
+          "rule_ids": [
+            "P02.2"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "capacity_convert",
+          "phase": "spatial",
+          "from": "service.medical",
+          "to": "service.education",
+          "fraction": 0.3,
+          "id": "P02.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "adjacent",
+          "mode": "multiply",
+          "value": 1.2,
+          "when": {
+            "traits": [
+              "building.education"
+            ]
+          },
+          "id": "P02.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "30%基础医疗容量转为教育；邻接教育建筑效率+20%。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "P03",
+      "name": "实践教育",
+      "visual_domain": "public",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.education"
+      ],
+      "hero_asset": "assets/world030/buildings/school.png",
+      "motif": "courtyard_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "employment",
+          "role": "benefit",
+          "text": "邻接岗位的有效劳动力 +20%",
+          "rule_ids": [
+            "P03.2"
+          ]
+        },
+        {
+          "icon": "education",
+          "role": "cost",
+          "text": "本建筑效率 −15%",
+          "rule_ids": [
+            "P03.1"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.85,
+          "id": "P03.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "personnel_mult",
+          "targets": "adjacent",
+          "mode": "multiply",
+          "value": 1.2,
+          "id": "P03.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "自身效率×0.85；邻接岗位获得的有效劳动力×1.2。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "P04",
+      "name": "生物质能公共设施",
+      "visual_domain": "public",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.public_service"
+      ],
+      "hero_asset": "assets/world030/buildings/park.png",
+      "motif": "courtyard_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "material",
+          "role": "conversion",
+          "text": "5粮食 → 2材料；独立消耗",
+          "rule_ids": [
+            "P04.2"
+          ]
+        },
+        {
+          "icon": "energy",
+          "role": "conversion",
+          "text": "5粮食 → 2电力；独立消耗",
+          "rule_ids": [
+            "P04.3"
+          ]
+        },
+        {
+          "icon": "currency",
+          "role": "cost",
+          "text": "建筑维护 +50%",
+          "rule_ids": [
+            "P04.1"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P04.1",
+          "priority": 0
+        },
+        {
+          "op": "grant_recipe",
+          "phase": "production",
+          "targets": "service_area",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "input": {
+            "food": 5
+          },
+          "output": {
+            "material": 2
+          },
+          "rate": 0.3,
+          "id": "P04.2",
+          "priority": 0
+        },
+        {
+          "op": "grant_recipe",
+          "phase": "distribution",
+          "targets": "service_area",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "input": {
+            "food": 5
+          },
+          "output": {
+            "energy": 2
+          },
+          "rate": 0.3,
+          "id": "P04.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "维护×1.5；覆盖住宅获得两项配方：5食物→2材料、5食物→2即时能源。每项独立付费。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "P05",
+      "name": "热量管理",
+      "visual_domain": "industrial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.industrial"
+      ],
+      "hero_asset": "assets/world030/buildings/works.png",
+      "motif": "blueprint_hatch",
+      "flavor": "让车间的余温走进城市。",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "heat",
+          "role": "conversion",
+          "text": "分出10%产品和40%污染形成余热",
+          "rule_ids": [
+            "P05.1",
+            "P05.2"
+          ]
+        },
+        {
+          "icon": "heat",
+          "role": "condition",
+          "text": "还需供暖或节电方案利用余热",
+          "rule_ids": [
+            "P05.1",
+            "P05.2"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "redirect_product_heat",
+          "value": 0.1,
+          "targets": "self",
+          "id": "P05.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "redirect_pollution_heat",
+          "value": 0.4,
+          "targets": "self",
+          "id": "P05.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "从实际物资产出分走10%、污染分走40%变成余热，不能同时保留原产物。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "P06",
+      "name": "高级回收",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/warehouse.png",
+      "motif": "network_lines",
+      "flavor": "把城市的负担，变成可用之物。",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "pollution",
+          "role": "conversion",
+          "text": "10污染额度 → 3材料 + 3制成品",
+          "rule_ids": [
+            "P06.2"
+          ]
+        },
+        {
+          "icon": "pollution",
+          "role": "condition",
+          "text": "每小时最多处理10；受本格可用额度限制",
+          "rule_ids": [
+            "P06.2"
+          ]
+        },
+        {
+          "icon": "currency",
+          "role": "cost",
+          "text": "建筑维护 +50%",
+          "rule_ids": [
+            "P06.1"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "P06.1",
+          "priority": 0
+        },
+        {
+          "op": "field_convert",
+          "phase": "environment",
+          "input_type": "pollution",
+          "amount": 10,
+          "output": {
+            "material": 3,
+            "goods": 3
+          },
+          "rate": 1,
+          "id": "P06.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "维护×1.5；每小时最多消耗本格10污染额度，按每10点共同产出3材料+3制成品。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "P07",
+      "name": "家庭农场",
+      "visual_domain": "agriculture",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.agricultural"
+      ],
+      "hero_asset": "assets/world030/buildings/farm.png",
+      "motif": "field_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "population",
+          "role": "benefit",
+          "text": "增加8个住房位置；住户优先就地工作",
+          "rule_ids": [
+            "P07.1",
+            "P07.2",
+            "P07.3"
+          ]
+        },
+        {
+          "icon": "food",
+          "role": "cost",
+          "text": "粮食产出 −15%",
+          "rule_ids": [
+            "P07.1",
+            "P07.2",
+            "P07.3"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "housing",
+          "targets": "self",
+          "mode": "add",
+          "value": 8,
+          "id": "P07.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.85,
+          "id": "P07.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "local_employment",
+          "value": true,
+          "targets": "self",
+          "id": "P07.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "提供8人住房，粮食产出×0.85；住在本建筑的人优先填本建筑岗位。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "P08",
+      "name": "水基工厂",
+      "visual_domain": "industrial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.industrial"
+      ],
+      "hero_asset": "assets/world030/buildings/works.png",
+      "motif": "blueprint_hatch",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "production",
+          "role": "neutral",
+          "text": "水岸工厂，短缺时更容易拿到材料",
+          "rule_ids": [
+            "P08.1",
+            "P08.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "production",
+          "role": "neutral",
+          "text": "污染也会沿水岸传得更远",
+          "rule_ids": [
+            "P08.1",
+            "P08.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "material_distance",
+          "value": 0.5,
+          "targets": "self",
+          "id": "P08.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "water_pollution_decay",
+          "value": 0.7,
+          "targets": "self",
+          "id": "P08.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "需水岸；材料采购的排序距离减半；污染沿水岸的衰减系数×0.7。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "L01",
+      "name": "电商仓储店",
+      "visual_domain": "commercial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "eligibility_traits": [
+        "building.commercial"
+      ],
+      "hero_asset": "assets/world030/buildings/market.png",
+      "motif": "shop_canopy",
+      "flavor": "少一点逛街，多一点配送。",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "commercial",
+          "role": "benefit",
+          "text": "服务衰减降低30%，仓容 +50%",
+          "rule_ids": [
+            "L01.1",
+            "L01.4"
+          ]
+        },
+        {
+          "icon": "production",
+          "role": "benefit",
+          "text": "与工业的既有协同 ×2",
+          "rule_ids": [
+            "L01.3"
+          ]
+        },
+        {
+          "icon": "entertainment",
+          "role": "cost",
+          "text": "不再提供休闲名额",
+          "rule_ids": [
+            "L01.2"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service_decay",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.7,
+          "id": "L01.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.entertainment",
+          "targets": "self",
+          "mode": "override",
+          "value": 0,
+          "id": "L01.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "industrial_adjacency",
+          "value": 2,
+          "targets": "self",
+          "id": "L01.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "storage.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "L01.4",
+          "priority": 0
+        }
+      ],
+      "source_summary": "服务衰减×0.7，娱乐容量归零，与工业的已有协同×2，库存×1.5。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "L02",
+      "name": "无人机站",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/warehouse.png",
+      "motif": "network_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "logistics",
+          "role": "benefit",
+          "text": "两格内采购排序更有利",
+          "rule_ids": [
+            "L02.1"
+          ]
+        },
+        {
+          "icon": "energy",
+          "role": "cost",
+          "text": "用电 +25%，维护 +30%",
+          "rule_ids": [
+            "L02.2",
+            "L02.3"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "emit",
+          "phase": "spatial",
+          "type": "drone",
+          "strength": 1,
+          "range": 2,
+          "decay": 0.3,
+          "id": "L02.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "energy_demand",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "L02.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.3,
+          "id": "L02.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "产生两格配送可达场；覆盖建筑的采购距离权重×0.4。能源需求×1.25、维护×1.3。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "L03",
+      "name": "零库存生产",
+      "visual_domain": "industrial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/works.png",
+      "motif": "blueprint_hatch",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "production",
+          "role": "benefit",
+          "text": "优先采购；建筑效率 +20%",
+          "rule_ids": [
+            "L03.2",
+            "L03.3"
+          ]
+        },
+        {
+          "icon": "goods",
+          "role": "cost",
+          "text": "仓容只保留20%",
+          "rule_ids": [
+            "L03.1"
+          ]
+        },
+        {
+          "icon": "warning",
+          "role": "condition",
+          "text": "所需投入缺供时，运行率最多50%",
+          "rule_ids": [
+            "L03.4"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "storage.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.2,
+          "id": "L03.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "allocation_priority",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "id": "L03.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.2,
+          "id": "L03.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "jit_cap",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.5,
+          "id": "L03.4",
+          "priority": 0
+        }
+      ],
+      "source_summary": "仓容×0.2，优先采购，效率×1.2；任一所需投入缺供，运行率上限50%。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "L04",
+      "name": "邻里中心",
+      "visual_domain": "public",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "eligibility_traits": [
+        "building.public_service",
+        "building.commercial"
+      ],
+      "hero_asset": "assets/world030/buildings/park.png",
+      "motif": "courtyard_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "medical",
+          "role": "relation",
+          "text": "邻接服务再延伸一格；可达性为50%",
+          "rule_ids": [
+            "L04.1"
+          ]
+        },
+        {
+          "icon": "medical",
+          "role": "condition",
+          "text": "共享原服务名额，不复制容量",
+          "rule_ids": [
+            "L04.1"
+          ]
+        },
+        {
+          "icon": "currency",
+          "role": "cost",
+          "text": "建筑维护 +20%",
+          "rule_ids": [
+            "L04.2"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "service_relay",
+          "value": 0.5,
+          "targets": "self",
+          "id": "L04.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.2,
+          "id": "L04.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "把邻接服务源以50%可达性转播一格；保留原服务源与容量，维护×1.2。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "L05",
+      "name": "中转仓",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/warehouse.png",
+      "motif": "network_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "仓容翻倍，收下邻近多余产物",
+          "rule_ids": [
+            "L05.1",
+            "L05.2",
+            "L05.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "代价：建筑效率降低10%",
+          "rule_ids": [
+            "L05.1",
+            "L05.2",
+            "L05.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "storage.*",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 2,
+          "id": "L05.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "overflow_relay",
+          "value": true,
+          "targets": "self",
+          "id": "L05.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "efficiency",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.9,
+          "id": "L05.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "仓容×2，优先收邻接生产者的溢出。自身效率×0.9。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "O01",
+      "name": "商业医疗",
+      "visual_domain": "commercial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.medical"
+      ],
+      "hero_asset": "assets/world030/buildings/clinic.png",
+      "motif": "shop_canopy",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "commercial",
+          "role": "neutral",
+          "text": "医院可和商业协同，并形成交易税源",
+          "rule_ids": [
+            "O01.1",
+            "O01.2",
+            "O01.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "commercial",
+          "role": "neutral",
+          "text": "医疗服务不再额外增加幸福",
+          "rule_ids": [
+            "O01.1",
+            "O01.2",
+            "O01.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "medical_commercial_relation",
+          "value": true,
+          "targets": "self",
+          "id": "O01.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "medical_happiness",
+          "value": false,
+          "targets": "self",
+          "id": "O01.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "medical_activity",
+          "value": 1.2,
+          "targets": "self",
+          "id": "O01.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "医疗—商业邻接建立协同；医疗不再额外加幸福；实际医疗服务形成交易税基。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "O02",
+      "name": "工厂家属区",
+      "visual_domain": "residential",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.residential"
+      ],
+      "hero_asset": "assets/world030/buildings/hamlet.png",
+      "motif": "window_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "home",
+          "role": "neutral",
+          "text": "本住宅更容易进入同公司工厂就业",
+          "rule_ids": [
+            "O02.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "home",
+          "role": "neutral",
+          "text": "仍然承受工业污染",
+          "rule_ids": [
+            "O02.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "family_employment",
+          "value": true,
+          "targets": "self",
+          "id": "O02.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "与本住宅同运营商的工业岗位可达性更高，同条件优先接纳。污染不减免。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "O03",
+      "name": "密集住宅",
+      "visual_domain": "residential",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.residential"
+      ],
+      "hero_asset": "assets/world030/buildings/hamlet.png",
+      "motif": "window_grid",
+      "flavor": "同一片土地，住下更多邻居。",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "population",
+          "role": "benefit",
+          "text": "住房容量 +75%",
+          "rule_ids": [
+            "O03.1"
+          ]
+        },
+        {
+          "icon": "currency",
+          "role": "benefit",
+          "text": "每人维护 −15%",
+          "rule_ids": [
+            "O03.2"
+          ]
+        },
+        {
+          "icon": "pollution",
+          "role": "cost",
+          "text": "污染、服务缺口的负面影响 +25%",
+          "rule_ids": [
+            "O03.3",
+            "O03.4"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "housing",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.75,
+          "id": "O03.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "population_maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.85,
+          "id": "O03.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "exposure_multiplier",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "O03.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "shortage_multiplier",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "O03.4",
+          "priority": 0
+        }
+      ],
+      "source_summary": "住房×1.75，人口维护费×0.85；污染和服务缺口负面影响×1.25。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "O04",
+      "name": "开放大学",
+      "visual_domain": "public",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.education"
+      ],
+      "hero_asset": "assets/world030/buildings/school.png",
+      "motif": "courtyard_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "entertainment",
+          "role": "benefit",
+          "text": "新增休闲名额＝基础教育名额的30%",
+          "rule_ids": [
+            "O04.1"
+          ]
+        },
+        {
+          "icon": "education",
+          "role": "neutral",
+          "text": "仍按实际有限服务容量分配",
+          "rule_ids": [
+            "O04.1"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "capacity_copy",
+          "phase": "spatial",
+          "from": "service.education",
+          "to": "service.entertainment",
+          "fraction": 0.3,
+          "id": "O04.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "同一教育覆盖网新增相当于基础教育容量30%的娱乐容量。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "O05",
+      "name": "义务教师",
+      "visual_domain": "public",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.residential"
+      ],
+      "hero_asset": "assets/world030/buildings/hamlet.png",
+      "motif": "courtyard_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "medical",
+          "role": "neutral",
+          "text": "教育达到35的居民可兼任义务教师",
+          "rule_ids": [
+            "O05.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "medical",
+          "role": "neutral",
+          "text": "代价：参与居民工作效率降低15%",
+          "rule_ids": [
+            "O05.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "volunteer_education",
+          "value": {
+            "threshold": 35,
+            "capacity_per_pop": 0.3,
+            "labor_mult": 0.85
+          },
+          "targets": "self",
+          "id": "O05.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "本住宅教育≥35的居民每人提供0.3教育容量；人员效率×0.85。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "O06",
+      "name": "东郊记忆",
+      "visual_domain": "commercial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.industrial"
+      ],
+      "hero_asset": "assets/world030/buildings/works.png",
+      "motif": "shop_canopy",
+      "flavor": "旧厂房不谢幕，只换一种生活。",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "commercial",
+          "role": "relation",
+          "text": "旧工业厂房按商用结算",
+          "rule_ids": [
+            "O06.1",
+            "O06.5",
+            "O06.6"
+          ]
+        },
+        {
+          "icon": "pollution",
+          "role": "benefit",
+          "text": "停止原工业污染",
+          "rule_ids": [
+            "O06.4"
+          ]
+        },
+        {
+          "icon": "goods",
+          "role": "tradeoff",
+          "text": "停止原工业产出；自营合同可保留20%",
+          "rule_ids": [
+            "O06.2",
+            "O06.7",
+            "O06.8"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "relate",
+          "phase": "spatial",
+          "relation": "commercial_use",
+          "id": "O06.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "targets": "self",
+          "mode": "override",
+          "value": 0,
+          "id": "O06.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "input.material",
+          "targets": "self",
+          "mode": "override",
+          "value": 0,
+          "id": "O06.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "override",
+          "value": 0,
+          "id": "O06.4",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.commercial",
+          "targets": "self",
+          "mode": "add",
+          "value": 24,
+          "id": "O06.5",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.entertainment",
+          "targets": "self",
+          "mode": "add",
+          "value": 10,
+          "id": "O06.6",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.6400000000000001,
+          "when": {
+            "same_provider": true
+          },
+          "priority": 10,
+          "id": "O06.7"
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "input.material",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.44000000000000006,
+          "when": {
+            "same_provider": true
+          },
+          "priority": 10,
+          "id": "O06.8"
+        }
+      ],
+      "source_summary": "保留原工业Trait与历史，按商业用途结算；原工业产出、污染归零。同运营商提供的方案保留20%原产出。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "O07",
+      "name": "商业综合体",
+      "visual_domain": "commercial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.commercial"
+      ],
+      "hero_asset": "assets/world030/buildings/market.png",
+      "motif": "shop_canopy",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "commercial",
+          "role": "relation",
+          "text": "可参与各种邻接基本协同；跨类按50%",
+          "rule_ids": [
+            "O07.1"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "universal_adjacency",
+          "value": 0.5,
+          "targets": "self",
+          "id": "O07.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "以50%强度参与相邻建筑的基本协同。占地+1仍列未来，不在本版启用。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B01",
+      "name": "服务集中",
+      "visual_domain": "public",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "block"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/school.png",
+      "motif": "courtyard_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "medical",
+          "role": "neutral",
+          "text": "同类相邻服务共享名额，中心更强",
+          "rule_ids": [
+            "B01.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "medical",
+          "role": "neutral",
+          "text": "离开服务集群后，覆盖衰减更快",
+          "rule_ids": [
+            "B01.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "service_pool",
+          "value": true,
+          "targets": "self",
+          "id": "B01.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "同类相邻服务设施合成有限容量共享池，内部可达×1.25，向外衰减×1.3。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B02",
+      "name": "市政暖气",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "block"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/power.png",
+      "motif": "network_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "把实际余热送给住宅与服务设施",
+          "rule_ids": [
+            "B02.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "效率最多提高30%；下周期生效",
+          "rule_ids": [
+            "B02.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "heat_service",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.05,
+          "when": {
+            "any_traits": [
+              "building.residential",
+              "building.service"
+            ]
+          },
+          "id": "B02.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "有限余热分配到住宅和服务建筑，每份提升5%效率，最多30%；下一周期生效。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B03",
+      "name": "市政管廊",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "block"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/power.png",
+      "motif": "network_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "通过相连道路延伸供热，减轻污染影响",
+          "rule_ids": [
+            "B03.1",
+            "B03.2",
+            "B03.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "代价：接入建筑维护增加30%",
+          "rule_ids": [
+            "B03.1",
+            "B03.2",
+            "B03.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "heat_network",
+          "value": true,
+          "targets": "self",
+          "id": "B03.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.3,
+          "when": {
+            "traits": [
+              "building.road"
+            ]
+          },
+          "id": "B03.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "exposure_multiplier",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.5,
+          "when": {
+            "traits": [
+              "building.road"
+            ]
+          },
+          "id": "B03.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "道路建筑网络传递余热，维护×1.3，所在地污染的负面解释×0.5；不复制余热。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B04",
+      "name": "地下快速路",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "block"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/warehouse.png",
+      "motif": "network_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "道路沿线更方便上班和接受服务",
+          "rule_ids": [
+            "B04.1",
+            "B04.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "代价：相关建筑维护增加25%",
+          "rule_ids": [
+            "B04.1",
+            "B04.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "access_network",
+          "value": true,
+          "targets": "self",
+          "id": "B04.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "when": {
+            "traits": [
+              "building.road"
+            ]
+          },
+          "id": "B04.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "道路连接项目的就业与服务场衰减×0.6，固定维护×1.25。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B05",
+      "name": "战略储备",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "block"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/warehouse.png",
+      "motif": "network_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "市政仓储翻倍",
+          "rule_ids": [
+            "B05.1",
+            "B05.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "物资短缺时，先保住宅与公共服务",
+          "rule_ids": [
+            "B05.1",
+            "B05.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "municipal_storage",
+          "value": 2,
+          "targets": "self",
+          "id": "B05.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "allocation_priority",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "when": {
+            "any_traits": [
+              "building.residential",
+              "building.public_service"
+            ]
+          },
+          "id": "B05.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "公共仓库仓容×2；住宅与公共服务在短缺分配中优先。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B06",
+      "name": "用爱发电",
+      "visual_domain": "residential",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "block"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/hamlet.png",
+      "motif": "window_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "energy",
+          "role": "benefit",
+          "text": "上周期幸福≥75的居民，每人供电0.12",
+          "rule_ids": [
+            "B06.1"
+          ]
+        },
+        {
+          "icon": "happiness",
+          "role": "condition",
+          "text": "跌出阈值就停止供电",
+          "rule_ids": [
+            "B06.1"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "happiness_energy",
+          "value": {
+            "threshold": 75,
+            "per_pop": 0.12
+          },
+          "targets": "self",
+          "id": "B06.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "上周期幸福≥75的人群每人提供0.12即时能源。掉出阈值就停止。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B07",
+      "name": "联合采购",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "block",
+        "organization"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/warehouse.png",
+      "motif": "network_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "同公司建筑一起采购，再内部调配",
+          "rule_ids": [
+            "B07.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "改变谁先拿到物资，不凭空加货",
+          "rule_ids": [
+            "B07.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "group_procurement",
+          "value": true,
+          "targets": "self",
+          "id": "B07.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "同运营商成为采购组，短缺额度先到采购组、组内再按来源距离分配。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B08",
+      "name": "污染产业园",
+      "visual_domain": "industrial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "block"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [
+        "building.industrial"
+      ],
+      "hero_asset": "assets/world030/buildings/works.png",
+      "motif": "blueprint_hatch",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "currency",
+          "role": "benefit",
+          "text": "满足高污染条件时，工业维护 −25%",
+          "rule_ids": [
+            "B08.1"
+          ]
+        },
+        {
+          "icon": "pollution",
+          "role": "cost",
+          "text": "触发后工业环境负担 +20%",
+          "rule_ids": [
+            "B08.2"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.75,
+          "when": {
+            "field_min": {
+              "pollution": 2
+            }
+          },
+          "id": "B08.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.2,
+          "when": {
+            "field_min": {
+              "pollution": 2
+            }
+          },
+          "id": "B08.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "高污染工业获得最多25%维护折扣，但污染×1.2；读取上周期污染，避免同周期自我放大。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "B09",
+      "name": "热电共生",
+      "visual_domain": "industrial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.industrial"
+      ],
+      "hero_asset": "assets/world030/buildings/power.png",
+      "motif": "blueprint_hatch",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "production",
+          "role": "neutral",
+          "text": "把实际余热用于节电，最多抵扣50%",
+          "rule_ids": [
+            "B09.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "production",
+          "role": "neutral",
+          "text": "和居民供暖争同一份热量",
+          "rule_ids": [
+            "B09.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "heat_discount",
+          "targets": "self",
+          "mode": "override",
+          "value": 0.5,
+          "id": "B09.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "从有限余热中预留热量，下一周期抵扣能源需求，最多50%；与民生供暖争同一热源。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "G01",
+      "name": "企业内部协同",
+      "visual_domain": "industrial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "organization"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [
+        "building.industrial"
+      ],
+      "hero_asset": "assets/world030/buildings/works.png",
+      "motif": "blueprint_hatch",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "production",
+          "role": "neutral",
+          "text": "同公司相邻工业，协同效果翻倍",
+          "rule_ids": [
+            "G01.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "production",
+          "role": "neutral",
+          "text": "不同公司不享受这项内部加成",
+          "rule_ids": [
+            "G01.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "value": 2,
+          "targets": "self",
+          "id": "G01.1",
+          "priority": 0,
+          "field": "synergy.same_industrial",
+          "mode": "multiply"
+        }
+      ],
+      "source_summary": "同组织相邻工业之间的基础协同×2；不改变物理邻接。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "G02",
+      "name": "内部供应链",
+      "visual_domain": "infrastructure",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "organization"
+      ],
+      "allowed_slots": [],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/warehouse.png",
+      "motif": "network_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "先向同公司生产者拿货",
+          "rule_ids": [
+            "G02.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "logistics",
+          "role": "neutral",
+          "text": "内部不够，再向全地区采购",
+          "rule_ids": [
+            "G02.1"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "same_supplier",
+          "value": true,
+          "targets": "self",
+          "id": "G02.1",
+          "priority": 0
+        }
+      ],
+      "source_summary": "本组织建筑先从同组织来源采购，不足再用其他来源。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "M01",
+      "name": "模块化设计",
+      "visual_domain": "general",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [],
+      "hero_asset": "assets/world030/buildings/works.png",
+      "motif": "modular_grid",
+      "flavor": "为下一次改造，留一个位置。",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "operations",
+          "role": "benefit",
+          "text": "增加1个可装生产 / 物流的弹性位",
+          "rule_ids": [
+            "M01.1"
+          ]
+        },
+        {
+          "icon": "currency",
+          "role": "cost",
+          "text": "建筑维护 +25%",
+          "rule_ids": [
+            "M01.2"
+          ]
+        },
+        {
+          "icon": "lock",
+          "role": "condition",
+          "text": "附加槽仍占用时不能直接卸下本卡",
+          "rule_ids": [
+            "M01.1"
+          ]
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "slot_add",
+          "phase": "spatial",
+          "name": "Flex",
+          "accepts": [
+            "Production",
+            "Logistics"
+          ],
+          "id": "M01.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "M01.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "增加一个可放生产/物流方案的Flex槽；维护×1.25。拆走它会被检查，不能让附加槽变成幽灵位。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "R05",
+      "name": "社区诊所",
+      "visual_domain": "public",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "eligibility_traits": [
+        "building.medical"
+      ],
+      "hero_asset": "assets/world030/buildings/clinic.png",
+      "motif": "courtyard_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "medical",
+          "role": "neutral",
+          "text": "更远住户也能接受医疗，邻接优先",
+          "rule_ids": [
+            "R05.1",
+            "R05.2",
+            "R05.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "medical",
+          "role": "neutral",
+          "text": "代价：医疗名额减少30%",
+          "rule_ids": [
+            "R05.1",
+            "R05.2",
+            "R05.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.medical",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.7,
+          "id": "R05.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service_decay",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.5,
+          "id": "R05.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "adjacent_service_priority",
+          "value": true,
+          "targets": "self",
+          "id": "R05.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "医疗容量×0.7，服务衰减×0.5；邻接住户优先。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "R08",
+      "name": "社区商业",
+      "visual_domain": "commercial",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Logistics"
+      ],
+      "eligibility_traits": [
+        "building.commercial"
+      ],
+      "hero_asset": "assets/world030/buildings/market.png",
+      "motif": "shop_canopy",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "commercial",
+          "role": "neutral",
+          "text": "购物服务名额增加50%",
+          "rule_ids": [
+            "R08.1",
+            "R08.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "commercial",
+          "role": "neutral",
+          "text": "只服务紧挨着的住区",
+          "rule_ids": [
+            "R08.1",
+            "R08.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service_range",
+          "targets": "self",
+          "mode": "override",
+          "value": 1,
+          "id": "R08.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.commercial",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.5,
+          "id": "R08.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "只服务邻接格，消费容量×1.5。与远覆盖电商方案竞争物流槽。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "R10",
+      "name": "都市农业",
+      "visual_domain": "agriculture",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.residential",
+        "building.commercial"
+      ],
+      "hero_asset": "assets/world030/buildings/farm.png",
+      "motif": "field_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "food",
+          "role": "neutral",
+          "text": "额外种出1.5粮食/小时",
+          "rule_ids": [
+            "R10.1",
+            "R10.2",
+            "R10.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "food",
+          "role": "neutral",
+          "text": "代价：多1岗位、0.7维护/小时",
+          "rule_ids": [
+            "R10.1",
+            "R10.2",
+            "R10.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "add",
+          "value": 1.5,
+          "id": "R10.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.7,
+          "id": "R10.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "jobs",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "id": "R10.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "建筑额外产1.5食物/h，维护+0.7/h，岗位需求+1。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "R14",
+      "name": "农家乐",
+      "visual_domain": "agriculture",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.agricultural"
+      ],
+      "hero_asset": "assets/world030/buildings/farm.png",
+      "motif": "field_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "food",
+          "role": "neutral",
+          "text": "农场额外提供12个休闲名额",
+          "rule_ids": [
+            "R14.1",
+            "R14.2",
+            "R14.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "food",
+          "role": "neutral",
+          "text": "粮食少20%，维护多0.6/小时",
+          "rule_ids": [
+            "R14.1",
+            "R14.2",
+            "R14.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.8,
+          "id": "R14.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.entertainment",
+          "targets": "self",
+          "mode": "add",
+          "value": 12,
+          "id": "R14.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.6,
+          "id": "R14.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "食物产出×0.8，提供12人娱乐容量，维护+0.6/h。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "R15",
+      "name": "精耕小农",
+      "visual_domain": "agriculture",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.agricultural"
+      ],
+      "hero_asset": "assets/world030/buildings/farm.png",
+      "motif": "field_lines",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "food",
+          "role": "neutral",
+          "text": "农业产出潜力提高40%",
+          "rule_ids": [
+            "R15.1",
+            "R15.2",
+            "R15.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "food",
+          "role": "neutral",
+          "text": "多用25%人手；低负荷损失更大",
+          "rule_ids": [
+            "R15.1",
+            "R15.2",
+            "R15.3"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.4,
+          "id": "R15.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "jobs",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.25,
+          "id": "R15.2",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "utilization_exponent",
+          "value": 1.6,
+          "targets": "self",
+          "id": "R15.3",
+          "priority": 0
+        }
+      ],
+      "source_summary": "粮食潜力×1.4，岗位需求×1.25；低运行率时的损失更陡。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "R16",
+      "name": "家庭作坊",
+      "visual_domain": "residential",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Production"
+      ],
+      "eligibility_traits": [
+        "building.residential"
+      ],
+      "hero_asset": "assets/world030/buildings/hamlet.png",
+      "motif": "window_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "home",
+          "role": "neutral",
+          "text": "住宅消耗材料，制造少量生活用品",
+          "rule_ids": [
+            "R16.1",
+            "R16.2",
+            "R16.3",
+            "R16.4",
+            "R16.5"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "home",
+          "role": "neutral",
+          "text": "新增2岗位，同时增加污染和维护",
+          "rule_ids": [
+            "R16.1",
+            "R16.2",
+            "R16.3",
+            "R16.4",
+            "R16.5"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "jobs",
+          "targets": "self",
+          "mode": "add",
+          "value": 2,
+          "id": "R16.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "input.material",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.5,
+          "id": "R16.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.8,
+          "id": "R16.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "id": "R16.4",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "add",
+          "value": 0.6,
+          "id": "R16.5",
+          "priority": 0
+        }
+      ],
+      "source_summary": "住宅新增2个岗位，消耗0.5材料/h产0.8制成品/h，产生1污染/h，维护+0.6。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "R17",
+      "name": "职住一体",
+      "visual_domain": "residential",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.residential"
+      ],
+      "hero_asset": "assets/world030/buildings/hamlet.png",
+      "motif": "window_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "home",
+          "role": "neutral",
+          "text": "更方便进入紧挨着的建筑工作",
+          "rule_ids": [
+            "R17.1",
+            "R17.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "home",
+          "role": "neutral",
+          "text": "代价：住房减少10%",
+          "rule_ids": [
+            "R17.1",
+            "R17.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "housing",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 0.9,
+          "id": "R17.1",
+          "priority": 0
+        },
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "neighbor_employment",
+          "value": true,
+          "targets": "self",
+          "id": "R17.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "住房×0.9，本群与邻接岗位的可达排序提高；不把距离当额外效率惩罚。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    },
+    {
+      "bonus_id": "R18",
+      "name": "公共厨房",
+      "visual_domain": "residential",
+      "visual_domain_is_not_eligibility": true,
+      "allowed_hosts": [
+        "building",
+        "block"
+      ],
+      "allowed_slots": [
+        "Operations"
+      ],
+      "eligibility_traits": [
+        "building.residential"
+      ],
+      "hero_asset": "assets/world030/buildings/hamlet.png",
+      "motif": "window_grid",
+      "flavor": "",
+      "flavor_is_nonmechanical": true,
+      "effect_rows": [
+        {
+          "icon": "home",
+          "role": "neutral",
+          "text": "邻接住宅共用厨房，覆盖者省20%口粮",
+          "rule_ids": [
+            "R18.1",
+            "R18.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        },
+        {
+          "icon": "home",
+          "role": "neutral",
+          "text": "每处最多服务24人，维护增加1/小时",
+          "rule_ids": [
+            "R18.1",
+            "R18.2"
+          ],
+          "review_note": "保留当前player_highlights；未按数字正负自动着色。"
+        }
+      ],
+      "rules_reference": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "key": "kitchen_capacity",
+          "value": 24,
+          "targets": "self",
+          "id": "R18.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "targets": "self",
+          "mode": "add",
+          "value": 1,
+          "id": "R18.2",
+          "priority": 0
+        }
+      ],
+      "source_summary": "邻接住宅形成共享厨房，每处最多覆盖24人；覆盖者食物需求×0.8。每处维护+1/h。",
+      "provider": null,
+      "contract_org": null,
+      "provider_source": "bonus instance, never from bonus definition or visual domain",
+      "full_effects_expansion": true,
+      "no_new_rarity": true
+    }
+  ]
+}
