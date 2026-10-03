@@ -74,6 +74,7 @@ func start(a):
 	app.desk.open("city040","preview:"+residence+":"+str(g.Development.choices(g,residence)[0]));await capture("beta-04-upgrade")
 	app.desk.close();app.selected_project=""
 	var queued=add("neighborhood");g.s.projects[queued].status="construction";g.s.projects[queued].job={"work":2.4,"total":2.4,"material":4.0,"cp":true};g.s.projects[queued].slots={};g.s.projects[queued].slot_types={}
+	g.refresh_metrics();app.refresh()
 	app.desk.open("city040","construction");await capture("beta-04b-construction");app.desk.close()
 	g.Bonus.grant(g,"P01","ui-fixture");g.Bonus.grant(g,"P01","ui-fixture")
 	var host=add("manufacturing","steel")
