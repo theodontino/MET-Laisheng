@@ -35,10 +35,15 @@ func labels(node:Node) -> String:
 	var result=node.text+"\n" if node is Label else ""
 	for child in node.get_children():result+=labels(child)
 	return result
+func click(control:Control):
+	var at=control.get_global_rect().get_center();var move=InputEventMouseMotion.new();move.position=at;app.get_viewport().push_input(move);await frames(2)
+	var down=InputEventMouseButton.new();down.button_index=MOUSE_BUTTON_LEFT;down.position=at;down.pressed=true;app.get_viewport().push_input(down)
+	var up=InputEventMouseButton.new();up.button_index=MOUSE_BUTTON_LEFT;up.position=at;up.pressed=false;app.get_viewport().push_input(up);await frames(2)
 func start(a):
 	app=a;app.ignore_save=true;app.test_mode=true;await frames(10)
 	check(is_equal_approx(app.beta_active_interval(1000000,31000000,true),30.0),"slow rendered frame retains30realactiveseconds")
 	check(app.beta_active_interval(1000000,31000000,false)==0.0,"backgroundandpausedintervalsnevercatchup")
+	check(not app.beta_should_submit(.49) and app.beta_should_submit(.5),"halfsecondbatchpreservesboundedcommitcadence")
 	var g=app.game;g.new_game(5126,1000000);g.select_block(0);g.choose_origin("village");app.overlay.hide();g.s.settings.user_paused=false;g.Themes.select(g,"industrial")
 	var residence=g.playable_ids()[0];var production=add("workshop");var service=add("medical_clinic");var logistics=add("freight","civic")
 	g.refresh_metrics();g.Population.rehouse(g);app.refresh();app.map_view.focus_all();await capture("beta-01-normal")
@@ -54,11 +59,16 @@ func start(a):
 	check(app.desk.mode_buttons.size()==4,"four time modes replace old pulse buttons")
 	check(app.safe_area.grow(2).encloses(app.desk.time_panel.get_global_rect()),"desktop time HUD fits")
 	app.Beta.set_mode(app,"burn");await capture("beta-02-accelerated")
-	check(g.s.beta_time.mode=="burn" and "DT" in app.desk.time_risk.text,"accelerated risk and DT rate shown")
-	app.Beta.set_mode(app,"normal")
+	check(g.s.beta_time.mode=="burn" and "DT" in app.desk.time_risk.text and "现实" in app.desk.time_risk.text and "大周期" in app.desk.time_risk.text,"accelerated risk, DT rate, budget and cycle ETA shown")
+	var active_before=float(g.s.beta_time.active_real_seconds);app.beta_frame_seconds=.37;app.Beta.set_mode(app,"normal")
+	check(is_equal_approx(float(g.s.beta_time.active_real_seconds)-active_before,.37) and app.beta_frame_seconds==0,"stopflushesfractionalactiveprefixwithoutlosstime")
+	check(app.display_pending_tick==-1,"normalstopdoesnotforceplanningforecast")
 	app.desk.open("tasks");await capture("beta-02b-theme-progress");app.desk.close()
 	for pair in [[residence,"residence"],[production,"production"],[service,"service"],[logistics,"logistics"]]:
 		app.selected_project=pair[0];app.inspector_key="";app.refresh();app.map_view.focus_tile(g.s.projects[pair[0]].tile);await capture("beta-03-"+pair[1])
+		check(not app.inspector031.primary.get_global_rect().intersects(app.desk.time_panel.get_global_rect()),"L2 main action clear of time HUD: "+pair[1])
+		check(app.inspector031.primary.is_visible_in_tree() and not app.inspector031.primary.disabled,"L2 primary enabled: "+pair[1])
+	await click(app.inspector031.primary);check(app.desk.kind=="city040" and app.desk.arg=="market","native pointer reaches logistics primary and opens trade");app.desk.close()
 	g.s.block.trade_ledger.append({"tick":g.s.simulation_tick,"used_capacity":2.5,"capacity":4.0})
 	app.inspector031.update_context();check("2.50 / 4.00" in labels(app.inspector031.nodes.context),"logistics L2 reads actual used capacity and refreshes")
 	app.desk.open("city040","preview:"+residence+":"+str(g.Development.choices(g,residence)[0]));await capture("beta-04-upgrade")

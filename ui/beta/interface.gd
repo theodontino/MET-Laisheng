@@ -68,7 +68,7 @@ static func set_mode(app,id:String) -> void:
 	if app.decision_kind!="":app.message("请先完成当前方案选择。");return
 	var error=app.game.Clock.set_mode(app.game,id)
 	if error is String and error!="":app.message(error);return
-	app.display_pending_tick=int(app.game.s.simulation_tick)
+	app.display_pending_tick=int(app.game.s.simulation_tick) if id!="normal" else -1
 	app.game.s.settings.user_paused=false;app.game.s.beta_time.pause_reason=""
 	if app.desk.is_open():app.desk.close()
 	app.save_game();app.refresh();app.message("时间档位："+mode_name(app.game))
@@ -234,7 +234,7 @@ static func reward_source(g,source:String) -> String:
 	return "城市成长奖励"
 
 static func landmark_rule(rule:Dictionary) -> String:
-	var fields={"output.goods":"制成品产出","personnel_mult":"人员效率","service.*":"服务容量","housing":"住房容量","storage.*":"仓储容量","trade_capacity":"货运能力","output.food":"粮食产出","input.food":"粮食投入","construction_capacity":"施工能力","tax_mult":"税收","output.material":"材料产出"}
+	var fields={"output.goods":"制成品产出","personnel_mult":"人员效率","service.commercial":"商业服务容量","storage.food":"粮食仓容","service.*":"服务容量","housing":"住房容量","storage.*":"仓储容量","trade_capacity":"货运能力","output.food":"粮食产出","input.food":"粮食投入","construction_capacity":"施工能力","commercial_tax_multiplier":"商业税收","tax_mult":"税收","output.material":"材料产出"}
 	var field=str(rule.get("field",""));var value=float(rule.get("value",0))
 	var targets="工业建筑" if "building.industrial" in rule.get("when",{}).get("any_traits",[]) else ("公共服务建筑" if "building.public_service" in rule.get("when",{}).get("any_traits",[]) else "适用建筑")
 	return targets+" · "+str(fields.get(field,field))+((" %+.0f%%"%((value-1)*100)) if rule.get("mode","")=="multiply" else (" %+.2f"%value))

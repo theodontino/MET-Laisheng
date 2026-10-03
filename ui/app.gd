@@ -416,7 +416,7 @@ func _process(delta):
 	# Engine delta can be capped under slow rendering. Monotonic elapsed time
 	# is the sole online clock; pause/focus/decision boundaries reset its origin.
 	capture_beta_seconds()
-	if beta_can_run() and beta_frame_seconds>=0.1:flush_beta_time()
+	if beta_can_run() and beta_should_submit(beta_frame_seconds):flush_beta_time()
 	last_wall=now;save_elapsed+=delta;ui_elapsed+=delta
 	var boundary=str(game.s.get("beta_time",{}).get("pause_reason",""))+":"+str(game.s.get("beta_time",{}).get("local_elapsed_seconds",0))
 	if beta_mandatory_pending() and boundary!=beta_boundary_seen and not overlay.visible and decision_kind=="":
@@ -619,6 +619,9 @@ func layout_ui():
 	if desk.is_open():inspector_panel.hide()
 	refresh_build_dock()
 	desk.relayout(area)
+	if not compact and desk.time_panel.visible:
+		if inspector_panel.visible:avoid_time_hud(inspector_panel)
+		if desk.is_open() and not desk.is_fullscreen():avoid_time_hud(desk.page)
 	if was!=compact:
 		if inspector031.visible:inspector031.signature="";inspector031.call_deferred("update_view",game,shot,selected_project)
 		theme=W.theme();_retune(self)
@@ -821,7 +824,7 @@ func resume_beta_normal():
 	reset_beta_clock()
 	if beta_decisions_pending():message("请先处理本次已保存的奖励和待选事件。");return
 	game.Cycles.acknowledge(game);game.s.beta_time.pause_reason="";game.s.settings.user_paused=false
-	game.Clock.set_mode(game,"normal");overlay.hide()
+	game.Clock.set_mode(game,"normal");display_pending_tick=-1;overlay.hide()
 	if desk.is_open():desk.close()
 	save_game();refresh()
 func on_beta_source(source:Dictionary):
@@ -873,3 +876,14 @@ func capture_beta_seconds(now_usec:int=-1):
 	beta_clock_usec=now
 func reset_beta_clock():
 	beta_clock_usec=Time.get_ticks_usec()
+
+func avoid_time_hud(panel:Control):
+	var bounds=panel.get_global_rect();var clock=desk.time_panel.get_global_rect()
+	if not bounds.intersects(clock):return
+	if clock.position.y<=bounds.position.y:
+		var shift=clock.end.y+8.-bounds.position.y
+		panel.position.y+=shift;panel.size.y=maxf(160.,bounds.size.y-shift)
+	else:panel.size.y=maxf(160.,clock.position.y-bounds.position.y-8.)
+
+static func beta_should_submit(buffered_seconds:float) -> bool:
+	return buffered_seconds>=0.5

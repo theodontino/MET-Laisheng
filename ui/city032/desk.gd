@@ -38,6 +38,7 @@ var mode_buttons={}
 var time_risk:Label
 var main_alert:Button
 var next_condition_label:Label
+var risk_resource_name:String="粮食"
 var pause_button:Button
 var dt_button:Button
 var clock_row:HBoxContainer
@@ -228,12 +229,14 @@ func update_hud():
 	for id in mode_buttons:
 		var button=mode_buttons[id];button.disabled=(float(g.s.dt)<=0 and id!="normal") or app.decision_kind!=""
 		button.add_theme_stylebox_override("normal",W.button_box(W.SOFT,W.GREEN if str(state.get("mode","normal"))==id else W.SOFT))
-	var forecast=Beta.risk(g,Beta.risk_snapshot(app))
+	var forecast=Beta.risk(g,Beta.risk_snapshot(app)) if a>1 else {"text":"","name":"粮食","stable":true}
+	risk_resource_name=str(forecast.get("name","粮食"))
 	var local=float(state.get("local_elapsed_seconds",0));var next_year=(Beta.YEAR-fmod(local,Beta.YEAR))/a
 	time_risk.text=str(forecast.text) if a>1 else "资源详情 › 点击物资"
 	time_risk.tooltip_text="下一年约 "+Beta.seconds_text(next_year)+"；剩余额外预算 %.2f 年"%(float(g.s.dt)*Beta.dt_seconds(g)/Beta.YEAR)
 	if a>1:
-		time_risk.text+="\n年度约 "+Beta.seconds_text(next_year)+" · DT %.3f/分"%((a-1)/Beta.dt_seconds(g)*60)
+		time_risk.text+="\n年度 "+Beta.seconds_text(next_year)+" / 大周期 "+Beta.seconds_text((2*Beta.YEAR-fmod(local,2*Beta.YEAR))/a)
+		time_risk.text+="\nDT %.3f/分 · 余%.2f年 / 现实%s"%[(a-1)/Beta.dt_seconds(g)*60,float(g.s.dt)*Beta.dt_seconds(g)/Beta.YEAR,Beta.seconds_text(float(g.s.dt)*Beta.dt_seconds(g)/(a-1))]
 	for id in resource_buttons:
 		var n=resource_buttons[id];var quantity=D.quantity(id);var x=M.resource(g,app.shot,id)
 		n.head.add_theme_color_override("font_color",Color(quantity.ink));n.icon.texture=Art.icon(str(quantity.icon),Color(quantity.ink))
@@ -276,7 +279,7 @@ func relayout(area:Rect2):
 	var resource_w=minf(area.size.x*.55,620.*(1.15 if scale>1 else 1.))
 	var resource_h=78.
 	resource_grid.visible=false;compact_resource.visible=true
-	compact_resource.text="物资 · "+str(Beta.risk(app.game,Beta.risk_snapshot(app)).get("name","稳定"))
+	compact_resource.text="物资 · "+risk_resource_name+(" %.0f"%app.game.inventory_total("food") if Beta.acceleration(app.game)<=1 else "")
 	resource_w=minf(area.size.x*.48,280.*scale);resource_h=56
 	if compact:resource_w=maxf(104 if scale<=1.2 else 140,compact_resource.get_combined_minimum_size().x+12.);resource_h=56
 	if wide_desktop:

@@ -4,7 +4,7 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 export MET_EVIDENCE_DIR="${MET_EVIDENCE_DIR:-/tmp/met-beta-evidence}"
 mkdir -p "$MET_EVIDENCE_DIR"
-for suite in beta_time beta_bonus beta_themes beta_lifecycle beta_planning beta_feedback beta_math_cache beta_acceptance beta_playthrough; do
+for suite in beta_time beta_bonus beta_themes beta_lifecycle beta_planning beta_feedback beta_math_cache beta_allocation beta_acceptance beta_playthrough; do
   test -f "$PROJECT_ROOT/tests/$suite.gd" || { echo "Required Beta suite missing: $suite" >&2; exit 1; }
   logfile="$MET_EVIDENCE_DIR/$suite.log"
   "$GODOT" --headless --path "$PROJECT_ROOT" --script "res://tests/$suite.gd" >"$logfile" 2>&1

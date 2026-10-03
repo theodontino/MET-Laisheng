@@ -195,7 +195,12 @@ static func feasible_resources(s:Dictionary,compiled:Dictionary,claims:Dictionar
 				var reduced=minf(float(bounded[cid].needs[resource]),float(claims[cid].needs[resource])*limit)
 				if reduced<float(bounded[cid].needs[resource])-.0000001:
 					bounded[cid].needs[resource]=reduced;changed=true
-		if not changed:break
+		if not changed:
+			# No bounds changed: the allocation just computed is already final.
+			# Rebuilding its identical source/consumer pairs repeats the full sort.
+			allocation.reconcile_rounds=rounds
+			return allocation
+	# The eight-round limit may leave newly tightened bounds; resolve those once.
 	allocation=resources(s,compiled,bounded,access)
 	allocation.reconcile_rounds=rounds
 	return allocation
