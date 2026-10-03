@@ -24,14 +24,14 @@ static func start(app):
 			else:app.message(e))))
 	W.section(app.modal_body,"先看，再建","下方选建筑 → 悬停比较位置 → 三份投标选一份。建成后先看它实际做了什么；需要时再研究方案。")
 static func origin(app):
-	var g=app.game;app.open_modal("他们带着什么来到河谷？","先安顿18位居民。下一批6位新邻居在3小时后抵达；可以暂停迁入。")
+	var g=app.game;app.open_modal("他们带着什么来到河谷？","先安顿18位居民。下一批6位新邻居在3来生月后抵达；可以暂停迁入。")
 	var row=app.option_row(app.modal_body,14)
 	for oid in g.s.origin_choices:
 		var o=g.c.origins[oid]
-		var starts={"village":"随行粮食留作城市储备，早期预算与DT可用于建设。","charter":"额外资金与材料支持早期建设；还需要建立本地口粮来源。","miners":"额外材料与DT可投入建设；尽快补足粮食供给。","free":"预算、少量粮食、建材与DT起步，发展方向由你决定。"}
+		var starts={"village":"随行粮食留作城市储备，早期预算与DT可用于建设。","charter":"额外资金与材料支持早期建设；还需要建立本地口粮来源。","miners":"额外材料可投入建设；尽快补足粮食供给。","free":"预算、少量粮食、建材与DT起步，发展方向由你决定。"}
 		var v=card(row,o.name,"农居 + 作坊",starts.get(oid,o.story))
 		var picture=Art.picture({"village":"homestead","charter":"neighborhood","miners":"workshop","free":"homestead"}.get(oid,"homestead"),Vector2(144,150));v.add_child(picture);v.move_child(picture,0)
-		W.section(v,"随行家底","通货 %.0f · DT %.0f\n粮食 %.0f · 材料 %.0f"%[g.c.balance.initial_money+o.cash,g.c.balance.initial_dt+o.dt,g.c.balance.initial_stock.food+o.food,g.c.balance.initial_stock.material+o.material])
+		W.section(v,"随行家底","通货 %.0f · DT %.0f\n粮食 %.0f · 材料 %.0f"%[g.c.balance.initial_money+o.cash,g.c.balance.initial_dt,g.c.balance.initial_stock.food+o.food,g.c.balance.initial_stock.material+o.material])
 		W.section(v,"起步时先想一件事",{"village":"粮食有了起点。先找材料、电力和下一批居民的住处。","charter":"电力已有保障。粮食和材料还需要你安排。","miners":"材料已有来源。把粮食和工人的生活接起来。","free":"材料与预算较灵活。先让粮食供给站稳，再选发展方向。"}[oid])
 		v.add_child(W.primary(W.button("接手 · "+o.name,func():
 			var e=g.choose_origin(oid)
@@ -75,14 +75,14 @@ static func goals_legacy(app):
 			var e=g.Progress.deliver(g)
 			if e=="":app.save_game();app.refresh();goals(app)
 			else:app.modal_subtitle.text=e,g.s.city_goal.delivered))
-	W.section(app.modal_body,"生活底线怎么算","无人待安置，粮食与电力满足至少95%；财政非负，且收支非负或储备还能支持4小时。连续站稳1小时。请先修短板，不必继续盲目扩张。")
+	W.section(app.modal_body,"生活底线怎么算","无人待安置，粮食与电力满足至少95%；财政非负，且收支非负或储备还能支持4来生月。连续站稳1来生月。请先修短板，不必继续盲目扩张。")
 	var changes=W.hbox(app.modal_body,10)
-	var arrive=g.next_arrival();var arrival_text="下一批：%.1fh后，6位居民"%arrive if arrive>=0 else "本轮约定的居民已全部到达"
-	W.section(app.modal_body,"接下来会发生什么",arrival_text+"\n暂停迁入不会停止自然增长，空房仍需保留余量。\n公共服务需求从第3小时起，在2小时内渐入；提前建设不会突然触发惩罚。")
+	var arrive=g.next_arrival();var arrival_text="下一批：%.1f月后，6位居民"%arrive if arrive>=0 else "本轮约定的居民已全部到达"
+	W.section(app.modal_body,"接下来会发生什么",arrival_text+"\n暂停迁入不会停止自然增长，空房仍需保留余量。\n公共服务需求从第3来生月起，在2来生月内渐入；提前建设不会突然触发惩罚。")
 	changes.add_child(W.button("恢复迁入" if g.s.migration_paused else "暂停新居民迁入",func():g.toggle_migration();app.save_game();app.refresh();goals(app)))
 	if not g.s.goods_active:
-		if float(g.s.goods_requested_at)>=0:W.section(app.modal_body,"生活用品计划已公布","%.1fh后开始消费制成品，届时每位居民基础需求为%.3f/h。"%[maxf(0,g.s.goods_requested_at+g.c.balance.goods_grace_hours-g.s.local_hours),g.c.balance.population_goods])
-		else:changes.add_child(W.button("公布生活用品计划（2h后生效）",func():
+		if float(g.s.goods_requested_at)>=0:W.section(app.modal_body,"生活用品计划已公布","%.1f月后开始消费制成品，届时每位居民基础需求为%.3f/月。"%[maxf(0,g.s.goods_requested_at+g.c.balance.goods_grace_hours-g.s.local_hours),g.c.balance.population_goods])
+		else:changes.add_child(W.button("公布生活用品计划（2月后生效）",func():
 			var e=g.enable_goods()
 			if e=="":app.save_game();app.refresh();goals(app)
 			else:app.modal_subtitle.text=e,not g.s.get("goods_available",false)))
@@ -109,19 +109,19 @@ static func resources_legacy(app):
 	for r in ["food","material","goods"]:
 		if r=="goods" and not g.s.get("goods_available",false) and g.inventory_total(r)<=0:continue
 		var x=P.resource(g,shot,r)
-		W.section(app.modal_body,"%s · 库存 %.1f"%[P.RES[r],x.stock],"生产 %.2f/h − 消耗 %.2f/h − 丢弃 %.2f/h = 库存净变 %+.2f/h\n%s"%[x.produced,x.consumed,x.lost,x.net,x.status])
+		W.section(app.modal_body,"%s · 库存 %.1f"%[P.RES[r],x.stock],"生产 %.2f/月 − 消耗 %.2f/月 − 丢弃 %.2f/月 = 库存净变 %+.2f/月\n%s"%[x.produced,x.consumed,x.lost,x.net,x.status])
 		for id in g.Rules.ids(g.s.projects):
 			var n=float(g.s.projects[id].inventory.get(r,0));var cap=g.stock_cap_for(id,r)
 			if cap>0:app.modal_body.add_child(W.label("%s  %.1f / %.0f%s"%[g.project_name(id),n,cap," · 可接收外部溢出" if id=="municipal" or "building.logistics" in g.s.projects[id].traits or g.compiled.config[id].get("overflow_relay",false) else " · 本地产物仓"],13,W.MUTED))
 		for id in g.Rules.ids(shot.metrics.get("activity_ledger",{})):
 			for entry in shot.metrics.activity_ledger[id]:
 				if entry.resource!=r or entry.rate<.001:continue
-				var desc=("产 %.2f/h（入库 %.2f，丢弃 %.2f）"%[entry.rate,entry.kept,entry.lost]) if entry.kind=="output" else "用 %.2f/h"%entry.rate
+				var desc=("产 %.2f/月（入库 %.2f，丢弃 %.2f）"%[entry.rate,entry.kept,entry.lost]) if entry.kind=="output" else "用 %.2f/月"%entry.rate
 				app.modal_body.add_child(W.label(g.project_name(id)+" · "+desc+" · "+str(entry.source),12,W.TEXT))
 	var m=shot.metrics
-	W.section(app.modal_body,"财政 · 下一周期预计","收入 %.2f/h − 维护 %.2f/h = 净收支 %+.2f/h\n生产税只计算留下的有效产物，不为直接丢弃物资反复发钱。"%[m.get("income",0),m.get("upkeep",0),m.get("cashflow",0)])
+	W.section(app.modal_body,"财政 · 下一周期预计","收入 %.2f/月 − 维护 %.2f/月 = 净收支 %+.2f/月\n生产税只计算留下的有效产物，不为直接丢弃物资反复发钱。"%[m.get("income",0),m.get("upkeep",0),m.get("cashflow",0)])
 	for entry in m.get("fiscal_ledger",[]):
-		app.modal_body.add_child(W.label(("+" if entry.kind=="income" else "−")+"%.2f/h  "%entry.rate+g.project_name(entry.source_id)+" · "+entry.name,12,W.GREEN if entry.kind=="income" else W.MUTED))
+		app.modal_body.add_child(W.label(("+" if entry.kind=="income" else "−")+"%.2f/月  "%entry.rate+g.project_name(entry.source_id)+" · "+entry.name,12,W.GREEN if entry.kind=="income" else W.MUTED))
 	W.section(app.modal_body,"电力 · 当期使用，不默认存储","供给 %.2f，需求 %.2f，满足 %.0f%%。只有显式储能能力能留下余电。"%[m.get("energy",0),m.get("energy_need",0),100*m.get("energy_ratio",1)])
 	for bid in m.get("energy_sources",{}):app.modal_body.add_child(W.label(g.project_name(bid)+" · 供电 %.2f"%m.energy_sources[bid],12,W.GREEN))
 	for bid in m.get("energy_requests",{}):app.modal_body.add_child(W.label(g.project_name(bid)+" · 用电申请 %.2f"%m.energy_requests[bid],12,W.TEXT))
@@ -130,7 +130,7 @@ static func explain(app,id:String):
 	var g=app.game;app.open_modal(g.project_name(id)+" · 来源与计算","先看真实活动，再展开倍率。列表中的来源就是参与结算的对象，不是另算一套演示数。")
 	var shot=app.planner.snapshot(g)
 	for entry in shot.metrics.get("activity_ledger",{}).get(id,[]):
-		if entry.rate>.001:W.section(app.modal_body,("产出 " if entry.kind=="output" else "消耗 ")+P.RES.get(entry.resource,entry.resource),"%.3f/h · %s"%[entry.rate,entry.source])
+		if entry.rate>.001:W.section(app.modal_body,("产出 " if entry.kind=="output" else "消耗 ")+P.RES.get(entry.resource,entry.resource),"%.3f/月 · %s"%[entry.rate,entry.source])
 	W.section(app.modal_body,"数值修正链")
 	for key in g.Rules.ids(g.compiled.trace.get(id,{})):
 		var x=g.compiled.trace[id][key];var name={"efficiency":"建筑效率","maintenance":"固定维护","output.food":"粮食产能","output.material":"材料产能","output.goods":"制成品产能","spatial_synergy":"空间协同","cohesion":"整套自营"}.get(key,key)
@@ -151,7 +151,7 @@ static func slot_detail(app,id:String,slot:String):
 	var row=W.hbox(app.modal_body,8);C031.socket_symbol(row,type,32);row.add_child(W.label(g.slot_label(id,slot),18))
 	if type=="Flex":row.add_child(W.label("来自模块化设计 · 接受生产 / 物流",14,W.MUTED))
 	if iid=="":
-		var v=C031.group(app.modal_body,"空闲插口",D031.color("inset"));v.add_child(W.label("从委托奖励中获得部署许可后，可安装到适用的空槽。",16,W.MUTED))
+		var v=C031.group(app.modal_body,"空闲插口",D031.color("inset"));v.add_child(W.label("从年度、人口或主题奖励中获得副本后，可安装到适用的空槽。",16,W.MUTED))
 		v.add_child(W.primary(W.button("查看部署许可",func():app.close_modal();app.desk.open("city040","permits"))))
 		return
 	var ins=g.s.bonus_instances[iid];var def=g.c.bonuses[ins.bonus_id]
@@ -227,15 +227,19 @@ static func failure(app):
 	app.modal_body.add_child(W.button("返回只读地图",func():app.close_modal()));app.modal_body.add_child(W.button("导出存档",func():app.export_file("save")))
 static func help(app):
 	app.open_modal("在河谷里，先做一件值得做的事。","不用学代码术语。上方看城市需要什么，下方决定建什么，地图告诉你放在哪里有什么代价。")
-	for pair in [["建设","只新建农居、邻里中心或作坊；选择地块后比较三家运营者。报价会被记住，关闭或返回不收费。"],["成长","选中已建建筑，比较升级方向。升级沿用原位置与运营者，并按共享施工能力逐步完成。"],["许可","委托完成后从三份保存的候选中选择一张一次部署许可，再安装到适用建筑、运营组织或当前街区。"],["目标","安顿居民并稳定生活，再完成一项街区成果。目标达成后可以继续经营，并获得一次命名权。"],["看数据","顶部看预算与人口，右下点击单项资源直达对应明细。点击建筑查看真实投入、产出与居民联系。"],["推进","DT推进整个街区。‘下一变化’会在完工、迁入和重要成果处停下，只收实际花费。"],["地图操作","滚轮缩放；中键或右键拖动。1返回观察、2进入建设、Esc逐层返回、空格推进下一变化。"]]:W.section(app.modal_body,pair[0],pair[1])
+	for pair in [["建设","新建农居、邻里中心或作坊，选择位置与运营者，再用共享施工能力成长。"],["构筑","每年和安居人口里程碑提供普通方案；主题阶段带来定向副本与蓝图升级。同宿主首份100%，追加每份33⅓%。"],["城市方向","选择五个委任主题之一。只有获得稀有重铸许可并支付DT，才可更换未完成主题。"],["时间","准备库存后选观察、推进或燃烧。DT只为额外本地时间付费；外贸跟真实在线时间，移民跟本地时间。暂停与离线冻结全部城市进程。"],["尾声","DT真实耗尽后为城市命名。此时已完成主题才获得定型建筑；仍可常速经营，也能保存只读记录后独立重开。"],["地图操作","滚轮缩放；中键或右键拖动。1观察、2建设、Esc逐层返回、空格选择推进档；P暂停。"]]:W.section(app.modal_body,pair[0],pair[1])
+
 static func settings(app):
-	app.open_modal("河谷手册与存档","MET 0.4.0 · 当前版本使用独立存档目录。")
+	app.open_modal("河谷手册与存档","MET Beta · 当前版本使用独立存档目录。")
 	var row=app.option_row(app.modal_body,12)
 	var a=card(row,"继续照顾这座城")
 	a.add_child(W.button("显示、字号与触摸",func():app.display_options()))
 	a.add_child(W.button("街区政策",func():app.policy_categories()))
+	a.add_child(W.button("城市消息",func():app.open_city_messages()))
+	a.add_child(W.button("市民泡泡："+("开" if app.display_settings.citizen_bubbles else "关"),func():app.display_settings.citizen_bubbles=not app.display_settings.citizen_bubbles;app.feedback_layer.toggle_bubbles(app.display_settings.citizen_bubbles);app.save_display_settings();settings(app)))
 	a.add_child(W.button("发展目标与居民迁入",func():goals(app)));a.add_child(W.button("居民与工作",func():population(app)));a.add_child(W.button("方案手册",func():catalog(app)));a.add_child(W.button("怎么玩",func():help(app)))
 	var b=card(row,"留住城市")
+	b.add_child(W.button("已结算城市记录",func():app.open_city_records()))
 	b.add_child(W.button("导出存档",func():app.export_file("save")));b.add_child(W.button("导出反馈记录",func():app.export_file("feedback")));b.add_child(W.button("导入当前版本备份",func():app.import_file()));b.add_child(W.button("打开存档目录",func():OS.shell_open(ProjectSettings.globalize_path("user://"))));b.add_child(W.button("另开一局…",func():new_game(app)))
 	app.modal_body.add_child(W.button("音效："+("开" if app.game.s.settings.get("sound",true) else "关"),func():app.game.s.settings.sound=not app.game.s.settings.get("sound",true);app.save_game();settings(app)))
 	app.modal_body.add_child(W.button("开发工具（使用会标记存档）",func():debug(app)))

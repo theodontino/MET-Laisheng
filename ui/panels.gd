@@ -69,7 +69,7 @@ static func legacy_inspector(app):
 		var valid=g.s.cells.has(tile) and g.s.cells[tile].building=="" and not "tile.water" in g.s.cells[tile].traits
 		app.inspector_nodes.cta.disabled=not valid
 		var d=g.c.projects[app.selected_base]
-		app.inspector_nodes.costs.text="建造 %.0f通货 + %.0f材料\n施工量 %.1f CP；基础维护 %.1f/h"%[d.cost,d.material,d.construction_required,d.stats.maintenance]
+		app.inspector_nodes.costs.text="建造 %.0f通货 + %.0f材料\n施工量 %.1f CP；基础维护 %.1f/月"%[d.cost,d.material,d.construction_required,d.stats.maintenance]
 		if valid:
 			var result=app.planner.compare(g,app.selected_base,tile)
 			app.map_view.plan_result=result;app.map_view.plan_tile=tile
@@ -78,7 +78,7 @@ static func legacy_inspector(app):
 			var risks=P.plan_cautions(g,result)
 			app.inspector_nodes.risk.text="\n".join(risks) if not risks.is_empty() else "当前未见明显投入短缺。"
 			app.inspector_nodes.risk.add_theme_color_override("font_color",W.RED if not risks.is_empty() else W.GREEN)
-			if result.get("ok",false):app.inspector_nodes.costs.text+="\n预计新增用电 %+.1f · 收支 %+.1f/h"%[result.energy_demand,result.cashflow]
+			if result.get("ok",false):app.inspector_nodes.costs.text+="\n预计新增用电 %+.1f · 收支 %+.1f/月"%[result.energy_demand,result.cashflow]
 		else:
 			app.map_view.plan_result={};app.map_view.plan_tile=""
 			app.inspector_nodes.place.text="将鼠标放到一块空地上"
@@ -97,7 +97,7 @@ static func legacy_inspector(app):
 	else:
 		for r in ["food","material","goods","energy"]:
 			var value=float(effective.outputs_last.get(r,0))
-			if value>.001:lines.append("%s %.1f%s"%[P.RES[r],value,"" if r=="energy" else "/h"])
+			if value>.001:lines.append("%s %.1f%s"%[P.RES[r],value,"" if r=="energy" else "/月"])
 		for kind in g.c.balance.service_kinds:
 			var served=0.
 			for link in metrics.get("service_links",[]):
@@ -113,8 +113,8 @@ static func legacy_inspector(app):
 	app.inspector_nodes.outputs.text="\n".join(lines) if not lines.is_empty() else "没有物资产出；查看下方调度与方案作用。"
 	var inputs=[]
 	for entry in metrics.get("activity_ledger",{}).get(id,[]):
-		if entry.kind=="input" and entry.rate>.001:inputs.append(P.RES.get(entry.resource,entry.resource)+" %.1f/h"%entry.rate)
-	app.inspector_nodes.inputs.text="消耗："+("、".join(inputs) if not inputs.is_empty() else "本周期无物资扣除")+"\n固定维护 %.1f/h"%st.maintenance
+		if entry.kind=="input" and entry.rate>.001:inputs.append(P.RES.get(entry.resource,entry.resource)+" %.1f/月"%entry.rate)
+	app.inspector_nodes.inputs.text="消耗："+("、".join(inputs) if not inputs.is_empty() else "本周期无物资扣除")+"\n固定维护 %.1f/月"%st.maintenance
 	var working=0.
 	for link in metrics.get("employment_links",[]):
 		if link.target==id:working+=float(link.people)

@@ -1,0 +1,477 @@
+[
+  {
+    "id": "industrial",
+    "name": "工业基地",
+    "description": "稳定工业产出，培养有效劳力，完成真实交付。",
+    "stages": [
+      {
+        "id": "M1",
+        "name": "立足",
+        "hold_months": 1,
+        "goals": [
+          {
+            "metric": "goods_rate",
+            "label": "实际制成品月产",
+            "unit": "单位/月",
+            "kind": "state",
+            "min": 2
+          },
+          {
+            "metric": "energy",
+            "label": "电力满足",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.95
+          }
+        ]
+      },
+      {
+        "id": "M2",
+        "name": "成形",
+        "hold_months": 2,
+        "goals": [
+          {
+            "metric": "goods_rate",
+            "label": "实际制成品月产",
+            "unit": "单位/月",
+            "kind": "state",
+            "min": 6
+          },
+          {
+            "metric": "industrial_labor",
+            "label": "工业有效用工",
+            "unit": "人",
+            "kind": "state",
+            "min": 8
+          },
+          {
+            "metric": "energy",
+            "label": "电力满足",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.95
+          }
+        ]
+      },
+      {
+        "id": "M3",
+        "name": "证明",
+        "hold_months": 2,
+        "goals": [
+          {
+            "metric": "delivery_material",
+            "label": "主动交付材料",
+            "unit": "单位",
+            "kind": "delivery",
+            "min": 24
+          },
+          {
+            "metric": "delivery_goods",
+            "label": "主动交付制成品",
+            "unit": "单位",
+            "kind": "delivery",
+            "min": 18
+          },
+          {
+            "metric": "industrial_usage",
+            "label": "产能加权工业利用率",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.75
+          },
+          {
+            "metric": "energy",
+            "label": "电力满足",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.95
+          }
+        ]
+      }
+    ],
+    "bonus_ids": [
+      "P01",
+      "P05",
+      "P06",
+      "P08",
+      "L03",
+      "B08",
+      "B09",
+      "G01",
+      "G02",
+      "M01"
+    ]
+  },
+  {
+    "id": "civic",
+    "name": "安居计划",
+    "description": "从安顿居民到完善公共服务，塑造健康幸福的社区。",
+    "stages": [
+      {
+        "id": "M1",
+        "name": "立足",
+        "hold_months": 1,
+        "goals": [
+          {
+            "metric": "housed",
+            "label": "入住人口",
+            "unit": "人",
+            "kind": "state",
+            "min": 32
+          },
+          {
+            "metric": "homeless",
+            "label": "待安置人口",
+            "unit": "人",
+            "kind": "state",
+            "max": 0.1
+          },
+          {
+            "metric": "food",
+            "label": "食物满足",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.95
+          }
+        ]
+      },
+      {
+        "id": "M2",
+        "name": "成形",
+        "hold_months": 2,
+        "goals": [
+          {
+            "metric": "housed",
+            "label": "入住人口",
+            "unit": "人",
+            "kind": "state",
+            "min": 64
+          },
+          {
+            "metric": "medical",
+            "label": "实际医疗覆盖",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.7
+          },
+          {
+            "metric": "education",
+            "label": "实际教育覆盖",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.5
+          }
+        ]
+      },
+      {
+        "id": "M3",
+        "name": "证明",
+        "hold_months": 3,
+        "goals": [
+          {
+            "metric": "housed",
+            "label": "入住人口",
+            "unit": "人",
+            "kind": "state",
+            "min": 96
+          },
+          {
+            "metric": "health",
+            "label": "人口加权健康",
+            "unit": "",
+            "kind": "state",
+            "min": 75
+          },
+          {
+            "metric": "happiness",
+            "label": "人口加权幸福",
+            "unit": "",
+            "kind": "state",
+            "min": 75
+          },
+          {
+            "metric": "medical",
+            "label": "实际医疗覆盖",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.75
+          },
+          {
+            "metric": "commercial",
+            "label": "实际购物覆盖",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.75
+          },
+          {
+            "metric": "entertainment",
+            "label": "实际休闲覆盖",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.75
+          }
+        ]
+      }
+    ],
+    "bonus_ids": [
+      "P02",
+      "P03",
+      "O02",
+      "O03",
+      "O04",
+      "O05",
+      "B01",
+      "B02",
+      "R05",
+      "R17",
+      "R18"
+    ]
+  },
+  {
+    "id": "commercial",
+    "name": "商业引擎",
+    "description": "让真实购物服务成为城市发展动力。",
+    "stages": [
+      {
+        "id": "M1",
+        "name": "立足",
+        "hold_months": 1,
+        "goals": [
+          {
+            "metric": "commercial_people",
+            "label": "实际购物服务人数",
+            "unit": "人",
+            "kind": "state",
+            "min": 24
+          },
+          {
+            "metric": "commercial",
+            "label": "购物满足",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.7
+          }
+        ]
+      },
+      {
+        "id": "M2",
+        "name": "成形",
+        "hold_months": 2,
+        "goals": [
+          {
+            "metric": "commercial_people",
+            "label": "实际购物服务人数",
+            "unit": "人",
+            "kind": "state",
+            "min": 48
+          },
+          {
+            "metric": "commercial_usage",
+            "label": "容量加权商业利用率",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.75
+          }
+        ]
+      },
+      {
+        "id": "M3",
+        "name": "证明",
+        "hold_months": 0,
+        "goals": [
+          {
+            "metric": "commercial_person_months",
+            "label": "阶段实际商业服务累计",
+            "unit": "人·月",
+            "kind": "accumulate",
+            "min": 240
+          },
+          {
+            "metric": "food",
+            "label": "同期食物满足",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.95
+          },
+          {
+            "metric": "currency",
+            "label": "通货非负",
+            "unit": "",
+            "kind": "state",
+            "min": 0
+          }
+        ]
+      }
+    ],
+    "bonus_ids": [
+      "L01",
+      "O01",
+      "O07",
+      "R08",
+      "R14",
+      "R10",
+      "B04",
+      "B07"
+    ]
+  },
+  {
+    "id": "logistics",
+    "name": "港务枢纽",
+    "description": "通过实际进口或出口建立城市与外部的联系。",
+    "stages": [
+      {
+        "id": "M1",
+        "name": "立足",
+        "hold_months": 0,
+        "goals": [
+          {
+            "metric": "trade",
+            "label": "阶段实际成交",
+            "unit": "单位",
+            "kind": "accumulate",
+            "min": 12
+          }
+        ]
+      },
+      {
+        "id": "M2",
+        "name": "成形",
+        "hold_months": 1,
+        "goals": [
+          {
+            "metric": "trade",
+            "label": "阶段新增实际成交",
+            "unit": "单位",
+            "kind": "accumulate",
+            "min": 48
+          },
+          {
+            "metric": "food",
+            "label": "本地食物满足",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.95
+          }
+        ]
+      },
+      {
+        "id": "M3",
+        "name": "证明",
+        "hold_months": 0,
+        "goals": [
+          {
+            "metric": "trade",
+            "label": "阶段新增实际成交",
+            "unit": "单位",
+            "kind": "accumulate",
+            "min": 96
+          },
+          {
+            "metric": "food_stock_months",
+            "label": "现有口粮耐久",
+            "unit": "月",
+            "kind": "state",
+            "min": 2
+          },
+          {
+            "metric": "currency",
+            "label": "通货非负",
+            "unit": "",
+            "kind": "state",
+            "min": 0
+          }
+        ]
+      }
+    ],
+    "bonus_ids": [
+      "L02",
+      "L03",
+      "L05",
+      "B05",
+      "B07",
+      "G02",
+      "L01",
+      "M01"
+    ]
+  },
+  {
+    "id": "agricultural",
+    "name": "粮食腹地",
+    "description": "以本地产出保障口粮，建立有真实余粮的农业基地。",
+    "stages": [
+      {
+        "id": "M1",
+        "name": "立足",
+        "hold_months": 1,
+        "goals": [
+          {
+            "metric": "food_self_sufficiency",
+            "label": "本地实际食物产需比",
+            "unit": "%",
+            "kind": "state",
+            "min": 1.1
+          }
+        ]
+      },
+      {
+        "id": "M2",
+        "name": "成形",
+        "hold_months": 2,
+        "goals": [
+          {
+            "metric": "housed",
+            "label": "入住人口",
+            "unit": "人",
+            "kind": "state",
+            "min": 64
+          },
+          {
+            "metric": "food_self_sufficiency",
+            "label": "本地实际食物产需比",
+            "unit": "%",
+            "kind": "state",
+            "min": 1.3
+          }
+        ]
+      },
+      {
+        "id": "M3",
+        "name": "证明",
+        "hold_months": 2,
+        "goals": [
+          {
+            "metric": "delivery_food",
+            "label": "主动交付食物",
+            "unit": "单位",
+            "kind": "delivery",
+            "min": 50
+          },
+          {
+            "metric": "food_stock_months",
+            "label": "保留口粮",
+            "unit": "月",
+            "kind": "state",
+            "min": 3
+          },
+          {
+            "metric": "food",
+            "label": "实际食物满足",
+            "unit": "%",
+            "kind": "state",
+            "min": 0.98
+          }
+        ]
+      }
+    ],
+    "bonus_ids": [
+      "P07",
+      "R15",
+      "R14",
+      "R10",
+      "R18",
+      "B05",
+      "L05",
+      "B07"
+    ]
+  }
+]

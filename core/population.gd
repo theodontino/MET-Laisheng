@@ -69,6 +69,7 @@ static func summary(g) -> Dictionary:
 		for j in group.employment.values():employed+=j
 	return {"population":people,"housed":housed,"homeless":people-housed,"housing":housing,"vacancies":maxf(0,housing-housed),"workforce":people,"jobs":jobs,"employed":employed,"employment":minf(1,employed/maxf(1,people)),"health":health/maxf(1,people),"happiness":happiness/maxf(1,people),"education":education/maxf(1,people)}
 static func update(g,next:Dictionary,c:Dictionary,inputs:Dictionary,service:Dictionary,env:Dictionary,labor:Dictionary,h:float) -> void:
+	# h is economic months: response constants and service rates are per month.
 	var stage=int(g.s.stage)
 	for gid in R.ids(g.s.groups):
 		var old=g.s.groups[gid];var p=next.groups[gid];var host=g.s.projects[old.host];var st=c.stats[old.host];var n=float(old.count)
@@ -90,7 +91,11 @@ static func update(g,next:Dictionary,c:Dictionary,inputs:Dictionary,service:Dict
 		if old.host=="homeless":health_target-=12;happiness_target-=24
 		p.health=clampf(lerpf(float(old.health),health_target,1-exp(-h*.22)),0,100)
 		p.happiness=clampf(lerpf(float(old.happiness),happiness_target,1-exp(-h*.35)),0,100)
-		p.education=clampf(float(old.education)+h*(5*live.education*(1-float(old.education)/100)-.03),0,100)
+		var learning_rate=0.05*float(live.education)
+		if learning_rate>0:
+			var education_target=100.0-0.03/learning_rate
+			p.education=clampf(education_target+(float(old.education)-education_target)*exp(-learning_rate*h),0,100)
+		else:p.education=clampf(float(old.education)-0.03*h,0,100)
 		# Healthy ordinary residents at education15 are the 100% reference, not a hidden 15% penalty.
 		p.efficiency=clampf((.6+.4*float(p.health)/78.)*(1.+.002*(float(p.education)-15.)),.45,1.3)
 		p.demand=clampf(1+(float(p.education)-15)*.004,.85,1.4)

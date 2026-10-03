@@ -7,44 +7,56 @@ const Pop=preload("res://core/population.gd")
 const Progress=preload("res://core/progress.gd")
 const Store=preload("res://core/storage.gd")
 const RES=["food","material","goods"]
+
+static func spatial_snapshot(g,compiled:Dictionary) -> Dictionary:
+	# This deliberately conservative key contains every input read by F.access.
+	# It is independent of stocks, temporal counters and allocations. Full stats
+	# may invalidate more often than needed, but can never hide a range/capacity
+	# or Rule change. Only the last snapshot is retained outside saved state.
+	var projects=[]
+	for id in R.ids(g.s.projects):
+		var p:Dictionary=g.s.projects[id]
+		projects.append([id,p.get("tile",""),p.get("status",""),p.get("paused",false),p.get("special",false),p.get("traits",[])])
+	var volunteer=[]
+	for id in R.ids(compiled.config):
+		var gate:Dictionary=compiled.config[id].get("volunteer_education",{})
+		if gate.is_empty():continue
+		var eligible=false
+		for group in g.s.groups.values():
+			if group.host==id and float(group.education)>=float(gate.threshold):eligible=true;break
+		volunteer.append([id,eligible])
+	var group_origins=[]
+	for id in R.ids(g.s.get("authored_fields",{})):
+		var field:Dictionary=g.s.authored_fields[id]
+		var source=str(field.get("source_id",""))
+		if str(field.get("origin",""))=="" and g.s.groups.has(source):group_origins.append([source,g.s.groups[source].host])
+	var key=JSON.stringify([R.ids(g.s.cells),projects,compiled.stats,compiled.config,compiled.emitters,compiled.options,
+		g.s.get("authored_fields",{}),group_origins,volunteer,g.c.balance.service_kinds],"",true,true)
+	if g.spatial_cache.get("key","")==key:
+		var reused:Dictionary=g.spatial_cache.access
+		g.spatial_cache={"key":key,"access":reused,"hit":true}
+		return reused
+	var access=F.access(g,compiled)
+	g.spatial_cache={"key":key,"access":access,"hit":false}
+	return access
+
 static func total(inventories:Dictionary,r:String) -> float:
 	var n=0.
 	for id in R.ids(inventories):n+=float(inventories[id].get(r,0))
 	return n
-static func advance(g,hours:float,paid:bool,stop_events:bool=false) -> Dictionary:
-	var elapsed=0.;var spent=0.;var reason=""
-	if g.s.phase!="play" or hours<=0 or not is_finite(hours) or hours>240:return {"advanced":0.,"spent":0.,"reason":"无效推进或任期已结束。"}
-	if g.s.settings.get("user_paused",false):return {"advanced":0.,"spent":0.,"reason":"城市已暂停，请先继续。"}
-	if not paid:
-		g.s.remainder+=hours
-		if g.s.remainder<float(g.c.balance.tick_hours):return {"advanced":0.,"spent":0.,"reason":""}
-		hours=g.s.remainder;g.s.remainder=0.
-	while elapsed<hours-.0000001 and g.s.phase=="play":
-		var h=minf(float(g.c.balance.tick_hours),hours-elapsed);var price=g.temporal_load()
-		if paid:
-			h=minf(h,float(g.s.dt)/price)
-			if h<.000001:reason="DT不足；未执行未付款的时间。";break
-		if g.s.settings.get("user_paused",false):reason="城市已暂停，请先继续。";break
-		var old=g.s.duplicate(true);var error=tick(g,h)
-		if error!="":
-			g.s=old;g.refresh_metrics();reason=error;g.last_error=error;push_error(error);break
-		elapsed+=h
-		if paid:g.s.dt=maxf(0,g.s.dt-h*price);spent+=h*price;g.s.totals.dt_used+=h*price
-		g.Civic.finalize(g)
-		if stop_events:
-			var structural=int(g.s.totals.built)>int(old.totals.built) or int(g.s.event_cursor)>int(old.event_cursor) or bool(g.s.city_goal.get("completed",false))!=bool(old.get("city_goal",{}).get("completed",false)) or g.s.goods_active!=old.goods_active
-			if structural:reason="重要变化已发生，先看一眼城市。";break
-	g.refresh_metrics()
-	return {"advanced":elapsed,"spent":spent,"reason":reason}
-static func tick(g,h:float) -> String:
-	h=round(h*1000000.)/1000000.
-	g.s=Store.canonical(g.s)
+static func advance(g,months:float,paid:bool,_stop_events:bool=false) -> Dictionary:
+	# Compatibility entry only: all advancement uses the same clock service.
+	var mode="advance" if paid else "normal"
+	var acceleration=25920.0 if paid else 1.0
+	return g.Clock.advance(g,months*float(g.c.beta.units.earth_seconds_per_month)/acceleration,mode)
+static func tick(g,h:float,context:Dictionary={}) -> String:
+	if h<=0 or not is_finite(h):return "结算时间必须为正的有限月数。"
 	var s=g.s;var previous_population=0.
 	for group in s.groups.values():previous_population+=float(group.count)
 	var arrived=0.
 	var next=s.duplicate(true);var compiled=R.compile(g);var stats=compiled.stats;var config=compiled.config
 	# 1. Spatial snapshot. Every receiver retains each Field's source.
-	var access=F.access(g,compiled)
+	var access=spatial_snapshot(g,compiled)
 	# 2. Offers/claims resolve globally using explicit ordering, not object traversal order.
 	var labor=A.labor(s,compiled,access);var claims={};var recipe_claims={};var population_energy={};var energy_requests={}
 	var kitchens={}
@@ -161,14 +173,14 @@ static func tick(g,h:float) -> String:
 		var cid="pop:"+gid;actual[cid]={};people_inputs[gid]={"energy":energy_ratio if population_energy[gid]>0 else 1.}
 		for r in claims[cid].needs:
 			actual[cid][r]=float(reserved.grants[cid].get(r,0))
-			people_inputs[gid][r]=minf(1,float(actual[cid][r])/maxf(.000001,float(claims[cid].needs[r])))
+			people_inputs[gid][r]=minf(1,float(actual[cid][r])/maxf(1e-15,float(claims[cid].needs[r])))
 	for cid in R.ids(recipe_claims):
 		var recipe=recipe_claims[cid].recipe;var bid=recipe_claims[cid].owner
 		var fraction=recipe_energy.get(cid,minf(A.supply_ratio(claims[cid].needs,reserved.grants[cid]),float(activity[bid].utilization)))
 		actual[cid]={}
 		for r in claims[cid].needs:actual[cid][r]=float(claims[cid].needs[r])*float(fraction)
 	# 4. Commit resource receipts to a private next-state and place actual output.
-	var receipt=A.settle_resources(s,reserved,actual);var inventories=receipt.inventories;var before=A.stocks(s);var produced={};var spilled={};var movements=[];var completed=[];var kept_production=0.;var ledger={}
+	var receipt=A.settle_resources(s,reserved,actual);var inventories=receipt.inventories;var before=A.stocks(s);var produced={};var spilled={};var movements=[];var kept_production=0.;var ledger={}
 	for bid in R.ids(s.projects):ledger[bid]=[]
 	for id in batteries:inventories[id].energy-=batteries[id]
 	# Storage capacity changes redistribute old excess, not silently delete it.
@@ -184,7 +196,6 @@ static func tick(g,h:float) -> String:
 			var work=0.*a.utilization
 			next.projects[bid].job.work=maxf(0,float(p.job.work)-work)
 			next.projects[bid].job.material=maxf(0,float(p.job.material)-float(actual.get("work:"+bid,{}).get("material",0)))
-			if next.projects[bid].job.work<.000001:completed.append(bid)
 		elif p.status=="running" and not p.paused:
 			for r in RES:
 				var raw=maxf(0,float(st["output."+r])*float(st.efficiency)*float(a.utilization))
@@ -255,7 +266,7 @@ static func tick(g,h:float) -> String:
 		if p.special:continue
 		maintenance+=maxf(0,float(stats[bid].maintenance))*h
 		fiscal.append({"kind":"expense","source_id":bid,"name":"建筑固定维护","rate":maxf(0,float(stats[bid].maintenance))})
-		trade+=float(service.delivered.get(bid+"|commercial",0))*h
+		trade+=float(service.delivered.get(bid+"|commercial",0))*float(stats[bid].get("commercial_tax_multiplier",1))*h
 		trade+=float(service.delivered.get(bid+"|medical",0))*float(config[bid].get("medical_activity",0))*h
 	production=kept_production
 	match taxmode:
@@ -267,7 +278,7 @@ static func tick(g,h:float) -> String:
 	fiscal.append({"kind":"income","source_id":"municipal","name":{"head":"人头税","production":"有效生产税","trade":"消费税"}.get(taxmode,"税收"),"rate":tax/h})
 	if rent>0:fiscal.append({"kind":"income","source_id":"municipal","name":"用地收入","rate":rent/h})
 	if pollution_tax>0:fiscal.append({"kind":"income","source_id":"municipal","name":"计源排污收入","rate":pollution_tax/h})
-	next.currency=snappedf(float(next.currency)+tax+rent+pollution_tax-maintenance,.000001)
+	next.currency=float(next.currency)+tax+rent+pollution_tax-maintenance
 	for id in R.ids(inventories):
 		next.projects[id].inventory=inventories[id]
 		for r in next.projects[id].get("retained_storage",{}):next.projects[id].retained_storage[r]=minf(float(next.projects[id].retained_storage[r]),float(inventories[id].get(r,0)))
@@ -275,13 +286,20 @@ static func tick(g,h:float) -> String:
 		next.cells[tile].fields=access.tiles[tile].duplicate(true)
 		for k in env.tiles[tile]:next.cells[tile].fields[k]=env.tiles[tile][k].duplicate(true)
 	next.fields=access.fields.duplicate(true);next.fields.merge(env.fields)
-	for id in completed:next.projects[id].status="running";next.projects[id].job={};next.projects[id].commissioned_tick=int(s.simulation_tick)+1;next.totals.built+=1
-	next.local_hours=snappedf(float(next.local_hours)+h,.000001);next.simulation_tick=int(next.simulation_tick)+1
+	next.local_hours=float(next.local_hours)+h;next.simulation_tick=int(next.simulation_tick)+1
 	for group in next.groups.values():
-		if group.host!="homeless" and group.health>50 and group.happiness>40:group.count+=float(group.count)*float(g.c.balance.birth_per_hour)*h
+		if group.host!="homeless" and group.health>50 and group.happiness>40:group.count*=exp(float(g.c.balance.birth_per_hour)*h)
 	var flows={}
 	for r in RES:flows[r]=(total(inventories,r)-total(before,r))/h
 	var audit={"resources":{},"pollution_generated":env.pollution_produced,"pollution_recycled":recycled,"heat_generated":env.heat_produced,"heat_used":heat_used,"hours":h,"phase_order":["空间","分配","运行","生产仓储","场与人群","财政与结构"]}
+	audit.population_food_requested=0.0
+	audit.commercial_service_people=0.0
+	audit.population_counts={}
+	for gid in R.ids(s.groups):
+		audit.population_food_requested+=float(claims.get("pop:"+gid,{}).get("needs",{}).get("food",0))
+		audit.commercial_service_people+=float(service.covered.get(gid,{}).get("commercial",0))
+		audit.population_counts[gid]=float(s.groups[gid].count)
+	audit.population_food_demand_rate=float(audit.population_food_requested)/h
 	for r in RES:
 		var a0=total(before,r);var a1=total(inventories,r);var output=float(produced.get(r,0));var input=float(receipt.consumed.get(r,0));var loss=float(spilled.get(r,0))
 		audit.resources[r]={"before":a0,"produced":output,"consumed":input,"lost":loss,"after":a1,"error":a0+output-input-loss-a1}
@@ -310,29 +328,31 @@ static func tick(g,h:float) -> String:
 	for group in next.groups.values():happiness+=float(group.count)*float(group.happiness)
 	happiness/=maxf(1,people)
 	next.support=clampf(lerpf(float(s.support),happiness,1-exp(-h*.15)),0,100)
-	var failing=happiness<30 or next.currency<0
-	next.governance_bad_hours=float(s.governance_bad_hours)+h if failing else maxf(0,float(s.governance_bad_hours)-h)
-	if next.governance_bad_hours>3:next.mandate=maxf(0,float(next.mandate)-h)
 	if produced.get("goods",0)>0:next.goods_available=true
 	if float(next.get("goods_requested_at",-1))>=0 and float(next.local_hours)+.0000001>=float(next.goods_requested_at)+float(g.c.balance.goods_grace_hours):next.goods_active=true
 	g.recording_cycle=true
 	g.s=next;g.compiled=compiled
 	g.Construction.tick(g,h)
-	g.Market.tick(g,h)
-	while not g.preview_mode and int(g.s.event_cursor)<g.c.balance.group_events_hours.size() and g.s.local_hours+.0000001>=g.c.balance.group_events_hours[int(g.s.event_cursor)]:
+	# Refresh once after the committed fields and possible construction changes.
+	# Trade mutates stock/cash; migration/rehouse mutates groups. Neither changes
+	# the building/field/slot inputs of Rules.compile, so reuse it below.
+	g.refresh_metrics()
+	g.Market.tick(g,h,float(context.get("external_seconds",h*float(g.c.beta.units.earth_seconds_per_month)/g.Clock.acceleration(g))))
+	var arrival_interval=float(g.c.beta.economy_candidates.arrival_interval_months)
+	while not g.preview_mode and float(g.s.local_hours)+1e-10>=(int(g.s.event_cursor)+1)*arrival_interval:
 		g.s.event_cursor+=1
 		if not g.s.migration_paused:
-			Pop.create(g,"homeless",float(g.c.balance.arrival_count));arrived+=float(g.c.balance.arrival_count)
-			g.log_event("arrival",{"count":6},"6名新居民抵达，优先填入空余住房。")
-	g.compiled=R.compile(g)
+			var count=float(g.c.beta.economy_candidates.arrival_people)
+			Pop.create(g,"homeless",count);arrived+=count
+			g.log_event("arrival",{"count":count},"%.0f名新居民抵达，优先填入空余住房。"%count)
 	if not g.preview_mode:Pop.rehouse(g)
-	g.refresh_metrics()
+	var final_metrics:Dictionary=g.s.metrics.duplicate(true)
+	final_metrics.merge(Pop.summary(g),true)
+	g.s.metrics=final_metrics
 	if not g.preview_mode:
 		g.recording_cycle=false
 		g.Civic.cycle(g,h,previous_population,arrived)
 		Progress.after_commit(g,h)
-		g.Commissions.tick(g,h)
-		g.Block.grant_naming(g)
 		g.Civic.sync(g);g.Civic.finalize(g)
 	g.recording_cycle=false
 	return g.validate_state(g.s)

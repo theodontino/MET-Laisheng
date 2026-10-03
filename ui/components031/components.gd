@@ -106,6 +106,12 @@ static func socket(parent:Node,g,host:String,slot:String,fn:Callable,micro:bool=
 	else:
 		var ins=g.s.bonus_instances[iid];var status="已装载" if ins.get("active",false) else "已停用"
 		button=bonus(v,g,ins.bonus_id,fn,"micro" if micro else "installed",{"instance_status":status});button.set_meta("slot_id",slot)
+		var same=[]
+		for key in g.slot_ids(host):
+			var installed=str(p.slots.get(key,""))
+			if installed!="" and str(g.s.bonus_instances.get(installed,{}).get("bonus_id",""))==str(ins.bonus_id):same.append(installed)
+		var grade=str(g.Bonus.card(g,str(ins.bonus_id)).get("grade","基础"))
+		v.add_child(W.label(grade+" · "+("首份 100%" if same.find(iid)<=0 else "追加 33⅓%"),13,W.GREEN))
 	if not micro and type=="Flex":
 		v.add_child(W.label("来自模块化设计 · 接受生产 / 物流",14,W.MUTED))
 	if not micro and p.status!="running":v.add_child(W.label("施工中 · 可以查看，暂不可改造",14,W.MUTED))

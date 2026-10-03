@@ -80,7 +80,7 @@ static func tile_info(g,s:Dictionary,tile:String,kind:String) -> Dictionary:
 			if e.kind=="input":consume+=float(e.rate)
 			else:prod+=float(e.rate);lost+=float(e.get("lost",0))
 		var stock=float(s.projects.get(building,{}).get("inventory",{}).get(kind,0))
-		return {"value":prod-consume,"produced":prod,"consumed":consume,"stock":stock,"lost":lost,"label":"产 %.1f / 用 %.1f%s"%[prod,consume,"" if kind=="energy" else "/h"],"known":s.metrics.has("activity_ledger"),"applicable":prod+consume+stock>.001}
+		return {"value":prod-consume,"produced":prod,"consumed":consume,"stock":stock,"lost":lost,"label":"产 %.1f / 用 %.1f%s"%[prod,consume,"" if kind=="energy" else "/月"],"known":s.metrics.has("activity_ledger"),"applicable":prod+consume+stock>.001}
 	return {"value":value,"label":label,"entries":entries,"known":s.get("error","")=="","applicable":true}
 static func links(g,s:Dictionary,selected:String,kind:String) -> Array:
 	var result=[]

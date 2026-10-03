@@ -44,6 +44,10 @@ static func card(g,id:String) -> Dictionary:
 		data.effect_rows=[]
 		for text in definition.get("player_highlights",[definition.summary]):data.effect_rows.append({"icon":"info","role":"effect","text":text})
 		if not id in warnings:warnings.append(id);push_warning("UI031 rule catalog mismatch: "+id)
+	if int(g.s.block.get("blueprint_levels",{}).get(id,0))>0:
+		data.effect_rows=[]
+		for row in g.Bonus.card(g,id).get("effects",[]):
+			data.effect_rows.append({"icon":"info","role":"effect","text":"蓝图单份 · "+str(row.get("label","数值"))+" %.3f %s"%[float(row.get("after",0)),str(row.get("unit",""))]})
 	data.allowed_hosts=definition.get("hosts",[]);data.allowed_slots=definition.get("allowed_slots",[])
 	return data
 static func hero(data:Dictionary) -> String:

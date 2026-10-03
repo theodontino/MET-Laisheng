@@ -45,7 +45,7 @@ func setup(a):
 	for side in ["top","bottom"]:margin.add_theme_constant_override("margin_"+side,10)
 	scroll.add_child(margin);body=W.vbox(margin,10);body.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	var fp=W.panel(self,W.PANEL);var fs=W.box(W.PANEL,W.SOFT,0);fs.content_margin_top=4;fs.content_margin_bottom=4;fs.content_margin_left=8;fs.content_margin_right=8;fp.add_theme_stylebox_override("panel",fs);footer=W.hbox(fp,6)
-	primary=W.primary(W.button("查看运营方案",func():switch_tab("slots") if tab!="slots" else switch_tab("overview")));primary.custom_minimum_size=Vector2(0,40);primary.size_flags_horizontal=Control.SIZE_EXPAND_FILL;footer.add_child(primary)
+	primary=W.primary(W.button("查看运营方案",primary_action));primary.custom_minimum_size=Vector2(0,40);primary.size_flags_horizontal=Control.SIZE_EXPAND_FILL;footer.add_child(primary)
 	more=W.button("更多",manage);more.custom_minimum_size=Vector2(64,40);footer.add_child(more)
 func adapt():
 	var compact=app.compact;var altered=compact!=compact_layout or W.text_scale!=current_font
@@ -66,7 +66,7 @@ func update_view(g,shot:Dictionary,id:String):
 	var d=D.domain(data.domain)
 	header.add_theme_stylebox_override("panel",W.box(W.PANEL,W.SOFT,10))
 	title_label.text=data.name;subtitle.text=data.operator+" · 运营者";domain_label.text=str(d.label);domain_label.add_theme_color_override("font_color",W.GREEN);portrait.texture=Art.thumbnail(str(data.base))
-	reading.text=data.reading+" · 第%d周期"%data.tick
+	reading.text=data.reading+" · 每来生月"
 	var key=data.signature+":"+tab+":"+str(compact_layout)+":"+str(W.text_scale)
 	if signature!=key:
 		var old=float(scroll.scroll_vertical) if signature!="" else float(scroll_positions.get(tab,0))
@@ -75,7 +75,7 @@ func update_view(g,shot:Dictionary,id:String):
 	for keytab in tabs:
 		var b=tabs[keytab];var style=W.button_box(W.SOFT if keytab==tab else W.PANEL,W.GREEN if keytab==tab else W.SOFT)
 		style.border_width_bottom=3 if keytab==tab else 0;b.add_theme_stylebox_override("normal",style)
-	primary.text=("看方案" if compact_layout else "查看运营方案") if tab!="slots" else ("看概况" if compact_layout else "回到运行概况")
+	primary.text=primary_label()
 func switch_tab(value:String):
 	if value==tab:return
 	scroll_positions[tab]=scroll.scroll_vertical;tab=value;signature="";app.play_cue("select")
@@ -102,6 +102,7 @@ func rebuild():
 	else:details()
 func overview():
 	var m=model;var narrow=compact_layout or W.text_scale>1.2
+	context_summary()
 	if m.current.status=="construction":
 		var v=_group(body,"施工进度");text(v,"construction","",20);var bar=W.bar(0);v.add_child(bar);nodes.construction_bar=bar
 	if not m.house.is_empty():
@@ -130,7 +131,7 @@ func overview():
 		var q=_resource_row(inputs,x.id,("电力合计" if x.id=="energy" else P.RES.get(x.id,x.id)),"",x.unit);nodes["in:"+x.id]=q
 	if m.inputs.is_empty():text(inputs,"no_inputs","本周期无物资扣除" if m.known else "投入待结算",14,W.MUTED)
 	C.divider(inputs)
-	for i in m.fees.size():nodes["fee:"+str(i)]=_resource_row(inputs,"currency",m.fees[i].label,"","通货/h")
+	for i in m.fees.size():nodes["fee:"+str(i)]=_resource_row(inputs,"currency",m.fees[i].label,"","通货/月")
 	var source=W.flat(W.button("展开投入来源",func():switch_tab("details")));source.custom_minimum_size.x=0;inputs.add_child(source)
 	if "building.logistics" in m.current.traits and not m.inventory.is_empty():
 		var v=_group(body,"可用仓储 · 当前库存")
@@ -162,7 +163,7 @@ func details():
 		text(out,"detail_out:"+x.id,"",17,W.TEXT);text(out,"detail_out_sources:"+x.id,"",14,W.MUTED)
 	if m.outputs.is_empty():out.add_child(W.label("本周期无物资产出。",14,W.MUTED))
 	var fees=_group(body,"财政负担 · "+m.reading)
-	for i in m.fees.size():nodes["fee:"+str(i)]=_resource_row(fees,"currency",m.fees[i].label,"","通货/h")
+	for i in m.fees.size():nodes["fee:"+str(i)]=_resource_row(fees,"currency",m.fees[i].label,"","通货/月")
 	var storage=_group(body,"库存 · 当前持有量")
 	for x in m.inventory:
 		nodes["stock:"+x.id]=_resource_row(storage,x.id,P.RES.get(x.id,x.id),"","库存 / 仓容")
@@ -172,6 +173,7 @@ func details():
 	var trace=_group(body,"数值解释");text(trace,"trace","",14,W.MUTED)
 	var history=_group(body,"原方案与当前合同");text(history,"history","",14,W.MUTED)
 func refresh_values():
+	update_context()
 	var m=model
 	if nodes.has("construction"):
 		nodes.construction.text="剩余 %.1f CP · 材料 %.1f"%[m.current.job.work,m.current.job.material];nodes.construction_bar.value=1-float(m.current.job.work)/maxf(.001,m.current.job.total)
@@ -190,7 +192,7 @@ func refresh_values():
 	for x in m.outputs:
 		if nodes.has("out:"+x.id):
 			nodes["out:"+x.id].value.text="%.1f"%x.value if m.known else "—"
-			if nodes.has("kept:"+x.id):nodes["kept:"+x.id].text="其中可入库 %.1f/h · 丢弃 %.1f/h"%[x.kept,x.lost]
+			if nodes.has("kept:"+x.id):nodes["kept:"+x.id].text="其中可入库 %.1f/月 · 丢弃 %.1f/月"%[x.kept,x.lost]
 		if nodes.has("detail_out:"+x.id):
 			nodes["detail_out:"+x.id].text=P.RES.get(x.id,x.id)+" %.3f %s"%[x.value,x.unit]
 			var lines=[]
@@ -239,3 +241,60 @@ func manage():
 	v.add_child(W.button("查看建筑成长",func():app.close_modal();app.desk.open("city040","upgrade:"+id),g.s.projects[id].get("status","")!="running"))
 	v.add_child(W.button("查看部署许可",func():app.close_modal();app.desk.open("city040","permits")))
 	var danger=_group(app.modal_body,"危险操作",W.SOFT);var b=W.button("拆除建筑…",func():app.Dialogs.demolition(app,id));b.add_theme_stylebox_override("normal",W.button_box(W.PANEL,W.GOLD));b.add_theme_color_override("font_color",W.GOLD);danger.add_child(b)
+
+func primary_label() -> String:
+	if tab=="slots":return "回到运行概况"
+	if selected_id=="" or not app.game.s.projects.has(selected_id):return "查看运营方案"
+	var p=app.game.s.projects[selected_id]
+	if str(p.get("def",""))=="freight":return "打开贸易"
+	if not app.game.Development.choices(app.game,selected_id).is_empty() and p.get("status","")=="running":return "预览升级方向"
+	return "查看可装副本"
+func primary_action():
+	if tab=="slots":switch_tab("overview");return
+	var g=app.game
+	if not g.s.projects.has(selected_id):return
+	if str(g.s.projects[selected_id].get("def",""))=="freight":app.desk.open("city040","market")
+	elif not g.Development.choices(g,selected_id).is_empty() and g.s.projects[selected_id].get("status","")=="running":app.desk.open("city040","upgrade:"+selected_id)
+	else:app.desk.open("city040","permits")
+func context_summary():
+	nodes.context=_group(body,"",W.SOFT)
+	update_context()
+func update_context():
+	if not nodes.has("context"):return
+	var group=nodes.context;W.clear(group)
+	var m=model;var g=app.game;var project=g.s.projects.get(selected_id,{})
+	if str(project.get("def",""))=="freight":
+		group.add_child(W.label("物流 · 对外接口",17,W.GREEN))
+		var rate=float(g.Market._total_capacity(g))
+		group.add_child(W.label("全城外贸运力 %.1f / 现实在线小时"%rate,16,W.GREEN))
+		var ledger:Array=g.s.block.get("trade_ledger",[]);var latest:Dictionary=ledger.back() if not ledger.is_empty() else {}
+		var orders=[]
+		for order in g.s.block.get("trade_orders",[]):
+			if str(order.get("status","open")) in ["open","partial"]:orders.append(order)
+		group.add_child(W.label("当前开放订单 %d · 最近成交周期 %.2f / %.2f 运力"%[orders.size(),float(latest.get("used_capacity",0)),float(latest.get("capacity",0))],14,W.MUTED))
+		for order in orders:
+			var quote=g.Market.quote(g,str(order.resource));var price=float(quote.get(str(order.side),0));var limit=float(order.limit_price)
+			var allowed=price<=limit if str(order.side)=="buy" else price>=limit
+			group.add_child(W.label(P.RES.get(str(order.resource),str(order.resource))+" · "+("限价可成交" if allowed else "限价不满足")+" · 已成交 %.1f"%float(order.get("filled",0)),14,W.GREEN if allowed else W.GOLD))
+	elif not m.house.is_empty():
+		group.add_child(W.label("住宅 · 首要需求",17,W.GREEN));var lowest=1.0;var name="生活供给稳定";var kinds=["food","material","energy"]
+		if g.s.get("goods_active",false):kinds.append("goods")
+		if float(g.s.local_hours)>=float(g.c.balance.get("service_start_hours",3)):
+			kinds.append_array(g.c.balance.service_kinds)
+		for population in m.groups:
+			for kind in kinds:
+				if not population.get("living",{}).has(kind):continue
+				if float(population.living[kind])<lowest:lowest=float(population.living[kind]);name=P.KIND.get(kind,P.RES.get(kind,kind))+"覆盖 %.0f%%"%(lowest*100)
+		group.add_child(W.label(name,16,W.GREEN if lowest>=.98 else W.GOLD))
+	elif not m.services.is_empty():
+		group.add_child(W.label("公共服务 · 名额与可达",17,W.GREEN))
+		group.add_child(W.label("服务范围 %.0f 格；下面显示实际服务人数 / 有效容量。可达仅说明位置允许，满额时仍会有居民等候。"%float(m.stats.get("service_range",0)),15,W.MUTED))
+	elif not m.outputs.is_empty():
+		group.add_child(W.label("生产 · 投入 → 产出",17,W.GREEN));var inputs=[];var outputs=[]
+		for item in m.inputs:inputs.append(P.RES.get(item.id,item.id)+" %.1f"%float(item.value))
+		for item in m.outputs:outputs.append(P.RES.get(item.id,item.id)+" %.1f"%float(item.value))
+		group.add_child(W.label((" + ".join(inputs) if not inputs.is_empty() else "本地生产")+" → "+" + ".join(outputs),15))
+		group.add_child(W.label("实际运行率 %.0f%% · 物资率按每来生月"%(float(m.utilization)*100),14,W.MUTED))
+		for item in m.inputs:
+			if str(item.id)=="energy":continue
+			group.add_child(W.label("投入余量 · "+P.RES.get(item.id,item.id)+"全城可用 %.1f"%g.inventory_total(str(item.id)),14,W.MUTED))

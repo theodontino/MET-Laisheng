@@ -51,31 +51,25 @@ static func after_commit(g,h:float=.1) -> void:
 	var pleasant=is_safe and m.happiness>=72 and m.health>=72 and service_ratio(g,"medical")>=.75 and service_ratio(g,"commercial")>=.75 and service_ratio(g,"entertainment")>=.75
 	goal.community=float(goal.community)+h if pleasant else 0.
 	goal.renewal=float(goal.renewal)+h if is_safe and renewal_ok(g) else 0.
-	# Commissions own Bonus rewards; the city goal grants naming and completion rewards.
+	# Historical city outcomes remain descriptive; naming belongs to actual DT zero.
 	var ready=false
 	match str(goal.route):
 		"community":ready=goal.community>=float(g.c.balance.goal_duration)
 		"delivery":ready=goal.delivered
 		"renewal":ready=goal.renewal>=float(g.c.balance.goal_duration)
 	if not goal.completed and g.Civic.route_permitted(g) and ready and m.housed>=float(g.c.balance.target_people) and goal.stable>=float(g.c.balance.target_stable_hours):
-		goal.completed=true;g.s.complete=true;g.s.currency+=120;g.s.dt=minf(g.c.balance.dt_cap,g.s.dt+6)
-		g.log_event("community_complete",{"route":goal.route},"河谷新章完成：这座社区能独立运转了。获得120通货、6DT与地区命名权。")
-	if not g.s.crisis.get("active",false) and (minf(g.s.mandate,g.s.support)<15 or maxf(g.s.mandate,g.s.support)<30):
-		g.s.crisis={"active":true};g.log_event("crisis",{},"治理危机：生活与财政需要优先修复。城市不会突然消失。")
-static func award(g,id:String,title:String,money:float,dt:float) -> void:
-	if id in g.s.city_goal.awards or not g.Civic.permitted(g,id):return
-	g.s.city_goal.awards.append(id);g.s.currency+=money;g.s.dt=minf(g.c.balance.dt_cap,g.s.dt+dt)
-	g.log_event("city_outcome",{"id":id,"money":money,"dt":dt},title+" · 获得一份地区方案机会")
+		goal.completed=true;g.s.complete=true;g.s.currency+=120
+		g.log_event("community_complete",{"route":goal.route},"河谷新章完成：这座社区能独立运转了。获得120通货；DT与命名资格不变。")
 static func deliver(g) -> String:
 	initialize(g)
 	if g.s.city_goal.delivered:return "交付已完成。"
 	if not g.Civic.route_permitted(g) or str(g.s.city_goal.route)!="delivery":return "请先在任务面板接取供给交付成果。"
 	var mat=float(g.c.balance.goal_delivery_material);var goods=float(g.c.balance.goal_delivery_goods)
-	if not safe(g) or g.s.city_goal.stable<float(g.c.balance.target_stable_hours):return "先让住房、粮食、电力与财政稳定1本地小时。"
+	if not safe(g) or g.s.city_goal.stable<float(g.c.balance.target_stable_hours):return "先让住房、粮食、电力与财政稳定1来生月。"
 	if g.inventory_total("material")<mat or g.inventory_total("goods")<goods:return "需要20材料和12制成品，交付时真正扣除。"
 	var foodneed=0.
 	for p in g.s.groups.values():foodneed+=float(p.count)*float(g.compiled.stats[p.host].population_food)
-	if g.inventory_total("food")<foodneed*2:return "交付前留足当前居民至少2小时的粮食。"
+	if g.inventory_total("food")<foodneed*2:return "交付前留足当前居民至少2来生月的粮食。"
 	g.withdraw_stock("material",mat);g.withdraw_stock("goods",goods);g.s.city_goal.delivered=true
 	g.log_event("delivery",{"material":mat,"goods":goods},"发展物资已交付，基础生活储备保留。");g.refresh_metrics();after_commit(g,0);return ""
 static func checklist(g) -> Array:
@@ -84,15 +78,10 @@ static func checklist(g) -> Array:
 	var done=goal.community>=g.c.balance.goal_duration if route=="community" else (goal.delivered if route=="delivery" else goal.renewal>=g.c.balance.goal_duration)
 	return [
 		{"name":"安顿30位居民，无人待安置","done":m.get("housed",0)>=30 and m.get("homeless",0)<.1,"value":"%.0f / 30人"%m.get("housed",0)},
-		{"name":"生活与财政稳定1小时","done":goal.stable>=1,"value":"%.1f / 1.0h"%goal.stable},
-		{"name":g.c.data.city_goals[route].name,"done":done,"value":"已达成" if done else ("交付20材料 + 12制成品" if route=="delivery" else "%.1f / %.1fh"%[goal[route],g.c.balance.goal_duration])}]
-static func crisis(g,choice:String) -> String:
-	if not g.s.crisis.get("active",false):return "当前没有治理危机。"
-	if choice=="repair":
-		if g.s.currency<80:return "整改需要80通货。"
-		g.s.currency-=80;g.s.mandate=maxf(50,g.s.mandate);g.s.support=maxf(40,g.s.support);g.s.crisis={};g.log_event("crisis_repair",{},"治理整改费用");return ""
-	if choice=="leave":g.s.phase="failed";g.s.failed_reason="交出本地区治理权，城市留作只读记录。";return ""
-	return "无效选项。"
+		{"name":"生活与财政稳定1来生月","done":goal.stable>=1,"value":"%.1f / 1.0月"%goal.stable},
+		{"name":g.c.data.city_goals[route].name,"done":done,"value":"已达成" if done else ("交付20材料 + 12制成品" if route=="delivery" else "%.1f / %.1f月"%[goal[route],g.c.balance.goal_duration])}]
+static func crisis(_g,_choice:String) -> String:
+	return "本 Beta 不使用旧治理危机结算；DT 归零后可留城或独立重开。"
 
 static func requirements(g) -> Array:
 	initialize(g)
@@ -105,7 +94,7 @@ static func requirements(g) -> Array:
 	elif route=="delivery":
 		rows.append({"name":"可交付材料","value":"%.1f / 20"%g.inventory_total("material"),"done":g.inventory_total("material")>=20,"action":"extraction"})
 		rows.append({"name":"可交付制成品","value":"%.1f / 12"%g.inventory_total("goods"),"done":g.inventory_total("goods")>=12,"action":"manufacturing"})
-		rows.append({"name":"交付前保留两小时口粮","value":"交付只扣材料和制成品，不扣粮食","done":safe(g),"action":"agriculture"})
+		rows.append({"name":"交付前保留两来生月口粮","value":"交付只扣材料和制成品，不扣粮食","done":safe(g),"action":"agriculture"})
 	else:
 		for gid in g.s.city_goal.anchors:
 			if not g.s.groups.has(gid):continue

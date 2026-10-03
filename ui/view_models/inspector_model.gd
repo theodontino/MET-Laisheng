@@ -20,19 +20,19 @@ static func build(g,shot:Dictionary,id:String) -> Dictionary:
 	for e in m.ledger:
 		var r=str(e.resource)
 		if e.kind=="input":
-			if not input.has(r):input[r]={"id":r,"value":0.,"children":[],"unit":"电力" if r=="energy" else "/h"}
+			if not input.has(r):input[r]={"id":r,"value":0.,"children":[],"unit":"电力" if r=="energy" else "/月"}
 			input[r].value+=float(e.rate);input[r].children.append(e)
 		else:
-			if not output.has(r):output[r]={"id":r,"value":0.,"kept":0.,"lost":0.,"children":[],"unit":"电力" if r=="energy" else "/h"}
+			if not output.has(r):output[r]={"id":r,"value":0.,"kept":0.,"lost":0.,"children":[],"unit":"电力" if r=="energy" else "/月"}
 			output[r].value+=float(e.rate);output[r].kept+=float(e.get("kept",e.rate));output[r].lost+=float(e.get("lost",0));output[r].children.append(e)
 	for r in ["food","material","goods","energy"]:
-		if not output.has(r) and float(st.get("output."+r,0))>0:output[r]={"id":r,"value":0.,"kept":0.,"lost":0.,"children":[],"unit":"电力" if r=="energy" else "/h"}
+		if not output.has(r) and float(st.get("output."+r,0))>0:output[r]={"id":r,"value":0.,"kept":0.,"lost":0.,"children":[],"unit":"电力" if r=="energy" else "/月"}
 		if input.has(r) and input[r].value>.000001:m.inputs.append(input[r])
 		if output.has(r) and (output[r].value>.000001 or float(st.get("output."+r,0))>0):m.outputs.append(output[r])
 	for e in metrics.get("fiscal_ledger",[]):
 		if e.source_id!=id:continue
 		m.fiscal.append(e)
-		if e.kind=="expense":m.fees.append({"id":"currency","label":"住户维护" if e.name=="居民基础维护" else "建筑维护","value":float(e.rate),"unit":"通货/h","source":e})
+		if e.kind=="expense":m.fees.append({"id":"currency","label":"住户维护" if e.name=="居民基础维护" else "建筑维护","value":float(e.rate),"unit":"通货/月","source":e})
 	for kind in g.c.balance.service_kinds:
 		var served=0.
 		for link in metrics.get("service_links",[]):
@@ -45,7 +45,7 @@ static func build(g,shot:Dictionary,id:String) -> Dictionary:
 		var cap=g.stock_cap_for(id,r);var stock=float(current.inventory.get(r,0))
 		if cap>0 or stock>0:m.inventory.append({"id":r,"stock":stock,"capacity":cap,"public":id=="municipal" or "building.logistics" in current.traits or g.compiled.config.get(id,{}).get("overflow_relay",false)})
 	var status={"code":"ok","message":"投入齐备","detail":"","action":""}
-	if current.status=="construction":status={"code":"inactive","message":"施工中","detail":"还需 %.1fh 工作、%.1f 材料"%[current.job.work,current.job.material],"action":""}
+	if current.status=="construction":status={"code":"inactive","message":"施工中","detail":"还需 %.1f CP、%.1f 材料"%[current.job.work,current.job.material],"action":""}
 	elif current.paused:status={"code":"inactive","message":"已暂停","detail":"暂停生产，固定维护仍计入收支。","action":""}
 	elif not known or a.is_empty():status={"code":"unknown","message":"待结算","detail":"当前没有可信的运营结果。","action":""}
 	else:

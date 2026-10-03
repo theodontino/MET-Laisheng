@@ -26,6 +26,7 @@ var show_all_links:bool=false
 var show_impacts:bool=true
 var reduce_motion:bool=false
 var show_labels:bool=true
+var beta_feedback_active:bool=false
 var font:Font
 var dragging:bool=false
 var panning:bool=false
@@ -180,7 +181,7 @@ func _process(delta):
 		Connections.clear_cache()
 		connector_render_items=Connections.items(self,fabric_snapshot.get("connectors",[]))
 		render_stats.connector_builds+=1
-	var bkey=elevation_key+foundation_key+str(layer)+str(mode)+str(hovered if mode=="site" else "")+_structure_appearance_key()+_filler_appearance_key()+connections_key
+	var bkey=JSON.stringify(game.s.get("block",{}).get("capstone",{}))+elevation_key+foundation_key+str(layer)+str(mode)+str(hovered if mode=="site" else "")+_structure_appearance_key()+_filler_appearance_key()+connections_key
 	if _last_buildings!=bkey:
 		_last_buildings=bkey;buildings.material.set_shader_parameter("saturation",1.0 if layer in ["normal","terrain","operator"] else .28);buildings.queue_redraw()
 	if visual_time-_last_effect>.033:
@@ -650,6 +651,37 @@ func _structures(c:CanvasItem):
 			var modules=Art.attachments(game,str(b.id))
 			for j in mini(2,modules.size()):_sprite(c,modules[j],p+Vector2((j*2-1)*.49,.26)*r,r*.62,color)
 	_draw_fabric_fillers(c)
+	_draw_capstone(c)
+
+
+func _draw_capstone(c:CanvasItem):
+	# A civic landmark is a real Block entity, not another buildable slot or population host.
+	var capstone:Dictionary=game.s.get("block",{}).get("capstone",{})
+	var tile=str(capstone.get("tile_anchor",""))
+	if capstone.is_empty() or not game.s.cells.has(tile):return
+	var role=str(capstone.get("function_role",capstone.get("theme","civic")))
+	var color:Color={"industrial":Color("D5AF60"),"civic":Color("ADA5CA"),"commercial":Color("82B3D5"),"logistics":Color("79BDBA"),"agricultural":Color("98B580")}.get(role,Color("ADA5CA"))
+	var r=radius()*.58
+	var p=point(tile)+Vector2(-.73,-.53)*radius()
+	_shadow(c,p+Vector2(0,r*.10),Vector2(r*.8,r*.35),.18)
+	var roof=PackedVector2Array([p+Vector2(-.84,-.64)*r,p+Vector2(-.12,-1.04)*r,p+Vector2(.81,-.64)*r,p+Vector2(.09,-.26)*r])
+	var front=PackedVector2Array([roof[0],roof[3],p+Vector2(.09,.35)*r,p+Vector2(-.84,-.03)*r])
+	var side=PackedVector2Array([roof[3],roof[2],p+Vector2(.81,-.04)*r,p+Vector2(.09,.35)*r])
+	c.draw_colored_polygon(front,Color("CBC3A8"));c.draw_colored_polygon(side,Color("8B998D"));c.draw_colored_polygon(roof,color)
+	for i in 3:
+		var base=p+Vector2(-.65+i*.24,-.25+i*.10)*r
+		c.draw_line(base,base+Vector2(0,.31)*r,Color("5B6865"),maxf(2,3*draw_scale()),true)
+	var pole=p+Vector2(.45,-.83)*r
+	c.draw_line(pole,pole-Vector2(0,.85)*r,Color("D6D6BE"),maxf(1,2*draw_scale()),true)
+	c.draw_colored_polygon(PackedVector2Array([pole-Vector2(0,.85)*r,pole+Vector2(.45,-.69)*r,pole+Vector2(0,-.47)*r]),color)
+	# Theme emblems stay legible without pretending to be new simulation buildings.
+	var emblem=p+Vector2(-.04,-.63)*r
+	if role=="agricultural":
+		c.draw_circle(emblem,6*draw_scale(),Color("42694C"))
+	elif role=="industrial":
+		c.draw_rect(Rect2(emblem-Vector2(4,8)*draw_scale(),Vector2(8,14)*draw_scale()),Color("6B604B"))
+	else:
+		c.draw_circle(emblem,6*draw_scale(),Color("E5E2C9"),false,maxf(1,2*draw_scale()))
 
 func _construction(c:CanvasItem,p:Vector2,r:float):
 	# Visual scaffolding has no capacity or construction-time effects.
@@ -724,7 +756,7 @@ func _overlays(c:CanvasItem):
 			var p=clampf(1-float(b.job.work)/maxf(.001,b.job.total),0,1)
 			c.draw_rect(Rect2(pos+Vector2(-r*.44,r*.36),Vector2(r*.88,5)),Color("b8bdac"));c.draw_rect(Rect2(pos+Vector2(-r*.44,r*.36),Vector2(r*.88*p,5)),Color("a77539"))
 		elif b.paused:marker(c,pos+Vector2(r*.4,-r*.34),"Ⅱ",Color("53636a"))
-		elif not a.is_empty() and u<.48 and (id==selected_project or b.tile==hovered or layer!="normal"):
+		elif not beta_feedback_active and not a.is_empty() and u<.48 and (id==selected_project or b.tile==hovered or layer!="normal"):
 			if label_count<10:
 				var problem=str(a.get("bottleneck",""));var symbol="人" if "劳力" in problem else ("电" if "能源" in problem else ("料" if "物资" in problem else "仓"))
 				marker(c,pos+Vector2(r*.45,-r*.30),symbol,Color("a53332"));label_count+=1

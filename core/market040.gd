@@ -59,7 +59,9 @@ static func _freight_sources(g) -> Array:
 		var p:Dictionary = g.s.projects[id]
 		if str(p.get("status", "")) != "running" or bool(p.get("paused", false)): continue
 		var stats = _stats(g, str(id))
-		var capacity = maxf(0, float(stats.get("trade_capacity", 0)))
+		# Existing trade-capacity modifiers retain ratios against the baseline 12.
+		# The base rate has its own real-hour unit, never an economic-month unit.
+		var capacity = maxf(0, float(stats.get("trade_capacity", 0))) / float(g.c.beta.external_market_candidate.legacy_capacity_reference) * float(g.c.beta.external_market_candidate.freight_capacity_per_real_hour) * maxf(0,float(g.c.beta.external_market_candidate.coupling_multiplier))
 		var usage = clampf(float(p.get("usage", 1)), 0, 1)
 		var available = capacity * usage
 		if available <= 0.000001: continue
@@ -86,6 +88,7 @@ static func order(g, resource:String, side:String, amount:float, limit_price:flo
 		"created_at":float(g.s.get("local_hours", 0)),"status":"open","last_attempt_tick":-1,
 		"quote_at_order":quote_now}
 	g.s.block.trade_orders.append(row)
+	g.revision+=1
 	return ""
 
 static func cancel(g, order_id:String) -> String:
@@ -97,6 +100,7 @@ static func cancel(g, order_id:String) -> String:
 		row.status = "cancelled"
 		row.cancelled_at = float(g.s.get("local_hours", 0))
 		g.s.block.trade_orders[i] = row
+		g.revision+=1
 		return ""
 	return "找不到这笔订单。"
 
@@ -168,13 +172,15 @@ static func _audit_trade(g, resource:String, side:String, amount:float, cash_del
 	g.s.audit = audit
 	if g.s.get("metrics", {}).get("flows") is Dictionary:
 		var flow = g.s.metrics.flows
-		flow[resource] = (float(receipt.after) - float(receipt.get("before", receipt.after))) / maxf(0.000001, h)
+		flow[resource] = (float(receipt.after) - float(receipt.get("before", receipt.after))) / maxf(1e-15, h)
 		g.s.metrics.flows = flow
 	var market_cash = float(g.s.metrics.get("market_cash_delta", 0)) + cash_delta
 	g.s.metrics.market_cash_delta = market_cash
 
-static func tick(g, h:float) -> void:
+static func tick(g, h:float, external_seconds:float=-1.0) -> void:
 	if h <= 0: return
+	if external_seconds<0:external_seconds=h*float(g.c.beta.units.earth_seconds_per_month)
+	if not is_finite(external_seconds) or external_seconds<0:return
 	ensure(g)
 	var block:Dictionary = g.s.block
 	var market_state:Dictionary = block.market_state
@@ -183,8 +189,8 @@ static func tick(g, h:float) -> void:
 	# in this tick. Net trade pressure only affects the next quote.
 	for resource in market:
 		var state:Dictionary = market[resource]
-		var half_life = maxf(0.000001, float(state.get("reversion_half_life", 4)))
-		state.pressure = float(state.get("pressure", 0)) * exp(-h / half_life)
+		var tau = maxf(0.000001, float(g.c.beta.external_market_candidate.pressure_relaxation_time_constant_real_seconds))
+		state.pressure = float(state.get("pressure", 0)) * exp(-external_seconds / tau)
 		market[resource] = state
 	market_state.resources = market
 	block.market_state = market_state
@@ -194,11 +200,11 @@ static func tick(g, h:float) -> void:
 	var sources = _freight_sources(g)
 	var total_capacity = 0.0
 	for source in sources:
-		source.available = float(source.available) * h
+		source.available = float(source.available) * external_seconds / 3600.0
 		total_capacity += float(source.available)
 	var records:Array = []
 	var per_resource_pressure = {}
-	var ledger = {"tick":int(g.s.get("simulation_tick", 0)),"h":float(g.s.get("local_hours", 0)),"hours":h,
+	var ledger = {"tick":int(g.s.get("simulation_tick", 0)),"h":float(g.s.get("local_hours", 0)),"hours":h,"economic_months":h,"external_seconds":external_seconds,
 		"bought":{},"sold":{},"currency_delta":0.0,"capacity":total_capacity,"used_capacity":0.0,"trades":[]}
 	for order_row in _orders_in_stable_order(g.s.block.trade_orders):
 		var order_id = str(order_row.get("id", ""))
@@ -244,7 +250,7 @@ static func tick(g, h:float) -> void:
 				g.s.block.trade_orders[order_index] = live
 				continue
 		var cash_delta = -amount * unit_price if side == "buy" else amount * unit_price
-		g.s.currency = snappedf(float(g.s.currency) + cash_delta, 0.000001)
+		g.s.currency = float(g.s.currency) + cash_delta
 		var trade = {"id":g.uid("X"),"order_id":order_id,"resource":resource,"side":side,"amount":amount,
 			"price":unit_price,"unit_price":unit_price,"mid_price":float(quote_row.mid),"limit_price":float(live.limit_price),
 			"currency_delta":cash_delta,"tick":int(g.s.get("simulation_tick", 0)),"h":float(g.s.get("local_hours", 0)),

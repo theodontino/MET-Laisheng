@@ -31,5 +31,5 @@ func _draw():
 		for row in samples:
 			points.append(r.position+Vector2((float(row.h)-t0)/span*r.size.x,(max_value-float(row.get(s.key,0)))/range_value*r.size.y))
 		draw_polyline(points,s.color,2.5,true)
-	draw_string(font,Vector2(r.position.x,r.end.y+26),"%.1fh"%t0,HORIZONTAL_ALIGNMENT_LEFT,-1,int(14*W.text_scale),W.MUTED)
-	draw_string(font,Vector2(r.end.x-85,r.end.y+26),"%.1fh"%t1,HORIZONTAL_ALIGNMENT_RIGHT,85,int(14*W.text_scale),W.MUTED)
+	draw_string(font,Vector2(r.position.x,r.end.y+26),"%.1f月"%t0,HORIZONTAL_ALIGNMENT_LEFT,-1,int(14*W.text_scale),W.MUTED)
+	draw_string(font,Vector2(r.end.x-85,r.end.y+26),"%.1f月"%t1,HORIZONTAL_ALIGNMENT_RIGHT,85,int(14*W.text_scale),W.MUTED)

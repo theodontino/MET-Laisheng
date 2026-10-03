@@ -1,10 +1,24 @@
 extends RefCounted
+## Pure mathematical memoization only; never retains cities, fields, RNG or entities.
+const COORD_CACHE_LIMIT=4096
+const DISTANCE_CACHE_LIMIT=8192
+static var _coordinate_cache:Dictionary={}
+static var _distance_cache:Dictionary={}
+static var _distance_entries:int=0
+
+static func clear_math_cache() -> void:
+	_coordinate_cache.clear();_distance_cache.clear();_distance_entries=0
+
 const DIRS = [Vector2i(1,0),Vector2i(1,-1),Vector2i(0,-1),Vector2i(-1,0),Vector2i(-1,1),Vector2i(0,1)]
 static func key(q:int,r:int) -> String:
 	return "%d,%d" % [q,r]
 static func coords(k:String) -> Vector2i:
+	if _coordinate_cache.has(k):return _coordinate_cache[k]
 	var s=k.split(",")
-	return Vector2i(int(s[0]),int(s[1]))
+	var result=Vector2i(int(s[0]),int(s[1]))
+	if _coordinate_cache.size()>=COORD_CACHE_LIMIT:_coordinate_cache.clear()
+	_coordinate_cache[k]=result
+	return result
 static func neighbors(k:String) -> Array:
 	var p=coords(k)
 	var result=[]
@@ -49,5 +63,11 @@ static func make_map(kind:int) -> Dictionary:
 	return cells
 
 static func distance(a:String,b:String) -> int:
+	if _distance_cache.has(a) and _distance_cache[a].has(b):return _distance_cache[a][b]
 	var d=coords(a)-coords(b)
-	return maxi(absi(d.x),maxi(absi(d.y),absi(d.x+d.y)))
+	var result=maxi(absi(d.x),maxi(absi(d.y),absi(d.x+d.y)))
+	if _distance_entries>=DISTANCE_CACHE_LIMIT:
+		_distance_cache.clear();_distance_entries=0
+	if not _distance_cache.has(a):_distance_cache[a]={}
+	_distance_cache[a][b]=result;_distance_entries+=1
+	return result

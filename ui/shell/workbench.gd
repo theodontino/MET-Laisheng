@@ -106,7 +106,7 @@ func rebuild():
 					for value in candidate_preview.get("added_service",{}).values():service_gain+=float(value)
 					card.add_child(W.label("住房 %+.0f · 服务 %+.0f人 · 供电 +%.1f"%[float(candidate_preview.get("housing",0)),service_gain,float(candidate_preview.get("energy_supply",0))],14,W.TEXT))
 					var outputs=candidate_preview.get("outputs",{})
-					card.add_child(W.label("粮食 %.1f · 材料 %.1f · 制成品 %.1f /h"%[float(outputs.get("food",0)),float(outputs.get("material",0)),float(outputs.get("goods",0))],14,W.TEXT))
+					card.add_child(W.label("粮食 %.1f · 材料 %.1f · 制成品 %.1f /月"%[float(outputs.get("food",0)),float(outputs.get("material",0)),float(outputs.get("goods",0))],14,W.TEXT))
 				else:card.add_child(W.label(str(candidate_preview.get("error","当前无法生成预测。")),14,W.MUTED))
 				card.add_child(Art.slot_strip(g,o.get("slot_track",[])))
 			else:

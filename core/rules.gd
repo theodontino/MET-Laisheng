@@ -3,6 +3,69 @@ extends RefCounted
 ## Compile reads only a stable world. All modifications reduce after collection.
 const Hex=preload("res://core/hex.gd")
 const SUPPORTED=["modify","configure","capacity_convert","capacity_copy","grant_recipe","field_convert","emit","relate","slot_add"]
+# Content is immutable; only per-Block blueprint levels and live instances are state.
+static var _bonus_content:Dictionary = {}
+static func bonus_content() -> Dictionary:
+	if _bonus_content.is_empty():
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string("res://content/beta/bonus_upgrades.json"))
+		if parsed is Dictionary: _bonus_content = parsed
+	return _bonus_content
+
+static func copy_strength(g, count:int, bonus_id:String="") -> float:
+	if count <= 0: return 0.0
+	var coefficient = float(bonus_content().get("subsequent_copy_weight", 1.0 / 3.0))
+	if g.c.get("beta") is Dictionary:
+		coefficient = float(g.c.beta.get("bonus", {}).get("subsequent_copy_weight", coefficient))
+	if g.c.bonuses.has(bonus_id):
+		coefficient = float(g.c.bonuses[bonus_id].get("subsequent_copy_weight", coefficient))
+	return 1.0 + float(count - 1) * maxf(0.0, coefficient)
+
+static func _weighted(value:float, mode:String, strength:float, maximum=null) -> float:
+	var result = value * strength if mode == "add" else 1.0 + (value - 1.0) * strength
+	# Negative multipliers must never become negative consumption or output.
+	if mode == "multiply": result = maxf(0.0, result)
+	if maximum != null: result = minf(float(maximum), result)
+	return result
+
+static func bonus_rules(g, bonus_id:String, count:int=1, level_override:int=-1) -> Array:
+	if not g.c.bonuses.has(bonus_id): return []
+	var content = bonus_content()
+	var level = clampi(int(g.s.get("block", {}).get("blueprint_levels", {}).get(bonus_id, 0)), 0, 2)
+	if level_override >= 0: level = clampi(level_override, 0, 2)
+	var patches:Dictionary = content.get("upgrades", {}).get(bonus_id, {})
+	var policies:Dictionary = content.get("rule_policies", {})
+	var strength = copy_strength(g, count, bonus_id)
+	var result:Array = []
+	for original in g.c.bonuses[bonus_id].get("rules", []):
+		var rule:Dictionary = original.duplicate(true)
+		var rule_id = str(rule.get("id", ""))
+		for key in patches.get(rule_id, {}):
+			var levels:Array = patches[rule_id][key]
+			rule[key] = levels[mini(level, levels.size() - 1)].duplicate(true) if levels[mini(level, levels.size() - 1)] is Dictionary else levels[mini(level, levels.size() - 1)]
+		var policy:Dictionary = policies.get(rule_id, {})
+		if str(rule.get("op", "")) == "modify" and str(rule.get("mode", "")) in ["add", "multiply"]:
+			rule.value = _weighted(float(rule.value), str(rule.mode), strength)
+		elif policy.has("value_mode"):
+			rule.value = _weighted(float(rule.value), str(policy.value_mode), strength, policy.get("maximum"))
+		elif policy.has("dictionary_values"):
+			for key in policy.dictionary_values:
+				rule.value[key] = _weighted(float(rule.value[key]), str(policy.dictionary_values[key]), strength)
+		elif policy.has("strength_field"):
+			var field = str(policy.strength_field)
+			rule[field] = _weighted(float(rule.get(field, 1.0)), "add", strength, policy.get("maximum"))
+		# Unspecified structure, booleans, fields, fixed bounds and overrides are idempotent.
+		result.append(rule)
+	return result
+
+static func duplicate_has_benefit(g, bonus_id:String, existing_count:int) -> bool:
+	if existing_count <= 0: return true
+	var benefit_ids:Array = bonus_content().get("benefit_rules", {}).get(bonus_id, [])
+	var before = bonus_rules(g, bonus_id, existing_count)
+	var after = bonus_rules(g, bonus_id, existing_count + 1)
+	for i in mini(before.size(), after.size()):
+		if str(before[i].get("id", "")) in benefit_ids and before[i] != after[i]: return true
+	return false
+
 static func ids(d:Dictionary) -> Array:
 	var a=d.keys();a.sort();return a
 static func near(s:Dictionary,a:String,b:String) -> int:
@@ -80,7 +143,7 @@ static func selections(s:Dictionary,context:Dictionary,rule:Dictionary) -> Array
 	else:
 		for id in ids(s.projects):
 			var p=s.projects[id]
-			if p.get("special",false):continue
+			if p.get("special",false) and not rule.get("include_special", false):continue
 			if ht=="organization" and (p.operator_org!=host or p.get("operator_unresolved",false)):continue
 			if any_trait(semantic_traits(s,id),context.get("eligibility",[])):sources.append(id)
 	var result={};var shape=rule.get("targets","self")
@@ -90,7 +153,7 @@ static func selections(s:Dictionary,context:Dictionary,rule:Dictionary) -> Array
 		else:
 			if s.projects[source].status!="running" or s.projects[source].paused:continue
 			for target in ids(s.projects):
-				if s.projects[target].get("special",false):continue
+				if s.projects[target].get("special",false) and not rule.get("include_special", false):continue
 				var distance=near(s,source,target)
 				if shape=="adjacent" and distance!=1:continue
 				if shape=="radius" and distance>int(rule.get("radius",2)):continue
@@ -117,11 +180,27 @@ static func compile(g) -> Dictionary:
 	for org_id in ids(s.organizations):
 		var org=c.operators[org_id]
 		contexts.append({"host_type":"organization","host":org_id,"rules":org.rules,"specificity":20,"name":org.name,"provider":org_id,"uid":"org:"+org_id,"eligibility":[]})
+	var capstone:Dictionary = s.block.get("capstone", {})
+	if not capstone.is_empty() and capstone.get("rules") is Array:
+		contexts.append({"host_type":"block","host":s.block.id,"rules":capstone.rules,"specificity":10,"name":str(capstone.get("name", "主题地标")),"provider":"","uid":str(capstone.get("id", "capstone")),"eligibility":[]})
+	# Collapse copies BEFORE reduction: x2 + two further copies becomes x2.6667,
+	# not x2*x2*x2. Different hosts remain independent sources at full first strength.
+	var bonus_groups:Dictionary = {}
 	for instance_id in ids(s.bonus_instances):
-		var instance=s.bonus_instances[instance_id]
-		if not instance.active:continue
-		var def=c.bonuses[instance.bonus_id]
-		contexts.append({"host_type":instance.host_type,"host":instance.host_id,"rules":def.rules,"specificity":{"building":30,"organization":20,"block":10}[instance.host_type],"name":def.name,"provider":instance.get("contract_org",instance.provider_org),"uid":instance_id,"eligibility":[] if instance.host_type=="building" else def.traits})
+		var instance:Dictionary=s.bonus_instances[instance_id]
+		if not instance.get("active", false) or not c.bonuses.has(instance.get("bonus_id", "")):continue
+		var key = str(instance.host_type) + "|" + str(instance.host_id) + "|" + str(instance.bonus_id)
+		if not bonus_groups.has(key): bonus_groups[key] = {"instance":instance,"uid":instance_id,"count":0}
+		bonus_groups[key].count += 1
+	for key in ids(bonus_groups):
+		var group:Dictionary = bonus_groups[key]
+		var instance:Dictionary = group.instance
+		var def:Dictionary = c.bonuses[instance.bonus_id]
+		var level = clampi(int(s.block.get("blueprint_levels", {}).get(instance.bonus_id, 0)), 0, 2)
+		var label = str(def.name)
+		if level > 0: label += " · " + str(bonus_content().grades[level])
+		if int(group.count) > 1: label += " ×%d（合成强度 %.3f；数值下限0，比例上限1）" % [int(group.count), copy_strength(g, int(group.count), str(instance.bonus_id))]
+		contexts.append({"host_type":instance.host_type,"host":instance.host_id,"rules":bonus_rules(g, str(instance.bonus_id), int(group.count)),"specificity":{"building":30,"organization":20,"block":10}[instance.host_type],"name":label,"provider":instance.get("contract_org",instance.get("provider_org", "")),"uid":group.uid,"eligibility":[] if instance.host_type=="building" else def.traits})
 	for ctx in contexts:
 		for rule in ctx.rules:
 			assert(rule.op in SUPPORTED,"Unsupported Rule operator: "+str(rule.op))

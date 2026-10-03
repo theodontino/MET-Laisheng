@@ -1,5 +1,6 @@
 extends Control
 ## 0.3.2 City Desk: concrete information entry points on the existing map.
+const Beta=preload("res://ui/beta/interface.gd")
 const W=preload("res://ui/widgets.gd")
 const C=preload("res://ui/components031/components.gd")
 const D=preload("res://ui/components031/design.gd")
@@ -32,6 +33,11 @@ var task_signature=""
 var page_signature=""
 var time_panel:PanelContainer
 var time_clock:Label
+var budget_bar:ProgressBar
+var mode_buttons={}
+var time_risk:Label
+var main_alert:Button
+var next_condition_label:Label
 var pause_button:Button
 var dt_button:Button
 var clock_row:HBoxContainer
@@ -79,19 +85,19 @@ func setup(owner):
 	app=owner;set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);mouse_filter=Control.MOUSE_FILTER_IGNORE
 	_build_time();_build_resources();_build_tasks();_build_page()
 func _build_time():
-	time_panel=W.panel(self,W.PANEL);time_panel.name="TimePanel032"
-	var style=W.box(W.PANEL,W.SOFT,10);style.content_margin_top=4;style.content_margin_bottom=4;style.content_margin_left=8;style.content_margin_right=8;time_panel.add_theme_stylebox_override("panel",style)
-	var v=W.vbox(time_panel,2);clock_row=W.hbox(v,4)
-	dt_button=W.button("",func():open("time"),false,"DT、城镇时间与精确推进");dt_button.name="DTDetails040";dt_button.custom_minimum_size=Vector2(94,40);clock_row.add_child(dt_button)
-	dt_button.add_theme_stylebox_override("normal",W.button_box(W.SOFT,W.GREEN))
-	app.dt_label=W.label("",17,W.TEXT,false);dt_button.add_child(app.dt_label);app.dt_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);app.dt_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;app.dt_label.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
-	time_clock=W.label("",14,W.MUTED,false);clock_row.add_child(time_clock)
-	pause_button=W.button("暂停",toggle_pause);pause_button.name="Pause032";pause_button.custom_minimum_size.x=68;clock_row.add_child(pause_button)
-	time_actions=W.hbox(v,6)
-	app.checkpoint_button=W.primary(W.button("下一变化",app.advance_checkpoint));app.checkpoint_button.name="Advance040";app.checkpoint_button.custom_minimum_size=Vector2(96,40);clock_row.add_child(app.checkpoint_button)
-	app.pulse_buttons=[]
-	for h in [.5,1.,3.]:
-		var b=W.button("+%.1fh"%h,func():advance(h));b.custom_minimum_size.x=60;b.name="Advance"+str(h);time_actions.add_child(b);app.pulse_buttons.append([b,h])
+	time_panel=W.panel(self,W.PANEL);time_panel.name="BetaTimePanel"
+	var style=W.box(W.PANEL,W.SOFT,10);style.content_margin_top=5;style.content_margin_bottom=5;style.content_margin_left=8;style.content_margin_right=8;time_panel.add_theme_stylebox_override("panel",style)
+	var v=W.vbox(time_panel,4);clock_row=W.hbox(v,5)
+	dt_button=W.button("",func():open("time"),false,"高速发展预算、来生历与时间规则");dt_button.custom_minimum_size=Vector2(100,40);clock_row.add_child(dt_button)
+	app.dt_label=W.label("",16,W.GREEN,false);dt_button.add_child(app.dt_label);app.dt_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);app.dt_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;app.dt_label.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
+	time_clock=W.label("",14,W.MUTED,false);time_clock.size_flags_horizontal=Control.SIZE_EXPAND_FILL;clock_row.add_child(time_clock)
+	pause_button=W.button("暂停",toggle_pause);pause_button.name="BetaPause";pause_button.custom_minimum_size.x=58;clock_row.add_child(pause_button)
+	app.checkpoint_button=W.primary(W.button("停止推进",func():Beta.set_mode(app,"normal")));app.checkpoint_button.name="BetaStop";app.checkpoint_button.custom_minimum_size=Vector2(84,40);clock_row.add_child(app.checkpoint_button)
+	budget_bar=W.bar(1);budget_bar.custom_minimum_size.y=4;v.add_child(budget_bar)
+	time_actions=W.hbox(v,4);app.pulse_buttons=[]
+	for mode in Beta.mode_rows(app.game):
+		var id=str(mode[0]);var button=W.button(str(mode[1]),func():Beta.set_mode(app,id));button.name="BetaMode_"+id;button.custom_minimum_size=Vector2(0,34);button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;time_actions.add_child(button);mode_buttons[id]=button
+	time_risk=W.label("",13,W.MUTED);v.add_child(time_risk)
 func _build_resources():
 	resource_panel=W.panel(self);resource_panel.name="ResourceDock032"
 	var st=W.box(W.PANEL,W.OUTLINE,7);st.content_margin_left=5;st.content_margin_right=5;st.content_margin_top=4;st.content_margin_bottom=4;resource_panel.add_theme_stylebox_override("panel",st)
@@ -122,6 +128,8 @@ func _build_tasks():
 	var summary_hover=W.button_box(W.PANEL,W.GREEN,6);summary_hover.content_margin_left=5;summary_hover.content_margin_right=5;summary_hover.content_margin_top=2;summary_hover.content_margin_bottom=2;task_summary.add_theme_stylebox_override("hover",summary_hover);h.add_child(task_summary)
 	task_count=W.label("待领 0",13,W.MUTED,false);task_count.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;task_count.vertical_alignment=VERTICAL_ALIGNMENT_CENTER;task_count.custom_minimum_size.x=56;h.add_child(task_count)
 	task_toggle=W.button("",toggle_rail,false,"展开委托历史");task_toggle.name="TaskRailToggle032";task_toggle.icon=Art.icon("ledger",W.TEXT);task_toggle.expand_icon=true;task_toggle.add_theme_constant_override("icon_max_width",20);task_toggle.custom_minimum_size=Vector2(36,32);h.add_child(task_toggle)
+	next_condition_label=W.label("",13,W.MUTED);task_root.add_child(next_condition_label)
+	main_alert=W.button("",func():app.on_beta_source(app.feedback_layer.summary().get("main",{})));main_alert.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;main_alert.custom_minimum_size.y=38;task_root.add_child(main_alert);main_alert.hide()
 	task_scroll=ScrollContainer.new();task_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;task_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;task_root.add_child(task_scroll)
 	task_list=W.vbox(task_scroll,4);task_list.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 func _build_page():
@@ -144,6 +152,7 @@ func is_open() -> bool:return kind!=""
 func is_fullscreen() -> bool:return is_open() and kind_is_fullscreen
 func blocks_time() -> bool:return is_open()
 func open(view:String,context:String=""):
+	app.flush_beta_time()
 	if app.game.s.phase not in ["play","failed"]:app.message("先选择地区并安顿居民。");return
 	if not is_open():
 		previous_layer=app.map_view.layer;previous_selected=app.selected_project;previous_manual_layer=app.manual_layer
@@ -187,79 +196,65 @@ func restore_scroll(value:int,expected:String) -> void:
 	await get_tree().process_frame
 	if is_open() and page_signature==expected:scroll.scroll_vertical=value
 func close():
+	app.reset_beta_clock()
 	if not is_open():return
 	var was=kind;kind="";arg="";subtopic="";detail_id="";nav_stack=[];page.hide();page_signature="";pending_policy="";policy_buttons={};policy_prediction={}
 	if was in ["resource","population"]:
 		app.map_view.layer=previous_layer;app.manual_layer=previous_manual_layer;app.map_view.invalidate()
 	app.refresh();app.play_cue("back")
 func toggle_pause():
-	app.game.Civic.ensure(app.game)
-	var paused=not bool(app.game.s.settings.get("user_paused",false));app.game.s.settings.user_paused=paused
-	app.game.log_event("pause" if paused else "resume",{},"手动暂停城市" if paused else "恢复城市运行")
+	app.flush_beta_time()
+	var g=app.game;g.Civic.ensure(g)
+	if bool(g.s.settings.get("user_paused",false)):
+		if app.beta_mandatory_pending():app.open_beta_settlement();return
+		g.s.settings.user_paused=false;g.s.beta_time.pause_reason=""
+	else:g.s.settings.user_paused=true;g.s.beta_time.pause_reason="manual"
 	app.save_game();update_hud()
 	if kind=="time":render(true)
-	app.message("城市已暂停；系统时间继续，未使用的DT保留。" if paused else "手动暂停已解除。查看/比较页面关闭后恢复自然运行。")
-func advance(h:float):
-	if app.game.s.settings.get("user_paused",false):app.message("请先点继续，再推进城市。");return
-	if app.decision_kind!="":app.message("请先结束方案比较。");return
-	if is_open():close()
-	app.do_pulse(h)
+	app.message("城市已暂停。" if g.s.settings.user_paused else "城市已继续；关闭查看页面后推进时间。")
+func advance(_months:float):
+	Beta.set_mode(app,"advance")
 func toggle_rail():
 	rail_expanded=not rail_expanded;task_signature=""
 	app.display_settings.task_rail_expanded=rail_expanded;app.save_display_settings();update_hud();app.layout_ui()
 func update_hud():
 	if app==null or app.game.s.is_empty():return
-	var g=app.game;var paused=bool(g.s.settings.get("user_paused",false))
-	var dt=Time.get_datetime_dict_from_system();var stamp="%02d:%02d:%02d"%[dt.hour,dt.minute,dt.second]
-	time_clock.text=(stamp.left(5)+"\n城 %.1fh"%float(g.s.local_hours)) if app.compact else "系统 "+stamp+"\n城镇 %.1fh"%float(g.s.local_hours)
-	if is_instance_valid(detail_clock):detail_clock.text=stamp
-	time_clock.tooltip_text="设备系统时间 %04d-%02d-%02d %s\n城镇时间只随游戏结算推进。"%[dt.year,dt.month,dt.day,stamp]
-	pause_button.text="" if app.compact else ("继续" if paused else "暂停")
-	pause_button.icon=Art.icon("play" if paused else "pause",W.TEXT) if app.compact else null;pause_button.expand_icon=true;pause_button.add_theme_constant_override("icon_max_width",22)
-	pause_button.tooltip_text="手动暂停已开启" if paused else ("查看或比较中，本地时间自动暂停" if blocks_time() or app.decision_kind!="" else "暂停城市的自然结算与手动推进")
-	app.checkpoint_button.disabled=g.s.phase!="play" or g.s.dt<.01 or paused or app.decision_kind!=""
-	for pair in app.pulse_buttons:pair[0].disabled=paused or app.decision_kind!=""
+	var g=app.game;var paused=bool(g.s.settings.get("user_paused",false));var state=g.s.get("beta_time",{});var a=Beta.acceleration(g)
+	time_clock.text=(Beta.date(float(state.get("local_elapsed_seconds",0))).trim_prefix("来生 ") if app.compact else Beta.date(float(state.get("local_elapsed_seconds",0))))+"\n"+("已暂停" if paused or blocks_time() or app.decision_kind!="" else Beta.mode_name(g)+" ×%.0f"%a)
+	pause_button.text="" if app.compact else ("继续" if paused else "暂停");pause_button.icon=Art.icon("play" if paused else "pause",W.TEXT) if app.compact else null;pause_button.expand_icon=true;pause_button.add_theme_constant_override("icon_max_width",24);pause_button.tooltip_text="暂停与决策期间城市、外贸均冻结"
+	app.checkpoint_button.text="■" if app.compact else "停止推进";app.checkpoint_button.tooltip_text="停止推进，返回常速"
+	app.checkpoint_button.visible=a>1;app.checkpoint_button.disabled=g.s.phase!="play"
+	budget_bar.value=clampf(float(g.s.dt)/float(g.c.beta.time.initial_dt),0,1);budget_bar.tooltip_text="剩余 %.2f DT · 可额外推进 %.2f 年"%[float(g.s.dt),float(g.s.dt)*Beta.dt_seconds(g)/Beta.YEAR]
+	for id in mode_buttons:
+		var button=mode_buttons[id];button.disabled=(float(g.s.dt)<=0 and id!="normal") or app.decision_kind!=""
+		button.add_theme_stylebox_override("normal",W.button_box(W.SOFT,W.GREEN if str(state.get("mode","normal"))==id else W.SOFT))
+	var forecast=Beta.risk(g,Beta.risk_snapshot(app))
+	var local=float(state.get("local_elapsed_seconds",0));var next_year=(Beta.YEAR-fmod(local,Beta.YEAR))/a
+	time_risk.text=str(forecast.text) if a>1 else "资源详情 › 点击物资"
+	time_risk.tooltip_text="下一年约 "+Beta.seconds_text(next_year)+"；剩余额外预算 %.2f 年"%(float(g.s.dt)*Beta.dt_seconds(g)/Beta.YEAR)
+	if a>1:
+		time_risk.text+="\n年度约 "+Beta.seconds_text(next_year)+" · DT %.3f/分"%((a-1)/Beta.dt_seconds(g)*60)
 	for id in resource_buttons:
-		var n=resource_buttons[id]
-		var quantity=D.quantity(id)
+		var n=resource_buttons[id];var quantity=D.quantity(id);var x=M.resource(g,app.shot,id)
 		n.head.add_theme_color_override("font_color",Color(quantity.ink));n.icon.texture=Art.icon(str(quantity.icon),Color(quantity.ink))
-		if id=="energy":
-			var x=M.resource(g,app.shot,id);n.head.text="电力 %.1f"%x.supply;n.tail.text="需 %.1f"%x.need;n.button.tooltip_text="供给 %.1f · 需求 %.1f；点击查看供电与申请来源。"%[x.supply,x.need]
-		else:
-			var x=M.resource(g,app.shot,id);n.head.text="%s %.0f"%[x.name,x.stock];n.tail.text=("弃 %.1f/h"%x.lost if x.lost>.1 else "%+.1f/h"%x.net)+"  ›"
-			n.button.tooltip_text=x.status+"；点击查看产/用/弃与来源。"
-	var mission_state=g.s.block.get("commissions",{});var mission=mission_state.get("active",{});var pending=str(mission_state.get("pending_reward",""));var commission_name=""
-	for def in g.c.v040.get("commissions",[]):
-		if str(def.get("id",""))==str(mission.get("id","")):commission_name=str(def.get("name",def.id));break
-	var city_goal:Dictionary=g.s.get("city_goal",{});var route=str(city_goal.get("route","community"));var city_goal_name=str(g.c.data.get("city_goals",{}).get(route,{}).get("name","街区目标"))
-	var claimable=1 if pending!="" else 0
-	var target_name=("委托完成 · 领取奖励" if pending!="" else (commission_name if not mission.is_empty() and commission_name!="" else ("进行中的委托" if not mission.is_empty() else ("街区目标已达成" if city_goal.get("completed",false) else city_goal_name))))
-	task_summary.text=target_name;task_summary.tooltip_text="查看："+target_name+" · 委托与地区目标历史";task_count.text="待领 %d"%claimable;task_count.add_theme_color_override("font_color",W.GOLD if claimable>0 else W.MUTED)
-	task_toggle.tooltip_text="收起委托历史" if rail_expanded else "展开委托历史"
-	var sig=JSON.stringify([mission_state,city_goal,rail_expanded,app.compact])
+		if id=="energy":n.head.text="电力 %.1f"%x.supply;n.tail.text="需 %.1f"%x.need
+		else:n.head.text="%s %.0f"%[x.name,x.stock];n.tail.text=("弃 %.1f/月"%x.lost if x.lost>.1 else "%+.1f/月"%x.net)+"  ›"
+		n.button.tooltip_text=str(x.get("status","当前实际供电"))+"；点击查看供给、消耗与来源。"
+	var warning=app.feedback_layer.summary().get("main",{}) if app.feedback_layer!=null else {}
+	main_alert.visible=not warning.is_empty();main_alert.text=str(warning.get("text",""));main_alert.tooltip_text="定位实际来源"
+	var theme=g.Themes.view(g);var queue=Beta.pending(g);var claimable=queue.size()
+	var name=str(theme.get("name","选择委任主题"));task_summary.text=name+" · "+str(theme.get("stage_name",""));task_count.text="待领 %d"%claimable
+	task_summary.tooltip_text="当前主题、下一条件、事件与奖励";task_count.add_theme_color_override("font_color",W.GOLD if claimable>0 else W.MUTED)
+	var next_condition="主题已完成" if theme.get("completed",false) else "选择这座城市的发展方向"
+	for goal in theme.get("goals",[]):
+		if not goal.get("met",false):next_condition=str(goal.get("label",""))+" %.1f / %.1f"%[float(goal.get("value",0)),float(goal.get("target",0))];break
+	next_condition_label.text=next_condition
+	var sig=JSON.stringify([name,next_condition,claimable,rail_expanded,app.compact,theme.get("events",[])])
 	active_task_count=claimable
 	if sig!=task_signature:
-		task_signature=sig;W.clear(task_list)
-		if pending!="":
-			task_list.add_child(W.button("领取一次委托奖励  ›",func():open("tasks")))
-		elif not mission.is_empty():
-			var button=W.button((commission_name if commission_name!="" else str(mission.get("id","主委托"))+"  ›"),func():open("tasks"));button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;task_list.add_child(button)
-			var summary=""
-			for def in g.c.v040.get("commissions",[]):
-				if str(def.get("id",""))!=str(mission.get("id","")):continue
-				var parts=[]
-				for goal in def.get("goals",[]):
-					var key=str(goal.get("metric",""));parts.append(str(goal.get("help",key)))
-				summary=" · ".join(parts.slice(0,2));break
-			if summary!="":task_list.add_child(W.label(summary,13,W.MUTED))
-		else:task_list.add_child(W.label("当前没有主委托。",14,W.MUTED))
-		var completed:Array=mission_state.get("completed",[])
-		for i in range(maxi(0,completed.size()-3),completed.size()):
-			var completed_id=str(completed[i]);var completed_name=completed_id
-			for def in g.c.v040.get("commissions",[]):
-				if str(def.get("id",""))==completed_id:completed_name=str(def.get("name",completed_id));break
-			task_list.add_child(W.label("✓ "+completed_name,13,W.MUTED,false))
-		task_list.add_child(W.button("全部委托与地区目标  ›",func():open("tasks")))
+		task_signature=sig;W.clear(task_list);task_list.add_child(W.button("城市消息 ›",func():app.open_city_messages()))
+		if claimable>0:task_list.add_child(W.button("领取已保存奖励 ›",func():open("tasks")))
+		elif not theme.get("events",[]).is_empty():task_list.add_child(W.button("处理主题事件 ›",func():open("tasks")))
 	if is_open() and kind not in ["policies","time"]:
 		var version=app.planner.version(g)+":"+kind+":"+arg+":"+subtopic+":"+detail_id+":"+task_tab
 		if page_signature!=version:render(true)
@@ -268,31 +263,25 @@ func relayout(area:Rect2):
 	var tw=app.time_hud_width()
 	task_summary.add_theme_font_size_override("font_size",int(14*scale));task_count.add_theme_font_size_override("font_size",int(13*scale))
 	var wide_desktop=not compact and scale<=1.2 and area.size.x>=1280 and area.size.y>=800
-	if compact:
-		var now=Time.get_datetime_dict_from_system();var stamp="%02d:%02d:%02d"%[now.hour,now.minute,now.second]
-		time_clock.text=stamp.left(5)+"\n城 %.1fh"%float(app.game.s.local_hours)
-		pause_button.text="";pause_button.icon=Art.icon("play" if app.game.s.settings.get("user_paused",false) else "pause",W.TEXT);pause_button.expand_icon=true
-		app.checkpoint_button.text="推进";app.checkpoint_button.tooltip_text="推进到下一个城市变化"
-	else:
-		pause_button.text="继续" if app.game.s.settings.get("user_paused",false) else "暂停";pause_button.icon=null
-		app.checkpoint_button.text="下一变化";app.checkpoint_button.tooltip_text="推进到下一个城市变化"
-	time_actions.visible=false
+	time_actions.visible=true
 	dt_button.custom_minimum_size=Vector2((104 if scale>1.2 else 82) if compact else 94,40)
 	time_clock.visible=true
 	pause_button.custom_minimum_size=Vector2((44 if compact else (64 if scale>1.2 else 58)),40)
-	app.checkpoint_button.custom_minimum_size=Vector2(80 if compact else 98,40)
+	app.checkpoint_button.custom_minimum_size=Vector2(44 if compact else 98,40)
 	var compact_time_width=minf(maxf(0.,area.size.x),maxf(tw,time_panel.get_combined_minimum_size().x)) if compact else tw
-	time_panel.position=Vector2(area.end.x-compact_time_width,area.position.y);time_panel.size=Vector2(compact_time_width,60 if compact else 68)
+	time_panel.position=Vector2(area.end.x-compact_time_width,area.position.y);time_panel.size=Vector2(compact_time_width,150 if Beta.acceleration(app.game)>1 else 128)
 	if wide_desktop:
-		time_panel.size=Vector2(tw,60);time_panel.position=Vector2(area.end.x-tw-16,area.end.y-76)
+		time_panel.size=Vector2(tw,maxf(188 if Beta.acceleration(app.game)>1 else 128,time_panel.get_combined_minimum_size().y));time_panel.position=Vector2(area.end.x-tw-16,area.end.y-time_panel.size.y-16)
 	for pair in app.pulse_buttons:pair[0].custom_minimum_size.x=64 if scale<=1 else 76
 	var resource_w=minf(area.size.x*.55,620.*(1.15 if scale>1 else 1.))
 	var resource_h=78.
-	resource_grid.visible=not compact;compact_resource.visible=compact
+	resource_grid.visible=false;compact_resource.visible=true
+	compact_resource.text="物资 · "+str(Beta.risk(app.game,Beta.risk_snapshot(app)).get("name","稳定"))
+	resource_w=minf(area.size.x*.48,280.*scale);resource_h=56
 	if compact:resource_w=maxf(104 if scale<=1.2 else 140,compact_resource.get_combined_minimum_size().x+12.);resource_h=56
 	if wide_desktop:
-		resource_w=maxf(0,area.size.x-596);resource_h=64
-		resource_panel.position=Vector2(area.position.x+580,area.position.y+14)
+		resource_w=minf(280.*scale,area.size.x*.36);resource_h=64
+		resource_panel.position=Vector2(area.end.x-resource_w-16,area.position.y+14)
 	else:resource_panel.position=Vector2(area.end.x-resource_w-8,area.end.y-resource_h-8)
 	resource_panel.size=Vector2(resource_w,resource_h)
 	for id in resource_buttons:
@@ -305,8 +294,8 @@ func relayout(area:Rect2):
 	var task_width=minf(maxf(0.,area.size.x-16.),248.+maxf(0.,scale-1.)*60.)
 	task_scroll.visible=expanded;task_count.visible=true
 	if wide_desktop:task_panel.position=Vector2(area.end.x-task_width-16,area.position.y+94)
-	else:task_panel.position=Vector2(area.end.x-task_width-8,area.position.y+top+12)
-	task_panel.size=Vector2(task_width,80 if expanded else 56)
+	else:task_panel.position=Vector2(area.end.x-task_width-8,maxf(area.position.y+top+12,time_panel.position.y+time_panel.get_combined_minimum_size().y+12) if compact else area.position.y+top+12)
+	task_panel.size=Vector2(task_width,(160 if expanded else 88)+(main_alert.get_combined_minimum_size().y+6 if main_alert.visible else 0))
 	task_panel.visible=not app.screenshot_mode and app.game.s.phase=="play" and (not is_fullscreen() or wide_desktop) and not has_inspector and not is_open()
 	if is_open():
 		if kind_is_fullscreen:
@@ -402,7 +391,7 @@ func locate(id:String):
 	if not g.s.projects.has(id) or g.s.projects[id].get("special",false):app.message("此对象在地图外；已计入总量。详情可在表中查看。");return
 	app.selected_project=id;app.map_view.selected_project=id;app.map_view.focus_tile(g.s.projects[id].tile);app.map_view.invalidate()
 func render_time():
-	Topics040.render_time(self)
+	Beta.render_time(self)
 
 func render_policies():
 	Topics040.render_policies(self)
@@ -429,7 +418,7 @@ func update_policy_footer():
 	primary.disabled=updating_policy or not policy_prediction.get("ok",false) or g.s.currency<cost_value or policy_version!=app.planner.version(g)
 	if updating_policy:footer_text.text="正在计算…";return
 	if not policy_prediction.get("ok",false):footer_text.text="预测失败："+str(policy_prediction.get("error","请重新选择"));return
-	footer_text.text=("收支 %+.1f/h · 变化 %+.1f/h"%[policy_prediction.cashflow,policy_prediction.delta]) if app.compact else "预计收支 %+.2f/h · 比不更换 %+.2f/h · 只消耗 %.0f 通货"%[policy_prediction.cashflow,policy_prediction.delta,cost_value]
+	footer_text.text=("收支 %+.1f/月 · 变化 %+.1f/月"%[policy_prediction.cashflow,policy_prediction.delta]) if app.compact else "预计收支 %+.2f/月 · 比不更换 %+.2f/月 · 只消耗 %.0f 通货"%[policy_prediction.cashflow,policy_prediction.delta,cost_value]
 	if g.s.currency<cost_value:footer_text.text+=" · 预算不足"
 func apply_policy():
 	var g=app.game

@@ -1,4 +1,4 @@
-# MET 0.3.0 continuation contract
+# MET Laisheng Beta continuation contract
 
 ## Project vision and scope
 

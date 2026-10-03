@@ -24,16 +24,17 @@ static func tick(g,h:float) -> void:
 	for row in queue(g):
 		if row.paused:continue
 		var p=g.s.projects[row.id];var job=p.upgrade_job if row.upgrade else p.job
-		var rate=float(job.material)/maxf(.000001,float(job.work));var work=minf(remaining,float(job.work))
+		var rate=float(job.material)/maxf(1e-15,float(job.work));var work=minf(remaining,float(job.work))
 		if rate>0:work=minf(work,g.inventory_total("material")/rate)
 		var material=work*rate
 		if material>0:g.withdraw_stock("material",material)
 		job.work=maxf(0,float(job.work)-work);job.material=maxf(0,float(job.material)-material)
 		remaining-=work;used+=work;material_used+=material
-		if not row.upgrade:p.usage=work/maxf(.000001,h*capacity(g));p.bottleneck="施工中" if work>0 else "等待施工能力或材料"
-		if float(job.work)<.000001:g.Development.complete(g,row.id)
+		if not row.upgrade:p.usage=work/maxf(1e-15,h*capacity(g));p.bottleneck="施工中" if work>0 else "等待施工能力或材料"
+		if float(job.work)<=1e-10:g.Development.complete(g,row.id)
 	g.s.block.construction_last={"cp":used,"material":material_used,"hours":h}
 	if g.s.audit.get("resources",{}).has("material"):
 		var a=g.s.audit.resources.material;a.consumed+=material_used;a.after=g.inventory_total("material");a.error=float(a.before)+float(a.produced)-float(a.consumed)-float(a.lost)-float(a.after)
 		g.s.metrics.flows.material=float(g.s.metrics.flows.get("material",0))-material_used/h
-	g.refresh_metrics()
+	# Simulation refreshes once after this structural phase, before trade.
+	# Recompiling here as well repeated a full city scan on every tiny tick.

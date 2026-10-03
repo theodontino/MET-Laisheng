@@ -2,10 +2,10 @@ extends RefCounted
 ## Persistent, bounded civic history and the lifecycle of EXISTING city outcomes.
 ## This module does not generate resources or invent retrospective history.
 const OUTCOMES={
-	"food":{"name":"稳住粮食供给","desc":"居民口粮满足99%，粮食不再净减少，并经营至少0.5小时。","money":35.,"dt":2.},
-	"housing":{"name":"安顿新邻居","desc":"安置至少24位居民，待安置人口少于0.1。","money":35.,"dt":2.},
-	"services":{"name":"接通生活服务","desc":"医疗和购物实际覆盖分别达到65%。","money":40.,"dt":2.},
-	"manufacturing":{"name":"第一批生活用品","desc":"让真实制成品库存达到6。","money":30.,"dt":1.}}
+	"food":{"name":"稳住粮食供给","desc":"居民口粮满足99%，粮食不再净减少，并经营至少0.5来生月。","money":35.,"dt":0.},
+	"housing":{"name":"安顿新邻居","desc":"安置至少24位居民，待安置人口少于0.1。","money":35.,"dt":0.},
+	"services":{"name":"接通生活服务","desc":"医疗和购物实际覆盖分别达到65%。","money":40.,"dt":0.},
+	"manufacturing":{"name":"第一批生活用品","desc":"让真实制成品库存达到6。","money":30.,"dt":0.}}
 const ROUTES=["community","delivery","renewal"]
 const HISTORY_LIMIT=720
 const ACTION_LIMIT=300
@@ -42,9 +42,9 @@ static func cycle(g,h:float,previous_population:float,arrivals:float) -> void:
 	ensure(g)
 	var j=g.s.civic032;var m=g.s.metrics;var count=float(m.get("population",0))
 	var change=count-previous_population
-	j.last_population_rate=change/maxf(.000001,h)
-	j.last_arrival_rate=arrivals/maxf(.000001,h)
-	j.last_birth_rate=(change-arrivals)/maxf(.000001,h)
+	j.last_population_rate=change/maxf(1e-15,h)
+	j.last_arrival_rate=arrivals/maxf(1e-15,h)
+	j.last_birth_rate=(change-arrivals)/maxf(1e-15,h)
 	j.last_cycle_h=h
 	var row={"h":float(g.s.local_hours),"tick":int(g.s.simulation_tick),"span":h,"balance":float(g.s.currency),"dt":float(g.s.dt),"income":float(m.get("income",0)),"upkeep":float(m.get("upkeep",0)),"net":float(m.get("cashflow",0)),"population":count,"population_rate":j.last_population_rate,"known":true}
 	j.history.append(row)
@@ -123,7 +123,7 @@ static func task_rows(g) -> Array:
 				var med=g.Progress.service_ratio(g,"medical");var shopping=g.Progress.service_ratio(g,"commercial")
 				progress=minf(1,minf(med,shopping)/.65);reading="医疗 %.0f%% · 购物 %.0f%% / 目标65%%"%[100*med,100*shopping]
 			"manufacturing":progress=minf(1,g.inventory_total("goods")/6.);reading="制成品 %.1f / 6"%g.inventory_total("goods")
-		rows.append({"id":id,"name":def.name,"description":def.desc,"status":state,"progress":progress,"reading":reading,"reward":"%.0f通货 · %.0fDT · 1次地区方案机会"%[def.money,def.dt],"chapter":false})
+		rows.append({"id":id,"name":def.name,"description":def.desc,"status":state,"progress":progress,"reading":reading,"reward":"历史城市目标（本版奖励由年度与委任提供）","chapter":false})
 	for route in ROUTES:
 		var active=str(goal.get("route","community"))==route and bool(j.get("route_active",true))
 		var status="active" if active else "available"

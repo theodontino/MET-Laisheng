@@ -5,7 +5,32 @@ var cache={}
 var token=""
 var lru:Array=[]
 var timings:Array=[]
-func version(g) -> String:return str(g.revision)+":"+str(g.s.simulation_tick)+":"+str(g.s.projects.size())
+func version(g) -> String:
+	# Revision invalidates geometry/rules and committed simulation. Public commands
+	# also change mode, orders, cash or stock between settlements; include these
+	# real inputs rather than stale last-tick metrics or an ever-growing journal.
+	# Per-building stocks matter: equal city totals can have different access.
+	var projects:Array=[]
+	for id in R.ids(g.s.get("projects", {})):
+		var p:Dictionary=g.s.projects[id]
+		projects.append([id,p.get("inventory",{}),p.get("retained_storage",{}),
+			p.get("status",""),p.get("paused",false),p.get("work_priority",0),
+			p.get("job",{}),p.get("upgrade_job",{}),p.get("usage",0),
+			p.get("next_heat_bonus",0),p.get("next_heat_credit",0)])
+	var block:Dictionary=g.s.get("block",{})
+	var orders:Array=[]
+	for order in block.get("trade_orders",[]):
+		if str(order.get("status","")) in ["open","partial"]:
+			orders.append([order.get("id",""),order.get("resource",""),order.get("side",""),
+				order.get("remaining",0),order.get("limit_price",0),order.get("sequence",0)])
+	var state=[g.get_instance_id(),g.c.get_instance_id(),g.revision,g.s.get("simulation_tick",0),
+		g.s.get("phase",""),g.s.get("currency",0),g.s.get("dt",0),g.s.get("local_hours",0),
+		g.s.get("beta_time",{}).get("mode","normal"),g.s.get("goods_active",false),
+		g.s.get("goods_requested_at",-1),g.s.get("migration_paused",false),projects,orders,
+		block.get("market_state",{}),block.get("construction_capacity",0),
+		block.get("policies",{}),block.get("blueprint_levels",{}),block.get("capstone",{}),
+		g.c.balance.get("tick_hours",0),g.c.beta.get("external_market_candidate",{})]
+	return JSON.stringify(state,"",true,true).sha256_text()
 func copy_game(g):
 	var other=g.get_script().new();other.c=g.c;other.s=g.s.duplicate(true);other.preview_mode=true;other.refresh_metrics();return other
 func reset_for(g) -> void:

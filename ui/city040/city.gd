@@ -1,5 +1,6 @@
 extends RefCounted
 ## 0.4 city actions on the existing map. All displayed state comes from Game snapshots/APIs.
+const Beta=preload("res://ui/beta/interface.gd")
 const W=preload("res://ui/widgets.gd")
 const C=preload("res://ui/components031/components.gd")
 const D=preload("res://ui/components031/design.gd")
@@ -29,7 +30,8 @@ static func render(d,section:String="home") -> void:
 		"permits":_permit_wallet(d)
 		"commissions":render_commissions(d)
 		"market":_market(d)
-		"block":_block(d)
+		"block":Beta.render_ending(d)
+		"settlement":Beta.render_settlement(d)
 		_: 
 			var bits=section.split(":")
 			if bits[0]=="upgrade" and bits.size()>1:_upgrade(d,bits[1])
@@ -44,10 +46,10 @@ static func _home(d) -> void:
 	d.title.text="城市发展";d.subtitle.text="从三种起点建筑成长，再处理建设、委托和街区目标。"
 	var stats=g.s.get("metrics",{})
 	var row=GridContainer.new();row.columns=1 if d.app.compact else 3;row.add_theme_constant_override("h_separation",10);row.add_theme_constant_override("v_separation",10);d.body.add_child(row)
-	for pair in [["人口","%.0f"%float(stats.get("population",0))],["收支","%+.1f/h"%float(stats.get("cashflow",0))],["施工能力","%.1f CP/h"%float(g.Construction.capacity(g))]]:
+	for pair in [["人口","%.0f"%float(stats.get("population",0))],["收支","%+.1f/月"%float(stats.get("cashflow",0))],["施工能力","%.1f CP/月"%float(g.Construction.capacity(g))]]:
 		var card=_group(row,pair[0]);card.add_child(W.label(pair[1],24,W.GREEN))
 	var links=GridContainer.new();links.columns=1 if d.app.compact else 2;links.add_theme_constant_override("h_separation",10);links.add_theme_constant_override("v_separation",10);d.body.add_child(links)
-	for pair in [["development","建筑升级","查看成长路线、预览能力变化并开始升级。"],["construction","施工队列","查看共享施工能力、材料进度并调整优先级。"],["permits","部署许可","查看委托获得的许可并安装到空槽。"],["commissions","委托与目标","处理一个主委托、领取一次三选一奖励并查看历史。"],["market","贸易订单","查看外部报价、创建订单和核对执行记录。"],["block","街区目标与命名","继续经营当前街区，并在目标达成后为街区命名。"]]:
+	for pair in [["development","建筑升级","查看成长路线、预览能力变化并开始升级。"],["construction","施工队列","查看共享施工能力、材料进度并调整优先级。"],["permits","部署许可","查看委托获得的许可并安装到空槽。"],["commissions","委托与目标","选择发展主题、处理事件、领取年度与主题奖励。"],["market","贸易订单","查看外部报价、创建订单和核对执行记录。"],["block","街区目标与命名","继续经营当前街区，并在DT归零后为街区命名。"]]:
 		var item=pair;var card=_group(links,item[1]);card.add_child(W.label(item[2],14,W.MUTED));card.add_child(W.button("打开",func():d.navigate("city040",item[0])))
 	var add=_group(d.body,"新建起点建筑")
 	add.add_child(W.label("农居、邻里中心、作坊是当前街区可新建的三种 Tier 1 起点。专业建筑通过升级获得。",15,W.MUTED))
@@ -103,7 +105,7 @@ static func _upgrade_preview(d,id:String,node:String) -> void:
 			var arrow_cell=CenterContainer.new();arrow_cell.custom_minimum_size=Vector2(32,32);arrow_cell.size_flags_horizontal=Control.SIZE_SHRINK_CENTER;arrow_cell.size_flags_vertical=Control.SIZE_SHRINK_CENTER;comparison.add_child(arrow_cell)
 			var arrow=W.label("→",24,W.GREEN);arrow.size_flags_horizontal=Control.SIZE_SHRINK_CENTER;arrow_cell.add_child(arrow)
 	var costs=GridContainer.new();costs.columns=2 if d.app.compact or W.text_scale>1.2 else 4;costs.add_theme_constant_override("h_separation",8);costs.add_theme_constant_override("v_separation",8);costs.size_flags_horizontal=Control.SIZE_EXPAND_FILL;d.body.add_child(costs)
-	for metric in [["造价","%.0f 通货"%float(preview.cost)],["材料","%.0f"%float(preview.material)],["施工量","%.1f CP"%float(preview.construction_required)],["预计工期","%.1f 小时"%float(preview.eta)]]:
+	for metric in [["造价","%.0f 通货"%float(preview.cost)],["材料","%.0f"%float(preview.material)],["施工量","%.1f CP"%float(preview.construction_required)],["预计工期","%.1f 来生月"%float(preview.eta)]]:
 		var cell=metric;var box=_group(costs,str(cell[0]),W.PANEL);box.add_child(W.label(str(cell[1]),19,W.TEXT))
 	var outcomes:Container=VBoxContainer.new() if W.text_scale>1.2 else HBoxContainer.new();outcomes.add_theme_constant_override("separation",8);outcomes.size_flags_horizontal=Control.SIZE_EXPAND_FILL;d.body.add_child(outcomes)
 	var changes:Array=[];var seen={}
@@ -144,7 +146,7 @@ static func _format_value(value) -> String:
 
 static func _construction(d) -> void:
 	var g=d.app.game;var rows=g.Construction.queue(g)
-	d.title.text="施工队列";d.subtitle.text="共享施工能力 %.1f CP/h · 进度和材料在真实推进中结算。"%float(g.Construction.capacity(g))
+	d.title.text="施工队列";d.subtitle.text="共享施工能力 %.1f CP/月 · 进度和材料在真实推进中结算。"%float(g.Construction.capacity(g))
 	if rows.is_empty():d.body.add_child(W.label("当前没有施工中的建筑或升级。",17,W.MUTED));return
 	for row in rows:
 		var item=row;var card=_group(d.body,str(row.name)+(" · 升级" if row.upgrade else " · 新建"))
@@ -164,9 +166,9 @@ static func _priority_name(value:int) -> String:
 	return {-1:"低",0:"普通",1:"优先"}.get(value,"普通")
 
 static func _permits(d) -> void:
-	var g=d.app.game;d.title.text="部署许可";d.subtitle.text="每张许可只提供一次安装机会；卸载后不会退回。"
+	var g=d.app.game;d.title.text="部署许可";d.subtitle.text="每份副本只提供一次安装机会；卸载后不会退回。"
 	var ids=_project_ids(g)
-	if ids.is_empty():d.body.add_child(W.label("先建成一处建筑，再查看它可安装的许可。",16,W.MUTED));return
+	if ids.is_empty():d.body.add_child(W.label("先建成一处建筑，再查看它可安装的副本。",16,W.MUTED));return
 	for id in ids:
 		var p=g.s.projects[id];var card=_group(d.body,g.project_name(id)+" · "+Art.stage_name(int(p.get("tier",1))))
 		var slots=[]
@@ -175,7 +177,7 @@ static func _permits(d) -> void:
 		card.add_child(W.button("查看可安装许可",func():d.push_section("permits",id),slots.is_empty()))
 
 static func _permit_wallet(d) -> void:
-	var g=d.app.game;d.title.text="部署许可";d.subtitle.text="从委托奖励中选择许可，再安装到适用建筑、运营组织或当前街区。每张许可只部署一次。"
+	var g=d.app.game;d.title.text="部署许可";d.subtitle.text="每次装配消耗一份副本；同宿主首份 100%，追加每份 33⅓%。蓝图升级影响本局所有同名副本。"
 	var wallet:Dictionary=g.s.block.get("bonus_wallet",{});var ids:Array=wallet.keys();ids.sort();var available_count=0
 	var metadata_all:Dictionary=g.c.v040.get("bonus_economy",{}).get("metadata",{})
 	for value in ids:
@@ -183,7 +185,7 @@ static func _permit_wallet(d) -> void:
 		if int(license.get("charges",0))<=0:continue
 		available_count+=1;var def:Dictionary=g.c.bonuses.get(bid,{});var meta:Dictionary=metadata_all.get(bid,{})
 		var scope=str(meta.get("scope",license.get("scope","building")));var label={"building":"建筑许可","organization":"组织许可","block":"街区许可"}.get(scope,"建筑许可")
-		var card=_group(d.body,str(def.get("name",bid))+" · "+label,W.SOFT);card.add_child(W.label("剩余 %d 次"%int(license.get("charges",0)),14,W.GREEN));card.add_child(W.label(str(def.get("summary","")),14,W.MUTED))
+		var card=_group(d.body,str(def.get("name",bid))+" · "+str(g.Bonus.card(g,bid).get("grade","基础"))+" · "+label,W.SOFT);card.add_child(W.label("剩余 %d 次"%int(license.get("charges",0)),14,W.GREEN));card.add_child(W.label(str(def.get("summary","")),14,W.MUTED))
 		var options:Array=[]
 		if scope=="building":
 			for project_id in _project_ids(g):
@@ -202,12 +204,8 @@ static func _permit_wallet(d) -> void:
 		if options.is_empty():card.add_child(W.label("当前没有适用的空槽或宿主。",14,W.MUTED))
 		for option in options:
 			var item=option
-			card.add_child(W.primary(W.button("安装到「%s」"%str(item.name),func():
-				var error=g.Bonus.install(g,bid,str(item.type),str(item.host),str(item.slot))
-				if error!="":d.app.message(error)
-				else:d.app.save_game();d.app.refresh();d.replace("city040","permits");d.app.message(str(def.get("name",bid))+"许可已安装。")
-			)))
-	if available_count==0:d.body.add_child(W.label("钱包里还没有待部署许可。完成委托后，可从奖励三选一领取。",16,W.MUTED))
+			card.add_child(W.button("预览安装到「%s」"%str(item.name),func():Beta.install_preview(d.app,bid,str(item.type),str(item.host),str(item.slot))))
+	if available_count==0:d.body.add_child(W.label("钱包里还没有待部署许可。年度、安居人口与主题奖励会提供新的副本。",16,W.MUTED))
 
 static func _permits_for(d,id:String) -> void:
 	var g=d.app.game
@@ -243,73 +241,11 @@ static func _permits_for(d,id:String) -> void:
 	if empty_count==0:d.body.add_child(W.label("该建筑当前没有空槽；升级后可解锁新的稳定槽型。",15,W.MUTED))
 
 static func render_commissions(d) -> void:
-	var g=d.app.game;var state:Dictionary=g.s.block.get("commissions",{});var active:Dictionary=state.get("active",{})
-	d.title.text="委托与街区目标";d.subtitle.text=str(g.s.block.display_name)+" · 当前委托、街区目标与完成记录。"
-	for pair in [["active","主委托"],["available","可接委托"],["history","历史"]]:
-		var tab=pair[0];var label={"active":"当前","available":"可接","history":"历史"}.get(tab,pair[1]) if d.app.compact else pair[1];var b=W.button(label,func():d.task_tab=tab;d.render(false));b.size_flags_horizontal=Control.SIZE_EXPAND_FILL;d.tabs.add_child(b)
-		if d.task_tab==tab:W.primary(b)
-	if d.task_tab=="history":
-		var history=state.get("history",[])
-		if history.is_empty():d.body.add_child(W.label("还没有委托记录。",17,W.MUTED))
-		for entry in history.duplicate():
-			var item=entry;var card=_group(d.body,str(entry.get("name",entry.get("id","委托"))))
-			card.add_child(W.label(_status_name(str(entry.get("status","")))+" · "+str(entry.get("completed_at",entry.get("started_at",""))),14,W.MUTED))
-			card.add_child(W.button("查看委托条件",func():d.push_section("commission",str(item.get("id","")))))
-		return
-	if d.task_tab=="active":
-		var rewards=g.s.block.get("reward_choices",[]);var pending=str(state.get("pending_reward",""));var choice={}
-		for reward in rewards:
-			if str(reward.get("reward_id",""))==pending and not reward.get("claimed",false):choice=reward;break
-		if not choice.is_empty():_reward_choice(d,choice)
-		if not active.is_empty():
-			var commission=_commission_def(g,str(active.get("id","")));var card=_group(d.body,str(commission.get("name",active.get("id","主委托"))))
-			card.add_child(W.bar(_commission_progress(active,commission)))
-			card.add_child(W.label(_progress_summary(active,commission),15,W.GREEN))
-			card.add_child(W.button("查看委托条件",func():d.push_section("commission",str(active.get("id","")))))
-			if _commission_has_goal(commission,"delivery_goods",active):
-				var target=0.;for goal in _commission_goals(active,commission):
-					if str(goal.get("metric",""))=="delivery_goods":target=maxf(target,float(goal.get("min",0)))
-				var delivered=float(active.get("delivered_goods",0));var stock=g.inventory_total("goods")
-				card.add_child(W.primary(W.button("交付制成品 · %.0f / %.0f"%[delivered,target],func():
-					var error=g.Commissions.deliver(g)
-					if error!="":d.app.message(error)
-					else:d.app.save_game();d.app.refresh();d.render(false);d.app.message("委托交付已记录。推进城市以完成委托条件。")
-				,stock<=0 or delivered>=target)))
-			card.add_child(W.button("放弃当前委托",func():
-				var error=g.Commissions.abandon(g)
-				if error!="":d.app.message(error)
-				else:d.app.save_game();d.app.refresh();d.render(false)
-			))
-		else:d.body.add_child(W.label("当前没有进行中的委托。去“可接委托”选择一项，其他候选仍会保留。",16,W.MUTED))
-		_block_goal_card(d)
-		_block_management(d)
-	else:
-		var choices=g.Commissions.available(g)
-		if choices.is_empty():d.body.add_child(W.label("目前没有可接委托。建成更多设施或推进城市后会出现新的方向。",16,W.MUTED))
-		for entry in choices:
-			var item=entry;var id=str(entry.get("id",""));var def=_commission_def(g,id);var card=_group(d.body,str(def.get("name",entry.get("name",id))))
-			card.add_child(W.label(str(def.get("help",def.get("description",""))),15,W.MUTED))
-			card.add_child(W.button("查看条件",func():d.push_section("commission",id)))
-			card.add_child(W.primary(W.button("接取为主委托",func():
-				var error=g.Commissions.accept(g,id)
-				if error!="":d.app.message(error)
-				else:d.task_tab="active";d.app.save_game();d.app.refresh();d.render(false)
-			)))
+	Beta.render_themes(d)
+	_block_management(d)
 
 static func _reward_choice(d,choice:Dictionary) -> void:
-	var g=d.app.game;var reward_id=str(choice.get("reward_id",""));var card=_group(d.body,"委托完成 · 选择一张许可",W.SOFT)
-	card.add_child(W.label("领取后只生成一次部署许可。关闭页面、切页或重载不会改变选择。",14,W.MUTED))
-	var options=choice.get("choices",[])
-	if options.is_empty():card.add_child(W.label("奖励选项正在准备；稍后可回到这里领取。",15,W.GOLD))
-	for entry in options:
-		var item=entry;var bid=str(entry.get("bonus_id",""));var name=str(entry.get("name",g.c.bonuses.get(bid,{}).get("name",bid)))
-		var scope_label={"building":"建筑许可","organization":"组织许可","block":"当前街区许可"}.get(str(entry.get("scope","building")),"当前街区许可")
-		var button=W.primary(W.button(name+"  ·  "+scope_label+" · 一次部署",func():
-			var error=g.Bonus.choose(g,reward_id,bid)
-			if error!="":d.app.message(error)
-			else:d.app.save_game();d.app.refresh();d.render(false);d.app.message(name+"许可已加入钱包。")
-		))
-		card.add_child(button);card.add_child(W.label(str(entry.get("preview_reason","适用于指定宿主，可在当前街区部署一次。")),14,W.MUTED))
+	Beta.reward(d,choice)
 
 static func _block_goal_card(d) -> void:
 	var g=d.app.game;var card=_group(d.body,"街区目标")
@@ -335,7 +271,7 @@ static func _block_goal(d) -> void:
 	var rows=g.s.get("civic032",{}).get("task_history",[])
 	var found=false
 	for row in rows:
-		if str(row.get("id",""))=="route:"+route:found=true;history.add_child(W.label(_status_name(str(row.get("status","")))+" · "+str(row.get("h",""))+"h",14,W.MUTED))
+		if str(row.get("id",""))=="route:"+route:found=true;history.add_child(W.label(_status_name(str(row.get("status","")))+" · "+str(row.get("h",""))+"月",14,W.MUTED))
 	if not found:history.add_child(W.label("街区目标达成后会在这里留下记录。",14,W.MUTED))
 
 static func _commission_detail(d,id:String) -> void:
@@ -347,7 +283,7 @@ static func _commission_detail(d,id:String) -> void:
 		var metric=str(goal.get("metric",""));var text=str(GOAL_NAMES.get(metric,metric.replace("_"," ")))
 		if goal.has("min"):text+=" · 至少 "+_format_value(goal.min)
 		if goal.has("max"):text+=" · 至多 "+_format_value(goal.max)
-		if goal.has("duration"):text+=" · 持续 %.1fh"%float(goal.duration)
+		if goal.has("duration"):text+=" · 持续 %.1f月"%float(goal.duration)
 		goals.add_child(W.label(text,15,W.MUTED))
 	var fail=def.get("fail_conditions",{})
 	if not fail.is_empty():
@@ -393,7 +329,7 @@ static func _progress_summary(active:Dictionary,def:Dictionary) -> String:
 		var row=name+" "+_format_value(value)
 		if goal.has("min"):row+=" / "+_format_value(goal.min)
 		elif goal.has("max"):row+=" / ≤"+_format_value(goal.max)
-		if float(goal.get("duration",0))>0:row+=" · 连续 %.1f / %.1fh"%[float(elapsed.get(key,0)),float(goal.duration)]
+		if float(goal.get("duration",0))>0:row+=" · 连续 %.1f / %.1f月"%[float(elapsed.get(key,0)),float(goal.duration)]
 		rows.append(row)
 	return " · ".join(rows)
 
@@ -407,7 +343,7 @@ static func _status_name(status:String) -> String:
 
 static func _market(d,resource:String="") -> void:
 	var g=d.app.game;var resources=["food","material","goods"]
-	d.title.text="街区贸易";d.subtitle.text="订单由货运站容量逐步执行，报价使用当前街区市场状态。"
+	d.title.text="街区贸易";d.subtitle.text="外部市场按真实活跃在线时间成交；DT 加速不会提高外贸运力。"
 	if resource!="" and resource in resources:d.trade_resource=resource
 	var selector=W.hbox(d.body,8)
 	for id in resources:
@@ -422,7 +358,7 @@ static func _market(d,resource:String="") -> void:
 	for id in _project_ids(g):
 		var p=g.s.projects[id]
 		if str(p.get("def",""))=="freight" and p.get("status","")=="running" and not p.get("paused",false):station=true
-	price.add_child(W.label("已接通货运站" if station else "建成货运站后可创建订单。",14,W.MUTED))
+	price.add_child(W.label(("已接通货运站 · 全城 %.1f单位 / 现实在线小时"%float(g.Market._total_capacity(g))) if station else "建成货运站后可创建订单。",14,W.MUTED))
 	var form=_group(summary_and_order,"创建订单")
 	var narrow=d.app.compact or W.text_scale>1.2
 	var trade_row:Container=W.vbox(form,6) if narrow else W.hbox(form,6)
@@ -435,10 +371,10 @@ static func _market(d,resource:String="") -> void:
 	var submit=W.primary(W.button("提交订单",func():
 		var error=g.Market.order(g,d.trade_resource,d.trade_side,float(amount.value),float(limit.value))
 		if error!="":d.app.message(error)
-		else:d.app.save_game();d.app.refresh();d.replace("city040","resource:"+d.trade_resource);d.app.message("贸易订单已创建，按货运能力执行。")
+		else:d.app.display_pending_tick=int(g.s.simulation_tick);d.app.save_game();d.app.refresh();d.replace("city040","resource:"+d.trade_resource);d.app.message("贸易订单已创建，按货运能力执行。")
 	,not station));submit.size_flags_horizontal=Control.SIZE_EXPAND_FILL;submit.custom_minimum_size.y=40;trade_row.add_child(submit)
 	var orders=_group(d.body,"当前订单")
-	var current=g.s.block.get("trade_orders",[])
+	var current=g.s.block.get("trade_orders",[]).filter(func(order):return str(order.get("status","open")) in ["open","partial"])
 	if current.is_empty():orders.add_child(W.label("当前没有开放订单。",14,W.MUTED))
 	for row in current:
 		var item=row;var row_box=W.hbox(orders,8)
@@ -446,7 +382,7 @@ static func _market(d,resource:String="") -> void:
 		row_box.add_child(W.button("取消",func():
 			var error=g.Market.cancel(g,str(item.get("id","")))
 			if error!="":d.app.message(error)
-			else:d.app.save_game();d.replace("city040","resource:"+d.trade_resource)
+			else:d.app.display_pending_tick=int(g.s.simulation_tick);d.app.save_game();d.replace("city040","resource:"+d.trade_resource)
 		))
 	var history=_group(d.body,"最近贸易记录")
 	var trades=g.s.block.get("trade_history",[])
@@ -485,7 +421,7 @@ static func _block(d) -> void:
 static func _block_management(d) -> void:
 	var g=d.app.game;var card=_group(d.body,"居民与生活用品")
 	var arrival=float(g.next_arrival())
-	card.add_child(W.label("下一批居民：%.1f小时后"%arrival if arrival>=0 else "本轮约定的居民已全部到达",14,W.MUTED))
+	card.add_child(W.label("下一批居民：%.1f来生月后"%arrival if arrival>=0 else "本轮约定的居民已全部到达",14,W.MUTED))
 	card.add_child(W.button("恢复迁入" if g.s.get("migration_paused",false) else "暂停新居民迁入",func():
 		g.toggle_migration();d.app.save_game();d.app.refresh();d.render(true)
 	))
@@ -493,11 +429,11 @@ static func _block_management(d) -> void:
 		card.add_child(W.label("生活用品需求正在生效，居民会持续消费制成品。",14,W.GREEN))
 	elif float(g.s.get("goods_requested_at",-1))>=0:
 		var remain=maxf(0,float(g.s.goods_requested_at)+float(g.c.balance.goods_grace_hours)-float(g.s.local_hours))
-		card.add_child(W.label("生活用品计划已公布 · %.1f小时后开始消费"%remain,14,W.GREEN))
+		card.add_child(W.label("生活用品计划已公布 · %.1f来生月后开始消费"%remain,14,W.GREEN))
 	else:
 		card.add_child(W.label("公布生活用品计划后，居民会在宽限期后开始消费制成品。",14,W.MUTED))
 		var available=bool(g.s.get("goods_available",false)) or g.inventory_total("goods")>0
-		card.add_child(W.primary(W.button("公布生活用品计划（2小时后生效）",func():
+		card.add_child(W.primary(W.button("公布生活用品计划（2来生月后生效）",func():
 			var error=g.enable_goods()
 			if error!="":d.app.message(error)
 			else:d.app.save_game();d.app.refresh();d.render(true);d.app.message("生活用品消费计划已公布。")

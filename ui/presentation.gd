@@ -5,21 +5,23 @@ const KIND={"medical":"医疗","education":"教育","commercial":"购物","enter
 static func primary(base:String) -> String:
 	return {"neighborhood":"为街坊补齐基础服务","workshop":"让建设与生产有一个起点","homestead":"为新居民留出住处","agriculture":"让粮食供给站稳","extraction":"给建设持续供料","power_station":"给城镇接上电","manufacturing":"生产生活与交付用品","commercial_center":"让居民方便购物","primary_school":"让教育走进社区","medical_clinic":"照顾附近居民健康","garden":"让街坊多一处休闲","yard":"留住多出来的物资"}.get(base,"")
 static func resource(g,snapshot:Dictionary,r:String) -> Dictionary:
-	var h=float(snapshot.audit.get("hours",g.c.balance.tick_hours));var a=snapshot.audit.get("resources",{}).get(r,{})
+	var h=maxf(1e-12,float(snapshot.audit.get("hours",g.c.balance.tick_hours)));var a=snapshot.audit.get("resources",{}).get(r,{})
 	var produced=float(a.get("produced",0))/h;var consumed=float(a.get("consumed",0))/h;var lost=float(a.get("lost",0))/h
-	var net=produced-consumed-lost;var stock=g.inventory_total(r)
+	var imported=float(a.get("imported",0))/h;var exported=float(a.get("exported",0))/h
+	var delivered=float(a.get("commission_delivered",0))/h
+	var net=produced+imported-consumed-exported-delivered-lost;var stock=g.inventory_total(r)
 	var need=float(snapshot.metrics.get("requested",{}).get(r,consumed))
 	var status="供需平稳"
-	if lost>.05:status="每小时浪费 %.1f"%lost
-	elif need>consumed+.1:status="未满足需求 %.1f/h"%(need-consumed)
-	elif net<-.05:status="按当前用量约 %.1fh 耗尽"%(stock/-net)
+	if lost>.05:status="每月浪费 %.1f"%lost
+	elif need>consumed+.1:status="未满足需求 %.1f/月"%(need-consumed)
+	elif net<-.05:status="按当前用量约 %.1f月 耗尽"%(stock/-net)
 	elif net>.1:status="正在积累储备"
-	return {"stock":stock,"produced":produced,"consumed":consumed,"lost":lost,"net":net,"need":need,"status":status}
+	return {"stock":stock,"produced":produced,"consumed":consumed,"lost":lost,"net":net,"need":need,"imported":imported,"exported":exported,"delivered":delivered,"status":status}
 static func alerts(g,shot:Dictionary) -> Array:
 	var alerts=[];var m=shot.metrics
 	if g.s.phase!="play":return alerts
 	if g.s.currency<0:alerts.append({"title":"财政已赤字","detail":"先检查闲置维护和当前税制。","action":"policies","target":"","severity":3})
-	elif m.get("cashflow",0)<-1:alerts.append({"title":"财政每小时 %+.1f"%m.cashflow,"detail":"按当前收支，预算约还能支持 %.1fh。"%(g.s.currency/-float(m.cashflow)),"action":"policies","target":"","severity":2})
+	elif m.get("cashflow",0)<-1:alerts.append({"title":"财政每月 %+.1f"%m.cashflow,"detail":"按当前收支，预算约还能支持 %.1f月。"%(g.s.currency/-float(m.cashflow)),"action":"policies","target":"","severity":2})
 	if m.get("homeless",0)>.1:alerts.append({"title":"%.0f位居民等待住房"%m.homeless,"detail":"建房、增加现有住宅容量，或先暂停新的迁入。","action":"homestead","target":"","severity":3})
 	var food=resource(g,shot,"food")
 	var family_food=0.;var family_count=0.
@@ -29,7 +31,7 @@ static func alerts(g,shot:Dictionary) -> Array:
 	if m.get("energy_ratio",1)<.98:alerts.append({"title":"电力只满足 %.0f%%"%(100*m.energy_ratio),"detail":"发电站缺工也会少发电，先看缺口来源。","action":"power_station","target":"","severity":3})
 	var arrive=g.next_arrival()
 	if arrive>=0 and not g.s.migration_paused and m.get("vacancies",0)<g.c.balance.arrival_count:
-		alerts.append({"title":"%.1fh后有6位新邻居"%arrive,"detail":"空房仅 %.0f；可建房或暂停这批迁入。"%m.get("vacancies",0),"action":"homestead","target":"","severity":2})
+		alerts.append({"title":"%.1f月后有6位新邻居"%arrive,"detail":"空房仅 %.0f；可建房或暂停这批迁入。"%m.get("vacancies",0),"action":"homestead","target":"","severity":2})
 	for id in g.playable_ids():
 		var p=g.s.projects[id];var a=m.get("utilization",{}).get(id,{})
 		if p.status!="running" or p.paused or a.is_empty():continue
@@ -47,7 +49,7 @@ static func alerts(g,shot:Dictionary) -> Array:
 	if alerts.size()<2 and g.s.migration_paused and m.get("vacancies",0)<2:
 		alerts.append({"title":"住宅需要一点增长余地","detail":"已暂停新迁入，但现有住户仍会自然增长。","action":"homestead","target":"","severity":1})
 	if alerts.size()<2 and g.s.get("goods_available",false) and not g.s.goods_active and float(g.s.get("goods_requested_at",-1))<0:
-		alerts.append({"title":"生活用品已经能生产","detail":"主动公布消费计划，2小时后新需求才生效。","action":"goals","target":"","severity":1})
+		alerts.append({"title":"生活用品已经能生产","detail":"主动公布消费计划，2月后新需求才生效。","action":"goals","target":"","severity":1})
 	if alerts.size()<2 and g.s.block.commissions.get("pending_reward","")!="":alerts.append({"title":"委托奖励待领取","detail":"从已保存的三份候选中选择一份部署许可。","action":"goals","target":"","severity":1})
 	if alerts.size()<2 and food.lost>.1:alerts.append({"title":"粮食没有留住","detail":food.status+"；可暂缓扩产或增设仓储。","action":"yard","target":"","severity":1})
 	if alerts.size()<2 and g.s.city_goal.get("completed",false):alerts.append({"title":"社区已建成，城市仍然属于你","detail":"继续改善住区、调整方案，或保存这座河谷。完整跨地区发展尚未开放。","action":"goals","target":"","severity":0})
@@ -60,7 +62,7 @@ static func plan_lines(g,result:Dictionary) -> Array:
 	if result.housing>0:lines.append("+%.0f 住房位置（不是立即增加人口）"%result.housing)
 	for r in ["food","material","goods"]:
 		var n=float(result.outputs.get(r,0))
-		if n>.001:lines.append("预计%s %.1f/h · 可入库 %.1f"%[RES[r],n,result.retained.get(r,0)])
+		if n>.001:lines.append("预计%s %.1f/月 · 可入库 %.1f"%[RES[r],n,result.retained.get(r,0)])
 	if result.energy_supply>.05:lines.append("预计供电 +%.1f"%result.energy_supply)
 	for k in g.c.balance.service_kinds:
 		if result.services[k]>.01:lines.append("%s预计服务 %.0f人 · 全城新增 %+.0f"%[KIND[k],result.services[k],result.added_service[k]])
@@ -78,5 +80,5 @@ static func plan_cautions(g,result:Dictionary) -> Array:
 		lines.append("当前粮食有余量；新增产能主要为后续扩张。")
 	var loss=0.
 	for n in result.losses.values():loss+=float(n)
-	if loss>.01:lines.append("现有仓储不足，预计损耗 %.1f/h"%loss)
+	if loss>.01:lines.append("现有仓储不足，预计损耗 %.1f/月"%loss)
 	return lines

@@ -1,10 +1,10 @@
 extends RefCounted
 ## Versioned JSON snapshots, checksum for corruption only, never claimed anti-cheat.
 ## Temp -> backup -> main rename; offers, RNG, and global deadlines are in snapshot.
-const SAVE="user://river_valley_v5.json"
+const SAVE="user://met_beta_v6.json"
 static func encode(state:Dictionary) -> String:
 	var payload=JSON.stringify(canonical(state),"",true,true)
-	return JSON.stringify({"schema":5,"sha256":payload.sha256_text(),"payload":payload},"\t")
+	return JSON.stringify({"schema":6,"sha256":payload.sha256_text(),"payload":payload},"\t")
 static func decode(text:String) -> Dictionary:
 	var parser=JSON.new()
 	if parser.parse(text)!=OK:return {"ok":false,"error":"存档JSON无效。"}
@@ -52,8 +52,8 @@ static func read(path:String=SAVE) -> Dictionary:
 
 static func canonical(value):
 	# JSON has one numeric category. Integers and exactly integral floats hash alike;
-	# Simulation values use 1e-6 precision at persistence/tick boundaries.
-	# This removes JSON parser last-bit drift without claiming cross-platform bitwise math.
+	# Preserve full float precision: 1 real second is only 6.43e-7 economic
+	# months. Global decimal rounding would discard legitimate online activity.
 	if value is Dictionary:
 		var out={};var keys=value.keys();keys.sort()
 		for key in keys:out[key]=canonical(value[key])
@@ -63,7 +63,6 @@ static func canonical(value):
 		for item in value:out.append(canonical(item))
 		return out
 	if value is float and is_finite(value) and absf(value)<9007199254.:
-		var rounded=round(value*1000000.)/1000000.
-		if rounded==floor(rounded):return int(rounded)
-		return rounded
+		if value==floor(value):return int(value)
+		return value
 	return value

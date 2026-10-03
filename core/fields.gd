@@ -155,7 +155,7 @@ static func consume_local_pollution(env:Dictionary,tile:String,amount:float,h:fl
 		if n<=0:continue
 		pool.remaining-=n;pool.local[tile]-=n;taken+=n
 		for entry in env.tiles.get(tile,{}).get("pollution",[]):
-			if entry.field_id==fid:entry.value-=n/maxf(.000001,h)
+			if entry.field_id==fid:entry.value-=n/maxf(1e-15,h)
 		if taken>=amount-.000001:break
 	return taken
 static func reserve_heat(env:Dictionary,tile:String,requested:float) -> Dictionary:

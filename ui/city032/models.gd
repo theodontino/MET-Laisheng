@@ -6,7 +6,7 @@ const DATA=preload("res://ui/view_models/map_data.gd")
 const RES=["food","material","goods","energy"]
 const SERVICES=["medical","education","commercial","entertainment"]
 static func stamp(shot:Dictionary) -> String:
-	return "下一周期预计" if shot.get("forecast",false) else "第 %d 周期 · 实际"%int(shot.get("tick",0))
+	return "下一周期预计" if shot.get("forecast",false) else "最近结算 · 实际"
 static func population(g,shot:Dictionary) -> Dictionary:
 	var count=0.;var housed=0.;var employed=0.;var health=0.;var happiness=0.;var education=0.;var rows=[];var totals={}
 	var m=shot.get("metrics",{});var groups=shot.get("groups",{});var projects=shot.get("projects",{});var active=["food","material","energy"]
@@ -47,6 +47,9 @@ static func resource(g,shot:Dictionary,id:String) -> Dictionary:
 			var host=str(shot.groups.get(gid,{}).get("host","homeless"));sinks.append({"id":host,"name":g.project_name(host)+" · 住户","rate":float(m.population_energy[gid]),"note":"居民申请"})
 		return {"id":id,"name":"电力","supply":float(m.get("energy",0)),"need":float(m.get("energy_need",0)),"ratio":float(m.get("energy_ratio",1)),"sources":sources,"sinks":sinks,"stores":[],"stamp":stamp(shot)}
 	var result=P.resource(g,shot,id)
+	if float(result.get("imported",0))>0:sources.append({"id":"external_market","name":"外部市场进口","rate":float(result.imported),"note":"真实成交，受限价与外贸运力约束","kept":float(result.imported),"lost":0.0})
+	if float(result.get("exported",0))>0:sinks.append({"id":"external_market","name":"外部市场出口","rate":float(result.exported),"note":"真实成交"})
+	if float(result.get("delivered",0))>0:sinks.append({"id":"commission","name":"主题交付","rate":float(result.delivered),"note":"已从库存支付"})
 	for bid in R.ids(m.get("activity_ledger",{})):
 		for row in m.activity_ledger[bid]:
 			if row.resource!=id or absf(float(row.rate))<.000001:continue

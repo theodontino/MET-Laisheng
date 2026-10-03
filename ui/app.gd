@@ -1,4 +1,13 @@
 extends Control
+const Beta=preload("res://ui/beta/interface.gd")
+const FeedbackLayer=preload("res://ui/beta_feedback.gd")
+var feedback_layer
+var beta_frame_seconds:float=0.0
+var beta_clock_usec:int=0
+var modal_focus_before:WeakRef
+var beta_boundary_seen:String=""
+var beta_background:bool=false
+var beta_background_wall:float=0.0
 const CityDesk=preload("res://ui/city032/desk.gd")
 var desk
 const Game=preload("res://core/game.gd")
@@ -21,7 +30,7 @@ var catalog_state={"query":"","domain":"all"}
 var compact:bool=false
 var issue_index:int=-1
 var display_pending_tick:int=-1
-var display_settings={"text_scale":1.0,"reduced_motion":false,"high_contrast":false,"force_compact":false,"all_links":false,"task_rail_expanded":false,"frame_limit":0}
+var display_settings={"text_scale":1.0,"reduced_motion":false,"high_contrast":false,"force_compact":false,"all_links":false,"task_rail_expanded":false,"citizen_bubbles":true,"frame_limit":0}
 var safe_area=Rect2()
 var top_panel:PanelContainer
 var bottom_panel:PanelContainer
@@ -122,8 +131,8 @@ func _ready():
 	for pair in [["--test","runner"],["--playthrough","playthrough"]]:
 		if pair[0] in args:
 			ignore_save=true;test_mode=true;get_tree().quit(load("res://tests/"+pair[1]+".gd").new().run());return
-	ignore_save="--colony041" in args or "--fresh" in args or "--touch032" in args or "--ui032" in args or "--ui040" in args or "--visual040" in args or "--input032" in args or "--ui-smoke" in args or "--ui030" in args or "--preview030" in args or "--ui031" in args or "--input031" in args or "--ui031-regression" in args
-	if "--colony041" in args or "--ui040" in args or "--visual040" in args:test_mode=true
+	ignore_save="--beta-ui" in args or "--colony041" in args or "--fresh" in args or "--touch032" in args or "--ui032" in args or "--ui040" in args or "--visual040" in args or "--input032" in args or "--ui-smoke" in args or "--ui030" in args or "--preview030" in args or "--ui031" in args or "--input031" in args or "--ui031-regression" in args
+	if "--beta-ui" in args or "--colony041" in args or "--ui040" in args or "--visual040" in args:test_mode=true
 	if "--input-smoke" in args:save_path="user://input_smoke031.json"
 	if "--input032" in args:ignore_save=false;save_path="user://input_smoke032.json"
 	game.new_game(25092026,Time.get_unix_time_from_system())
@@ -140,6 +149,7 @@ func _ready():
 		Dialogs.start(self)
 	elif game.s.phase=="origin":Dialogs.origin(self)
 	elif game.s.phase=="failed":Dialogs.failure(self)
+	if "--beta-ui" in args:call_deferred("run_beta_ui")
 	if "--ui-smoke" in args:call_deferred("run_ui_smoke")
 	if "--ui030" in args:call_deferred("run_ui030")
 	if "--ui031" in args:call_deferred("run_ui031")
@@ -159,6 +169,7 @@ func _ready():
 func build_ui():
 	map_view=MapView.new();map_view.game=game;map_view.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);add_child(map_view)
 	map_view.cell_clicked.connect(on_cell);map_view.cell_hovered.connect(on_hover)
+	feedback_layer=FeedbackLayer.new();add_child(feedback_layer);feedback_layer.configure(game,map_view);feedback_layer.source_clicked.connect(on_beta_source);feedback_layer.toggle_bubbles(bool(display_settings.citizen_bubbles))
 	hud_root=Control.new();hud_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);hud_root.mouse_filter=Control.MOUSE_FILTER_IGNORE;add_child(hud_root)
 	top_panel=W.panel(hud_root);var header=W.hbox(top_panel,8);header_nodes.row=header
 	var brand=W.flat(W.button("",func():desk.open("city040","block"),false,"当前地区与命名"));brand.custom_minimum_size=Vector2(136,46);header.add_child(brand);header_nodes.brand=brand
@@ -223,10 +234,17 @@ func build_ui():
 	for panel in [top_panel,bottom_panel,inspector_panel,workbench,legend_panel,build_palette,modal_panel]:panel.minimum_size_changed.connect(request_layout)
 	layout_ui()
 func open_modal(title:String,subtitle:String=""):
+	flush_beta_time()
+	if not overlay.visible and get_viewport().gui_get_focus_owner()!=null:modal_focus_before=weakref(get_viewport().gui_get_focus_owner())
 	W.clear(modal_body);modal_title.text=title;modal_subtitle.text=subtitle;modal_scroll.scroll_vertical=0;overlay.show();layout_ui()
 func close_modal():
+	reset_beta_clock()
 	if game.s.phase in ["select_block","origin"]:return
 	overlay.hide();refresh();play_cue("back")
+	if modal_focus_before!=null:
+		var previous=modal_focus_before.get_ref()
+		if is_instance_valid(previous) and previous.is_visible_in_tree():previous.grab_focus()
+	modal_focus_before=null
 func refresh():
 	if map_view==null:return
 	visual_feedback()
@@ -246,7 +264,7 @@ func refresh_stats():
 	view_model=MapData.current(game,planner,display_pending_tick==int(game.s.simulation_tick));shot=view_model;map_view.display_shot=view_model
 	var m=shot.get("metrics",{})
 	header_nodes.place.text=str(game.s.block.get("display_name","河谷登陆点")) if game.s.phase=="play" else "MET / 来生"
-	header_nodes.place_hint.text="0.4.0 · 可命名 ›" if game.s.block.get("naming_rights",false) else "来生 · 生态管理区"
+	header_nodes.place_hint.text="Beta · 可命名 ›" if game.s.block.get("naming_rights",false) else "来生 · 城市试验"
 	sync_header_values()
 	cash_label.add_theme_color_override("font_color",Color("FFB5B5") if game.s.currency<0 else Color.WHITE)
 	dt_label.text="%.1f DT"%game.s.dt if compact else "%.1f DT  ›"%game.s.dt
@@ -255,17 +273,15 @@ func refresh_stats():
 	for i in 2:
 		alert_buttons[i].visible=i<alerts.size()
 		if i<alerts.size():alert_buttons[i].text=alerts[i].title+"  ›";alert_buttons[i].tooltip_text=alerts[i].detail
-	checkpoint_button.text="推进" if compact else "下一变化 ·%.1fDT"%game.next_checkpoint().cost
-	checkpoint_button.tooltip_text="最多推进%.1fh，预计不超过%.1f DT；重要变化提前停下。"%[game.next_checkpoint().hours,game.temporal_load()*game.next_checkpoint().hours]
 	desk.update_hud()
 func sync_header_values():
 	if cash_label==null or governance_label==null or game.s.is_empty():return
 	var m=shot.get("metrics",{})
 	var balance=float(game.s.get("currency",0));var cashflow=float(m.get("cashflow",0))
 	var population=float(m.get("population",0));var housed=float(m.get("housed",0));var housing=float(m.get("housing",0))
-	cash_label.text=("预算 %.0f"%balance) if compact else "%.0f  通货\n%+.1f /h"%[balance,cashflow]
+	cash_label.text=("预算 %.0f"%balance) if compact else "%.0f  通货\n%+.1f /月"%[balance,cashflow]
 	governance_label.text=("人口 %.0f"%population) if compact else "%.0f  居民\n居住 %.0f / %.0f"%[population,housed,housing]
-	header_nodes.finance.tooltip_text="预算：%.0f 通货 · 收支：%+.1f /h\n点击查看预算、收支平衡和实际历史。"%[balance,cashflow]
+	header_nodes.finance.tooltip_text="预算：%.0f 通货 · 收支：%+.1f /月\n点击查看预算、收支平衡和实际历史。"%[balance,cashflow]
 	header_nodes.people.tooltip_text="人口：%.0f · 居住：%.0f / %.0f\n点击查看人口、居住、就业与需求覆盖。"%[population,housed,housing]
 func select_base(id:String):
 	if not id in game.c.v040.progression.tier1:
@@ -355,26 +371,14 @@ func accept_offer(id:String):
 	display_pending_tick=int(game.s.simulation_tick)
 	decision_kind="";workbench.hide();mode="inspect";selection=[];inspector_key="";map_view.plan_result={};map_view.plan_tile=""
 	save_game();overlay.hide();refresh();play_cue("confirm")
-	message("已签约。费用已付，推进到下一变化即可建设。" if kind=="development" else "方案已更新。看看它在地图上改变了什么。")
+	message("已签约。费用已付，选择时间档位后按共享施工能力建设。" if kind=="development" else "方案已更新。看看它在地图上改变了什么。")
 func act(e:String):
 	if e!="":message(e);return
 	display_pending_tick=int(game.s.simulation_tick)
 	save_game();inspector_key="";refresh()
-func advance_checkpoint():do_pulse(game.next_checkpoint().hours)
-func do_pulse(h:float):
-	if game.s.settings.get("user_paused",false):message("城市已暂停，请先点继续。");return
-	if desk.is_open():message("查看中，本地时间暂停。返回地图再推进。");return
-	if decision_kind!="":message("比较中，本地时间暂停。返回后再推进。");return
-	var before=game.s.totals.built;var cursor=game.s.event_cursor;var oldawards=game.s.city_goal.get("awards",[]).size()
-	var r=game.Sim.advance(game,h,true,true);save_game();refresh()
-	var text="推进 %.1fh · 支付 %.2f DT"%[r.advanced,r.spent]
-	if r.reason!="":text+=" · "+r.reason
-	if game.s.totals.built>before:text+=" · 建筑完工，新的供给已接通";map_view.flash_time=2.;sound()
-	if game.s.event_cursor>cursor:text+=" · 6位新邻居到达";sound()
-	if game.s.city_goal.get("awards",[]).size()>oldawards:text+=" · 街区发展成果已兑现";sound()
-	message(text)
-	if game.s.city_goal.get("completed",false) and not celebration_shown:celebration_shown=true;Dialogs.award(self);sound()
-	elif game.s.crisis.get("active",false):Dialogs.governance(self)
+func advance_checkpoint():Beta.set_mode(self,"advance")
+func do_pulse(_months:float):Beta.set_mode(self,"advance")
+
 func alert_action(index:int):
 	if index>=alerts.size():return
 	overlay.hide();issue_index=index;selected_project="";mode="inspect";selection=[];inspector_key=""
@@ -403,14 +407,20 @@ func sound():
 	var audio=AudioStreamWAV.new();audio.format=AudioStreamWAV.FORMAT_16_BITS;audio.mix_rate=rate;audio.data=data;chime.stream=audio;chime.play()
 func save_game():
 	if ignore_save or game.s.is_empty():return
-	game.s.wall_mark=maxf(game.s.wall_mark,Time.get_unix_time_from_system());var e=Store.write(game.s,save_path)
+	if not beta_background:game.s.wall_mark=maxf(game.s.wall_mark,Time.get_unix_time_from_system())
+	var e=Store.write(game.s,save_path)
 	if e!="":message(e)
 func _process(delta):
 	if test_mode or game.s.is_empty() or closing or overlay==null:return
 	var now=Time.get_unix_time_from_system()
-	if now-last_wall>8:game.s.wall_mark=last_wall;game.resume_time(now)
-	elif game.s.phase=="play" and not overlay.visible and decision_kind=="" and not desk.blocks_time() and not game.s.settings.get("user_paused",false):game.advance_online(minf(delta,2.)/3600.*float(game.s.settings.lab_speed))
-	last_wall=now;game.update_global(now);save_elapsed+=delta;ui_elapsed+=delta
+	# Engine delta can be capped under slow rendering. Monotonic elapsed time
+	# is the sole online clock; pause/focus/decision boundaries reset its origin.
+	capture_beta_seconds()
+	if beta_can_run() and beta_frame_seconds>=0.1:flush_beta_time()
+	last_wall=now;save_elapsed+=delta;ui_elapsed+=delta
+	var boundary=str(game.s.get("beta_time",{}).get("pause_reason",""))+":"+str(game.s.get("beta_time",{}).get("local_elapsed_seconds",0))
+	if beta_mandatory_pending() and boundary!=beta_boundary_seen and not overlay.visible and decision_kind=="":
+		beta_boundary_seen=boundary;open_beta_settlement()
 	if hover_pending:
 		hover_wait-=delta
 		if hover_wait<=0:
@@ -423,12 +433,19 @@ func _process(delta):
 		if decision_kind!="" and workbench.preview_version!=planner.version(game):workbench.update_preview()
 		if save_path=="user://input_smoke031.json" or "--input032" in OS.get_cmdline_user_args():dump_input_layout()
 func _notification(what):
-	if what==NOTIFICATION_WM_CLOSE_REQUEST:closing=true;save_game();save_display_settings();get_tree().quit()
-	elif what==NOTIFICATION_APPLICATION_PAUSED:save_game();save_display_settings()
+	if what==NOTIFICATION_WM_CLOSE_REQUEST:flush_beta_time();closing=true;save_game();save_display_settings();get_tree().quit()
+	elif what in [NOTIFICATION_APPLICATION_PAUSED,NOTIFICATION_APPLICATION_FOCUS_OUT]:
+		if game.s.is_empty() or beta_background:return
+		flush_beta_time();beta_background=true;beta_background_wall=Time.get_unix_time_from_system();game.s.wall_mark=beta_background_wall;save_game();save_display_settings()
+	elif what in [NOTIFICATION_APPLICATION_RESUMED,NOTIFICATION_APPLICATION_FOCUS_IN]:
+		if not beta_background or game.s.is_empty():return
+		beta_background=false;game.s.wall_mark=beta_background_wall;game.resume_time(Time.get_unix_time_from_system());beta_frame_seconds=0.0;reset_beta_clock()
+		if desk!=null:desk.update_hud()
+
 func _unhandled_key_input(event):
 	if not event is InputEventKey or not event.pressed or event.echo:return
 	var focus=get_viewport().gui_get_focus_owner()
-	if focus is LineEdit or focus is TextEdit:return
+	if (focus is LineEdit or focus is TextEdit) and event.keycode!=KEY_ESCAPE:return
 	match event.keycode:
 		KEY_ESCAPE:
 			if screenshot_mode:screenshot_mode=false;layout_ui()
@@ -459,9 +476,10 @@ func load_saved(path:String):
 	if not migrated.ok:message(migrated.error);return
 	game.resume_time(Time.get_unix_time_from_system());selection=[];selected_project="";inspector_key="";ignore_save=false;save_game();overlay.hide();refresh();map_view.focus_community();message("当前版本的城市备份已载入。")
 func import_file():
-	var dialog=FileDialog.new();dialog.use_native_dialog=true;dialog.access=FileDialog.ACCESS_FILESYSTEM;dialog.file_mode=FileDialog.FILE_MODE_OPEN_FILE;dialog.filters=PackedStringArray(["*.json ; MET 0.4.0 存档备份"]);add_child(dialog)
+	var dialog=FileDialog.new();dialog.use_native_dialog=true;dialog.access=FileDialog.ACCESS_FILESYSTEM;dialog.file_mode=FileDialog.FILE_MODE_OPEN_FILE;dialog.filters=PackedStringArray(["*.json ; MET Beta 当前版本存档备份"]);add_child(dialog)
 	dialog.file_selected.connect(func(path):load_saved(path);dialog.queue_free());dialog.canceled.connect(func():dialog.queue_free());dialog.popup_centered_ratio(.7)
 func restart(seed_value:int):
+	beta_boundary_seen="";beta_frame_seconds=0.0
 	if desk.is_open():desk.close()
 	ignore_save=test_mode or "--fresh" in OS.get_cmdline_user_args()
 	game.new_game(seed_value,Time.get_unix_time_from_system());selection=[];selected_project="";mode="inspect";inspector_key="";celebration_shown=false;save_game();refresh();Dialogs.start(self)
@@ -515,7 +533,7 @@ func resize_interface():
 func _rect(node:Control,rect:Rect2):
 	node.position=rect.position;node.size=rect.size
 func time_hud_width() -> float:
-	return (380. if W.text_scale>1.2 else 330.) if compact else (458. if W.text_scale>1. else 416.)
+	return (440. if W.text_scale>1.2 else 380.) if compact else (458. if W.text_scale>1. else 416.)
 func layout_ui():
 	if top_panel==null or desk==null:return
 	var vp=get_viewport_rect().size;var area=Rect2(Vector2.ZERO,vp)
@@ -548,7 +566,7 @@ func layout_ui():
 		if header_nodes.policy.get_parent()!=header_nodes.row:header_nodes.policy.reparent(header_nodes.row)
 	else:
 		if header_nodes.policy.get_parent()!=header_nodes.toolrow:header_nodes.policy.reparent(header_nodes.toolrow)
-	header_nodes.ledger.visible=not compact;header_nodes.policy.visible=not compact or area.size.x>=720;header_nodes.people.visible=true
+	header_nodes.ledger.visible=not compact;header_nodes.policy.visible=not compact or area.size.x>=720;header_nodes.people.visible=not compact or area.size.x>=720
 	for l in [cash_label,governance_label]:l.add_theme_font_size_override("font_size",int((14 if compact else 15)*W.text_scale));l.add_theme_color_override("font_color",W.TEXT)
 	dt_label.add_theme_font_size_override("font_size",int(15*W.text_scale))
 	var bs=W.box(W.PANEL,W.OUTLINE,7);bs.content_margin_left=8;bs.content_margin_right=8;bs.content_margin_top=4;bs.content_margin_bottom=4
@@ -647,7 +665,7 @@ func refresh_legend():
 	layer_button.tooltip_text="分析图层 · "+MapData.NAMES.get(kind,kind);layer_button.custom_minimum_size.x=84
 	lock_button.modulate=Color("d8b776") if layer_locked else Color.WHITE
 	legend_title.text=MapData.NAMES.get(kind,kind)+( " · 已锁定" if layer_locked else "")
-	var stamp="下周期预计" if map_view.display_shot.get("forecast",false) else "第%d周期 · 实际"%int(game.s.simulation_tick)
+	var stamp="下周期预计" if map_view.display_shot.get("forecast",false) else "最近结算 · 实际"
 	var text=stamp+"\n"
 	if kind in MapData.SERVICES:
 		text+="实线：可达范围\n住宅色条：实际服务率\n斜纹：可达但容量不足\n刻度 0 / 50 / 75 / 100%
@@ -729,7 +747,7 @@ func city_status():
 		W.section(modal_body,alerts[i].title,alerts[i].detail)
 		modal_body.add_child(W.button("查看这个问题的解法",func():alert_action(i)))
 	for r in ["food","material","goods"]:
-		var x=Presentation.resource(game,shot,r);W.section(modal_body,Presentation.RES[r],"库存 %.1f；产 %.1f / 用 %.1f / 弃 %.1f 每小时。%s"%[x.stock,x.produced,x.consumed,x.lost,x.status])
+		var x=Presentation.resource(game,shot,r);W.section(modal_body,Presentation.RES[r],"库存 %.1f；产 %.1f / 用 %.1f / 弃 %.1f 每来生月。%s"%[x.stock,x.produced,x.consumed,x.lost,x.status])
 	modal_body.add_child(W.button("完整来源账本",func():Dialogs.resources(self)))
 	modal_body.add_child(W.button("地区政策与区域方案",policy_categories))
 
@@ -747,7 +765,7 @@ func visual_feedback():
 		if int(game.s.simulation_tick)<=int(first_operations[id]):continue
 		var p=game.s.projects[id];var outputs=[]
 		for resource in p.get("outputs_last",{}):
-			if float(p.outputs_last[resource])>.001:outputs.append(Presentation.RES.get(resource,resource)+" %.1f"%p.outputs_last[resource]+("" if resource=="energy" else "/h"))
+			if float(p.outputs_last[resource])>.001:outputs.append(Presentation.RES.get(resource,resource)+" %.1f"%p.outputs_last[resource]+("" if resource=="energy" else "/月"))
 		var served=0.
 		for l in game.s.metrics.get("service_links",[]):
 			if l.source==id:served+=float(l.people)
@@ -786,3 +804,72 @@ func run_touch032():
 
 func run_visual040():
 	var runner=load("res://tests/visual040.gd").new();add_child(runner);runner.start(self)
+
+func beta_decisions_pending() -> bool:
+	if not Beta.pending(game).is_empty():return true
+	for event in game.Themes.view(game).get("events",[]):
+		if event.get("status","")=="offered":return true
+	return false
+func beta_mandatory_pending() -> bool:
+	var reason=str(game.s.get("beta_time",{}).get("pause_reason",""))
+	return game.s.phase=="play" and reason!="" and reason not in ["manual","resume","offline","background","返回城市；准备好后继续"]
+func open_beta_settlement():
+	if game.s.phase!="play":return
+	game.s.settings.user_paused=true
+	desk.open("city040","settlement")
+func resume_beta_normal():
+	reset_beta_clock()
+	if beta_decisions_pending():message("请先处理本次已保存的奖励和待选事件。");return
+	game.Cycles.acknowledge(game);game.s.beta_time.pause_reason="";game.s.settings.user_paused=false
+	game.Clock.set_mode(game,"normal");overlay.hide()
+	if desk.is_open():desk.close()
+	save_game();refresh()
+func on_beta_source(source:Dictionary):
+	if str(source.get("kind",""))=="commission":desk.open("tasks");return
+	if str(source.get("kind",""))=="capstone":desk.open("city040","block");return
+	var id=str(source.get("building_id",source.get("source_id","")))
+	if source.get("kind","")=="trade":desk.open("city040","market");return
+	if game.s.projects.has(id):
+		if desk.is_open():desk.close()
+		selected_project=id;mode="inspect";inspector_key="";map_view.layer=str(source.get("layer","normal"));refresh();map_view.focus_tile(str(game.s.projects[id].tile))
+	else:desk.open("resource",str(source.get("layer","food")) if str(source.get("layer","")) in ["food","material","goods","energy"] else "food")
+func open_city_messages():
+	open_modal("城市消息","来自实际城市状态的记录；紧急问题仍会显示地图告警。")
+	for row in feedback_layer.history():
+		var entry=row
+		modal_body.add_child(W.button(str(entry.get("text","城市记录")),func():overlay.hide();on_beta_source(entry)))
+func run_beta_ui():
+	var runner=load("res://tests/beta_ui.gd").new();add_child(runner);runner.start(self)
+
+func open_city_records():
+	open_modal("已结算的城市记录","只读留念；不切换旧城、不继承资源或构筑。")
+	var records=game.Block.list_archives()
+	if records.is_empty():modal_body.add_child(W.label("还没有已结算记录。DT 耗尽后可在城市尾声保存。",16,W.MUTED))
+	for item in records:
+		var row=item
+		modal_body.add_child(W.button(str(row.get("name","城市"))+" · "+Beta.date(float(row.get("local_elapsed_seconds",0))),func():
+			open_modal(str(row.get("name","城市记录")),"只读本局记录")
+			modal_body.add_child(W.label("人口 %.1f · 通货 %.1f · DT 开销 %.2f"%[float(row.get("population",0)),float(row.get("currency",0)),float(row.get("dt_spent",0))],17))
+			modal_body.add_child(W.label("主题："+str(row.get("theme",{}).get("id","未选择"))+" · "+str(row.get("capstone",{}).get("name","无定型建筑")),16,W.MUTED))
+			var copies={}
+			for instance in row.get("bonus_instances",{}).values():
+				var bid=str(instance.get("bonus_id",""));copies[bid]=int(copies.get(bid,0))+1
+			for bid in copies:modal_body.add_child(W.label(str(game.c.bonuses.get(bid,{}).get("name",bid))+" · 装配%d份 · 蓝图等级%d"%[copies[bid],int(row.get("blueprint_levels",{}).get(bid,0))],15,W.GREEN))
+			for event in row.get("history",[]).slice(-20):modal_body.add_child(W.label(str(event.get("message",event.get("text",event.get("kind","城市记录")))),14,W.MUTED))))
+
+func flush_beta_time():
+	capture_beta_seconds()
+	if beta_frame_seconds<=0 or game.s.is_empty():return
+	var seconds=beta_frame_seconds;beta_frame_seconds=0.0
+	if not game.s.settings.get("user_paused",false):game.advance_active(seconds)
+
+static func beta_active_interval(previous_usec:int,now_usec:int,eligible:bool) -> float:
+	return maxf(0,float(now_usec-previous_usec)/1000000.) if eligible and previous_usec>0 else 0.0
+func beta_can_run() -> bool:
+	return not test_mode and not closing and not game.s.is_empty() and game.s.phase=="play" and not beta_background and overlay!=null and not overlay.visible and decision_kind=="" and desk!=null and not desk.blocks_time() and not game.s.settings.get("user_paused",false)
+func capture_beta_seconds(now_usec:int=-1):
+	var now=Time.get_ticks_usec() if now_usec<0 else now_usec
+	beta_frame_seconds+=beta_active_interval(beta_clock_usec,now,beta_can_run())
+	beta_clock_usec=now
+func reset_beta_clock():
+	beta_clock_usec=Time.get_ticks_usec()

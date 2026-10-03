@@ -17,17 +17,24 @@ const Bonus=preload("res://core/bonus_economy040.gd")
 const Commissions=preload("res://core/commissions040.gd")
 const Market=preload("res://core/market040.gd")
 const Block=preload("res://core/block040.gd")
+const Clock=preload("res://core/time_model.gd")
+const Themes=preload("res://core/commission_theme.gd")
+const Cycles=preload("res://core/cycles.gd")
 var c=Catalog.new()
 var s:Dictionary={}
 var compiled:Dictionary={}
+## Derived source-aware spatial projection; never serialized in the city state.
+var spatial_cache:Dictionary={}
 var last_error:String=""
 var preview_mode:bool=false
 var recording_cycle:bool=false
 var revision:int=0
+## UI forecasts commands between commits; a fresh committed tick needs no rerun.
+var last_committed_revision:int=-1
 
 func new_game(seed_value:int,now:float) -> void:
 	var v=absi(seed_value)%2147483000+1
-	s={"schema":5,"build":c.data.build,"seed":seed_value,"phase":"select_block","block_index":-1,
+	s={"schema":6,"build":c.data.build,"seed":seed_value,"phase":"select_block","block_index":-1,
 		"rng":{"opening":v,"draft":(v+1701)%2147483646+1,"events":(v+5303)%2147483646+1},
 		"wall_mark":now,"global_now":now,"started_at":now,"local_hours":0.,"remainder":0.,"simulation_tick":0,
 		"currency":float(c.balance.initial_money),"dt":float(c.balance.initial_dt),"support":75.,"mandate":75.,
@@ -39,6 +46,7 @@ func new_game(seed_value:int,now:float) -> void:
 		"debug_used":false,"settings":{"sound":true,"lab_speed":1.},"migration_paused":false,"knowledge":0.,"stage":0,"goods_active":false,"goods_available":false,"quote_bank":{},"goods_requested_at":-1.,"city_goal":{},"arrival_deferred":false}
 	for oid in Rules.ids(c.operators):s.organizations[oid]={"id":oid,"traits":c.operators[oid].traits.duplicate(),"labels":[]}
 	Block.ensure(self)
+	Clock.ensure(self);Themes.ensure(self);Cycles.ensure(self)
 	compiled={};log_event("new_game",{"seed":seed_value},"河谷新章：安顿居民，建立供给，选择这座城的发展方向。")
 func uid(prefix:String) -> String:
 	var result=prefix+"%06d"%int(s.next_id);s.next_id=int(s.next_id)+1;return result
@@ -64,7 +72,7 @@ func select_block(index:int) -> String:
 	return ""
 func choose_origin(id:String) -> String:
 	if s.phase!="origin" or not id in s.origin_choices:return "不是本次起源。"
-	var origin=c.origins[id];s.origin=id;s.phase="play";s.currency+=float(origin.cash);s.dt+=float(origin.dt)
+	var origin=c.origins[id];s.origin=id;s.phase="play";s.currency+=float(origin.cash)
 	_create_special("municipal","市政储备",false)
 	_create_special("homeless","待安置住区",true)
 	for r in ["food","material","goods"]:s.projects.municipal.inventory[r]=float(c.balance.initial_stock[r])+float(origin.get(r,0))
@@ -72,7 +80,7 @@ func choose_origin(id:String) -> String:
 	var anchor="workshop"
 	_create_starter(anchor,["0,0" if anchor!="timber" else "1,1"],"civic" if id=="charter" else ("farmers" if anchor=="farm" else "steel"))
 	Population.create(self,home,float(c.balance.initial_people))
-	refresh_metrics();Progress.initialize(self);Civic.ensure(self);log_event("origin",{"id":id},"18位居民已安顿。先看粮食和空房，再决定河谷的下一步。")
+	refresh_metrics();Progress.initialize(self);Civic.ensure(self);s.block.cycles.baseline=Cycles._snapshot(self);log_event("origin",{"id":id},"18位居民已安顿。先看粮食和空房，再决定河谷的下一步。")
 	return ""
 func _create_special(id:String,name:String,home:bool) -> void:
 	var base=c.projects.homestead.stats.duplicate(true)
@@ -90,10 +98,6 @@ func create_building(def_id:String,tile:String,operator:String,ready:bool=false)
 		"inventory":{"food":0.,"material":0.,"goods":0.},"slots":{},"slot_types":{},"work_priority":0,"level":0,
 		"status":"running" if ready else "construction","paused":false,"job":{},"usage":1. if ready else 0.,"bottleneck":"尚未运行",
 		"next_heat_bonus":0.,"next_heat_credit":0.,"outputs_last":{},"history":[],"effective_hours":0.,"size_scale":1.}
-	for slot_type in c.operators[operator].get("slot_layout",["Production","Logistics","Operations"]):
-		var slot_id=str(slot_type);var suffix=2
-		while p.slots.has(slot_id):slot_id=str(slot_type)+":"+str(suffix);suffix+=1
-		p.slots[slot_id]="";p.slot_types[slot_id]=slot_type
 	if not ready:p.job={"work":float(def.construction_required),"total":float(def.construction_required),"material":float(def.material),"energy":.5,"cp":true}
 	Development.ensure_project(self,p)
 	s.projects[id]=p;s.sites[site]={"id":site,"cells":[tile],"project_ids":[id],"zone":def.zone}
@@ -153,9 +157,11 @@ func bonus_eligible(bonus_id:String,host_type:String,host_id:String,slot:String=
 				if host_type=="organization" and s.projects[id].operator_org!=host_id:continue
 				if Rules.any_trait(Rules.semantic_traits(s,id),def.traits):matched=true
 			if not matched:return "目前没有可受益的建筑。"
+	var duplicate_error=Bonus.duplicate_error(self,bonus_id,host_type,host_id,replacing)
+	if duplicate_error!="":return duplicate_error
 	for ins in s.bonus_instances.values():
 		if ins.id==replacing or not ins.active or ins.host_type!=host_type or ins.host_id!=host_id:continue
-		if ins.bonus_id==bonus_id:return "同宿主不能重复安装同一方案。"
+		if ins.bonus_id==bonus_id:continue
 		if ins.bonus_id in def.excludes or bonus_id in c.bonuses[ins.bonus_id].excludes:return "与当前方案互斥。"
 	return ""
 func mount_bonus(bonus_id:String,host_type:String,host_id:String,provider:String,slot:String="") -> String:
@@ -176,7 +182,7 @@ func _install_bonus(bonus_id:String,host_type:String,host_id:String,provider:Str
 	if host_type=="building":
 		s.projects[host_id].slots[slot]=iid
 		for rule in c.bonuses[bonus_id].rules:
-			if rule.op=="slot_add":
+			if rule.op=="slot_add" and not s.projects[host_id].slots.has(rule.name):
 				s.projects[host_id].slots[rule.name]="";s.projects[host_id].slot_types[rule.name]="Flex"
 	s.totals.installed+=1;refresh_metrics();log_event("bonus",{"instance":iid},c.bonuses[bonus_id].name+"已挂载。")
 	return ""
@@ -186,7 +192,13 @@ func _unmount(iid:String) -> void:
 	if i.host_type=="building" and s.projects.has(i.host_id):
 		var p=s.projects[i.host_id];p.slots[i.slot]=""
 		for rule in c.bonuses[i.bonus_id].rules:
-			if rule.op=="slot_add":p.slots.erase(rule.name);p.get("slot_types",{}).erase(rule.name)
+			if rule.op=="slot_add":
+				var retained=false
+				for other in s.bonus_instances.values():
+					if not other.active or other.host_type!="building" or other.host_id!=i.host_id:continue
+					for other_rule in c.bonuses[other.bonus_id].rules:
+						if other_rule.op=="slot_add" and other_rule.name==rule.name:retained=true
+				if not retained:p.slots.erase(rule.name);p.get("slot_types",{}).erase(rule.name)
 func clear_slot(id:String,slot:String) -> String:
 	if s.phase!="play" or not s.projects.has(id) or not s.projects[id].slots.has(slot):return "当前不可拆卸。"
 	var iid=str(s.projects[id].slots[slot])
@@ -262,26 +274,60 @@ func refresh_metrics() -> void:
 	m.merge(Population.summary(self),true)
 	s.metrics=m
 
-func temporal_load() -> float:return float(c.balance.base_load)+playable_ids().size()*float(c.balance.building_load)
-func pulse(hours:float) -> Dictionary:return Sim.advance(self,hours,true)
+func temporal_load() -> float:
+	# Compatibility price API now reports DT per economic month, not city-size tax.
+	return 1555200.0 / float(c.beta.time.earth_seconds_per_dt)
+func advance_active(real_seconds:float) -> Dictionary:
+	return Clock.advance(self,real_seconds)
+func pulse(months:float) -> Dictionary:
+	# Existing callers request a local duration; route it through the same clock engine.
+	if not is_finite(months) or months<=0:return {"advanced":0.0,"spent":0.0,"reason":"无效推进。"}
+	var result=Clock.advance(self,months*1555200.0/25920.0,"advance")
+	return result
 func advance_online(hours:float) -> void:
-	if not s.settings.get("user_paused",false):Sim.advance(self,hours,false)
+	Clock.advance(self,hours*3600.0,"normal")
 func update_global(now:float) -> void:s.global_now=maxf(float(s.global_now),now)
 func resume_time(now:float) -> float:
-	var elapsed=maxf(0,now-float(s.wall_mark));var before=float(s.dt)
-	s.dt=minf(float(c.balance.dt_cap),s.dt+elapsed/3600.*float(c.balance.offline_dt_per_hour));s.wall_mark=maxf(float(s.wall_mark),now);update_global(now)
-	if s.has("civic032") and s.dt>before:Civic.event(self,"offline_dt",{},"离线恢复DT（不推进城市）")
-	return s.dt-before
+	return Clock.resume(self,now)
 func validate_state(value:Dictionary) -> String:
 	var journal_error=Civic.validate(value)
 	if journal_error!="":return journal_error
-	if int(value.get("schema",0))!=5:return "这是其他 pre-alpha 版本的存档，请开始新游戏。"
+	if int(value.get("schema",0))!=6:return "这是其他 pre-alpha 版本的存档，请开始新游戏。"
 	for k in ["projects","groups","fields","authored_fields","bonus_instances","organizations","block","cells","rng","metrics","totals","draft","settings"]:
 		if not value.get(k) is Dictionary:return "存档缺少对象："+k
 	for k in ["currency","dt","local_hours","next_id","wall_mark","simulation_tick","remainder","global_now","event_cursor","block_opportunities","support","mandate"]:
 		if not is_num(value.get(k)):return "存档数值损坏："+k
 	if not value.get("phase","") in ["select_block","origin","play","failed"]:return "未知游戏阶段。"
 	if value.dt<0 or value.local_hours<0:return "时间预算不能为负。"
+	if not value.get("beta_time") is Dictionary:return "缺少Beta时间状态。"
+	for key in ["local_elapsed_seconds","active_real_seconds","offline_recorded_seconds","last_seen_utc","segments_committed"]:
+		if not is_num(value.beta_time.get(key)) or value.beta_time[key]<0:return "时间记录损坏："+key
+	if not str(value.beta_time.get("mode","")) in ["normal","observe","advance","burn"]:return "时间档位损坏。"
+	if not value.block.get("cycles") is Dictionary:return "年度记录损坏。"
+	var cy:Dictionary=value.block.cycles
+	for key in ["year","major_cycle"]:
+		if not is_num(cy.get(key)) or cy[key]<0:return "周期计数损坏。"
+	for key in ["history","population_awards","pending_summaries"]:
+		if not cy.get(key) is Array:return "周期记录损坏："+key
+	if not cy.get("population_stability") is Dictionary:return "人口里程碑记录损坏。"
+	for elapsed in cy.population_stability.values():
+		if not is_num(elapsed) or elapsed<0:return "人口持续时间损坏。"
+	for grade in value.block.get("blueprint_levels",{}).values():
+		if not is_num(grade) or grade<0 or grade>2 or grade!=floor(grade):return "蓝图等级损坏。"
+	var reward_ids={};var reward_sources={}
+	for reward in value.block.get("reward_choices",[]):
+		if not reward is Dictionary or not reward.get("choices") is Array:return "奖励记录损坏。"
+		var rid=str(reward.get("reward_id",""));var source=str(reward.get("source",""))
+		if rid=="" or source=="" or reward_ids.has(rid) or reward_sources.has(source):return "奖励来源重复或损坏。"
+		reward_ids[rid]=true;reward_sources[source]=true
+	if value.block.has("ending"):
+		var ending=value.block.ending
+		if not ending is Dictionary:return "尾声记录损坏。"
+		if ending.get("triggered",false) and not is_num(ending.get("local_elapsed_seconds")):return "尾声时间损坏。"
+	if value.block.has("capstone"):
+		var landmark=value.block.capstone
+		if not landmark is Dictionary or not Block.capstone_definitions().has(str(landmark.get("theme",""))):return "定型建筑记录损坏。"
+		if not value.block.get("ending",{}).get("capstone_claimed",false):return "定型建筑缺少领取记录。"
 	if not value.block.get("policies") is Dictionary:return "政策记录损坏。"
 	for key in ["quote_bank","city_goal"]:
 		if value.has(key) and not value[key] is Dictionary:return "新版本字段损坏："+key
@@ -295,7 +341,7 @@ func validate_state(value:Dictionary) -> String:
 			if not goal.baseline.get(key) is Dictionary:return "原住民基线损坏。"
 			for stat in ["health","pollution","service"]:
 				if not is_num(goal.baseline[key].get(stat)):return "原住民基线数值损坏。"
-	if int(value.schema)==5:
+	if int(value.schema)==6:
 		for key in ["bonus_wallet","deployed_bonuses","commissions"]:
 			if not value.block.get(key) is Dictionary:return "地区成长数据损坏："+key
 		for key in ["reward_choices","trade_orders","trade_history"]:
@@ -400,7 +446,7 @@ func slot_label(id:String,slot:String) -> String:
 	return label
 func operator_layout(org:String) -> String:
 	var labels=[]
-	for t in c.operators[org].get("slot_layout",["Production","Logistics","Operations"]):labels.append({"Production":"生产","Logistics":"物流","Operations":"运营"}[t])
+	for t in c.operators[org].get("slot_track",["Production","Logistics","Operations"]):labels.append({"Production":"生产","Logistics":"物流","Operations":"运营"}[t])
 	return " / ".join(labels)
 func cohesion(id:String) -> Dictionary:
 	var p=s.projects[id];var occupied=0;var own=0
@@ -419,8 +465,8 @@ func recontract(id:String,slot:String) -> String:
 	if iid=="":return "空槽无需重签。"
 	var ins=s.bonus_instances[iid]
 	if ins.get("contract_org",ins.provider_org)==s.projects[id].operator_org:return "已是自营方案。"
-	if s.currency<c.balance.recontract_cost or s.dt<1:return "需要40通货和1DT。"
-	s.currency-=c.balance.recontract_cost;s.dt-=1;ins.contract_org=s.projects[id].operator_org
+	if s.currency<c.balance.recontract_cost:return "重签通货不足。"
+	s.currency-=c.balance.recontract_cost;ins.contract_org=s.projects[id].operator_org
 	log_event("recontract",{"instance":iid},"方案已重签；原提供方记录保留，能力不变。");refresh_metrics();return ""
 func reforge_slot(id:String,slot:String,type:String) -> String:
 	return "槽位轨道随建筑成长解锁；常规改型已取消。"
@@ -441,7 +487,7 @@ func enable_goods() -> String:
 	if s.goods_active or float(s.get("goods_requested_at",-1))>=0:return ""
 	if not s.get("goods_available",false) and inventory_total("goods")<=0:return "先建立制成品供给。"
 	s.goods_requested_at=float(s.local_hours)
-	log_event("goods_plan",{},"生活用品计划已公布；2本地小时后居民开始消费制成品。");refresh_metrics();return ""
+	log_event("goods_plan",{},"生活用品计划已公布；2来生月后居民开始消费制成品。");refresh_metrics();return ""
 func next_checkpoint() -> Dictionary:
 	var hours=3.;var name="观察城市运行"
 	for id in playable_ids():
@@ -461,9 +507,9 @@ func next_checkpoint() -> Dictionary:
 	return {"hours":snappedf(maxf(.1,hours),.1),"name":name,"cost":hours*temporal_load()}
 func migrate_state(value:Dictionary) -> Dictionary:
 	# Pre-alpha saves are version-local. This API name remains the UI load boundary.
-	if int(value.get("schema",0))!=5 or value.get("build","")!=c.data.build or value.has("district"):
+	if int(value.get("schema",0))!=6 or value.get("build","")!=c.data.build or value.has("district"):
 		return {"ok":false,"error":"这是其他 pre-alpha 版本的存档，请开始新游戏。"}
 	var error=validate_state(value)
 	if error!="":return {"ok":false,"error":error}
-	s=value.duplicate(true);compiled=Rules.compile(self);revision+=1
+	s=value.duplicate(true);Clock.ensure(self);Themes.ensure(self);Cycles.ensure(self);s.beta_time.mode="normal";s.settings.user_paused=true;compiled=Rules.compile(self);revision+=1
 	return {"ok":true,"state":s,"migrated":false}
