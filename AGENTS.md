@@ -1,3 +1,13 @@
 # MET 0.3.0 continuation contract
 
+## Project vision and scope
+
+Current authorized implementation contract: [Beta v3](docs/beta/design-v3/00_READ_FIRST.md), with [unit audit](docs/beta/UNIT_AUDIT.md). Its explicit replacements supersede the historical 0.4 requirements below and in the constitution. Beta uses finite DT, offline duration recording only (no Reserve gameplay), Local-Time immigration, annual/population drafts, repeated Bonus copies and blueprint upgrades, theme commissions, and naming/capstones at actual DT zero. Preserve all source-backed simulation and display invariants. Work on the existing branch/checkout; do not create a worktree unless explicitly requested.
+
+Read [MET 项目宪法](docs/PROJECT_CONSTITUTION.md) before planning design or gameplay changes. Preserve its distinction between long-term vision, stable design principles, 0.4 requirements, and future outlook. Design requirements are not proof of implementation or authorization to implement every idea. The city is the protagonist; meaningful choices change the value of later choices. Preserve the established core loop. Keep 0.4 to one Block; District and cross-Block systems remain outlook only. Pre-alpha does not require cross-version save compatibility. Follow subsequent explicit project decisions when updating this baseline.
+
+## Pre-1.0 platform scope
+
+Throughout pre-1.0, mobile is outside implementation and delivery scope. The only mobile-related requirement is to consider future mobile constraints in architecture, input/UI design, and performance/resource budgets, leaving reasonable headroom. Do not turn this consideration into mobile-specific implementation, adaptation, packaging, device testing, or release requirements. Missing mobile validation does not block pre-1.0 delivery. Existing mobile code, artifacts, and historical reports do not create ongoing mobile obligations; preserve their historical meaning. Reassess mobile scope separately at 1.0 or later; support is not automatically promised.
+
 Continue this exact B-lineage game. Do not substitute another demo. Read README.md, docs/v030 and the locked design030 package. Preserve gameplay content unless explicitly authorized. Presentation reads snapshots; never alter RNG, wallets or entities to draw previews. Keep operator/provider/slot history and source-aware service capacities. Inspect exact source and use the delivered final evidence; do not rebrand old evidence. No automatic GitHub publishing. Mac/mobile hardware results must be distinguished from Linux/headless tests. New artwork is original parameterized illustration, not a verified pure image-model pipeline.

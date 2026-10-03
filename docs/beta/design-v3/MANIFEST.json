@@ -1,0 +1,45 @@
+{
+  "type": "design_package_not_software_release",
+  "files": [
+    {
+      "name": "00_READ_FIRST.md",
+      "bytes": 2979,
+      "sha256": "4107e8616f31c46d66926af82a947cc32fd6e77fce1ffccfed0494030c0bbde6"
+    },
+    {
+      "name": "01_BETA_SPEC.md",
+      "bytes": 17253,
+      "sha256": "a988ea1be2410fc786ba91f2bec53f93e8c37804d6f3ec29cc54f070fd83ab52"
+    },
+    {
+      "name": "02_PARAMETERS.json",
+      "bytes": 4497,
+      "sha256": "c6ba9c73c20f02937bf0ef8a1badfd7716389e91b1fe909abf88fe399d3706a8"
+    },
+    {
+      "name": "03_CONTENT_DRAFT.md",
+      "bytes": 12212,
+      "sha256": "ecce0fc61a2dc97024fa2f244b8d658719f54d8071970c0d8b120fc355428129"
+    },
+    {
+      "name": "04_UI_SPEC.md",
+      "bytes": 6240,
+      "sha256": "62ae1f6ec0af56eca052eb498a953e9bae05911c89a4284d5481544ea4af96ea"
+    },
+    {
+      "name": "05_IMPLEMENTATION_AND_ACCEPTANCE.md",
+      "bytes": 10052,
+      "sha256": "5166dfcb932b0064335a48ae3cdc13950c7aa60753783365047b8637deb3dfe1"
+    },
+    {
+      "name": "06_DECISIONS_AND_SOURCES.md",
+      "bytes": 5429,
+      "sha256": "59c52f554ffbd9edcaa5bcafbe4e0bc40ae1dd53678ed6da9b1523c68b28cacb"
+    },
+    {
+      "name": "07_MATH_CHECKS.json",
+      "bytes": 2540,
+      "sha256": "71b5835abeacf49ecbd80bbb24df0aa1522803f7a6d48d127a51bf7aedf4d735"
+    }
+  ]
+}

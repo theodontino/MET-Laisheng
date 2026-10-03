@@ -1,0 +1,143 @@
+{
+  "document_version": "3.0-design",
+  "implementation_status": "proposal_not_implemented",
+  "baseline_commit": "3e7f00cb8aa0177df6f04e0ec490414bd8f019aa",
+  "units": {
+    "canonical": "earth-equivalent seconds for duration; Laisheng civil units for display",
+    "calendar_source": "奥努米亚黎明_世界与战役背景总档_B版_Obsidian.md，第9章9.1–9.2；文件原始行340–354附近，以章节标题定位",
+    "earth_seconds_per_laisheng_day": 129600,
+    "civil_hours_per_day": 24,
+    "days_per_xun": 6,
+    "days_per_month": 12,
+    "months_per_season": 3,
+    "months_per_year": 12,
+    "days_per_year": 144,
+    "earth_seconds_per_month": 1555200,
+    "earth_seconds_per_year": 18662400,
+    "calendar_status": "canonical; day made exact at 36 Earth hours per latest user instruction"
+  },
+  "time": {
+    "status": "user_rules_with_designer_tunable_initial_values",
+    "offline_city_simulation": false,
+    "offline_reward_generation": false,
+    "offline_duration_record_only": true,
+    "reserve_implemented": false,
+    "pause_freezes_local_and_external": true,
+    "initial_dt": 75.0,
+    "extra_years_at_initial_dt": 5.0,
+    "earth_seconds_per_dt": 1244160.0,
+    "major_cycle_years": 2.0,
+    "annual_draft_interval_years": 1.0,
+    "major_cycle_additional_basic_draft": false,
+    "modes": [
+      {
+        "id": "normal",
+        "label": "常速",
+        "acceleration": 1
+      },
+      {
+        "id": "observe",
+        "label": "观察",
+        "acceleration": 5184,
+        "seconds_per_month": 300
+      },
+      {
+        "id": "advance",
+        "label": "推进",
+        "acceleration": 25920,
+        "seconds_per_month": 60
+      },
+      {
+        "id": "burn",
+        "label": "燃烧",
+        "acceleration": 77760,
+        "seconds_per_month": 20
+      }
+    ],
+    "normal_reward_heals_dt": false,
+    "max_economic_step_laisheng_days": 1.0,
+    "partial_step_on_boundary": true,
+    "fixed_block_age_limit": null,
+    "population_clock": "local"
+  },
+  "economy_candidates": {
+    "status": "initial_values_require_live_balance_testing",
+    "economic_unit": "1 Laisheng month",
+    "base_construction_cp_per_month": 4.0,
+    "ordinary_late_cp_target": [
+      6.0,
+      8.0
+    ],
+    "construction_build_cp_target": [
+      10.0,
+      12.0
+    ],
+    "cp_hard_cap": null,
+    "initial_people": 18,
+    "arrival_people": 6,
+    "arrival_interval_months": 3,
+    "natural_growth_per_year": 0.03,
+    "milestone_housed_people": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "milestone_stability_months": 1.0,
+    "repeat_milestone_reward": false
+  },
+  "external_market_candidate": {
+    "status": "independently_tuned_candidate_release_gate_not_existing_code_value",
+    "clock": "active_real_seconds",
+    "freight_capacity_per_real_hour": 120.0,
+    "coupling_multiplier": 1.0,
+    "hidden_throughput_floor": 0,
+    "pressure_relaxation_time_constant_real_seconds": 900,
+    "reserve_enabled": false,
+    "trade_and_price_time_inputs_separate": true
+  },
+  "bonus": {
+    "allow_repeated_offers": true,
+    "allow_repeated_inventory": true,
+    "allow_same_host_copies": true,
+    "first_copy_weight": 1.0,
+    "subsequent_copy_weight": 0.3333333333333333,
+    "generic_same_host_copy_limit": null,
+    "requires_legal_slots": true,
+    "draft_internal_duplicates": false,
+    "scope_immutable_on_acquisition": true,
+    "upgrade_steps": 2,
+    "upgrade_scope_candidate": "same_bonus_blueprint_within_this_block",
+    "default_numeric_penalties_scale_with_copies": true,
+    "boolean_duplicate_policy": "idempotent",
+    "structural_duplicate_policy": "explicit_per_rule_or_do_not_consume"
+  },
+  "commission_candidates": {
+    "themes": [
+      "industrial",
+      "civic",
+      "commercial",
+      "logistics",
+      "agricultural"
+    ],
+    "milestones_per_theme": 3,
+    "events_per_theme": 3,
+    "ordinary_free_switching": false,
+    "reforge_requires_token": true,
+    "reforge_dt_cost": 7.5,
+    "reforge_preserves_earned_rewards": true,
+    "reforge_drops_unfinished_progress": true,
+    "completed_theme_locked_candidate": true
+  },
+  "block_end": {
+    "trigger": "first_actual_dt_zero",
+    "name_available_to_all": true,
+    "capstone_requires_commission_completed_at_zero": true,
+    "late_completion_grants_capstone": false,
+    "capstone_rewards_per_block": 1,
+    "capstone_instant_inauguration_candidate": true,
+    "continue_at_1x": true,
+    "restart_independent": true,
+    "carryover": false
+  }
+}

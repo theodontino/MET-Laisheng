@@ -1,0 +1,109 @@
+{
+  "kind": "design_math_only_not_game_validation",
+  "assertions_passed": 15,
+  "checks": [
+    {
+      "name": "day_36_earth_hours",
+      "passed": true,
+      "details": 129600
+    },
+    {
+      "name": "civil_hour_90_minutes",
+      "passed": true,
+      "details": 5400
+    },
+    {
+      "name": "month_12_days",
+      "passed": true,
+      "details": 1555200
+    },
+    {
+      "name": "year_144_days",
+      "passed": true,
+      "details": 18662400
+    },
+    {
+      "name": "month_times_12_equals_year",
+      "passed": true,
+      "details": true
+    },
+    {
+      "name": "five_year_budget",
+      "passed": true,
+      "details": 93312000
+    },
+    {
+      "name": "dt_day_conversion",
+      "passed": true,
+      "details": 9.6
+    },
+    {
+      "name": "observe_month_seconds",
+      "passed": true,
+      "details": 300.0
+    },
+    {
+      "name": "advance_month_seconds",
+      "passed": true,
+      "details": 60.0
+    },
+    {
+      "name": "burn_month_seconds",
+      "passed": true,
+      "details": 20.0
+    },
+    {
+      "name": "reforge_half_year_budget",
+      "passed": true,
+      "details": 7.5
+    },
+    {
+      "name": "stack_30percent_three",
+      "passed": true,
+      "details": 0.5
+    },
+    {
+      "name": "stack_x2_three",
+      "passed": true,
+      "details": 2.6666666666666665
+    },
+    {
+      "name": "tick_count_upper_step_not_actual_calls",
+      "passed": true,
+      "details": 720
+    },
+    {
+      "name": "candidate_freight_two_per_minute",
+      "passed": true,
+      "details": 2
+    }
+  ],
+  "modes": [
+    {
+      "mode": "observe",
+      "year_real_seconds": 3600.0,
+      "five_years_real_seconds": 18000.0,
+      "dt_spent_for_one_calendar_year": 14.997106481481481,
+      "real_seconds_to_exhaust_initial_dt": 18003.472892147405
+    },
+    {
+      "mode": "advance",
+      "year_real_seconds": 720.0,
+      "five_years_real_seconds": 3600.0,
+      "dt_spent_for_one_calendar_year": 14.999421296296296,
+      "real_seconds_to_exhaust_initial_dt": 3600.138894247463
+    },
+    {
+      "mode": "burn",
+      "year_real_seconds": 240.0,
+      "five_years_real_seconds": 1200.0,
+      "dt_spent_for_one_calendar_year": 14.999807098765432,
+      "real_seconds_to_exhaust_initial_dt": 1200.015432297226
+    }
+  ],
+  "notes": [
+    "Calendar 6-12-144 source reviewed; proposal numbers are not game-tested.",
+    "Actual game calls can exceed 720 due to events and partial steps.",
+    "No Godot code modified, no game regression or performance run in this handoff task."
+  ]
+}
