@@ -1,0 +1,188 @@
+{
+  "schema": "met.world3d.asset-export.v1",
+  "blender_version": "4.3.2",
+  "command": "blender --background --threads 2 --python-exit-code 1 --python tools/make_art040.py -- --runtime3d",
+  "scope": "Four existing original building constructors + one original native fern tree; no third-party download",
+  "legacy_assets_verified_unchanged": 46,
+  "legacy_asset_sha256": {
+    "content/presentation040/art_catalog.json": "aa2f9f0f959c0ffd7667d0b8a33750c6796a42ee34a54e30b84ab4617976b0ba",
+    "assets/world040/buildings/advanced_residence.png": "e3e9e4a5f724c23dbab869754fb77e676f5577c76608a751167d0538b2bad4e2",
+    "assets/world040/buildings/agriculture.png": "8d69934faf26cdbfc4ef5ebf0d084e5b2c5a164ab5e8eb123371958e38906f4c",
+    "assets/world040/buildings/commercial_center.png": "aeef0cf222cb8891828e3eb242ee9c4c32923382f626b8f6cb139d5fd70e6bf8",
+    "assets/world040/buildings/extraction.png": "f9e7c085a72fecee28c515027eabd4e82335ccbd5788ae46a0cbf11738f47d6f",
+    "assets/world040/buildings/freight.png": "99be830652706597e7013000bb2c163b36199bc2f5297ff01b37542bc50b9df4",
+    "assets/world040/buildings/garden.png": "1045359977eaf4227269d843cb131b4ef0ca9a341e425fd8787262757c6766a5",
+    "assets/world040/buildings/homestead.png": "4ce4f60ce4544ba867f5668888d6b071278f6bcea0ff342851cfcc568ce2ea54",
+    "assets/world040/buildings/hospital.png": "80b4486ac83484da57bcc2dd9fb8f8d1b2d9610acfd300c9c09494692e94395c",
+    "assets/world040/buildings/manufacturing.png": "29dba4bb7b84bdf7a5beecb280adcf4c5cec9e4d4a56e36814bc9d1c5ef86ac7",
+    "assets/world040/buildings/material_factory.png": "19cb9924f801f12b30ab05171080240c7865699ec5b04c3a8808e11d108979ff",
+    "assets/world040/buildings/medical_clinic.png": "0c51c190301d034169dc191f7b9bcb8508fb7ddc8232f59f3347c27bf8b93fa8",
+    "assets/world040/buildings/modern_agriculture.png": "79cd25c4b374518975bb192dfc89ef00a85a05fd1260fd81fcb8091987a223ae",
+    "assets/world040/buildings/neighborhood.png": "282b64f8c318105819098eb15ecc75dd6f8fdad7349210cdf043dbc32a1b5725",
+    "assets/world040/buildings/power_plant.png": "c7870f4f341b17c727ef23f62885d90b1df26856f90a379c9505db98925f6fe2",
+    "assets/world040/buildings/power_station.png": "6c47fbbe31c7a30b396b20769b4bd79d46110fbaf3a8a9e6e17a85910d44d889",
+    "assets/world040/buildings/primary_school.png": "575598197755a44d7abb9dd7e081d1b63ed9f46d8371624b35966e7c153f25b0",
+    "assets/world040/buildings/public_center.png": "e3f4832a976243114a5323714f5537804f11e89c87fcdad4a57692574e629069",
+    "assets/world040/buildings/residence.png": "43935eba4bdc6d9b8369815fab303a76afef1689980522ae64a7ea635a08297a",
+    "assets/world040/buildings/secondary_school.png": "4387e0f1340951db8c3456703c9de8e9dc6621a79f4b6bda5f0ead30b85cdcb1",
+    "assets/world040/buildings/workshop.png": "f251bebf67aa648112f440ba04c21622336a2f6b92fe42c3a873eb7087bd740c",
+    "assets/world040/buildings/yard.png": "e4b08839621300c9d0bbb3257e4ab1ff02effda015b83bbd43efb2c01742781c",
+    "assets/world040/modules/drone.png": "d0556080759af14efaae54afbac93f9c7eb8d480b0a2ec15b73ca22267de29f8",
+    "assets/world040/modules/heat.png": "131e52b1ab5b1c3c153af49a8b2f30d2701cca47a6f497fcaef9542b59693bdb",
+    "assets/world040/modules/open_court.png": "fd625ce7b1751372bcde4c84ca78347c5a0013d9aae44691dda7adce1465739d",
+    "assets/world040/modules/recycle.png": "2cd0b8615cfa497c597e5f30493c3d26951742756ac0829361c0bed1032ee194",
+    "assets/world040/modules/reuse.png": "4676bcbab7c08f8b420c70a3ab2b621bfd1e8d66905a1161ab467622982dca3c",
+    "assets/world040/modules/roof_farm.png": "7008e38601eac4ea13421fd3644bb269753615b47f262ea861263298452e1600",
+    "assets/world040/modules/storage.png": "de27454f54a468c434686e6717d1b5672d77a7129f90d4a264911ef21082ec54",
+    "assets/world040/modules/workshop_module.png": "d81d9d5a46067b3ab65068383debeac4f2dd5ecb990e68ff4479ce60070405c0",
+    "assets/world040/props/bench.png": "d55b4735829488ee2bd386c12afe5e84d7e88349e47bf9cf13115ebd676ec6c5",
+    "assets/world040/props/crates.png": "42079b5b2e6e0115e9fccf612d48b6a1595db271eed70c4dad6f478c1ad3bac8",
+    "assets/world040/props/fence.png": "3e10f5e0be2307350f45bc750292ec99797cda225b8cc5cb4a3ee6ef7187ac68",
+    "assets/world040/props/flowers.png": "9527bd56fd21eb7be433d8842512e70d13def48910f19911b32c5670d6c69708",
+    "assets/world040/props/furrows.png": "77f8644b2e61f1a3e85b692e46753c999f3c7a9df66644c91af0fa038aa1965b",
+    "assets/world040/props/garden_courtyard.png": "e127cb90cb874cdf268a3dc82ce53111f3dd7fe87d9ae9ea76b6bb7ac3ff436c",
+    "assets/world040/props/lamp.png": "b4c0e6bc2323430bb414b99ff0e02be737c36ffd84b169102860f8affab189c1",
+    "assets/world040/props/materials.png": "0811551d1f8efdc072877c01e5f40b2a8d8a346bbfcf8d12d0fababd01f908b8",
+    "assets/world040/props/rocks.png": "59a8dcca64712fa3533b358ea2ec682d86082fe4deb9d670e551d9a6d7d46bc9",
+    "assets/world040/props/shrub.png": "d15cb92f33bf58d82be1f2084ff47cbae724a6f64f33829f8de6f1947687ad9d",
+    "assets/world040/props/stall.png": "8f901e1ff865ea435e89eecd86d5660fec3b0c86537ca8d08740232e73018576",
+    "assets/world040/props/tree_broadleaf.png": "1f76ba07c7efb5f9e6543d08c96e7f05264d4073d415e974926226415f53552d",
+    "assets/world040/props/tree_conifer.png": "a11b1e1062d4f0b1efc3f90f8915ee6ce57fae1e081470a610d1d577f9b09545",
+    "assets/world040/terrain/hill_0.png": "11b25313b1b81bbf56d23efd5a5ac6d767faa7c7077ae0436f73ca7e8fc282ff",
+    "assets/world040/terrain/hill_1.png": "c593fb08ba693f1afaf28ee80f8ab287d22c041e53cabaecad3e4a8cb8a26dfb",
+    "assets/world040/terrain/hill_2.png": "88d0e9b1f4e10036b0edf35dde4aeb3d8543d8fdea5af05579a848825f0b205d"
+  },
+  "legacy_changes": [],
+  "runtime": {
+    "building.homestead.t1": {
+      "path": "assets/world3d/buildings/homestead.glb",
+      "sha256": "adb8cc12b9fd325335a11731b67303585fe32c83e248826f2a8828ac771b18dc",
+      "bounds": {
+        "min": [
+          -0.79365,
+          0.0,
+          -0.5207483
+        ],
+        "max": [
+          0.6831,
+          0.352,
+          0.248325
+        ]
+      },
+      "statistics": {
+        "source_components": 110,
+        "vertices": 7438,
+        "triangles": 13236,
+        "material_surfaces": 17
+      },
+      "material_profile": "met.mineral_pbr.v1"
+    },
+    "building.neighborhood.t1": {
+      "path": "assets/world3d/buildings/neighborhood.glb",
+      "sha256": "b14a541e4a4fdcb5452ecb10ae94e3c62ef83ff1ec49bed828d307037613bc43",
+      "bounds": {
+        "min": [
+          -0.852225,
+          0.0,
+          -0.5635428
+        ],
+        "max": [
+          0.7835428,
+          0.5005,
+          0.561
+        ]
+      },
+      "statistics": {
+        "source_components": 183,
+        "vertices": 12966,
+        "triangles": 21200,
+        "material_surfaces": 20
+      },
+      "material_profile": "met.mineral_pbr.v1"
+    },
+    "building.workshop.t1": {
+      "path": "assets/world3d/buildings/workshop.glb",
+      "sha256": "90e5d6383b638bec3f0368faa36c897ed9cca5fec2a25a50b50a88fe8f111b7d",
+      "bounds": {
+        "min": [
+          -0.92675,
+          0.0,
+          -0.4543
+        ],
+        "max": [
+          0.8731814,
+          0.39105,
+          0.6395305
+        ]
+      },
+      "statistics": {
+        "source_components": 64,
+        "vertices": 4268,
+        "triangles": 8280,
+        "material_surfaces": 15
+      },
+      "material_profile": "met.mineral_pbr.v1"
+    },
+    "building.residence.t2": {
+      "path": "assets/world3d/buildings/residence.glb",
+      "sha256": "72368c12ec149d804a6c93e324597bf8db7595d6949fe224caf96850840f848b",
+      "bounds": {
+        "min": [
+          -0.9625,
+          0.0,
+          -0.6697176
+        ],
+        "max": [
+          0.968825,
+          0.66275,
+          0.49225
+        ]
+      },
+      "statistics": {
+        "source_components": 482,
+        "vertices": 30622,
+        "triangles": 51316,
+        "material_surfaces": 16
+      },
+      "material_profile": "met.mineral_pbr.v1"
+    },
+    "nature.tree.valley_01": {
+      "path": "assets/world3d/nature/valley_tree_01.glb",
+      "sha256": "7fcd57dc86b4b31cca342eceeab54463c3830f0441ed5bb85c251d4504708ab2",
+      "bounds": {
+        "min": [
+          -0.2223769,
+          0.0,
+          -0.2223769
+        ],
+        "max": [
+          0.2223769,
+          0.6996,
+          0.2223769
+        ]
+      },
+      "statistics": {
+        "source_components": 82,
+        "vertices": 2710,
+        "triangles": 1892,
+        "material_surfaces": 6
+      },
+      "material_profile": "met.valley_foliage_pbr.v1"
+    }
+  },
+  "validator_failure_gate_checks": 18,
+  "claim_limit": "Asset provenance and pipeline integrity; visual and engine import acceptance are recorded separately.",
+  "runtime_tree_palette_calibration": {
+    "profile": "met.valley_foliage_pbr.v1",
+    "palette_srgb_hex": {
+      "green": "3F654B",
+      "green_dark": "2E4F3B",
+      "leaf": "3F6848",
+      "leaf_light": "708D56",
+      "leaf_dark": "2E5137"
+    },
+    "roughness": 0.9,
+    "scope": "Runtime tree branch only; temporary palette override with finally restoration; old PNG/building palette unchanged",
+    "geometry_bounds_and_statistics_unchanged_from_pre_calibration": true
+  }
+}

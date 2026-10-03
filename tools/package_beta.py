@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_ROOT = 'MET_Laisheng_Beta'
 ROOT_FILES = ('.gitignore', 'AGENTS.md', 'README.md', 'project.godot', 'main.tscn', 'export_presets.cfg')
 SOURCE_DIRS = ('core', 'ui', 'content', 'assets', 'tests', 'tools', 'docs', 'art_source')
-EXCLUDE = {'.git', '.godot', '.agents', '.codex', '__pycache__', 'node_modules', 'build', 'archive', 'user_data', 'user_saves', 'player_saves', 'save_data', '__MACOSX'}
+EXCLUDE = {'.git', '.godot', '.agents', '.codex', '__pycache__', 'node_modules', 'build', 'archive', 'vendor_local', 'user_data', 'user_saves', 'player_saves', 'save_data', '__MACOSX'}
 
 def selected() -> list[Path]:
     paths = [Path(name) for name in ROOT_FILES if (ROOT / name).is_file()]

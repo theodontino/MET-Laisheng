@@ -15,7 +15,7 @@ func capture(name:String):
 	await frames();await RenderingServer.frame_post_draw
 	var path=Paths.file(name+".png")
 	check(get_viewport().get_texture().get_image().save_png(path)==OK,"framebuffer "+name)
-	captures.append({"path":path,"fixture":true,"renderer":"Godot GL compatibility / Mesa llvmpipe","window":str(get_window().size),"text_scale":app.W.text_scale})
+	captures.append({"path":path,"fixture":true,"renderer":str(RenderingServer.call("get_current_rendering_method")),"device":RenderingServer.get_video_adapter_name(),"window":str(get_window().size),"text_scale":app.W.text_scale})
 func add(def:String,org:String="commons") -> String:
 	var keys=app.game.s.cells.keys();keys.sort()
 	for tile in keys:

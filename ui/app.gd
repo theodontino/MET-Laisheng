@@ -121,6 +121,18 @@ var chime:AudioStreamPlayer
 const BLOCKS=["河湾","林缘旧村","北部高台"]
 const ZONES={"settlement":"定居","production":"生产","circulation":"流通","public":"公共"}
 func _ready():
+	# Explicit Living World vertical slice. Normal startup/save paths stay 2D.
+	var visual_args = OS.get_cmdline_user_args()
+	if "--hero-valley" in visual_args or "--hero-2d" in visual_args:
+		ignore_save = true; test_mode = true; set_process(false)
+		var visual_scene = load("res://ui/world3d/hero_scene.gd")
+		if visual_scene == null or not visual_scene.can_instantiate():
+			push_error("Living World visual scene failed to compile. The default 2D renderer is available without --hero-valley.")
+			get_tree().quit(2)
+			return
+		get_tree().root.add_child.call_deferred(visual_scene.new())
+		queue_free()
+		return
 	# The pre-1.0 presentation contract is a full-screen desktop at 1080p or above.
 	get_window().min_size=Vector2i(1920,1080)
 	get_window().mode=Window.MODE_FULLSCREEN

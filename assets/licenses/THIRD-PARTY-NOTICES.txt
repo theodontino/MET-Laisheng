@@ -3291,3 +3291,15 @@ misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 
 
+
+
+MET Living World V1 original artwork provenance
+------------------------------------------------
+The five assets in content/presentation3d/asset_manifest.json are original MET
+procedural geometry, not third-party downloads or assets from reference games.
+They retain project-original rights (LicenseRef-MET-Project-Original); this
+notice does not grant a new CC0 or other independent reuse license. Source and
+runtime files are included in the authorized MET project distribution.
+See docs/living_world/ASSET_PROVENANCE.md for the complete provenance and
+redistribution scope. Existing third-party engine/font notices above remain
+applicable and are not replaced by this entry.

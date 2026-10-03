@@ -20,6 +20,24 @@ export GODOT=/absolute/path/to/Godot_v4.7.2-stable_linux.x86_64
 
 命令在仓库根目录执行；macOS、Windows 使用对应平台的 Godot 4.7.2 可执行文件。[构建与验证指南](docs/beta/BUILD_AND_TEST.md)提供独立测试目录、原生窗口、性能探针与源码打包命令。旧 0.4 安装包不代表本次 Beta 的导出或运行结果。
 
+### 可选的 Living World3D 原型
+
+Living World3D 是与 Beta 2D 路径并列的只读视觉纵轴。默认启动仍使用 GL Compatibility 和现有 2D 主场景；只有显式启动参数会打开固定 37 Hex Hero Valley。该场景包含四个建筑实例、一种河谷树木原型和连续河谷河道，由同一套固定白昼方向光照明。它不读取玩家存档、不改变模拟，也不代表完整建筑库或完整美术重制。
+
+在支持 Vulkan 的桌面环境中，从仓库根目录运行：
+
+```bash
+"$GODOT" --path . --rendering-method forward_plus --rendering-driver vulkan -- --hero-valley
+```
+
+以旧 2D renderer 检视同一夹具：
+
+```bash
+"$GODOT" --path . -- --hero-2d
+```
+
+renderer 和 driver 覆写只作用于本次进程，`project.godot` 默认仍为 `gl_compatibility`。当前云环境的 Vulkan Forward+ 使用软件 Vulkan / lavapipe，不能据此宣称硬件 GPU 性能。完整模块、资产边界、复核步骤和验收状态见 [Living World3D 架构与迁移说明](docs/living_world/ARCHITECTURE.md) 与 [V1 验收记录](docs/living_world/ACCEPTANCE.md)。
+
 ## 一局怎样推进
 
 从农居、邻里中心和作坊建设城市，选择运营者，准备库存，再选择时间档位。升级改变建筑的用途和依赖关系，保留原建筑身份、运营者、库存和人群关系；方案槽随 Tier 逐个解锁。建设与升级仍共用施工能力，真实消耗材料。

@@ -3,6 +3,7 @@
 Run with:
   Blender --background --python tools/make_art040.py -- --preview
   Blender --background --python tools/make_art040.py -- --all
+  Blender --background --python-exit-code 1 --python tools/make_art040.py -- --runtime3d
 
 The PNGs are runtime assets. No .blend files are written into assets/world040.
 """
@@ -1531,6 +1532,8 @@ def parse_args():
     p.add_argument("--tier-contact",action="store_true",
                    help="assemble the anchor-aligned representative contact sheet")
     p.add_argument("--all",action="store_true")
+    p.add_argument("--runtime3d",action="store_true",
+                   help="export the four Hero Valley buildings and one tree as lit GLB; leave PNG/catalog unchanged")
     p.add_argument("--props",action="store_true")
     p.add_argument("--props-only",nargs="+",choices=PROPS,
                    help="render selected shared decoration assets")
@@ -1551,6 +1554,16 @@ def main():
         return
     global bpy
     import bpy
+    if args.runtime3d:
+        if any((args.preview, args.tier_preview, args.props, args.props_only,
+                args.source_scene, args.only, args.all)):
+            raise SystemExit("--runtime3d is an independent export; do not combine it with legacy render modes")
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("met_world3d_assets", ROOT / "tools" / "make_world3d_assets.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        module.export_hero_assets()
+        return
     if args.source_scene:
         save_source_scene(args.source_scene)
         return

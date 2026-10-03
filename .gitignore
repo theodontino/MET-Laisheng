@@ -38,3 +38,6 @@ text_editor_themes/
 *.savegame
 user_saves/
 player_saves/
+
+# Private/non-redistributable original asset packs; the source packager also excludes this directory.
+art_source/vendor_local/

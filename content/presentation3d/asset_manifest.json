@@ -1,0 +1,697 @@
+{
+  "schema": "met.presentation3d.v1",
+  "version": 1,
+  "units": "Hex radius 1; glTF/Godot right-handed Y-up; source scale baked into vertices",
+  "camera_reference": {
+    "direction_to_camera": [
+      9.0,
+      13.2,
+      12.0
+    ],
+    "elevation_degrees": 41.35,
+    "azimuth_degrees_blender_xy": -53.1301
+  },
+  "material_profiles": {
+    "met.mineral_pbr.v1": {
+      "description": "Original mineral colors; Principled metallic-roughness; realtime scene lighting",
+      "baked_directional_light": false,
+      "baked_ao": false,
+      "textures": false
+    },
+    "met.valley_foliage_pbr.v1": {
+      "description": "Runtime-only native fern greens, calibrated for fixed daylight and filmic tonemapping",
+      "palette_note": "Tree-only saturated/deeper greens; legacy PNG and building palettes unchanged",
+      "palette_srgb_hex": {
+        "green": "3F654B",
+        "green_dark": "2E4F3B",
+        "leaf": "3F6848",
+        "leaf_light": "708D56",
+        "leaf_dark": "2E5137"
+      },
+      "roughness": 0.9,
+      "baked": false,
+      "baked_directional_light": false,
+      "baked_ao": false,
+      "textures": false
+    }
+  },
+  "bindings": {
+    "homestead": "building.homestead.t1",
+    "neighborhood": "building.neighborhood.t1",
+    "workshop": "building.workshop.t1",
+    "residence": "building.residence.t2"
+  },
+  "assets": [
+    {
+      "id": "building.homestead.t1",
+      "kind": "building",
+      "runtime_path": "assets/world3d/buildings/homestead.glb",
+      "source_path": "art_source/original/world3d/homestead.blend",
+      "source_pack": "MET original parameterized Laisheng geometry",
+      "author": "MET project; original procedural geometry, Codex-assisted implementation",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "license": "LicenseRef-MET-Project-Original",
+      "license_url": "res://docs/living_world/ASSET_PROVENANCE.md",
+      "download_date": "2026-10-03",
+      "download_date_note": "Original in-project export date; no external download",
+      "source_sha256": "273b5728238542d996ba4857b9deb9fbc4dae407a5dc35bdd8fe4b6052aeb16d",
+      "runtime_sha256": "adb8cc12b9fd325335a11731b67303585fe32c83e248826f2a8828ac771b18dc",
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "footprint": {
+        "xz_bounds": [
+          -0.79365,
+          -0.432776,
+          0.67925,
+          0.166375
+        ]
+      },
+      "bounds": {
+        "min": [
+          -0.79365,
+          0.0,
+          -0.5207483
+        ],
+        "max": [
+          0.6831,
+          0.352,
+          0.248325
+        ]
+      },
+      "tags": [
+        "hero-valley",
+        "original",
+        "runtime-3d",
+        "realtime-lightable",
+        "building"
+      ],
+      "material_profile": "met.mineral_pbr.v1",
+      "redistribution_policy": "project-source-and-runtime",
+      "attribution_required": false,
+      "source_to_runtime": {
+        "uniform_scale": 0.055,
+        "axis_mapping": "[x,z,-y]",
+        "pivot_origin": "legacy-origin-ground",
+        "scale_baked": true
+      },
+      "generator": {
+        "script": "tools/make_world3d_assets.py",
+        "sha256": "483f5a0fee6a677964c8e3d7530d00eddce74f8c3d67abb328aa2b89c7a1d9fa",
+        "dependencies": [
+          {
+            "path": "tools/make_art040.py",
+            "sha256": "e5c2c342e3664fbfa2f426d4f9afb50cae60f3d5588be7f4bc68dc8a20cdaf85"
+          },
+          {
+            "path": "content/presentation040/art_catalog.json",
+            "sha256": "aa2f9f0f959c0ffd7667d0b8a33750c6796a42ee34a54e30b84ab4617976b0ba"
+          }
+        ],
+        "blender_version": "4.3.2",
+        "command": "blender --background --python-exit-code 1 --python tools/make_art040.py -- --runtime3d"
+      },
+      "mesh_statistics": {
+        "source_components": 110,
+        "vertices": 7438,
+        "triangles": 13236,
+        "material_surfaces": 17
+      },
+      "legacy_binding": {
+        "logical_asset_id": "building_homestead",
+        "definition_id": "homestead",
+        "catalog_path": "content/presentation040/art_catalog.json",
+        "footprint_world_bounds": [
+          -14.430000305175781,
+          -3.0250000953674316,
+          12.350000381469727,
+          7.868655204772949
+        ],
+        "world_bounds": [
+          -14.430000305175781,
+          -4.515000343322754,
+          0.0,
+          12.420000076293945,
+          9.469138145446777,
+          6.400000095367432
+        ],
+        "connector_anchors": {
+          "front": [
+            -1.0399999618530273,
+            -3.0250000953674316
+          ],
+          "right": [
+            12.350000381469727,
+            2.421827554702759
+          ],
+          "rear": [
+            -1.0399999618530273,
+            7.868655204772949
+          ],
+          "left": [
+            -14.430000305175781,
+            2.421827554702759
+          ]
+        }
+      },
+      "connector_anchors": {
+        "front": [
+          -0.0572,
+          0.0,
+          0.166375
+        ],
+        "right": [
+          0.67925,
+          0.0,
+          -0.1332005
+        ],
+        "rear": [
+          -0.0572,
+          0.0,
+          -0.432776
+        ],
+        "left": [
+          -0.79365,
+          0.0,
+          -0.1332005
+        ]
+      }
+    },
+    {
+      "id": "building.neighborhood.t1",
+      "kind": "building",
+      "runtime_path": "assets/world3d/buildings/neighborhood.glb",
+      "source_path": "art_source/original/world3d/neighborhood.blend",
+      "source_pack": "MET original parameterized Laisheng geometry",
+      "author": "MET project; original procedural geometry, Codex-assisted implementation",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "license": "LicenseRef-MET-Project-Original",
+      "license_url": "res://docs/living_world/ASSET_PROVENANCE.md",
+      "download_date": "2026-10-03",
+      "download_date_note": "Original in-project export date; no external download",
+      "source_sha256": "b0c94dfcc6ea5171e419ff86e6c6ceb3ed7c444f5a41b4f811f383914502ff9b",
+      "runtime_sha256": "b14a541e4a4fdcb5452ecb10ae94e3c62ef83ff1ec49bed828d307037613bc43",
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "footprint": {
+        "xz_bounds": [
+          -0.852225,
+          -0.4576,
+          0.70125,
+          0.561
+        ]
+      },
+      "bounds": {
+        "min": [
+          -0.852225,
+          0.0,
+          -0.5635428
+        ],
+        "max": [
+          0.7835428,
+          0.5005,
+          0.561
+        ]
+      },
+      "tags": [
+        "hero-valley",
+        "original",
+        "runtime-3d",
+        "realtime-lightable",
+        "building"
+      ],
+      "material_profile": "met.mineral_pbr.v1",
+      "redistribution_policy": "project-source-and-runtime",
+      "attribution_required": false,
+      "source_to_runtime": {
+        "uniform_scale": 0.055,
+        "axis_mapping": "[x,z,-y]",
+        "pivot_origin": "legacy-origin-ground",
+        "scale_baked": true
+      },
+      "generator": {
+        "script": "tools/make_world3d_assets.py",
+        "sha256": "483f5a0fee6a677964c8e3d7530d00eddce74f8c3d67abb328aa2b89c7a1d9fa",
+        "dependencies": [
+          {
+            "path": "tools/make_art040.py",
+            "sha256": "e5c2c342e3664fbfa2f426d4f9afb50cae60f3d5588be7f4bc68dc8a20cdaf85"
+          },
+          {
+            "path": "content/presentation040/art_catalog.json",
+            "sha256": "aa2f9f0f959c0ffd7667d0b8a33750c6796a42ee34a54e30b84ab4617976b0ba"
+          }
+        ],
+        "blender_version": "4.3.2",
+        "command": "blender --background --python-exit-code 1 --python tools/make_art040.py -- --runtime3d"
+      },
+      "mesh_statistics": {
+        "source_components": 183,
+        "vertices": 12966,
+        "triangles": 21200,
+        "material_surfaces": 20
+      },
+      "legacy_binding": {
+        "logical_asset_id": "building_neighborhood",
+        "definition_id": "neighborhood",
+        "catalog_path": "content/presentation040/art_catalog.json",
+        "footprint_world_bounds": [
+          -15.494999885559082,
+          -10.199999809265137,
+          12.75,
+          8.319999694824219
+        ],
+        "world_bounds": [
+          -15.494999885559082,
+          -10.199999809265137,
+          0.0,
+          14.246232032775879,
+          10.246232032775879,
+          9.100000381469727
+        ],
+        "connector_anchors": {
+          "front": [
+            -1.372499942779541,
+            -10.199999809265137
+          ],
+          "right": [
+            12.75,
+            -0.940000057220459
+          ],
+          "rear": [
+            -1.372499942779541,
+            8.319999694824219
+          ],
+          "left": [
+            -15.494999885559082,
+            -0.940000057220459
+          ]
+        }
+      },
+      "connector_anchors": {
+        "front": [
+          -0.0754875,
+          0.0,
+          0.561
+        ],
+        "right": [
+          0.70125,
+          0.0,
+          0.0517
+        ],
+        "rear": [
+          -0.0754875,
+          0.0,
+          -0.4576
+        ],
+        "left": [
+          -0.852225,
+          0.0,
+          0.0517
+        ]
+      }
+    },
+    {
+      "id": "building.workshop.t1",
+      "kind": "building",
+      "runtime_path": "assets/world3d/buildings/workshop.glb",
+      "source_path": "art_source/original/world3d/workshop.blend",
+      "source_pack": "MET original parameterized Laisheng geometry",
+      "author": "MET project; original procedural geometry, Codex-assisted implementation",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "license": "LicenseRef-MET-Project-Original",
+      "license_url": "res://docs/living_world/ASSET_PROVENANCE.md",
+      "download_date": "2026-10-03",
+      "download_date_note": "Original in-project export date; no external download",
+      "source_sha256": "bcee4cf570135bad25bc402ca89625c518d8f2b7a3af7ee6f94b9d202eff531e",
+      "runtime_sha256": "90e5d6383b638bec3f0368faa36c897ed9cca5fec2a25a50b50a88fe8f111b7d",
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "footprint": {
+        "xz_bounds": [
+          -0.92675,
+          -0.452375,
+          0.808225,
+          0.6395305
+        ]
+      },
+      "bounds": {
+        "min": [
+          -0.92675,
+          0.0,
+          -0.4543
+        ],
+        "max": [
+          0.8731814,
+          0.39105,
+          0.6395305
+        ]
+      },
+      "tags": [
+        "hero-valley",
+        "original",
+        "runtime-3d",
+        "realtime-lightable",
+        "building"
+      ],
+      "material_profile": "met.mineral_pbr.v1",
+      "redistribution_policy": "project-source-and-runtime",
+      "attribution_required": false,
+      "source_to_runtime": {
+        "uniform_scale": 0.055,
+        "axis_mapping": "[x,z,-y]",
+        "pivot_origin": "legacy-origin-ground",
+        "scale_baked": true
+      },
+      "generator": {
+        "script": "tools/make_world3d_assets.py",
+        "sha256": "483f5a0fee6a677964c8e3d7530d00eddce74f8c3d67abb328aa2b89c7a1d9fa",
+        "dependencies": [
+          {
+            "path": "tools/make_art040.py",
+            "sha256": "e5c2c342e3664fbfa2f426d4f9afb50cae60f3d5588be7f4bc68dc8a20cdaf85"
+          },
+          {
+            "path": "content/presentation040/art_catalog.json",
+            "sha256": "aa2f9f0f959c0ffd7667d0b8a33750c6796a42ee34a54e30b84ab4617976b0ba"
+          }
+        ],
+        "blender_version": "4.3.2",
+        "command": "blender --background --python-exit-code 1 --python tools/make_art040.py -- --runtime3d"
+      },
+      "mesh_statistics": {
+        "source_components": 64,
+        "vertices": 4268,
+        "triangles": 8280,
+        "material_surfaces": 15
+      },
+      "legacy_binding": {
+        "logical_asset_id": "building_workshop",
+        "definition_id": "workshop",
+        "catalog_path": "content/presentation040/art_catalog.json",
+        "footprint_world_bounds": [
+          -16.850000381469727,
+          -11.627827644348145,
+          14.694999694824219,
+          8.225000381469727
+        ],
+        "world_bounds": [
+          -16.850000381469727,
+          -11.627827644348145,
+          0.0,
+          15.876025199890137,
+          8.260000228881836,
+          7.110000133514404
+        ],
+        "connector_anchors": {
+          "front": [
+            -1.077500343322754,
+            -11.627827644348145
+          ],
+          "right": [
+            14.694999694824219,
+            -1.701413631439209
+          ],
+          "rear": [
+            -1.077500343322754,
+            8.225000381469727
+          ],
+          "left": [
+            -16.850000381469727,
+            -1.701413631439209
+          ]
+        }
+      },
+      "connector_anchors": {
+        "front": [
+          -0.0592625,
+          0.0,
+          0.6395305
+        ],
+        "right": [
+          0.808225,
+          0.0,
+          0.0935777
+        ],
+        "rear": [
+          -0.0592625,
+          0.0,
+          -0.452375
+        ],
+        "left": [
+          -0.92675,
+          0.0,
+          0.0935777
+        ]
+      }
+    },
+    {
+      "id": "building.residence.t2",
+      "kind": "building",
+      "runtime_path": "assets/world3d/buildings/residence.glb",
+      "source_path": "art_source/original/world3d/residence.blend",
+      "source_pack": "MET original parameterized Laisheng geometry",
+      "author": "MET project; original procedural geometry, Codex-assisted implementation",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "license": "LicenseRef-MET-Project-Original",
+      "license_url": "res://docs/living_world/ASSET_PROVENANCE.md",
+      "download_date": "2026-10-03",
+      "download_date_note": "Original in-project export date; no external download",
+      "source_sha256": "ca2b10315a5a8a99b6aee7cbcdf010605dafdf8003e3859786bf70f6158c2b00",
+      "runtime_sha256": "72368c12ec149d804a6c93e324597bf8db7595d6949fe224caf96850840f848b",
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "footprint": {
+        "xz_bounds": [
+          -0.9625,
+          -0.649,
+          0.9625,
+          0.4895
+        ]
+      },
+      "bounds": {
+        "min": [
+          -0.9625,
+          0.0,
+          -0.6697176
+        ],
+        "max": [
+          0.968825,
+          0.66275,
+          0.49225
+        ]
+      },
+      "tags": [
+        "hero-valley",
+        "original",
+        "runtime-3d",
+        "realtime-lightable",
+        "building"
+      ],
+      "material_profile": "met.mineral_pbr.v1",
+      "redistribution_policy": "project-source-and-runtime",
+      "attribution_required": false,
+      "source_to_runtime": {
+        "uniform_scale": 0.055,
+        "axis_mapping": "[x,z,-y]",
+        "pivot_origin": "legacy-origin-ground",
+        "scale_baked": true
+      },
+      "generator": {
+        "script": "tools/make_world3d_assets.py",
+        "sha256": "483f5a0fee6a677964c8e3d7530d00eddce74f8c3d67abb328aa2b89c7a1d9fa",
+        "dependencies": [
+          {
+            "path": "tools/make_art040.py",
+            "sha256": "e5c2c342e3664fbfa2f426d4f9afb50cae60f3d5588be7f4bc68dc8a20cdaf85"
+          },
+          {
+            "path": "content/presentation040/art_catalog.json",
+            "sha256": "aa2f9f0f959c0ffd7667d0b8a33750c6796a42ee34a54e30b84ab4617976b0ba"
+          }
+        ],
+        "blender_version": "4.3.2",
+        "command": "blender --background --python-exit-code 1 --python tools/make_art040.py -- --runtime3d"
+      },
+      "mesh_statistics": {
+        "source_components": 482,
+        "vertices": 30622,
+        "triangles": 51316,
+        "material_surfaces": 16
+      },
+      "legacy_binding": {
+        "logical_asset_id": "building_residence",
+        "definition_id": "residence",
+        "catalog_path": "content/presentation040/art_catalog.json",
+        "footprint_world_bounds": [
+          -17.5,
+          -8.899999618530273,
+          17.5,
+          11.799999237060547
+        ],
+        "world_bounds": [
+          -17.5,
+          -8.949999809265137,
+          0.0,
+          17.614999771118164,
+          12.17668342590332,
+          12.050000190734863
+        ],
+        "connector_anchors": {
+          "front": [
+            0.0,
+            -8.899999618530273
+          ],
+          "right": [
+            17.5,
+            1.4499998092651367
+          ],
+          "rear": [
+            0.0,
+            11.799999237060547
+          ],
+          "left": [
+            -17.5,
+            1.4499998092651367
+          ]
+        }
+      },
+      "connector_anchors": {
+        "front": [
+          0.0,
+          0.0,
+          0.4895
+        ],
+        "right": [
+          0.9625,
+          0.0,
+          -0.07975
+        ],
+        "rear": [
+          0.0,
+          0.0,
+          -0.649
+        ],
+        "left": [
+          -0.9625,
+          0.0,
+          -0.07975
+        ]
+      }
+    },
+    {
+      "id": "nature.tree.valley_01",
+      "kind": "foliage",
+      "runtime_path": "assets/world3d/nature/valley_tree_01.glb",
+      "source_path": "art_source/original/world3d/valley_tree_01.blend",
+      "source_pack": "MET original parameterized Laisheng geometry",
+      "author": "MET project; original procedural geometry, Codex-assisted implementation",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "license": "LicenseRef-MET-Project-Original",
+      "license_url": "res://docs/living_world/ASSET_PROVENANCE.md",
+      "download_date": "2026-10-03",
+      "download_date_note": "Original in-project export date; no external download",
+      "source_sha256": "75ce29bec34682fa8c19e45c774424b0ad4963f549a44938b6318982887af981",
+      "runtime_sha256": "7fcd57dc86b4b31cca342eceeab54463c3830f0441ed5bb85c251d4504708ab2",
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "footprint": {
+        "xz_bounds": [
+          -0.2223769,
+          -0.2223769,
+          0.2223769,
+          0.2223769
+        ]
+      },
+      "bounds": {
+        "min": [
+          -0.2223769,
+          0.0,
+          -0.2223769
+        ],
+        "max": [
+          0.2223769,
+          0.6996,
+          0.2223769
+        ]
+      },
+      "tags": [
+        "hero-valley",
+        "original",
+        "runtime-3d",
+        "realtime-lightable",
+        "foliage"
+      ],
+      "material_profile": "met.valley_foliage_pbr.v1",
+      "redistribution_policy": "project-source-and-runtime",
+      "attribution_required": false,
+      "source_to_runtime": {
+        "uniform_scale": 0.055,
+        "axis_mapping": "[x,z,-y]",
+        "pivot_origin": "legacy-origin-ground",
+        "scale_baked": true
+      },
+      "generator": {
+        "script": "tools/make_world3d_assets.py",
+        "sha256": "483f5a0fee6a677964c8e3d7530d00eddce74f8c3d67abb328aa2b89c7a1d9fa",
+        "dependencies": [
+          {
+            "path": "tools/make_art040.py",
+            "sha256": "e5c2c342e3664fbfa2f426d4f9afb50cae60f3d5588be7f4bc68dc8a20cdaf85"
+          },
+          {
+            "path": "content/presentation040/art_catalog.json",
+            "sha256": "aa2f9f0f959c0ffd7667d0b8a33750c6796a42ee34a54e30b84ab4617976b0ba"
+          }
+        ],
+        "blender_version": "4.3.2",
+        "command": "blender --background --python-exit-code 1 --python tools/make_art040.py -- --runtime3d"
+      },
+      "mesh_statistics": {
+        "source_components": 82,
+        "vertices": 2710,
+        "triangles": 1892,
+        "material_surfaces": 6
+      }
+    }
+  ]
+}

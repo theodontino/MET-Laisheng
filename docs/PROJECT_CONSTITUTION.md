@@ -80,6 +80,8 @@ DT 的职责是 Agency Budget：允许玩家在一轮内强力干预城市，但
 
 城市视觉应随发展变化：主建筑按格建设，相邻发展地区间长出小房屋、店铺、仓棚、街树和道路肌理；街区逐渐变密、变高、变现代。填充物初期属于视觉层，不为每栋小屋新增模拟 Entity。表现读取真实模拟状态，不反向改变模拟；停工时不能仍用冒烟等表现伪造生产。
 
+**独立视觉轴（2026-10-03）：** Living World3D 是与 2D Beta 并列的可选只读展示路径，使用 detached 的已结算状态、独立资产 registry 和共享固定白昼光。其 V1 目标是固定 37 Hex Hero Valley、四栋建筑与一种树木原型；它不取代 2D 世界、不改变游戏或存档逻辑，也不意味着其余建筑已经覆盖。默认仍以 GL Compatibility 打开现有 2D 主场景；只有显式运行 `"$GODOT" --path . --rendering-method forward_plus --rendering-driver vulkan -- --hero-valley` 才启动 3D 切片。具体模块合同、许可口径和迁移阶段见 [Living World3D 架构说明](living_world/ARCHITECTURE.md)。V1 运行与画面结论须等[验收记录](living_world/ACCEPTANCE.md)提供实际证据后再写，不以设计目标代替完成证明。
+
 ## 三、0.4 阶段产品需求基线
 
 本节记录设计目标，不是完成清单。0.4 只做一个 Block；整个 pre-alpha 不提供跨版本存档兼容。当前成长、Commission、Bonus 与 Market 稳定之前，不同时展开全部远期路线。
