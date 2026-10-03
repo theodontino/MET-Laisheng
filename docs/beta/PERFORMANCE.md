@@ -64,4 +64,4 @@ App 缓冲外还存在本帧距最近一次时钟采样的时间，停止回调�
 
 - BEFORE：`beta_performance_native_isolated_before.json/.log`、`beta_performance_isolated_before.json/.log`。
 - AFTER：`beta_performance_native.json/.log`、`beta_performance.json/.log`。
-- 数学缓存：`beta_math_cache.json`；资源分配旧算法精确对照：`beta_allocation.json`；时间边界与暂停恢复：`beta_time.json`。
+- 数学缓存：`beta_math_cache.json`；资源分配旧算法精确对照：`beta_allocation.json`；时间边界与暂停恢复：`beta_time.log`。
