@@ -1,0 +1,121 @@
+name: macOS application release
+
+on:
+  push:
+    tags:
+      - 'macos-*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: macos-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-release:
+    runs-on: macos-14
+    timeout-minutes: 40
+    steps:
+      - name: Check out exact release tag
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Install checksum-verified Godot and macOS export template
+        shell: bash
+        run: |
+          set -euo pipefail
+          MET_SETUP_DIR="$RUNNER_TEMP/met-godot"
+          mkdir -p "$MET_SETUP_DIR"
+          cd "$MET_SETUP_DIR"
+          curl -fLsS --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_macos.universal.zip -o engine.zip
+          curl -fLsS --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz -o templates.tpz
+          echo '38aa16e5bba2083941fc5b3e54be0089bd4cc35e32415f5b9fd9a8a6a7b9818255d44532ea8ef94b5aef56c4b407c2d634fa4f657e4ebe681ebbf59b7bac69ca  engine.zip' | shasum -a 512 -c -
+          echo 'ca4d71c4d7b81dfc15d1a98baa07534aa95b03fdda78a0075b06672e1648d2e5f40980c9adc28d23e1b92e732ee7bf3461997aa804af74ec2fcd7a93ccb84079  templates.tpz' | shasum -a 512 -c -
+          unzip -q engine.zip
+          MET_TEMPLATE_DIR="$HOME/Library/Application Support/Godot/export_templates/4.7.2.stable"
+          mkdir -p "$MET_TEMPLATE_DIR"
+          unzip -j -q templates.tpz templates/macos.zip -d "$MET_TEMPLATE_DIR"
+          echo "GODOT=$MET_SETUP_DIR/Godot.app/Contents/MacOS/Godot" >> "$GITHUB_ENV"
+          echo "MET_EVIDENCE_DIR=$RUNNER_TEMP/met-macos-evidence" >> "$GITHUB_ENV"
+
+      - name: Import and run Beta regression on macOS
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$MET_EVIDENCE_DIR" build
+          "$GODOT" --headless --path . --editor --import --quit > "$MET_EVIDENCE_DIR/import.log" 2>&1
+          if rg -n 'SCRIPT ERROR|ERROR:|Parse Error|Compile Error' "$MET_EVIDENCE_DIR/import.log"; then exit 1; fi
+          bash tools/test_beta.sh
+
+      - name: Export universal application
+        shell: bash
+        run: |
+          set -euo pipefail
+          MET_PACKAGE="build/MET_${GITHUB_REF_NAME}_universal.zip"
+          "$GODOT" --headless --path . --export-release macOS "$MET_PACKAGE" > "$MET_EVIDENCE_DIR/export.log" 2>&1
+          if rg -n 'SCRIPT ERROR|ERROR:|Parse Error|Compile Error' "$MET_EVIDENCE_DIR/export.log"; then exit 1; fi
+          echo "MET_PACKAGE=$MET_PACKAGE" >> "$GITHUB_ENV"
+
+      - name: Validate ZIP, signature and native headless application startup
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, plistlib, struct, zipfile
+          from pathlib import Path
+          archive = Path(os.environ['MET_PACKAGE'])
+          extraction = Path(os.environ['RUNNER_TEMP']) / 'met-export-check'
+          with zipfile.ZipFile(archive) as z:
+              assert z.testzip() is None, 'ZIP CRC failure'
+              assert all(not Path(n).is_absolute() and '..' not in Path(n).parts for n in z.namelist())
+              plist_path = next(n for n in z.namelist() if n.endswith('/Contents/Info.plist'))
+              info = plistlib.loads(z.read(plist_path))
+              app = plist_path.split('/Contents/')[0]
+              executable = app + '/Contents/MacOS/' + info['CFBundleExecutable']
+              binary = z.read(executable)
+              assert struct.unpack('>I', binary[:4])[0] == 0xcafebabe
+              count = struct.unpack('>I', binary[4:8])[0]
+              architectures = {struct.unpack_from('>I', binary, 8 + i * 20)[0] for i in range(count)}
+              assert architectures == {0x01000007, 0x0100000c}, 'Requires Intel and Apple Silicon'
+              assert (z.getinfo(executable).external_attr >> 16) & 0o111
+              assert any(n.endswith('.pck') for n in z.namelist())
+              z.extractall(extraction)
+              # Python extraction does not retain ZIP Unix executable attributes.
+              for entry in z.infolist():
+                  if not entry.is_dir():
+                      mode = (entry.external_attr >> 16) & 0o777
+                      if mode: (extraction / entry.filename).chmod(mode)
+          checksum = hashlib.sha256(archive.read_bytes()).hexdigest()
+          archive.with_suffix('.zip.sha256').write_text(checksum + '  ' + archive.name + '\n')
+          with open(os.environ['GITHUB_ENV'], 'a') as env:
+              env.write('MET_APP=' + str(extraction / app) + '\n')
+              env.write('MET_EXECUTABLE=' + str(extraction / executable) + '\n')
+          report = {'source_commit': os.environ['GITHUB_SHA'], 'tag': os.environ['GITHUB_REF_NAME'], 'zip_sha256': checksum, 'universal': True, 'zip_crc': True, 'codesign': 'ad-hoc; native verification is required by the next command', 'notarized': False, 'graphical_hardware_acceptance': False}
+          Path('build/macOS-build.json').write_text(json.dumps(report, indent=2) + '\n')
+          PY
+          codesign --verify --deep --strict "$MET_APP"
+          "$MET_EXECUTABLE" --headless --audio-driver Dummy --quit-after 120 -- --fresh > "$MET_EVIDENCE_DIR/app-startup.log" 2>&1
+          if rg -n 'SCRIPT ERROR|ERROR:|Parse Error|Compile Error' "$MET_EVIDENCE_DIR/app-startup.log"; then exit 1; fi
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('build/macOS-build.json')
+          report = json.loads(p.read_text())
+          report.update(native_codesign_verification=True, native_macos_headless_startup=True)
+          p.write_text(json.dumps(report, indent=2) + '\n')
+          PY
+
+      - name: Publish verified application to GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/met-release-notes.md" <<'NOTES'
+          Universal macOS application for Apple Silicon and Intel. Extract the ZIP and open `MET · 来生.app`.
+
+          Default startup is the existing GL/2D Beta game. The Living World V1 is an opt-in 3D fixture. To open it from Terminal, use `open -n "/absolute/path/MET · 来生.app" --args --rendering-method forward_plus -- --hero-valley`.
+
+          Built with official checksum-verified Godot 4.7.2 templates. ZIP, architectures, native ad-hoc signature verification, Beta regressions and native macOS headless app startup passed. This does not certify graphical gameplay or Metal/GPU performance. The application is ad-hoc signed, not Apple-notarized; macOS may require approval through Privacy & Security settings. The attached JSON records the exact source commit and checksum.
+          NOTES
+          gh release create "$GITHUB_REF_NAME" "$MET_PACKAGE" "$MET_PACKAGE.sha256" build/macOS-build.json --verify-tag --prerelease --title "MET macOS — $GITHUB_REF_NAME" --notes-file "$RUNNER_TEMP/met-release-notes.md"
