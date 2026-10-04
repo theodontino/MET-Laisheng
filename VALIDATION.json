@@ -1,0 +1,23 @@
+{
+  "source_commit": "bc5971972a64659d5d63a379b02d67783d6e51d5",
+  "sha256": "92236489b317cfbe2c67a754bddcd84f784a8b3d0fcf94caf9b6bb3d883ca8f4",
+  "bytes": 81341375,
+  "crc_valid": true,
+  "app_bundle": "MET · 来生.app",
+  "architectures": [
+    {
+      "architecture": "x86_64",
+      "signature_blob_bytes": 1114112
+    },
+    {
+      "architecture": "arm64",
+      "signature_blob_bytes": 1048576
+    }
+  ],
+  "executable_permissions_preserved": true,
+  "export_codesigning": "Godot builtin ad-hoc; native macOS codesign verification unavailable",
+  "notarized": false,
+  "macos_native_launch_tested": false,
+  "linux_exported_pck_default_startup": true,
+  "linux_exported_pck_hero_render": true
+}
