@@ -1,6 +1,8 @@
 # MET Beta.2 — UI Impacts V1 macOS app
 
-[Download the universal macOS app ZIP](https://github.com/theodontino/MET-Laisheng/raw/refs/heads/downloads/macos-ui-impacts-v1-7e9e1a9/MET_0.5.0-beta.2_UIImpactsV1_macOS_universal_7e9e1a9.zip)
+[直接下载 ZIP](https://github.com/theodontino/MET-Laisheng/raw/refs/heads/downloads/macos-ui-impacts-v1-7e9e1a9/MET_0.5.0-beta.2_UIImpactsV1_macOS_universal_7e9e1a9.zip)
+
+[GitHub 下载页面](https://github.com/theodontino/MET-Laisheng/blob/downloads/macos-ui-impacts-v1-7e9e1a9/MET_0.5.0-beta.2_UIImpactsV1_macOS_universal_7e9e1a9.zip)：登录有仓库权限的 GitHub 账号后，可在文件页点击 Download raw file。
 
 解压后打开 `MET · 来生.app`。本次为 Godot 主线：整体 UI 80%/100%/120%，图形化建设前后供需、库存、电力与环境影响；`L` / `Shift+L` 循环地图图层。默认桌面全屏，最低1920×1080。
 
