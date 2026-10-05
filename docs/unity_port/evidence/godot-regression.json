@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "Existing Godot Beta core and route regressions after adding the independent Unity source project. Not Unity execution or performance.",
+  "core_checks_passed": 401,
+  "core_checks_failed": 0,
+  "playthrough_routes_passed": 6,
+  "playthrough_routes_failed": 0,
+  "suites": {
+    "beta_time": 62,
+    "beta_bonus": 63,
+    "beta_themes": 52,
+    "beta_lifecycle": 56,
+    "beta_planning": 43,
+    "beta_feedback": 21,
+    "beta_math_cache": 6,
+    "beta_allocation": 29,
+    "beta_acceptance": 69
+  },
+  "command": "GODOT=<verified 4.7.2 executable> MET_EVIDENCE_DIR=<fresh evidence> bash tools/test_beta.sh",
+  "godot_gameplay_files_modified": false
+}

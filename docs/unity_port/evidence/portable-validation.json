@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "Portable fixture geometry, hashes, provenance and package pins; Unity execution unverified.",
+  "geometry": {
+    "world": {
+      "triangles": 110408,
+      "meshes": 21,
+      "surfaces": 85,
+      "color_surfaces": 3,
+      "nodes": 34
+    },
+    "foliage": {
+      "triangles": 1892,
+      "meshes": 6,
+      "surfaces": 6,
+      "color_surfaces": 6,
+      "nodes": 7
+    }
+  },
+  "source_files_checked": 19,
+  "sidecar_sha256": "17b6e0efc294062e7a0ae563f01b5fefa1c1c23f58fdd1501854fe6b92d13a31"
+}

@@ -3303,3 +3303,17 @@ runtime files are included in the authorized MET project distribution.
 See docs/living_world/ASSET_PROVENANCE.md for the complete provenance and
 redistribution scope. Existing third-party engine/font notices above remain
 applicable and are not replaced by this entry.
+
+
+MET Unity migration slice dependency scope
+------------------------------------------
+The optional unity/METLivingWorld source project references Unity Technologies'
+Universal Render Pipeline 17.0.3 (Unity Companion License), glTFast 6.20.0
+(Apache-2.0), and com.unity.nuget.newtonsoft-json 3.2.1 (upstream Newtonsoft.Json
+MIT, James Newton-King). Packages are resolved through Unity Package Manager;
+their source/binaries are not vendored in this MET source distribution. Preserve
+the notices delivered with the actual installed packages when distributing a
+Unity Player. This entry is not a substitute for Unity's Editor/runtime license
+or a complete, verified license inventory of an unbuilt Unity application.
+See docs/unity_port/DEPENDENCIES.md. The existing MET original artwork rights
+and historical Godot/font notices above are unchanged.

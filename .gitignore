@@ -41,3 +41,21 @@ player_saves/
 
 # Private/non-redistributable original asset packs; the source packager also excludes this directory.
 art_source/vendor_local/
+
+# Unity port: generated caches, local editor state and native builds.
+unity/**/Library/
+unity/**/Temp/
+unity/**/Obj/
+unity/**/Logs/
+unity/**/UserSettings/
+unity/**/Builds/
+unity/**/*.csproj
+unity/**/*.sln
+unity/**/*.userprefs
+unity/**/.vs/
+unity/**/MemoryCaptures/
+unity/**/Recordings/
+unity/**/*.glb.import
+unity/**/UnityHeroEvidence/
+unity/**/Build/
+*.ulf

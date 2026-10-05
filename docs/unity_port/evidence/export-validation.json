@@ -1,0 +1,549 @@
+{
+  "albedo_conversion": {
+    "building_foliage": "existing standard PBR materials preserved",
+    "lighting_baked": false,
+    "mode": "linear_vertex_color_PBR",
+    "river": "original fixed shader ALBEDO sampled at actual vertices; constant roughness 0.50",
+    "shaders_ported": false,
+    "terrain": "original shader ALBEDO sampled at actual mesh vertices; fine fragment noise approximated"
+  },
+  "bounds": {
+    "max": [
+      7.187177658081055,
+      1.1380112171173096,
+      8.124691009521484
+    ],
+    "min": [
+      -7.187177658081055,
+      -0.5,
+      -6.625
+    ]
+  },
+  "camera": {
+    "far": 100.0,
+    "near": 0.05000000074505806,
+    "position": [
+      10.810274124145508,
+      16.20507049560547,
+      14.41369915008545
+    ],
+    "projection": "orthographic",
+    "target": [
+      0.0,
+      0.3499999940395355,
+      0.0
+    ],
+    "up": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "vertical_span": 12.0
+  },
+  "checks": [
+    {
+      "name": "official GLTFDocument exports both deterministic runs",
+      "pass": true
+    },
+    {
+      "name": "world GLB, shared tree GLB and sidecar are byte-identical across repeated exports",
+      "pass": true
+    },
+    {
+      "name": "portable JSON is versioned committed presentation data",
+      "pass": true
+    },
+    {
+      "name": "fixture world and independent visual seeds are fixed",
+      "pass": true
+    },
+    {
+      "name": "identical fixture produces identical committed visual snapshot signature",
+      "pass": true
+    },
+    {
+      "name": "complete encoded state, RNG, wallet, compiled data and revision remain unchanged",
+      "pass": true
+    },
+    {
+      "name": "export does not mutate detached visual snapshot",
+      "pass": true
+    },
+    {
+      "name": "fixture export never reads or writes player save or advances gameplay RNG",
+      "pass": true
+    },
+    {
+      "name": "portable Hero Valley has 37 logical Hex tiles",
+      "pass": true
+    },
+    {
+      "name": "four existing buildings retain logical identity",
+      "pass": true
+    },
+    {
+      "name": "29 existing tree transforms are exported separately from prototype",
+      "pass": true
+    },
+    {
+      "name": "single existing tree prototype retains six shared material batches and 1892 triangles",
+      "pass": true
+    },
+    {
+      "name": "JSON and official GLB both declare original RH Y-up coordinates",
+      "pass": true
+    },
+    {
+      "name": "Unity conversion boundary explicitly prevents geometry double reflection",
+      "pass": true
+    },
+    {
+      "name": "only static shader ALBEDO is sampled, with no directional lighting baked",
+      "pass": true
+    },
+    {
+      "name": "fixed orthographic camera retains original vertical span",
+      "pass": true
+    },
+    {
+      "name": "fixed camera preserves original miniature viewing distance",
+      "pass": true
+    },
+    {
+      "name": "single fixed daylight has explicit color and intensity semantics",
+      "pass": true
+    },
+    {
+      "name": "fixed environment direction and dry weather are valid",
+      "pass": true
+    },
+    {
+      "name": "portable sidecar excludes Simulation wallets, entities, groups, rules and resource inventories",
+      "pass": true
+    },
+    {
+      "name": "unique logical tile centers and terrain-following 48-point outlines are finite",
+      "pass": true
+    },
+    {
+      "name": "tree positions, normalized quaternions, positive scales and tile references are valid",
+      "pass": true
+    },
+    {
+      "name": "recorded source and registered asset SHA256 map is traceable",
+      "pass": true
+    },
+    {
+      "name": "sidecar records actual exported GLB SHA256",
+      "pass": true
+    },
+    {
+      "name": "both exported GLBs reimport through official Godot GLTFDocument",
+      "pass": true
+    },
+    {
+      "name": "round-trip world preserves actual terrain, river, foundation, building and road triangle count",
+      "pass": true
+    },
+    {
+      "name": "round-trip prototype remains six shared meshes, without per-tree scene duplication",
+      "pass": true
+    },
+    {
+      "name": "round-trip world preserves actual mesh-instance count",
+      "pass": true
+    },
+    {
+      "name": "round-trip world preserves actual transformed geometry bounds",
+      "pass": true
+    },
+    {
+      "name": "portable world contains geometry only, without hidden camera, lighting or instanced forest",
+      "pass": true
+    },
+    {
+      "name": "all round-trip materials are standard lit PBR with no Godot-only shader",
+      "pass": true
+    },
+    {
+      "name": "actual round-trip mesh positions and normals are finite with consistent clockwise front faces",
+      "pass": true
+    },
+    {
+      "name": "80 registered building ground-contact samples remain supported by actual exported terrain and platform triangles",
+      "pass": true
+    },
+    {
+      "name": "official outputs have valid binary glTF 2.0 container headers and JSON chunks",
+      "pass": true
+    },
+    {
+      "name": "portable glTF primitives contain baked base-color attributes",
+      "pass": true
+    },
+    {
+      "name": "official glTF payload does not embed camera or directional illumination",
+      "pass": true
+    }
+  ],
+  "coordinate_system": {
+    "geometry": "Godot official GLTFDocument glTF 2.0",
+    "handedness": "right",
+    "json": "same right-handed coordinates as GLB",
+    "unit": "world_hex_radius_1",
+    "unity_conversion": "glTFast mirrors X; mirror JSON X once, quaternion [x,-y,-z,w]; never reflect imported geometry again",
+    "up": "+Y"
+  },
+  "environment": {
+    "ambient_color": [
+      0.8274509906768799,
+      0.8784313797950745,
+      0.8196078538894653,
+      1.0
+    ],
+    "ambient_intensity": 0.3499999940395355,
+    "background": [
+      0.7960784435272217,
+      0.8470588326454163,
+      0.8627451062202454,
+      1.0
+    ],
+    "cloudiness": 0.05,
+    "color_space": "srgb",
+    "fog_density": 0.0,
+    "humidity": 0.4,
+    "sun_color": [
+      1.0,
+      0.9411764740943908,
+      0.8392156958580017,
+      1.0
+    ],
+    "sun_direction": [
+      0.3545851707458496,
+      -0.7431448698043823,
+      -0.5674548745155334
+    ],
+    "sun_intensity": 1.149999976158142,
+    "temperature_band": "temperate",
+    "wetness": 0.0,
+    "wind": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "world_time": 36000.0
+  },
+  "evidence_normalization": "Only output absolute directories removed; recorded check outcomes, hashes, geometry and isolation proof retained. No durations or timestamps were included by this probe.",
+  "failed": 0,
+  "first_run": {
+    "files": {
+      "foliage.glb": "77d4823d28d98e429e205668ecc85ffef1d403af6b5a399daca7208d2cbcd9cc",
+      "hero_valley.json": "17b6e0efc294062e7a0ae563f01b5fefa1c1c23f58fdd1501854fe6b92d13a31",
+      "world.glb": "b3c23f3b7521c4d39a9efd597955d18f26656808b66bc495e4fecd36a334f967"
+    },
+    "live_state_unchanged": true,
+    "model_stats": {
+      "building_triangles": 94032,
+      "buildings": 4,
+      "buildings_detail": {
+        "buildings": 4,
+        "construction_sites_skipped": 0,
+        "mesh_instances": 4,
+        "missing_assets": [],
+        "offmap_sources_skipped": 2,
+        "presentation_only": true,
+        "triangles": 94032
+      },
+      "fabric": {
+        "annexes": 0,
+        "lane_triangles": 144,
+        "lanes": 2,
+        "presentation_only": true,
+        "source_connectors": 2,
+        "street_props": 0
+      },
+      "foliage": {
+        "batches": 6,
+        "missing_assets": [],
+        "presentation_only": true,
+        "profile": {
+          "center_density": 0.92,
+          "edge_density": 0.4,
+          "forest_candidates": 22,
+          "max_slope": 0.65,
+          "minimum_spacing": 16.0,
+          "plain_candidates": 2,
+          "plain_density": 0.26,
+          "platform_clearance": 13.0,
+          "river_clearance": 66.0,
+          "road_clearance": 11.0,
+          "scale_max": 1.16,
+          "scale_min": 0.8,
+          "scatter_radius": 62.0
+        },
+        "tree_scene_nodes": 0,
+        "trees": 29,
+        "triangles_per_tree": 1892,
+        "visual_seed": 314159
+      },
+      "foliage_batches": 6,
+      "foundation_meshes": 8,
+      "foundation_triangles": 142,
+      "mesh_instances_world": 21,
+      "river": {
+        "continuous_path_points": 388,
+        "river_half_width_legacy": 31.0,
+        "river_mesh_instances": 1,
+        "river_triangles": 1581,
+        "river_vertices": 2835,
+        "water_height_world": 0.018
+      },
+      "river_triangles": 1581,
+      "road_triangles": 144,
+      "terrain": {
+        "foundation_meshes": 8,
+        "foundation_triangles": 142,
+        "grid_step_legacy": 10.0,
+        "individual_hex_surfaces": 0,
+        "landscape_edge_triangles": 690,
+        "perimeter_vertices": 64,
+        "terrain_mesh_instances": 1,
+        "terrain_triangles": 13819,
+        "terrain_vertices": 10979
+      },
+      "terrain_skirt_triangles": 690,
+      "terrain_triangles": 13819,
+      "tiles": 37,
+      "trees": 29,
+      "triangles_per_tree": 1892,
+      "triangles_world": 110408
+    },
+    "ok": true,
+    "snapshot_signature": "2de4ddd315c6eacc13b76d5d3458d79f8b77d3281e2513e57b1914dab12f3827"
+  },
+  "fixture": "MET Hero Valley V1",
+  "geometry_conversion": {
+    "bounds": "actual indexed geometry, excluding unused lattice/river vertices clipped from visible topology",
+    "front_face": "clockwise in Godot, official glTF conversion by writer",
+    "front_faces_normalized": 144.0,
+    "source_geometry_mutated": false,
+    "writer": "Godot GLTFDocument"
+  },
+  "isolation_proof": {
+    "after": {
+      "compiled_sha256": "6c9ee32f2b6bc5f43ce8ab4207f474c18a75badde478844689746bfae17404ec",
+      "revision": 3.0,
+      "rng_sha256": "85ceeef637666d8554d5df93ae04a7fc2cd57aaed754c5e18f5602a83d83974d",
+      "state_sha256": "b3b559b9f42531f43468860cee9bb55939ccb02c01a9728c76950b8062fb8ddc",
+      "wallet_sha256": "286d2f3418c0297319c511fdf96ee88aff1ced341419b9ea539d774cde609648"
+    },
+    "before": {
+      "compiled_sha256": "6c9ee32f2b6bc5f43ce8ab4207f474c18a75badde478844689746bfae17404ec",
+      "revision": 3.0,
+      "rng_sha256": "85ceeef637666d8554d5df93ae04a7fc2cd57aaed754c5e18f5602a83d83974d",
+      "state_sha256": "b3b559b9f42531f43468860cee9bb55939ccb02c01a9728c76950b8062fb8ddc",
+      "wallet_sha256": "286d2f3418c0297319c511fdf96ee88aff1ced341419b9ea539d774cde609648"
+    },
+    "gameplay_rng_used_by_presentation": false,
+    "live_state_unchanged": true,
+    "player_save_read": false,
+    "player_save_written": false,
+    "snapshot_after_sha256": "8ff9ddf3aa6758cf8d5917e5d3640a80198c4620e4695b90b3f37dfcd66c2069",
+    "snapshot_before_sha256": "8ff9ddf3aa6758cf8d5917e5d3640a80198c4620e4695b90b3f37dfcd66c2069",
+    "snapshot_unchanged": true
+  },
+  "model_stats": {
+    "building_triangles": 94032.0,
+    "buildings": 4.0,
+    "buildings_detail": {
+      "buildings": 4.0,
+      "construction_sites_skipped": 0.0,
+      "mesh_instances": 4.0,
+      "missing_assets": [],
+      "offmap_sources_skipped": 2.0,
+      "presentation_only": true,
+      "triangles": 94032.0
+    },
+    "fabric": {
+      "annexes": 0.0,
+      "lane_triangles": 144.0,
+      "lanes": 2.0,
+      "presentation_only": true,
+      "source_connectors": 2.0,
+      "street_props": 0.0
+    },
+    "foliage": {
+      "batches": 6.0,
+      "missing_assets": [],
+      "presentation_only": true,
+      "profile": {
+        "center_density": 0.92,
+        "edge_density": 0.4,
+        "forest_candidates": 22.0,
+        "max_slope": 0.65,
+        "minimum_spacing": 16.0,
+        "plain_candidates": 2.0,
+        "plain_density": 0.26,
+        "platform_clearance": 13.0,
+        "river_clearance": 66.0,
+        "road_clearance": 11.0,
+        "scale_max": 1.16,
+        "scale_min": 0.8,
+        "scatter_radius": 62.0
+      },
+      "tree_scene_nodes": 0.0,
+      "trees": 29.0,
+      "triangles_per_tree": 1892.0,
+      "visual_seed": 314159.0
+    },
+    "foliage_batches": 6.0,
+    "foundation_meshes": 8.0,
+    "foundation_triangles": 142.0,
+    "mesh_instances_world": 21.0,
+    "river": {
+      "continuous_path_points": 388.0,
+      "river_half_width_legacy": 31.0,
+      "river_mesh_instances": 1.0,
+      "river_triangles": 1581.0,
+      "river_vertices": 2835.0,
+      "water_height_world": 0.018
+    },
+    "river_triangles": 1581.0,
+    "road_triangles": 144.0,
+    "terrain": {
+      "foundation_meshes": 8.0,
+      "foundation_triangles": 142.0,
+      "grid_step_legacy": 10.0,
+      "individual_hex_surfaces": 0.0,
+      "landscape_edge_triangles": 690.0,
+      "perimeter_vertices": 64.0,
+      "terrain_mesh_instances": 1.0,
+      "terrain_triangles": 13819.0,
+      "terrain_vertices": 10979.0
+    },
+    "terrain_skirt_triangles": 690.0,
+    "terrain_triangles": 13819.0,
+    "tiles": 37.0,
+    "trees": 29.0,
+    "triangles_per_tree": 1892.0,
+    "triangles_world": 110408.0
+  },
+  "passed": 36,
+  "schema": 1,
+  "scope": "Godot official GLTF export/import and data bridge; Unity editor and target macOS runtime unverified",
+  "second_run": {
+    "files": {
+      "foliage.glb": "77d4823d28d98e429e205668ecc85ffef1d403af6b5a399daca7208d2cbcd9cc",
+      "hero_valley.json": "17b6e0efc294062e7a0ae563f01b5fefa1c1c23f58fdd1501854fe6b92d13a31",
+      "world.glb": "b3c23f3b7521c4d39a9efd597955d18f26656808b66bc495e4fecd36a334f967"
+    },
+    "live_state_unchanged": true,
+    "model_stats": {
+      "building_triangles": 94032,
+      "buildings": 4,
+      "buildings_detail": {
+        "buildings": 4,
+        "construction_sites_skipped": 0,
+        "mesh_instances": 4,
+        "missing_assets": [],
+        "offmap_sources_skipped": 2,
+        "presentation_only": true,
+        "triangles": 94032
+      },
+      "fabric": {
+        "annexes": 0,
+        "lane_triangles": 144,
+        "lanes": 2,
+        "presentation_only": true,
+        "source_connectors": 2,
+        "street_props": 0
+      },
+      "foliage": {
+        "batches": 6,
+        "missing_assets": [],
+        "presentation_only": true,
+        "profile": {
+          "center_density": 0.92,
+          "edge_density": 0.4,
+          "forest_candidates": 22,
+          "max_slope": 0.65,
+          "minimum_spacing": 16.0,
+          "plain_candidates": 2,
+          "plain_density": 0.26,
+          "platform_clearance": 13.0,
+          "river_clearance": 66.0,
+          "road_clearance": 11.0,
+          "scale_max": 1.16,
+          "scale_min": 0.8,
+          "scatter_radius": 62.0
+        },
+        "tree_scene_nodes": 0,
+        "trees": 29,
+        "triangles_per_tree": 1892,
+        "visual_seed": 314159
+      },
+      "foliage_batches": 6,
+      "foundation_meshes": 8,
+      "foundation_triangles": 142,
+      "mesh_instances_world": 21,
+      "river": {
+        "continuous_path_points": 388,
+        "river_half_width_legacy": 31.0,
+        "river_mesh_instances": 1,
+        "river_triangles": 1581,
+        "river_vertices": 2835,
+        "water_height_world": 0.018
+      },
+      "river_triangles": 1581,
+      "road_triangles": 144,
+      "terrain": {
+        "foundation_meshes": 8,
+        "foundation_triangles": 142,
+        "grid_step_legacy": 10.0,
+        "individual_hex_surfaces": 0,
+        "landscape_edge_triangles": 690,
+        "perimeter_vertices": 64,
+        "terrain_mesh_instances": 1,
+        "terrain_triangles": 13819,
+        "terrain_vertices": 10979
+      },
+      "terrain_skirt_triangles": 690,
+      "terrain_triangles": 13819,
+      "tiles": 37,
+      "trees": 29,
+      "triangles_per_tree": 1892,
+      "triangles_world": 110408
+    },
+    "ok": true,
+    "snapshot_signature": "2de4ddd315c6eacc13b76d5d3458d79f8b77d3281e2513e57b1914dab12f3827"
+  },
+  "snapshot_signature": "2de4ddd315c6eacc13b76d5d3458d79f8b77d3281e2513e57b1914dab12f3827",
+  "source_files_sha256": {
+    "assets/world3d/buildings/homestead.glb": "adb8cc12b9fd325335a11731b67303585fe32c83e248826f2a8828ac771b18dc",
+    "assets/world3d/buildings/neighborhood.glb": "b14a541e4a4fdcb5452ecb10ae94e3c62ef83ff1ec49bed828d307037613bc43",
+    "assets/world3d/buildings/residence.glb": "72368c12ec149d804a6c93e324597bf8db7595d6949fe224caf96850840f848b",
+    "assets/world3d/buildings/workshop.glb": "90e5d6383b638bec3f0368faa36c897ed9cca5fec2a25a50b50a88fe8f111b7d",
+    "assets/world3d/nature/valley_tree_01.glb": "7fcd57dc86b4b31cca342eceeab54463c3830f0441ed5bb85c251d4504708ab2",
+    "content/presentation3d/asset_manifest.json": "6f2e37cde63f5846da3e6e091740b5c40e587253f781132f56f432fb242c20cd",
+    "tests/fixtures/hero_valley.gd": "b328cf904c93b7cc7c7799faa954439d8569763ec6faefc029125d27c7ce7d58",
+    "tools/export_unity_hero.gd": "80b0d4e3e21d28c2dcc91eab1318caa1352048876fbbf858f57ab783eeb10c05",
+    "ui/world3d/city/building_renderer.gd": "488a364e24f38a48754c6101ee3d5ab9f02ef27343f31812a5d054d1f82d6026",
+    "ui/world3d/city/fabric_renderer.gd": "99920b59d7cb9ebbf45d119221a405a974b71eb19558f82e63925ad252cfa4db",
+    "ui/world3d/environment/environment_controller.gd": "536bd5588af2a18becf48a30f726b1f9f1e464c5cec7240adde3ecf8a8878d64",
+    "ui/world3d/environment/environment_state.gd": "991e78561ee2798966912625a3111c7dd6d7a3ce4e01b7569f0c1958759a700b",
+    "ui/world3d/foliage/foliage_scatter.gd": "5b7fe571fe69a7ac5b96119b40930e40299b4c7fe79f0ce63a21514db7e1046f",
+    "ui/world3d/terrain/river_builder.gd": "1d4c5b58bd2ce24ba59783fd3824fda5b719b9986c1f814cbcca93d439deeda7",
+    "ui/world3d/terrain/river_material.gdshader": "d8326b6391ad513f9234326b90866f8cabc24afd39cb25c157aa3393387ece27",
+    "ui/world3d/terrain/terrain_builder.gd": "d1206fafc6a984c8a34e94e82f91d7a4b872331562843bcfc9314a0f3ccc58c5",
+    "ui/world3d/terrain/terrain_material.gdshader": "a4774a81aa52fad8a9c2ec10c343bf01626253e841e13eb2419f755abd4303a8",
+    "ui/world3d/world_view_3d.gd": "595aac50c4b943d8716a908245630bc2ef91cb1d42d5948f4f73f9d1b8de7ef9",
+    "ui/world3d/world_visual_snapshot.gd": "eb8bdaacd4c89c865d4bd0d33e2b335fdfc86d538ea3677f8a3b5ce0e7f29e5c"
+  },
+  "status": "Godot export/import bridge passed; Unity execution unverified",
+  "toolchain": {
+    "exporter": "Godot GLTFDocument",
+    "godot": "4.7.2-stable (official)"
+  },
+  "visual_seed": 314159.0,
+  "world_seed": 905003.0
+}

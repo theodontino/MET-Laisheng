@@ -38,6 +38,10 @@ Living World3D 是与 Beta 2D 路径并列的只读视觉纵轴。默认启动�
 
 renderer 和 driver 覆写只作用于本次进程，`project.godot` 默认仍为 `gl_compatibility`。当前云环境的 Vulkan Forward+ 使用软件 Vulkan / lavapipe，不能据此宣称硬件 GPU 性能。完整模块、资产边界、复核步骤和验收状态见 [Living World3D 架构与迁移说明](docs/living_world/ARCHITECTURE.md) 与 [V1 验收记录](docs/living_world/ACCEPTANCE.md)。
 
+### Unity 移植验证
+
+新增独立 [Unity Hero Valley 工程](unity/METLivingWorld/README.md)，复用同一固定切片的真实几何、原建筑与树木实例，使用官方免费 URP/glTFast 管线。这一阶段迁移世界呈现、摄影与交互，尚未迁移城市玩法或完整 Beta UI；原 Godot 游戏仍可正常运行。Unity 实际运行和 macOS 构建需要有效编辑器授权；用户目前没有 Unity 账号，不能将源码或 Godot 导出验证称为 Unity 运行完成。架构和验收状态见 [Unity 移植记录](docs/unity_port/ACCEPTANCE.md)。
+
 ## 一局怎样推进
 
 从农居、邻里中心和作坊建设城市，选择运营者，准备库存，再选择时间档位。升级改变建筑的用途和依赖关系，保留原建筑身份、运营者、库存和人群关系；方案槽随 Tier 逐个解锁。建设与升级仍共用施工能力，真实消耗材料。

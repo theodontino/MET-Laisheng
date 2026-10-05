@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!129 &1
+PlayerSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 27
+  companyName: MET
+  productName: MET Living World Unity
+  defaultScreenWidth: 1920
+  defaultScreenHeight: 1080
+  m_ActiveColorSpace: 1
+  runInBackground: 1
+  fullscreenMode: 1
+  scriptingDefineSymbols:
+    Standalone: GLTFAST_KEEP_MESH_DATA
+  activeInputHandler: 0
