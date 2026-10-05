@@ -15,3 +15,11 @@ open -n "/absolute/path/MET · 来生.app" --args --rendering-method forward_plu
 ```
 
 The package is ad-hoc signed and not Apple-notarized. Native headless startup is distinct from graphical/macOS GPU acceptance. Do not claim signing, notarization, gameplay or performance checks that were not executed. Mobile remains out of scope.
+
+## UI Impacts V1 delivery — 2026-10-05
+
+[Download page for the universal macOS app](https://github.com/theodontino/MET-Laisheng/blob/downloads/macos-ui-impacts-v1-7e9e1a9/MET_0.5.0-beta.2_UIImpactsV1_macOS_universal_7e9e1a9.zip). Sign in with a GitHub account that can access this repository, then choose **Download raw file** and extract `MET · 来生.app`.
+
+The new official-template export is from source commit `7e9e1a90a207039734d23fbcd79737f21213c6ff`. ZIP size: **81,409,226 bytes**; SHA-256: `b141c2f0afd118324fee9d438290ed3a6e2360b1ffe9d2e8e82cdd7970688033`. ZIP CRC, Intel/Apple Silicon architectures, executable permissions and signature structure passed. The extracted PCK passed default Linux startup and **101 native packaged-control checks**. Native macOS launch, Apple signature verification and notarization were not performed. Source acceptance is recorded in [UI_IMPACTS_ACCEPTANCE.md](UI_IMPACTS_ACCEPTANCE.md).
+
+GitHub Release API requests from this cloud environment returned `Forbidden`. The package, checksum, `VALIDATION.json` and instructions were therefore uploaded to a dedicated artifact-only branch, preserving previous downloads; its remote ZIP blob was fetched and independently matched to the local SHA-256. Anonymous HTTP returned 404 and does not establish authenticated browser availability. The unique tag `macos-0.5.0-beta.2-ui-impacts-v1` was also pushed to trigger the existing macOS workflow; its Actions/Release outcome remains unobserved here. This is verified GitHub branch delivery, not a claim that a GitHub Release asset was published.
