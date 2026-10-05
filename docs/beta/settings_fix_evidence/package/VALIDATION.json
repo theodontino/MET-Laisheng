@@ -1,0 +1,40 @@
+{
+  "source_commit": "ad0372a20b2153a3fc1e7e33f52eebd19511502e",
+  "product": "MET Godot 0.5.0-beta.2 / Settings click fix",
+  "zip": "MET_0.5.0-beta.2_SettingsFix_macOS_universal_ad0372a.zip",
+  "sha256": "c709ffbbc001b8ecda5549dbed77c04b4894193102920526913dfe4bdb13574b",
+  "bytes": 81410127,
+  "crc_valid": true,
+  "app_bundle": "MET \u00b7 \u6765\u751f.app",
+  "bundle_identifier": "com.projectmet.laishengbeta",
+  "architectures": [
+    {
+      "architecture": "x86_64",
+      "signature_blob_bytes": 1114112
+    },
+    {
+      "architecture": "arm64",
+      "signature_blob_bytes": 1048576
+    }
+  ],
+  "executable_permissions_preserved": true,
+  "export_codesigning": "Godot builtin ad-hoc; native Apple verification not performed",
+  "notarized": false,
+  "macos_native_launch_tested": false,
+  "pck_path": "/workspace/.met-setup/settings-fix/macos-delivery/extracted/MET \u00b7 \u6765\u751f.app/Contents/Resources/MET \u00b7 \u6765\u751f.pck",
+  "accepted_source_fingerprint": "55e169a89c81d5dbf0e79f9a4fbde9bad36bb62df9e67051432b76700fffe624",
+  "source_native_checks": 1085,
+  "source_native_inputs": 102,
+  "source_native_captures": 9,
+  "linux_exported_pck_default_startup": true,
+  "linux_exported_pck_native_controls": true,
+  "github_release_direct_upload": "Unavailable: GitHub API requests return Forbidden",
+  "release_workflow_result": "Not observed; tag push does not prove a Release was published",
+  "packed_native_checks": 118,
+  "packed_native_failed": 0,
+  "packed_engine_errors": [],
+  "packed_native_inputs": 21,
+  "packed_native_captures": 4,
+  "packed_manual_screenshot_visually_inspected": true,
+  "release_tag": "macos-0.5.0-beta.2-settings-fix-ad0372a"
+}

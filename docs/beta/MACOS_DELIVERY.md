@@ -2,6 +2,8 @@
 
 Standing authorization: after completed development and acceptance, deliver a universal macOS `.app` ZIP through a GitHub prerelease. Preserve earlier artifacts.
 
+Latest validated download: [Beta.2 settings entry fix](https://github.com/theodontino/MET-Laisheng/blob/downloads/macos-settings-fix-ad0372a/MET_0.5.0-beta.2_SettingsFix_macOS_universal_ad0372a.zip), source `ad0372a20b2153a3fc1e7e33f52eebd19511502e`. Use the new extracted app; earlier ZIPs retain their original code.
+
 The `.github/workflows/release-macos.yml` workflow builds on a macOS runner when a unique `macos-*` tag is pushed. It checks official Godot 4.7.2 downloads against pinned SHA-512 hashes, imports the exact tagged source, runs Beta regressions, exports the existing universal macOS preset, checks ZIP/architectures/permissions, verifies the ad-hoc signature, and starts the exported app headlessly on macOS before publishing. The workflow token only needs repository contents write permission. It does not require an Apple certificate, notarization credentials or new repository secrets.
 
 Use the existing branch; commit reviewed source, push it, then create and push a unique release tag at that exact commit. Example tag: `macos-0.5.0-beta.2-living-world-v1`. Do not reuse or force-update tags. Observe the actual Actions result and verify release assets before claiming GitHub delivery succeeded. An accepted tag push alone is not proof of a completed build or publication. If GitHub Actions is disabled or API access is unavailable, provide the independently validated local ZIP and identify the concrete blocker.
@@ -15,6 +17,14 @@ open -n "/absolute/path/MET · 来生.app" --args --rendering-method forward_plu
 ```
 
 The package is ad-hoc signed and not Apple-notarized. Native headless startup is distinct from graphical/macOS GPU acceptance. Do not claim signing, notarization, gameplay or performance checks that were not executed. Mobile remains out of scope.
+
+## Settings entry fix delivery — 2026-10-05
+
+[Download the universal macOS app](https://github.com/theodontino/MET-Laisheng/blob/downloads/macos-settings-fix-ad0372a/MET_0.5.0-beta.2_SettingsFix_macOS_universal_ad0372a.zip). Sign in with a GitHub account that can access the repository, choose **Download raw file**, and extract `MET · 来生.app`.
+
+This package fixes the gear button's cancelled mouse press during focus-triggered layout and the packed manual's missing fallback icon loading. Source: `ad0372a20b2153a3fc1e7e33f52eebd19511502e`; size: **81,410,127 bytes**; SHA-256: `c709ffbbc001b8ecda5549dbed77c04b4894193102920526913dfe4bdb13574b`. ZIP CRC, universal architectures, executable permissions and signature structure passed. The source native UI suite passed **1085 checks**, and the extracted PCK passed default Linux startup plus **118 native checks**, including actual gear → manual → display settings clicks, all supported UI scales, reopening, and loaded icons. Packed engine logs contain no script or resource errors; the packed manual screenshot was visually inspected. Full evidence is in [settings_fix_evidence/package](settings_fix_evidence/package/); source acceptance is in [SETTINGS_FIX_ACCEPTANCE.md](SETTINGS_FIX_ACCEPTANCE.md).
+
+The GitHub API still returned `Forbidden`; the fresh ZIP, checksum and validation records were uploaded to the dedicated artifact-only branch `downloads/macos-settings-fix-ad0372a`, and a fresh fetch independently matched the remote ZIP SHA-256. Earlier download branches and files remain unchanged. Tag `macos-0.5.0-beta.2-settings-fix-ad0372a` was pushed at the exact app source to trigger macOS CI; Actions/Release results remain unobserved. This is verified GitHub branch delivery, with no claim of native Mac launch, Apple verification, notarization or published Release.
 
 ## UI Impacts V1 delivery — 2026-10-05
 

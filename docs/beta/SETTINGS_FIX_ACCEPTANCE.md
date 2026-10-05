@@ -12,4 +12,6 @@ Godot 4.7.2、X11/Xvfb、Mesa llvmpipe GL Compatibility 下，始终固定 **192
 
 ![通过实际齿轮入口打开设置，UI 120%](settings_fix_evidence/final/impacts-09-settings-through-gear-ui120.png)
 
-这是 Linux 原生自动交互，不能证明 Mac 原生启动、Apple 签名接受或目标 GPU 性能。新 macOS 包的源码提交、校验与包内入口验证另见 [交付记录](MACOS_DELIVERY.md)。
+实际导出的 macOS 包内 PCK 通过 **118 项 Linux 原生检查**，执行 21 次输入、生成 4 张新图，覆盖城市空闲状态与选址中的齿轮、手册、显示设置、80%／100%／120% 缩放及关闭重开。最终默认启动、包内交互和导出日志均没有脚本或资源错误，手册回退图标可见；截图和包内报告见 [settings_fix_evidence/package](settings_fix_evidence/package/)。
+
+这是 Linux 原生自动交互，不能证明 Mac 原生启动、Apple 签名接受或目标 GPU 性能。新 macOS 包的源码提交、校验与已验证的 GitHub 下载另见 [交付记录](MACOS_DELIVERY.md)。

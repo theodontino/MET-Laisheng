@@ -1,0 +1,694 @@
+{
+	"captures": [
+		{
+			"created_at": 1791213989.43981,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "normal",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/settings-fix/final-packed-controls/packed-settings-manual.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.0,
+			"width": 1920
+		},
+		{
+			"created_at": 1791213996.85136,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "material",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/settings-fix/final-packed-controls/impacts-ui-80-site.png",
+			"text_scale": 1.0,
+			"ui_scale": 0.8,
+			"width": 1920
+		},
+		{
+			"created_at": 1791214005.55002,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "material",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/settings-fix/final-packed-controls/impacts-ui-120-site.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.2,
+			"width": 1920
+		},
+		{
+			"created_at": 1791214007.90099,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "material",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/settings-fix/final-packed-controls/impacts-09-settings-through-gear-ui120.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.2,
+			"width": 1920
+		}
+	],
+	"checks": [
+		{
+			"name": "packaged test uses a native display",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: exported PCK startup",
+			"pass": true
+		},
+		{
+			"name": "runtime excludes editor/source/evidence directories",
+			"pass": true
+		},
+		{
+			"name": "fixture enters play through real origin API",
+			"pass": true
+		},
+		{
+			"name": "fixture supplies a real residence",
+			"pass": true
+		},
+		{
+			"name": "fixture settles through the real simulation",
+			"pass": true
+		},
+		{
+			"detail": {
+				"housing": 64.0,
+				"jobs": 14.0,
+				"population": 42.0103468550682
+			},
+			"name": "fixture population has real housing and available workers",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: packaged settings gear from idle city",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: packaged settings gear from idle city",
+			"pass": true
+		},
+		{
+			"name": "packaged idle city opens manual",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: packed-settings-manual",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: packed-settings-manual",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: packaged manual display settings",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: packaged manual display settings",
+			"pass": true
+		},
+		{
+			"name": "packaged idle manual reaches display settings",
+			"pass": true
+		},
+		{
+			"name": "packaged idle settings preserve authoritative city",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: choose workshop from native build dock",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: choose workshop from native build dock",
+			"pass": true
+		},
+		{
+			"name": "map pointer selects the intended real site",
+			"pass": true
+		},
+		{
+			"name": "site bubble fits screen without covering selected map hex",
+			"pass": true
+		},
+		{
+			"name": "valid site forecast adds change to layer cycle",
+			"pass": true
+		},
+		{
+			"name": "independent ScaledInterface root owns UI transforms",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: settings gear: before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: settings gear: before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "native settings gear opens manual: before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "modal hides underlying map tools: before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 发展目标与居民迁入 / before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 居民与工作 / before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 方案手册 / before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: display settings entry: before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "manual reaches display options: before UI 80%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native UI scale 80%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native UI scale 80%",
+			"pass": true
+		},
+		{
+			"name": "settings gear returns after modal: 80%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 80%",
+			"pass": true
+		},
+		{
+			"name": "UI scale applies only to interface root: 80%",
+			"pass": true
+		},
+		{
+			"name": "HUD physical dimensions scale in fixed viewport: 80%",
+			"pass": true
+		},
+		{
+			"name": "UI scale preserves map size, world zoom, pan and tile screen coordinates: 80%",
+			"pass": true
+		},
+		{
+			"name": "screen/UI point and rect helpers round trip: 80%",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% @PanelContainer@9",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% L0Time",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% @PanelContainer@53",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% SitePreviewBubble",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% CompareSiteTender",
+			"pass": true
+		},
+		{
+			"name": "scaled site bubble avoids actual map hex: 80%",
+			"pass": true
+		},
+		{
+			"name": "cached site restores valid plan after scale modal: 80%",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-ui-80-site",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-ui-80-site",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: settings gear: before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: settings gear: before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "native settings gear opens manual: before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "modal hides underlying map tools: before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 发展目标与居民迁入 / before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 居民与工作 / before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 方案手册 / before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: display settings entry: before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "manual reaches display options: before UI 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native UI scale 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native UI scale 100%",
+			"pass": true
+		},
+		{
+			"name": "settings gear returns after modal: 100%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 100%",
+			"pass": true
+		},
+		{
+			"name": "UI scale applies only to interface root: 100%",
+			"pass": true
+		},
+		{
+			"name": "HUD physical dimensions scale in fixed viewport: 100%",
+			"pass": true
+		},
+		{
+			"name": "UI scale preserves map size, world zoom, pan and tile screen coordinates: 100%",
+			"pass": true
+		},
+		{
+			"name": "screen/UI point and rect helpers round trip: 100%",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% @PanelContainer@9",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% L0Time",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% @PanelContainer@53",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% SitePreviewBubble",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% CompareSiteTender",
+			"pass": true
+		},
+		{
+			"name": "scaled site bubble avoids actual map hex: 100%",
+			"pass": true
+		},
+		{
+			"name": "cached site restores valid plan after scale modal: 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: settings gear: before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: settings gear: before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native settings gear opens manual: before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "modal hides underlying map tools: before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 发展目标与居民迁入 / before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 居民与工作 / before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 方案手册 / before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: display settings entry: before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "manual reaches display options: before UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native UI scale 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native UI scale 120%",
+			"pass": true
+		},
+		{
+			"name": "settings gear returns after modal: 120%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 120%",
+			"pass": true
+		},
+		{
+			"name": "UI scale applies only to interface root: 120%",
+			"pass": true
+		},
+		{
+			"name": "HUD physical dimensions scale in fixed viewport: 120%",
+			"pass": true
+		},
+		{
+			"name": "UI scale preserves map size, world zoom, pan and tile screen coordinates: 120%",
+			"pass": true
+		},
+		{
+			"name": "screen/UI point and rect helpers round trip: 120%",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% @PanelContainer@9",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% L0Time",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% @PanelContainer@53",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% SitePreviewBubble",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% CompareSiteTender",
+			"pass": true
+		},
+		{
+			"name": "scaled site bubble avoids actual map hex: 120%",
+			"pass": true
+		},
+		{
+			"name": "cached site restores valid plan after scale modal: 120%",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-ui-120-site",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-ui-120-site",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: settings gear: restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: settings gear: restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native settings gear opens manual: restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "modal hides underlying map tools: restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 发展目标与居民迁入 / restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 居民与工作 / restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "manual action has a runtime icon: 方案手册 / restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: display settings entry: restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: display settings entry: restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "manual reaches display options: restore from UI 120%",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-09-settings-through-gear-ui120",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-09-settings-through-gear-ui120",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: restore native UI 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: restore native UI 100%",
+			"pass": true
+		},
+		{
+			"name": "UI scale and native settings clicks preserve full gameplay snapshot",
+			"pass": true
+		},
+		{
+			"name": "packaged settings close returns to visible gear",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: exported PCK settings complete",
+			"pass": true
+		}
+	],
+	"comparisons": [],
+	"completed_at": 1791214009.11424,
+	"count": 118,
+	"display_server": "X11",
+	"engine_version": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"evidence_type": "scripted native pointer and keyboard fixtures with real Game/Simulation settlements; no human playtest, natural playthrough or macOS hardware claim",
+	"failed": 0,
+	"fixture_ids": {
+		"freight": "B000013",
+		"medical_clinic": "B000009",
+		"power_station": "B000011",
+		"residence": "B000006"
+	},
+	"input_actions": [
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "packaged settings gear from idle city",
+			"x": 210.0,
+			"y": 1020.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "packaged manual display settings",
+			"x": 960.0,
+			"y": 364.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "packaged return to idle map"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "choose workshop from native build dock",
+			"x": 927.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "choose real empty workshop site 1,0",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "settings gear: before UI 80%",
+			"x": 210.0,
+			"y": 1020.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "display settings entry: before UI 80%",
+			"x": 960.0,
+			"y": 364.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native UI scale 80%",
+			"x": 382.0,
+			"y": 281.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape return from display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "settings gear: before UI 100%",
+			"x": 168.0,
+			"y": 1032.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "display settings entry: before UI 100%",
+			"x": 960.000061035156,
+			"y": 399.199981689453
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native UI scale 100%",
+			"x": 606.400024414062,
+			"y": 332.799987792969
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape return from display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "settings gear: before UI 120%",
+			"x": 210.0,
+			"y": 1020.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "display settings entry: before UI 120%",
+			"x": 960.0,
+			"y": 364.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native UI scale 120%",
+			"x": 635.0,
+			"y": 281.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape return from display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "settings gear: restore from UI 120%",
+			"x": 252.000015258789,
+			"y": 1007.99993896484
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "display settings entry: restore from UI 120%",
+			"x": 958.800048828125,
+			"y": 388.800018310547
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "restore native UI 100%",
+			"x": 399.599975585938,
+			"y": 289.200012207031
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape from restored display settings"
+		}
+	],
+	"layout_evidence": [],
+	"passed": 118,
+	"renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+	"resolution": "1920x1080 fullscreen throughout; UI and font scale only",
+	"source_fingerprint": "",
+	"started_at": 1791213986.40463
+}
