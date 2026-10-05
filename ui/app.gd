@@ -601,7 +601,9 @@ func layout_ui():
 	var archived=desk.is_open() or decision_kind!="" or overlay!=null and overlay.visible
 	var topstyle=W.box(W.PANEL,W.DIVIDER,18);topstyle.content_margin_top=12;topstyle.content_margin_bottom=12;topstyle.content_margin_left=16;topstyle.content_margin_right=16;top_panel.add_theme_stylebox_override("panel",topstyle)
 	_rect(top_panel,Rect2(area.position+Vector2(24,24),Vector2(314,112)))
-	for key in ["brand","finance","policy","ledger","menu"]:header_nodes[key].hide()
+	# The settings button lives in tool_panel, which owns its visibility.
+	# Hiding it during focus-triggered layout cancels the active mouse press.
+	for key in ["brand","finance","policy","ledger"]:header_nodes[key].hide()
 	for key in ["people","food"]:
 		var button=header_nodes[key];button.show();button.custom_minimum_size=Vector2(126,72);W.flat(button)
 	governance_label.add_theme_font_size_override("font_size",28);header_nodes.food_text.add_theme_font_size_override("font_size",28)

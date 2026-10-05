@@ -1,0 +1,18 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+UI IMPACTS PASS fixture enters play through real origin API
+UI IMPACTS PASS fixture supplies a real residence
+UI IMPACTS PASS fixture settles through the real simulation
+UI IMPACTS PASS fixture population has real housing and available workers
+MENU GEOMETRY [P: (186.0, 1000.0), S: (48.0, 40.0)] local (162.0, 0.0) parent [P: (24.0, 1000.0), S: (210.0, 40.0)] tool [P: (24.0, 1000.0), S: (332.0, 48.0)] visible true phase play
+MENU HOVER @Button@21:<Button#72058144445>
+UI IMPACTS PASS native pointer target available: bottom-left settings menu
+UI IMPACTS FAIL native pointer dispatches exactly one Button pressed callback: bottom-left settings menu
+MENU RESULT overlay false title 来生 · 从河谷聚落开始
+UI IMPACTS FAIL settings menu opens from real pointer
+UI IMPACTS PASS 1080p framebuffer: settings-entry-repro
+UI IMPACTS PASS fresh screenshot: settings-entry-repro
+UI IMPACTS RESULT 7 passed, 2 failed

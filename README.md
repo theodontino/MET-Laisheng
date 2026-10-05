@@ -10,7 +10,7 @@ Beta.2 重置界面与地图呈现：常驻状态收敛为四项，选中建筑�
 
 建设影响比较进一步加入同一步预测的供需图、当前库存与支撑月数、电力及环境变化，并可直接打开对应地图。显示设置提供整体 UI 80%／100%／120%，与地图缩放独立；`L`／`Shift+L` 循环分析图层。详见[建设影响验收](docs/beta/UI_IMPACTS_ACCEPTANCE.md)。
 
-本轮 macOS 通用应用包与准确源码／校验值见[下载与交付记录](docs/beta/MACOS_DELIVERY.md#ui-impacts-v1-delivery--2026-10-05)。
+最新 macOS 通用应用包与准确源码／校验值见[下载与交付记录](docs/beta/MACOS_DELIVERY.md)。设置齿轮点击失败的修复和真实入口验证见[设置入口验收](docs/beta/SETTINGS_FIX_ACCEPTANCE.md)。
 
 ## 开始运行
 

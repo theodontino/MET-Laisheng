@@ -170,14 +170,24 @@ func start_site() -> String:
 	check(on_screen(app.site_bubble) and not app.site_bubble.get_global_rect().intersects(footprint_screen(tile)),"site bubble fits screen without covering selected map hex")
 	check(app.plan_preview_available() and "change" in app.layer_cycle_order(),"valid site forecast adds change to layer cycle")
 	return tile
+func open_display_from_menu(label:String) -> void:
+	# Exercise the player's entry path; a direct display_options() call misses
+	# focus-triggered relayout that can cancel the settings button's mouse press.
+	release_focus();await frames()
+	await click(app.header_nodes.menu,"settings gear: "+label)
+	check(app.overlay.visible and app.modal_title.text=="河谷手册与存档","native settings gear opens manual: "+label)
+	check(not app.tool_panel.is_visible_in_tree(),"modal hides underlying map tools: "+label)
+	await click(button_text(app.modal_body,"显示设置"),"display settings entry: "+label)
+	check(app.overlay.visible and app.modal_title.text=="显示与交互","manual reaches display options: "+label)
 func test_scale(tile:String) -> void:
 	var map=app.map_view;var before=Store.encode(app.game.s)
 	var map_size=map.size;var map_zoom=float(map.zoom);var map_pan=map.pan;var map_point=map.point(tile);var map_anchor=map.tile_screen_anchor(tile);var hud_size=app.top_panel.get_global_rect().size
 	check(str(app.ui_root.name)=="ScaledInterface","independent ScaledInterface root owns UI transforms")
 	for factor in [.8,1.,1.2]:
-		app.display_options();await frames()
+		await open_display_from_menu("before UI %d%%"%roundi(factor*100))
 		await click(by_meta(app.modal_body,"ui_scale",factor),"native UI scale %d%%"%roundi(factor*100))
 		await key(KEY_ESCAPE,"Escape return from display settings");app.command_notice.hide();await frames()
+		check(on_screen(app.header_nodes.menu),"settings gear returns after modal: %d%%"%roundi(factor*100))
 		fullscreen("UI %d%%"%roundi(factor*100))
 		check(near(float(app.display_settings.ui_scale),factor) and app.ui_root.scale.is_equal_approx(Vector2.ONE*factor),"UI scale applies only to interface root: %d%%"%roundi(factor*100))
 		check(app.ui_root.size.is_equal_approx(Vector2(1920,1080)/factor) and app.top_panel.get_global_rect().size.is_equal_approx(hud_size*factor),"HUD physical dimensions scale in fixed viewport: %d%%"%roundi(factor*100))
@@ -188,7 +198,9 @@ func test_scale(tile:String) -> void:
 		check(not app.site_bubble.get_global_rect().intersects(footprint_screen(tile)),"scaled site bubble avoids actual map hex: %d%%"%roundi(factor*100))
 		check(app.plan_preview_available(),"cached site restores valid plan after scale modal: %d%%"%roundi(factor*100))
 		if factor!=1.:await capture("impacts-ui-%d-site"%roundi(factor*100))
-	app.display_options();await frames();await click(by_meta(app.modal_body,"ui_scale",1.),"restore native UI 100%")
+	await open_display_from_menu("restore from UI 120%")
+	await capture("impacts-09-settings-through-gear-ui120")
+	await click(by_meta(app.modal_body,"ui_scale",1.),"restore native UI 100%")
 	await key(KEY_ESCAPE,"Escape from restored display settings");app.command_notice.hide()
 	check(Store.encode(app.game.s)==before,"UI scale and native settings clicks preserve full gameplay snapshot")
 func direct_snapshot(g,base:String="",tile:String="",offer:Dictionary={}) -> Dictionary:

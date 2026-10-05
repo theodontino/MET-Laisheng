@@ -1,0 +1,1079 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+UI IMPACTS PASS native display server is active
+UI IMPACTS PASS contracted Godot 4.7.2 engine
+UI IMPACTS PASS fixed 1920x1080 fullscreen: startup
+UI IMPACTS PASS application and unscaled map fill native 1080p viewport
+UI IMPACTS PASS fixture enters play through real origin API
+UI IMPACTS PASS fixture supplies a real residence
+UI IMPACTS PASS fixture settles through the real simulation
+UI IMPACTS PASS fixture population has real housing and available workers
+UI IMPACTS PASS idle layer order contains all sixteen analysis layers without change
+UI IMPACTS PASS L advances and wraps in the documented layer order: 0
+UI IMPACTS PASS L advances and wraps in the documented layer order: 1
+UI IMPACTS PASS L advances and wraps in the documented layer order: 2
+UI IMPACTS PASS L advances and wraps in the documented layer order: 3
+UI IMPACTS PASS L advances and wraps in the documented layer order: 4
+UI IMPACTS PASS L advances and wraps in the documented layer order: 5
+UI IMPACTS PASS L advances and wraps in the documented layer order: 6
+UI IMPACTS PASS L advances and wraps in the documented layer order: 7
+UI IMPACTS PASS L advances and wraps in the documented layer order: 8
+UI IMPACTS PASS L advances and wraps in the documented layer order: 9
+UI IMPACTS PASS L advances and wraps in the documented layer order: 10
+UI IMPACTS PASS L advances and wraps in the documented layer order: 11
+UI IMPACTS PASS L advances and wraps in the documented layer order: 12
+UI IMPACTS PASS L advances and wraps in the documented layer order: 13
+UI IMPACTS PASS L advances and wraps in the documented layer order: 14
+UI IMPACTS PASS L advances and wraps in the documented layer order: 15
+UI IMPACTS PASS Shift+L reverses and wraps: 0
+UI IMPACTS PASS Shift+L reverses and wraps: 1
+UI IMPACTS PASS Shift+L reverses and wraps: 2
+UI IMPACTS PASS Shift+L reverses and wraps: 3
+UI IMPACTS PASS Shift+L reverses and wraps: 4
+UI IMPACTS PASS Shift+L reverses and wraps: 5
+UI IMPACTS PASS Shift+L reverses and wraps: 6
+UI IMPACTS PASS Shift+L reverses and wraps: 7
+UI IMPACTS PASS Shift+L reverses and wraps: 8
+UI IMPACTS PASS Shift+L reverses and wraps: 9
+UI IMPACTS PASS Shift+L reverses and wraps: 10
+UI IMPACTS PASS Shift+L reverses and wraps: 11
+UI IMPACTS PASS Shift+L reverses and wraps: 12
+UI IMPACTS PASS Shift+L reverses and wraps: 13
+UI IMPACTS PASS Shift+L reverses and wraps: 14
+UI IMPACTS PASS Shift+L reverses and wraps: 15
+UI IMPACTS PASS native pointer target available: open archive modal
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: open archive modal
+UI IMPACTS PASS modal blocks L
+UI IMPACTS PASS native pointer target available: open finance desk
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: open finance desk
+UI IMPACTS PASS management desk blocks Shift+L
+UI IMPACTS PASS native Escape returns from management desk
+UI IMPACTS PASS native pointer target available: focus native LineEdit fixture
+UI IMPACTS PASS focused LineEdit consumes L as text
+UI IMPACTS PASS native pointer target available: focus native TextEdit fixture
+UI IMPACTS PASS focused TextEdit consumes L as text
+UI IMPACTS PASS native layer shortcuts and blockers preserve authoritative state and RNG
+UI IMPACTS PASS native pointer target available: choose workshop from native build dock
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: choose workshop from native build dock
+UI IMPACTS PASS map pointer selects the intended real site
+UI IMPACTS PASS site bubble fits screen without covering selected map hex
+UI IMPACTS PASS valid site forecast adds change to layer cycle
+UI IMPACTS PASS independent ScaledInterface root owns UI transforms
+UI IMPACTS PASS native pointer target available: settings gear: before UI 80%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: settings gear: before UI 80%
+UI IMPACTS PASS native settings gear opens manual: before UI 80%
+UI IMPACTS PASS modal hides underlying map tools: before UI 80%
+UI IMPACTS PASS native pointer target available: display settings entry: before UI 80%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 80%
+UI IMPACTS PASS manual reaches display options: before UI 80%
+UI IMPACTS PASS native pointer target available: native UI scale 80%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native UI scale 80%
+UI IMPACTS PASS settings gear returns after modal: 80%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 80%
+UI IMPACTS PASS UI scale applies only to interface root: 80%
+UI IMPACTS PASS HUD physical dimensions scale in fixed viewport: 80%
+UI IMPACTS PASS UI scale preserves map size, world zoom, pan and tile screen coordinates: 80%
+UI IMPACTS PASS screen/UI point and rect helpers round trip: 80%
+UI IMPACTS PASS scaled context control fits screen: 80% @PanelContainer@9
+UI IMPACTS PASS scaled context control fits screen: 80% L0Time
+UI IMPACTS PASS scaled context control fits screen: 80% @PanelContainer@53
+UI IMPACTS PASS scaled context control fits screen: 80% SitePreviewBubble
+UI IMPACTS PASS scaled context control fits screen: 80% CompareSiteTender
+UI IMPACTS PASS scaled site bubble avoids actual map hex: 80%
+UI IMPACTS PASS cached site restores valid plan after scale modal: 80%
+UI IMPACTS PASS 1080p framebuffer: impacts-ui-80-site
+UI IMPACTS PASS fresh screenshot: impacts-ui-80-site
+UI IMPACTS PASS native pointer target available: settings gear: before UI 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: settings gear: before UI 100%
+UI IMPACTS PASS native settings gear opens manual: before UI 100%
+UI IMPACTS PASS modal hides underlying map tools: before UI 100%
+UI IMPACTS PASS native pointer target available: display settings entry: before UI 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 100%
+UI IMPACTS PASS manual reaches display options: before UI 100%
+UI IMPACTS PASS native pointer target available: native UI scale 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native UI scale 100%
+UI IMPACTS PASS settings gear returns after modal: 100%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 100%
+UI IMPACTS PASS UI scale applies only to interface root: 100%
+UI IMPACTS PASS HUD physical dimensions scale in fixed viewport: 100%
+UI IMPACTS PASS UI scale preserves map size, world zoom, pan and tile screen coordinates: 100%
+UI IMPACTS PASS screen/UI point and rect helpers round trip: 100%
+UI IMPACTS PASS scaled context control fits screen: 100% @PanelContainer@9
+UI IMPACTS PASS scaled context control fits screen: 100% L0Time
+UI IMPACTS PASS scaled context control fits screen: 100% @PanelContainer@53
+UI IMPACTS PASS scaled context control fits screen: 100% SitePreviewBubble
+UI IMPACTS PASS scaled context control fits screen: 100% CompareSiteTender
+UI IMPACTS PASS scaled site bubble avoids actual map hex: 100%
+UI IMPACTS PASS cached site restores valid plan after scale modal: 100%
+UI IMPACTS PASS native pointer target available: settings gear: before UI 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: settings gear: before UI 120%
+UI IMPACTS PASS native settings gear opens manual: before UI 120%
+UI IMPACTS PASS modal hides underlying map tools: before UI 120%
+UI IMPACTS PASS native pointer target available: display settings entry: before UI 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 120%
+UI IMPACTS PASS manual reaches display options: before UI 120%
+UI IMPACTS PASS native pointer target available: native UI scale 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native UI scale 120%
+UI IMPACTS PASS settings gear returns after modal: 120%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 120%
+UI IMPACTS PASS UI scale applies only to interface root: 120%
+UI IMPACTS PASS HUD physical dimensions scale in fixed viewport: 120%
+UI IMPACTS PASS UI scale preserves map size, world zoom, pan and tile screen coordinates: 120%
+UI IMPACTS PASS screen/UI point and rect helpers round trip: 120%
+UI IMPACTS PASS scaled context control fits screen: 120% @PanelContainer@9
+UI IMPACTS PASS scaled context control fits screen: 120% L0Time
+UI IMPACTS PASS scaled context control fits screen: 120% @PanelContainer@53
+UI IMPACTS PASS scaled context control fits screen: 120% SitePreviewBubble
+UI IMPACTS PASS scaled context control fits screen: 120% CompareSiteTender
+UI IMPACTS PASS scaled site bubble avoids actual map hex: 120%
+UI IMPACTS PASS cached site restores valid plan after scale modal: 120%
+UI IMPACTS PASS 1080p framebuffer: impacts-ui-120-site
+UI IMPACTS PASS fresh screenshot: impacts-ui-120-site
+UI IMPACTS PASS native pointer target available: settings gear: restore from UI 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: settings gear: restore from UI 120%
+UI IMPACTS PASS native settings gear opens manual: restore from UI 120%
+UI IMPACTS PASS modal hides underlying map tools: restore from UI 120%
+UI IMPACTS PASS native pointer target available: display settings entry: restore from UI 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: display settings entry: restore from UI 120%
+UI IMPACTS PASS manual reaches display options: restore from UI 120%
+UI IMPACTS PASS 1080p framebuffer: impacts-09-settings-through-gear-ui120
+UI IMPACTS PASS fresh screenshot: impacts-09-settings-through-gear-ui120
+UI IMPACTS PASS native pointer target available: restore native UI 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: restore native UI 100%
+UI IMPACTS PASS UI scale and native settings clicks preserve full gameplay snapshot
+UI IMPACTS PASS native pointer target available: open actual operator tender
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: open actual operator tender
+UI IMPACTS PASS real tender command generates three persistent operator candidates
+UI IMPACTS PASS workbench presents three small operator comparison cards
+UI IMPACTS PASS comparison keeps one TenderConfirmPrimary commit
+UI IMPACTS PASS comparison sits at lower right and leaves a real map analysis area
+UI IMPACTS PASS native pointer target available: preview operator circular
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: preview operator circular
+UI IMPACTS PASS native candidate selection chooses an actual valid offer: offer:0
+UI IMPACTS PASS candidate preview does not mutate saved city or RNG: offer:0
+UI IMPACTS PASS selected impact panel is visible in native comparison
+UI IMPACTS PASS selected impact panel consumes authoritative read model
+UI IMPACTS PASS three resource rows each render a real before/after graphic
+UI IMPACTS PASS graphical resource row exists: food
+UI IMPACTS PASS visible impact metadata matches receipt: food stock
+UI IMPACTS PASS visible impact metadata matches receipt: food capacity
+UI IMPACTS PASS visible impact metadata matches receipt: food before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: food before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: food after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: food after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: food before_net
+UI IMPACTS PASS visible impact metadata matches receipt: food after_net
+UI IMPACTS PASS visible impact metadata matches receipt: food need_share
+UI IMPACTS PASS visible impact metadata matches receipt: food runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: food runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: food
+UI IMPACTS PASS graphical resource row exists: material
+UI IMPACTS PASS visible impact metadata matches receipt: material stock
+UI IMPACTS PASS visible impact metadata matches receipt: material capacity
+UI IMPACTS PASS visible impact metadata matches receipt: material before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: material before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: material after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: material after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: material before_net
+UI IMPACTS PASS visible impact metadata matches receipt: material after_net
+UI IMPACTS PASS visible impact metadata matches receipt: material need_share
+UI IMPACTS PASS visible impact metadata matches receipt: material runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: material runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: material
+UI IMPACTS PASS graphical resource row exists: goods
+UI IMPACTS PASS visible impact metadata matches receipt: goods stock
+UI IMPACTS PASS visible impact metadata matches receipt: goods capacity
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_net
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_net
+UI IMPACTS PASS visible impact metadata matches receipt: goods need_share
+UI IMPACTS PASS visible impact metadata matches receipt: goods runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: goods runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: goods
+UI IMPACTS PASS visible zero-demand share remains unavailable: goods
+UI IMPACTS PASS electricity graphic explicitly uses supply/demand capacity
+UI IMPACTS PASS environment burden uses a source-backed whole-map area graphic
+UI IMPACTS PASS independent real simulation settlement: baseline
+UI IMPACTS PASS independent real simulation settlement: proposal
+UI IMPACTS PASS baseline and proposal are the same real next settlement
+UI IMPACTS PASS planner baseline matches independent actual settlement: metrics
+UI IMPACTS PASS planner proposal matches independent actual settlement: metrics
+UI IMPACTS PASS planner baseline matches independent actual settlement: audit
+UI IMPACTS PASS planner proposal matches independent actual settlement: audit
+UI IMPACTS PASS planner baseline matches independent actual settlement: projects
+UI IMPACTS PASS planner proposal matches independent actual settlement: projects
+UI IMPACTS PASS planner baseline matches independent actual settlement: groups
+UI IMPACTS PASS planner proposal matches independent actual settlement: groups
+UI IMPACTS PASS planner baseline matches independent actual settlement: tiles
+UI IMPACTS PASS planner proposal matches independent actual settlement: tiles
+UI IMPACTS PASS impact model accepts real same-step planner result
+UI IMPACTS PASS ordinary inventory impact contains food/material/goods only
+UI IMPACTS PASS inventory/current capacity reads authoritative city: food
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: food
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: food
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: food
+UI IMPACTS PASS building share divides real output by total demand: food
+UI IMPACTS PASS real settled resource receipt is known: food
+UI IMPACTS PASS inventory/current capacity reads authoritative city: material
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: material
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: material
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: material
+UI IMPACTS PASS building share divides real output by total demand: material
+UI IMPACTS PASS real settled resource receipt is known: material
+UI IMPACTS PASS inventory/current capacity reads authoritative city: goods
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: goods
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: goods
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: goods
+UI IMPACTS PASS zero demand has no invented 0 percent need share: goods
+UI IMPACTS PASS real settled resource receipt is known: goods
+UI IMPACTS PASS fixture exercises a real negative net flow and finite stock runway
+UI IMPACTS PASS fixture exercises real zero consumption demand
+UI IMPACTS PASS electricity uses actual capacity and coverage without inventory/month units: before
+UI IMPACTS PASS electricity uses actual capacity and coverage without inventory/month units: after
+UI IMPACTS PASS energy remains a separate capacity measure
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,0
+UI IMPACTS PASS environment graphic uses the actual whole-map area as its denominator
+UI IMPACTS PASS environment area and extrema match independent per-cell field sums
+UI IMPACTS PASS environment resident count and exposure delta match actual household receipts
+UI IMPACTS PASS native pointer target available: preview operator farmers
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: preview operator farmers
+UI IMPACTS PASS native candidate selection chooses an actual valid offer: offer:1
+UI IMPACTS PASS candidate preview does not mutate saved city or RNG: offer:1
+UI IMPACTS PASS selected impact panel is visible in native comparison
+UI IMPACTS PASS selected impact panel consumes authoritative read model
+UI IMPACTS PASS three resource rows each render a real before/after graphic
+UI IMPACTS PASS graphical resource row exists: food
+UI IMPACTS PASS visible impact metadata matches receipt: food stock
+UI IMPACTS PASS visible impact metadata matches receipt: food capacity
+UI IMPACTS PASS visible impact metadata matches receipt: food before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: food before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: food after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: food after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: food before_net
+UI IMPACTS PASS visible impact metadata matches receipt: food after_net
+UI IMPACTS PASS visible impact metadata matches receipt: food need_share
+UI IMPACTS PASS visible impact metadata matches receipt: food runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: food runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: food
+UI IMPACTS PASS graphical resource row exists: material
+UI IMPACTS PASS visible impact metadata matches receipt: material stock
+UI IMPACTS PASS visible impact metadata matches receipt: material capacity
+UI IMPACTS PASS visible impact metadata matches receipt: material before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: material before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: material after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: material after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: material before_net
+UI IMPACTS PASS visible impact metadata matches receipt: material after_net
+UI IMPACTS PASS visible impact metadata matches receipt: material need_share
+UI IMPACTS PASS visible impact metadata matches receipt: material runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: material runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: material
+UI IMPACTS PASS graphical resource row exists: goods
+UI IMPACTS PASS visible impact metadata matches receipt: goods stock
+UI IMPACTS PASS visible impact metadata matches receipt: goods capacity
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_net
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_net
+UI IMPACTS PASS visible impact metadata matches receipt: goods need_share
+UI IMPACTS PASS visible impact metadata matches receipt: goods runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: goods runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: goods
+UI IMPACTS PASS visible zero-demand share remains unavailable: goods
+UI IMPACTS PASS electricity graphic explicitly uses supply/demand capacity
+UI IMPACTS PASS environment burden uses a source-backed whole-map area graphic
+UI IMPACTS PASS independent real simulation settlement: baseline
+UI IMPACTS PASS independent real simulation settlement: proposal
+UI IMPACTS PASS baseline and proposal are the same real next settlement
+UI IMPACTS PASS planner baseline matches independent actual settlement: metrics
+UI IMPACTS PASS planner proposal matches independent actual settlement: metrics
+UI IMPACTS PASS planner baseline matches independent actual settlement: audit
+UI IMPACTS PASS planner proposal matches independent actual settlement: audit
+UI IMPACTS PASS planner baseline matches independent actual settlement: projects
+UI IMPACTS PASS planner proposal matches independent actual settlement: projects
+UI IMPACTS PASS planner baseline matches independent actual settlement: groups
+UI IMPACTS PASS planner proposal matches independent actual settlement: groups
+UI IMPACTS PASS planner baseline matches independent actual settlement: tiles
+UI IMPACTS PASS planner proposal matches independent actual settlement: tiles
+UI IMPACTS PASS impact model accepts real same-step planner result
+UI IMPACTS PASS ordinary inventory impact contains food/material/goods only
+UI IMPACTS PASS inventory/current capacity reads authoritative city: food
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: food
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: food
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: food
+UI IMPACTS PASS building share divides real output by total demand: food
+UI IMPACTS PASS real settled resource receipt is known: food
+UI IMPACTS PASS inventory/current capacity reads authoritative city: material
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: material
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: material
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: material
+UI IMPACTS PASS building share divides real output by total demand: material
+UI IMPACTS PASS real settled resource receipt is known: material
+UI IMPACTS PASS inventory/current capacity reads authoritative city: goods
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: goods
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: goods
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: goods
+UI IMPACTS PASS zero demand has no invented 0 percent need share: goods
+UI IMPACTS PASS real settled resource receipt is known: goods
+UI IMPACTS PASS fixture exercises a real negative net flow and finite stock runway
+UI IMPACTS PASS fixture exercises real zero consumption demand
+UI IMPACTS PASS electricity uses actual capacity and coverage without inventory/month units: before
+UI IMPACTS PASS electricity uses actual capacity and coverage without inventory/month units: after
+UI IMPACTS PASS energy remains a separate capacity measure
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,0
+UI IMPACTS PASS environment graphic uses the actual whole-map area as its denominator
+UI IMPACTS PASS environment area and extrema match independent per-cell field sums
+UI IMPACTS PASS environment resident count and exposure delta match actual household receipts
+UI IMPACTS PASS native pointer target available: preview operator civic
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: preview operator civic
+UI IMPACTS PASS native candidate selection chooses an actual valid offer: offer:2
+UI IMPACTS PASS candidate preview does not mutate saved city or RNG: offer:2
+UI IMPACTS PASS selected impact panel is visible in native comparison
+UI IMPACTS PASS selected impact panel consumes authoritative read model
+UI IMPACTS PASS three resource rows each render a real before/after graphic
+UI IMPACTS PASS graphical resource row exists: food
+UI IMPACTS PASS visible impact metadata matches receipt: food stock
+UI IMPACTS PASS visible impact metadata matches receipt: food capacity
+UI IMPACTS PASS visible impact metadata matches receipt: food before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: food before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: food after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: food after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: food before_net
+UI IMPACTS PASS visible impact metadata matches receipt: food after_net
+UI IMPACTS PASS visible impact metadata matches receipt: food need_share
+UI IMPACTS PASS visible impact metadata matches receipt: food runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: food runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: food
+UI IMPACTS PASS graphical resource row exists: material
+UI IMPACTS PASS visible impact metadata matches receipt: material stock
+UI IMPACTS PASS visible impact metadata matches receipt: material capacity
+UI IMPACTS PASS visible impact metadata matches receipt: material before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: material before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: material after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: material after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: material before_net
+UI IMPACTS PASS visible impact metadata matches receipt: material after_net
+UI IMPACTS PASS visible impact metadata matches receipt: material need_share
+UI IMPACTS PASS visible impact metadata matches receipt: material runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: material runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: material
+UI IMPACTS PASS graphical resource row exists: goods
+UI IMPACTS PASS visible impact metadata matches receipt: goods stock
+UI IMPACTS PASS visible impact metadata matches receipt: goods capacity
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_supply
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_demand
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_supply
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_demand
+UI IMPACTS PASS visible impact metadata matches receipt: goods before_net
+UI IMPACTS PASS visible impact metadata matches receipt: goods after_net
+UI IMPACTS PASS visible impact metadata matches receipt: goods need_share
+UI IMPACTS PASS visible impact metadata matches receipt: goods runway_before
+UI IMPACTS PASS visible impact metadata matches receipt: goods runway_after
+UI IMPACTS PASS before/after resource graph shares one truthful monthly axis: goods
+UI IMPACTS PASS visible zero-demand share remains unavailable: goods
+UI IMPACTS PASS electricity graphic explicitly uses supply/demand capacity
+UI IMPACTS PASS environment burden uses a source-backed whole-map area graphic
+UI IMPACTS PASS independent real simulation settlement: baseline
+UI IMPACTS PASS independent real simulation settlement: proposal
+UI IMPACTS PASS baseline and proposal are the same real next settlement
+UI IMPACTS PASS planner baseline matches independent actual settlement: metrics
+UI IMPACTS PASS planner proposal matches independent actual settlement: metrics
+UI IMPACTS PASS planner baseline matches independent actual settlement: audit
+UI IMPACTS PASS planner proposal matches independent actual settlement: audit
+UI IMPACTS PASS planner baseline matches independent actual settlement: projects
+UI IMPACTS PASS planner proposal matches independent actual settlement: projects
+UI IMPACTS PASS planner baseline matches independent actual settlement: groups
+UI IMPACTS PASS planner proposal matches independent actual settlement: groups
+UI IMPACTS PASS planner baseline matches independent actual settlement: tiles
+UI IMPACTS PASS planner proposal matches independent actual settlement: tiles
+UI IMPACTS PASS impact model accepts real same-step planner result
+UI IMPACTS PASS ordinary inventory impact contains food/material/goods only
+UI IMPACTS PASS inventory/current capacity reads authoritative city: food
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: food
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: food
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: food
+UI IMPACTS PASS building share divides real output by total demand: food
+UI IMPACTS PASS real settled resource receipt is known: food
+UI IMPACTS PASS inventory/current capacity reads authoritative city: material
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: material
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: material
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: material
+UI IMPACTS PASS building share divides real output by total demand: material
+UI IMPACTS PASS real settled resource receipt is known: material
+UI IMPACTS PASS inventory/current capacity reads authoritative city: goods
+UI IMPACTS PASS before/after supply and demand match actual monthly receipts: goods
+UI IMPACTS PASS consumed, net flow and net delta match actual receipts: goods
+UI IMPACTS PASS stock depletion uses current stock divided by actual net consumption: goods
+UI IMPACTS PASS zero demand has no invented 0 percent need share: goods
+UI IMPACTS PASS real settled resource receipt is known: goods
+UI IMPACTS PASS fixture exercises a real negative net flow and finite stock runway
+UI IMPACTS PASS fixture exercises real zero consumption demand
+UI IMPACTS PASS electricity uses actual capacity and coverage without inventory/month units: before
+UI IMPACTS PASS electricity uses actual capacity and coverage without inventory/month units: after
+UI IMPACTS PASS energy remains a separate capacity measure
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -1,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -1,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -2,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -2,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -3,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -3,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: -4,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: -4,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 0,4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 0,4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 1,3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 1,3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 2,2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 2,2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,0
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 3,1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 3,1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-1
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-1
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-2
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-2
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-3
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-3
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,-4
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,-4
+UI IMPACTS PASS map raw environment delta equals independently summed real fields: 4,0
+UI IMPACTS PASS map delta keeps independent units without a combined score: 4,0
+UI IMPACTS PASS environment graphic uses the actual whole-map area as its denominator
+UI IMPACTS PASS environment area and extrema match independent per-cell field sums
+UI IMPACTS PASS environment resident count and exposure delta match actual household receipts
+UI IMPACTS PASS selected impact panel exists on first screen: UI 100% / text 100%
+UI IMPACTS PASS first-screen acceptance starts at the real scroll origin: UI 100% / text 100%
+UI IMPACTS PASS entire selected impact panel fits actual ScrollContainer clip on first screen: UI 100% / text 100%
+UI IMPACTS PASS tender title fits native viewport: UI 100% / text 100%
+UI IMPACTS PASS single commit remains visible and enabled without committing: UI 100% / text 100%
+UI IMPACTS PASS details navigation remains visible: UI 100% / text 100%
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 100% false
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 100% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: UI 100% / text 100%
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 100% / text 100% offer:0
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 100% / text 100% offer:1
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 100% / text 100% offer:2
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% energy
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% environment_area
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% @VBoxContainer@815
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% @VBoxContainer@821
+UI IMPACTS PASS 1080p framebuffer: impacts-06-tender-first-screen-full-energy-environment
+UI IMPACTS PASS fresh screenshot: impacts-06-tender-first-screen-full-energy-environment
+UI IMPACTS PASS native pointer target available: native tender ui scale 80%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native tender ui scale 80%
+UI IMPACTS PASS native tender display setting applies: ui 80%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 80% / text 100%
+UI IMPACTS PASS selected impact panel exists on first screen: UI 80% / text 100%
+UI IMPACTS PASS first-screen acceptance starts at the real scroll origin: UI 80% / text 100%
+UI IMPACTS PASS entire selected impact panel fits actual ScrollContainer clip on first screen: UI 80% / text 100%
+UI IMPACTS PASS tender title fits native viewport: UI 80% / text 100%
+UI IMPACTS PASS single commit remains visible and enabled without committing: UI 80% / text 100%
+UI IMPACTS PASS details navigation remains visible: UI 80% / text 100%
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 80% / text 100% false
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 80% / text 100% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: UI 80% / text 100%
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 80% / text 100% offer:0
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 80% / text 100% offer:1
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 80% / text 100% offer:2
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% energy
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% environment_area
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% @VBoxContainer@947
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 80% / text 100% @VBoxContainer@953
+UI IMPACTS PASS tender UI scale preserves unscaled map geometry: UI 80% / text 100%
+UI IMPACTS PASS native UI setting preserves selected operator: UI 80% / text 100%
+UI IMPACTS PASS native pointer target available: native tender ui scale 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native tender ui scale 120%
+UI IMPACTS PASS native tender display setting applies: ui 120%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 120% / text 100%
+UI IMPACTS PASS selected impact panel exists on first screen: UI 120% / text 100%
+UI IMPACTS PASS first-screen acceptance starts at the real scroll origin: UI 120% / text 100%
+UI IMPACTS PASS entire selected impact panel fits actual ScrollContainer clip on first screen: UI 120% / text 100%
+UI IMPACTS PASS tender title fits native viewport: UI 120% / text 100%
+UI IMPACTS PASS single commit remains visible and enabled without committing: UI 120% / text 100%
+UI IMPACTS PASS details navigation remains visible: UI 120% / text 100%
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 120% / text 100% false
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 120% / text 100% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: UI 120% / text 100%
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 120% / text 100% offer:0
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 120% / text 100% offer:1
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 120% / text 100% offer:2
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% energy
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% environment_area
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% @VBoxContainer@1090
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 120% / text 100% @VBoxContainer@1096
+UI IMPACTS PASS tender UI scale preserves unscaled map geometry: UI 120% / text 100%
+UI IMPACTS PASS native UI setting preserves selected operator: UI 120% / text 100%
+UI IMPACTS PASS native pointer target available: native tender ui scale 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native tender ui scale 100%
+UI IMPACTS PASS native tender display setting applies: ui 100%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 100% / text 100%
+UI IMPACTS PASS selected impact panel exists on first screen: UI 100% / text 100%
+UI IMPACTS PASS first-screen acceptance starts at the real scroll origin: UI 100% / text 100%
+UI IMPACTS PASS entire selected impact panel fits actual ScrollContainer clip on first screen: UI 100% / text 100%
+UI IMPACTS PASS tender title fits native viewport: UI 100% / text 100%
+UI IMPACTS PASS single commit remains visible and enabled without committing: UI 100% / text 100%
+UI IMPACTS PASS details navigation remains visible: UI 100% / text 100%
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 100% false
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 100% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: UI 100% / text 100%
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 100% / text 100% offer:0
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 100% / text 100% offer:1
+UI IMPACTS PASS operator choice fits first-screen scroll clip: UI 100% / text 100% offer:2
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% energy
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% environment_area
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% @VBoxContainer@1233
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: UI 100% / text 100% @VBoxContainer@1239
+UI IMPACTS PASS tender UI scale preserves unscaled map geometry: UI 100% / text 100%
+UI IMPACTS PASS native UI setting preserves selected operator: UI 100% / text 100%
+UI IMPACTS PASS native pointer target available: native tender text scale 125%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native tender text scale 125%
+UI IMPACTS PASS native tender display setting applies: text 125%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 100% / text 125%
+UI IMPACTS PASS enlarged-text impact panel exists: UI 100% / text 125%
+UI IMPACTS PASS tender title fits native viewport: UI 100% / text 125%
+UI IMPACTS PASS single commit remains visible and enabled without committing: UI 100% / text 125%
+UI IMPACTS PASS details navigation remains visible: UI 100% / text 125%
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 125% false
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 125% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: UI 100% / text 125%
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 125% food
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 125% food
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 125% food
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 125% material
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 125% material
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 125% material
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 125% goods
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 125% goods
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 125% goods
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 125% energy
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 125% energy
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 125% energy
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 125% @VBoxContainer@1376
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 125% @VBoxContainer@1376
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 125% @VBoxContainer@1376
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 125% @VBoxContainer@1382
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 125% @VBoxContainer@1382
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 125% @VBoxContainer@1382
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 125% selected operator
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 125% selected operator
+UI IMPACTS PASS native pointer target available: reselect unchanged operator at UI 100% / text 125%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: reselect unchanged operator at UI 100% / text 125%
+UI IMPACTS PASS enlarged text keeps the same operator selection usable: UI 100% / text 125%
+UI IMPACTS PASS tender title fits native viewport: UI 100% / text 125%
+UI IMPACTS PASS single commit remains visible and enabled without committing: UI 100% / text 125%
+UI IMPACTS PASS details navigation remains visible: UI 100% / text 125%
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 125% false
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 125% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: UI 100% / text 125%
+UI IMPACTS PASS tender font size preserves map geometry: UI 100% / text 125%
+UI IMPACTS PASS native pointer target available: native tender text scale 150%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native tender text scale 150%
+UI IMPACTS PASS native tender display setting applies: text 150%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 100% / text 150%
+UI IMPACTS PASS enlarged-text impact panel exists: UI 100% / text 150%
+UI IMPACTS PASS tender title fits native viewport: UI 100% / text 150%
+UI IMPACTS PASS single commit remains visible and enabled without committing: UI 100% / text 150%
+UI IMPACTS PASS details navigation remains visible: UI 100% / text 150%
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 150% false
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 150% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: UI 100% / text 150%
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 150% food
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 150% food
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 150% food
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 150% material
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 150% material
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 150% material
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 150% goods
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 150% goods
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 150% goods
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 150% energy
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 150% energy
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 150% energy
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 150% @VBoxContainer@1570
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 150% @VBoxContainer@1570
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 150% @VBoxContainer@1570
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 150% @VBoxContainer@1576
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 150% @VBoxContainer@1576
+UI IMPACTS PASS scrolling preserves selected offer and usable commit: UI 100% / text 150% @VBoxContainer@1576
+UI IMPACTS PASS enlarged-text content uses real scroll container: UI 100% / text 150% selected operator
+UI IMPACTS PASS native scrolling exposes complete enlarged-text content: UI 100% / text 150% selected operator
+UI IMPACTS PASS native pointer target available: reselect unchanged operator at UI 100% / text 150%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: reselect unchanged operator at UI 100% / text 150%
+UI IMPACTS PASS enlarged text keeps the same operator selection usable: UI 100% / text 150%
+UI IMPACTS PASS tender title fits native viewport: UI 100% / text 150%
+UI IMPACTS PASS single commit remains visible and enabled without committing: UI 100% / text 150%
+UI IMPACTS PASS details navigation remains visible: UI 100% / text 150%
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 150% false
+UI IMPACTS PASS baseline/proposal map button remains visible: UI 100% / text 150% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: UI 100% / text 150%
+UI IMPACTS PASS tender font size preserves map geometry: UI 100% / text 150%
+UI IMPACTS PASS native pointer target available: native tender text scale 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native tender text scale 100%
+UI IMPACTS PASS native tender display setting applies: text 100%
+UI IMPACTS PASS selected impact panel exists on first screen: restored UI 100% / text 100%
+UI IMPACTS PASS first-screen acceptance starts at the real scroll origin: restored UI 100% / text 100%
+UI IMPACTS PASS entire selected impact panel fits actual ScrollContainer clip on first screen: restored UI 100% / text 100%
+UI IMPACTS PASS tender title fits native viewport: restored UI 100% / text 100%
+UI IMPACTS PASS single commit remains visible and enabled without committing: restored UI 100% / text 100%
+UI IMPACTS PASS details navigation remains visible: restored UI 100% / text 100%
+UI IMPACTS PASS baseline/proposal map button remains visible: restored UI 100% / text 100% false
+UI IMPACTS PASS baseline/proposal map button remains visible: restored UI 100% / text 100% true
+UI IMPACTS PASS scaled tender preserves exactly one commit: restored UI 100% / text 100%
+UI IMPACTS PASS operator choice fits first-screen scroll clip: restored UI 100% / text 100% offer:0
+UI IMPACTS PASS operator choice fits first-screen scroll clip: restored UI 100% / text 100% offer:1
+UI IMPACTS PASS operator choice fits first-screen scroll clip: restored UI 100% / text 100% offer:2
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% resource_flow
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% energy
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% environment_area
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% food
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% material
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% goods
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% @VBoxContainer@1764
+UI IMPACTS PASS resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% @VBoxContainer@1770
+UI IMPACTS PASS tender scaling, enlarged text and native scrolling preserve state, RNG, compiled rules and revision
+UI IMPACTS PASS tender workbench permits L with a valid change forecast
+UI IMPACTS PASS tender workbench permits reverse layer cycle
+UI IMPACTS PASS native pointer target available: show same-step baseline map
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: show same-step baseline map
+UI IMPACTS PASS analysis map selects same-step baseline: food
+UI IMPACTS PASS rendered map tile values match actual selected snapshot: food
+UI IMPACTS PASS 1080p framebuffer: impacts-01-baseline-food
+UI IMPACTS PASS fresh screenshot: impacts-01-baseline-food
+UI IMPACTS PASS native pointer target available: show same-step proposal map
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: show same-step proposal map
+UI IMPACTS PASS analysis map selects same-step proposal: food
+UI IMPACTS PASS rendered map tile values match actual selected snapshot: food
+UI IMPACTS PASS 1080p framebuffer: impacts-02-proposal-food
+UI IMPACTS PASS fresh screenshot: impacts-02-proposal-food
+UI IMPACTS PASS analysis map selects same-step proposal: energy
+UI IMPACTS PASS rendered map tile values match actual selected snapshot: energy
+UI IMPACTS PASS 1080p framebuffer: impacts-03-proposal-energy
+UI IMPACTS PASS fresh screenshot: impacts-03-proposal-energy
+UI IMPACTS PASS native pointer target available: select baseline before pollution CTA
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: select baseline before pollution CTA
+UI IMPACTS PASS native pointer target available: selected impact pollution map CTA
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: selected impact pollution map CTA
+UI IMPACTS PASS pollution CTA switches map, enables forecast and synchronizes map toggle
+UI IMPACTS PASS analysis map selects same-step proposal: pollution
+UI IMPACTS PASS rendered map tile values match actual selected snapshot: pollution
+UI IMPACTS PASS 1080p framebuffer: impacts-04-proposal-pollution
+UI IMPACTS PASS fresh screenshot: impacts-04-proposal-pollution
+UI IMPACTS PASS native pointer target available: select baseline before change CTA
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: select baseline before change CTA
+UI IMPACTS PASS native pointer target available: selected impact change map CTA
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: selected impact change map CTA
+UI IMPACTS PASS change CTA switches map, enables forecast and synchronizes map toggle
+UI IMPACTS PASS analysis map selects same-step proposal: change
+UI IMPACTS PASS rendered map tile values match actual selected snapshot: change
+UI IMPACTS PASS 1080p framebuffer: impacts-05-proposal-change
+UI IMPACTS PASS fresh screenshot: impacts-05-proposal-change
+UI IMPACTS PASS forecast map retains selected site and actual independent deltas
+UI IMPACTS PASS map toggle, layer CTAs and analysis rendering preserve exact city and RNG
+UI IMPACTS PASS returning from unpaid tender restores cached site forecast
+UI IMPACTS PASS cached site forecast restores change layer cycle
+UI IMPACTS PASS leaving planning clears proposal, reference and ghost deltas
+UI IMPACTS PASS exited planning returns analysis to current city snapshot
+UI IMPACTS PASS unpaid preview exits preserve offer records, city and RNG
+UI IMPACTS PASS fixed 1920x1080 fullscreen: completed
+UI IMPACTS RESULT 1073 passed, 0 failed
