@@ -1,0 +1,12 @@
+{
+  "source_commit": "98242e180682051d82479056fe6d85fe790a213d",
+  "artifact_kind": "Unity source project, not macOS app",
+  "zip_sha256": "6a59d13c8b4c26445dae98d10326071b0eb82c211e9f7cffecb27379bdf38090",
+  "zip_bytes": 4625909,
+  "members": 47,
+  "crc": "passed",
+  "member_sha256": "passed",
+  "independent_extracted_portable_validation": "passed",
+  "unity_execution": "not_run",
+  "unity_mac_app": "not_built"
+}
