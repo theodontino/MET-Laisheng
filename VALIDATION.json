@@ -1,0 +1,36 @@
+{
+  "source_commit": "7e9e1a90a207039734d23fbcd79737f21213c6ff",
+  "product": "MET Godot 0.5.0-beta.2 / UI Impacts V1",
+  "zip": "MET_0.5.0-beta.2_UIImpactsV1_macOS_universal_7e9e1a9.zip",
+  "sha256": "b141c2f0afd118324fee9d438290ed3a6e2360b1ffe9d2e8e82cdd7970688033",
+  "bytes": 81409226,
+  "crc_valid": true,
+  "app_bundle": "MET \u00b7 \u6765\u751f.app",
+  "bundle_identifier": "com.projectmet.laishengbeta",
+  "architectures": [
+    {
+      "architecture": "x86_64",
+      "signature_blob_bytes": 1114112
+    },
+    {
+      "architecture": "arm64",
+      "signature_blob_bytes": 1048576
+    }
+  ],
+  "executable_permissions_preserved": true,
+  "export_codesigning": "Godot builtin ad-hoc; native Apple verification not performed",
+  "notarized": false,
+  "macos_native_launch_tested": false,
+  "pck_path": "/workspace/.met-setup/main-ui-impact/macos-delivery/extracted/MET \u00b7 \u6765\u751f.app/Contents/Resources/MET \u00b7 \u6765\u751f.pck",
+  "linux_exported_pck_default_startup": true,
+  "linux_exported_pck_native_controls": true,
+  "accepted_source_fingerprint": "44474ec3dd5fe5f106ec01c35fd2cdae1a8dd714f9dda478d39f5d8ea0f96b7a",
+  "packed_native_checks": 101,
+  "source_native_checks": 1040,
+  "ui_regression_checks": 977,
+  "core_checks": 401,
+  "core_routes": 6,
+  "github_release_direct_upload": "Unavailable: GitHub API returns Forbidden",
+  "release_tag": "macos-0.5.0-beta.2-ui-impacts-v1",
+  "release_workflow_result": "Not observable from this environment; tag push does not prove a Release was published"
+}
