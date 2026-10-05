@@ -177,6 +177,9 @@ func open_display_from_menu(label:String) -> void:
 	await click(app.header_nodes.menu,"settings gear: "+label)
 	check(app.overlay.visible and app.modal_title.text=="河谷手册与存档","native settings gear opens manual: "+label)
 	check(not app.tool_panel.is_visible_in_tree(),"modal hides underlying map tools: "+label)
+	for text in ["发展目标与居民迁入","居民与工作","方案手册"]:
+		var action=button_text(app.modal_body,text)
+		check(action!=null and action.icon!=null,"manual action has a runtime icon: "+text+" / "+label)
 	await click(button_text(app.modal_body,"显示设置"),"display settings entry: "+label)
 	check(app.overlay.visible and app.modal_title.text=="显示与交互","manual reaches display options: "+label)
 func test_scale(tile:String) -> void:

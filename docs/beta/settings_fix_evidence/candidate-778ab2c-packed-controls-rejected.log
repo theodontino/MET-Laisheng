@@ -1,0 +1,211 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+UI IMPACTS PASS packaged test uses a native display
+UI IMPACTS PASS fixed 1920x1080 fullscreen: exported PCK startup
+UI IMPACTS PASS runtime excludes editor/source/evidence directories
+UI IMPACTS PASS fixture enters play through real origin API
+UI IMPACTS PASS fixture supplies a real residence
+UI IMPACTS PASS fixture settles through the real simulation
+UI IMPACTS PASS fixture population has real housing and available workers
+UI IMPACTS PASS native pointer target available: choose workshop from native build dock
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: choose workshop from native build dock
+UI IMPACTS PASS map pointer selects the intended real site
+UI IMPACTS PASS site bubble fits screen without covering selected map hex
+UI IMPACTS PASS valid site forecast adds change to layer cycle
+UI IMPACTS PASS independent ScaledInterface root owns UI transforms
+UI IMPACTS PASS native pointer target available: settings gear: before UI 80%
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: settings gear: before UI 80%
+UI IMPACTS PASS native settings gear opens manual: before UI 80%
+UI IMPACTS PASS modal hides underlying map tools: before UI 80%
+UI IMPACTS PASS native pointer target available: display settings entry: before UI 80%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 80%
+UI IMPACTS PASS manual reaches display options: before UI 80%
+UI IMPACTS PASS native pointer target available: native UI scale 80%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native UI scale 80%
+UI IMPACTS PASS settings gear returns after modal: 80%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 80%
+UI IMPACTS PASS UI scale applies only to interface root: 80%
+UI IMPACTS PASS HUD physical dimensions scale in fixed viewport: 80%
+UI IMPACTS PASS UI scale preserves map size, world zoom, pan and tile screen coordinates: 80%
+UI IMPACTS PASS screen/UI point and rect helpers round trip: 80%
+UI IMPACTS PASS scaled context control fits screen: 80% @PanelContainer@9
+UI IMPACTS PASS scaled context control fits screen: 80% L0Time
+UI IMPACTS PASS scaled context control fits screen: 80% @PanelContainer@53
+UI IMPACTS PASS scaled context control fits screen: 80% SitePreviewBubble
+UI IMPACTS PASS scaled context control fits screen: 80% CompareSiteTender
+UI IMPACTS PASS scaled site bubble avoids actual map hex: 80%
+UI IMPACTS PASS cached site restores valid plan after scale modal: 80%
+UI IMPACTS PASS 1080p framebuffer: impacts-ui-80-site
+UI IMPACTS PASS fresh screenshot: impacts-ui-80-site
+UI IMPACTS PASS native pointer target available: settings gear: before UI 100%
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: settings gear: before UI 100%
+UI IMPACTS PASS native settings gear opens manual: before UI 100%
+UI IMPACTS PASS modal hides underlying map tools: before UI 100%
+UI IMPACTS PASS native pointer target available: display settings entry: before UI 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 100%
+UI IMPACTS PASS manual reaches display options: before UI 100%
+UI IMPACTS PASS native pointer target available: native UI scale 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native UI scale 100%
+UI IMPACTS PASS settings gear returns after modal: 100%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 100%
+UI IMPACTS PASS UI scale applies only to interface root: 100%
+UI IMPACTS PASS HUD physical dimensions scale in fixed viewport: 100%
+UI IMPACTS PASS UI scale preserves map size, world zoom, pan and tile screen coordinates: 100%
+UI IMPACTS PASS screen/UI point and rect helpers round trip: 100%
+UI IMPACTS PASS scaled context control fits screen: 100% @PanelContainer@9
+UI IMPACTS PASS scaled context control fits screen: 100% L0Time
+UI IMPACTS PASS scaled context control fits screen: 100% @PanelContainer@53
+UI IMPACTS PASS scaled context control fits screen: 100% SitePreviewBubble
+UI IMPACTS PASS scaled context control fits screen: 100% CompareSiteTender
+UI IMPACTS PASS scaled site bubble avoids actual map hex: 100%
+UI IMPACTS PASS cached site restores valid plan after scale modal: 100%
+UI IMPACTS PASS native pointer target available: settings gear: before UI 120%
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: settings gear: before UI 120%
+UI IMPACTS PASS native settings gear opens manual: before UI 120%
+UI IMPACTS PASS modal hides underlying map tools: before UI 120%
+UI IMPACTS PASS native pointer target available: display settings entry: before UI 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: display settings entry: before UI 120%
+UI IMPACTS PASS manual reaches display options: before UI 120%
+UI IMPACTS PASS native pointer target available: native UI scale 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: native UI scale 120%
+UI IMPACTS PASS settings gear returns after modal: 120%
+UI IMPACTS PASS fixed 1920x1080 fullscreen: UI 120%
+UI IMPACTS PASS UI scale applies only to interface root: 120%
+UI IMPACTS PASS HUD physical dimensions scale in fixed viewport: 120%
+UI IMPACTS PASS UI scale preserves map size, world zoom, pan and tile screen coordinates: 120%
+UI IMPACTS PASS screen/UI point and rect helpers round trip: 120%
+UI IMPACTS PASS scaled context control fits screen: 120% @PanelContainer@9
+UI IMPACTS PASS scaled context control fits screen: 120% L0Time
+UI IMPACTS PASS scaled context control fits screen: 120% @PanelContainer@53
+UI IMPACTS PASS scaled context control fits screen: 120% SitePreviewBubble
+UI IMPACTS PASS scaled context control fits screen: 120% CompareSiteTender
+UI IMPACTS PASS scaled site bubble avoids actual map hex: 120%
+UI IMPACTS PASS cached site restores valid plan after scale modal: 120%
+UI IMPACTS PASS 1080p framebuffer: impacts-ui-120-site
+UI IMPACTS PASS fresh screenshot: impacts-ui-120-site
+UI IMPACTS PASS native pointer target available: settings gear: restore from UI 120%
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+ERROR: Condition "buffer_size == 0" is true. Returning: ERR_INVALID_PARAMETER
+   at: load_svg_from_buffer (core/io/image.cpp:4489)
+   GDScript backtrace (most recent call first):
+       [0] icon (res://ui/map/art.gd:105)
+       [1] icon_button (res://ui/widgets.gd:329)
+       [2] settings (res://ui/dialogs.gd:332)
+       [3] <anonymous lambda> (res://ui/app.gd:219)
+       [4] pointer (res://tests/ui_impacts.gd:74)
+       [5] frames (res://tests/ui_impacts.gd:27)
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: settings gear: restore from UI 120%
+UI IMPACTS PASS native settings gear opens manual: restore from UI 120%
+UI IMPACTS PASS modal hides underlying map tools: restore from UI 120%
+UI IMPACTS PASS native pointer target available: display settings entry: restore from UI 120%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: display settings entry: restore from UI 120%
+UI IMPACTS PASS manual reaches display options: restore from UI 120%
+UI IMPACTS PASS 1080p framebuffer: impacts-09-settings-through-gear-ui120
+UI IMPACTS PASS fresh screenshot: impacts-09-settings-through-gear-ui120
+UI IMPACTS PASS native pointer target available: restore native UI 100%
+UI IMPACTS PASS native pointer dispatches exactly one Button pressed callback: restore native UI 100%
+UI IMPACTS PASS UI scale and native settings clicks preserve full gameplay snapshot
+UI IMPACTS PASS packaged settings close returns to visible gear
+UI IMPACTS PASS fixed 1920x1080 fullscreen: exported PCK settings complete
+UI IMPACTS RESULT 97 passed, 0 failed

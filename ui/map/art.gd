@@ -97,10 +97,11 @@ static func icon(id:String,tint:Color=Color("EDF3EF")) -> Texture2D:
 	if icons.has(key):return icons[key]
 	var path="res://assets/ui040/"+id+".svg"
 	if not FileAccess.file_exists(path) and not ResourceLoader.exists(path):path="res://assets/ui030/"+id+".svg"
+	if not FileAccess.file_exists(path) and not ResourceLoader.exists(path):path="res://assets/ui040/build.svg"
 	if not FileAccess.file_exists(path):
 		if ResourceLoader.exists(path):
 			var imported=load(path);icons[key]=imported;return imported
-		path="res://assets/ui030/build.svg"
+		return null
 	var svg=FileAccess.get_file_as_string(path).replace("#24473f","#"+tint.to_html(false)).replace("#75D7BE","#"+tint.to_html(false)).replace("#C6A56B","#"+tint.to_html(false));var image=Image.new()
 	if image.load_svg_from_string(svg,2.0)!=OK:return null
 	var tex=ImageTexture.create_from_image(image);icons[key]=tex;return tex
