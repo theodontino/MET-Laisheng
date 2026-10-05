@@ -3,12 +3,14 @@ extends PanelContainer
 const W=preload("res://ui/widgets.gd")
 const Art=preload("res://ui/map/art.gd")
 const P=preload("res://ui/presentation.gd")
+const ImpactModel=preload("res://ui/view_models/impact_model.gd")
 var app
 var tile:String=""
 var base:String=""
 var prediction:Dictionary={}
 var nodes:Dictionary={}
 var signature:String=""
+var reference:Dictionary={}
 func setup(owner):
 	app=owner;name="SitePreviewBubble";mouse_filter=Control.MOUSE_FILTER_STOP
 	var style=W.box(W.PANEL,W.ACCENT,16);style.content_margin_left=18;style.content_margin_right=18;style.content_margin_top=14;style.content_margin_bottom=14;add_theme_stylebox_override("panel",style)
@@ -31,7 +33,7 @@ func refresh():
 	var key=tile+":"+base+":"+app.planner.version(g)
 	if key!=signature:
 		signature=key;prediction=app.planner.compare(g,base,tile)
-		app.map_view.plan_result=prediction;app.map_view.plan_tile=tile
+		reference=app.planner.snapshot(g)
 		nodes.title.text=str(g.c.projects[base].name);nodes.image.texture=Art.thumbnail(base)
 		W.clear(nodes.metrics)
 		var items=[]
@@ -45,15 +47,26 @@ func refresh():
 		for item in items.slice(0,2):
 			var column=W.vbox(nodes.metrics,3);column.set_meta("preview_metric",item.icon)
 			var row=W.hbox(column,7);var icon=TextureRect.new();icon.texture=Art.icon(item.icon,W.ACCENT);icon.custom_minimum_size=Vector2(26,26);icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;row.add_child(icon);row.add_child(W.label("%.1f"%item.value,23,W.TEXT,false));column.add_child(W.label("预计 "+item.unit,13,W.MUTED,false))
+		var contextual=ImpactModel.build(g,reference,prediction)
+		for column in nodes.metrics.get_children():
+			var id=str(column.get_meta("preview_metric",""))
+			for row in contextual.get("resources",[]):
+				if row.id!=id:continue
+				var note="占预计需求 %.0f%%"%(float(row.need_share)*100.) if row.share_known else ("预计暂无消费需求" if row.known else "等待有效结算")
+				column.add_child(W.label(note,12,W.MUTED,false));column.tooltip_text="全城库存 %.1f / %.1f；建设后净流 %+.1f/月。全城总量不保证每栋建筑可达。"%[row.stock,row.capacity,row.after_net]
 		var risks=P.plan_cautions(g,prediction);var state=risk_state(prediction)
 		nodes.risk.text="● "+str(state.text);nodes.risk.tooltip_text="\n".join(risks)
 		nodes.risk.add_theme_color_override("font_color",W.WARNING if state.attention else W.SUCCESS)
 		var def=g.c.projects[base];nodes.costs.text="%.0f 通货 · %.0f 材料 · %.1f CP"%[def.cost,def.material,def.construction_required]
 		nodes.action.disabled=not prediction.get("ok",false)
+	# Returning from a tender clears the map preview, but not this site's cache.
+	if app.map_view.plan_result!=prediction or app.map_view.plan_reference!=reference or app.map_view.plan_tile!=tile:
+		app.map_view.plan_result=prediction;app.map_view.plan_tile=tile;app.map_view.plan_reference=reference;app.map_view.invalidate()
 	show();reposition()
 func show_details():
 	app.open_modal(str(app.game.c.projects[base].name)+" · 选址预测","同一城市快照下，假定建设完成后的下一结算；未购买、未扣款。")
-	for line in P.plan_lines(app.game,prediction):app.modal_body.add_child(W.label(line,18,W.TEXT))
+	var panel=load("res://ui/reset/impact_panel.gd")
+	panel.build(app.modal_body,ImpactModel.build(app.game,reference,prediction),func(kind):app.close_modal();app.show_plan_layer(kind))
 	for line in P.plan_cautions(app.game,prediction):app.modal_body.add_child(W.label(line,16,W.MUTED if str(line).begins_with("当前粮食有余量") else W.WARNING))
 	app.modal_body.add_child(W.label("位置："+tile+" · "+app.game.c.tags_text(app.game.s.cells[tile].traits),14,W.MUTED))
 func _process(_delta):reposition()
@@ -61,9 +74,9 @@ func reposition():
 	if app==null:return
 	if app.mode!="site" or app.desk.is_open() or app.overlay!=null and app.overlay.visible or app.decision_kind!="" or app.screenshot_mode:hide();return
 	if tile=="" or not app.game.s.cells.has(tile):hide();return
-	var anchor=app.map_view.global_position+app.map_view.tile_screen_anchor(tile)
+	var anchor=app.ui_position_from_screen(app.map_view.global_position+app.map_view.tile_screen_anchor(tile))
 	var footprint=Rect2(anchor,Vector2.ZERO)
-	for vertex in app.map_view.surface_polygon(tile):footprint=footprint.expand(app.map_view.global_position+vertex)
+	for vertex in app.map_view.surface_polygon(tile):footprint=footprint.expand(app.ui_position_from_screen(app.map_view.global_position+vertex))
 	var dimensions=Vector2(358,maxf(240,get_combined_minimum_size().y));size=dimensions
 	var safe=Rect2(app.safe_area.position+Vector2(16,146),app.safe_area.size-Vector2(32,264))
 	var candidates=[Vector2(footprint.end.x+16,anchor.y-dimensions.y*.5),Vector2(footprint.position.x-dimensions.x-16,anchor.y-dimensions.y*.5),Vector2(anchor.x-dimensions.x*.5,footprint.end.y+16),Vector2(anchor.x-dimensions.x*.5,footprint.position.y-dimensions.y-16)]

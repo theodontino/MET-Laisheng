@@ -1,0 +1,90 @@
+[
+  {
+    "created_at": 1791194714.10868,
+    "fixture": true,
+    "height": 1080,
+    "map_layer": "material",
+    "map_proposal": true,
+    "path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-ui-80-site.png",
+    "text_scale": 1.0,
+    "ui_scale": 0.8,
+    "width": 1920
+  },
+  {
+    "created_at": 1791194718.3223,
+    "fixture": true,
+    "height": 1080,
+    "map_layer": "material",
+    "map_proposal": true,
+    "path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-ui-120-site.png",
+    "text_scale": 1.0,
+    "ui_scale": 1.2,
+    "width": 1920
+  },
+  {
+    "created_at": 1791194724.46267,
+    "fixture": true,
+    "height": 1080,
+    "map_layer": "material",
+    "map_proposal": true,
+    "path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-06-tender-first-screen-full-energy-environment.png",
+    "text_scale": 1.0,
+    "ui_scale": 1.0,
+    "width": 1920
+  },
+  {
+    "created_at": 1791194748.9043,
+    "fixture": true,
+    "height": 1080,
+    "map_layer": "food",
+    "map_proposal": false,
+    "path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-01-baseline-food.png",
+    "text_scale": 1.0,
+    "ui_scale": 1.0,
+    "width": 1920
+  },
+  {
+    "created_at": 1791194750.40645,
+    "fixture": true,
+    "height": 1080,
+    "map_layer": "food",
+    "map_proposal": true,
+    "path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-02-proposal-food.png",
+    "text_scale": 1.0,
+    "ui_scale": 1.0,
+    "width": 1920
+  },
+  {
+    "created_at": 1791194751.46731,
+    "fixture": true,
+    "height": 1080,
+    "map_layer": "energy",
+    "map_proposal": true,
+    "path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-03-proposal-energy.png",
+    "text_scale": 1.0,
+    "ui_scale": 1.0,
+    "width": 1920
+  },
+  {
+    "created_at": 1791194753.61061,
+    "fixture": true,
+    "height": 1080,
+    "map_layer": "pollution",
+    "map_proposal": true,
+    "path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-04-proposal-pollution.png",
+    "text_scale": 1.0,
+    "ui_scale": 1.0,
+    "width": 1920
+  },
+  {
+    "created_at": 1791194755.76665,
+    "fixture": true,
+    "height": 1080,
+    "map_layer": "change",
+    "map_proposal": true,
+    "path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-05-proposal-change.png",
+    "text_scale": 1.0,
+    "ui_scale": 1.0,
+    "width": 1920
+  }
+]

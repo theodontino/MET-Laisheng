@@ -42,7 +42,7 @@ static func service(s:Dictionary,tile:String,kind:String) -> Dictionary:
 	return {"people":people,"served":delivered,"ratio":ratio,"sources":sources,"reachable":not sources.is_empty(),"known":known,"reason":reason}
 static func tile_info(g,s:Dictionary,tile:String,kind:String) -> Dictionary:
 	if SERVICES.has(kind):return service(s,tile,kind)
-	var building=str(g.s.cells.get(tile,{}).get("building",""));var value=0.;var label="";var entries=[]
+	var building=str(s.get("tiles",{}).get(tile,g.s.cells.get(tile,{})).get("building",""));var value=0.;var label="";var entries=[]
 	if kind in ["pollution","heat"]:
 		entries=s.tiles.get(tile,{}).get("fields",{}).get(kind,[])
 		for e in entries:value+=float(e.value)
@@ -73,7 +73,16 @@ static func tile_info(g,s:Dictionary,tile:String,kind:String) -> Dictionary:
 			count+=float(group.count)
 			for n in group.employment.values():assigned+=float(n)
 		return {"value":(count-assigned)/maxf(.001,count),"label":"待就业 %.1f / %.1f"%[maxf(0,count-assigned),count],"known":true,"applicable":count>.001,"count":count}
-	elif kind in ["food","material","goods","energy"]:
+	elif kind=="energy":
+		var metrics:Dictionary=s.get("metrics",{});var produced=float(metrics.get("energy_sources",{}).get(building,0))
+		var need=float(metrics.get("energy_requests",{}).get(building,0))
+		for gid in s.get("groups",{}):
+			if str(s.groups[gid].get("host",""))==building:need+=float(metrics.get("population_energy",{}).get(gid,0))
+		var ratio=float(metrics.get("energy_ratio",1));var consumed=need*ratio
+		return {"value":produced-consumed,"produced":produced,"consumed":consumed,"need":need,"ratio":ratio,
+			"stock":0.,"lost":0.,"known":metrics.has("energy_sources") and metrics.has("energy_requests"),"applicable":produced+need>.001,
+			"label":"供 %.1f / 需 %.1f · 满足 %.0f%%"%[produced,need,ratio*100.]}
+	elif kind in ["food","material","goods"]:
 		var prod=0.;var consume=0.;var lost=0.
 		for e in s.metrics.get("activity_ledger",{}).get(building,[]):
 			if e.resource!=kind:continue

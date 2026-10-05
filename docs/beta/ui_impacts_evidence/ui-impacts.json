@@ -1,0 +1,6450 @@
+{
+	"captures": [
+		{
+			"created_at": 1791194714.10868,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "material",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-ui-80-site.png",
+			"text_scale": 1.0,
+			"ui_scale": 0.8,
+			"width": 1920
+		},
+		{
+			"created_at": 1791194718.3223,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "material",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-ui-120-site.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.2,
+			"width": 1920
+		},
+		{
+			"created_at": 1791194724.46267,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "material",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-06-tender-first-screen-full-energy-environment.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.0,
+			"width": 1920
+		},
+		{
+			"created_at": 1791194748.9043,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "food",
+			"map_proposal": false,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-01-baseline-food.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.0,
+			"width": 1920
+		},
+		{
+			"created_at": 1791194750.40645,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "food",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-02-proposal-food.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.0,
+			"width": 1920
+		},
+		{
+			"created_at": 1791194751.46731,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "energy",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-03-proposal-energy.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.0,
+			"width": 1920
+		},
+		{
+			"created_at": 1791194753.61061,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "pollution",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-04-proposal-pollution.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.0,
+			"width": 1920
+		},
+		{
+			"created_at": 1791194755.76665,
+			"fixture": true,
+			"height": 1080,
+			"map_layer": "change",
+			"map_proposal": true,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-impacts/impacts-05-proposal-change.png",
+			"text_scale": 1.0,
+			"ui_scale": 1.0,
+			"width": 1920
+		}
+	],
+	"checks": [
+		{
+			"name": "native display server is active",
+			"pass": true
+		},
+		{
+			"name": "contracted Godot 4.7.2 engine",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: startup",
+			"pass": true
+		},
+		{
+			"name": "application and unscaled map fill native 1080p viewport",
+			"pass": true
+		},
+		{
+			"name": "fixture enters play through real origin API",
+			"pass": true
+		},
+		{
+			"name": "fixture supplies a real residence",
+			"pass": true
+		},
+		{
+			"name": "fixture settles through the real simulation",
+			"pass": true
+		},
+		{
+			"detail": {
+				"housing": 64.0,
+				"jobs": 14.0,
+				"population": 42.0103468550682
+			},
+			"name": "fixture population has real housing and available workers",
+			"pass": true
+		},
+		{
+			"name": "idle layer order contains all sixteen analysis layers without change",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 0",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 1",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 2",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 3",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 4",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 5",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 6",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 7",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 8",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 9",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 10",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 11",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 12",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 13",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 14",
+			"pass": true
+		},
+		{
+			"name": "L advances and wraps in the documented layer order: 15",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 0",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 1",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 2",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 3",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 4",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 5",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 6",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 7",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 8",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 9",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 10",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 11",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 12",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 13",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 14",
+			"pass": true
+		},
+		{
+			"name": "Shift+L reverses and wraps: 15",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: open archive modal",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: open archive modal",
+			"pass": true
+		},
+		{
+			"name": "modal blocks L",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: open finance desk",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: open finance desk",
+			"pass": true
+		},
+		{
+			"name": "management desk blocks Shift+L",
+			"pass": true
+		},
+		{
+			"name": "native Escape returns from management desk",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: focus native LineEdit fixture",
+			"pass": true
+		},
+		{
+			"name": "focused LineEdit consumes L as text",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: focus native TextEdit fixture",
+			"pass": true
+		},
+		{
+			"name": "focused TextEdit consumes L as text",
+			"pass": true
+		},
+		{
+			"name": "native layer shortcuts and blockers preserve authoritative state and RNG",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: choose workshop from native build dock",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: choose workshop from native build dock",
+			"pass": true
+		},
+		{
+			"name": "map pointer selects the intended real site",
+			"pass": true
+		},
+		{
+			"name": "site bubble fits screen without covering selected map hex",
+			"pass": true
+		},
+		{
+			"name": "valid site forecast adds change to layer cycle",
+			"pass": true
+		},
+		{
+			"name": "independent ScaledInterface root owns UI transforms",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native UI scale 80%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native UI scale 80%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 80%",
+			"pass": true
+		},
+		{
+			"name": "UI scale applies only to interface root: 80%",
+			"pass": true
+		},
+		{
+			"name": "HUD physical dimensions scale in fixed viewport: 80%",
+			"pass": true
+		},
+		{
+			"name": "UI scale preserves map size, world zoom, pan and tile screen coordinates: 80%",
+			"pass": true
+		},
+		{
+			"name": "screen/UI point and rect helpers round trip: 80%",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% @PanelContainer@9",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% L0Time",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% @PanelContainer@53",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% SitePreviewBubble",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 80% CompareSiteTender",
+			"pass": true
+		},
+		{
+			"name": "scaled site bubble avoids actual map hex: 80%",
+			"pass": true
+		},
+		{
+			"name": "cached site restores valid plan after scale modal: 80%",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-ui-80-site",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-ui-80-site",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native UI scale 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native UI scale 100%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 100%",
+			"pass": true
+		},
+		{
+			"name": "UI scale applies only to interface root: 100%",
+			"pass": true
+		},
+		{
+			"name": "HUD physical dimensions scale in fixed viewport: 100%",
+			"pass": true
+		},
+		{
+			"name": "UI scale preserves map size, world zoom, pan and tile screen coordinates: 100%",
+			"pass": true
+		},
+		{
+			"name": "screen/UI point and rect helpers round trip: 100%",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% @PanelContainer@9",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% L0Time",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% @PanelContainer@53",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% SitePreviewBubble",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 100% CompareSiteTender",
+			"pass": true
+		},
+		{
+			"name": "scaled site bubble avoids actual map hex: 100%",
+			"pass": true
+		},
+		{
+			"name": "cached site restores valid plan after scale modal: 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native UI scale 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native UI scale 120%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 120%",
+			"pass": true
+		},
+		{
+			"name": "UI scale applies only to interface root: 120%",
+			"pass": true
+		},
+		{
+			"name": "HUD physical dimensions scale in fixed viewport: 120%",
+			"pass": true
+		},
+		{
+			"name": "UI scale preserves map size, world zoom, pan and tile screen coordinates: 120%",
+			"pass": true
+		},
+		{
+			"name": "screen/UI point and rect helpers round trip: 120%",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% @PanelContainer@9",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% L0Time",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% @PanelContainer@53",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% SitePreviewBubble",
+			"pass": true
+		},
+		{
+			"name": "scaled context control fits screen: 120% CompareSiteTender",
+			"pass": true
+		},
+		{
+			"name": "scaled site bubble avoids actual map hex: 120%",
+			"pass": true
+		},
+		{
+			"name": "cached site restores valid plan after scale modal: 120%",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-ui-120-site",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-ui-120-site",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: restore native UI 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: restore native UI 100%",
+			"pass": true
+		},
+		{
+			"name": "UI scale and native settings clicks preserve full gameplay snapshot",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: open actual operator tender",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: open actual operator tender",
+			"pass": true
+		},
+		{
+			"name": "real tender command generates three persistent operator candidates",
+			"pass": true
+		},
+		{
+			"name": "workbench presents three small operator comparison cards",
+			"pass": true
+		},
+		{
+			"name": "comparison keeps one TenderConfirmPrimary commit",
+			"pass": true
+		},
+		{
+			"detail": {
+				"map_area": "[P: (380.0, 150.0), S: (1160.0, 342.0)]",
+				"workbench": "[P: (836.0, 516.0), S: (1060.0, 540.0)]"
+			},
+			"name": "comparison sits at lower right and leaves a real map analysis area",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: preview operator circular",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: preview operator circular",
+			"pass": true
+		},
+		{
+			"name": "native candidate selection chooses an actual valid offer: offer:0",
+			"pass": true
+		},
+		{
+			"name": "candidate preview does not mutate saved city or RNG: offer:0",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel is visible in native comparison",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel consumes authoritative read model",
+			"pass": true
+		},
+		{
+			"name": "three resource rows each render a real before/after graphic",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: food",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: food",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: material",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: material",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: goods",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: goods",
+			"pass": true
+		},
+		{
+			"name": "visible zero-demand share remains unavailable: goods",
+			"pass": true
+		},
+		{
+			"name": "electricity graphic explicitly uses supply/demand capacity",
+			"pass": true
+		},
+		{
+			"name": "environment burden uses a source-backed whole-map area graphic",
+			"pass": true
+		},
+		{
+			"name": "independent real simulation settlement: baseline",
+			"pass": true
+		},
+		{
+			"name": "independent real simulation settlement: proposal",
+			"pass": true
+		},
+		{
+			"name": "baseline and proposal are the same real next settlement",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: metrics",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: metrics",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: audit",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: audit",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: projects",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: projects",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: groups",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: groups",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: tiles",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: tiles",
+			"pass": true
+		},
+		{
+			"name": "impact model accepts real same-step planner result",
+			"pass": true
+		},
+		{
+			"name": "ordinary inventory impact contains food/material/goods only",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: food",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: food",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: food",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: food",
+			"pass": true
+		},
+		{
+			"name": "building share divides real output by total demand: food",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: food",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: material",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: material",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: material",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: material",
+			"pass": true
+		},
+		{
+			"name": "building share divides real output by total demand: material",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: material",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: goods",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: goods",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: goods",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: goods",
+			"pass": true
+		},
+		{
+			"name": "zero demand has no invented 0 percent need share: goods",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: goods",
+			"pass": true
+		},
+		{
+			"name": "fixture exercises a real negative net flow and finite stock runway",
+			"pass": true
+		},
+		{
+			"name": "fixture exercises real zero consumption demand",
+			"pass": true
+		},
+		{
+			"name": "electricity uses actual capacity and coverage without inventory/month units: before",
+			"pass": true
+		},
+		{
+			"name": "electricity uses actual capacity and coverage without inventory/month units: after",
+			"pass": true
+		},
+		{
+			"name": "energy remains a separate capacity measure",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,0",
+			"pass": true
+		},
+		{
+			"name": "environment graphic uses the actual whole-map area as its denominator",
+			"pass": true
+		},
+		{
+			"name": "environment area and extrema match independent per-cell field sums",
+			"pass": true
+		},
+		{
+			"name": "environment resident count and exposure delta match actual household receipts",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: preview operator farmers",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: preview operator farmers",
+			"pass": true
+		},
+		{
+			"name": "native candidate selection chooses an actual valid offer: offer:1",
+			"pass": true
+		},
+		{
+			"name": "candidate preview does not mutate saved city or RNG: offer:1",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel is visible in native comparison",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel consumes authoritative read model",
+			"pass": true
+		},
+		{
+			"name": "three resource rows each render a real before/after graphic",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: food",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: food",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: material",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: material",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: goods",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: goods",
+			"pass": true
+		},
+		{
+			"name": "visible zero-demand share remains unavailable: goods",
+			"pass": true
+		},
+		{
+			"name": "electricity graphic explicitly uses supply/demand capacity",
+			"pass": true
+		},
+		{
+			"name": "environment burden uses a source-backed whole-map area graphic",
+			"pass": true
+		},
+		{
+			"name": "independent real simulation settlement: baseline",
+			"pass": true
+		},
+		{
+			"name": "independent real simulation settlement: proposal",
+			"pass": true
+		},
+		{
+			"name": "baseline and proposal are the same real next settlement",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: metrics",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: metrics",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: audit",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: audit",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: projects",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: projects",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: groups",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: groups",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: tiles",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: tiles",
+			"pass": true
+		},
+		{
+			"name": "impact model accepts real same-step planner result",
+			"pass": true
+		},
+		{
+			"name": "ordinary inventory impact contains food/material/goods only",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: food",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: food",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: food",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: food",
+			"pass": true
+		},
+		{
+			"name": "building share divides real output by total demand: food",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: food",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: material",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: material",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: material",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: material",
+			"pass": true
+		},
+		{
+			"name": "building share divides real output by total demand: material",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: material",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: goods",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: goods",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: goods",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: goods",
+			"pass": true
+		},
+		{
+			"name": "zero demand has no invented 0 percent need share: goods",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: goods",
+			"pass": true
+		},
+		{
+			"name": "fixture exercises a real negative net flow and finite stock runway",
+			"pass": true
+		},
+		{
+			"name": "fixture exercises real zero consumption demand",
+			"pass": true
+		},
+		{
+			"name": "electricity uses actual capacity and coverage without inventory/month units: before",
+			"pass": true
+		},
+		{
+			"name": "electricity uses actual capacity and coverage without inventory/month units: after",
+			"pass": true
+		},
+		{
+			"name": "energy remains a separate capacity measure",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,0",
+			"pass": true
+		},
+		{
+			"name": "environment graphic uses the actual whole-map area as its denominator",
+			"pass": true
+		},
+		{
+			"name": "environment area and extrema match independent per-cell field sums",
+			"pass": true
+		},
+		{
+			"name": "environment resident count and exposure delta match actual household receipts",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: preview operator civic",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: preview operator civic",
+			"pass": true
+		},
+		{
+			"name": "native candidate selection chooses an actual valid offer: offer:2",
+			"pass": true
+		},
+		{
+			"name": "candidate preview does not mutate saved city or RNG: offer:2",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel is visible in native comparison",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel consumes authoritative read model",
+			"pass": true
+		},
+		{
+			"name": "three resource rows each render a real before/after graphic",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: food",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: food runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: food",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: material",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: material runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: material",
+			"pass": true
+		},
+		{
+			"name": "graphical resource row exists: goods",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods stock",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods capacity",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_supply",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_demand",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods before_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods after_net",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods need_share",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods runway_before",
+			"pass": true
+		},
+		{
+			"name": "visible impact metadata matches receipt: goods runway_after",
+			"pass": true
+		},
+		{
+			"name": "before/after resource graph shares one truthful monthly axis: goods",
+			"pass": true
+		},
+		{
+			"name": "visible zero-demand share remains unavailable: goods",
+			"pass": true
+		},
+		{
+			"name": "electricity graphic explicitly uses supply/demand capacity",
+			"pass": true
+		},
+		{
+			"name": "environment burden uses a source-backed whole-map area graphic",
+			"pass": true
+		},
+		{
+			"name": "independent real simulation settlement: baseline",
+			"pass": true
+		},
+		{
+			"name": "independent real simulation settlement: proposal",
+			"pass": true
+		},
+		{
+			"name": "baseline and proposal are the same real next settlement",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: metrics",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: metrics",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: audit",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: audit",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: projects",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: projects",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: groups",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: groups",
+			"pass": true
+		},
+		{
+			"name": "planner baseline matches independent actual settlement: tiles",
+			"pass": true
+		},
+		{
+			"name": "planner proposal matches independent actual settlement: tiles",
+			"pass": true
+		},
+		{
+			"name": "impact model accepts real same-step planner result",
+			"pass": true
+		},
+		{
+			"name": "ordinary inventory impact contains food/material/goods only",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: food",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: food",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: food",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: food",
+			"pass": true
+		},
+		{
+			"name": "building share divides real output by total demand: food",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: food",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: material",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: material",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: material",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: material",
+			"pass": true
+		},
+		{
+			"name": "building share divides real output by total demand: material",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: material",
+			"pass": true
+		},
+		{
+			"name": "inventory/current capacity reads authoritative city: goods",
+			"pass": true
+		},
+		{
+			"name": "before/after supply and demand match actual monthly receipts: goods",
+			"pass": true
+		},
+		{
+			"name": "consumed, net flow and net delta match actual receipts: goods",
+			"pass": true
+		},
+		{
+			"name": "stock depletion uses current stock divided by actual net consumption: goods",
+			"pass": true
+		},
+		{
+			"name": "zero demand has no invented 0 percent need share: goods",
+			"pass": true
+		},
+		{
+			"name": "real settled resource receipt is known: goods",
+			"pass": true
+		},
+		{
+			"name": "fixture exercises a real negative net flow and finite stock runway",
+			"pass": true
+		},
+		{
+			"name": "fixture exercises real zero consumption demand",
+			"pass": true
+		},
+		{
+			"name": "electricity uses actual capacity and coverage without inventory/month units: before",
+			"pass": true
+		},
+		{
+			"name": "electricity uses actual capacity and coverage without inventory/month units: after",
+			"pass": true
+		},
+		{
+			"name": "energy remains a separate capacity measure",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -1,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -1,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -2,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -2,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -3,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -3,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: -4,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: -4,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 0,4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 0,4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 1,3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 1,3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 2,2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 2,2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,0",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 3,1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 3,1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "map raw environment delta equals independently summed real fields: 4,0",
+			"pass": true
+		},
+		{
+			"name": "map delta keeps independent units without a combined score: 4,0",
+			"pass": true
+		},
+		{
+			"name": "environment graphic uses the actual whole-map area as its denominator",
+			"pass": true
+		},
+		{
+			"name": "environment area and extrema match independent per-cell field sums",
+			"pass": true
+		},
+		{
+			"name": "environment resident count and exposure delta match actual household receipts",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel exists on first screen: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "first-screen acceptance starts at the real scroll origin: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"detail": {
+				"panel": "[P: (1150.0, 566.0), S: (734.0, 399.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "entire selected impact panel fits actual ScrollContainer clip on first screen: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 100% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 100% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 100% / text 100% offer:0",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 100% / text 100% offer:1",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 100% / text 100% offer:2",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 632.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 703.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 774.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 632.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 703.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 774.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1159.0, 888.0), S: (345.0, 46.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% energy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1530.0, 888.0), S: (345.0, 11.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% environment_area",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 667.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 738.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 809.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 632.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 703.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 774.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1159.0, 851.0), S: (345.0, 108.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% @VBoxContainer@667",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1530.0, 851.0), S: (345.0, 108.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% @VBoxContainer@673",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-06-tender-first-screen-full-energy-environment",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-06-tender-first-screen-full-energy-environment",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native tender ui scale 80%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native tender ui scale 80%",
+			"pass": true
+		},
+		{
+			"name": "native tender display setting applies: ui 80%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel exists on first screen: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "first-screen acceptance starts at the real scroll origin: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"detail": {
+				"panel": "[P: (1304.0, 668.8), S: (587.2, 319.2)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "entire selected impact panel fits actual ScrollContainer clip on first screen: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 80% / text 100% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 80% / text 100% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 80% / text 100% offer:0",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 80% / text 100% offer:1",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 80% / text 100% offer:2",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1304.0, 721.6), S: (587.2, 52.8)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1304.0, 778.4), S: (587.2, 52.8)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1304.0, 835.2), S: (587.2, 52.8)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1409.6, 721.6), S: (325.6, 52.8)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1409.6, 778.4), S: (325.6, 52.8)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1409.6, 835.2), S: (325.6, 52.8)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1311.2, 926.4), S: (276.0, 36.8)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% energy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1608.0, 926.4), S: (276.0, 8.8)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% environment_area",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1304.0, 749.6), S: (97.6, 17.6)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1304.0, 806.4), S: (97.6, 17.6)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1304.0, 863.2), S: (97.6, 17.6)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1743.2, 721.6), S: (148.0, 17.6)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1743.2, 778.4), S: (148.0, 17.6)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1743.2, 835.2), S: (148.0, 17.6)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1311.2, 896.8), S: (276.0, 86.4)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% @VBoxContainer@799",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1608.0, 896.8), S: (276.0, 86.4)]",
+				"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 80% / text 100% @VBoxContainer@805",
+			"pass": true
+		},
+		{
+			"name": "tender UI scale preserves unscaled map geometry: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "native UI setting preserves selected operator: UI 80% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native tender ui scale 120%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native tender ui scale 120%",
+			"pass": true
+		},
+		{
+			"name": "native tender display setting applies: ui 120%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel exists on first screen: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "first-screen acceptance starts at the real scroll origin: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"detail": {
+				"panel": "[P: (995.9999, 463.2), S: (880.8, 478.8)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "entire selected impact panel fits actual ScrollContainer clip on first screen: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 120% / text 100% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 120% / text 100% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 120% / text 100% offer:0",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 120% / text 100% offer:1",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 120% / text 100% offer:2",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (995.9999, 542.4), S: (880.8, 79.2)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (995.9999, 627.6), S: (880.8, 79.2)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (995.9999, 712.7999), S: (880.8, 79.2)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1154.4, 542.4), S: (488.4, 79.2)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1154.4, 627.6), S: (488.4, 79.2)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1154.4, 712.7999), S: (488.4, 79.2)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1006.8, 849.6), S: (414.0, 55.2)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% energy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1452.0, 849.6), S: (414.0, 13.2)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% environment_area",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (995.9999, 584.4), S: (146.4, 26.4)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (995.9999, 669.6), S: (146.4, 26.4)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (995.9999, 754.7999), S: (146.4, 26.4)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1654.8, 542.4), S: (222.0, 26.4)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1654.8, 627.6), S: (222.0, 26.4)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1654.8, 712.7999), S: (222.0, 26.4)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1006.8, 805.2), S: (414.0, 129.6)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% @VBoxContainer@942",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1452.0, 805.2), S: (414.0, 129.6)]",
+				"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 120% / text 100% @VBoxContainer@948",
+			"pass": true
+		},
+		{
+			"name": "tender UI scale preserves unscaled map geometry: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "native UI setting preserves selected operator: UI 120% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native tender ui scale 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native tender ui scale 100%",
+			"pass": true
+		},
+		{
+			"name": "native tender display setting applies: ui 100%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel exists on first screen: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "first-screen acceptance starts at the real scroll origin: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"detail": {
+				"panel": "[P: (1150.0, 566.0), S: (734.0, 399.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "entire selected impact panel fits actual ScrollContainer clip on first screen: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 100% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 100% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 100% / text 100% offer:0",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 100% / text 100% offer:1",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: UI 100% / text 100% offer:2",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 632.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 703.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 774.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 632.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 703.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 774.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1159.0, 888.0), S: (345.0, 46.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% energy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1530.0, 888.0), S: (345.0, 11.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% environment_area",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 667.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 738.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 809.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 632.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 703.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 774.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1159.0, 851.0), S: (345.0, 108.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% @VBoxContainer@1085",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1530.0, 851.0), S: (345.0, 108.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: UI 100% / text 100% @VBoxContainer@1091",
+			"pass": true
+		},
+		{
+			"name": "tender UI scale preserves unscaled map geometry: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "native UI setting preserves selected operator: UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native tender text scale 125%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native tender text scale 125%",
+			"pass": true
+		},
+		{
+			"name": "native tender display setting applies: text 125%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text impact panel exists: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 125% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 125% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 125% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1054.0, 585.0), S: (830.0, 79.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (728.0, 511.0), S: (1156.0, 479.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 125% food",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 125% food",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 125% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1054.0, 669.0), S: (830.0, 79.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (728.0, 511.0), S: (1156.0, 479.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 125% material",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 125% material",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 125% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1054.0, 753.0), S: (830.0, 79.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (728.0, 511.0), S: (1156.0, 479.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 125% goods",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 125% goods",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 125% energy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1063.0, 885.0), S: (393.0, 58.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (728.0, 511.0), S: (1156.0, 479.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 125% energy",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 125% energy",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 125% @VBoxContainer@1228",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1063.0, 843.0), S: (393.0, 128.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (728.0, 511.0), S: (1156.0, 479.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 125% @VBoxContainer@1228",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 125% @VBoxContainer@1228",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 125% @VBoxContainer@1234",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1482.0, 843.0), S: (393.0, 128.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (728.0, 511.0), S: (1156.0, 479.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 125% @VBoxContainer@1234",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 125% @VBoxContainer@1234",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 125% selected operator",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (738.0, 781.0), S: (294.0, 43.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (728.0, 511.0), S: (1156.0, 479.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 125% selected operator",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: reselect unchanged operator at UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: reselect unchanged operator at UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "enlarged text keeps the same operator selection usable: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 125% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 125% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "tender font size preserves map geometry: UI 100% / text 125%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native tender text scale 150%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native tender text scale 150%",
+			"pass": true
+		},
+		{
+			"name": "native tender display setting applies: text 150%",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text impact panel exists: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 150% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 150% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 150% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1022.0, 540.0), S: (854.0, 96.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (648.0, 455.0), S: (1236.0, 525.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 150% food",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 150% food",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 150% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1022.0, 641.0), S: (854.0, 96.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (648.0, 455.0), S: (1236.0, 525.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 150% material",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 150% material",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 150% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1022.0, 742.0), S: (854.0, 96.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (648.0, 455.0), S: (1236.0, 525.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 150% goods",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 150% goods",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 150% energy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1031.0, 895.0), S: (405.0, 69.0)]",
+				"scroll_vertical": 0,
+				"visible_clip": "[P: (648.0, 455.0), S: (1236.0, 525.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 150% energy",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 150% energy",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 150% @VBoxContainer@1422",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1031.0, 824.0), S: (405.0, 150.0)]",
+				"scroll_vertical": 25,
+				"visible_clip": "[P: (648.0, 455.0), S: (1236.0, 525.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 150% @VBoxContainer@1422",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 150% @VBoxContainer@1422",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 150% @VBoxContainer@1428",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1462.0, 824.0), S: (405.0, 150.0)]",
+				"scroll_vertical": 25,
+				"visible_clip": "[P: (648.0, 455.0), S: (1236.0, 525.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 150% @VBoxContainer@1428",
+			"pass": true
+		},
+		{
+			"name": "scrolling preserves selected offer and usable commit: UI 100% / text 150% @VBoxContainer@1428",
+			"pass": true
+		},
+		{
+			"name": "enlarged-text content uses real scroll container: UI 100% / text 150% selected operator",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (658.0, 744.0), S: (342.0, 51.0)]",
+				"scroll_vertical": 25,
+				"visible_clip": "[P: (648.0, 455.0), S: (1236.0, 525.0)]"
+			},
+			"name": "native scrolling exposes complete enlarged-text content: UI 100% / text 150% selected operator",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: reselect unchanged operator at UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: reselect unchanged operator at UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "enlarged text keeps the same operator selection usable: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 150% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: UI 100% / text 150% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "tender font size preserves map geometry: UI 100% / text 150%",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: native tender text scale 100%",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: native tender text scale 100%",
+			"pass": true
+		},
+		{
+			"name": "native tender display setting applies: text 100%",
+			"pass": true
+		},
+		{
+			"name": "selected impact panel exists on first screen: restored UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "first-screen acceptance starts at the real scroll origin: restored UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"detail": {
+				"panel": "[P: (1150.0, 566.0), S: (734.0, 399.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "entire selected impact panel fits actual ScrollContainer clip on first screen: restored UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "tender title fits native viewport: restored UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "single commit remains visible and enabled without committing: restored UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "details navigation remains visible: restored UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: restored UI 100% / text 100% false",
+			"pass": true
+		},
+		{
+			"name": "baseline/proposal map button remains visible: restored UI 100% / text 100% true",
+			"pass": true
+		},
+		{
+			"name": "scaled tender preserves exactly one commit: restored UI 100% / text 100%",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: restored UI 100% / text 100% offer:0",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: restored UI 100% / text 100% offer:1",
+			"pass": true
+		},
+		{
+			"name": "operator choice fits first-screen scroll clip: restored UI 100% / text 100% offer:2",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 632.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 703.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 774.0), S: (734.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 632.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 703.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1282.0, 774.0), S: (407.0, 66.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% resource_flow",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1159.0, 888.0), S: (345.0, 46.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% energy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1530.0, 888.0), S: (345.0, 11.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% environment_area",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 667.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 738.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1150.0, 809.0), S: (122.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 632.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% food",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 703.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% material",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1699.0, 774.0), S: (185.0, 22.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% goods",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1159.0, 851.0), S: (345.0, 108.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% @VBoxContainer@1616",
+			"pass": true
+		},
+		{
+			"detail": {
+				"rect": "[P: (1530.0, 851.0), S: (345.0, 108.0)]",
+				"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+			},
+			"name": "resource, energy or environment content fits real first-screen clip: restored UI 100% / text 100% @VBoxContainer@1622",
+			"pass": true
+		},
+		{
+			"name": "tender scaling, enlarged text and native scrolling preserve state, RNG, compiled rules and revision",
+			"pass": true
+		},
+		{
+			"name": "tender workbench permits L with a valid change forecast",
+			"pass": true
+		},
+		{
+			"name": "tender workbench permits reverse layer cycle",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: show same-step baseline map",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: show same-step baseline map",
+			"pass": true
+		},
+		{
+			"name": "analysis map selects same-step baseline: food",
+			"pass": true
+		},
+		{
+			"name": "rendered map tile values match actual selected snapshot: food",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-01-baseline-food",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-01-baseline-food",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: show same-step proposal map",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: show same-step proposal map",
+			"pass": true
+		},
+		{
+			"name": "analysis map selects same-step proposal: food",
+			"pass": true
+		},
+		{
+			"name": "rendered map tile values match actual selected snapshot: food",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-02-proposal-food",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-02-proposal-food",
+			"pass": true
+		},
+		{
+			"name": "analysis map selects same-step proposal: energy",
+			"pass": true
+		},
+		{
+			"name": "rendered map tile values match actual selected snapshot: energy",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-03-proposal-energy",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-03-proposal-energy",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: select baseline before pollution CTA",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: select baseline before pollution CTA",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: selected impact pollution map CTA",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: selected impact pollution map CTA",
+			"pass": true
+		},
+		{
+			"name": "pollution CTA switches map, enables forecast and synchronizes map toggle",
+			"pass": true
+		},
+		{
+			"name": "analysis map selects same-step proposal: pollution",
+			"pass": true
+		},
+		{
+			"name": "rendered map tile values match actual selected snapshot: pollution",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-04-proposal-pollution",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-04-proposal-pollution",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: select baseline before change CTA",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: select baseline before change CTA",
+			"pass": true
+		},
+		{
+			"name": "native pointer target available: selected impact change map CTA",
+			"pass": true
+		},
+		{
+			"name": "native pointer dispatches exactly one Button pressed callback: selected impact change map CTA",
+			"pass": true
+		},
+		{
+			"name": "change CTA switches map, enables forecast and synchronizes map toggle",
+			"pass": true
+		},
+		{
+			"name": "analysis map selects same-step proposal: change",
+			"pass": true
+		},
+		{
+			"name": "rendered map tile values match actual selected snapshot: change",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: impacts-05-proposal-change",
+			"pass": true
+		},
+		{
+			"name": "fresh screenshot: impacts-05-proposal-change",
+			"pass": true
+		},
+		{
+			"name": "forecast map retains selected site and actual independent deltas",
+			"pass": true
+		},
+		{
+			"name": "map toggle, layer CTAs and analysis rendering preserve exact city and RNG",
+			"pass": true
+		},
+		{
+			"name": "returning from unpaid tender restores cached site forecast",
+			"pass": true
+		},
+		{
+			"name": "cached site forecast restores change layer cycle",
+			"pass": true
+		},
+		{
+			"name": "leaving planning clears proposal, reference and ghost deltas",
+			"pass": true
+		},
+		{
+			"name": "exited planning returns analysis to current city snapshot",
+			"pass": true
+		},
+		{
+			"name": "unpaid preview exits preserve offer records, city and RNG",
+			"pass": true
+		},
+		{
+			"name": "fixed 1920x1080 fullscreen: completed",
+			"pass": true
+		}
+	],
+	"comparisons": [
+		{
+			"baseline_tick": 2,
+			"environment_cells": [
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "-1,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "-1,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "-1,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142858,
+					"tile": "0,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0964285714285715,
+					"tile": "0,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0964285714285714,
+					"tile": "0,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "0,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0964285714285714,
+					"tile": "1,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "1,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.192857142857143,
+					"tile": "1,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0964285714285714,
+					"tile": "1,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "1,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0964285714285714,
+					"tile": "2,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "2,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0964285714285714,
+					"tile": "2,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "2,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "3,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "3,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0482142857142857,
+					"tile": "3,0"
+				}
+			],
+			"model": {
+				"energy": {
+					"after_need": 6.31078741847248,
+					"after_ratio": 1.0,
+					"after_supply": 25.6,
+					"before_need": 6.31078741847248,
+					"before_ratio": 1.0,
+					"before_supply": 22.0,
+					"known": true,
+					"need_delta": 0.0,
+					"supply_delta": 3.6
+				},
+				"environment": {
+					"affected_tiles": 19,
+					"exposure_delta": 2.89356980889501,
+					"harmed": 42.0103468550682,
+					"increased_tiles": 19,
+					"max_increase": 0.192857142857143,
+					"max_reduction": 0.0,
+					"reduced_tiles": 0,
+					"total_tiles": 61
+				},
+				"housing": 0.0,
+				"map_snapshot_forecast": true,
+				"ok": true,
+				"resources": [
+					{
+						"after_consumed": 7.56186243391228,
+						"after_demand": 7.56186243391228,
+						"after_net": -2.05186243391228,
+						"after_supply": 5.51,
+						"before_consumed": 7.56186243391228,
+						"before_demand": 7.56186243391228,
+						"before_net": -2.05186243391228,
+						"before_supply": 5.51,
+						"capacity": 280.0,
+						"id": "food",
+						"known": true,
+						"loss": 0.0,
+						"name": "粮食",
+						"need_share": 0.0,
+						"net_delta": 0.0,
+						"output": 0.0,
+						"runway_after": 24.2681961407403,
+						"runway_before": 24.2681961407403,
+						"share_known": true,
+						"status": "储备正在减少",
+						"stock": 49.795
+					},
+					{
+						"after_consumed": 1.05025867137671,
+						"after_demand": 1.05025867137671,
+						"after_net": 5.9897413286233,
+						"after_supply": 7.04,
+						"before_consumed": 1.05025867137671,
+						"before_demand": 1.05025867137671,
+						"before_net": 2.14974132862329,
+						"before_supply": 3.2,
+						"capacity": 294.0,
+						"id": "material",
+						"known": true,
+						"loss": 0.0,
+						"name": "材料",
+						"need_share": 3.35155528436237,
+						"net_delta": 3.84,
+						"output": 3.52,
+						"runway_after": -1.0,
+						"runway_before": -1.0,
+						"share_known": true,
+						"status": "储备正在增加",
+						"stock": 55.215
+					},
+					{
+						"after_consumed": 0.0,
+						"after_demand": 0.0,
+						"after_net": 1.32,
+						"after_supply": 1.32,
+						"before_consumed": 0.0,
+						"before_demand": 0.0,
+						"before_net": 0.6,
+						"before_supply": 0.6,
+						"capacity": 232.0,
+						"id": "goods",
+						"known": true,
+						"loss": 0.0,
+						"name": "制成品",
+						"need_share": 0.0,
+						"net_delta": 0.72,
+						"output": 0.66,
+						"runway_after": -1.0,
+						"runway_before": -1.0,
+						"share_known": false,
+						"status": "储备正在增加",
+						"stock": 0.06
+					}
+				],
+				"snapshot_id": "4e72fd7937970971d017b38e335948a54bb890496f696799204ed0641ff1c26a"
+			},
+			"offer_id": "offer:0",
+			"operator_org": "circular",
+			"proposal_tick": 2
+		},
+		{
+			"baseline_tick": 2,
+			"environment_cells": [
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714285,
+					"tile": "-1,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "-1,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "-1,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "0,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "0,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "0,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "0,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "1,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714285,
+					"tile": "1,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.214285714285714,
+					"tile": "1,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "1,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "1,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "2,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "2,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "2,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "2,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "3,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "3,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "3,0"
+				}
+			],
+			"model": {
+				"energy": {
+					"after_need": 6.31078741847248,
+					"after_ratio": 1.0,
+					"after_supply": 25.6,
+					"before_need": 6.31078741847248,
+					"before_ratio": 1.0,
+					"before_supply": 22.0,
+					"known": true,
+					"need_delta": 0.0,
+					"supply_delta": 3.6
+				},
+				"environment": {
+					"affected_tiles": 19,
+					"exposure_delta": 3.21507756543889,
+					"harmed": 42.0103468550682,
+					"increased_tiles": 19,
+					"max_increase": 0.214285714285714,
+					"max_reduction": 0.0,
+					"reduced_tiles": 0,
+					"total_tiles": 61
+				},
+				"housing": 0.0,
+				"map_snapshot_forecast": true,
+				"ok": true,
+				"resources": [
+					{
+						"after_consumed": 7.56186243391228,
+						"after_demand": 7.56186243391228,
+						"after_net": -2.05186243391228,
+						"after_supply": 5.51,
+						"before_consumed": 7.56186243391228,
+						"before_demand": 7.56186243391228,
+						"before_net": -2.05186243391228,
+						"before_supply": 5.51,
+						"capacity": 280.0,
+						"id": "food",
+						"known": true,
+						"loss": 0.0,
+						"name": "粮食",
+						"need_share": 0.0,
+						"net_delta": 0.0,
+						"output": 0.0,
+						"runway_after": 24.2681961407403,
+						"runway_before": 24.2681961407403,
+						"share_known": true,
+						"status": "储备正在减少",
+						"stock": 49.795
+					},
+					{
+						"after_consumed": 1.05025867137671,
+						"after_demand": 1.05025867137671,
+						"after_net": 5.9897413286233,
+						"after_supply": 7.04,
+						"before_consumed": 1.05025867137671,
+						"before_demand": 1.05025867137671,
+						"before_net": 2.14974132862329,
+						"before_supply": 3.2,
+						"capacity": 294.0,
+						"id": "material",
+						"known": true,
+						"loss": 0.0,
+						"name": "材料",
+						"need_share": 3.35155528436237,
+						"net_delta": 3.84,
+						"output": 3.52,
+						"runway_after": -1.0,
+						"runway_before": -1.0,
+						"share_known": true,
+						"status": "储备正在增加",
+						"stock": 55.215
+					},
+					{
+						"after_consumed": 0.0,
+						"after_demand": 0.0,
+						"after_net": 1.32,
+						"after_supply": 1.32,
+						"before_consumed": 0.0,
+						"before_demand": 0.0,
+						"before_net": 0.6,
+						"before_supply": 0.6,
+						"capacity": 232.0,
+						"id": "goods",
+						"known": true,
+						"loss": 0.0,
+						"name": "制成品",
+						"need_share": 0.0,
+						"net_delta": 0.72,
+						"output": 0.66,
+						"runway_after": -1.0,
+						"runway_before": -1.0,
+						"share_known": false,
+						"status": "储备正在增加",
+						"stock": 0.06
+					}
+				],
+				"snapshot_id": "4e72fd7937970971d017b38e335948a54bb890496f696799204ed0641ff1c26a"
+			},
+			"offer_id": "offer:1",
+			"operator_org": "farmers",
+			"proposal_tick": 2
+		},
+		{
+			"baseline_tick": 2,
+			"environment_cells": [
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714285,
+					"tile": "-1,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "-1,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "-1,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "0,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "0,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "0,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "0,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "1,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714285,
+					"tile": "1,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.214285714285714,
+					"tile": "1,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "1,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "1,2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "2,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "2,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.107142857142857,
+					"tile": "2,0"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "2,1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "3,-1"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "3,-2"
+				},
+				{
+					"heat": 0.0,
+					"pollution": 0.0535714285714286,
+					"tile": "3,0"
+				}
+			],
+			"model": {
+				"energy": {
+					"after_need": 6.31078741847248,
+					"after_ratio": 1.0,
+					"after_supply": 25.6,
+					"before_need": 6.31078741847248,
+					"before_ratio": 1.0,
+					"before_supply": 22.0,
+					"known": true,
+					"need_delta": 0.0,
+					"supply_delta": 3.6
+				},
+				"environment": {
+					"affected_tiles": 19,
+					"exposure_delta": 3.21507756543889,
+					"harmed": 42.0103468550682,
+					"increased_tiles": 19,
+					"max_increase": 0.214285714285714,
+					"max_reduction": 0.0,
+					"reduced_tiles": 0,
+					"total_tiles": 61
+				},
+				"housing": 0.0,
+				"map_snapshot_forecast": true,
+				"ok": true,
+				"resources": [
+					{
+						"after_consumed": 7.56186243391228,
+						"after_demand": 7.56186243391228,
+						"after_net": -2.05186243391228,
+						"after_supply": 5.51,
+						"before_consumed": 7.56186243391228,
+						"before_demand": 7.56186243391228,
+						"before_net": -2.05186243391228,
+						"before_supply": 5.51,
+						"capacity": 280.0,
+						"id": "food",
+						"known": true,
+						"loss": 0.0,
+						"name": "粮食",
+						"need_share": 0.0,
+						"net_delta": 0.0,
+						"output": 0.0,
+						"runway_after": 24.2681961407403,
+						"runway_before": 24.2681961407403,
+						"share_known": true,
+						"status": "储备正在减少",
+						"stock": 49.795
+					},
+					{
+						"after_consumed": 1.05025867137671,
+						"after_demand": 1.05025867137671,
+						"after_net": 5.9897413286233,
+						"after_supply": 7.04,
+						"before_consumed": 1.05025867137671,
+						"before_demand": 1.05025867137671,
+						"before_net": 2.14974132862329,
+						"before_supply": 3.2,
+						"capacity": 294.0,
+						"id": "material",
+						"known": true,
+						"loss": 0.0,
+						"name": "材料",
+						"need_share": 3.35155528436237,
+						"net_delta": 3.84,
+						"output": 3.52,
+						"runway_after": -1.0,
+						"runway_before": -1.0,
+						"share_known": true,
+						"status": "储备正在增加",
+						"stock": 55.215
+					},
+					{
+						"after_consumed": 0.0,
+						"after_demand": 0.0,
+						"after_net": 1.32,
+						"after_supply": 1.32,
+						"before_consumed": 0.0,
+						"before_demand": 0.0,
+						"before_net": 0.6,
+						"before_supply": 0.6,
+						"capacity": 232.0,
+						"id": "goods",
+						"known": true,
+						"loss": 0.0,
+						"name": "制成品",
+						"need_share": 0.0,
+						"net_delta": 0.72,
+						"output": 0.66,
+						"runway_after": -1.0,
+						"runway_before": -1.0,
+						"share_known": false,
+						"status": "储备正在增加",
+						"stock": 0.06
+					}
+				],
+				"snapshot_id": "4e72fd7937970971d017b38e335948a54bb890496f696799204ed0641ff1c26a"
+			},
+			"offer_id": "offer:2",
+			"operator_org": "civic",
+			"proposal_tick": 2
+		}
+	],
+	"completed_at": 1791194757.39621,
+	"count": 1040,
+	"display_server": "X11",
+	"engine_version": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"evidence_type": "scripted native pointer and keyboard fixtures with real Game/Simulation settlements; no human playtest, natural playthrough or macOS hardware claim",
+	"failed": 0,
+	"fixture_ids": {
+		"freight": "B000013",
+		"medical_clinic": "B000009",
+		"power_station": "B000011",
+		"residence": "B000006"
+	},
+	"input_actions": [
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L next layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L previous layer"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "open archive modal",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L while archive modal is open"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "open finance desk",
+			"x": 984.0,
+			"y": 298.5
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L while finance desk is open"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape close finance desk"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "focus native LineEdit fixture",
+			"x": 550.0,
+			"y": 188.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L in focused LineEdit"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "focus native TextEdit fixture",
+			"x": 550.0,
+			"y": 188.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L in focused TextEdit"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "choose workshop from native build dock",
+			"x": 927.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "choose real empty workshop site 1,0",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native UI scale 80%",
+			"x": 382.0,
+			"y": 281.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape return from display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native UI scale 100%",
+			"x": 606.400024414062,
+			"y": 332.799987792969
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape return from display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native UI scale 120%",
+			"x": 635.0,
+			"y": 281.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape return from display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "restore native UI 100%",
+			"x": 399.599975585938,
+			"y": 289.200012207031
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape from restored display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "open actual operator tender",
+			"x": 1199.92553710938,
+			"y": 625.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "preview operator circular",
+			"x": 993.0,
+			"y": 593.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "preview operator farmers",
+			"x": 993.0,
+			"y": 715.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "preview operator civic",
+			"x": 993.0,
+			"y": 837.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native tender ui scale 80%",
+			"x": 382.0,
+			"y": 281.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape tender display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native tender ui scale 120%",
+			"x": 699.200012207031,
+			"y": 332.799987792969
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape tender display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native tender ui scale 100%",
+			"x": 399.599975585938,
+			"y": 289.200012207031
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape tender display settings"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native tender text scale 125%",
+			"x": 502.0,
+			"y": 331.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape tender display settings"
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 125% food",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 125% material",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 125% goods",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 125% energy",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 125% @VBoxContainer@1228",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 125% @VBoxContainer@1234",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 125% selected operator",
+			"ticks": 0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "reselect unchanged operator at UI 100% / text 125%",
+			"x": 885.0,
+			"y": 802.5
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native tender text scale 150%",
+			"x": 665.5,
+			"y": 361.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape tender display settings"
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 150% food",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 150% material",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 150% goods",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 0,
+			"target": "UI 100% / text 150% energy",
+			"ticks": 0
+		},
+		{
+			"button_indices": [
+				5
+			],
+			"complete_pairs": 1,
+			"kind": "native_wheel",
+			"pressed_events": 1,
+			"released_events": 1,
+			"scroll_vertical": 25,
+			"target": "UI 100% / text 150% @VBoxContainer@1422",
+			"ticks": 1
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 25,
+			"target": "UI 100% / text 150% @VBoxContainer@1428",
+			"ticks": 0
+		},
+		{
+			"button_indices": [],
+			"complete_pairs": 0,
+			"kind": "native_wheel",
+			"pressed_events": 0,
+			"released_events": 0,
+			"scroll_vertical": 25,
+			"target": "UI 100% / text 150% selected operator",
+			"ticks": 0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "reselect unchanged operator at UI 100% / text 150%",
+			"x": 829.0,
+			"y": 769.5
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "native tender text scale 100%",
+			"x": 405.0,
+			"y": 390.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape tender display settings"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L in tender comparison"
+		},
+		{
+			"kind": "native_key",
+			"shift": true,
+			"target": "Shift+L in tender comparison"
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "show same-step baseline map",
+			"x": 1323.0,
+			"y": 543.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "show same-step proposal map",
+			"x": 1409.0,
+			"y": 543.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "select baseline before pollution CTA",
+			"x": 1323.0,
+			"y": 543.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "selected impact pollution map CTA",
+			"x": 1814.5,
+			"y": 868.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "select baseline before change CTA",
+			"x": 1323.0,
+			"y": 543.0
+		},
+		{
+			"button_pressed_callbacks": 1,
+			"kind": "native_pointer",
+			"target": "selected impact change map CTA",
+			"x": 1823.5,
+			"y": 583.0
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape unpaid tender comparison"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "L after returning to cached site"
+		},
+		{
+			"kind": "native_key",
+			"shift": false,
+			"target": "Escape leave site preview"
+		}
+	],
+	"layout_evidence": [
+		{
+			"controls": [
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 632.0), S: (734.0, 66.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 703.0), S: (734.0, 66.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 774.0), S: (734.0, 66.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 632.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 703.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 774.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1159.0, 888.0), S: (345.0, 46.0)]",
+					"role": "energy",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1530.0, 888.0), S: (345.0, 11.0)]",
+					"role": "environment_area",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 667.0), S: (122.0, 22.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 738.0), S: (122.0, 22.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 809.0), S: (122.0, 22.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 632.0), S: (185.0, 22.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 703.0), S: (185.0, 22.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 774.0), S: (185.0, 22.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1159.0, 851.0), S: (345.0, 108.0)]",
+					"role": "@VBoxContainer@667",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1530.0, 851.0), S: (345.0, 108.0)]",
+					"role": "@VBoxContainer@673",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				}
+			],
+			"first_screen": true,
+			"fixture": "UI 100% / text 100%",
+			"scroll_rect": "[P: (848.0, 566.0), S: (1036.0, 434.0)]",
+			"selected_offer": "offer:2",
+			"text_scale": 1.0,
+			"ui_scale": 1.0
+		},
+		{
+			"controls": [
+				{
+					"fully_visible": true,
+					"rect": "[P: (1304.0, 721.6), S: (587.2, 52.8)]",
+					"role": "food",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1304.0, 778.4), S: (587.2, 52.8)]",
+					"role": "material",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1304.0, 835.2), S: (587.2, 52.8)]",
+					"role": "goods",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1409.6, 721.6), S: (325.6, 52.8)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1409.6, 778.4), S: (325.6, 52.8)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1409.6, 835.2), S: (325.6, 52.8)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1311.2, 926.4), S: (276.0, 36.8)]",
+					"role": "energy",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1608.0, 926.4), S: (276.0, 8.8)]",
+					"role": "environment_area",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1304.0, 749.6), S: (97.6, 17.6)]",
+					"role": "food",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1304.0, 806.4), S: (97.6, 17.6)]",
+					"role": "material",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1304.0, 863.2), S: (97.6, 17.6)]",
+					"role": "goods",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1743.2, 721.6), S: (148.0, 17.6)]",
+					"role": "food",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1743.2, 778.4), S: (148.0, 17.6)]",
+					"role": "material",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1743.2, 835.2), S: (148.0, 17.6)]",
+					"role": "goods",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1311.2, 896.8), S: (276.0, 86.4)]",
+					"role": "@VBoxContainer@799",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1608.0, 896.8), S: (276.0, 86.4)]",
+					"role": "@VBoxContainer@805",
+					"visible_clip": "[P: (1062.4, 668.8), S: (828.7999, 347.2)]"
+				}
+			],
+			"first_screen": true,
+			"fixture": "UI 80% / text 100%",
+			"scroll_rect": "[P: (1062.4, 668.8), S: (828.8, 347.2)]",
+			"selected_offer": "offer:2",
+			"text_scale": 1.0,
+			"ui_scale": 0.8
+		},
+		{
+			"controls": [
+				{
+					"fully_visible": true,
+					"rect": "[P: (995.9999, 542.4), S: (880.8, 79.2)]",
+					"role": "food",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (995.9999, 627.6), S: (880.8, 79.2)]",
+					"role": "material",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (995.9999, 712.7999), S: (880.8, 79.2)]",
+					"role": "goods",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1154.4, 542.4), S: (488.4, 79.2)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1154.4, 627.6), S: (488.4, 79.2)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1154.4, 712.7999), S: (488.4, 79.2)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1006.8, 849.6), S: (414.0, 55.2)]",
+					"role": "energy",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1452.0, 849.6), S: (414.0, 13.2)]",
+					"role": "environment_area",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (995.9999, 584.4), S: (146.4, 26.4)]",
+					"role": "food",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (995.9999, 669.6), S: (146.4, 26.4)]",
+					"role": "material",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (995.9999, 754.7999), S: (146.4, 26.4)]",
+					"role": "goods",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1654.8, 542.4), S: (222.0, 26.4)]",
+					"role": "food",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1654.8, 627.6), S: (222.0, 26.4)]",
+					"role": "material",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1654.8, 712.7999), S: (222.0, 26.4)]",
+					"role": "goods",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1006.8, 805.2), S: (414.0, 129.6)]",
+					"role": "@VBoxContainer@942",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1452.0, 805.2), S: (414.0, 129.6)]",
+					"role": "@VBoxContainer@948",
+					"visible_clip": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]"
+				}
+			],
+			"first_screen": true,
+			"fixture": "UI 120% / text 100%",
+			"scroll_rect": "[P: (633.5999, 463.2), S: (1243.2, 520.8)]",
+			"selected_offer": "offer:2",
+			"text_scale": 1.0,
+			"ui_scale": 1.2
+		},
+		{
+			"controls": [
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 632.0), S: (734.0, 66.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 703.0), S: (734.0, 66.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 774.0), S: (734.0, 66.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 632.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 703.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 774.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1159.0, 888.0), S: (345.0, 46.0)]",
+					"role": "energy",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1530.0, 888.0), S: (345.0, 11.0)]",
+					"role": "environment_area",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 667.0), S: (122.0, 22.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 738.0), S: (122.0, 22.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 809.0), S: (122.0, 22.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 632.0), S: (185.0, 22.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 703.0), S: (185.0, 22.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 774.0), S: (185.0, 22.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1159.0, 851.0), S: (345.0, 108.0)]",
+					"role": "@VBoxContainer@1085",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1530.0, 851.0), S: (345.0, 108.0)]",
+					"role": "@VBoxContainer@1091",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				}
+			],
+			"first_screen": true,
+			"fixture": "UI 100% / text 100%",
+			"scroll_rect": "[P: (848.0, 566.0), S: (1036.0, 434.0)]",
+			"selected_offer": "offer:2",
+			"text_scale": 1.0,
+			"ui_scale": 1.0
+		},
+		{
+			"access": "native wheel reveals each resource row and complete energy/environment cards",
+			"first_screen": false,
+			"fixture": "UI 100% / text 125%",
+			"selected_offer": "offer:2",
+			"text_scale": 1.25,
+			"ui_scale": 1.0
+		},
+		{
+			"access": "native wheel reveals each resource row and complete energy/environment cards",
+			"first_screen": false,
+			"fixture": "UI 100% / text 150%",
+			"selected_offer": "offer:2",
+			"text_scale": 1.5,
+			"ui_scale": 1.0
+		},
+		{
+			"controls": [
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 632.0), S: (734.0, 66.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 703.0), S: (734.0, 66.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 774.0), S: (734.0, 66.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 632.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 703.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1282.0, 774.0), S: (407.0, 66.0)]",
+					"role": "resource_flow",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1159.0, 888.0), S: (345.0, 46.0)]",
+					"role": "energy",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1530.0, 888.0), S: (345.0, 11.0)]",
+					"role": "environment_area",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 667.0), S: (122.0, 22.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 738.0), S: (122.0, 22.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1150.0, 809.0), S: (122.0, 22.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 632.0), S: (185.0, 22.0)]",
+					"role": "food",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 703.0), S: (185.0, 22.0)]",
+					"role": "material",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1699.0, 774.0), S: (185.0, 22.0)]",
+					"role": "goods",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1159.0, 851.0), S: (345.0, 108.0)]",
+					"role": "@VBoxContainer@1616",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				},
+				{
+					"fully_visible": true,
+					"rect": "[P: (1530.0, 851.0), S: (345.0, 108.0)]",
+					"role": "@VBoxContainer@1622",
+					"visible_clip": "[P: (848.0, 566.0), S: (1036.0, 434.0)]"
+				}
+			],
+			"first_screen": true,
+			"fixture": "restored UI 100% / text 100%",
+			"scroll_rect": "[P: (848.0, 566.0), S: (1036.0, 434.0)]",
+			"selected_offer": "offer:2",
+			"text_scale": 1.0,
+			"ui_scale": 1.0
+		}
+	],
+	"passed": 1040,
+	"renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+	"resolution": "1920x1080 fullscreen throughout; UI and font scale only",
+	"source_fingerprint": "44474ec3dd5fe5f106ec01c35fd2cdae1a8dd714f9dda478d39f5d8ea0f96b7a",
+	"started_at": 1791194686.72811
+}

@@ -78,7 +78,9 @@ func _position_markers() -> void:
 	var offsets:Dictionary={};var occupied:Array[Rect2]=[]
 	var owner=get_parent()
 	if owner.has_method("context_obstacles"):
-		for rectangle in owner.context_obstacles():occupied.append(rectangle)
+		for rectangle in owner.context_obstacles():
+			var screen_rect:Rect2=owner.ui_rect_to_screen(rectangle) if owner.has_method("ui_rect_to_screen") else rectangle
+			occupied.append(Rect2(screen_rect.position-global_position,screen_rect.size))
 	for button in _markers.values():
 		var row:Dictionary=button.get_meta("source")
 		var tile=str(row.get("tile",""))

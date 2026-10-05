@@ -37,7 +37,7 @@ var catalog_state={"query":"","domain":"all"}
 var compact:bool=false
 var issue_index:int=-1
 var display_pending_tick:int=-1
-var display_settings={"text_scale":1.0,"reduced_motion":false,"high_contrast":false,"force_compact":false,"all_links":false,"task_rail_expanded":false,"citizen_bubbles":false,"frame_limit":0}
+var display_settings={"ui_scale":1.0,"text_scale":1.0,"reduced_motion":false,"high_contrast":false,"force_compact":false,"all_links":false,"task_rail_expanded":false,"citizen_bubbles":false,"frame_limit":0}
 var safe_area=Rect2()
 var top_panel:PanelContainer
 var bottom_panel:PanelContainer
@@ -60,6 +60,7 @@ var header_nodes={}
 var bottom_nodes={}
 var category_buttons=[]
 var hud_root:Control
+var ui_root:Control
 var modal_outer:VBoxContainer
 var modal_center:CenterContainer
 var resize_pending:bool=false
@@ -193,7 +194,10 @@ func build_ui():
 	map_view=MapView.new();map_view.game=game;map_view.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);add_child(map_view)
 	map_view.cell_clicked.connect(on_cell);map_view.cell_hovered.connect(on_hover)
 	feedback_layer=FeedbackLayer.new();add_child(feedback_layer);feedback_layer.configure(game,map_view);feedback_layer.source_clicked.connect(on_beta_source);feedback_layer.toggle_bubbles(bool(display_settings.citizen_bubbles))
-	hud_root=Control.new();hud_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);hud_root.mouse_filter=Control.MOUSE_FILTER_IGNORE;add_child(hud_root)
+	# The map keeps its full viewport and world zoom. All application controls
+	# share one scaled parent and lay out in that parent's logical coordinates.
+	ui_root=Control.new();ui_root.name="ScaledInterface";ui_root.mouse_filter=Control.MOUSE_FILTER_IGNORE;add_child(ui_root)
+	hud_root=Control.new();hud_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);hud_root.mouse_filter=Control.MOUSE_FILTER_IGNORE;ui_root.add_child(hud_root)
 	top_panel=W.panel(hud_root);var header=W.hbox(top_panel,8);header_nodes.row=header
 	var brand=W.flat(W.button("",func():desk.open("city040","block"),false,"当前地区与命名"));brand.custom_minimum_size=Vector2(136,46);header.add_child(brand);header_nodes.brand=brand
 	var brand_text=W.vbox(brand,0);brand_text.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);brand_text.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -248,11 +252,12 @@ func build_ui():
 	toast=W.label("",14,W.TEXT,false);toast.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS;toast.add_theme_stylebox_override("normal",W.box(Color("172329"),Color("34474D"),8));hud_root.add_child(toast);toast.minimum_size_changed.connect(request_layout)
 	build_palette=W.panel(hud_root);build_palette.hide()
 	layer_picker=W.panel(hud_root);layer_picker.hide()
-	workbench_shield=ColorRect.new();workbench_shield.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);workbench_shield.color=Color(.025,.035,.04,.62);workbench_shield.mouse_filter=Control.MOUSE_FILTER_STOP;hud_root.add_child(workbench_shield);workbench_shield.hide()
+	workbench_shield=ColorRect.new();workbench_shield.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);workbench_shield.color=Color(.025,.035,.04,.18);workbench_shield.mouse_filter=Control.MOUSE_FILTER_STOP;hud_root.add_child(workbench_shield);workbench_shield.hide()
 	workbench=Workbench.new();hud_root.add_child(workbench);workbench.setup(self);workbench.hide()
 	desk=CityDesk.new();hud_root.add_child(desk);desk.setup(self);desk.rail_expanded=false
 	site_bubble=SiteBubble.new();hud_root.add_child(site_bubble);site_bubble.setup(self)
-	overlay=Control.new();overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);add_child(overlay)
+	hud_root.move_child(legend_panel,hud_root.get_child_count()-1)
+	overlay=Control.new();overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);ui_root.add_child(overlay)
 	var shade=ColorRect.new();shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);shade.color=Color(.035,.07,.085,.66);shade.offset_top=140;overlay.add_child(shade)
 	modal_center=CenterContainer.new();modal_center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);modal_center.offset_top=140;overlay.add_child(modal_center)
 	modal_panel=W.panel(modal_center);modal_outer=W.vbox(modal_panel,8)
@@ -261,7 +266,7 @@ func build_ui():
 	mh.add_child(W.button("返回",close_modal))
 	modal_scroll=ScrollContainer.new();modal_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;modal_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;modal_outer.add_child(modal_scroll)
 	modal_body=W.vbox(modal_scroll,10);modal_body.size_flags_horizontal=Control.SIZE_EXPAND_FILL;overlay.hide()
-	command_notice=W.label("",16,W.TEXT);command_notice.name="CommandNotice";command_notice.set_meta("presentation_layer","command_feedback");command_notice.add_theme_stylebox_override("normal",W.box(W.RAISED,W.OUTLINE,12));command_notice.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;command_notice.vertical_alignment=VERTICAL_ALIGNMENT_CENTER;command_notice.mouse_filter=Control.MOUSE_FILTER_IGNORE;command_notice.z_index=100;add_child(command_notice);command_notice.hide()
+	command_notice=W.label("",16,W.TEXT);command_notice.name="CommandNotice";command_notice.set_meta("presentation_layer","command_feedback");command_notice.add_theme_stylebox_override("normal",W.box(W.RAISED,W.OUTLINE,12));command_notice.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;command_notice.vertical_alignment=VERTICAL_ALIGNMENT_CENTER;command_notice.mouse_filter=Control.MOUSE_FILTER_IGNORE;command_notice.z_index=100;ui_root.add_child(command_notice);command_notice.hide()
 	chime=AudioStreamPlayer.new();add_child(chime)
 	for panel in [top_panel,bottom_panel,inspector_panel,workbench,legend_panel,build_palette,modal_panel]:panel.minimum_size_changed.connect(request_layout)
 	wire_tool_focus(hud_root)
@@ -288,7 +293,7 @@ func refresh():
 	refresh_stats()
 	if decision_kind=="" and not desk.is_open():refresh_context()
 	else:inspector_panel.hide()
-	if mode!="site" and decision_kind=="":map_view.plan_result={};map_view.plan_tile=""
+	if mode!="site" and decision_kind=="":map_view.plan_result={};map_view.plan_reference={};map_view.plan_tile=""
 	map_view.invalidate();last_revision=game.revision;refresh_legend();layout_ui()
 	if last_phase!="play" and game.s.phase=="play":map_view.focus_community()
 	last_phase=str(game.s.phase)
@@ -358,7 +363,7 @@ func set_mode(value:String):
 	issue_index=-1
 	if decision_kind!="":exit_workbench()
 	if value=="inspect" and mode=="site" and not manual_layer and not layer_locked:map_view.layer=layer_before_plan
-	mode=value;selected_project="";selection=[];inspector_key="";map_view.plan_result={};map_view.plan_tile="";refresh()
+	mode=value;selected_project="";selection=[];inspector_key="";map_view.plan_result={};map_view.plan_reference={};map_view.plan_tile="";refresh()
 func project_for_cell(key:String) -> String:return str(game.s.cells.get(key,{}).get("building",""))
 func on_cell(key:String,_dragging:bool):
 	focused_tool=""
@@ -375,7 +380,7 @@ func on_cell(key:String,_dragging:bool):
 		map_view.hovered=key;message("正在比较规则。可继续平移地图或选择当前方案；返回后检查建筑。");return
 	var id=project_for_cell(key)
 	if id!="":
-		selected_project=id;mode="inspect";selection=[];inspector_key="";map_view.plan_result={};map_view.plan_tile="";refresh();map_view.ensure_visible(key);return
+		selected_project=id;mode="inspect";selection=[];inspector_key="";map_view.plan_result={};map_view.plan_reference={};map_view.plan_tile="";refresh();map_view.ensure_visible(key);return
 	if game.s.phase!="play" or "tile.water" in game.s.cells[key].traits:return
 	if mode!="site":
 		hovered_tile=key;message(key+" · "+game.c.tags_text(game.s.cells[key].traits)+"。从下方建设工具选择用途。");return
@@ -410,7 +415,7 @@ func accept_offer(id:String):
 			if not bid in ids:selected_project=bid
 	elif kind=="refit":selected_project=host
 	display_pending_tick=int(game.s.simulation_tick)
-	decision_kind="";workbench.hide();mode="inspect";selection=[];inspector_key="";map_view.plan_result={};map_view.plan_tile=""
+	decision_kind="";workbench.hide();mode="inspect";selection=[];inspector_key="";map_view.plan_result={};map_view.plan_reference={};map_view.plan_tile=""
 	save_game();overlay.hide();refresh();play_cue("confirm")
 	message("已签约。费用已付，选择时间档位后按共享施工能力建设。" if kind=="development" else "方案已更新。看看它在地图上改变了什么。")
 func act(e:String):
@@ -504,6 +509,9 @@ func _unhandled_key_input(event):
 		KEY_F8:Dialogs.debug(self)
 		KEY_SPACE:if not overlay.visible and decision_kind=="" and not desk.is_open():advance_checkpoint()
 		KEY_P:if not overlay.visible:desk.toggle_pause()
+		KEY_L:
+			if not event.ctrl_pressed and not event.alt_pressed and not event.meta_pressed and not overlay.visible and not desk.is_open():
+				cycle_layer(event.shift_pressed);get_viewport().set_input_as_handled()
 func export_file(kind:String):
 	var dialog=FileDialog.new();dialog.use_native_dialog=true;dialog.access=FileDialog.ACCESS_FILESYSTEM;dialog.file_mode=FileDialog.FILE_MODE_SAVE_FILE;dialog.filters=PackedStringArray(["*.json ; JSON"]);dialog.current_file="MET_Beta_"+kind+".json";add_child(dialog)
 	dialog.file_selected.connect(func(path):
@@ -553,6 +561,7 @@ func load_display_settings():
 		if value is Dictionary:
 			for k in display_settings:
 				if value.has(k):display_settings[k]=value[k]
+	display_settings.ui_scale=clampf(float(display_settings.ui_scale),.8,1.2)
 	W.text_scale=clampf(float(display_settings.text_scale),1.,1.5);W.high_contrast=bool(display_settings.high_contrast)
 	apply_frame_limit()
 func apply_frame_limit():
@@ -573,10 +582,20 @@ func resize_interface():
 	layout_ui()
 func _rect(node:Control,rect:Rect2):
 	node.position=rect.position;node.size=rect.size
+func ui_position_from_screen(point:Vector2) -> Vector2:
+	return ui_root.get_global_transform().affine_inverse()*point if ui_root!=null else point
+func ui_position_to_screen(point:Vector2) -> Vector2:
+	return ui_root.get_global_transform()*point if ui_root!=null else point
+func ui_rect_from_screen(rectangle:Rect2) -> Rect2:
+	return ui_root.get_global_transform().affine_inverse()*rectangle if ui_root!=null else rectangle
+func ui_rect_to_screen(rectangle:Rect2) -> Rect2:
+	return ui_root.get_global_transform()*rectangle if ui_root!=null else rectangle
 func time_hud_width() -> float:return 638.
 func layout_ui():
 	if top_panel==null or desk==null:return
-	var area=Rect2(Vector2.ZERO,get_viewport_rect().size);safe_area=area;compact=false;W.touch=false
+	var factor=clampf(float(display_settings.ui_scale),.8,1.2)
+	ui_root.position=Vector2.ZERO;ui_root.scale=Vector2.ONE*factor;ui_root.size=get_viewport_rect().size/factor
+	var area=Rect2(Vector2.ZERO,ui_root.size);safe_area=area;compact=false;W.touch=false
 	map_view.compact=false;map_view.reduce_motion=bool(display_settings.reduced_motion);map_view.show_all_links=bool(display_settings.all_links);map_view.ui_font_scale=W.text_scale
 	sync_header_values()
 	var archived=desk.is_open() or decision_kind!="" or overlay!=null and overlay.visible
@@ -594,22 +613,33 @@ func layout_ui():
 	for button in category_buttons:
 		button.visible=true;button.text="";button.custom_minimum_size=Vector2(64,56);button.add_theme_constant_override("icon_max_width",46)
 	bottom_nodes.place.hide();bottom_nodes.build.hide();bottom_nodes.stats.hide()
-	bottom_nodes.layers.show();bottom_nodes.layers.text="";bottom_nodes.layers.icon=Art.icon("layers",W.TEXT);bottom_nodes.layers.tooltip_text="分析图层 · 医疗、人口、资源与环境";bottom_nodes.layers.custom_minimum_size=Vector2(64,56)
+	bottom_nodes.layers.show();bottom_nodes.layers.text="";bottom_nodes.layers.icon=Art.icon("layers",W.TEXT);bottom_nodes.layers.tooltip_text="分析图层 · L 下一层 / Shift+L 上一层";bottom_nodes.layers.custom_minimum_size=Vector2(64,56)
 	bottom_nodes.growth.show();bottom_nodes.growth.text="档案";bottom_nodes.growth.icon=Art.icon("ledger",W.TEXT);bottom_nodes.growth.custom_minimum_size=Vector2(126,56);bottom_nodes.growth.name="OpenCityArchive"
 	tool_panel.visible=not screenshot_mode and not archived
 	_rect(tool_panel,Rect2(Vector2(24,area.end.y-80),Vector2(332,48)))
 	layer_button.hide();lock_button.hide();header_nodes.policy.hide();header_nodes.ledger.hide()
 	header_nodes.menu.show();if header_nodes.menu.get_parent()!=header_nodes.toolrow:header_nodes.menu.reparent(header_nodes.toolrow)
 	header_nodes.menu.custom_minimum_size=Vector2(48,40)
-	legend_panel.visible=map_view.layer!="normal" and not screenshot_mode and not archived
-	_rect(legend_panel,Rect2(Vector2(24,area.end.y-284),Vector2(286,182)))
+	legend_panel.visible=(map_view.layer!="normal" or decision_kind!="") and not screenshot_mode and not desk.is_open() and not overlay.visible
+	var legend_height=maxf(182,legend_panel.get_combined_minimum_size().y)
+	_rect(legend_panel,Rect2(Vector2(24,area.end.y-116-legend_height),Vector2(286,legend_height)))
 	var side=352.;var panel_height=minf(590,area.size.y-310)
 	_rect(inspector_panel,Rect2(Vector2(area.end.x-side-24,area.position.y+150),Vector2(side,panel_height)));inspector.custom_minimum_size.x=0
+	var map_space=Rect2(Vector2(380,150),Vector2(maxf(640,area.size.x-780),area.size.y-300))
 	if decision_kind!="":
-		var work_height=minf((480. if W.text_scale<=1. else 580.) if workbench.page=="summary" else 800.,area.size.y-180)
-		var dimensions=Vector2(minf(1300,area.size.x-160),work_height);_rect(workbench,Rect2(Vector2((area.size.x-dimensions.x)*.5,140+(area.size.y-140-dimensions.y)*.5),dimensions))
+		var summary_width=1060. if W.text_scale<=1. else (1180. if W.text_scale<=1.25 else 1260.)
+		var summary_height=540. if W.text_scale<=1. else (600. if W.text_scale<=1.25 else 660.)
+		var work_height=minf(summary_height if workbench.page=="summary" else 680.,area.size.y-180)
+		var dimensions=Vector2(minf(summary_width,area.size.x-96),work_height);_rect(workbench,Rect2(Vector2(area.end.x-dimensions.x-24,area.end.y-dimensions.y-24),dimensions))
+		if workbench.page=="summary":
+			if workbench.position.y>=334:
+				map_space=Rect2(Vector2(380,150),Vector2(maxf(480,area.size.x-760),workbench.position.y-174))
+			else:
+				map_space=Rect2(Vector2(24,150),Vector2(maxf(160,workbench.position.x-48),maxf(160,legend_panel.position.y-174)))
+		else:
+			map_space=Rect2(Vector2(24,150),Vector2(maxf(320,workbench.position.x-48),maxf(160,legend_panel.position.y-174)))
 	workbench_shield.offset_top=140;workbench_shield.visible=decision_kind!="";workbench.visible=decision_kind!=""
-	map_view.available_rect=Rect2(Vector2(380,150),Vector2(maxf(640,area.size.x-780),area.size.y-300))
+	map_view.available_rect=ui_rect_to_screen(map_space);map_view.available_rect.position-=map_view.global_position
 	notice_panel.hide();resource_row.hide();clock_label.hide()
 	_rect(toast,Rect2(Vector2((area.size.x-620)/2,area.end.y-148),Vector2(620,36)))
 	toast.visible=not screenshot_mode and not archived and ((mode=="site" and selection.is_empty()) or focused_tool!="");toast.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
@@ -617,10 +647,10 @@ func layout_ui():
 	if layer_picker.visible:_rect(layer_picker,Rect2(Vector2((area.size.x-320)/2,area.end.y-700),Vector2(320,560)))
 	var mw=minf(1280,area.size.x-96);var mh=minf(860,area.size.y-140);modal_panel.custom_minimum_size=Vector2(mw,mh);modal_panel.size=Vector2(mw,mh);modal_scroll.custom_minimum_size=Vector2(0,maxf(60,mh-150));modal_body.custom_minimum_size.x=0
 	top_panel.visible=not screenshot_mode;bottom_panel.visible=not screenshot_mode and not archived
-	if archived or screenshot_mode:inspector_panel.hide();legend_panel.hide();build_palette.hide();layer_picker.hide()
+	if archived or screenshot_mode:inspector_panel.hide();build_palette.hide();layer_picker.hide()
 	refresh_build_dock();desk.relayout(area)
 	if command_notice!=null:
-		var left_edge=top_panel.get_global_rect().end.x+24;var right_edge=desk.time_panel.position.x-24;var notice_width=minf(760,maxf(200,right_edge-left_edge))
+		var left_edge=ui_rect_from_screen(top_panel.get_global_rect()).end.x+24;var right_edge=desk.time_panel.position.x-24;var notice_width=minf(760,maxf(200,right_edge-left_edge))
 		_rect(command_notice,Rect2(Vector2((left_edge+right_edge-notice_width)*.5,32),Vector2(notice_width,96)))
 	if site_bubble!=null:site_bubble.reposition()
 	refresh_legend()
@@ -630,10 +660,12 @@ func refresh_context():
 	else:
 		site_bubble.hide();Panels.inspector(self)
 func context_obstacles() -> Array:
+	# Context controls are placed under ui_root, so avoidance uses UI coordinates.
+	# Root-level map markers convert these rectangles with ui_rect_to_screen().
 	var result=[]
 	if desk==null:return result
 	for node in [top_panel,desk.time_panel,desk.task_panel,desk.alert_panel,legend_panel,bottom_panel]:
-		if node!=null and node.visible:result.append(node.get_global_rect())
+		if node!=null and node.visible:result.append(ui_rect_from_screen(node.get_global_rect()))
 	return result
 func _retune(node:Node):
 	if node is Label or node is Button:
@@ -658,11 +690,31 @@ func rebuild_palette():
 func toggle_layers():
 	if layer_picker.visible:layer_picker.hide();return
 	build_palette.hide();W.clear(layer_picker);var v=W.vbox(layer_picker,4)
+	v.add_child(W.label("L 下一层 · Shift+L 上一层",13,W.MUTED))
 	var sc=ScrollContainer.new();sc.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;sc.size_flags_vertical=Control.SIZE_EXPAND_FILL;v.add_child(sc);var list=W.vbox(sc,6);list.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-	for kind in ["normal","terrain","medical","education","commercial","entertainment","pollution","heat","population","employment","unemployed","food","material","goods","energy","operator","change"]:
+	for kind in layer_cycle_order():
 		var title=MapData.NAMES[kind];var b=W.button(("● " if map_view.layer==kind else "")+title,func():set_layer(kind));b.clip_text=true;list.add_child(b)
 	layer_picker.show();layout_ui()
+func plan_preview_available() -> bool:
+	return map_view!=null and bool(map_view.plan_result.get("ok",false)) and not map_view.plan_result.get("map_snapshot",{}).is_empty()
+func layer_cycle_order() -> Array:
+	var kinds=["normal","food","material","goods","energy","pollution","medical","education","commercial","entertainment","population","employment","unemployed","heat","terrain","operator"]
+	if plan_preview_available():kinds.insert(1,"change")
+	return kinds
+func cycle_layer(reverse:bool=false):
+	if map_view==null or overlay.visible or desk.is_open():return
+	var kinds=layer_cycle_order();var at=kinds.find(map_view.layer)
+	if at<0:at=0
+	set_layer(str(kinds[posmod(at+(-1 if reverse else 1),kinds.size())]))
+func show_plan_layer(kind:String):
+	if not MapData.NAMES.has(kind):return
+	if plan_preview_available():map_view.preview_map_enabled=true
+	set_layer(kind)
+	var tile=str(map_view.plan_tile)
+	if game.s.cells.has(tile):map_view.ensure_visible(tile)
+	if workbench!=null:workbench.refresh_preview_buttons()
 func set_layer(kind:String,automatic:bool=false):
+	if not MapData.NAMES.has(kind):return
 	if automatic and (layer_locked or manual_layer):return
 	if not automatic:manual_layer=true
 	map_view.layer=kind;map_view.invalidate();layer_picker.hide();play_cue("layer");refresh_legend();layout_ui()
@@ -671,34 +723,44 @@ func refresh_legend():
 	var kind=map_view.layer
 	var short_names={"normal":"图层","terrain":"地形","medical":"医疗","education":"教育","commercial":"购物","entertainment":"休闲","pollution":"环境","heat":"余热","population":"人口","employment":"就业","unemployed":"就业","food":"粮食","material":"材料","goods":"制品","energy":"电力","operator":"运营","change":"变化"}
 	layer_button.text=short_names.get(kind,"图层")
-	layer_button.tooltip_text="分析图层 · "+MapData.NAMES.get(kind,kind);layer_button.custom_minimum_size.x=84
+	layer_button.tooltip_text="分析图层 · "+MapData.NAMES.get(kind,kind)+"\nL 下一层 / Shift+L 上一层";layer_button.custom_minimum_size.x=84
 	lock_button.modulate=Color("d8b776") if layer_locked else Color.WHITE
+	var comparison=plan_preview_available()
+	var preview=comparison and bool(map_view.preview_map_enabled)
 	legend_title.text=MapData.NAMES.get(kind,kind)+( " · 已锁定" if layer_locked else "")
-	var captions={"terrain":"图标辨地貌 · 边线定地格","medical":"绿色可达 · 色条为实际服务","education":"绿色可达 · 色条为实际服务","commercial":"绿色可达 · 色条为实际服务","entertainment":"绿色可达 · 色条为实际服务","pollution":"青色净化 ━ 赭色负担","heat":"0 ━ 4+ 余热场强","population":"入住 / 容量","employment":"到岗 / 岗位","unemployed":"待就业居民比例","food":"产出 − 消耗 · 线为真实调拨","material":"产出 − 消耗 · 线为真实调拨","goods":"产出 − 消耗 · 线为真实调拨","energy":"实际供电 / 需求","operator":"外圈颜色代表运营组织","change":"实线获益 · 虚线受损（预计）"}
-	legend_body.text=str(captions.get(kind,""))
+	var captions={"normal":"建筑与地貌","terrain":"图标辨地貌 · 边线定地格","medical":"绿色可达 · 色条为分配服务","education":"绿色可达 · 色条为分配服务","commercial":"绿色可达 · 色条为分配服务","entertainment":"绿色可达 · 色条为分配服务","pollution":"青色净化 ━ 赭色负担","heat":"0 ━ 4+ 余热场强","population":"入住 / 容量","employment":"到岗 / 岗位","unemployed":"待就业居民比例","food":"产出 − 消耗 · 线为调拨","material":"产出 − 消耗 · 线为调拨","goods":"产出 − 消耗 · 线为调拨","energy":"全城比例配电 · 地格供/需","operator":"外圈颜色代表运营组织","change":"青：新增供给/服务 · 赭：新增代价\n斜纹：两者并存"}
+	var source="预计 · 建设完成后的下一结算" if preview else ("预计基线 · 未建设的下一结算" if comparison and not map_view.plan_reference.is_empty() else ("预计 · 当前城市下一结算" if map_view.analysis_snapshot().get("forecast",false) else "当前城市"))
+	legend_body.text=("暂无有效建设预测" if kind=="change" and not comparison else source+"\n"+str(captions.get(kind,"")))+"\nL 下一层 · Shift+L 上一层"
+	legend_panel.tooltip_text="与未建设的同一下一结算比较；青色表示新增供给或服务，赭色表示新增消耗、竞争或环境负担；斜纹表示同一地格同时存在两种变化。余热单独增加是蓝色信息，不直接视为健康风险。" if kind=="change" else ("全城按需求比例分配电力；地格只显示供给与需求，不代表空间电网。" if kind=="energy" else "")
 func layer_details():
-	var kind=map_view.layer;open_modal(MapData.NAMES.get(kind,kind)+" · 来源", "数据只读。可达性与实际分配分开；缺数据不画成零。")
+	var kind=map_view.layer;var source_view=map_view.analysis_snapshot()
+	open_modal(MapData.NAMES.get(kind,kind)+" · 来源", "预计下一结算；未购买、未扣款。" if plan_preview_available() else "数据只读。可达性与实际分配分开；缺数据不画成零。")
 	modal_body.add_child(W.button("关系线："+("全部" if display_settings.all_links else "最多6条"),func():display_settings.all_links=not display_settings.all_links;save_display_settings();map_view.show_all_links=display_settings.all_links;layer_details()))
-	var tile=game.s.projects.get(selected_project,{}).get("tile",hovered_tile)
+	var tile=str(map_view.plan_tile) if plan_preview_available() else str(game.s.projects.get(selected_project,{}).get("tile",hovered_tile))
+	var source_project=str(source_view.get("tiles",{}).get(tile,{}).get("building",selected_project))
 	if MapData.SERVICES.has(kind):
 		var total=0.;var delivered=0.;var homeless=0.
-		for gid in view_model.get("groups",{}):
-			var group=view_model.groups[gid];total+=float(group.count);delivered+=float(view_model.metrics.get("service_covered",{}).get(gid,{}).get(kind,0))
+		for gid in source_view.get("groups",{}):
+			var group=source_view.groups[gid];total+=float(group.count);delivered+=float(source_view.metrics.get("service_covered",{}).get(gid,{}).get(kind,0))
 			if group.host=="homeless":homeless+=float(group.count)
-		W.section(modal_body,"全地区实际分配","%.1f / %.1f人；地图外待安置 %.1f人仍计入分母。"%[delivered,total,homeless])
+		W.section(modal_body,"全地区预计分配" if plan_preview_available() else "全地区实际分配","%.1f / %.1f人；地图外待安置 %.1f人仍计入分母。"%[delivered,total,homeless])
 		if game.s.cells.has(tile):
-			var x=MapData.service(view_model,tile,kind);W.section(modal_body,"所选地块 "+tile,x.reason+"；服务 %.1f / %.1f人"%[x.served,x.people])
+			var x=MapData.service(source_view,tile,kind);W.section(modal_body,"所选地块 "+tile,x.reason+"；服务 %.1f / %.1f人"%[x.served,x.people])
 			for source in x.sources:
-				W.section(modal_body,game.project_name(source),"可达性 %.2f；来源保留，不因中转复制容量。"%x.sources[source])
+				W.section(modal_body,layer_source_name(source_view,str(source)),"可达性 %.2f；来源保留，不因中转复制容量。"%x.sources[source])
 	elif game.s.cells.has(tile) and kind in ["pollution","heat"]:
-		for e in view_model.tiles[tile].fields.get(kind,[]):W.section(modal_body,game.project_name(e.source_id),"贡献 %+.4f · %s"%[e.value,e.field_id])
-		if kind=="pollution" and selected_project!="":
-			var aggregate=str(game.compiled.config[selected_project].get("pollution_aggregate","sum"));var interpreted=game.Rules.aggregate(view_model.tiles[tile].fields.get("pollution",[]),aggregate)
+		for e in source_view.tiles[tile].fields.get(kind,[]):W.section(modal_body,layer_source_name(source_view,str(e.source_id)),"贡献 %+.4f · %s"%[e.value,e.field_id])
+		if kind=="pollution" and source_project!="":
+			var aggregate=str(source_view.get("compiled",{}).get("config",{}).get(source_project,{}).get("pollution_aggregate","sum"));var interpreted=game.Rules.aggregate(source_view.tiles[tile].fields.get("pollution",[]),aggregate)
 			W.section(modal_body,"此建筑的读取方式",aggregate+" → %.4f。地图色带是原始贡献，受体可按自身规则解释。"%interpreted)
-		if kind=="heat":W.section(modal_body,"本周期额度","产生 %.4f；实际使用 %.4f"%[view_model.audit.get("heat_generated",0),view_model.audit.get("heat_used",0)])
-	elif selected_project!="":
-		for l in MapData.links(game,view_model,selected_project,kind):W.section(modal_body,game.project_name(l.source)+" → "+game.project_name(l.target),"%s  %.3f"%[MapData.NAMES.get(l.kind,l.kind),l.amount])
+		if kind=="heat":W.section(modal_body,"本周期额度","产生 %.4f；实际使用 %.4f"%[source_view.audit.get("heat_generated",0),source_view.audit.get("heat_used",0)])
+	elif source_project!="":
+		for l in MapData.links(game,source_view,source_project,kind):W.section(modal_body,layer_source_name(source_view,str(l.source))+" → "+layer_source_name(source_view,str(l.target)),"%s  %.3f"%[MapData.NAMES.get(l.kind,l.kind),l.amount])
 	else:W.section(modal_body,"先选一栋建筑","返回后点选建筑，再打开来源查看相关居民、提供方和分配记录。")
+func layer_source_name(snapshot:Dictionary,id:String) -> String:
+	var project=snapshot.get("projects",{}).get(id,{})
+	if not project.is_empty():return str(project.get("name",game.c.projects.get(str(project.get("def","")),{}).get("name",id)))
+	return game.project_name(id)
 func show_workbench():
 	flush_beta_time()
 	if desk.is_open():desk.close()
@@ -711,7 +773,7 @@ func policy_categories():
 	show_policy()
 func exit_workbench():
 	if decision_kind=="tender":game.Draft.remember(game)
-	decision_kind="";workbench.hide();workbench_shield.hide();reset_beta_clock();map_view.plan_result={};map_view.plan_tile="";inspector_key="";save_game();refresh();play_cue("back")
+	decision_kind="";workbench.hide();workbench_shield.hide();reset_beta_clock();map_view.plan_result={};map_view.plan_reference={};map_view.plan_tile="";inspector_key="";save_game();refresh();play_cue("back")
 func play_cue(id:String):
 	if chime==null or not game.s.settings.get("sound",true):return
 	var path="res://assets/audio030/"+id+".wav"
@@ -721,7 +783,11 @@ func play_cue(id:String):
 	var data=FileAccess.get_file_as_bytes(path)
 	var audio=AudioStreamWAV.new();audio.format=AudioStreamWAV.FORMAT_16_BITS;audio.mix_rate=22050;audio.data=data.slice(44);chime.stream=audio;chime.play()
 func display_options():
-	open_modal("显示与交互","桌面全屏显示；文字与地图分别缩放。")
+	open_modal("显示与交互","界面尺寸与字号独立调节；地图缩放使用滚轮。")
+	var sizes=option_row(modal_body,8)
+	for factor in [.8,1.0,1.2]:
+		var chosen=is_equal_approx(float(display_settings.ui_scale),factor)
+		var button=W.button(("✓ " if chosen else "")+"界面 %d%%"%roundi(factor*100),func():display_settings.ui_scale=factor;apply_display();display_options());button.name="DisplayUIScale_"+str(roundi(factor*100));button.set_meta("ui_scale",factor);sizes.add_child(button)
 	var row=option_row(modal_body,8)
 	for factor in [1.0,1.25,1.5]:row.add_child(W.button("字号 %d%%"%int(factor*100),func():display_settings.text_scale=factor;apply_display();display_options()))
 	for pair in [["reduced_motion","减少动态"],["high_contrast","提高对比"]]:
@@ -731,7 +797,10 @@ func display_options():
 		rates.add_child(W.button("自动帧率" if rate==0 else "%d FPS"%rate,func():display_settings.frame_limit=rate;apply_display();display_options()))
 func apply_display():
 	apply_frame_limit()
+	display_settings.ui_scale=clampf(float(display_settings.ui_scale),.8,1.2)
 	W.text_scale=clampf(float(display_settings.text_scale),1.,1.5);W.high_contrast=bool(display_settings.high_contrast);theme=W.theme();save_display_settings();inspector_key="";_retune(self);layout_ui();refresh();if desk.is_open():desk.render(true)
+	# Custom comparison graphics calculate their minimum size at construction.
+	if decision_kind!="":workbench.rebuild()
 func run_colony041():
 	var runner=load("res://tests/colony041.gd").new();add_child(runner);runner.start(self)
 func run_ui030():
@@ -930,7 +999,7 @@ func reset_beta_clock():
 	beta_clock_usec=Time.get_ticks_usec()
 
 func avoid_time_hud(panel:Control):
-	var bounds=panel.get_global_rect();var clock=desk.time_panel.get_global_rect()
+	var bounds=ui_rect_from_screen(panel.get_global_rect());var clock=ui_rect_from_screen(desk.time_panel.get_global_rect())
 	if not bounds.intersects(clock):return
 	if clock.position.y<=bounds.position.y:
 		var shift=clock.end.y+8.-bounds.position.y

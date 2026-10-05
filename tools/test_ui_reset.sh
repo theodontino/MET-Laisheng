@@ -8,6 +8,10 @@ if [[ "$MET_UI_SUITE" == desk ]]; then
   UI_SCRIPT=res://tests/desk_visuals.gd
   UI_PREFIX=desk
   UI_REPORT=desk-visuals.json
+elif [[ "$MET_UI_SUITE" == impacts ]]; then
+  UI_SCRIPT=res://tests/ui_impacts.gd
+  UI_PREFIX=ui-impacts
+  UI_REPORT=ui-impacts.json
 else
   UI_SCRIPT=res://tests/ui_reset.gd
   UI_PREFIX=ui-reset
@@ -21,7 +25,7 @@ import hashlib, json, pathlib, subprocess, sys, time
 root, evidence = map(pathlib.Path, sys.argv[1:3])
 script, prefix = sys.argv[3:5]
 files = sorted(p for name in ('core', 'content', 'ui', 'assets') for p in (root / name).rglob('*') if p.is_file() and p.suffix not in ('.uid', '.import'))
-files += [root / name for name in ('project.godot', 'main.tscn', 'tests/ui_reset.gd', 'tests/beta_ui.gd', 'tests/desk_visuals.gd', 'tools/test_ui_reset.sh')]
+files += [root / name for name in ('project.godot', 'main.tscn', 'tests/ui_reset.gd', 'tests/ui_impacts.gd', 'tests/beta_ui.gd', 'tests/desk_visuals.gd', 'tools/test_ui_reset.sh')]
 members = {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
 fingerprint = hashlib.sha256(json.dumps(members, sort_keys=True).encode()).hexdigest()
 try:
@@ -42,7 +46,7 @@ if [[ "${MET_UI_IMPORT:-1}" == 1 ]]; then
   if rg -n 'SCRIPT ERROR|Parse Error|Compile Error|^ERROR:' "$MET_EVIDENCE_DIR/$UI_PREFIX-import.log"; then exit 1; fi
 fi
 timeout 360 "$GODOT" --path "$PROJECT_ROOT" --rendering-method gl_compatibility --audio-driver Dummy --script "$UI_SCRIPT" -- --fresh >"$MET_EVIDENCE_DIR/$UI_PREFIX.log" 2>&1
-if rg -n 'SCRIPT ERROR|Parse Error|Compile Error|^ERROR:|UI RESET FAIL' "$MET_EVIDENCE_DIR/$UI_PREFIX.log"; then exit 1; fi
+if rg -n 'SCRIPT ERROR|Parse Error|Compile Error|^ERROR:|UI RESET FAIL|UI IMPACTS FAIL' "$MET_EVIDENCE_DIR/$UI_PREFIX.log"; then exit 1; fi
 python3 - "$PROJECT_ROOT" "$MET_EVIDENCE_DIR" "$UI_PREFIX" "$UI_REPORT" <<'PY'
 import hashlib, json, pathlib, sys, time
 root, evidence = map(pathlib.Path, sys.argv[1:3])
@@ -50,7 +54,7 @@ prefix, report_name = sys.argv[3:5]
 before = json.loads((evidence / (prefix + '-source-before.json')).read_text())
 changed = [name for name, digest in before['files'].items() if not (root / name).is_file() or hashlib.sha256((root / name).read_bytes()).hexdigest() != digest]
 current_files = {str(p.relative_to(root)) for name in ('core', 'content', 'ui', 'assets') for p in (root / name).rglob('*') if p.is_file() and p.suffix not in ('.uid', '.import')}
-current_files.update(('project.godot', 'main.tscn', 'tests/ui_reset.gd', 'tests/beta_ui.gd', 'tests/desk_visuals.gd', 'tools/test_ui_reset.sh'))
+current_files.update(('project.godot', 'main.tscn', 'tests/ui_reset.gd', 'tests/ui_impacts.gd', 'tests/beta_ui.gd', 'tests/desk_visuals.gd', 'tools/test_ui_reset.sh'))
 added = sorted(current_files - set(before['files']))
 changed.extend(added)
 after_members = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in sorted(current_files)}

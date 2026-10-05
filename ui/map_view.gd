@@ -10,6 +10,7 @@ const Art=preload("res://ui/map/art.gd")
 const AtlasStyle=preload("res://ui/map/atlas_style.gd")
 const Fabric=preload("res://ui/map/fabric040.gd")
 const Data=preload("res://ui/view_models/map_data.gd")
+const ImpactModel=preload("res://ui/view_models/impact_model.gd")
 signal cell_clicked(key:String,dragging:bool)
 signal cell_hovered(key:String)
 signal camera_changed
@@ -36,6 +37,10 @@ var flash_project_id:String=""
 var planned_base:String=""
 var planning_values={}
 var plan_result={}
+var plan_reference:Dictionary={}
+var preview_map_enabled:bool=true
+var preview_deltas:Dictionary={}
+var _preview_key:String=""
 var plan_tile:String=""
 var display_shot={}
 var compact:bool=false
@@ -158,11 +163,17 @@ func _process(delta):
 	_ensure_foundations()
 	if _focus_pending:focus_community();_focus_pending=false
 	_sync_camera()
-	var data_key=str(game.s.block_index)+":"+str(game.revision)+":"+str(game.s.simulation_tick)+":"+str(display_shot.get("snapshot_id",""))+":"+layer
+	var analysis=analysis_snapshot()
+	var plan_key=str(plan_result.get("snapshot_id",""))+str(plan_result.get("candidate_key",""))+str(plan_tile) if has_plan_preview() else ""
+	if plan_key!=_preview_key:
+		_preview_key=plan_key;preview_deltas={}
+		if has_plan_preview() and not plan_reference.is_empty():
+			for key in game.s.cells:preview_deltas[key]=ImpactModel.tile_delta(game,plan_reference,plan_result.map_snapshot,str(key))
+	var data_key=str(game.s.block_index)+":"+str(game.revision)+":"+str(game.s.simulation_tick)+":"+str(analysis.get("snapshot_id",""))+":"+layer+":"+plan_key+":"+str(preview_map_enabled)
 	if _data_key!=data_key:
 		_data_key=data_key;view_values={}
-		if not display_shot.is_empty() and layer not in ["normal","terrain","operator"]:
-			for key in game.s.cells:view_values[key]=Data.tile_info(game,display_shot,key,layer)
+		if not analysis.is_empty() and layer not in ["normal","terrain","operator"]:
+			for key in game.s.cells:view_values[key]=Data.tile_info(game,analysis,key,layer)
 	var ground_data_key=data_key if layer not in ["normal","terrain","operator"] else ""
 	var gkey=elevation_key+foundation_key+ground_data_key+str(mode)+str(display_shot.get("forecast",false))
 	if _last_ground!=gkey:_last_ground=gkey;ground.queue_redraw()
@@ -181,9 +192,19 @@ func _process(delta):
 	if visual_time-_last_effect>.033:
 		_last_effect=visual_time;effects.queue_redraw()
 func invalidate():
-	if mode=="site" or layer=="change":_last_ground=""
+	_data_key="";_last_ground="";_preview_key=""
+	view_values={}
+	if not has_plan_preview():preview_deltas={}
 	if mode=="site":_last_buildings=""
 	if effects!=null:effects.queue_redraw()
+
+func has_plan_preview() -> bool:
+	return bool(plan_result.get("ok",false)) and not plan_result.get("map_snapshot",{}).is_empty()
+func analysis_snapshot() -> Dictionary:
+	if has_plan_preview():
+		if preview_map_enabled:return plan_result.map_snapshot
+		if not plan_reference.is_empty():return plan_reference
+	return display_shot
 func invalidate_camera():
 	_sync_camera()
 	if effects!=null:effects.queue_redraw()
@@ -509,14 +530,15 @@ func _terrain(c:CanvasItem):
 			elif layer=="pollution":
 				var v=float(info.get("value",0));col=Color("aac9c0") if v<0 else Color("d6a178");col.a=minf(.75,absf(v)/Data.display_max("pollution",2.)*.75)
 			elif layer=="heat":col=Color("d4a26a");col.a=minf(.62,maxf(0,float(info.get("value",0)))/Data.display_max("heat",4.))
-			elif layer in ["food","material","goods","energy"] and info.get("applicable",false):
+			elif layer=="energy" and info.get("applicable",false):
+				col=Color("9dbbb0") if float(info.get("ratio",1))>=.98 or float(info.get("need",0))<=.001 else Color("d3b693");col.a=.67
+			elif layer in ["food","material","goods"] and info.get("applicable",false):
 				col=Color("9dbbb0") if float(info.value)>=0 else Color("d3b693");col.a=.67
-			elif layer=="change" and plan_result.get("ok",false):
-				var delta=plan_result.get("map_delta",{}).get(k,{})
-				var sum=0.
-				for v in delta.get("services",{}).values():sum+=float(v)
-				sum+=float(delta.get("utilization",0))*10-float(delta.get("pollution",0))*10
-				if absf(sum)>.001:col=Color("86b59b") if sum>0 else Color("d9a38c");col.a=.72
+			elif layer=="change" and has_plan_preview() and preview_map_enabled:
+				var delta:Dictionary=preview_deltas.get(k,{})
+				if delta.get("changed",false):
+					var both=bool(delta.get("positive",false)) and bool(delta.get("negative",false))
+					col=Color("c7b78a") if both else (Color("86b59b") if delta.get("positive",false) else (Color("d9a38c") if delta.get("negative",false) else Color("9fbccc")));col.a=.64;hatch=both
 			if col.a>0:c.draw_colored_polygon(surface_polygon(k,.99),col)
 			if hatch:
 				var rr=radius()*.58
@@ -657,11 +679,14 @@ func marker(c:CanvasItem,pos:Vector2,text:String,color:Color=Color("24473f"),fon
 func _overlays(c:CanvasItem):
 	label_rects=[];label_hidden=0
 	if game==null or game.s.cells.is_empty():return
-	var r=radius();var keys=game.s.cells.keys();var metrics=display_shot.get("metrics",game.s.metrics);var label_count=0
-	var links=Data.links(game,display_shot,selected_project,layer) if not display_shot.is_empty() and show_relations else []
+	var analysis=analysis_snapshot()
+	var r=radius();var keys=game.s.cells.keys();var metrics=analysis.get("metrics",game.s.metrics);var label_count=0
+	var forecasting=has_plan_preview() and preview_map_enabled and layer not in ["normal","terrain","operator"]
+	var existing_label_limit=6 if forecasting else 12
+	var links=Data.links(game,analysis,selected_project,layer) if not analysis.is_empty() and show_relations else []
 	hidden_links=maxi(0,links.size()-6) if not show_all_links else 0
 	for i in mini(links.size(),links.size() if show_all_links else 6):
-		var l=links[i];var src=Data.source_tile(display_shot,l.source);var dst=Data.source_tile(display_shot,l.target)
+		var l=links[i];var src=Data.source_tile(analysis,l.source);var dst=Data.source_tile(analysis,l.target)
 		if not game.s.cells.has(src) or not game.s.cells.has(dst):continue
 		var a=point(src);var b=point(dst);var col=Color("598a78")
 		if l.kind=="pollution":col=Color("b07150")
@@ -681,7 +706,7 @@ func _overlays(c:CanvasItem):
 				var other=view_values.get(ns[i],{}).get("sources",{});var inside=not other.is_empty() if selected_project=="" else float(other.get(selected_project,0))>0
 				if not inside:_edge(c,k,i,Color("377e73"),2.0)
 	# The proposed source's reach is a separate dashed boundary, not served population.
-	if Data.SERVICES.has(layer) and plan_result.get("ok",false):
+	if Data.SERVICES.has(layer) and has_plan_preview() and preview_map_enabled:
 		var forecast=plan_result.get("map_snapshot",{});var source=str(plan_result.get("target",""));var preview_cells=forecast.get("tiles",{})
 		for k in keys:
 			if float(Data.best_sources(preview_cells.get(k,{}),layer).get(source,0))<=0:continue
@@ -697,7 +722,7 @@ func _overlays(c:CanvasItem):
 			c.draw_rect(Rect2(pos+Vector2(-r*.44,r*.36),Vector2(r*.88,5)),Color("b8bdac"));c.draw_rect(Rect2(pos+Vector2(-r*.44,r*.36),Vector2(r*.88*p,5)),Color("a77539"))
 		elif b.paused:marker(c,pos+Vector2(r*.4,-r*.34),"Ⅱ",Color("53636a"))
 		elif not beta_feedback_active and not a.is_empty() and u<.48 and (id==selected_project or b.tile==hovered or layer!="normal"):
-			if label_count<10:
+			if label_count<mini(10,existing_label_limit):
 				var problem=str(a.get("bottleneck",""));var symbol="人" if "劳力" in problem else ("电" if "能源" in problem else ("料" if "物资" in problem else "仓"))
 				marker(c,pos+Vector2(r*.45,-r*.30),symbol,Color("a53332"));label_count+=1
 		# Dynamic geometry refers to current operating status and actual/forecast caption.
@@ -715,31 +740,54 @@ func _overlays(c:CanvasItem):
 			_outline(c,pos,r*.88,color,2.0);c.draw_texture_rect(Art.icon("org_"+b.operator_org),Rect2(pos+Vector2(r*.5,-r*.38),Vector2(26,26)),false)
 		if id==selected_project or b.tile==hovered:
 			_outline(c,pos,r*.90,Color("fff3c3"),3.0)
-			if show_labels and label_count<12:marker(c,pos+Vector2(0,r*.70),game.project_name(id));label_count+=1
+			if show_labels and label_count<existing_label_limit:marker(c,pos+Vector2(0,r*.70),game.project_name(id));label_count+=1
 		var info=view_values.get(b.tile,{})
-		if Data.SERVICES.has(layer) and float(info.get("people",0))>0 and label_count<12:
+		if Data.SERVICES.has(layer) and float(info.get("people",0))>0 and label_count<existing_label_limit:
 			marker(c,pos+Vector2(0,r*.40),("%.0f%%"%(float(info.ratio)*100)) if info.get("known",false) else "?",Color("17665a") if info.get("ratio",0)>=.75 else Color("a53332"));label_count+=1
-		elif layer=="population" and info.get("applicable",false) and label_count<12:
+		elif layer=="population" and info.get("applicable",false) and label_count<existing_label_limit:
 			if float(info.get("housing",0))>0:
 				_outline(c,pos,r*.90,Color("3D8A61"),2.)
 				marker(c,pos+Vector2(0,r*.46),"住 %.0f/%.0f"%[info.count,info.housing],Color("286342"));label_count+=1
 			if float(info.get("jobs",0))>0:
 				marker(c,pos+Vector2(0,-r*.60),"岗 %.0f/%.0f"%[info.assigned,info.jobs],Color("356EA0"));label_count+=1
-		elif layer in ["employment","unemployed"] and info.get("applicable",false) and label_count<12:
+		elif layer in ["employment","unemployed"] and info.get("applicable",false) and label_count<existing_label_limit:
 			marker(c,pos+Vector2(0,r*.48),"%.0f%%"%(float(info.value)*100),Color("53636a"));label_count+=1
-		elif layer in ["food","material","goods","energy"] and info.get("applicable",false) and label_count<12:
+		elif layer=="energy" and info.has("produced") and info.has("need") and info.get("applicable",false) and label_count<existing_label_limit:
+			var power="供 %.1f"%float(info.produced) if float(info.produced)>.001 else "需 %.1f · %.0f%%"%[float(info.need),float(info.ratio)*100.]
+			marker(c,pos+Vector2(0,r*.48),power,Color("17665a") if float(info.get("ratio",1))>=.98 else Color("8b641d"));label_count+=1
+		elif layer in ["food","material","goods"] and info.get("applicable",false) and label_count<existing_label_limit:
 			marker(c,pos+Vector2(0,r*.48),"%+.1f"%float(info.value),Color("17665a") if info.value>=0 else Color("8b641d"));label_count+=1
-	if plan_result.get("ok",false):
-		for k in plan_result.get("map_delta",{}):
+	if forecasting:
+		var impact_keys=preview_deltas.keys()
+		impact_keys.sort_custom(func(a,b):
+			if a==plan_tile:return b!=plan_tile
+			if b==plan_tile:return false
+			var aa=absf(float(preview_deltas[a].get("pollution",0)));var bb=absf(float(preview_deltas[b].get("pollution",0)))
+			return aa>bb if aa!=bb else str(a)<str(b))
+		for k in impact_keys:
 			if not game.s.cells.has(k) or label_count>=12:continue
-			var d=plan_result.map_delta[k];var sum=0.;var service_name="服务"
-			for kind in d.get("services",{}):
-				var n=float(d.services[kind])
-				if absf(n)>absf(sum):sum=n;service_name={"medical":"医疗","education":"教育","commercial":"购物","entertainment":"休闲"}.get(kind,"服务")
-			var util=float(d.get("utilization",0));var pollution=float(d.get("pollution",0))
-			if absf(sum)>.1:marker(c,point(k)+Vector2(0,-r*.6),service_name+" %+.1f人"%sum,Color("17665a") if sum>0 else Color("a53332"));label_count+=1
-			elif absf(util)>.1:marker(c,point(k)+Vector2(0,-r*.6),"运行 %+.0f%%"%(util*100),Color("17665a") if util>0 else Color("a53332"));label_count+=1
-			elif pollution>.05:_outline(c,point(k),r*.87,Color("ae634b"),2.)
+			var delta:Dictionary=preview_deltas[k];var text="";var good=true
+			if layer in Data.SERVICES:
+				var value=float(delta.services.get(layer,0))
+				if absf(value)>.01:text="%s %+.1f人"%[Data.NAMES.get(layer,layer),value];good=value>0
+			elif layer in ["food","material","goods"]:
+				var value=float(delta.resources.get(layer,{}).get("net",0))
+				if absf(value)>.001:text="产消差 %+.1f/月"%value;good=value>0
+			elif layer=="energy":
+				var supply=float(delta.energy.get("supply",0));var need=float(delta.energy.get("need",0))
+				if absf(supply)>.001:text="供电 %+.1f"%supply;good=supply>0
+				elif absf(need)>.001:text="用电 %+.1f"%need;good=need<0
+			elif layer in ["pollution","heat"]:
+				var value=float(delta.get(layer,0))
+				if absf(value)>.00001:text=("负担 %+.2f" if layer=="pollution" else "余热 %+.2f")%value;good=value<0 if layer=="pollution" else true
+			elif layer=="change":
+				if not delta.get("changed",false):continue
+				text="供给与代价" if delta.get("positive",false) and delta.get("negative",false) else ("新增供给 / 服务" if delta.get("positive",false) else ("负担 / 需求增加" if delta.get("negative",false) else "余热变化"))
+				good=not bool(delta.get("negative",false))
+			if text!="":
+				var neutral=layer=="heat" or (layer=="change" and not delta.get("positive",false) and not delta.get("negative",false))
+				_outline(c,point(k),r*.87,Color("597d96") if neutral else (Color("377e73") if good else Color("ae634b")),2.)
+				marker(c,point(k)+Vector2(0,-r*.65),text,Color("356EA0") if neutral else (Color("17665a") if good else Color("8b641d")));label_count+=1
 	var tile=plan_tile if plan_tile!="" else (str(selected[0]) if not selected.is_empty() else hovered)
 	if mode=="site" and game.s.cells.has(tile) and game.s.cells[tile].building=="":
 		_outline(c,point(tile),r*.94,Color("8b641d"),3.)

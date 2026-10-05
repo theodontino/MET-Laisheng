@@ -1,0 +1,5427 @@
+{
+	"captures": [
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-01-city-overview.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-residence-unknown.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-residence-zero.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-residence.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-production.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-medical.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-education.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-commercial.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-logistics.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-03-market.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-construction.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-paused.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-02-abnormal.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-04-building-archive.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-building-overview.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-04b-sources.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-building-sources.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-building-slots.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-building-residence.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-building-medical.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-building-logistics.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-archive-index.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-finance-overview.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-finance-sources.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-resource-overview.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-resource-sources.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-resource-energy.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-population-overview.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-population-needs.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-population-housing.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-policy-options.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-policy-preview.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-policy-rules.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-development.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-upgrade-preview.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-construction.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-market.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-market-order.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-market-negative-buy.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-market-receipt-buy.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-market-negative-sell.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-market-receipt-sell.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-theme.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-05-theme-near-complete.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-05b-theme-reward-ready.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-05b1-reward-queue-before-theme.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-05b2-matching-theme-reward.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-reward-three.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-bonus-wallet.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-bonus-hosts.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/desk-bonus-install.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-05c-severe-alerts.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-06-local-site.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-06b-operator-comparison.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-07-all-growth-nodes.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-07b-neighborhood-connections.png",
+			"width": 1920
+		},
+		{
+			"fixture": true,
+			"height": 1080,
+			"path": "/workspace/.met-setup/main-ui-impact/accepted-reset/reset-08-command-error-feedback.png",
+			"width": 1920
+		}
+	],
+	"checks": [
+		{
+			"name": "native display server is active",
+			"pass": true
+		},
+		{
+			"name": "only contracted 1920x1080 desktop resolution",
+			"pass": true
+		},
+		{
+			"name": "actual app and map fill the native viewport",
+			"pass": true
+		},
+		{
+			"name": "desktop starts fullscreen",
+			"pass": true
+		},
+		{
+			"detail": [
+				"dt",
+				"food",
+				"population",
+				"time"
+			],
+			"name": "L0 contains exactly DT, population, food, time",
+			"pass": true
+		},
+		{
+			"name": "finance is not a permanent L0 status",
+			"pass": true
+		},
+		{
+			"name": "material, goods and power dock removed from permanent HUD",
+			"pass": true
+		},
+		{
+			"name": "no empty theme card before accepting a theme",
+			"pass": true
+		},
+		{
+			"name": "L0 item fits 1080p: population",
+			"pass": true
+		},
+		{
+			"name": "L0 item fits 1080p: food",
+			"pass": true
+		},
+		{
+			"name": "L0 item fits 1080p: time",
+			"pass": true
+		},
+		{
+			"name": "L0 item fits 1080p: dt",
+			"pass": true
+		},
+		{
+			"name": "all four time controls remain available",
+			"pass": true
+		},
+		{
+			"name": "visible time control normal",
+			"pass": true
+		},
+		{
+			"name": "visible time control observe",
+			"pass": true
+		},
+		{
+			"name": "visible time control advance",
+			"pass": true
+		},
+		{
+			"name": "visible time control burn",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-01-city-overview",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-01-city-overview",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000001"
+			},
+			"name": "map pointer selects expected entity B000001",
+			"pass": true
+		},
+		{
+			"detail": 3,
+			"name": "L2 has at most three graphical indicators: residence",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: residence",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: residence",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: residence",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: residence",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: residence",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: residence",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: residence",
+			"pass": true
+		},
+		{
+			"name": "residence has occupancy, livability and population",
+			"pass": true
+		},
+		{
+			"name": "residential number comes from real hosted population",
+			"pass": true
+		},
+		{
+			"name": "missing living receipts show unknown rather than fabricated zero",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-residence-unknown",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-residence-unknown",
+			"pass": true
+		},
+		{
+			"name": "real zero receipts remain a zero warning",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-residence-zero",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-residence-zero",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-residence",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-residence",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000006"
+			},
+			"name": "map pointer selects expected entity B000006",
+			"pass": true
+		},
+		{
+			"detail": 3,
+			"name": "L2 has at most three graphical indicators: production",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: production",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: production",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: production",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: production",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: production",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: production",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: production",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-production",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-production",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000008"
+			},
+			"name": "map pointer selects expected entity B000008",
+			"pass": true
+		},
+		{
+			"detail": 2,
+			"name": "L2 has at most three graphical indicators: medical",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: medical",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: medical",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: medical",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: medical",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: medical",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: medical",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: medical",
+			"pass": true
+		},
+		{
+			"name": "service uses service-specific context: medical",
+			"pass": true
+		},
+		{
+			"detail": [
+				"medical"
+			],
+			"name": "service graphic reflects actual service kind: medical",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-medical",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-medical",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000010"
+			},
+			"name": "map pointer selects expected entity B000010",
+			"pass": true
+		},
+		{
+			"detail": 2,
+			"name": "L2 has at most three graphical indicators: education",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: education",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: education",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: education",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: education",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: education",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: education",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: education",
+			"pass": true
+		},
+		{
+			"name": "service uses service-specific context: education",
+			"pass": true
+		},
+		{
+			"detail": [
+				"education"
+			],
+			"name": "service graphic reflects actual service kind: education",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-education",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-education",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000012"
+			},
+			"name": "map pointer selects expected entity B000012",
+			"pass": true
+		},
+		{
+			"detail": 2,
+			"name": "L2 has at most three graphical indicators: commercial",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: commercial",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: commercial",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: commercial",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: commercial",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: commercial",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: commercial",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: commercial",
+			"pass": true
+		},
+		{
+			"name": "service uses service-specific context: commercial",
+			"pass": true
+		},
+		{
+			"detail": [
+				"entertainment",
+				"commercial"
+			],
+			"name": "service graphic reflects actual service kind: commercial",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-commercial",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-commercial",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000014"
+			},
+			"name": "map pointer selects expected entity B000014",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has at most three graphical indicators: logistics",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: logistics",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: logistics",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: logistics",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: logistics",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: logistics",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: logistics",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: logistics",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-logistics",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-logistics",
+			"pass": true
+		},
+		{
+			"name": "freight shows all three actual inventory bars",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: freight market",
+			"pass": true
+		},
+		{
+			"name": "freight primary opens real orders and receipts",
+			"pass": true
+		},
+		{
+			"name": "all six authoritative buy/sell quotes are visible",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: food:buy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(175.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: food:buy",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: food:sell",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(175.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: food:sell",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: material:buy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(175.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: material:buy",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: material:sell",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(174.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: material:sell",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: goods:buy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(175.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: goods:buy",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: goods:sell",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(174.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: goods:sell",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-03-market",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-03-market",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000016"
+			},
+			"name": "map pointer selects expected entity B000016",
+			"pass": true
+		},
+		{
+			"detail": 3,
+			"name": "L2 has at most three graphical indicators: construction",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: construction",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: construction",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: construction",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: construction",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: construction",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: construction",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: construction",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-construction",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-construction",
+			"pass": true
+		},
+		{
+			"name": "construction offers priority adjustment",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: construction priority",
+			"pass": true
+		},
+		{
+			"name": "construction priority management is reachable",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000018"
+			},
+			"name": "map pointer selects expected entity B000018",
+			"pass": true
+		},
+		{
+			"detail": 0,
+			"name": "L2 has at most three graphical indicators: paused",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: paused",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: paused",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: paused",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: paused",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: paused",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: paused",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: paused",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-paused",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-paused",
+			"pass": true
+		},
+		{
+			"name": "paused context suppresses normal operation metrics",
+			"pass": true
+		},
+		{
+			"name": "paused building offers restore",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: restore paused building",
+			"pass": true
+		},
+		{
+			"name": "restore action reaches the actual game command",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000020"
+			},
+			"name": "map pointer selects expected entity B000020",
+			"pass": true
+		},
+		{
+			"detail": 2,
+			"name": "L2 has at most three graphical indicators: abnormal",
+			"pass": true
+		},
+		{
+			"detail": 1,
+			"name": "L2 has exactly one primary action: abnormal",
+			"pass": true
+		},
+		{
+			"name": "fixed primary action fits 1080p: abnormal",
+			"pass": true
+		},
+		{
+			"name": "primary action is clear of time controller: abnormal",
+			"pass": true
+		},
+		{
+			"name": "L2 consumes current snapshot identity: abnormal",
+			"pass": true
+		},
+		{
+			"name": "model and visible graphic counts agree: abnormal",
+			"pass": true
+		},
+		{
+			"name": "building portrait visible: abnormal",
+			"pass": true
+		},
+		{
+			"name": "low weight details reachable: abnormal",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-02-abnormal",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-02-abnormal",
+			"pass": true
+		},
+		{
+			"name": "shortage is not mislabeled as restoration",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000006"
+			},
+			"name": "map pointer selects expected entity B000006",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: building details",
+			"pass": true
+		},
+		{
+			"name": "building archive opened through L2 details",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-04-building-archive",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-04-building-archive",
+			"pass": true
+		},
+		{
+			"name": "production archive shows actual input/output relationship",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-building-overview",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-building-overview",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: complete building sources",
+			"pass": true
+		},
+		{
+			"name": "source, rule and relation detail remains in archive",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-04b-sources",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-04b-sources",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-building-sources",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-building-sources",
+			"pass": true
+		},
+		{
+			"name": "exact contribution ledger starts collapsed",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: expand exact building contribution ledger",
+			"pass": true
+		},
+		{
+			"name": "disclosure exposes exact activity receipt from the current snapshot",
+			"pass": true
+		},
+		{
+			"name": "activity disclosure keeps original structured records",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: service.entertainment =",
+			"pass": true
+		},
+		{
+			"name": "exact rule chain can be expanded by pointer",
+			"pass": true
+		},
+		{
+			"name": "expanded rule chain preserves complete current compiled trace",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 完整 Field 样本与来源",
+			"pass": true
+		},
+		{
+			"name": "expanded Field source preserves source IDs, path and sample values",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: building slots and Bonus",
+			"pass": true
+		},
+		{
+			"name": "slot management remains reachable",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-building-slots",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-building-slots",
+			"pass": true
+		},
+		{
+			"name": "opening building archive does not mutate simulation or RNG",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 部署许可",
+			"pass": true
+		},
+		{
+			"name": "slot click reaches actual installation detail",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 查看部署许可",
+			"pass": true
+		},
+		{
+			"name": "slot detail reaches deployable Bonus inventory",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000006"
+			},
+			"name": "map pointer selects expected entity B000006",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: return to building archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: operations and workforce",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: workforce priority",
+			"pass": true
+		},
+		{
+			"name": "archived workforce priority invokes game command",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: building management",
+			"pass": true
+		},
+		{
+			"name": "management retains 暂停运行",
+			"pass": true
+		},
+		{
+			"name": "management retains 查看建筑成长",
+			"pass": true
+		},
+		{
+			"name": "management retains 查看部署许可",
+			"pass": true
+		},
+		{
+			"name": "management retains 市场与订单",
+			"pass": true
+		},
+		{
+			"name": "management retains 政策与制度",
+			"pass": true
+		},
+		{
+			"name": "management retains 运营商档案",
+			"pass": true
+		},
+		{
+			"name": "management retains 拆除建筑",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 拆除建筑",
+			"pass": true
+		},
+		{
+			"name": "demolition remains a separate confirmation",
+			"pass": true
+		},
+		{
+			"name": "Escape exits demolition without deleting building",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000001"
+			},
+			"name": "map pointer selects expected entity B000001",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: L3 archive for residence",
+			"pass": true
+		},
+		{
+			"name": "different building type has graphical archive: residence",
+			"pass": true
+		},
+		{
+			"name": "typed building archive reads exact current snapshot: residence",
+			"pass": true
+		},
+		{
+			"name": "typed building archive is read only: residence",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-building-residence",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-building-residence",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000008"
+			},
+			"name": "map pointer selects expected entity B000008",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: L3 archive for medical",
+			"pass": true
+		},
+		{
+			"name": "different building type has graphical archive: medical",
+			"pass": true
+		},
+		{
+			"name": "typed building archive reads exact current snapshot: medical",
+			"pass": true
+		},
+		{
+			"name": "typed building archive is read only: medical",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-building-medical",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-building-medical",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": "B000014"
+			},
+			"name": "map pointer selects expected entity B000014",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: L3 archive for logistics",
+			"pass": true
+		},
+		{
+			"name": "different building type has graphical archive: logistics",
+			"pass": true
+		},
+		{
+			"name": "typed building archive reads exact current snapshot: logistics",
+			"pass": true
+		},
+		{
+			"name": "typed building archive is read only: logistics",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-building-logistics",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-building-logistics",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 财政",
+			"pass": true
+		},
+		{
+			"name": "L3 archive reaches 财政",
+			"pass": true
+		},
+		{
+			"name": "L3 return fits 1080p: 财政",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: return from 财政",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 人口",
+			"pass": true
+		},
+		{
+			"name": "L3 archive reaches 人口",
+			"pass": true
+		},
+		{
+			"name": "L3 return fits 1080p: 人口",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: return from 人口",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 物资",
+			"pass": true
+		},
+		{
+			"name": "L3 archive reaches 物资",
+			"pass": true
+		},
+		{
+			"name": "L3 return fits 1080p: 物资",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: return from 物资",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 建设",
+			"pass": true
+		},
+		{
+			"name": "L3 archive reaches 建设",
+			"pass": true
+		},
+		{
+			"name": "L3 return fits 1080p: 建设",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: return from 建设",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 市场",
+			"pass": true
+		},
+		{
+			"name": "L3 archive reaches 市场",
+			"pass": true
+		},
+		{
+			"name": "L3 return fits 1080p: 市场",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: return from 市场",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 政策",
+			"pass": true
+		},
+		{
+			"name": "L3 archive reaches 政策",
+			"pass": true
+		},
+		{
+			"name": "L3 return fits 1080p: 政策",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: return from 政策",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 方案",
+			"pass": true
+		},
+		{
+			"name": "L3 archive reaches 方案",
+			"pass": true
+		},
+		{
+			"name": "L3 return fits 1080p: 方案",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: return from 方案",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: graphical archive index",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-archive-index",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-archive-index",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 财政",
+			"pass": true
+		},
+		{
+			"name": "archive title and breadcrumbs visible: finance",
+			"pass": true
+		},
+		{
+			"name": "archive return controls visible: finance",
+			"pass": true
+		},
+		{
+			"name": "archive uses real graphical content: finance",
+			"pass": true
+		},
+		{
+			"name": "archive uses current snapshot identity: finance",
+			"pass": true
+		},
+		{
+			"name": "graphical meter available: 收入",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real value: 收入",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real capacity: 收入",
+			"pass": true
+		},
+		{
+			"name": "graphical meter available: 支出",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real value: 支出",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real capacity: 支出",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-finance-overview",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-finance-overview",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 收入构成",
+			"pass": true
+		},
+		{
+			"name": "budget graph leads to income sources",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 展开全部来源",
+			"pass": true
+		},
+		{
+			"name": "budget source breakdown leads to exact ledger",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-finance-sources",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-finance-sources",
+			"pass": true
+		},
+		{
+			"name": "full fiscal ledger starts collapsed",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: expand full fiscal ledger",
+			"pass": true
+		},
+		{
+			"name": "fiscal ledger is explicitly expandable",
+			"pass": true
+		},
+		{
+			"name": "Escape returns budget one level",
+			"pass": true
+		},
+		{
+			"name": "second Escape returns budget overview",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 历史流水",
+			"pass": true
+		},
+		{
+			"name": "budget history opens an actual historical chart",
+			"pass": true
+		},
+		{
+			"name": "finance chart preserves exact saved historical samples",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 物资",
+			"pass": true
+		},
+		{
+			"name": "archive title and breadcrumbs visible: resources",
+			"pass": true
+		},
+		{
+			"name": "archive return controls visible: resources",
+			"pass": true
+		},
+		{
+			"name": "archive uses real graphical content: resources",
+			"pass": true
+		},
+		{
+			"name": "archive uses current snapshot identity: resources",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: material archive tab",
+			"pass": true
+		},
+		{
+			"name": "graphical meter available: 材料",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real value: 材料",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real capacity: 材料",
+			"pass": true
+		},
+		{
+			"name": "resource page shows one actual supply/use/stock flow",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-resource-overview",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-resource-overview",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 供给来源",
+			"pass": true
+		},
+		{
+			"name": "resource graph leads to supply sources",
+			"pass": true
+		},
+		{
+			"name": "resource contribution meter matches authoritative receipts: B000003",
+			"pass": true
+		},
+		{
+			"name": "resource contribution meter matches authoritative receipts: B000006",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 全部来源与精确记录",
+			"pass": true
+		},
+		{
+			"name": "resource sources lead to exact receipt page",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-resource-sources",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-resource-sources",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 完整来源记录",
+			"pass": true
+		},
+		{
+			"name": "resource disclosure retains exact current source note and rate: B000003",
+			"pass": true
+		},
+		{
+			"name": "resource disclosure retains exact current source note and rate: B000006",
+			"pass": true
+		},
+		{
+			"name": "Escape returns resource one level",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 电力",
+			"pass": true
+		},
+		{
+			"name": "electricity uses current power supply without a fictional stock flow",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-resource-energy",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-resource-energy",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 人口",
+			"pass": true
+		},
+		{
+			"name": "archive title and breadcrumbs visible: population",
+			"pass": true
+		},
+		{
+			"name": "archive return controls visible: population",
+			"pass": true
+		},
+		{
+			"name": "archive uses real graphical content: population",
+			"pass": true
+		},
+		{
+			"name": "archive uses current snapshot identity: population",
+			"pass": true
+		},
+		{
+			"name": "graphical meter available: 已安置 / 住房",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real value: 已安置 / 住房",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real capacity: 已安置 / 住房",
+			"pass": true
+		},
+		{
+			"name": "graphical meter available: 已就业 / 岗位",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real value: 已就业 / 岗位",
+			"pass": true
+		},
+		{
+			"name": "graphical meter reads real capacity: 已就业 / 岗位",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-population-overview",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-population-overview",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 生活需求",
+			"pass": true
+		},
+		{
+			"name": "population cards lead to actual needs matrix",
+			"pass": true
+		},
+		{
+			"name": "population has graphical source-backed need matrix",
+			"pass": true
+		},
+		{
+			"name": "need matrix uses exact source ratio: G000005:food",
+			"pass": true
+		},
+		{
+			"name": "need matrix uses exact source ratio: G000005:material",
+			"pass": true
+		},
+		{
+			"name": "need matrix uses exact source ratio: G000005:energy",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-population-needs",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-population-needs",
+			"pass": true
+		},
+		{
+			"name": "Escape returns population overview",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 居住分布",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 查看全部住区",
+			"pass": true
+		},
+		{
+			"name": "housing exposes deeper per-home records",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-population-housing",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-population-housing",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 政策",
+			"pass": true
+		},
+		{
+			"name": "archive title and breadcrumbs visible: policies",
+			"pass": true
+		},
+		{
+			"name": "archive return controls visible: policies",
+			"pass": true
+		},
+		{
+			"name": "all policies appear as actual comparison cards",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: tax_head",
+			"pass": true
+		},
+		{
+			"name": "current policy is visibly selected in its exclusive slot: tax_head",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: tax_production",
+			"pass": true
+		},
+		{
+			"name": "mutually exclusive policies share the same visual slot: Tax",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: tax_trade",
+			"pass": true
+		},
+		{
+			"name": "mutually exclusive policies share the same visual slot: Tax",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: jobs_access",
+			"pass": true
+		},
+		{
+			"name": "current policy is visibly selected in its exclusive slot: jobs_access",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: jobs_merit",
+			"pass": true
+		},
+		{
+			"name": "mutually exclusive policies share the same visual slot: Labor",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: pollution_default",
+			"pass": true
+		},
+		{
+			"name": "current policy is visibly selected in its exclusive slot: pollution_default",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: pollution_fee",
+			"pass": true
+		},
+		{
+			"name": "mutually exclusive policies share the same visual slot: Environment",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: pollution_spread",
+			"pass": true
+		},
+		{
+			"name": "mutually exclusive policies share the same visual slot: Environment",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: procure_near",
+			"pass": true
+		},
+		{
+			"name": "current policy is visibly selected in its exclusive slot: procure_near",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: procure_split",
+			"pass": true
+		},
+		{
+			"name": "mutually exclusive policies share the same visual slot: Procurement",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: land_normal",
+			"pass": true
+		},
+		{
+			"name": "current policy is visibly selected in its exclusive slot: land_normal",
+			"pass": true
+		},
+		{
+			"name": "policy option uses a visual comparison card: land_rent",
+			"pass": true
+		},
+		{
+			"name": "mutually exclusive policies share the same visual slot: Land",
+			"pass": true
+		},
+		{
+			"name": "archive uses current snapshot identity: policies",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-policy-options",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-policy-options",
+			"pass": true
+		},
+		{
+			"name": "policy fixture has a real alternative in an exclusive slot",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: preview policy jobs_merit",
+			"pass": true
+		},
+		{
+			"name": "pointer selects actual policy candidate",
+			"pass": true
+		},
+		{
+			"name": "policy preview uses existing shared planner",
+			"pass": true
+		},
+		{
+			"name": "policy confirmation stays in fixed action footer",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-policy-preview",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-policy-preview",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 完整规则与适用范围",
+			"pass": true
+		},
+		{
+			"name": "policy comparison opens exact rules",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 完整语法与条件",
+			"pass": true
+		},
+		{
+			"name": "raw policy syntax remains available through disclosure",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-policy-rules",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-policy-rules",
+			"pass": true
+		},
+		{
+			"name": "Escape returns from policy rules to the same candidate",
+			"pass": true
+		},
+		{
+			"name": "L3 resources, population, budget, policy and disclosures preserve exact simulation state and RNG",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 建设",
+			"pass": true
+		},
+		{
+			"name": "archive title and breadcrumbs visible: development",
+			"pass": true
+		},
+		{
+			"name": "archive return controls visible: development",
+			"pass": true
+		},
+		{
+			"name": "archive uses real graphical content: development",
+			"pass": true
+		},
+		{
+			"name": "growth page shows existing buildings and their real tracks",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-development",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-development",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 选择专业方向",
+			"pass": true
+		},
+		{
+			"name": "growth card opens real specialization choices",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 比较升级前后",
+			"pass": true
+		},
+		{
+			"name": "choice leads to real before/after capability comparison",
+			"pass": true
+		},
+		{
+			"name": "upgrade preview shows current and proposed building portraits",
+			"pass": true
+		},
+		{
+			"name": "upgrade has an explicit fixed payment confirmation",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-upgrade-preview",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-upgrade-preview",
+			"pass": true
+		},
+		{
+			"name": "Escape returns upgrade preview to specialization choice",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 施工队列",
+			"pass": true
+		},
+		{
+			"name": "construction shows actual shared queue progress",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-construction",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-construction",
+			"pass": true
+		},
+		{
+			"name": "growth comparison and shared construction display preserve state",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 市场",
+			"pass": true
+		},
+		{
+			"name": "archive title and breadcrumbs visible: market",
+			"pass": true
+		},
+		{
+			"name": "archive return controls visible: market",
+			"pass": true
+		},
+		{
+			"name": "archive uses real graphical content: market",
+			"pass": true
+		},
+		{
+			"name": "all six authoritative buy/sell quotes are visible",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: food:buy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(175.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: food:buy",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: food:sell",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(175.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: food:sell",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: material:buy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(175.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: material:buy",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: material:sell",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(174.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: material:sell",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: goods:buy",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(175.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: goods:buy",
+			"pass": true
+		},
+		{
+			"name": "quote numeric label preserves exact authoritative value: goods:sell",
+			"pass": true
+		},
+		{
+			"detail": {
+				"label_size": "(174.0, 37.0)",
+				"lines": 1,
+				"text_advance": 66.0
+			},
+			"name": "quote digits fit one readable line: goods:sell",
+			"pass": true
+		},
+		{
+			"name": "market begins with real quotes and transport capacity",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-market",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-market",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: market material tab",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: market food tab",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: market buy direction",
+			"pass": true
+		},
+		{
+			"name": "market quantity editing pauses the authoritative city clock",
+			"pass": true
+		},
+		{
+			"name": "numeric field exists: order amount",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: order amount",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": 1.5,
+				"expected": 1.5
+			},
+			"name": "numeric field accepts keyboard value: order amount",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: uncommitted order amount",
+			"pass": true
+		},
+		{
+			"name": "uncommitted keyboard amount survives repeated frames while the desk pauses time",
+			"pass": true
+		},
+		{
+			"name": "numeric field exists: confirmed order amount",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: confirmed order amount",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": 1.5,
+				"expected": 1.5
+			},
+			"name": "numeric field accepts keyboard value: confirmed order amount",
+			"pass": true
+		},
+		{
+			"name": "numeric field exists: order limit",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: order limit",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": 2.5,
+				"expected": 2.5
+			},
+			"name": "numeric field accepts keyboard value: order limit",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: review real market order",
+			"pass": true
+		},
+		{
+			"name": "review order remains read only before confirmation",
+			"pass": true
+		},
+		{
+			"name": "market payment/order confirmation uses fixed footer",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-market-order",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-market-order",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: confirm trade order",
+			"pass": true
+		},
+		{
+			"name": "pointer confirmation creates exactly one actual order",
+			"pass": true
+		},
+		{
+			"name": "market keyboard controls reach actual order resource, direction and quantity",
+			"pass": true
+		},
+		{
+			"name": "creating an unfilled order does not fabricate a cash receipt",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: cancel exact open order",
+			"pass": true
+		},
+		{
+			"name": "cancel pointer marks exact order without an unexecuted cash movement",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: negative-price buy direction",
+			"pass": true
+		},
+		{
+			"name": "numeric field exists: negative-price buy amount",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: negative-price buy amount",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": 1.0,
+				"expected": 1.0
+			},
+			"name": "numeric field accepts keyboard value: negative-price buy amount",
+			"pass": true
+		},
+		{
+			"name": "numeric field exists: negative-price buy limit",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: negative-price buy limit",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": -3.70000000000005,
+				"expected": -3.7
+			},
+			"name": "numeric field accepts keyboard value: negative-price buy limit",
+			"pass": true
+		},
+		{
+			"name": "negative-price buy explains correct cash direction",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: review negative-price buy",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: confirm negative-price buy",
+			"pass": true
+		},
+		{
+			"name": "negative-price buy creates a real execution receipt",
+			"pass": true
+		},
+		{
+			"name": "negative-price buy cash delta agrees with actual wallet",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-market-negative-buy",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-market-negative-buy",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 已结束订单",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: open exact buy order receipt",
+			"pass": true
+		},
+		{
+			"name": "order opens its exact saved fill and capacity receipts",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-market-receipt-buy",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-market-receipt-buy",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: negative-price sell direction",
+			"pass": true
+		},
+		{
+			"name": "numeric field exists: negative-price sell amount",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: negative-price sell amount",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": 1.0,
+				"expected": 1.0
+			},
+			"name": "numeric field accepts keyboard value: negative-price sell amount",
+			"pass": true
+		},
+		{
+			"name": "numeric field exists: negative-price sell limit",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: negative-price sell limit",
+			"pass": true
+		},
+		{
+			"detail": {
+				"actual": -4.29999999999995,
+				"expected": -4.3
+			},
+			"name": "numeric field accepts keyboard value: negative-price sell limit",
+			"pass": true
+		},
+		{
+			"name": "negative-price sell explains correct cash direction",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: review negative-price sell",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: confirm negative-price sell",
+			"pass": true
+		},
+		{
+			"name": "negative-price sell creates a real execution receipt",
+			"pass": true
+		},
+		{
+			"name": "negative-price sell cash delta agrees with actual wallet",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-market-negative-sell",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-market-negative-sell",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 已结束订单",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: open exact sell order receipt",
+			"pass": true
+		},
+		{
+			"name": "order opens its exact saved fill and capacity receipts",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-market-receipt-sell",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-market-receipt-sell",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: discover theme through archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 主题与奖励",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 选择「工业基地」",
+			"pass": true
+		},
+		{
+			"name": "real archive action accepts city theme",
+			"pass": true
+		},
+		{
+			"name": "theme archive shows real stage track",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-theme",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-theme",
+			"pass": true
+		},
+		{
+			"name": "accepted theme has a single visible L1 card",
+			"pass": true
+		},
+		{
+			"name": "untimed theme does not invent a deadline",
+			"pass": true
+		},
+		{
+			"name": "over 90 percent progress receives attention state",
+			"pass": true
+		},
+		{
+			"name": "reduced motion disables progress breathing",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-05-theme-near-complete",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-05-theme-near-complete",
+			"pass": true
+		},
+		{
+			"name": "saved theme reward exposes L1 claim action",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-05b-theme-reward-ready",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-05b-theme-reward-ready",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: theme reward claim",
+			"pass": true
+		},
+		{
+			"name": "theme claim preserves an older annual reward in queue",
+			"pass": true
+		},
+		{
+			"name": "theme entry exposes the earlier annual reward required by FIFO",
+			"pass": true
+		},
+		{
+			"name": "theme entry explains why an earlier reward must be resolved",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-05b1-reward-queue-before-theme",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-05b1-reward-queue-before-theme",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 领取",
+			"pass": true
+		},
+		{
+			"name": "actual pointer claims the earlier annual reward without bypassing FIFO",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-05b2-matching-theme-reward",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-05b2-matching-theme-reward",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 领取",
+			"pass": true
+		},
+		{
+			"name": "theme reward becomes claimable after the earlier reward",
+			"pass": true
+		},
+		{
+			"name": "reward archive compares three actual persistent candidates",
+			"pass": true
+		},
+		{
+			"name": "three saved reward candidates each expose one actual choice action",
+			"pass": true
+		},
+		{
+			"detail": "[P: (376.0, 653.0), S: (355.0, 40.0)]",
+			"name": "reward choice action visible on initial comparison page: P03",
+			"pass": true
+		},
+		{
+			"detail": "[P: (779.0, 653.0), S: (355.0, 40.0)]",
+			"name": "reward choice action visible on initial comparison page: P01",
+			"pass": true
+		},
+		{
+			"detail": "[P: (1182.0, 653.0), S: (354.0, 40.0)]",
+			"name": "reward choice action visible on initial comparison page: P02",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-reward-three",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-reward-three",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 完整规则与副本说明",
+			"pass": true
+		},
+		{
+			"name": "reward disclosure preserves candidates, wallets and RNG",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 领取",
+			"pass": true
+		},
+		{
+			"name": "comparison claim resolves the actual saved reward",
+			"pass": true
+		},
+		{
+			"name": "installation fixture provides a real compatible manufacturing host",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: city archive",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 方案",
+			"pass": true
+		},
+		{
+			"name": "archive title and breadcrumbs visible: Bonus wallet",
+			"pass": true
+		},
+		{
+			"name": "archive return controls visible: Bonus wallet",
+			"pass": true
+		},
+		{
+			"name": "archive uses real graphical content: Bonus wallet",
+			"pass": true
+		},
+		{
+			"name": "wallet shows actual acquired Bonus copies as visual cards",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-bonus-wallet",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-bonus-wallet",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: choose actual P01 copy",
+			"pass": true
+		},
+		{
+			"name": "Bonus card leads to compatible hosts",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-bonus-hosts",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-bonus-hosts",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: preview P01 in actual manufacturing slot",
+			"pass": true
+		},
+		{
+			"name": "host/slot pointer opens explicit install preview",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 完整规则与安装资格",
+			"pass": true
+		},
+		{
+			"name": "copy, host, slot and rule preview do not consume a copy or mutate RNG",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: desk-bonus-install",
+			"pass": true
+		},
+		{
+			"name": "capture: desk-bonus-install",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 确认消耗 1 份并安装",
+			"pass": true
+		},
+		{
+			"name": "installation confirmation consumes exactly one real copy",
+			"pass": true
+		},
+		{
+			"name": "actual installation fills the selected stable slot",
+			"pass": true
+		},
+		{
+			"name": "L1 caps real severe alarm cards at two",
+			"pass": true
+		},
+		{
+			"name": "excess severe alarms move into an accurate count",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-05c-severe-alerts",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-05c-severe-alerts",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: locate first severe source",
+			"pass": true
+		},
+		{
+			"name": "severe alarm pointer locates exact entity and analysis layer",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: all severe alarms",
+			"pass": true
+		},
+		{
+			"name": "overflow opens full issue archive",
+			"pass": true
+		},
+		{
+			"name": "empty material stock without an active deficit does not invent a red alarm",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: choose homestead starting building",
+			"pass": true
+		},
+		{
+			"name": "empty plot pointer starts local placement context",
+			"pass": true
+		},
+		{
+			"name": "empty site uses its local bubble and no building inspector",
+			"pass": true
+		},
+		{
+			"name": "site bubble shows at most two preview quantities",
+			"pass": true
+		},
+		{
+			"name": "site has one compare-tender primary",
+			"pass": true
+		},
+		{
+			"name": "bubble does not cover the selected tile footprint",
+			"pass": true
+		},
+		{
+			"name": "site preview preserves real material and construction costs",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-06-local-site",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-06-local-site",
+			"pass": true
+		},
+		{
+			"name": "site bubble follows camera while staying on screen",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: site prediction sources",
+			"pass": true
+		},
+		{
+			"name": "site prediction opens explicit L3 source explanation",
+			"pass": true
+		},
+		{
+			"name": "site planning, camera and forecast details preserve state and RNG",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: compare operator tenders",
+			"pass": true
+		},
+		{
+			"name": "operator comparison opens deliberate L3 workbench",
+			"pass": true
+		},
+		{
+			"name": "operator candidates are generated by real tender command",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-06b-operator-comparison",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-06b-operator-comparison",
+			"pass": true
+		},
+		{
+			"name": "L1 legend visible for terrain",
+			"pass": true
+		},
+		{
+			"name": "L1 legend visible for population",
+			"pass": true
+		},
+		{
+			"name": "L1 legend visible for food",
+			"pass": true
+		},
+		{
+			"name": "L1 legend visible for energy",
+			"pass": true
+		},
+		{
+			"name": "L1 legend visible for operator",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -4,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -4,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -4,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -4,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -4,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -3,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -3,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -3,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -3,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -3,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -2,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -2,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -2,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -2,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -2,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -1,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -1,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -1,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -1,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: -1,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 0,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 1,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 1,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 1,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 1,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 2,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 2,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 2,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 3,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 3,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 0.65: 4,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -4,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -4,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -4,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -4,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -4,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -3,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -3,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -3,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -3,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -3,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -2,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -2,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -2,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -2,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -2,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -1,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -1,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -1,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -1,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: -1,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 0,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 1,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 1,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 1,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 1,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 2,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 2,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 2,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 3,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 3,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.00: 4,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -4,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -4,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -4,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -4,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -4,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -3,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -3,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -3,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -3,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -3,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -2,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -2,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -2,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -2,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -2,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -1,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -1,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -1,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -1,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: -1,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 0,4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 1,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 1,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 1,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 1,3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 2,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 2,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 2,2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 3,0",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 3,1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "hex hit remains aligned at zoom 1.70: 4,0",
+			"pass": true
+		},
+		{
+			"name": "layers, legend, zoom and hit tests preserve exact authoritative snapshot",
+			"pass": true
+		},
+		{
+			"name": "rendering never consumes gameplay RNG",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: burn time control",
+			"pass": true
+		},
+		{
+			"name": "pointer selects burn mode",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: stop time control",
+			"pass": true
+		},
+		{
+			"name": "stop submits exact pending active interval",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: pause time control",
+			"pass": true
+		},
+		{
+			"name": "pause button reaches actual clock setting",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: homestead",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 1,
+				"width_per_radius": 0.879999995231628
+			},
+			"name": "main building leaves inter-tile courtyard space: homestead",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: homestead",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: homestead",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: workshop",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 1,
+				"width_per_radius": 0.879999935626984
+			},
+			"name": "main building leaves inter-tile courtyard space: workshop",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: workshop",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: workshop",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: workshop",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 1,
+				"width_per_radius": 0.879999935626984
+			},
+			"name": "main building leaves inter-tile courtyard space: workshop",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: workshop",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: workshop",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: medical_clinic",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 2,
+				"width_per_radius": 1.04000008106232
+			},
+			"name": "main building leaves inter-tile courtyard space: medical_clinic",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: medical_clinic",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: medical_clinic",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: primary_school",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 2,
+				"width_per_radius": 1.03999996185303
+			},
+			"name": "main building leaves inter-tile courtyard space: primary_school",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: primary_school",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: primary_school",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: commercial_center",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.22000002861023
+			},
+			"name": "main building leaves inter-tile courtyard space: commercial_center",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: commercial_center",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: commercial_center",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: freight",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.21999990940094
+			},
+			"name": "main building leaves inter-tile courtyard space: freight",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: freight",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: freight",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: neighborhood",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 1,
+				"width_per_radius": 0.879999995231628
+			},
+			"name": "main building leaves inter-tile courtyard space: neighborhood",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: neighborhood",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: neighborhood",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: agriculture",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 2,
+				"width_per_radius": 1.03999996185303
+			},
+			"name": "main building leaves inter-tile courtyard space: agriculture",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: agriculture",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: agriculture",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: power_station",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 2,
+				"width_per_radius": 1.03999996185303
+			},
+			"name": "main building leaves inter-tile courtyard space: power_station",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: power_station",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: power_station",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: manufacturing",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.22000002861023
+			},
+			"name": "main building leaves inter-tile courtyard space: manufacturing",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: manufacturing",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: manufacturing",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: residence",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 2,
+				"width_per_radius": 1.04000008106232
+			},
+			"name": "main building leaves inter-tile courtyard space: residence",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: residence",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: residence",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: public_center",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 2,
+				"width_per_radius": 1.03999996185303
+			},
+			"name": "main building leaves inter-tile courtyard space: public_center",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: public_center",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: public_center",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: extraction",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 2,
+				"width_per_radius": 1.04000008106232
+			},
+			"name": "main building leaves inter-tile courtyard space: extraction",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: extraction",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: extraction",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: yard",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 2,
+				"width_per_radius": 1.03999996185303
+			},
+			"name": "main building leaves inter-tile courtyard space: yard",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: yard",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: yard",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: advanced_residence",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.22000002861023
+			},
+			"name": "main building leaves inter-tile courtyard space: advanced_residence",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: advanced_residence",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: advanced_residence",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: modern_agriculture",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.22000002861023
+			},
+			"name": "main building leaves inter-tile courtyard space: modern_agriculture",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: modern_agriculture",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: modern_agriculture",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: garden",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.22000002861023
+			},
+			"name": "main building leaves inter-tile courtyard space: garden",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: garden",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: garden",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: hospital",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.22000002861023
+			},
+			"name": "main building leaves inter-tile courtyard space: hospital",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: hospital",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: hospital",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: secondary_school",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.22000002861023
+			},
+			"name": "main building leaves inter-tile courtyard space: secondary_school",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: secondary_school",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: secondary_school",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: power_plant",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.21999990940094
+			},
+			"name": "main building leaves inter-tile courtyard space: power_plant",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: power_plant",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: power_plant",
+			"pass": true
+		},
+		{
+			"name": "authored building asset retained: material_factory",
+			"pass": true
+		},
+		{
+			"detail": {
+				"tier": 3,
+				"width_per_radius": 1.22000002861023
+			},
+			"name": "main building leaves inter-tile courtyard space: material_factory",
+			"pass": true
+		},
+		{
+			"name": "opaque bounds lie within building texture: material_factory",
+			"pass": true
+		},
+		{
+			"name": "visible building has a real opaque pointer target: material_factory",
+			"pass": true
+		},
+		{
+			"name": "all 21 growth nodes remain represented",
+			"pass": true
+		},
+		{
+			"detail": [
+				0.879999965429306,
+				1.04000000655651,
+				1.22000000476837
+			],
+			"name": "growth tiers remain visually distinguishable",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -4,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -4,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -4,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -4,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -4,4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -3,4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -2,4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,-3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: -1,4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,-4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,-3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 0,4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,-4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,-3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 1,3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 2,-4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 2,-3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 2,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 2,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 2,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 2,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 2,2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 3,-4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 3,-3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 3,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 3,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 3,0",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 3,1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 4,-4",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 4,-3",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 4,-2",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 4,-1",
+			"pass": true
+		},
+		{
+			"name": "terrain symbol has a real trait source: 4,0",
+			"pass": true
+		},
+		{
+			"name": "asset geometry and terrain symbols are pure presentation",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-07-all-growth-nodes",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-07-all-growth-nodes",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-07b-neighborhood-connections",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-07b-neighborhood-connections",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: archive after budget exhaustion",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 城市",
+			"pass": true
+		},
+		{
+			"name": "city archive exposes naming command after DT zero",
+			"pass": true
+		},
+		{
+			"name": "pointer target available: 保存城市名称",
+			"pass": true
+		},
+		{
+			"name": "a real rejected empty-name command displays its reason on screen",
+			"pass": true
+		},
+		{
+			"name": "command error does not cover the rejected primary action",
+			"pass": true
+		},
+		{
+			"name": "command error does not obscure the four permanent state controls",
+			"pass": true
+		},
+		{
+			"name": "failed name command preserves city name and naming right",
+			"pass": true
+		},
+		{
+			"name": "rejected UI command leaves authoritative state unchanged",
+			"pass": true
+		},
+		{
+			"name": "1080p framebuffer: reset-08-command-error-feedback",
+			"pass": true
+		},
+		{
+			"name": "capture: reset-08-command-error-feedback",
+			"pass": true
+		}
+	],
+	"display_server": "X11",
+	"evidence_type": "scripted native pointer fixtures; no human or natural playthrough claim",
+	"failed": 0,
+	"fixture_ids": {
+		"abnormal": "B000020",
+		"commercial": "B000012",
+		"construction": "B000016",
+		"education": "B000010",
+		"logistics": "B000014",
+		"medical": "B000008",
+		"paused": "B000018",
+		"production": "B000006",
+		"residence": "B000001"
+	},
+	"input_actions": [
+		{
+			"kind": "native_pointer",
+			"target": "map building B000001",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000006",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000008",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000010",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000012",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000014",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "freight market",
+			"x": 1720.0,
+			"y": 655.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000016",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "construction priority",
+			"x": 1720.0,
+			"y": 655.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000018",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "restore paused building",
+			"x": 1720.0,
+			"y": 655.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000020",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000006",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "building details",
+			"x": 1720.0,
+			"y": 708.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "complete building sources",
+			"x": 1381.0,
+			"y": 433.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "expand exact building contribution ledger",
+			"x": 1272.0,
+			"y": 686.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "service.entertainment =",
+			"x": 956.0,
+			"y": 796.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "完整 Field 样本与来源",
+			"x": 956.0,
+			"y": 485.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "building slots and Bonus",
+			"x": 959.5,
+			"y": 433.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "部署许可",
+			"x": 541.5,
+			"y": 698.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "查看部署许可",
+			"x": 960.0,
+			"y": 866.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000006",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "return to building archive",
+			"x": 1720.0,
+			"y": 708.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "operations and workforce",
+			"x": 538.5,
+			"y": 433.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "workforce priority",
+			"x": 836.5,
+			"y": 797.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "building management",
+			"x": 1534.0,
+			"y": 849.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "拆除建筑",
+			"x": 960.0,
+			"y": 767.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000001",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "L3 archive for residence",
+			"x": 1720.0,
+			"y": 708.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000008",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "L3 archive for medical",
+			"x": 1720.0,
+			"y": 708.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "map building B000014",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "L3 archive for logistics",
+			"x": 1720.0,
+			"y": 708.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "财政",
+			"x": 984.0,
+			"y": 298.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "return from 财政",
+			"x": 1508.0,
+			"y": 300.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "人口",
+			"x": 1408.0,
+			"y": 298.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "return from 人口",
+			"x": 1508.0,
+			"y": 319.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "物资",
+			"x": 560.0,
+			"y": 494.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "return from 物资",
+			"x": 1508.0,
+			"y": 287.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "建设",
+			"x": 984.0,
+			"y": 494.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "return from 建设",
+			"x": 1508.0,
+			"y": 287.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "市场",
+			"x": 1408.0,
+			"y": 494.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "return from 市场",
+			"x": 1508.0,
+			"y": 287.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "政策",
+			"x": 560.0,
+			"y": 690.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "return from 政策",
+			"x": 1508.0,
+			"y": 287.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "方案",
+			"x": 984.0,
+			"y": 690.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "return from 方案",
+			"x": 1508.0,
+			"y": 449.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "graphical archive index",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "财政",
+			"x": 984.0,
+			"y": 298.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "收入构成",
+			"x": 566.0,
+			"y": 760.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "展开全部来源",
+			"x": 982.0,
+			"y": 766.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "expand full fiscal ledger",
+			"x": 960.0,
+			"y": 716.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "历史流水",
+			"x": 1398.0,
+			"y": 760.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "物资",
+			"x": 560.0,
+			"y": 494.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "material archive tab",
+			"x": 802.0,
+			"y": 356.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "供给来源",
+			"x": 565.0,
+			"y": 926.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "全部来源与精确记录",
+			"x": 982.0,
+			"y": 794.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "完整来源记录",
+			"x": 960.0,
+			"y": 756.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "电力",
+			"x": 1418.0,
+			"y": 356.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "人口",
+			"x": 1408.0,
+			"y": 298.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "生活需求",
+			"x": 1398.0,
+			"y": 828.5
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "居住分布",
+			"x": 566.0,
+			"y": 828.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "查看全部住区",
+			"x": 978.0,
+			"y": 916.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "政策",
+			"x": 560.0,
+			"y": 690.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "preview policy jobs_merit",
+			"x": 964.0,
+			"y": 883.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "完整规则与适用范围",
+			"x": 978.0,
+			"y": 891.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "完整语法与条件",
+			"x": 960.0,
+			"y": 724.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "建设",
+			"x": 984.0,
+			"y": 494.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "选择专业方向",
+			"x": 646.0,
+			"y": 835.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "比较升级前后",
+			"x": 646.0,
+			"y": 929.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "施工队列",
+			"x": 404.5,
+			"y": 356.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "市场",
+			"x": 1408.0,
+			"y": 494.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "market material tab",
+			"x": 956.5,
+			"y": 631.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "market food tab",
+			"x": 543.0,
+			"y": 631.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "market buy direction",
+			"x": 646.0,
+			"y": 929.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "order amount",
+			"x": 647.0,
+			"y": 740.0
+		},
+		{
+			"entered": "1.5",
+			"kind": "native_key",
+			"target": "order amount"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "uncommitted order amount",
+			"x": 647.0,
+			"y": 740.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "confirmed order amount",
+			"x": 647.0,
+			"y": 740.0
+		},
+		{
+			"entered": "1.5",
+			"kind": "native_key",
+			"target": "confirmed order amount"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "order limit",
+			"x": 1255.0,
+			"y": 740.0
+		},
+		{
+			"entered": "2.5",
+			"kind": "native_key",
+			"target": "order limit"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "review real market order",
+			"x": 1396.0,
+			"y": 984.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "confirm trade order",
+			"x": 1396.0,
+			"y": 998.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "cancel exact open order",
+			"x": 1475.0,
+			"y": 929.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "negative-price buy direction",
+			"x": 646.0,
+			"y": 929.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "negative-price buy amount",
+			"x": 647.0,
+			"y": 740.0
+		},
+		{
+			"entered": "1.0",
+			"kind": "native_key",
+			"target": "negative-price buy amount"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "negative-price buy limit",
+			"x": 1255.0,
+			"y": 740.0
+		},
+		{
+			"entered": "-3.7",
+			"kind": "native_key",
+			"target": "negative-price buy limit"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "review negative-price buy",
+			"x": 1396.0,
+			"y": 984.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "confirm negative-price buy",
+			"x": 1396.0,
+			"y": 998.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "已结束订单",
+			"x": 956.0,
+			"y": 928.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "open exact buy order receipt",
+			"x": 1460.5,
+			"y": 929.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "negative-price sell direction",
+			"x": 1266.0,
+			"y": 929.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "negative-price sell amount",
+			"x": 647.0,
+			"y": 740.0
+		},
+		{
+			"entered": "1.0",
+			"kind": "native_key",
+			"target": "negative-price sell amount"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "negative-price sell limit",
+			"x": 1255.0,
+			"y": 740.0
+		},
+		{
+			"entered": "-4.3",
+			"kind": "native_key",
+			"target": "negative-price sell limit"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "review negative-price sell",
+			"x": 1396.0,
+			"y": 984.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "confirm negative-price sell",
+			"x": 1396.0,
+			"y": 998.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "已结束订单",
+			"x": 956.0,
+			"y": 928.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "open exact sell order receipt",
+			"x": 1460.5,
+			"y": 929.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "discover theme through archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "主题与奖励",
+			"x": 560.0,
+			"y": 298.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "选择「工业基地」",
+			"x": 543.0,
+			"y": 586.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "theme reward claim",
+			"x": 1727.0,
+			"y": 299.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "领取",
+			"x": 956.0,
+			"y": 818.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "领取",
+			"x": 956.0,
+			"y": 673.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "完整规则与副本说明",
+			"x": 553.5,
+			"y": 928.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "领取",
+			"x": 553.5,
+			"y": 615.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "city archive",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "方案",
+			"x": 984.0,
+			"y": 690.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "choose actual P01 copy",
+			"x": 544.0,
+			"y": 632.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "preview P01 in actual manufacturing slot",
+			"x": 1491.59997558594,
+			"y": 924.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "完整规则与安装资格",
+			"x": 956.0,
+			"y": 1009.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "确认消耗 1 份并安装",
+			"x": 956.0,
+			"y": 1010.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "locate first severe source",
+			"x": 193.0,
+			"y": 176.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "all severe alarms",
+			"x": 193.0,
+			"y": 296.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "choose homestead starting building",
+			"x": 791.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "empty plot 1,-2",
+			"x": 950.0,
+			"y": 540.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "site prediction sources",
+			"x": 1309.92565917969,
+			"y": 710.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "compare operator tenders",
+			"x": 1310.42565917969,
+			"y": 660.0
+		},
+		{
+			"kind": "native_key",
+			"target": "Escape"
+		},
+		{
+			"kind": "native_pointer",
+			"target": "burn time control",
+			"x": 1822.5,
+			"y": 94.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "stop time control",
+			"x": 1828.0,
+			"y": 56.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "pause time control",
+			"x": 1858.0,
+			"y": 52.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "archive after budget exhaustion",
+			"x": 1094.0,
+			"y": 1016.0
+		},
+		{
+			"kind": "native_pointer",
+			"target": "城市",
+			"x": 1408.0,
+			"y": 690.5
+		},
+		{
+			"kind": "native_pointer",
+			"target": "保存城市名称",
+			"x": 646.0,
+			"y": 928.0
+		}
+	],
+	"passed": 977,
+	"renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+	"resolution": "1920x1080",
+	"source_fingerprint": "44474ec3dd5fe5f106ec01c35fd2cdae1a8dd714f9dda478d39f5d8ea0f96b7a"
+}

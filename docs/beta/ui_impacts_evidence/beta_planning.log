@@ -1,0 +1,46 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS no order forecast contains no imported food
+BETA PLANNING PASS real market API accepts test import
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS placing order changes real forecast import before any live tick
+BETA PLANNING PASS real clock API switches to burn without time advance
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS switching to burn immediately lowers per-local-step external receipts
+BETA PLANNING PASS mode-specific forecast does not reuse normal snapshot
+BETA PLANNING PASS switch back to normal succeeds
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS switching back restores full normal external throughput forecast
+BETA PLANNING PASS real market API cancels unfilled order
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS cancelling order immediately removes forecast delivery
+BETA PLANNING PASS unchanged city reuses its snapshot without invalidation or mutation
+BETA PLANNING PASS inventory withdrawal uses real game inventory path
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS same-revision inventory withdrawal changes forecast by actual resource loss
+BETA PLANNING PASS select agriculture through public API
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS theme command really delivers five food
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS theme delivery refreshes predicted inventory before next live tick
+BETA PLANNING PASS next-step prediction never repeats completed commission delivery
+BETA PLANNING PASS one-time delivery is not extrapolated as sustained food consumption
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS paid event uses actual currency command
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS event payment immediately reduces affordable forecast imports
+BETA PLANNING PASS one-step preview commits valid simulation only in clone
+BETA PLANNING PASS forecast preserves player stock orders RNG and full saved state
+BETA PLANNING PASS different live game cannot reuse prior city's cached order forecast
+BETA PLANNING RESULT 43/43 passed

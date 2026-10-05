@@ -1,0 +1,10 @@
+{
+  "finished_utc_epoch": 1791195013.344026,
+  "source_unchanged": true,
+  "changed_files": [],
+  "fingerprint": "44474ec3dd5fe5f106ec01c35fd2cdae1a8dd714f9dda478d39f5d8ea0f96b7a",
+  "passed": 977,
+  "failed": 0,
+  "captures": 57,
+  "native_input_actions": 154
+}

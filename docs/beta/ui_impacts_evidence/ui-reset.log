@@ -1,0 +1,983 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+UI RESET PASS native display server is active
+UI RESET PASS only contracted 1920x1080 desktop resolution
+UI RESET PASS actual app and map fill the native viewport
+UI RESET PASS desktop starts fullscreen
+UI RESET PASS L0 contains exactly DT, population, food, time
+UI RESET PASS finance is not a permanent L0 status
+UI RESET PASS material, goods and power dock removed from permanent HUD
+UI RESET PASS no empty theme card before accepting a theme
+UI RESET PASS L0 item fits 1080p: population
+UI RESET PASS L0 item fits 1080p: food
+UI RESET PASS L0 item fits 1080p: time
+UI RESET PASS L0 item fits 1080p: dt
+UI RESET PASS all four time controls remain available
+UI RESET PASS visible time control normal
+UI RESET PASS visible time control observe
+UI RESET PASS visible time control advance
+UI RESET PASS visible time control burn
+UI RESET PASS 1080p framebuffer: reset-01-city-overview
+UI RESET PASS capture: reset-01-city-overview
+UI RESET PASS map pointer selects expected entity B000001
+UI RESET PASS L2 has at most three graphical indicators: residence
+UI RESET PASS L2 has exactly one primary action: residence
+UI RESET PASS fixed primary action fits 1080p: residence
+UI RESET PASS primary action is clear of time controller: residence
+UI RESET PASS L2 consumes current snapshot identity: residence
+UI RESET PASS model and visible graphic counts agree: residence
+UI RESET PASS building portrait visible: residence
+UI RESET PASS low weight details reachable: residence
+UI RESET PASS residence has occupancy, livability and population
+UI RESET PASS residential number comes from real hosted population
+UI RESET PASS missing living receipts show unknown rather than fabricated zero
+UI RESET PASS 1080p framebuffer: reset-02-residence-unknown
+UI RESET PASS capture: reset-02-residence-unknown
+UI RESET PASS real zero receipts remain a zero warning
+UI RESET PASS 1080p framebuffer: reset-02-residence-zero
+UI RESET PASS capture: reset-02-residence-zero
+UI RESET PASS 1080p framebuffer: reset-02-residence
+UI RESET PASS capture: reset-02-residence
+UI RESET PASS map pointer selects expected entity B000006
+UI RESET PASS L2 has at most three graphical indicators: production
+UI RESET PASS L2 has exactly one primary action: production
+UI RESET PASS fixed primary action fits 1080p: production
+UI RESET PASS primary action is clear of time controller: production
+UI RESET PASS L2 consumes current snapshot identity: production
+UI RESET PASS model and visible graphic counts agree: production
+UI RESET PASS building portrait visible: production
+UI RESET PASS low weight details reachable: production
+UI RESET PASS 1080p framebuffer: reset-02-production
+UI RESET PASS capture: reset-02-production
+UI RESET PASS map pointer selects expected entity B000008
+UI RESET PASS L2 has at most three graphical indicators: medical
+UI RESET PASS L2 has exactly one primary action: medical
+UI RESET PASS fixed primary action fits 1080p: medical
+UI RESET PASS primary action is clear of time controller: medical
+UI RESET PASS L2 consumes current snapshot identity: medical
+UI RESET PASS model and visible graphic counts agree: medical
+UI RESET PASS building portrait visible: medical
+UI RESET PASS low weight details reachable: medical
+UI RESET PASS service uses service-specific context: medical
+UI RESET PASS service graphic reflects actual service kind: medical
+UI RESET PASS 1080p framebuffer: reset-02-medical
+UI RESET PASS capture: reset-02-medical
+UI RESET PASS map pointer selects expected entity B000010
+UI RESET PASS L2 has at most three graphical indicators: education
+UI RESET PASS L2 has exactly one primary action: education
+UI RESET PASS fixed primary action fits 1080p: education
+UI RESET PASS primary action is clear of time controller: education
+UI RESET PASS L2 consumes current snapshot identity: education
+UI RESET PASS model and visible graphic counts agree: education
+UI RESET PASS building portrait visible: education
+UI RESET PASS low weight details reachable: education
+UI RESET PASS service uses service-specific context: education
+UI RESET PASS service graphic reflects actual service kind: education
+UI RESET PASS 1080p framebuffer: reset-02-education
+UI RESET PASS capture: reset-02-education
+UI RESET PASS map pointer selects expected entity B000012
+UI RESET PASS L2 has at most three graphical indicators: commercial
+UI RESET PASS L2 has exactly one primary action: commercial
+UI RESET PASS fixed primary action fits 1080p: commercial
+UI RESET PASS primary action is clear of time controller: commercial
+UI RESET PASS L2 consumes current snapshot identity: commercial
+UI RESET PASS model and visible graphic counts agree: commercial
+UI RESET PASS building portrait visible: commercial
+UI RESET PASS low weight details reachable: commercial
+UI RESET PASS service uses service-specific context: commercial
+UI RESET PASS service graphic reflects actual service kind: commercial
+UI RESET PASS 1080p framebuffer: reset-02-commercial
+UI RESET PASS capture: reset-02-commercial
+UI RESET PASS map pointer selects expected entity B000014
+UI RESET PASS L2 has at most three graphical indicators: logistics
+UI RESET PASS L2 has exactly one primary action: logistics
+UI RESET PASS fixed primary action fits 1080p: logistics
+UI RESET PASS primary action is clear of time controller: logistics
+UI RESET PASS L2 consumes current snapshot identity: logistics
+UI RESET PASS model and visible graphic counts agree: logistics
+UI RESET PASS building portrait visible: logistics
+UI RESET PASS low weight details reachable: logistics
+UI RESET PASS 1080p framebuffer: reset-02-logistics
+UI RESET PASS capture: reset-02-logistics
+UI RESET PASS freight shows all three actual inventory bars
+UI RESET PASS pointer target available: freight market
+UI RESET PASS freight primary opens real orders and receipts
+UI RESET PASS all six authoritative buy/sell quotes are visible
+UI RESET PASS quote numeric label preserves exact authoritative value: food:buy
+UI RESET PASS quote digits fit one readable line: food:buy
+UI RESET PASS quote numeric label preserves exact authoritative value: food:sell
+UI RESET PASS quote digits fit one readable line: food:sell
+UI RESET PASS quote numeric label preserves exact authoritative value: material:buy
+UI RESET PASS quote digits fit one readable line: material:buy
+UI RESET PASS quote numeric label preserves exact authoritative value: material:sell
+UI RESET PASS quote digits fit one readable line: material:sell
+UI RESET PASS quote numeric label preserves exact authoritative value: goods:buy
+UI RESET PASS quote digits fit one readable line: goods:buy
+UI RESET PASS quote numeric label preserves exact authoritative value: goods:sell
+UI RESET PASS quote digits fit one readable line: goods:sell
+UI RESET PASS 1080p framebuffer: reset-03-market
+UI RESET PASS capture: reset-03-market
+UI RESET PASS map pointer selects expected entity B000016
+UI RESET PASS L2 has at most three graphical indicators: construction
+UI RESET PASS L2 has exactly one primary action: construction
+UI RESET PASS fixed primary action fits 1080p: construction
+UI RESET PASS primary action is clear of time controller: construction
+UI RESET PASS L2 consumes current snapshot identity: construction
+UI RESET PASS model and visible graphic counts agree: construction
+UI RESET PASS building portrait visible: construction
+UI RESET PASS low weight details reachable: construction
+UI RESET PASS 1080p framebuffer: reset-02-construction
+UI RESET PASS capture: reset-02-construction
+UI RESET PASS construction offers priority adjustment
+UI RESET PASS pointer target available: construction priority
+UI RESET PASS construction priority management is reachable
+UI RESET PASS map pointer selects expected entity B000018
+UI RESET PASS L2 has at most three graphical indicators: paused
+UI RESET PASS L2 has exactly one primary action: paused
+UI RESET PASS fixed primary action fits 1080p: paused
+UI RESET PASS primary action is clear of time controller: paused
+UI RESET PASS L2 consumes current snapshot identity: paused
+UI RESET PASS model and visible graphic counts agree: paused
+UI RESET PASS building portrait visible: paused
+UI RESET PASS low weight details reachable: paused
+UI RESET PASS 1080p framebuffer: reset-02-paused
+UI RESET PASS capture: reset-02-paused
+UI RESET PASS paused context suppresses normal operation metrics
+UI RESET PASS paused building offers restore
+UI RESET PASS pointer target available: restore paused building
+UI RESET PASS restore action reaches the actual game command
+UI RESET PASS map pointer selects expected entity B000020
+UI RESET PASS L2 has at most three graphical indicators: abnormal
+UI RESET PASS L2 has exactly one primary action: abnormal
+UI RESET PASS fixed primary action fits 1080p: abnormal
+UI RESET PASS primary action is clear of time controller: abnormal
+UI RESET PASS L2 consumes current snapshot identity: abnormal
+UI RESET PASS model and visible graphic counts agree: abnormal
+UI RESET PASS building portrait visible: abnormal
+UI RESET PASS low weight details reachable: abnormal
+UI RESET PASS 1080p framebuffer: reset-02-abnormal
+UI RESET PASS capture: reset-02-abnormal
+UI RESET PASS shortage is not mislabeled as restoration
+UI RESET PASS map pointer selects expected entity B000006
+UI RESET PASS pointer target available: building details
+UI RESET PASS building archive opened through L2 details
+UI RESET PASS 1080p framebuffer: reset-04-building-archive
+UI RESET PASS capture: reset-04-building-archive
+UI RESET PASS production archive shows actual input/output relationship
+UI RESET PASS 1080p framebuffer: desk-building-overview
+UI RESET PASS capture: desk-building-overview
+UI RESET PASS pointer target available: complete building sources
+UI RESET PASS source, rule and relation detail remains in archive
+UI RESET PASS 1080p framebuffer: reset-04b-sources
+UI RESET PASS capture: reset-04b-sources
+UI RESET PASS 1080p framebuffer: desk-building-sources
+UI RESET PASS capture: desk-building-sources
+UI RESET PASS exact contribution ledger starts collapsed
+UI RESET PASS pointer target available: expand exact building contribution ledger
+UI RESET PASS disclosure exposes exact activity receipt from the current snapshot
+UI RESET PASS activity disclosure keeps original structured records
+UI RESET PASS pointer target available: service.entertainment =
+UI RESET PASS exact rule chain can be expanded by pointer
+UI RESET PASS expanded rule chain preserves complete current compiled trace
+UI RESET PASS pointer target available: 完整 Field 样本与来源
+UI RESET PASS expanded Field source preserves source IDs, path and sample values
+UI RESET PASS pointer target available: building slots and Bonus
+UI RESET PASS slot management remains reachable
+UI RESET PASS 1080p framebuffer: desk-building-slots
+UI RESET PASS capture: desk-building-slots
+UI RESET PASS opening building archive does not mutate simulation or RNG
+UI RESET PASS pointer target available: 部署许可
+UI RESET PASS slot click reaches actual installation detail
+UI RESET PASS pointer target available: 查看部署许可
+UI RESET PASS slot detail reaches deployable Bonus inventory
+UI RESET PASS map pointer selects expected entity B000006
+UI RESET PASS pointer target available: return to building archive
+UI RESET PASS pointer target available: operations and workforce
+UI RESET PASS pointer target available: workforce priority
+UI RESET PASS archived workforce priority invokes game command
+UI RESET PASS pointer target available: building management
+UI RESET PASS management retains 暂停运行
+UI RESET PASS management retains 查看建筑成长
+UI RESET PASS management retains 查看部署许可
+UI RESET PASS management retains 市场与订单
+UI RESET PASS management retains 政策与制度
+UI RESET PASS management retains 运营商档案
+UI RESET PASS management retains 拆除建筑
+UI RESET PASS pointer target available: 拆除建筑
+UI RESET PASS demolition remains a separate confirmation
+UI RESET PASS Escape exits demolition without deleting building
+UI RESET PASS map pointer selects expected entity B000001
+UI RESET PASS pointer target available: L3 archive for residence
+UI RESET PASS different building type has graphical archive: residence
+UI RESET PASS typed building archive reads exact current snapshot: residence
+UI RESET PASS typed building archive is read only: residence
+UI RESET PASS 1080p framebuffer: desk-building-residence
+UI RESET PASS capture: desk-building-residence
+UI RESET PASS map pointer selects expected entity B000008
+UI RESET PASS pointer target available: L3 archive for medical
+UI RESET PASS different building type has graphical archive: medical
+UI RESET PASS typed building archive reads exact current snapshot: medical
+UI RESET PASS typed building archive is read only: medical
+UI RESET PASS 1080p framebuffer: desk-building-medical
+UI RESET PASS capture: desk-building-medical
+UI RESET PASS map pointer selects expected entity B000014
+UI RESET PASS pointer target available: L3 archive for logistics
+UI RESET PASS different building type has graphical archive: logistics
+UI RESET PASS typed building archive reads exact current snapshot: logistics
+UI RESET PASS typed building archive is read only: logistics
+UI RESET PASS 1080p framebuffer: desk-building-logistics
+UI RESET PASS capture: desk-building-logistics
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 财政
+UI RESET PASS L3 archive reaches 财政
+UI RESET PASS L3 return fits 1080p: 财政
+UI RESET PASS pointer target available: return from 财政
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 人口
+UI RESET PASS L3 archive reaches 人口
+UI RESET PASS L3 return fits 1080p: 人口
+UI RESET PASS pointer target available: return from 人口
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 物资
+UI RESET PASS L3 archive reaches 物资
+UI RESET PASS L3 return fits 1080p: 物资
+UI RESET PASS pointer target available: return from 物资
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 建设
+UI RESET PASS L3 archive reaches 建设
+UI RESET PASS L3 return fits 1080p: 建设
+UI RESET PASS pointer target available: return from 建设
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 市场
+UI RESET PASS L3 archive reaches 市场
+UI RESET PASS L3 return fits 1080p: 市场
+UI RESET PASS pointer target available: return from 市场
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 政策
+UI RESET PASS L3 archive reaches 政策
+UI RESET PASS L3 return fits 1080p: 政策
+UI RESET PASS pointer target available: return from 政策
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 方案
+UI RESET PASS L3 archive reaches 方案
+UI RESET PASS L3 return fits 1080p: 方案
+UI RESET PASS pointer target available: return from 方案
+UI RESET PASS pointer target available: graphical archive index
+UI RESET PASS 1080p framebuffer: desk-archive-index
+UI RESET PASS capture: desk-archive-index
+UI RESET PASS pointer target available: 财政
+UI RESET PASS archive title and breadcrumbs visible: finance
+UI RESET PASS archive return controls visible: finance
+UI RESET PASS archive uses real graphical content: finance
+UI RESET PASS archive uses current snapshot identity: finance
+UI RESET PASS graphical meter available: 收入
+UI RESET PASS graphical meter reads real value: 收入
+UI RESET PASS graphical meter reads real capacity: 收入
+UI RESET PASS graphical meter available: 支出
+UI RESET PASS graphical meter reads real value: 支出
+UI RESET PASS graphical meter reads real capacity: 支出
+UI RESET PASS 1080p framebuffer: desk-finance-overview
+UI RESET PASS capture: desk-finance-overview
+UI RESET PASS pointer target available: 收入构成
+UI RESET PASS budget graph leads to income sources
+UI RESET PASS pointer target available: 展开全部来源
+UI RESET PASS budget source breakdown leads to exact ledger
+UI RESET PASS 1080p framebuffer: desk-finance-sources
+UI RESET PASS capture: desk-finance-sources
+UI RESET PASS full fiscal ledger starts collapsed
+UI RESET PASS pointer target available: expand full fiscal ledger
+UI RESET PASS fiscal ledger is explicitly expandable
+UI RESET PASS Escape returns budget one level
+UI RESET PASS second Escape returns budget overview
+UI RESET PASS pointer target available: 历史流水
+UI RESET PASS budget history opens an actual historical chart
+UI RESET PASS finance chart preserves exact saved historical samples
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 物资
+UI RESET PASS archive title and breadcrumbs visible: resources
+UI RESET PASS archive return controls visible: resources
+UI RESET PASS archive uses real graphical content: resources
+UI RESET PASS archive uses current snapshot identity: resources
+UI RESET PASS pointer target available: material archive tab
+UI RESET PASS graphical meter available: 材料
+UI RESET PASS graphical meter reads real value: 材料
+UI RESET PASS graphical meter reads real capacity: 材料
+UI RESET PASS resource page shows one actual supply/use/stock flow
+UI RESET PASS 1080p framebuffer: desk-resource-overview
+UI RESET PASS capture: desk-resource-overview
+UI RESET PASS pointer target available: 供给来源
+UI RESET PASS resource graph leads to supply sources
+UI RESET PASS resource contribution meter matches authoritative receipts: B000003
+UI RESET PASS resource contribution meter matches authoritative receipts: B000006
+UI RESET PASS pointer target available: 全部来源与精确记录
+UI RESET PASS resource sources lead to exact receipt page
+UI RESET PASS 1080p framebuffer: desk-resource-sources
+UI RESET PASS capture: desk-resource-sources
+UI RESET PASS pointer target available: 完整来源记录
+UI RESET PASS resource disclosure retains exact current source note and rate: B000003
+UI RESET PASS resource disclosure retains exact current source note and rate: B000006
+UI RESET PASS Escape returns resource one level
+UI RESET PASS pointer target available: 电力
+UI RESET PASS electricity uses current power supply without a fictional stock flow
+UI RESET PASS 1080p framebuffer: desk-resource-energy
+UI RESET PASS capture: desk-resource-energy
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 人口
+UI RESET PASS archive title and breadcrumbs visible: population
+UI RESET PASS archive return controls visible: population
+UI RESET PASS archive uses real graphical content: population
+UI RESET PASS archive uses current snapshot identity: population
+UI RESET PASS graphical meter available: 已安置 / 住房
+UI RESET PASS graphical meter reads real value: 已安置 / 住房
+UI RESET PASS graphical meter reads real capacity: 已安置 / 住房
+UI RESET PASS graphical meter available: 已就业 / 岗位
+UI RESET PASS graphical meter reads real value: 已就业 / 岗位
+UI RESET PASS graphical meter reads real capacity: 已就业 / 岗位
+UI RESET PASS 1080p framebuffer: desk-population-overview
+UI RESET PASS capture: desk-population-overview
+UI RESET PASS pointer target available: 生活需求
+UI RESET PASS population cards lead to actual needs matrix
+UI RESET PASS population has graphical source-backed need matrix
+UI RESET PASS need matrix uses exact source ratio: G000005:food
+UI RESET PASS need matrix uses exact source ratio: G000005:material
+UI RESET PASS need matrix uses exact source ratio: G000005:energy
+UI RESET PASS 1080p framebuffer: desk-population-needs
+UI RESET PASS capture: desk-population-needs
+UI RESET PASS Escape returns population overview
+UI RESET PASS pointer target available: 居住分布
+UI RESET PASS pointer target available: 查看全部住区
+UI RESET PASS housing exposes deeper per-home records
+UI RESET PASS 1080p framebuffer: desk-population-housing
+UI RESET PASS capture: desk-population-housing
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 政策
+UI RESET PASS archive title and breadcrumbs visible: policies
+UI RESET PASS archive return controls visible: policies
+UI RESET PASS all policies appear as actual comparison cards
+UI RESET PASS policy option uses a visual comparison card: tax_head
+UI RESET PASS current policy is visibly selected in its exclusive slot: tax_head
+UI RESET PASS policy option uses a visual comparison card: tax_production
+UI RESET PASS mutually exclusive policies share the same visual slot: Tax
+UI RESET PASS policy option uses a visual comparison card: tax_trade
+UI RESET PASS mutually exclusive policies share the same visual slot: Tax
+UI RESET PASS policy option uses a visual comparison card: jobs_access
+UI RESET PASS current policy is visibly selected in its exclusive slot: jobs_access
+UI RESET PASS policy option uses a visual comparison card: jobs_merit
+UI RESET PASS mutually exclusive policies share the same visual slot: Labor
+UI RESET PASS policy option uses a visual comparison card: pollution_default
+UI RESET PASS current policy is visibly selected in its exclusive slot: pollution_default
+UI RESET PASS policy option uses a visual comparison card: pollution_fee
+UI RESET PASS mutually exclusive policies share the same visual slot: Environment
+UI RESET PASS policy option uses a visual comparison card: pollution_spread
+UI RESET PASS mutually exclusive policies share the same visual slot: Environment
+UI RESET PASS policy option uses a visual comparison card: procure_near
+UI RESET PASS current policy is visibly selected in its exclusive slot: procure_near
+UI RESET PASS policy option uses a visual comparison card: procure_split
+UI RESET PASS mutually exclusive policies share the same visual slot: Procurement
+UI RESET PASS policy option uses a visual comparison card: land_normal
+UI RESET PASS current policy is visibly selected in its exclusive slot: land_normal
+UI RESET PASS policy option uses a visual comparison card: land_rent
+UI RESET PASS mutually exclusive policies share the same visual slot: Land
+UI RESET PASS archive uses current snapshot identity: policies
+UI RESET PASS 1080p framebuffer: desk-policy-options
+UI RESET PASS capture: desk-policy-options
+UI RESET PASS policy fixture has a real alternative in an exclusive slot
+UI RESET PASS pointer target available: preview policy jobs_merit
+UI RESET PASS pointer selects actual policy candidate
+UI RESET PASS policy preview uses existing shared planner
+UI RESET PASS policy confirmation stays in fixed action footer
+UI RESET PASS 1080p framebuffer: desk-policy-preview
+UI RESET PASS capture: desk-policy-preview
+UI RESET PASS pointer target available: 完整规则与适用范围
+UI RESET PASS policy comparison opens exact rules
+UI RESET PASS pointer target available: 完整语法与条件
+UI RESET PASS raw policy syntax remains available through disclosure
+UI RESET PASS 1080p framebuffer: desk-policy-rules
+UI RESET PASS capture: desk-policy-rules
+UI RESET PASS Escape returns from policy rules to the same candidate
+UI RESET PASS L3 resources, population, budget, policy and disclosures preserve exact simulation state and RNG
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 建设
+UI RESET PASS archive title and breadcrumbs visible: development
+UI RESET PASS archive return controls visible: development
+UI RESET PASS archive uses real graphical content: development
+UI RESET PASS growth page shows existing buildings and their real tracks
+UI RESET PASS 1080p framebuffer: desk-development
+UI RESET PASS capture: desk-development
+UI RESET PASS pointer target available: 选择专业方向
+UI RESET PASS growth card opens real specialization choices
+UI RESET PASS pointer target available: 比较升级前后
+UI RESET PASS choice leads to real before/after capability comparison
+UI RESET PASS upgrade preview shows current and proposed building portraits
+UI RESET PASS upgrade has an explicit fixed payment confirmation
+UI RESET PASS 1080p framebuffer: desk-upgrade-preview
+UI RESET PASS capture: desk-upgrade-preview
+UI RESET PASS Escape returns upgrade preview to specialization choice
+UI RESET PASS pointer target available: 施工队列
+UI RESET PASS construction shows actual shared queue progress
+UI RESET PASS 1080p framebuffer: desk-construction
+UI RESET PASS capture: desk-construction
+UI RESET PASS growth comparison and shared construction display preserve state
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 市场
+UI RESET PASS archive title and breadcrumbs visible: market
+UI RESET PASS archive return controls visible: market
+UI RESET PASS archive uses real graphical content: market
+UI RESET PASS all six authoritative buy/sell quotes are visible
+UI RESET PASS quote numeric label preserves exact authoritative value: food:buy
+UI RESET PASS quote digits fit one readable line: food:buy
+UI RESET PASS quote numeric label preserves exact authoritative value: food:sell
+UI RESET PASS quote digits fit one readable line: food:sell
+UI RESET PASS quote numeric label preserves exact authoritative value: material:buy
+UI RESET PASS quote digits fit one readable line: material:buy
+UI RESET PASS quote numeric label preserves exact authoritative value: material:sell
+UI RESET PASS quote digits fit one readable line: material:sell
+UI RESET PASS quote numeric label preserves exact authoritative value: goods:buy
+UI RESET PASS quote digits fit one readable line: goods:buy
+UI RESET PASS quote numeric label preserves exact authoritative value: goods:sell
+UI RESET PASS quote digits fit one readable line: goods:sell
+UI RESET PASS market begins with real quotes and transport capacity
+UI RESET PASS 1080p framebuffer: desk-market
+UI RESET PASS capture: desk-market
+UI RESET PASS pointer target available: market material tab
+UI RESET PASS pointer target available: market food tab
+UI RESET PASS pointer target available: market buy direction
+UI RESET PASS market quantity editing pauses the authoritative city clock
+UI RESET PASS numeric field exists: order amount
+UI RESET PASS pointer target available: order amount
+UI RESET PASS numeric field accepts keyboard value: order amount
+UI RESET PASS pointer target available: uncommitted order amount
+UI RESET PASS uncommitted keyboard amount survives repeated frames while the desk pauses time
+UI RESET PASS numeric field exists: confirmed order amount
+UI RESET PASS pointer target available: confirmed order amount
+UI RESET PASS numeric field accepts keyboard value: confirmed order amount
+UI RESET PASS numeric field exists: order limit
+UI RESET PASS pointer target available: order limit
+UI RESET PASS numeric field accepts keyboard value: order limit
+UI RESET PASS pointer target available: review real market order
+UI RESET PASS review order remains read only before confirmation
+UI RESET PASS market payment/order confirmation uses fixed footer
+UI RESET PASS 1080p framebuffer: desk-market-order
+UI RESET PASS capture: desk-market-order
+UI RESET PASS pointer target available: confirm trade order
+UI RESET PASS pointer confirmation creates exactly one actual order
+UI RESET PASS market keyboard controls reach actual order resource, direction and quantity
+UI RESET PASS creating an unfilled order does not fabricate a cash receipt
+UI RESET PASS pointer target available: cancel exact open order
+UI RESET PASS cancel pointer marks exact order without an unexecuted cash movement
+UI RESET PASS pointer target available: negative-price buy direction
+UI RESET PASS numeric field exists: negative-price buy amount
+UI RESET PASS pointer target available: negative-price buy amount
+UI RESET PASS numeric field accepts keyboard value: negative-price buy amount
+UI RESET PASS numeric field exists: negative-price buy limit
+UI RESET PASS pointer target available: negative-price buy limit
+UI RESET PASS numeric field accepts keyboard value: negative-price buy limit
+UI RESET PASS negative-price buy explains correct cash direction
+UI RESET PASS pointer target available: review negative-price buy
+UI RESET PASS pointer target available: confirm negative-price buy
+UI RESET PASS negative-price buy creates a real execution receipt
+UI RESET PASS negative-price buy cash delta agrees with actual wallet
+UI RESET PASS 1080p framebuffer: desk-market-negative-buy
+UI RESET PASS capture: desk-market-negative-buy
+UI RESET PASS pointer target available: 已结束订单
+UI RESET PASS pointer target available: open exact buy order receipt
+UI RESET PASS order opens its exact saved fill and capacity receipts
+UI RESET PASS 1080p framebuffer: desk-market-receipt-buy
+UI RESET PASS capture: desk-market-receipt-buy
+UI RESET PASS pointer target available: negative-price sell direction
+UI RESET PASS numeric field exists: negative-price sell amount
+UI RESET PASS pointer target available: negative-price sell amount
+UI RESET PASS numeric field accepts keyboard value: negative-price sell amount
+UI RESET PASS numeric field exists: negative-price sell limit
+UI RESET PASS pointer target available: negative-price sell limit
+UI RESET PASS numeric field accepts keyboard value: negative-price sell limit
+UI RESET PASS negative-price sell explains correct cash direction
+UI RESET PASS pointer target available: review negative-price sell
+UI RESET PASS pointer target available: confirm negative-price sell
+UI RESET PASS negative-price sell creates a real execution receipt
+UI RESET PASS negative-price sell cash delta agrees with actual wallet
+UI RESET PASS 1080p framebuffer: desk-market-negative-sell
+UI RESET PASS capture: desk-market-negative-sell
+UI RESET PASS pointer target available: 已结束订单
+UI RESET PASS pointer target available: open exact sell order receipt
+UI RESET PASS order opens its exact saved fill and capacity receipts
+UI RESET PASS 1080p framebuffer: desk-market-receipt-sell
+UI RESET PASS capture: desk-market-receipt-sell
+UI RESET PASS pointer target available: discover theme through archive
+UI RESET PASS pointer target available: 主题与奖励
+UI RESET PASS pointer target available: 选择「工业基地」
+UI RESET PASS real archive action accepts city theme
+UI RESET PASS theme archive shows real stage track
+UI RESET PASS 1080p framebuffer: desk-theme
+UI RESET PASS capture: desk-theme
+UI RESET PASS accepted theme has a single visible L1 card
+UI RESET PASS untimed theme does not invent a deadline
+UI RESET PASS over 90 percent progress receives attention state
+UI RESET PASS reduced motion disables progress breathing
+UI RESET PASS 1080p framebuffer: reset-05-theme-near-complete
+UI RESET PASS capture: reset-05-theme-near-complete
+UI RESET PASS saved theme reward exposes L1 claim action
+UI RESET PASS 1080p framebuffer: reset-05b-theme-reward-ready
+UI RESET PASS capture: reset-05b-theme-reward-ready
+UI RESET PASS pointer target available: theme reward claim
+UI RESET PASS theme claim preserves an older annual reward in queue
+UI RESET PASS theme entry exposes the earlier annual reward required by FIFO
+UI RESET PASS theme entry explains why an earlier reward must be resolved
+UI RESET PASS 1080p framebuffer: reset-05b1-reward-queue-before-theme
+UI RESET PASS capture: reset-05b1-reward-queue-before-theme
+UI RESET PASS pointer target available: 领取
+UI RESET PASS actual pointer claims the earlier annual reward without bypassing FIFO
+UI RESET PASS 1080p framebuffer: reset-05b2-matching-theme-reward
+UI RESET PASS capture: reset-05b2-matching-theme-reward
+UI RESET PASS pointer target available: 领取
+UI RESET PASS theme reward becomes claimable after the earlier reward
+UI RESET PASS reward archive compares three actual persistent candidates
+UI RESET PASS three saved reward candidates each expose one actual choice action
+UI RESET PASS reward choice action visible on initial comparison page: P03
+UI RESET PASS reward choice action visible on initial comparison page: P01
+UI RESET PASS reward choice action visible on initial comparison page: P02
+UI RESET PASS 1080p framebuffer: desk-reward-three
+UI RESET PASS capture: desk-reward-three
+UI RESET PASS pointer target available: 完整规则与副本说明
+UI RESET PASS reward disclosure preserves candidates, wallets and RNG
+UI RESET PASS pointer target available: 领取
+UI RESET PASS comparison claim resolves the actual saved reward
+UI RESET PASS installation fixture provides a real compatible manufacturing host
+UI RESET PASS pointer target available: city archive
+UI RESET PASS pointer target available: 方案
+UI RESET PASS archive title and breadcrumbs visible: Bonus wallet
+UI RESET PASS archive return controls visible: Bonus wallet
+UI RESET PASS archive uses real graphical content: Bonus wallet
+UI RESET PASS wallet shows actual acquired Bonus copies as visual cards
+UI RESET PASS 1080p framebuffer: desk-bonus-wallet
+UI RESET PASS capture: desk-bonus-wallet
+UI RESET PASS pointer target available: choose actual P01 copy
+UI RESET PASS Bonus card leads to compatible hosts
+UI RESET PASS 1080p framebuffer: desk-bonus-hosts
+UI RESET PASS capture: desk-bonus-hosts
+UI RESET PASS pointer target available: preview P01 in actual manufacturing slot
+UI RESET PASS host/slot pointer opens explicit install preview
+UI RESET PASS pointer target available: 完整规则与安装资格
+UI RESET PASS copy, host, slot and rule preview do not consume a copy or mutate RNG
+UI RESET PASS 1080p framebuffer: desk-bonus-install
+UI RESET PASS capture: desk-bonus-install
+UI RESET PASS pointer target available: 确认消耗 1 份并安装
+UI RESET PASS installation confirmation consumes exactly one real copy
+UI RESET PASS actual installation fills the selected stable slot
+UI RESET PASS L1 caps real severe alarm cards at two
+UI RESET PASS excess severe alarms move into an accurate count
+UI RESET PASS 1080p framebuffer: reset-05c-severe-alerts
+UI RESET PASS capture: reset-05c-severe-alerts
+UI RESET PASS pointer target available: locate first severe source
+UI RESET PASS severe alarm pointer locates exact entity and analysis layer
+UI RESET PASS pointer target available: all severe alarms
+UI RESET PASS overflow opens full issue archive
+UI RESET PASS empty material stock without an active deficit does not invent a red alarm
+UI RESET PASS pointer target available: choose homestead starting building
+UI RESET PASS empty plot pointer starts local placement context
+UI RESET PASS empty site uses its local bubble and no building inspector
+UI RESET PASS site bubble shows at most two preview quantities
+UI RESET PASS site has one compare-tender primary
+UI RESET PASS bubble does not cover the selected tile footprint
+UI RESET PASS site preview preserves real material and construction costs
+UI RESET PASS 1080p framebuffer: reset-06-local-site
+UI RESET PASS capture: reset-06-local-site
+UI RESET PASS site bubble follows camera while staying on screen
+UI RESET PASS pointer target available: site prediction sources
+UI RESET PASS site prediction opens explicit L3 source explanation
+UI RESET PASS site planning, camera and forecast details preserve state and RNG
+UI RESET PASS pointer target available: compare operator tenders
+UI RESET PASS operator comparison opens deliberate L3 workbench
+UI RESET PASS operator candidates are generated by real tender command
+UI RESET PASS 1080p framebuffer: reset-06b-operator-comparison
+UI RESET PASS capture: reset-06b-operator-comparison
+UI RESET PASS L1 legend visible for terrain
+UI RESET PASS L1 legend visible for population
+UI RESET PASS L1 legend visible for food
+UI RESET PASS L1 legend visible for energy
+UI RESET PASS L1 legend visible for operator
+UI RESET PASS hex hit remains aligned at zoom 0.65: -4,0
+UI RESET PASS hex hit remains aligned at zoom 0.65: -4,1
+UI RESET PASS hex hit remains aligned at zoom 0.65: -4,2
+UI RESET PASS hex hit remains aligned at zoom 0.65: -4,3
+UI RESET PASS hex hit remains aligned at zoom 0.65: -4,4
+UI RESET PASS hex hit remains aligned at zoom 0.65: -3,-1
+UI RESET PASS hex hit remains aligned at zoom 0.65: -3,0
+UI RESET PASS hex hit remains aligned at zoom 0.65: -3,1
+UI RESET PASS hex hit remains aligned at zoom 0.65: -3,2
+UI RESET PASS hex hit remains aligned at zoom 0.65: -3,3
+UI RESET PASS hex hit remains aligned at zoom 0.65: -3,4
+UI RESET PASS hex hit remains aligned at zoom 0.65: -2,-2
+UI RESET PASS hex hit remains aligned at zoom 0.65: -2,-1
+UI RESET PASS hex hit remains aligned at zoom 0.65: -2,0
+UI RESET PASS hex hit remains aligned at zoom 0.65: -2,1
+UI RESET PASS hex hit remains aligned at zoom 0.65: -2,2
+UI RESET PASS hex hit remains aligned at zoom 0.65: -2,3
+UI RESET PASS hex hit remains aligned at zoom 0.65: -2,4
+UI RESET PASS hex hit remains aligned at zoom 0.65: -1,-3
+UI RESET PASS hex hit remains aligned at zoom 0.65: -1,-2
+UI RESET PASS hex hit remains aligned at zoom 0.65: -1,-1
+UI RESET PASS hex hit remains aligned at zoom 0.65: -1,0
+UI RESET PASS hex hit remains aligned at zoom 0.65: -1,1
+UI RESET PASS hex hit remains aligned at zoom 0.65: -1,2
+UI RESET PASS hex hit remains aligned at zoom 0.65: -1,3
+UI RESET PASS hex hit remains aligned at zoom 0.65: -1,4
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,-4
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,-3
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,-2
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,-1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,0
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,2
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,3
+UI RESET PASS hex hit remains aligned at zoom 0.65: 0,4
+UI RESET PASS hex hit remains aligned at zoom 0.65: 1,-4
+UI RESET PASS hex hit remains aligned at zoom 0.65: 1,-3
+UI RESET PASS hex hit remains aligned at zoom 0.65: 1,-2
+UI RESET PASS hex hit remains aligned at zoom 0.65: 1,-1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 1,0
+UI RESET PASS hex hit remains aligned at zoom 0.65: 1,1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 1,2
+UI RESET PASS hex hit remains aligned at zoom 0.65: 1,3
+UI RESET PASS hex hit remains aligned at zoom 0.65: 2,-4
+UI RESET PASS hex hit remains aligned at zoom 0.65: 2,-3
+UI RESET PASS hex hit remains aligned at zoom 0.65: 2,-2
+UI RESET PASS hex hit remains aligned at zoom 0.65: 2,-1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 2,0
+UI RESET PASS hex hit remains aligned at zoom 0.65: 2,1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 2,2
+UI RESET PASS hex hit remains aligned at zoom 0.65: 3,-4
+UI RESET PASS hex hit remains aligned at zoom 0.65: 3,-3
+UI RESET PASS hex hit remains aligned at zoom 0.65: 3,-2
+UI RESET PASS hex hit remains aligned at zoom 0.65: 3,-1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 3,0
+UI RESET PASS hex hit remains aligned at zoom 0.65: 3,1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 4,-4
+UI RESET PASS hex hit remains aligned at zoom 0.65: 4,-3
+UI RESET PASS hex hit remains aligned at zoom 0.65: 4,-2
+UI RESET PASS hex hit remains aligned at zoom 0.65: 4,-1
+UI RESET PASS hex hit remains aligned at zoom 0.65: 4,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: -4,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: -4,1
+UI RESET PASS hex hit remains aligned at zoom 1.00: -4,2
+UI RESET PASS hex hit remains aligned at zoom 1.00: -4,3
+UI RESET PASS hex hit remains aligned at zoom 1.00: -4,4
+UI RESET PASS hex hit remains aligned at zoom 1.00: -3,-1
+UI RESET PASS hex hit remains aligned at zoom 1.00: -3,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: -3,1
+UI RESET PASS hex hit remains aligned at zoom 1.00: -3,2
+UI RESET PASS hex hit remains aligned at zoom 1.00: -3,3
+UI RESET PASS hex hit remains aligned at zoom 1.00: -3,4
+UI RESET PASS hex hit remains aligned at zoom 1.00: -2,-2
+UI RESET PASS hex hit remains aligned at zoom 1.00: -2,-1
+UI RESET PASS hex hit remains aligned at zoom 1.00: -2,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: -2,1
+UI RESET PASS hex hit remains aligned at zoom 1.00: -2,2
+UI RESET PASS hex hit remains aligned at zoom 1.00: -2,3
+UI RESET PASS hex hit remains aligned at zoom 1.00: -2,4
+UI RESET PASS hex hit remains aligned at zoom 1.00: -1,-3
+UI RESET PASS hex hit remains aligned at zoom 1.00: -1,-2
+UI RESET PASS hex hit remains aligned at zoom 1.00: -1,-1
+UI RESET PASS hex hit remains aligned at zoom 1.00: -1,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: -1,1
+UI RESET PASS hex hit remains aligned at zoom 1.00: -1,2
+UI RESET PASS hex hit remains aligned at zoom 1.00: -1,3
+UI RESET PASS hex hit remains aligned at zoom 1.00: -1,4
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,-4
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,-3
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,-2
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,-1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,2
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,3
+UI RESET PASS hex hit remains aligned at zoom 1.00: 0,4
+UI RESET PASS hex hit remains aligned at zoom 1.00: 1,-4
+UI RESET PASS hex hit remains aligned at zoom 1.00: 1,-3
+UI RESET PASS hex hit remains aligned at zoom 1.00: 1,-2
+UI RESET PASS hex hit remains aligned at zoom 1.00: 1,-1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 1,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: 1,1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 1,2
+UI RESET PASS hex hit remains aligned at zoom 1.00: 1,3
+UI RESET PASS hex hit remains aligned at zoom 1.00: 2,-4
+UI RESET PASS hex hit remains aligned at zoom 1.00: 2,-3
+UI RESET PASS hex hit remains aligned at zoom 1.00: 2,-2
+UI RESET PASS hex hit remains aligned at zoom 1.00: 2,-1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 2,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: 2,1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 2,2
+UI RESET PASS hex hit remains aligned at zoom 1.00: 3,-4
+UI RESET PASS hex hit remains aligned at zoom 1.00: 3,-3
+UI RESET PASS hex hit remains aligned at zoom 1.00: 3,-2
+UI RESET PASS hex hit remains aligned at zoom 1.00: 3,-1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 3,0
+UI RESET PASS hex hit remains aligned at zoom 1.00: 3,1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 4,-4
+UI RESET PASS hex hit remains aligned at zoom 1.00: 4,-3
+UI RESET PASS hex hit remains aligned at zoom 1.00: 4,-2
+UI RESET PASS hex hit remains aligned at zoom 1.00: 4,-1
+UI RESET PASS hex hit remains aligned at zoom 1.00: 4,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: -4,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: -4,1
+UI RESET PASS hex hit remains aligned at zoom 1.70: -4,2
+UI RESET PASS hex hit remains aligned at zoom 1.70: -4,3
+UI RESET PASS hex hit remains aligned at zoom 1.70: -4,4
+UI RESET PASS hex hit remains aligned at zoom 1.70: -3,-1
+UI RESET PASS hex hit remains aligned at zoom 1.70: -3,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: -3,1
+UI RESET PASS hex hit remains aligned at zoom 1.70: -3,2
+UI RESET PASS hex hit remains aligned at zoom 1.70: -3,3
+UI RESET PASS hex hit remains aligned at zoom 1.70: -3,4
+UI RESET PASS hex hit remains aligned at zoom 1.70: -2,-2
+UI RESET PASS hex hit remains aligned at zoom 1.70: -2,-1
+UI RESET PASS hex hit remains aligned at zoom 1.70: -2,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: -2,1
+UI RESET PASS hex hit remains aligned at zoom 1.70: -2,2
+UI RESET PASS hex hit remains aligned at zoom 1.70: -2,3
+UI RESET PASS hex hit remains aligned at zoom 1.70: -2,4
+UI RESET PASS hex hit remains aligned at zoom 1.70: -1,-3
+UI RESET PASS hex hit remains aligned at zoom 1.70: -1,-2
+UI RESET PASS hex hit remains aligned at zoom 1.70: -1,-1
+UI RESET PASS hex hit remains aligned at zoom 1.70: -1,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: -1,1
+UI RESET PASS hex hit remains aligned at zoom 1.70: -1,2
+UI RESET PASS hex hit remains aligned at zoom 1.70: -1,3
+UI RESET PASS hex hit remains aligned at zoom 1.70: -1,4
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,-4
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,-3
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,-2
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,-1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,2
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,3
+UI RESET PASS hex hit remains aligned at zoom 1.70: 0,4
+UI RESET PASS hex hit remains aligned at zoom 1.70: 1,-4
+UI RESET PASS hex hit remains aligned at zoom 1.70: 1,-3
+UI RESET PASS hex hit remains aligned at zoom 1.70: 1,-2
+UI RESET PASS hex hit remains aligned at zoom 1.70: 1,-1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 1,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: 1,1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 1,2
+UI RESET PASS hex hit remains aligned at zoom 1.70: 1,3
+UI RESET PASS hex hit remains aligned at zoom 1.70: 2,-4
+UI RESET PASS hex hit remains aligned at zoom 1.70: 2,-3
+UI RESET PASS hex hit remains aligned at zoom 1.70: 2,-2
+UI RESET PASS hex hit remains aligned at zoom 1.70: 2,-1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 2,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: 2,1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 2,2
+UI RESET PASS hex hit remains aligned at zoom 1.70: 3,-4
+UI RESET PASS hex hit remains aligned at zoom 1.70: 3,-3
+UI RESET PASS hex hit remains aligned at zoom 1.70: 3,-2
+UI RESET PASS hex hit remains aligned at zoom 1.70: 3,-1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 3,0
+UI RESET PASS hex hit remains aligned at zoom 1.70: 3,1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 4,-4
+UI RESET PASS hex hit remains aligned at zoom 1.70: 4,-3
+UI RESET PASS hex hit remains aligned at zoom 1.70: 4,-2
+UI RESET PASS hex hit remains aligned at zoom 1.70: 4,-1
+UI RESET PASS hex hit remains aligned at zoom 1.70: 4,0
+UI RESET PASS layers, legend, zoom and hit tests preserve exact authoritative snapshot
+UI RESET PASS rendering never consumes gameplay RNG
+UI RESET PASS pointer target available: burn time control
+UI RESET PASS pointer selects burn mode
+UI RESET PASS pointer target available: stop time control
+UI RESET PASS stop submits exact pending active interval
+UI RESET PASS pointer target available: pause time control
+UI RESET PASS pause button reaches actual clock setting
+UI RESET PASS authored building asset retained: homestead
+UI RESET PASS main building leaves inter-tile courtyard space: homestead
+UI RESET PASS opaque bounds lie within building texture: homestead
+UI RESET PASS visible building has a real opaque pointer target: homestead
+UI RESET PASS authored building asset retained: workshop
+UI RESET PASS main building leaves inter-tile courtyard space: workshop
+UI RESET PASS opaque bounds lie within building texture: workshop
+UI RESET PASS visible building has a real opaque pointer target: workshop
+UI RESET PASS authored building asset retained: workshop
+UI RESET PASS main building leaves inter-tile courtyard space: workshop
+UI RESET PASS opaque bounds lie within building texture: workshop
+UI RESET PASS visible building has a real opaque pointer target: workshop
+UI RESET PASS authored building asset retained: medical_clinic
+UI RESET PASS main building leaves inter-tile courtyard space: medical_clinic
+UI RESET PASS opaque bounds lie within building texture: medical_clinic
+UI RESET PASS visible building has a real opaque pointer target: medical_clinic
+UI RESET PASS authored building asset retained: primary_school
+UI RESET PASS main building leaves inter-tile courtyard space: primary_school
+UI RESET PASS opaque bounds lie within building texture: primary_school
+UI RESET PASS visible building has a real opaque pointer target: primary_school
+UI RESET PASS authored building asset retained: commercial_center
+UI RESET PASS main building leaves inter-tile courtyard space: commercial_center
+UI RESET PASS opaque bounds lie within building texture: commercial_center
+UI RESET PASS visible building has a real opaque pointer target: commercial_center
+UI RESET PASS authored building asset retained: freight
+UI RESET PASS main building leaves inter-tile courtyard space: freight
+UI RESET PASS opaque bounds lie within building texture: freight
+UI RESET PASS visible building has a real opaque pointer target: freight
+UI RESET PASS authored building asset retained: neighborhood
+UI RESET PASS main building leaves inter-tile courtyard space: neighborhood
+UI RESET PASS opaque bounds lie within building texture: neighborhood
+UI RESET PASS visible building has a real opaque pointer target: neighborhood
+UI RESET PASS authored building asset retained: agriculture
+UI RESET PASS main building leaves inter-tile courtyard space: agriculture
+UI RESET PASS opaque bounds lie within building texture: agriculture
+UI RESET PASS visible building has a real opaque pointer target: agriculture
+UI RESET PASS authored building asset retained: power_station
+UI RESET PASS main building leaves inter-tile courtyard space: power_station
+UI RESET PASS opaque bounds lie within building texture: power_station
+UI RESET PASS visible building has a real opaque pointer target: power_station
+UI RESET PASS authored building asset retained: manufacturing
+UI RESET PASS main building leaves inter-tile courtyard space: manufacturing
+UI RESET PASS opaque bounds lie within building texture: manufacturing
+UI RESET PASS visible building has a real opaque pointer target: manufacturing
+UI RESET PASS authored building asset retained: residence
+UI RESET PASS main building leaves inter-tile courtyard space: residence
+UI RESET PASS opaque bounds lie within building texture: residence
+UI RESET PASS visible building has a real opaque pointer target: residence
+UI RESET PASS authored building asset retained: public_center
+UI RESET PASS main building leaves inter-tile courtyard space: public_center
+UI RESET PASS opaque bounds lie within building texture: public_center
+UI RESET PASS visible building has a real opaque pointer target: public_center
+UI RESET PASS authored building asset retained: extraction
+UI RESET PASS main building leaves inter-tile courtyard space: extraction
+UI RESET PASS opaque bounds lie within building texture: extraction
+UI RESET PASS visible building has a real opaque pointer target: extraction
+UI RESET PASS authored building asset retained: yard
+UI RESET PASS main building leaves inter-tile courtyard space: yard
+UI RESET PASS opaque bounds lie within building texture: yard
+UI RESET PASS visible building has a real opaque pointer target: yard
+UI RESET PASS authored building asset retained: advanced_residence
+UI RESET PASS main building leaves inter-tile courtyard space: advanced_residence
+UI RESET PASS opaque bounds lie within building texture: advanced_residence
+UI RESET PASS visible building has a real opaque pointer target: advanced_residence
+UI RESET PASS authored building asset retained: modern_agriculture
+UI RESET PASS main building leaves inter-tile courtyard space: modern_agriculture
+UI RESET PASS opaque bounds lie within building texture: modern_agriculture
+UI RESET PASS visible building has a real opaque pointer target: modern_agriculture
+UI RESET PASS authored building asset retained: garden
+UI RESET PASS main building leaves inter-tile courtyard space: garden
+UI RESET PASS opaque bounds lie within building texture: garden
+UI RESET PASS visible building has a real opaque pointer target: garden
+UI RESET PASS authored building asset retained: hospital
+UI RESET PASS main building leaves inter-tile courtyard space: hospital
+UI RESET PASS opaque bounds lie within building texture: hospital
+UI RESET PASS visible building has a real opaque pointer target: hospital
+UI RESET PASS authored building asset retained: secondary_school
+UI RESET PASS main building leaves inter-tile courtyard space: secondary_school
+UI RESET PASS opaque bounds lie within building texture: secondary_school
+UI RESET PASS visible building has a real opaque pointer target: secondary_school
+UI RESET PASS authored building asset retained: power_plant
+UI RESET PASS main building leaves inter-tile courtyard space: power_plant
+UI RESET PASS opaque bounds lie within building texture: power_plant
+UI RESET PASS visible building has a real opaque pointer target: power_plant
+UI RESET PASS authored building asset retained: material_factory
+UI RESET PASS main building leaves inter-tile courtyard space: material_factory
+UI RESET PASS opaque bounds lie within building texture: material_factory
+UI RESET PASS visible building has a real opaque pointer target: material_factory
+UI RESET PASS all 21 growth nodes remain represented
+UI RESET PASS growth tiers remain visually distinguishable
+UI RESET PASS terrain symbol has a real trait source: -4,0
+UI RESET PASS terrain symbol has a real trait source: -4,1
+UI RESET PASS terrain symbol has a real trait source: -4,2
+UI RESET PASS terrain symbol has a real trait source: -4,3
+UI RESET PASS terrain symbol has a real trait source: -4,4
+UI RESET PASS terrain symbol has a real trait source: -3,-1
+UI RESET PASS terrain symbol has a real trait source: -3,-1
+UI RESET PASS terrain symbol has a real trait source: -3,0
+UI RESET PASS terrain symbol has a real trait source: -3,0
+UI RESET PASS terrain symbol has a real trait source: -3,1
+UI RESET PASS terrain symbol has a real trait source: -3,1
+UI RESET PASS terrain symbol has a real trait source: -3,2
+UI RESET PASS terrain symbol has a real trait source: -3,2
+UI RESET PASS terrain symbol has a real trait source: -3,3
+UI RESET PASS terrain symbol has a real trait source: -3,3
+UI RESET PASS terrain symbol has a real trait source: -3,4
+UI RESET PASS terrain symbol has a real trait source: -3,4
+UI RESET PASS terrain symbol has a real trait source: -2,-2
+UI RESET PASS terrain symbol has a real trait source: -2,-2
+UI RESET PASS terrain symbol has a real trait source: -2,-1
+UI RESET PASS terrain symbol has a real trait source: -2,-1
+UI RESET PASS terrain symbol has a real trait source: -2,0
+UI RESET PASS terrain symbol has a real trait source: -2,0
+UI RESET PASS terrain symbol has a real trait source: -2,1
+UI RESET PASS terrain symbol has a real trait source: -2,1
+UI RESET PASS terrain symbol has a real trait source: -2,2
+UI RESET PASS terrain symbol has a real trait source: -2,2
+UI RESET PASS terrain symbol has a real trait source: -2,3
+UI RESET PASS terrain symbol has a real trait source: -2,3
+UI RESET PASS terrain symbol has a real trait source: -2,4
+UI RESET PASS terrain symbol has a real trait source: -2,4
+UI RESET PASS terrain symbol has a real trait source: -1,-3
+UI RESET PASS terrain symbol has a real trait source: -1,-3
+UI RESET PASS terrain symbol has a real trait source: -1,-2
+UI RESET PASS terrain symbol has a real trait source: -1,-2
+UI RESET PASS terrain symbol has a real trait source: -1,-1
+UI RESET PASS terrain symbol has a real trait source: -1,-1
+UI RESET PASS terrain symbol has a real trait source: -1,0
+UI RESET PASS terrain symbol has a real trait source: -1,0
+UI RESET PASS terrain symbol has a real trait source: -1,1
+UI RESET PASS terrain symbol has a real trait source: -1,1
+UI RESET PASS terrain symbol has a real trait source: -1,2
+UI RESET PASS terrain symbol has a real trait source: -1,2
+UI RESET PASS terrain symbol has a real trait source: -1,3
+UI RESET PASS terrain symbol has a real trait source: -1,3
+UI RESET PASS terrain symbol has a real trait source: -1,4
+UI RESET PASS terrain symbol has a real trait source: 0,-4
+UI RESET PASS terrain symbol has a real trait source: 0,-4
+UI RESET PASS terrain symbol has a real trait source: 0,-3
+UI RESET PASS terrain symbol has a real trait source: 0,-3
+UI RESET PASS terrain symbol has a real trait source: 0,-2
+UI RESET PASS terrain symbol has a real trait source: 0,-1
+UI RESET PASS terrain symbol has a real trait source: 0,0
+UI RESET PASS terrain symbol has a real trait source: 0,1
+UI RESET PASS terrain symbol has a real trait source: 0,2
+UI RESET PASS terrain symbol has a real trait source: 0,3
+UI RESET PASS terrain symbol has a real trait source: 0,4
+UI RESET PASS terrain symbol has a real trait source: 1,-4
+UI RESET PASS terrain symbol has a real trait source: 1,-4
+UI RESET PASS terrain symbol has a real trait source: 1,-3
+UI RESET PASS terrain symbol has a real trait source: 1,-2
+UI RESET PASS terrain symbol has a real trait source: 1,-1
+UI RESET PASS terrain symbol has a real trait source: 1,0
+UI RESET PASS terrain symbol has a real trait source: 1,1
+UI RESET PASS terrain symbol has a real trait source: 1,2
+UI RESET PASS terrain symbol has a real trait source: 1,3
+UI RESET PASS terrain symbol has a real trait source: 2,-4
+UI RESET PASS terrain symbol has a real trait source: 2,-3
+UI RESET PASS terrain symbol has a real trait source: 2,-2
+UI RESET PASS terrain symbol has a real trait source: 2,-1
+UI RESET PASS terrain symbol has a real trait source: 2,0
+UI RESET PASS terrain symbol has a real trait source: 2,1
+UI RESET PASS terrain symbol has a real trait source: 2,2
+UI RESET PASS terrain symbol has a real trait source: 3,-4
+UI RESET PASS terrain symbol has a real trait source: 3,-3
+UI RESET PASS terrain symbol has a real trait source: 3,-2
+UI RESET PASS terrain symbol has a real trait source: 3,-1
+UI RESET PASS terrain symbol has a real trait source: 3,0
+UI RESET PASS terrain symbol has a real trait source: 3,1
+UI RESET PASS terrain symbol has a real trait source: 4,-4
+UI RESET PASS terrain symbol has a real trait source: 4,-3
+UI RESET PASS terrain symbol has a real trait source: 4,-2
+UI RESET PASS terrain symbol has a real trait source: 4,-1
+UI RESET PASS terrain symbol has a real trait source: 4,0
+UI RESET PASS asset geometry and terrain symbols are pure presentation
+UI RESET PASS 1080p framebuffer: reset-07-all-growth-nodes
+UI RESET PASS capture: reset-07-all-growth-nodes
+UI RESET PASS 1080p framebuffer: reset-07b-neighborhood-connections
+UI RESET PASS capture: reset-07b-neighborhood-connections
+UI RESET PASS pointer target available: archive after budget exhaustion
+UI RESET PASS pointer target available: 城市
+UI RESET PASS city archive exposes naming command after DT zero
+UI RESET PASS pointer target available: 保存城市名称
+UI RESET PASS a real rejected empty-name command displays its reason on screen
+UI RESET PASS command error does not cover the rejected primary action
+UI RESET PASS command error does not obscure the four permanent state controls
+UI RESET PASS failed name command preserves city name and naming right
+UI RESET PASS rejected UI command leaves authoritative state unchanged
+UI RESET PASS 1080p framebuffer: reset-08-command-error-feedback
+UI RESET PASS capture: reset-08-command-error-feedback
+UI RESET RESULT 977 passed, 0 failed

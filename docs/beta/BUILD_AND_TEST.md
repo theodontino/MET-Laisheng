@@ -88,6 +88,15 @@ MET_UI_SUITE=desk MET_EVIDENCE_DIR="$MET_TEST_ROOT/desk-evidence" \
   bash tools/test_ui_reset.sh
 ```
 
+建设影响、整体 UI 缩放与图层快捷键使用独立的真实结算及原生输入夹具。所有比例均保持 1920×1080 全屏；不测试其他窗口尺寸。套件同时核对同一步预测、当前库存、全城电力、原始环境场以及玩家状态／RNG 只读：
+
+```bash
+MET_UI_SUITE=impacts MET_EVIDENCE_DIR="$MET_TEST_ROOT/impact-evidence" \
+  bash tools/test_ui_reset.sh
+```
+
+结果写入 `ui-impacts.json`，原图、输入操作和前后源码指纹保存在同一证据目录。实际完成状态见 [建设影响验收](UI_IMPACTS_ACCEPTANCE.md)。
+
 正常主场景的 Beta 决策流程回归使用以下入口，不附加窗口尺寸或全屏命令参数，直接验证游戏的默认启动行为：
 
 ```bash
