@@ -30,6 +30,8 @@ namespace MET.LivingWorld.Editor
             EditorApplication.delayCall += () =>
             {
                 if (Application.isBatchMode || EditorApplication.isPlayingOrWillChangePlaymode) return;
+                // The full game now owns automatic project setup. Historical Hero tools remain explicit.
+                if (File.Exists("Assets/City/CityBootstrap.cs")) return;
                 try
                 {
                     if (!UrpAtDomainStart || !IsURPConfigured())

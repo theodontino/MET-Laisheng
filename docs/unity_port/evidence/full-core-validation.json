@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "platform": "macOS arm64",
+  "godot": "4.7.2",
+  "dotnet_sdk": "10.0.401",
+  "core_target": "netstandard2.1 / C# 9",
+  "focused_checks": {
+    "foundation": 17,
+    "rules": 20,
+    "simulation": 10,
+    "progression": 127,
+    "total": 174
+  },
+  "parity": {
+    "total": 88,
+    "scenarios": [
+      {
+        "id": "block-0-industrial",
+        "complete_state_checkpoints": 21,
+        "test_injection": false
+      },
+      {
+        "id": "block-1-civic",
+        "complete_state_checkpoints": 21,
+        "test_injection": false
+      },
+      {
+        "id": "block-2-agricultural",
+        "complete_state_checkpoints": 20,
+        "test_injection": false
+      },
+      {
+        "id": "injected-compound-bonus-upgrade-logistics-market",
+        "complete_state_checkpoints": 26,
+        "test_injection": true
+      }
+    ],
+    "numeric_relative_tolerance": 1e-09,
+    "rng_and_cursors": "exact"
+  },
+  "scope": "Actual native C# core checks and Godot/C# complete-state parity; no Unity visual, human play or GPU performance claim."
+}

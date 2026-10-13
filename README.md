@@ -44,7 +44,7 @@ renderer 和 driver 覆写只作用于本次进程，`project.godot` 默认仍�
 
 ### Unity 移植验证
 
-新增独立 [Unity Hero Valley 工程](unity/METLivingWorld/README.md)，复用同一固定切片的真实几何、原建筑与树木实例，使用官方免费 URP/glTFast 管线。这一阶段迁移世界呈现、摄影与交互，尚未迁移城市玩法或完整 Beta UI；原 Godot 游戏仍可正常运行。Unity 实际运行和 macOS 构建需要有效编辑器授权；用户目前没有 Unity 账号，不能将源码或 Godot 导出验证称为 Unity 运行完成。架构和验收状态见 [Unity 移植记录](docs/unity_port/ACCEPTANCE.md)。
+用户已授权完整迁移，当前 [Unity 工程](unity/METLivingWorld/README.md) 使用 **6000.6.5f1**，保留同一套 Beta 内容与玩法，存档独立。原生 C# 核心已有 **174/174** 专项检查与 **88/88** Godot/C# 完整状态对照通过；macOS 通用 Player 在 Apple M5 Max / Metal、1920×1080 下 **88/88** 原生检查通过。首版画面被用户否定后，已修正不限帧、重复 UI 重建和地表/透明图层，默认稳定 60 帧；这仍是迁移测试版美术。原 Godot 游戏保留。运行、画面与交付证据见 [完整 Unity 迁移记录](docs/unity_port/FULL_MIGRATION.md)，早期固定 Hero 切片仍按[历史验收](docs/unity_port/ACCEPTANCE.md)阅读。
 
 ## 一局怎样推进
 

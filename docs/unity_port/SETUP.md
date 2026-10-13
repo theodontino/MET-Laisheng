@@ -1,3 +1,17 @@
+# 当前完整游戏迁移
+
+2026-10-13 用户选择 Unity **6000.6.5f1**。当前完整游戏场景为 `Assets/Scenes/City.unity`，免费组件解析为 URP **17.6.0**、uGUI **2.6.0**、glTFast **6.20.0**、Newtonsoft JSON **3.2.1**、嵌入式 XCharts **3.15.0**。XCharts 的 EntityId 局部适配记录在包内 `MET_PATCHES.md`。
+
+从仓库根目录运行 `bash tools/test_unity_city.sh editor`，分两个 Editor 进程准备 URP、再重新导入 GLB；`mac` 构建 universal `.app`；`native` 在独立测试存档路径中启动真实应用并生成自动操作与截图证据。`core` 执行 Godot/C# 完整状态对照。运行需要已合法激活的 Editor。当前完成情况见 [FULL_MIGRATION.md](FULL_MIGRATION.md)。
+
+下文保留原 Hero 切片安装历史与命令，不是新的完整游戏入口。
+
+## 本机 Unity 6.6 构建工具修复
+
+Hub 安装的官方 Burst `llvm-lipo`缺少执行权限，安装目录不允许修改该文件。用 `python3 tools/prepare_unity_burst_runtime.py`在 `.toolcache`准备同一官方工具的副本，恢复本地副本的执行位；`test_unity_city.sh`检测该副本并仅对当前构建使用 `UNITY_BURST_RUNTIME_PATH`。已实际完成 AOT 通用包构建，没有禁用 Burst 或改系统保护。工具副本不进入 Git。
+
+Unity 6.6 的实际 macOS 架构由 `OSXStandalone.UserBuildSettings.architecture = OSArchitecture.x64ARM64`指定；单独的 `PlayerSettings.SetArchitecture`不足以选择通用包。`mac`构建入口随后用 `tools/sign_unity_mac.py`进行本地产物 ad-hoc 签名与严格校验。
+
 # Unity 移植开发环境
 
 此目录的说明不代表已经配置成功。实际结果以 `ACCEPTANCE.md` 为准。

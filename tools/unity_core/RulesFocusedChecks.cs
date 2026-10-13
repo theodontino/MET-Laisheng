@@ -1,0 +1,85 @@
+using System;
+using MET.Core;
+public static class METRulesFocusedChecks {
+ public static V Run() {
+  var checks=V.Arr();Action<bool,string> check=(ok,name)=> { checks.Add(V.Map("name",name,"pass",ok));if(!ok)throw new Exception(name); };
+  Func<string,int,int,string,V> modifier=(mode,specificity,priority,uid)=>V.Map("mode",mode,"specificity",specificity,"priority",priority,"uid",uid,"source",uid,"value",mode=="override"?17.0:2.0);
+  check(Rules.wins(modifier("override",2,0,"z"),modifier("override",1,100,"a")),"specificity wins before priority");
+  check(Rules.wins(modifier("override",1,2,"z"),modifier("override",1,1,"a")),"priority wins before uid");
+  check(Rules.wins(modifier("override",1,1,"a"),modifier("override",1,1,"b")),"uid ascending breaks override tie");
+  var reduced=Rules.reduce_number(10,V.Arr(modifier("multiply",0,0,"b"),modifier("add",0,0,"a")));
+  check(reduced["value"].Double==24&&reduced["rules"][0]["rule"].Text=="a","numeric reduction adds before multiplying with sorted evidence");
+  var overrides=Rules.reduce_number(10,V.Arr(modifier("override",1,99,"a"),modifier("override",2,0,"z")));
+  check(overrides["value"].Double==17&&overrides["override"].Text=="z","numeric override applies last");
+  check(Rules._weighted(2,"multiply",5.0/3)==1+5.0/3&&Rules._weighted(-1,"multiply",3)==0,"copy weighting and nonnegative multiplier");
+  var contributions=V.Arr(V.Map("value",2.0),V.Map("value",3.0));
+  check(Rules.aggregate(contributions)==5&&Rules.aggregate(contributions,"product")==6&&Rules.aggregate(contributions,"mean")==2.5,"all aggregation modes");
+  var projects=V.Map();
+  Func<string,string,V,V> project=(id,tile,inventory)=>V.Map("id",id,"tile",tile,"inventory",inventory,"operator_org","o","traits",V.Arr(),"labels",V.Arr(),"special",false,"paused",false,"status","running");
+  projects["a"]=project("a","0,0",V.Map("food",10.0,"material",0.0));
+  projects["b"]=project("b","1,0",V.Map("food",0.0,"material",0.0));
+  projects["c"]=project("c","2,0",V.Map("food",0.0,"material",0.0));
+  var s=V.Map("projects",projects,"cells",V.Map("0,0",V.Map(),"1,0",V.Map(),"2,0",V.Map()),"groups",V.Map());
+  var compiled=V.Map("stats",V.Map(),"config",V.Map(),"options",V.Map());
+  foreach(var id in projects.Keys) { compiled["stats"][id]=V.Map("distance_cost",1.0,"allocation_priority",0.0,"jobs",0.0,"personnel_mult",1.0);compiled["config"][id]=V.Map(); }
+  var access=V.Map("tiles",Fields.empty_tiles(s));
+  Fields.sample(access["tiles"],"1,0","employment","field","a",.5,"relay");
+  Fields.sample(access["tiles"],"1,0","employment","field","a",.8);
+  check(Fields.source_value(access["tiles"],"1,0","employment","a")==.8&&Fields.source_value(access["tiles"],"1,0","employment","b")==0,"access selects best contribution for exact provider");
+  check(Fields.access_strength(0,2,.5)==1&&Fields.access_strength(2,2,.5)==.5&&Fields.access_strength(3,2,.5)==0,"access reach and decay");
+  var claims=V.Map("B",V.Map("owner","b","needs",V.Map("food",8.0)),"C",V.Map("owner","c","needs",V.Map("food",8.0)));
+  var allocation=Alloc.resources(s,compiled,claims,access);
+  check(allocation["grants"]["B"]["food"].Double==8&&allocation["grants"]["C"]["food"].Double==2&&projects["a"]["inventory"]["food"].Double==10,"distance allocation preserves source snapshot and finite stock");
+  var settled=Alloc.settle_resources(s,allocation,V.Map("B",V.Map("food",4.0),"C",V.Map("food",1.0)));
+  check(settled["inventories"]["a"]["food"].Double==5&&settled["consumed"]["food"].Double==5&&settled["receipts"][0]["source"].Text=="a","actual use returns unused reservations and source receipts");
+  claims["B"]["needs"]["material"]=8.0;
+  var feasible=Alloc.feasible_resources(s,compiled,claims,access,V.Map());
+  check(feasible["grants"]["B"]["food"].Double==0&&feasible["grants"]["C"]["food"].Double==8,"missing ingredient releases stock to feasible consumer");
+  check(Alloc.supply_ratio(V.Map("food",4.0,"material",2.0),V.Map("food",2.0,"material",2.0))==.5,"supply ratio uses limiting ingredient");
+  compiled["config"]["b"]["group_procurement"]=true;compiled["config"]["c"]["group_procurement"]=true;claims["B"]["needs"].Remove("material");
+  allocation=Alloc.resources(s,compiled,claims,access);
+  check(allocation["grants"]["B"]["food"].Double==8&&allocation["grants"]["C"]["food"].Double==2&&allocation["transfers"][0]["procurement_group"].Text=="o","group procurement retains finite sources and group evidence");
+  compiled["options"]["procure_mode"]="split";allocation=Alloc.resources(s,compiled,claims,access);
+  check(Math.Abs(allocation["grants"]["B"]["food"].Double-4.8)<1e-12&&Math.Abs(allocation["remaining"]["a"]["food"].Double-.4)<1e-12,"split procurement bounds each source reservation");
+  projects["a"]["traits"].Add("building.road");projects["b"]["traits"].Add("building.road");projects["c"]["traits"].Add("building.road");projects["b"]["paused"]=true;
+  check(Fields.road_component(s,"a").Count==1,"paused road blocks network component");
+  projects["b"]["paused"]=false;check(Fields.road_component(s,"a").Count==3,"road component uses actual adjacency");
+  projects["a"]["labels"].Add("use.commercial");var semantic=Rules.semantic_traits(s,"a");
+  check(semantic.Contains("building.commercial")&&!projects["a"]["traits"].Contains("building.commercial"),"semantic labels do not mutate innate traits");
+  var env=V.Map("tiles",Fields.empty_tiles(s),"budgets",V.Map("F",V.Map("type","heat","source_id","a","remaining",3.0,"local",V.Map("0,0",3.0,"1,0",3.0))));
+  Fields.sample(env["tiles"],"0,0","heat","F","a",3);Fields.sample(env["tiles"],"1,0","heat","F","a",3);
+  var heatA=Fields.reserve_heat(env,"0,0",2);var heatB=Fields.reserve_heat(env,"1,0",2);
+  check(heatA["amount"].Double==2&&heatB["amount"].Double==1&&heatB["sources"][0]["source"].Text=="a","heat reach consumes one shared finite pool");
+  env=V.Map("tiles",Fields.empty_tiles(s),"budgets",V.Map("P",V.Map("type","pollution","source_id","a","remaining",4.0,"local",V.Map("0,0",2.0))));
+  Fields.sample(env["tiles"],"0,0","pollution","P","a",1);
+  var cleaned=Fields.consume_local_pollution(env,"0,0",3,2);
+  check(cleaned==2&&env["budgets"]["P"]["remaining"].Double==2&&env["tiles"]["0,0"]["pollution"][0]["value"].Double==0,"pollution cleanup is bounded by local mass and edits projection");
+  return V.Map("passed",checks.Count,"checks",checks);
+ }
+ public static V RunSimulation(string contentRoot) {
+  var checks=V.Arr();Action<bool,string> check=(ok,name)=> { checks.Add(V.Map("name",name,"pass",ok));if(!ok)throw new Exception(name); };
+  var g=new Game(new Catalog(contentRoot));g.new_game(12345,0);g.select_block(0);g.choose_origin(g.s["origin_choices"][0].Text);
+  var compiled=Rules.compile(g);var first=Sim.spatial_snapshot(g,compiled);var key=g.spatial_cache["key"].Text;
+  Sim.spatial_snapshot(g,compiled);check(g.spatial_cache["hit"].Bool,"unchanged access inputs reuse spatial snapshot");
+  g.s["projects"]["municipal"]["inventory"]["food"]+=7;Sim.spatial_snapshot(g,compiled);
+  check(g.spatial_cache["hit"].Bool&&g.spatial_cache["key"].Text==key,"inventory does not invalidate access cache");
+  var bid=g.playable_ids()[0];g.s["projects"][bid]["paused"]=true;Sim.spatial_snapshot(g,compiled);
+  check(!g.spatial_cache["hit"].Bool,"paused source invalidates spatial snapshot");g.s["projects"][bid]["paused"]=false;
+  compiled["stats"][bid]["service_range"]+=1;Sim.spatial_snapshot(g,compiled);check(!g.spatial_cache["hit"].Bool,"range stats invalidate spatial snapshot");
+  var gid=Rules.ids(g.s["groups"])[0];var field=Fields.make_field(gid.Text,"education",1,2,.3);g.s["authored_fields"]["authored"]=field;
+  Sim.spatial_snapshot(g,compiled);g.s["groups"][gid]["host"]=g.playable_ids()[1];Sim.spatial_snapshot(g,compiled);
+  check(!g.spatial_cache["hit"].Bool,"authored group field follows home changes in cache key");
+  var projects=V.Map();Func<string,string,V,V> project=(id,tile,traits)=>V.Map("id",id,"tile",tile,"status","running","paused",false,"traits",traits,"inventory",V.Map("food",0.0));
+  projects["producer"]=project("producer","0,0",V.Arr());projects["relay"]=project("relay","1,0",V.Arr());projects["warehouse"]=project("warehouse","3,0",V.Arr("building.logistics"));projects["municipal"]=project("municipal","offmap:municipal",V.Arr());
+  var state=V.Map("projects",projects,"cells",V.Map("0,0",V.Map(),"1,0",V.Map(),"3,0",V.Map()));
+  var c=V.Map("stats",V.Map("producer",V.Map("storage.food",1.0),"relay",V.Map("storage.food",2.0),"warehouse",V.Map("storage.food",3.0),"municipal",V.Map("storage.food",4.0)),"config",V.Map("producer",V.Map(),"relay",V.Map("overflow_relay",true),"warehouse",V.Map(),"municipal",V.Map()),"options",V.Map());
+  var inventories=Alloc.stocks(state);var spilled=V.Map();var movements=V.Arr();var kept=Sim.deposit(state,c,inventories,"producer","food",7,spilled,movements);
+  check(kept==7&&inventories["producer"]["food"].Double==1&&movements[0]["target"].Text=="relay"&&movements[1]["target"].Text=="warehouse"&&movements[2]["target"].Text=="municipal","deposit fills producer then adjacent relay then logistics then municipal");
+  check(movements[0]["source"].Text=="producer"&&movements[0]["amount"].Double==2&&movements[2]["amount"].Double==1,"overflow movements retain producer provenance");
+  kept=Sim.deposit(state,c,inventories,"producer","food",5,spilled,movements);
+  check(kept==3&&spilled["food"].Double==2&&Sim.total(inventories,"food")==10,"full storage spills only finite overflow");
+  c["stats"]["producer"]["retained_storage.food"]=3.0;check(Sim.storage_cap(c,"producer","food")==3,"retained storage preserves capacity above current blueprint");
+  var before=g.s;check(Sim.tick(g,double.NaN)!=""&&ReferenceEquals(before,g.s),"invalid duration leaves state untouched");
+  return V.Map("passed",checks.Count,"checks",checks);
+ }
+}

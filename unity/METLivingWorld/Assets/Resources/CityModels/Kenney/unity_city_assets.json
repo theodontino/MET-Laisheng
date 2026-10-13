@@ -1,0 +1,1291 @@
+{
+  "schema": "met.unity.city-assets.v1",
+  "source_date": "2026-10-13",
+  "renderer": "Official glTFast + URP realtime lighting; original materials preserved",
+  "style": "Kenney City Kit Suburban/Commercial/Industrial with Factory Kit purpose props; original MET farmland retained",
+  "assets": {
+    "CityModels/homestead": {
+      "origin": "project-original",
+      "kind": "building",
+      "license": "LicenseRef-MET-Project-Original",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "provenance": "docs/living_world/ASSET_PROVENANCE.md"
+    },
+    "CityModels/neighborhood": {
+      "origin": "project-original",
+      "kind": "building",
+      "license": "LicenseRef-MET-Project-Original",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "provenance": "docs/living_world/ASSET_PROVENANCE.md"
+    },
+    "CityModels/workshop": {
+      "origin": "project-original",
+      "kind": "building",
+      "license": "LicenseRef-MET-Project-Original",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "provenance": "docs/living_world/ASSET_PROVENANCE.md"
+    },
+    "CityModels/residence": {
+      "origin": "project-original",
+      "kind": "building",
+      "license": "LicenseRef-MET-Project-Original",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "provenance": "docs/living_world/ASSET_PROVENANCE.md"
+    },
+    "CityModels/valley_tree_01": {
+      "origin": "project-original",
+      "kind": "foliage",
+      "license": "LicenseRef-MET-Project-Original",
+      "source_url": "https://github.com/theodontino/MET-Laisheng",
+      "provenance": "docs/living_world/ASSET_PROVENANCE.md"
+    },
+    "CityModels/Kenney/Suburban/building-type-p": {
+      "origin": "kenney",
+      "pack": "Suburban",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-suburban",
+      "source_model": "Models/GLB format/building-type-p.glb",
+      "preview": "Previews/building-type-p.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.6200000643730164,
+            0.0,
+            -0.4950000047683716
+          ],
+          "max": [
+            0.6200000643730164,
+            0.9179999828338623,
+            0.49500006437301636
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Factory/machine": {
+      "origin": "kenney",
+      "pack": "Factory",
+      "pack_version": "3.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/factory-kit",
+      "source_model": "Models/GLB format/machine.glb",
+      "preview": "Previews/machine.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.6000000238418579,
+            -4.106748552334949e-10,
+            -0.75
+          ],
+          "max": [
+            0.6000000238418579,
+            1.299751877784729,
+            0.75
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/building-q": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/building-q.glb",
+      "preview": "Previews/building-q.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -1.2982059717178345,
+            0.0,
+            -0.8738914728164673
+          ],
+          "max": [
+            0.8417940139770508,
+            0.8799999952316284,
+            0.8960000872612
+          ]
+        },
+        {
+          "min": [
+            -1.2982059717178345,
+            0.0,
+            -0.8738914728164673
+          ],
+          "max": [
+            0.8417940139770508,
+            0.8799999952316284,
+            0.8960000872612
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Suburban/path-stones-short": {
+      "origin": "kenney",
+      "pack": "Suburban",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-suburban",
+      "source_model": "Models/GLB format/path-stones-short.glb",
+      "preview": "Previews/path-stones-short.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.07000000029802322,
+            0.0,
+            -0.10000000149011612
+          ],
+          "max": [
+            0.07000000029802322,
+            0.009999999776482582,
+            0.10000000149011612
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Suburban/building-type-e": {
+      "origin": "kenney",
+      "pack": "Suburban",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-suburban",
+      "source_model": "Models/GLB format/building-type-e.glb",
+      "preview": "Previews/building-type-e.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.6499999761581421,
+            2.707167856703783e-16,
+            -0.5139999985694885
+          ],
+          "max": [
+            0.6499999761581421,
+            1.1375000476837158,
+            0.5139999985694885
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Commercial/detail-parasol-a": {
+      "origin": "kenney",
+      "pack": "Commercial",
+      "pack_version": "2.1",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-commercial",
+      "source_model": "Models/GLB format/detail-parasol-a.glb",
+      "preview": "Previews/detail-parasol-a.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.17320507764816284,
+            0.0,
+            -0.20000000298023224
+          ],
+          "max": [
+            0.17320507764816284,
+            0.45000001788139343,
+            0.20000000298023224
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Commercial/building-e": {
+      "origin": "kenney",
+      "pack": "Commercial",
+      "pack_version": "2.1",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-commercial",
+      "source_model": "Models/GLB format/building-e.glb",
+      "preview": "Previews/building-e.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.8199999928474426,
+            0.0,
+            -0.5039456486701965
+          ],
+          "max": [
+            0.8200000524520874,
+            0.8930000066757202,
+            0.5039458870887756
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Commercial/building-c": {
+      "origin": "kenney",
+      "pack": "Commercial",
+      "pack_version": "2.1",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-commercial",
+      "source_model": "Models/GLB format/building-c.glb",
+      "preview": "Previews/building-c.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.44179391860961914,
+            0.0,
+            -0.5450000166893005
+          ],
+          "max": [
+            0.4417939782142639,
+            0.8930000066757202,
+            0.5450000762939453
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Suburban/building-type-g": {
+      "origin": "kenney",
+      "pack": "Suburban",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-suburban",
+      "source_model": "Models/GLB format/building-type-g.glb",
+      "preview": "Previews/building-type-g.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.7250000238418579,
+            0.0,
+            -0.5889999866485596
+          ],
+          "max": [
+            0.7250000238418579,
+            0.76820969581604,
+            0.5889999866485596
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/solar-panel-flat": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/solar-panel-flat.glb",
+      "preview": "Previews/solar-panel-flat.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.20910000801086426,
+            0.0,
+            -0.35670000314712524
+          ],
+          "max": [
+            0.20910000801086426,
+            0.061500001698732376,
+            0.35670000314712524
+          ]
+        },
+        {
+          "min": [
+            -0.20910000801086426,
+            0.0,
+            -0.35670000314712524
+          ],
+          "max": [
+            0.20910000801086426,
+            0.061500001698732376,
+            0.35670000314712524
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/building-t": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/building-t.glb",
+      "preview": "Previews/building-t.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.8608628511428833,
+            0.0,
+            -0.6950000524520874
+          ],
+          "max": [
+            0.8608629107475281,
+            1.014552116394043,
+            0.6950002312660217
+          ]
+        },
+        {
+          "min": [
+            -0.8608628511428833,
+            0.0,
+            -0.6950000524520874
+          ],
+          "max": [
+            0.8608629107475281,
+            1.014552116394043,
+            0.6950002312660217
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Factory/hopper-square": {
+      "origin": "kenney",
+      "pack": "Factory",
+      "pack_version": "3.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/factory-kit",
+      "source_model": "Models/GLB format/hopper-square.glb",
+      "preview": "Previews/hopper-square.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.5586000084877014,
+            0.0,
+            -0.5586000084877014
+          ],
+          "max": [
+            0.5586000084877014,
+            1.0,
+            0.5586000084877014
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/building-l": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/building-l.glb",
+      "preview": "Previews/building-l.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -1.4635876417160034,
+            -6.261583359519332e-34,
+            -0.7110000848770142
+          ],
+          "max": [
+            0.6199999451637268,
+            1.9249999523162842,
+            1.159000039100647
+          ]
+        },
+        {
+          "min": [
+            -1.4635876417160034,
+            -6.261583359519332e-34,
+            -0.7110000848770142
+          ],
+          "max": [
+            0.6199999451637268,
+            1.9249999523162842,
+            1.159000039100647
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/shipping-container-a": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/shipping-container-a.glb",
+      "preview": "Previews/shipping-container-a.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.6900008320808411,
+            2.5397421943296195e-09,
+            -1.5233334302902222
+          ],
+          "max": [
+            0.6899996399879456,
+            1.2891850471496582,
+            1.5233334302902222
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Factory/box-small": {
+      "origin": "kenney",
+      "pack": "Factory",
+      "pack_version": "3.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/factory-kit",
+      "source_model": "Models/GLB format/box-small.glb",
+      "preview": "Previews/box-small.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.29750001430511475,
+            0.0,
+            -0.25
+          ],
+          "max": [
+            0.29749998450279236,
+            0.550000011920929,
+            0.25
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/building-p": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/building-p.glb",
+      "preview": "Previews/building-p.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.8417938947677612,
+            0.0,
+            -0.4959999918937683
+          ],
+          "max": [
+            0.8417940139770508,
+            0.7145521640777588,
+            0.4959999918937683
+          ]
+        },
+        {
+          "min": [
+            -0.8417938947677612,
+            0.0,
+            -0.4959999918937683
+          ],
+          "max": [
+            0.8417940139770508,
+            0.7145521640777588,
+            0.4959999918937683
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Commercial/building-j": {
+      "origin": "kenney",
+      "pack": "Commercial",
+      "pack_version": "2.1",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-commercial",
+      "source_model": "Models/GLB format/building-j.glb",
+      "preview": "Previews/building-j.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -1.041793942451477,
+            0.0,
+            -0.6700000166893005
+          ],
+          "max": [
+            1.0417940616607666,
+            1.693000078201294,
+            0.6700000166893005
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Commercial/building-k": {
+      "origin": "kenney",
+      "pack": "Commercial",
+      "pack_version": "2.1",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-commercial",
+      "source_model": "Models/GLB format/building-k.glb",
+      "preview": "Previews/building-k.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -1.041793942451477,
+            0.0,
+            -0.47099998593330383
+          ],
+          "max": [
+            1.0417940616607666,
+            1.4700000286102295,
+            0.4709998071193695
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Suburban/planter": {
+      "origin": "kenney",
+      "pack": "Suburban",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-suburban",
+      "source_model": "Models/GLB format/planter.glb",
+      "preview": "Previews/planter.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.20000000298023224,
+            0.0,
+            -0.15057337284088135
+          ],
+          "max": [
+            0.20000000298023224,
+            0.17710953950881958,
+            0.1494266241788864
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Commercial/building-n": {
+      "origin": "kenney",
+      "pack": "Commercial",
+      "pack_version": "2.1",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-commercial",
+      "source_model": "Models/GLB format/building-n.glb",
+      "preview": "Previews/building-n.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -1.1600000858306885,
+            0.0,
+            -0.9100000262260437
+          ],
+          "max": [
+            1.160000205039978,
+            2.4800000190734863,
+            0.9100000262260437
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Suburban/building-type-j": {
+      "origin": "kenney",
+      "pack": "Suburban",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-suburban",
+      "source_model": "Models/GLB format/building-type-j.glb",
+      "preview": "Previews/building-type-j.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.6850000023841858,
+            0.0,
+            -0.4580000042915344
+          ],
+          "max": [
+            0.6850000023841858,
+            1.037500023841858,
+            0.4580000042915344
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/detail-tank": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/detail-tank.glb",
+      "preview": "Previews/detail-tank.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.42400017380714417,
+            -2.8199664484680564e-18,
+            -0.25764763355255127
+          ],
+          "max": [
+            0.42400023341178894,
+            0.41529566049575806,
+            0.2576480507850647
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/building-e": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/building-e.glb",
+      "preview": "Previews/building-e.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.8417938947677612,
+            0.0,
+            -0.3959999978542328
+          ],
+          "max": [
+            0.8417940139770508,
+            1.649999976158142,
+            0.8940002918243408
+          ]
+        },
+        {
+          "min": [
+            -0.8417938947677612,
+            0.0,
+            -0.3959999978542328
+          ],
+          "max": [
+            0.8417940139770508,
+            1.649999976158142,
+            0.8940002918243408
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/building-f": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/building-f.glb",
+      "preview": "Previews/building-f.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -1.3482062816619873,
+            -3.609556789341316e-16,
+            -0.38599997758865356
+          ],
+          "max": [
+            0.44179394841194153,
+            1.9249999523162842,
+            0.8940000534057617
+          ]
+        },
+        {
+          "min": [
+            -1.3482062816619873,
+            -3.609556789341316e-16,
+            -0.38599997758865356
+          ],
+          "max": [
+            0.44179394841194153,
+            1.9249999523162842,
+            0.8940000534057617
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Factory/conveyor-long": {
+      "origin": "kenney",
+      "pack": "Factory",
+      "pack_version": "3.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/factory-kit",
+      "source_model": "Models/GLB format/conveyor-long.glb",
+      "preview": "Previews/conveyor-long.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -1.0,
+            0.0,
+            -0.5
+          ],
+          "max": [
+            1.0,
+            0.4000000059604645,
+            0.5
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/building-m": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/building-m.glb",
+      "preview": "Previews/building-m.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.6581377387046814,
+            0.0,
+            -0.8500000238418579
+          ],
+          "max": [
+            0.6581377387046814,
+            1.519006609916687,
+            0.8500000238418579
+          ]
+        },
+        {
+          "min": [
+            -0.6581377387046814,
+            0.0,
+            -0.8500000238418579
+          ],
+          "max": [
+            0.6581377387046814,
+            1.519006609916687,
+            0.8500000238418579
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/shipping-container-b": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/shipping-container-b.glb",
+      "preview": "Previews/shipping-container-b.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.6900006532669067,
+            2.5397421943296195e-09,
+            -1.5233334302902222
+          ],
+          "max": [
+            0.6899998188018799,
+            1.2891850471496582,
+            1.5233334302902222
+          ]
+        },
+        {
+          "min": [
+            -0.6900006532669067,
+            2.5397421943296195e-09,
+            -1.5233334302902222
+          ],
+          "max": [
+            0.6899998188018799,
+            1.2891850471496582,
+            1.5233334302902222
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Factory/crane": {
+      "origin": "kenney",
+      "pack": "Factory",
+      "pack_version": "3.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/factory-kit",
+      "source_model": "Models/GLB format/crane.glb",
+      "preview": "Previews/crane.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -0.9630127549171448,
+            -8.121503305413553e-16,
+            -0.5331921577453613
+          ],
+          "max": [
+            0.9630127549171448,
+            3.003319263458252,
+            0.5331921577453613
+          ]
+        },
+        {
+          "min": [
+            -0.30000001192092896,
+            0.0,
+            -2.9901251792907715
+          ],
+          "max": [
+            0.30000001192092896,
+            0.550000011920929,
+            0.6901248693466187
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    },
+    "CityModels/Kenney/Industrial/building-s": {
+      "origin": "kenney",
+      "pack": "Industrial",
+      "pack_version": "2.0",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/city-kit-industrial",
+      "source_model": "Models/GLB format/building-s.glb",
+      "preview": "Previews/building-s.png",
+      "position_accessor_bounds": [
+        {
+          "min": [
+            -1.0700000524520874,
+            0.0,
+            -0.4581376910209656
+          ],
+          "max": [
+            1.0500000715255737,
+            0.8367910385131836,
+            0.4581376910209656
+          ]
+        },
+        {
+          "min": [
+            -1.0700000524520874,
+            0.0,
+            -0.4581376910209656
+          ],
+          "max": [
+            1.0500000715255737,
+            0.8367910385131836,
+            0.4581376910209656
+          ]
+        }
+      ],
+      "normalization": "Official glTFast prefab; Unity transformed MeshFilter bounds, uniform footprint fit and ground alignment; no second coordinate mirror."
+    }
+  },
+  "bindings": {
+    "homestead": {
+      "resource": "CityModels/homestead",
+      "purpose": "agriculture",
+      "surface_detail": "farmland",
+      "width": 0.96,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [],
+      "assignment": "Existing MET original geometry; gameplay and asset identities remain separate."
+    },
+    "neighborhood": {
+      "resource": "CityModels/Kenney/Suburban/building-type-p",
+      "purpose": "community",
+      "surface_detail": "community_courtyard",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "workshop": {
+      "resource": "CityModels/Kenney/Industrial/building-q",
+      "purpose": "industry",
+      "surface_detail": "industrial",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Factory/machine",
+          "position": [
+            0.42,
+            0,
+            0.38
+          ],
+          "width": 0.23,
+          "max_height": 0.28,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "residence": {
+      "resource": "CityModels/Kenney/Suburban/building-type-e",
+      "purpose": "housing",
+      "surface_detail": "",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Suburban/path-stones-short",
+          "position": [
+            0,
+            0,
+            0.48
+          ],
+          "width": 0.22,
+          "max_height": 0.05,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "agriculture": {
+      "resource": "CityModels/homestead",
+      "purpose": "agriculture",
+      "surface_detail": "farmland",
+      "width": 0.86,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [],
+      "assignment": "Existing MET original geometry; gameplay and asset identities remain separate."
+    },
+    "public_center": {
+      "resource": "CityModels/Kenney/Commercial/building-e",
+      "purpose": "commercial",
+      "surface_detail": "community_courtyard",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Commercial/detail-parasol-a",
+          "position": [
+            0.41,
+            0,
+            0.39
+          ],
+          "width": 0.22,
+          "max_height": 0.3,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "medical_clinic": {
+      "resource": "CityModels/Kenney/Commercial/building-c",
+      "purpose": "medical",
+      "surface_detail": "medical_cross",
+      "width": 1.0,
+      "max_height": 1.0,
+      "rotation": 30,
+      "props": [],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "primary_school": {
+      "resource": "CityModels/Kenney/Suburban/building-type-g",
+      "purpose": "education",
+      "surface_detail": "school_courtyard",
+      "width": 1.02,
+      "max_height": 1.0,
+      "rotation": 30,
+      "props": [],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "power_station": {
+      "resource": "CityModels/Kenney/Industrial/building-t",
+      "purpose": "energy",
+      "surface_detail": "energy",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Industrial/solar-panel-flat",
+          "position": [
+            0.39,
+            0,
+            0.43
+          ],
+          "width": 0.3,
+          "max_height": 0.2,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "extraction": {
+      "resource": "CityModels/Kenney/Industrial/building-l",
+      "purpose": "extractive",
+      "surface_detail": "industrial",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Factory/hopper-square",
+          "position": [
+            0.43,
+            0,
+            0.39
+          ],
+          "width": 0.26,
+          "max_height": 0.26,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "yard": {
+      "resource": "CityModels/Kenney/Industrial/building-p",
+      "purpose": "logistics",
+      "surface_detail": "logistics",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Industrial/shipping-container-a",
+          "position": [
+            -0.38,
+            0,
+            0.42
+          ],
+          "width": 0.27,
+          "max_height": 0.28,
+          "rotation": 0
+        },
+        {
+          "resource": "CityModels/Kenney/Factory/box-small",
+          "position": [
+            0.43,
+            0,
+            0.39
+          ],
+          "width": 0.19,
+          "max_height": 0.19,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "advanced_residence": {
+      "resource": "CityModels/Kenney/Commercial/building-j",
+      "purpose": "housing",
+      "surface_detail": "",
+      "width": 0.96,
+      "max_height": 1.3,
+      "rotation": 30,
+      "props": [],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "modern_agriculture": {
+      "resource": "CityModels/homestead",
+      "purpose": "agriculture",
+      "surface_detail": "modern_farmland",
+      "width": 0.86,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Industrial/solar-panel-flat",
+          "position": [
+            0.43,
+            0,
+            0.39
+          ],
+          "width": 0.25,
+          "max_height": 0.2,
+          "rotation": 0
+        }
+      ],
+      "assignment": "Existing MET original geometry; gameplay and asset identities remain separate."
+    },
+    "commercial_center": {
+      "resource": "CityModels/Kenney/Commercial/building-k",
+      "purpose": "commercial",
+      "surface_detail": "commercial",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Commercial/detail-parasol-a",
+          "position": [
+            0.43,
+            0,
+            0.4
+          ],
+          "width": 0.24,
+          "max_height": 0.3,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "garden": {
+      "resource": "CityModels/Kenney/Suburban/planter",
+      "purpose": "green",
+      "surface_detail": "garden",
+      "width": 0.78,
+      "max_height": 0.45,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Commercial/detail-parasol-a",
+          "position": [
+            0.43,
+            0,
+            0.34
+          ],
+          "width": 0.26,
+          "max_height": 0.32,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "hospital": {
+      "resource": "CityModels/Kenney/Commercial/building-n",
+      "purpose": "medical",
+      "surface_detail": "medical_cross",
+      "width": 1.08,
+      "max_height": 1.3,
+      "rotation": 30,
+      "props": [],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "secondary_school": {
+      "resource": "CityModels/Kenney/Suburban/building-type-j",
+      "purpose": "education",
+      "surface_detail": "school_courtyard",
+      "width": 1.08,
+      "max_height": 1.0,
+      "rotation": 30,
+      "props": [],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "power_plant": {
+      "resource": "CityModels/Kenney/Industrial/building-e",
+      "purpose": "energy",
+      "surface_detail": "energy",
+      "width": 1.08,
+      "max_height": 1.2,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Industrial/detail-tank",
+          "position": [
+            0.43,
+            0,
+            0.4
+          ],
+          "width": 0.25,
+          "max_height": 0.38,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "material_factory": {
+      "resource": "CityModels/Kenney/Industrial/building-f",
+      "purpose": "extractive",
+      "surface_detail": "industrial",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Factory/machine",
+          "position": [
+            0.42,
+            0,
+            0.4
+          ],
+          "width": 0.24,
+          "max_height": 0.28,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "manufacturing": {
+      "resource": "CityModels/Kenney/Industrial/building-m",
+      "purpose": "industry",
+      "surface_detail": "industrial",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Factory/conveyor-long",
+          "position": [
+            0,
+            0,
+            0.46
+          ],
+          "width": 0.58,
+          "max_height": 0.18,
+          "rotation": 0
+        },
+        {
+          "resource": "CityModels/Kenney/Factory/box-small",
+          "position": [
+            0.43,
+            0,
+            0.4
+          ],
+          "width": 0.17,
+          "max_height": 0.17,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    },
+    "freight": {
+      "resource": "CityModels/Kenney/Industrial/building-s",
+      "purpose": "logistics",
+      "surface_detail": "logistics",
+      "width": 1.08,
+      "max_height": 1.25,
+      "rotation": 30,
+      "props": [
+        {
+          "resource": "CityModels/Kenney/Industrial/shipping-container-a",
+          "position": [
+            -0.38,
+            0,
+            0.4
+          ],
+          "width": 0.27,
+          "max_height": 0.26,
+          "rotation": 0
+        },
+        {
+          "resource": "CityModels/Kenney/Industrial/shipping-container-b",
+          "position": [
+            0.39,
+            0,
+            0.4
+          ],
+          "width": 0.28,
+          "max_height": 0.27,
+          "rotation": 0
+        },
+        {
+          "resource": "CityModels/Kenney/Factory/crane",
+          "position": [
+            0.44,
+            0,
+            -0.37
+          ],
+          "width": 0.24,
+          "max_height": 0.43,
+          "rotation": 0
+        }
+      ],
+      "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+    }
+  },
+  "preserved_originals": [
+    "CityModels/homestead",
+    "CityModels/neighborhood",
+    "CityModels/workshop",
+    "CityModels/residence",
+    "CityModels/valley_tree_01"
+  ],
+  "scope_note": "21 definitions have explicit bindings; distinct primary models and adapted facility assignments are counted separately. This is a community-asset integration, not completed Civilization VI artwork or Unity runtime acceptance."
+}

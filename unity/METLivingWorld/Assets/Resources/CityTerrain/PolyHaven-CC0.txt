@@ -1,0 +1,6 @@
+Asset: Grass Ground (Poly Haven)
+Original page: https://polyhaven.com/a/grass_ground
+Direct 1K diffuse JPG: https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/grass_ground/grass_ground_diff_1k.jpg
+License page: https://polyhaven.com/license
+License evidence: Poly Haven states its assets are CC0 and may be used for any purpose, including commercial work; no attribution is required (credit appreciated).
+Downloaded file: grass_ground_diff_1k.jpg

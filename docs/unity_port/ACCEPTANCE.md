@@ -1,5 +1,7 @@
 # Unity Hero Valley 移植验收状态
 
+本文是最初只读 Hero 切片的历史验收记录。完整迁移已于 2026-10-13 获授权，Unity Hub 已登录、6.6 已安装；新核心与 Unity 原生运行的结果另记 [FULL_MIGRATION.md](FULL_MIGRATION.md)，不替换或重标本页旧证据。
+
 **本轮完成源码移植和标准 GLB/JSON 桥接；Unity 运行、截图、性能和 macOS 包尚未验收。** 用户确认没有 Unity 账号或已激活环境。当前云环境也没有已激活的 Unity Editor，编辑器容器下载尝试遇到磁盘空间不足。现有证据不能据此比较 Godot 与 Unity 的性能或制作效率。
 
 ## 已实际执行的检查

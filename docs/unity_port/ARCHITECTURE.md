@@ -1,5 +1,7 @@
 # Unity Hero Valley 移植架构
 
+本文保留最初只读 Hero 切片的架构。2026-10-13 用户已授权完整玩法迁移，并选择 Unity 6.6；当前入口与证据见 [FULL_MIGRATION.md](FULL_MIGRATION.md)。下文原版本、范围与环境描述按历史记录阅读。
+
 本轮把现有 Living World V1 河谷可视切片移到一个独立 Unity 项目，建立可比较的导入、观察、验证与构建入口。城市模拟、玩法 UI 与存档仍由当前 Godot 游戏负责。Unity 工程没有另一套 Game、经济或城市成长实现；它读取一份固定的已结算展示数据，用于评估 Unity 是否能改善 MET 的视觉制作效率。
 
 实际验收范围见 [ACCEPTANCE.md](ACCEPTANCE.md)。Unity 源码与配置已提供，但当前没有已激活的 Unity 编辑器；不能把 Godot 导出成功当成 Unity 已运行。

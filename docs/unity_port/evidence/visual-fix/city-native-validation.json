@@ -1,0 +1,968 @@
+{
+  "status": "passed",
+  "unity_version": "6000.6.5f1",
+  "application_version": "0.5.0-beta.2-unity.2",
+  "platform": "OSXPlayer",
+  "graphics_device": "Apple M5 Max",
+  "graphics_api": "Metal",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "checks": [
+    {
+      "name": "isolated_save_root",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "runtime_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_import",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "camera_audio_listener",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "chinese_font_asset",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "urp_shaders_serialized",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "transparent_overlay_serialized",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_在此登陆",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "landing_callback",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确立起源 · 安顿居民",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "origin_callback",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "full_map",
+      "passed": true,
+      "detail": 61
+    },
+    {
+      "name": "core_valid_after_start",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "asset_coverage",
+      "passed": true,
+      "detail": {
+        "registered_assets": 34,
+        "loaded_prefab_count": 4,
+        "loaded_resource_keys": [
+          "CityModels/Kenney/Factory/machine",
+          "CityModels/Kenney/Industrial/building-q",
+          "CityModels/homestead",
+          "CityModels/valley_tree_01"
+        ],
+        "registered_cc0_assets": 29,
+        "registered_original_building_models": 4,
+        "original_tree_models": 1,
+        "catalog_definition_bindings": 21,
+        "distinct_primary_models": 19,
+        "distinct_cc0_primary_models": 18,
+        "distinct_original_primary_models": 1,
+        "visible_distinct_primary_models": 2,
+        "visible_cc0_primary_models": 1,
+        "visible_definition_bindings": {
+          "homestead": {
+            "resource": "CityModels/homestead",
+            "origin": "project-original",
+            "license": "LicenseRef-MET-Project-Original",
+            "direct_original_model": true,
+            "purpose": "agriculture",
+            "assignment": "Existing MET original geometry; gameplay and asset identities remain separate.",
+            "props": [],
+            "rendered_primary": true,
+            "normalized_height": 0.20314532518386841
+          },
+          "workshop": {
+            "resource": "CityModels/Kenney/Industrial/building-q",
+            "origin": "kenney",
+            "license": "CC0-1.0",
+            "direct_original_model": false,
+            "purpose": "industry",
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility.",
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Factory/machine",
+                "position": [
+                  0.42,
+                  0,
+                  0.38
+                ],
+                "width": 0.23,
+                "max_height": 0.28,
+                "rotation": 0
+              }
+            ],
+            "rendered_primary": true,
+            "normalized_height": 0.34708425402641296
+          }
+        },
+        "registry_bindings": {
+          "homestead": {
+            "resource": "CityModels/homestead",
+            "purpose": "agriculture",
+            "surface_detail": "farmland",
+            "width": 0.96,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [],
+            "assignment": "Existing MET original geometry; gameplay and asset identities remain separate."
+          },
+          "neighborhood": {
+            "resource": "CityModels/Kenney/Suburban/building-type-p",
+            "purpose": "community",
+            "surface_detail": "community_courtyard",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "workshop": {
+            "resource": "CityModels/Kenney/Industrial/building-q",
+            "purpose": "industry",
+            "surface_detail": "industrial",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Factory/machine",
+                "position": [
+                  0.42,
+                  0,
+                  0.38
+                ],
+                "width": 0.23,
+                "max_height": 0.28,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "residence": {
+            "resource": "CityModels/Kenney/Suburban/building-type-e",
+            "purpose": "housing",
+            "surface_detail": "",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Suburban/path-stones-short",
+                "position": [
+                  0,
+                  0,
+                  0.48
+                ],
+                "width": 0.22,
+                "max_height": 0.05,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "agriculture": {
+            "resource": "CityModels/homestead",
+            "purpose": "agriculture",
+            "surface_detail": "farmland",
+            "width": 0.86,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [],
+            "assignment": "Existing MET original geometry; gameplay and asset identities remain separate."
+          },
+          "public_center": {
+            "resource": "CityModels/Kenney/Commercial/building-e",
+            "purpose": "commercial",
+            "surface_detail": "community_courtyard",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Commercial/detail-parasol-a",
+                "position": [
+                  0.41,
+                  0,
+                  0.39
+                ],
+                "width": 0.22,
+                "max_height": 0.3,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "medical_clinic": {
+            "resource": "CityModels/Kenney/Commercial/building-c",
+            "purpose": "medical",
+            "surface_detail": "medical_cross",
+            "width": 1.0,
+            "max_height": 1.0,
+            "rotation": 30,
+            "props": [],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "primary_school": {
+            "resource": "CityModels/Kenney/Suburban/building-type-g",
+            "purpose": "education",
+            "surface_detail": "school_courtyard",
+            "width": 1.02,
+            "max_height": 1.0,
+            "rotation": 30,
+            "props": [],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "power_station": {
+            "resource": "CityModels/Kenney/Industrial/building-t",
+            "purpose": "energy",
+            "surface_detail": "energy",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Industrial/solar-panel-flat",
+                "position": [
+                  0.39,
+                  0,
+                  0.43
+                ],
+                "width": 0.3,
+                "max_height": 0.2,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "extraction": {
+            "resource": "CityModels/Kenney/Industrial/building-l",
+            "purpose": "extractive",
+            "surface_detail": "industrial",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Factory/hopper-square",
+                "position": [
+                  0.43,
+                  0,
+                  0.39
+                ],
+                "width": 0.26,
+                "max_height": 0.26,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "yard": {
+            "resource": "CityModels/Kenney/Industrial/building-p",
+            "purpose": "logistics",
+            "surface_detail": "logistics",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Industrial/shipping-container-a",
+                "position": [
+                  -0.38,
+                  0,
+                  0.42
+                ],
+                "width": 0.27,
+                "max_height": 0.28,
+                "rotation": 0
+              },
+              {
+                "resource": "CityModels/Kenney/Factory/box-small",
+                "position": [
+                  0.43,
+                  0,
+                  0.39
+                ],
+                "width": 0.19,
+                "max_height": 0.19,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "advanced_residence": {
+            "resource": "CityModels/Kenney/Commercial/building-j",
+            "purpose": "housing",
+            "surface_detail": "",
+            "width": 0.96,
+            "max_height": 1.3,
+            "rotation": 30,
+            "props": [],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "modern_agriculture": {
+            "resource": "CityModels/homestead",
+            "purpose": "agriculture",
+            "surface_detail": "modern_farmland",
+            "width": 0.86,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Industrial/solar-panel-flat",
+                "position": [
+                  0.43,
+                  0,
+                  0.39
+                ],
+                "width": 0.25,
+                "max_height": 0.2,
+                "rotation": 0
+              }
+            ],
+            "assignment": "Existing MET original geometry; gameplay and asset identities remain separate."
+          },
+          "commercial_center": {
+            "resource": "CityModels/Kenney/Commercial/building-k",
+            "purpose": "commercial",
+            "surface_detail": "commercial",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Commercial/detail-parasol-a",
+                "position": [
+                  0.43,
+                  0,
+                  0.4
+                ],
+                "width": 0.24,
+                "max_height": 0.3,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "garden": {
+            "resource": "CityModels/Kenney/Suburban/planter",
+            "purpose": "green",
+            "surface_detail": "garden",
+            "width": 0.78,
+            "max_height": 0.45,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Commercial/detail-parasol-a",
+                "position": [
+                  0.43,
+                  0,
+                  0.34
+                ],
+                "width": 0.26,
+                "max_height": 0.32,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "hospital": {
+            "resource": "CityModels/Kenney/Commercial/building-n",
+            "purpose": "medical",
+            "surface_detail": "medical_cross",
+            "width": 1.08,
+            "max_height": 1.3,
+            "rotation": 30,
+            "props": [],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "secondary_school": {
+            "resource": "CityModels/Kenney/Suburban/building-type-j",
+            "purpose": "education",
+            "surface_detail": "school_courtyard",
+            "width": 1.08,
+            "max_height": 1.0,
+            "rotation": 30,
+            "props": [],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "power_plant": {
+            "resource": "CityModels/Kenney/Industrial/building-e",
+            "purpose": "energy",
+            "surface_detail": "energy",
+            "width": 1.08,
+            "max_height": 1.2,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Industrial/detail-tank",
+                "position": [
+                  0.43,
+                  0,
+                  0.4
+                ],
+                "width": 0.25,
+                "max_height": 0.38,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "material_factory": {
+            "resource": "CityModels/Kenney/Industrial/building-f",
+            "purpose": "extractive",
+            "surface_detail": "industrial",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Factory/machine",
+                "position": [
+                  0.42,
+                  0,
+                  0.4
+                ],
+                "width": 0.24,
+                "max_height": 0.28,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "manufacturing": {
+            "resource": "CityModels/Kenney/Industrial/building-m",
+            "purpose": "industry",
+            "surface_detail": "industrial",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Factory/conveyor-long",
+                "position": [
+                  0,
+                  0,
+                  0.46
+                ],
+                "width": 0.58,
+                "max_height": 0.18,
+                "rotation": 0
+              },
+              {
+                "resource": "CityModels/Kenney/Factory/box-small",
+                "position": [
+                  0.43,
+                  0,
+                  0.4
+                ],
+                "width": 0.17,
+                "max_height": 0.17,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          },
+          "freight": {
+            "resource": "CityModels/Kenney/Industrial/building-s",
+            "purpose": "logistics",
+            "surface_detail": "logistics",
+            "width": 1.08,
+            "max_height": 1.25,
+            "rotation": 30,
+            "props": [
+              {
+                "resource": "CityModels/Kenney/Industrial/shipping-container-a",
+                "position": [
+                  -0.38,
+                  0,
+                  0.4
+                ],
+                "width": 0.27,
+                "max_height": 0.26,
+                "rotation": 0
+              },
+              {
+                "resource": "CityModels/Kenney/Industrial/shipping-container-b",
+                "position": [
+                  0.39,
+                  0,
+                  0.4
+                ],
+                "width": 0.28,
+                "max_height": 0.27,
+                "rotation": 0
+              },
+              {
+                "resource": "CityModels/Kenney/Factory/crane",
+                "position": [
+                  0.44,
+                  0,
+                  -0.37
+                ],
+                "width": 0.24,
+                "max_height": 0.43,
+                "rotation": 0
+              }
+            ],
+            "assignment": "MET gameplay purpose assigned to a generic community building/prop; not a claim that the source pack contains this specific facility."
+          }
+        },
+        "full_catalog_unique_models": false,
+        "missing_assets": [],
+        "note": "21 definitions have explicit bindings; distinct primary models and adapted facility assignments are counted separately. This is a community-asset integration, not completed Civilization VI artwork or Unity runtime acceptance."
+      }
+    },
+    {
+      "name": "capture_size_city-start.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_city-start.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_资源",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_资源",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_人口",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_人口",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_市场",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_市场",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_政策",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_政策",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_构筑",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_构筑",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_主题",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_主题",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_年度 / 尾声",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_年度 / 尾声",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_记录",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_记录",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_设置",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_设置",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_总览",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_read_only_总览",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_city-archive.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_city-archive.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_返回地图 · 保留时间状态",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_close_preserves_pause",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "page_close_no_offline_record",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui_scale_independent_camera",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_layer_terrain",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_layer_service",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_layer_employment",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_layer_pollution",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_layer_heat",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_layer_stock",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "layers_leave_game_unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_比较运营者投标 ›",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "tender_callback",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "comparison_snapshots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_does_not_spend",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_city-construction-comparison.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_city-construction-comparison.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_地图 · 建成后",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_map_exposed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_same_step_comparison",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_freezes_real_selection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_world_selection_rejected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "comparison_layer_cycle",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_read_only",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_city-forecast-map.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_city-forecast-map.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_返回方案比较 ›",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_return_page",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_返回地图 · 保留时间状态",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_cleared_on_close",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_context_restored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "forecast_selection_restored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_prefix_采用并建设 · ",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "construction_callback",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "construction_geometry",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "native_simulation_advance",
+      "passed": true,
+      "detail": {
+        "advanced": 1.0,
+        "local_seconds": 1555200.0,
+        "active_real_seconds": 59.999999999999993,
+        "spent": 1.2499517746913582,
+        "steps": 14,
+        "reason": ""
+      }
+    },
+    {
+      "name": "simulation_cpu_ms",
+      "passed": true,
+      "detail": 64.27470000000001
+    },
+    {
+      "name": "construction_completed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_返回地图 · 保留时间状态",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_city-resource-history.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_city-resource-history.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_返回地图 · 保留时间状态",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "bounded_default_frame_rate",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "static_presentation_reused",
+      "passed": true,
+      "detail": {
+        "status_rebuilds": 0,
+        "context_rebuilds": 0,
+        "preview_evaluations": 0,
+        "tracked_texts": 40,
+        "planner_entries": 0,
+        "frame_limit": 60
+      }
+    },
+    {
+      "name": "paused_geometry_reused",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no_native_errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "capture_size_city-native-final.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_city-native-final.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_city-whole-map.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_city-whole-map.png",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "errors": [],
+  "frame_intervals_ms": {
+    "samples": 300,
+    "median": 16.668125987052917,
+    "p95": 17.164129763841629
+  },
+  "resource_sample": {
+    "wall_ms": 5049.1842000000006,
+    "cpu_ms": 1507.6211000000003,
+    "cpu_percent_one_core": 29.870609592733789,
+    "resident_mb": 409.765625,
+    "application_focused": true,
+    "frame_limit": 60,
+    "screen": [
+      1920,
+      1080
+    ],
+    "camera_pixels": [
+      1920,
+      1080
+    ],
+    "presentation": {
+      "status_rebuilds": 0,
+      "context_rebuilds": 0,
+      "preview_evaluations": 0,
+      "tracked_texts": 40,
+      "planner_entries": 0,
+      "frame_limit": 60
+    }
+  },
+  "measurement_scope": "Paused native renderer frame intervals and process CPU/RSS; simulation CPU separately measured. Automated uGUI callbacks, not human play acceptance."
+}

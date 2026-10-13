@@ -1,0 +1,31 @@
+{
+  "resources": {
+    "food": {
+      "base_price": 2,
+      "pressure": 0,
+      "market_depth": 50,
+      "spread": 0.6,
+      "fee": 0.1,
+      "reversion_half_life": 4,
+      "amplitude": 4
+    },
+    "material": {
+      "base_price": 3,
+      "pressure": 0,
+      "market_depth": 50,
+      "spread": 0.6,
+      "fee": 0.1,
+      "reversion_half_life": 4,
+      "amplitude": 5
+    },
+    "goods": {
+      "base_price": 5,
+      "pressure": 0,
+      "market_depth": 50,
+      "spread": 0.6,
+      "fee": 0.1,
+      "reversion_half_life": 4,
+      "amplitude": 7
+    }
+  }
+}

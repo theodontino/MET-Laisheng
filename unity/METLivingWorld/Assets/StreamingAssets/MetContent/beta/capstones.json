@@ -1,0 +1,183 @@
+{
+  "industrial": {
+    "name": "工会总部",
+    "rules": [
+      {
+        "id": "goods",
+        "op": "modify",
+        "targets": "self",
+        "field": "output.goods",
+        "mode": "multiply",
+        "value": 1.12,
+        "when": {
+          "any_traits": [
+            "building.industrial"
+          ]
+        }
+      },
+      {
+        "id": "personnel",
+        "op": "modify",
+        "targets": "self",
+        "field": "personnel_mult",
+        "mode": "multiply",
+        "value": 1.08,
+        "when": {
+          "any_traits": [
+            "building.industrial"
+          ]
+        }
+      }
+    ],
+    "id": "capstone:industrial",
+    "theme": "industrial",
+    "function_role": "industrial",
+    "description": "本Block定型建筑；效果可在规则来源中查询。"
+  },
+  "civic": {
+    "name": "管委会",
+    "rules": [
+      {
+        "id": "service",
+        "op": "modify",
+        "targets": "self",
+        "field": "service.*",
+        "mode": "multiply",
+        "value": 1.15,
+        "when": {
+          "any_traits": [
+            "building.public_service"
+          ]
+        }
+      },
+      {
+        "id": "housing",
+        "op": "modify",
+        "targets": "self",
+        "field": "housing",
+        "mode": "multiply",
+        "value": 1.1,
+        "when": {
+          "any_traits": []
+        }
+      }
+    ],
+    "id": "capstone:civic",
+    "theme": "civic",
+    "function_role": "civic",
+    "description": "本Block定型建筑；效果可在规则来源中查询。"
+  },
+  "commercial": {
+    "name": "商会",
+    "rules": [
+      {
+        "id": "capacity",
+        "op": "modify",
+        "targets": "self",
+        "field": "service.commercial",
+        "mode": "multiply",
+        "value": 1.15,
+        "when": {
+          "any_traits": []
+        }
+      },
+      {
+        "id": "tax_base",
+        "op": "modify",
+        "targets": "self",
+        "field": "commercial_tax_multiplier",
+        "mode": "floor",
+        "value": 1.08,
+        "when": {
+          "any_traits": [
+            "building.commercial"
+          ]
+        }
+      },
+      {
+        "id": "tax",
+        "op": "modify",
+        "targets": "self",
+        "field": "commercial_tax_multiplier",
+        "mode": "add",
+        "value": 0.08,
+        "when": {
+          "any_traits": [
+            "building.commercial"
+          ]
+        }
+      }
+    ],
+    "id": "capstone:commercial",
+    "theme": "commercial",
+    "function_role": "commercial",
+    "description": "本Block定型建筑；效果可在规则来源中查询。"
+  },
+  "logistics": {
+    "name": "港务局",
+    "rules": [
+      {
+        "id": "throughput",
+        "op": "modify",
+        "targets": "self",
+        "field": "trade_capacity",
+        "mode": "multiply",
+        "value": 1.25,
+        "when": {
+          "any_traits": []
+        }
+      },
+      {
+        "id": "storage",
+        "op": "modify",
+        "targets": "self",
+        "field": "storage.*",
+        "mode": "multiply",
+        "value": 1.2,
+        "when": {
+          "any_traits": [
+            "building.logistics"
+          ]
+        }
+      }
+    ],
+    "id": "capstone:logistics",
+    "theme": "logistics",
+    "function_role": "logistics",
+    "description": "本Block定型建筑；效果可在规则来源中查询。"
+  },
+  "agricultural": {
+    "name": "农业合作社总部",
+    "rules": [
+      {
+        "id": "food",
+        "op": "modify",
+        "targets": "self",
+        "field": "output.food",
+        "mode": "multiply",
+        "value": 1.15,
+        "when": {
+          "any_traits": [
+            "building.agricultural"
+          ]
+        }
+      },
+      {
+        "id": "storage",
+        "op": "modify",
+        "targets": "self",
+        "field": "storage.food",
+        "mode": "multiply",
+        "value": 1.25,
+        "when": {
+          "any_traits": []
+        },
+        "include_special": true
+      }
+    ],
+    "id": "capstone:agricultural",
+    "theme": "agricultural",
+    "function_role": "agricultural",
+    "description": "本Block定型建筑；效果可在规则来源中查询。"
+  }
+}

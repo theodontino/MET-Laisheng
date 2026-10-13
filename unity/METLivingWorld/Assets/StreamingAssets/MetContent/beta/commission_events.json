@@ -1,0 +1,240 @@
+[
+  {
+    "id": "industrial_equipment",
+    "theme": "industrial",
+    "name": "设备商报价",
+    "description": "支付60通货和8材料，获得工业Copy三选一。",
+    "trigger": {
+      "milestone": 1,
+      "production_slot": true
+    },
+    "weight": 1,
+    "currency": 60,
+    "resources": {
+      "material": 8
+    },
+    "reward_kind": "copy"
+  },
+  {
+    "id": "industrial_workers",
+    "theme": "industrial",
+    "name": "工人社区请求",
+    "description": "3月内将实际医疗覆盖提高15个百分点；失败只失去机会。",
+    "trigger": {
+      "industrial_labor_min": 8,
+      "medical_max": 0.65
+    },
+    "weight": 1,
+    "deadline_months": 3,
+    "metric": "medical",
+    "improve": 0.15,
+    "reward_kind": "copy",
+    "reward_themes": [
+      "industrial",
+      "civic"
+    ]
+  },
+  {
+    "id": "industrial_order",
+    "theme": "industrial",
+    "name": "大宗订单",
+    "description": "支付20通货保证金，3月内交付12制成品；成功退保证金并获80通货。",
+    "trigger": {
+      "milestone": 2
+    },
+    "weight": 1,
+    "deposit": 20,
+    "deadline_months": 3,
+    "delivery_resource": "goods",
+    "delivery_amount": 12,
+    "cash_reward": 80
+  },
+  {
+    "id": "civic_families",
+    "theme": "civic",
+    "name": "新家庭申请",
+    "description": "接受6名移民，在下一个来生月边界抵达；增加真实人口与需求。",
+    "trigger": {
+      "vacancies_min": 6,
+      "food_min": 0.95
+    },
+    "weight": 1,
+    "arrival_people": 6
+  },
+  {
+    "id": "civic_doctors",
+    "theme": "civic",
+    "name": "社区医生联署",
+    "description": "支付50通货，获得一次医疗定向Copy选择。",
+    "trigger": {
+      "medical_max": 0.75,
+      "service_building": true
+    },
+    "weight": 1,
+    "currency": 50,
+    "reward_kind": "copy",
+    "bonus_ids": [
+      "P02",
+      "O01",
+      "R05"
+    ]
+  },
+  {
+    "id": "civic_space",
+    "theme": "civic",
+    "name": "公共空间资助",
+    "description": "2月内将实际休闲覆盖提高20个百分点；成功获得公共服务蓝图研究。",
+    "trigger": {
+      "milestone": 1,
+      "entertainment_max": 0.7
+    },
+    "weight": 1,
+    "deadline_months": 2,
+    "metric": "entertainment",
+    "improve": 0.2,
+    "reward_kind": "research",
+    "bonus_ids": [
+      "P02",
+      "P03",
+      "R05"
+    ]
+  },
+  {
+    "id": "commercial_night",
+    "theme": "commercial",
+    "name": "夜市试办",
+    "description": "支付30通货和4食物，获得商业Copy选择。",
+    "trigger": {
+      "commercial_people_min": 24
+    },
+    "weight": 1,
+    "currency": 30,
+    "resources": {
+      "food": 4
+    },
+    "reward_kind": "copy"
+  },
+  {
+    "id": "commercial_purchase",
+    "theme": "commercial",
+    "name": "商社联合采购",
+    "description": "3月内通过市场真实进口12制成品，成功获80通货；正常支付市场价。",
+    "trigger": {
+      "freight": true
+    },
+    "weight": 1,
+    "deadline_months": 3,
+    "trade_side": "buy",
+    "trade_resource": "goods",
+    "trade_amount": 12,
+    "cash_reward": 80
+  },
+  {
+    "id": "commercial_boom",
+    "theme": "commercial",
+    "name": "消费热潮",
+    "description": "2月内累计实际商业服务96人·月，成功获得商业研究。",
+    "trigger": {
+      "commercial_min": 0.75
+    },
+    "weight": 1,
+    "deadline_months": 2,
+    "person_months": 96,
+    "reward_kind": "research"
+  },
+  {
+    "id": "logistics_contract",
+    "theme": "logistics",
+    "name": "长期货约",
+    "description": "支付20通货保证金，再真实成交36单位；成功退保证金并获得物流Copy。",
+    "trigger": {
+      "has_trade": true
+    },
+    "weight": 1,
+    "deposit": 20,
+    "trade_amount": 36,
+    "reward_kind": "copy"
+  },
+  {
+    "id": "logistics_storage",
+    "theme": "logistics",
+    "name": "仓储援助",
+    "description": "支付60通货和8材料，获得中转仓或战略储备候选。",
+    "trigger": {
+      "storage_ratio_min": 0.8,
+      "actual_overflow": true
+    },
+    "weight": 1,
+    "currency": 60,
+    "resources": {
+      "material": 8
+    },
+    "reward_kind": "copy",
+    "bonus_ids": [
+      "L05",
+      "B05"
+    ]
+  },
+  {
+    "id": "logistics_customs",
+    "theme": "logistics",
+    "name": "优先清关竞标",
+    "description": "支付80通货，获得现有物流蓝图研究机会。",
+    "trigger": {
+      "milestone": 2
+    },
+    "weight": 1,
+    "currency": 80,
+    "reward_kind": "research"
+  },
+  {
+    "id": "agricultural_harvest",
+    "theme": "agricultural",
+    "name": "丰收收购",
+    "description": "即时交付20食物，获得50通货；也可以保留粮食。",
+    "trigger": {
+      "food_surplus_min": 1e-06,
+      "food_stock_months_min": 2
+    },
+    "weight": 1,
+    "resources": {
+      "food": 20
+    },
+    "cash_reward": 50
+  },
+  {
+    "id": "agricultural_review",
+    "theme": "agricultural",
+    "name": "种植方案评审",
+    "description": "支付50通货和6材料，获得农业蓝图研究三选一。",
+    "trigger": {
+      "milestone": 1,
+      "research": true
+    },
+    "weight": 1,
+    "currency": 50,
+    "resources": {
+      "material": 6
+    },
+    "reward_kind": "research"
+  },
+  {
+    "id": "agricultural_order",
+    "theme": "agricultural",
+    "name": "城市储粮订单",
+    "description": "3月内交付30食物，交付后保留2月口粮；成功获得农业/仓储Copy。",
+    "trigger": {
+      "milestone": 2
+    },
+    "weight": 1,
+    "deadline_months": 3,
+    "delivery_resource": "food",
+    "delivery_amount": 30,
+    "reserve_months": 2,
+    "reward_kind": "copy",
+    "reward_themes": [
+      "agricultural",
+      "logistics"
+    ]
+  }
+]

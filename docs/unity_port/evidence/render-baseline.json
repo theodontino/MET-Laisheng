@@ -1,0 +1,12 @@
+{
+  "source_version": "0.5.0-beta.2-unity.1",
+  "default_frame_limit": "unbounded (-1)",
+  "renderer_frame_interval_ms": {
+    "median": 0.39491921779699624,
+    "p95": 1.1360828066244721,
+    "samples": 120
+  },
+  "resident_memory_mb_observed_background": 420.7,
+  "cpu_percent_observed_background": 0.1,
+  "limitations": "Background CPU/RSS observation is not foreground GPU utilization. Three-building native scene. User rejected visual quality and reported high usage. No release published."
+}

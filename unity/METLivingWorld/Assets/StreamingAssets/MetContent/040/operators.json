@@ -1,0 +1,98 @@
+{
+  "civic": {
+    "domain_weights": {
+      "public": 100,
+      "community": 75,
+      "infrastructure": 60
+    },
+    "slot_track": [
+      "Production",
+      "Logistics",
+      "Operations"
+    ]
+  },
+  "steel": {
+    "domain_weights": {
+      "industrial": 100,
+      "infrastructure": 70,
+      "commercial": 15,
+      "public": 5
+    },
+    "slot_track": [
+      "Production",
+      "Production",
+      "Operations"
+    ]
+  },
+  "circular": {
+    "domain_weights": {
+      "industrial": 100,
+      "infrastructure": 70,
+      "agriculture": 30
+    },
+    "slot_track": [
+      "Production",
+      "Logistics",
+      "Operations"
+    ]
+  },
+  "river": {
+    "domain_weights": {
+      "commercial": 100,
+      "infrastructure": 80,
+      "industrial": 35
+    },
+    "slot_track": [
+      "Production",
+      "Logistics",
+      "Logistics"
+    ]
+  },
+  "farmers": {
+    "domain_weights": {
+      "agriculture": 100,
+      "community": 70,
+      "industrial": 20
+    },
+    "slot_track": [
+      "Production",
+      "Production",
+      "Operations"
+    ]
+  },
+  "academy": {
+    "domain_weights": {
+      "public": 100,
+      "community": 35
+    },
+    "slot_track": [
+      "Production",
+      "Operations",
+      "Operations"
+    ]
+  },
+  "care": {
+    "domain_weights": {
+      "public": 100,
+      "community": 80
+    },
+    "slot_track": [
+      "Production",
+      "Logistics",
+      "Operations"
+    ]
+  },
+  "commons": {
+    "domain_weights": {
+      "community": 100,
+      "agriculture": 60,
+      "public": 60,
+      "industrial": 40
+    },
+    "slot_track": [
+      "Production",
+      "Operations",
+      "Operations"
+    ]
+  }
+}

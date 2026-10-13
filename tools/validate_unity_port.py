@@ -124,10 +124,11 @@ def validate(project: Path, source_root: Path | None = ROOT) -> dict:
             checked_sources += 1
     manifest = json.loads((project / 'Packages/manifest.json').read_text())['dependencies']
     require(manifest['com.unity.cloud.gltfast'] == '6.20.0' and
-            manifest['com.unity.render-pipelines.universal'] == '17.0.3' and
-            manifest['com.unity.nuget.newtonsoft-json'] == '3.2.1', 'Unreviewed package version')
-    require('6000.0.58f2' in (project / 'ProjectSettings/ProjectVersion.txt').read_text(), 'Editor version changed')
-    return {'status': 'passed', 'scope': 'Portable fixture geometry, hashes, provenance and package pins; Unity execution unverified.',
+            manifest['com.unity.nuget.newtonsoft-json'] == '3.2.1', 'Unreviewed importer/JSON version')
+    editor_version = (project / 'ProjectSettings/ProjectVersion.txt').read_text().splitlines()[0].split(':', 1)[1].strip()
+    pair = (editor_version, manifest['com.unity.render-pipelines.universal'])
+    require(pair in [('6000.0.58f2', '17.0.3'), ('6000.6.5f1', '17.6.0')], 'Unreviewed Editor/URP combination')
+    return {'status': 'passed', 'editor_urp': pair, 'scope': 'Historical portable fixture geometry, provenance and declared pins; this check does not execute Unity or validate the full game.',
             'geometry': geometry, 'source_files_checked': checked_sources, 'sidecar_sha256': digest(sidecar_path)}
 
 

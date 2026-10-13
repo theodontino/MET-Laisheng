@@ -1,0 +1,23 @@
+{
+  "status": "pointer_and_keyboard_passed_system_focus_not_human_tested",
+  "player_version": "0.5.0-beta.2-unity.1",
+  "actual_user_pointer": {
+    "control": "在此登陆",
+    "gesture": "hold approximately 0.5 seconds then release",
+    "result": "entered origin selection",
+    "source": "direct user reply 2026-10-13"
+  },
+  "native_keyboard": {
+    "result": "Final signed Universal Player: Return selects landing, second Return confirms origin and enters play, P pauses city.",
+    "phase_after_first_return": "origin",
+    "block_index": 0,
+    "phase_after_second_return": "play",
+    "paused_after_P": true,
+    "method": "actual CUA native keyboard, state corroborated by isolated Player save"
+  },
+  "automation_limitation": "CUA coordinate click returned noWindowsAvailable for the fullscreen Unity window; native keyboard and screenshots worked.",
+  "system_focus": {
+    "user_reply": "not available to test",
+    "claim": "not accepted as human system-focus validation"
+  }
+}
