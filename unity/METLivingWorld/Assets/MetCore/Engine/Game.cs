@@ -37,7 +37,7 @@ public sealed partial class Game {
     }
     public string select_block(int index) {
         if(s["phase"].Text!="select_block"||index<0||index>2)return "起点已确定。";
-        s["block_index"]=index;s["cells"]=Hex.make_map(index);s["block"]["display_name"]=new[]{"河湾","林缘旧村","北部高台"}[index];
+        s["block_index"]=index;s["cells"]=Hex.make_map(index,s["seed"].Long);s["block"]["geography"]=Hex.geography(s["cells"],s["seed"].Long,index);s["block"]["display_name"]=new[]{"河湾","林缘旧村","北部高台"}[index];
         foreach(string key in s["cells"].Keys) {
             var cell=s["cells"][key];var traits=V.Arr();string terrain=cell["terrain"].Text;
             if(terrain=="plain")traits.Add("tile.fertile");else if(terrain=="forest")traits.Add("tile.forest");else if(terrain=="hill")traits.Add("tile.highland");else if(terrain=="wet")traits.Add("tile.wet");else if(terrain=="water")traits.Add("tile.water");

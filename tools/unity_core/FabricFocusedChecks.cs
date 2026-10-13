@@ -1,0 +1,27 @@
+using System;
+using System.IO;
+using System.Linq;
+using MET.Core;
+class FabricFocusedChecks {
+ static int checks;
+ static void Check(bool value,string name){checks++;if(!value)throw new Exception(name);}
+ static V Fixture(double occupancy,double usage,int tier=1) {
+  var cells=V.Map("0,0",V.Map("terrain","plain","building","home"),"1,0",V.Map("terrain","plain","building","shop"),"2,0",V.Map("terrain","water","building","waterhome"));
+  var projects=V.Map("home",V.Map("def","home","tile","0,0","tier",tier,"traits",V.Arr("building.residential"),"status","running","operator_org","commons","usage",usage),"shop",V.Map("def","shop","tile","1,0","tier",tier,"traits",V.Arr("building.commercial"),"status","running","operator_org","commons","usage",usage),"waterhome",V.Map("def","home","tile","2,0","status","running","traits",V.Arr("building.residential"),"usage",usage));
+  return V.Map("seed",8291,"cells",cells,"projects",projects,"groups",V.Map("g",V.Map("host","home","count",24*occupancy)),"compiled",V.Map("stats",V.Map("home",V.Map("housing",24,"efficiency",1))),"metrics",V.Map("utilization",V.Map("home",V.Map("utilization",usage),"shop",V.Map("utilization",usage)),"employment_links",V.Arr(V.Map("group","g","target","shop","people",24*occupancy)),"service_links",V.Arr(V.Map("source","shop","home","home","people",24*occupancy)),"activity_ledger",V.Map("shop",V.Arr(V.Map("kind","input","source_id","home","rate",usage*3)))));
+ }
+ static int Main(string[] args){try{
+  var definitions=V.Map("home",V.Map("tier",1,"domain","residential","stats",V.Map("housing",12)),"shop",V.Map("tier",1,"domain","commercial"));
+  var early=Fixture(.1,.1);string before=early.ToJson(false,true);var first=VisualFabric.Derive(early,definitions);
+  Check(early.ToJson(false,true)==before,"derive preserves all detached source fields");Check(Math.Abs(first["levels"]["home"]["occupancy"].Double-.1)<1e-9,"real hosted people divided by compiled housing, not catalog fallback");
+  var middle=VisualFabric.Derive(Fixture(.55,.6),definitions);var late=VisualFabric.Derive(Fixture(1,1,3),definitions);
+  Check(first["fillers"].Count<middle["fillers"].Count&&middle["fillers"].Count<late["fillers"].Count,"visible early, middle, late density grows from occupancy usage and tier");
+  Check(first["parcels"].Count==2&&first["connectors"].Count==1,"water plots and edges never become land fabrication");Check(first["connectors"].Keys.SequenceEqual(late["connectors"].Keys)&&first["parcels"].Keys.SequenceEqual(late["parcels"].Keys),"parcels and shared edges keep stable identity across growth");
+  Check(first["levels"]["home"]["development"].Double<late["levels"]["home"]["development"].Double,"legacy tier occupancy utilization development retained");Check(late["connectors"].Values[0]["relation"].Double>first["connectors"].Values[0]["relation"].Double,"employment service and input flows increase relation strength");
+  var unrelated=Fixture(.3,.3);unrelated["metrics"]=V.Map();unrelated["projects"]["home"]["operator_org"]="steel";var basic=VisualFabric.Derive(unrelated,definitions);Check(basic["connectors"].Count==1&&basic["connectors"].Values[0]["relation"].Double==0&&!basic["connectors"].Values[0]["same_operator"].Bool,"real adjacency still gets modest entry street without fictional operating relation");
+  var forecast=Fixture(.5,.5);forecast["compiled"]["stats"]["home"]["housing"]=48;var predicted=VisualFabric.Derive(forecast,definitions,V.Map("home",V.Map("housing",24)));Check(predicted["levels"]["home"]["occupancy"].Double==.25,"forecast compiled capacity takes precedence over committed stats");forecast.Remove("compiled");Check(VisualFabric.Derive(forecast,definitions,V.Map("home",V.Map("housing",48)))["levels"]["home"]["occupancy"].Double==.25,"committed snapshot uses detached actual compiled fallback");
+  var underConstruction=Fixture(1,1);underConstruction["projects"]["home"]["status"]="construction";var construction=VisualFabric.Derive(underConstruction,definitions);Check(construction["connectors"].Count==0&&!construction["fillers"].Values.Any(f=>f.Get("project","").Text=="home"),"unfinished building gets no running neighborhood infill");
+  var catalog=new Catalog(args[0]);var game=new Game(catalog);game.new_game(8291,1000000);game.select_block(0);game.choose_origin(game.s["origin_choices"][0].Text);string state=game.s.ToJson(false,true),compiled=game.compiled.ToJson(false,true);var actual=game.snapshot();var morphology=VisualFabric.Derive(actual,catalog.projects,game.compiled["stats"]);Check(game.s.ToJson(false,true)==state&&game.compiled.ToJson(false,true)==compiled,"real game state RNG money entities and compiled data stay exactly unchanged");Check(morphology["parcels"].Count==2&&morphology["connectors"].Count==1,"real starter snapshot derives actual pair and parcels");Check(VisualFabric.Derive(actual,catalog.projects,game.compiled["stats"])==morphology,"same real source produces stable identical visual plan");
+  var evidence=V.Map("scope","pure .NET readonly morphology, no native visual acceptance","checks",checks,"early",first,"middle",middle,"late",late,"real_start",morphology);if(args.Length>1)File.WriteAllText(args[1],evidence.ToJson());Console.WriteLine(V.Map("checks",checks,"early_fillers",first["fillers"].Count,"middle_fillers",middle["fillers"].Count,"late_fillers",late["fillers"].Count,"actual_parcels",morphology["parcels"].Count).ToJson());return 0;
+ }catch(Exception error){Console.Error.WriteLine(error);return 1;}}
+}

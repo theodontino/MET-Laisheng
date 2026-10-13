@@ -9,6 +9,7 @@ public sealed class CityFoliage : MonoBehaviour {
     Material[] materials;
     Matrix4x4[] placements=Array.Empty<Matrix4x4>();
     public int InstanceCount=>placements.Length;
+    public Matrix4x4[] CapturePlacements()=>(Matrix4x4[])placements.Clone();
     public void Initialize(GameObject prototype) {
         var pieces=new List<CombineInstance>();var imported=new List<Material>();
         foreach(var filter in prototype.GetComponentsInChildren<MeshFilter>(true)) {

@@ -75,9 +75,13 @@ public static class CityProject {
         KeepInstancingVariants();
         MaterialAsset("CitySurface", "Universal Render Pipeline/Lit");
         MaterialAsset("CityOverlay", "Universal Render Pipeline/Unlit", true);
-        PrepareTerrainDetail();
+        foreach (var resource in new[] { "CityLandscapeVertex", "CityRiverVertex" }) {
+            var material = AssetDatabase.LoadAssetAtPath<Material>("Assets/Resources/Rendering/" + resource + ".mat");
+            Require(material != null && material.shader != null, "City terrain material is missing: " + resource);
+            Require(!ShaderUtil.ShaderHasError(material.shader), "City terrain shader import failed: " + resource);
+        }
         PlayerSettings.companyName = "MET"; PlayerSettings.productName = "MET 来生 Unity Beta";
-        PlayerSettings.bundleVersion = "0.5.0-beta.2-unity.2";
+        PlayerSettings.bundleVersion = "0.5.0-beta.2-unity.3";
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, "com.projectmet.laisheng.unitybeta");
         PlayerSettings.colorSpace = ColorSpace.Linear;
         PlayerSettings.defaultScreenWidth = 1920; PlayerSettings.defaultScreenHeight = 1080;

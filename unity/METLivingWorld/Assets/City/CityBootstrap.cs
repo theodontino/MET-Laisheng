@@ -17,6 +17,7 @@ public sealed class CityBootstrap : MonoBehaviour {
         Interface.SelectionChanged += Select;
         Interface.LayerChanged += World.SetLayer;
         World.LayerChanged += Interface.SetLayer;
+        World.SetFabricSources(Runtime.Game.c.projects, Runtime.Game.compiled.Get("stats", MET.Core.V.Map()));
         World.Initialize(() => Interface.MapSnapshot, Interface.SelectTile,
             () => Interface.KeyboardOwned, Interface.PointerOwned,
             () => !Interface.MapViewing && !Interface.IsModal);
@@ -29,6 +30,7 @@ public sealed class CityBootstrap : MonoBehaviour {
     }
 
     void Present(MET.Core.V snapshot) {
+        World.SetFabricSources(Runtime.Game.c.projects, Runtime.Game.compiled.Get("stats", MET.Core.V.Map()));
         World.Present(snapshot);
         World.SetSourcePhase(Interface.MapSourcePhase);
     }

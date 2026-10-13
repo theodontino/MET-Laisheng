@@ -1,0 +1,56 @@
+{
+  "scope": "pure .NET generation and Godot/C# parity, separate from native screenshots",
+  "maps_tested": 384,
+  "summary": [
+    {
+      "landing": 0,
+      "tested_seeds": 128,
+      "distinct_maps": 128,
+      "distinct_terrain_maps": 128,
+      "distinct_rivers": 60,
+      "minimum_starter_land_component": 30,
+      "biome_cells": {
+        "plain": 3513,
+        "forest": 1234,
+        "hill": 905,
+        "wet": 1004,
+        "water": 1152
+      }
+    },
+    {
+      "landing": 1,
+      "tested_seeds": 128,
+      "distinct_maps": 128,
+      "distinct_terrain_maps": 128,
+      "distinct_rivers": 52,
+      "minimum_starter_land_component": 29,
+      "biome_cells": {
+        "plain": 2336,
+        "forest": 2349,
+        "hill": 861,
+        "wet": 1110,
+        "water": 1152
+      }
+    },
+    {
+      "landing": 2,
+      "tested_seeds": 128,
+      "distinct_maps": 128,
+      "distinct_terrain_maps": 128,
+      "distinct_rivers": 59,
+      "minimum_starter_land_component": 30,
+      "biome_cells": {
+        "plain": 3008,
+        "forest": 1270,
+        "hill": 1399,
+        "wet": 979,
+        "water": 1152
+      }
+    }
+  ],
+  "godot_parity_examples": 12,
+  "godot_parity_failures": 0,
+  "core_checks": 174,
+  "complete_state_checkpoints": 88,
+  "fabric_focused_checks": 14
+}

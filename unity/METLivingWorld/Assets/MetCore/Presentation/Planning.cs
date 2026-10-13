@@ -16,8 +16,8 @@ public sealed class Planning {
  public void reset_for(Game g){var key=version(g);if(key!=token){cache=V.Map();token=key;lru=V.Arr();}}
  public V snapshot(Game g) {
   reset_for(g);if(cache.Has("world"))return cache["world"];
-  if(!V.Arr("play","failed").Contains(g.s["phase"])||g.s["projects"].Count==0)return V.Map("metrics",g.s["metrics"],"audit",V.Map(),"projects",g.s["projects"],"groups",g.s["groups"],"tiles",g.s["cells"],"error","");
-  var clone=copy_game(g);var err=Sim.tick(clone,g.c.balance["tick_hours"].Double);var result=V.Map("metrics",clone.s["metrics"],"audit",clone.s["audit"],"projects",clone.s["projects"],"groups",clone.s["groups"],"tiles",clone.s["cells"],"compiled",clone.compiled,"error",err,"forecast",true,"tick",clone.s["simulation_tick"],"snapshot_id",version(g)+":forecast","source_phase","next_tick");cache["world"]=result;return result;
+  if(!V.Arr("play","failed").Contains(g.s["phase"])||g.s["projects"].Count==0)return V.Map("seed",g.s.Get("seed",0),"block",g.s["block"].Duplicate(true),"metrics",g.s["metrics"],"audit",V.Map(),"projects",g.s["projects"],"groups",g.s["groups"],"tiles",g.s["cells"],"error","");
+  var clone=copy_game(g);var err=Sim.tick(clone,g.c.balance["tick_hours"].Double);var result=V.Map("seed",clone.s.Get("seed",0),"block",clone.s["block"].Duplicate(true),"metrics",clone.s["metrics"],"audit",clone.s["audit"],"projects",clone.s["projects"],"groups",clone.s["groups"],"tiles",clone.s["cells"],"compiled",clone.compiled,"error",err,"forecast",true,"tick",clone.s["simulation_tick"],"snapshot_id",version(g)+":forecast","source_phase","next_tick");cache["world"]=result;return result;
  }
  public V compare(Game g,string @base,string tile,V offer=null,string host="",string slot="") {
   offer=offer??V.Map();reset_for(g);var key=V.Arr(@base,tile,offer,host,slot).ToJson();if(cache.Has(key))return cache[key];var began=Stopwatch.GetTimestamp();var reference=snapshot(g);var clone=copy_game(g);var target=host;
@@ -49,7 +49,7 @@ public sealed class Planning {
   }remember(key,result);return result;
  }
  public void remember(string key,V result){cache[key]=result;lru.Erase(key);lru.Add(key);while(lru.Count>16){var oldest=lru[0];lru.Items.RemoveAt(0);cache.Erase(oldest);}}
- public V display_copy(Game g)=>V.Map("metrics",g.s["metrics"],"audit",g.s["audit"],"projects",g.s["projects"],"groups",g.s["groups"],"tiles",g.s["cells"],"compiled",g.compiled,"forecast",true,"tick",g.s["simulation_tick"],"source_phase","next_tick","error","");
+ public V display_copy(Game g)=>V.Map("seed",g.s.Get("seed",0),"block",g.s["block"].Duplicate(true),"metrics",g.s["metrics"],"audit",g.s["audit"],"projects",g.s["projects"],"groups",g.s["groups"],"tiles",g.s["cells"],"compiled",g.compiled,"forecast",true,"tick",g.s["simulation_tick"],"source_phase","next_tick","error","");
  public V map_diff(V before,Game after) {
   var result=V.Map();foreach(var tile in after.s["cells"].Keys){var entry=V.Map("services",V.Map(),"pollution",0.0,"utilization",0.0,"resources",V.Map());foreach(var kind in after.c.balance["service_kinds"]){var a=0.0;var b=0.0;
    foreach(var link in before["metrics"].Get("service_links",V.Arr()))if(link["kind"]==kind&&before["projects"].Get(link["home"].Text,V.Map()).Get("tile","").Text==tile)a+=link["people"].Double;

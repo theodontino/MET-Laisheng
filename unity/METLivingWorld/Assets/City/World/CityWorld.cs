@@ -71,8 +71,7 @@ public sealed partial class CityWorld : MonoBehaviour {
     public void Present(V detached) {
         if(detached==null||!detached.IsMap||geometryRoot==null)return;
         snapshot=detached;SourcePhase=detached.Get("source_phase",detached.Get("forecast",false).Bool?"next_tick":"actual").Text;
-        var key=StructureKey(snapshot);
-        if(key!=structure) {RebuildGeometry();structure=key;}
+        PresentGeometryIncremental();
         if(SelectedTile!=""&&!tiles.ContainsKey(SelectedTile))SelectedTile="";
         SetOutline(selectionOutline,SelectedTile);RefreshAnalysis();
     }
@@ -113,11 +112,11 @@ public sealed partial class CityWorld : MonoBehaviour {
         return new Vector3(-Mathf.Sqrt(3)*(coord.x+coord.y*.5f),0,-1.5f*coord.y);
     }
     static Vector3 Corner(int index,float radius) {float a=(30+60*index)*Mathf.Deg2Rad;return new Vector3(Mathf.Cos(a)*radius,0,Mathf.Sin(a)*radius);}
-    float GroundHeight(V cell)=>HeightAt(CellPosition(cell));
-    float LocalHeight(V cell,Vector3 local)=>HeightAt(CellPosition(cell)+new Vector3(local.x,0,local.z));
+    float GroundHeight(V cell)=>VisualGroundHeight(CellPosition(cell));
+    float LocalHeight(V cell,Vector3 local)=>VisualGroundHeight(CellPosition(cell)+new Vector3(local.x,0,local.z));
     void CreateTile(string id,V cell) {
         string terrain=cell.Get("terrain","plain").Text;var holder=new GameObject("Tile_"+id);holder.transform.SetParent(groundRoot,false);holder.transform.localPosition=TilePosition(id);holder.layer=GroundLayer;
-        var identity=holder.AddComponent<CityTileIdentity>();identity.TileId=id;identity.SurfaceHeight=GroundHeight(cell);identity.Terrain=terrain;tiles[id]=identity;
+        var identity=holder.AddComponent<CityTileIdentity>();identity.TileId=id;identity.SurfaceHeight=VisualSurfaceHeight(TilePosition(id));identity.Terrain=terrain;tiles[id]=identity;
         var mesh=LandscapeHex(id,false);holder.AddComponent<MeshFilter>().sharedMesh=mesh;
         var render=holder.AddComponent<MeshRenderer>();render.sharedMaterial=terrainMaterials["continuous"];render.receiveShadows=true;render.shadowCastingMode=ShadowCastingMode.Off;render.enabled=false;
         holder.AddComponent<MeshCollider>().sharedMesh=mesh;
@@ -146,7 +145,7 @@ public sealed partial class CityWorld : MonoBehaviour {
         if(identity.Status=="construction")BuildScaffolding(holder.transform);
         else {
             var model=Instantiate(GetModel(resource),holder.transform,false);model.name="Imported_"+resource.Substring(resource.LastIndexOf('/')+1);identity.VisualHeight=FitImportedModel(model,holder.transform,width,height,(float)binding.Get("rotation",30).Double);
-            foreach(var renderer in model.GetComponentsInChildren<Renderer>(true)){renderer.shadowCastingMode=ShadowCastingMode.On;renderer.receiveShadows=true;}
+            foreach(var renderer in model.GetComponentsInChildren<Renderer>(true)){HarmonizeImportedPalette(renderer,def=="secondary_school");renderer.shadowCastingMode=ShadowCastingMode.On;renderer.receiveShadows=true;}
             BuildUseDetails(holder.transform,binding);
             foreach(var prop in binding.Get("props",V.Arr()))PlaceImportedProp(holder.transform,prop);
             if(p.Get("upgrade_job",V.Map()).Count>0)BuildScaffolding(holder.transform);
@@ -163,6 +162,22 @@ public sealed partial class CityWorld : MonoBehaviour {
         string def=p.Get("def","").Text;if(Bindings.Has(def))return Bindings[def];
         var traits=p.Get("traits",V.Arr());string fallback=traits.Contains("building.residential")?"residence":traits.Contains("building.agricultural")?"homestead":traits.Contains("building.service")?"neighborhood":"workshop";
         return V.Map("resource","CityModels/"+fallback,"purpose",Purpose(p),"width",1.0,"max_height",1.2);
+    }
+    readonly Dictionary<Material,Material> importedPalette=new Dictionary<Material,Material>();
+    void HarmonizeImportedPalette(Renderer renderer,bool texturePalette) {
+        var materials=renderer.sharedMaterials;bool changed=false;
+        for(int i=0;i<materials.Length;i++) {
+            var source=materials[i];if(source==null)continue;
+            string property=source.HasProperty("baseColorFactor")?"baseColorFactor":"_BaseColor";if(!source.HasProperty(property))continue;
+            var color=source.GetColor(property);
+            if(!texturePalette&&(color.g<.3f||color.g<color.r*1.4f||color.g<color.b*1.12f))continue;
+            if(!importedPalette.TryGetValue(source,out var muted)) {
+                muted=new Material(source){name="CityPalette_"+source.name,enableInstancing=true};
+                var tone=texturePalette?color*.58f:SurfaceColor(Srgb("89AB98"));tone.a=color.a;muted.SetColor(property,tone);ownedMaterials.Add(muted);importedPalette[source]=muted;
+            }
+            materials[i]=muted;changed=true;
+        }
+        if(changed)renderer.sharedMaterials=materials;
     }
     // Bounds are read from official imported geometry after node transforms; this is not a GLB parser.
     public static Bounds GroundBounds(GameObject imported,Transform localSpace) {
@@ -296,8 +311,8 @@ public sealed partial class CityWorld : MonoBehaviour {
     }
     void SetOutline(LineRenderer line,string id) {
         if(line==null)return;line.enabled=id!=""&&tiles.ContainsKey(id);if(!line.enabled)return;
-        var center=TilePosition(id);const int steps=8;line.positionCount=6*steps;var cell=Cells(snapshot)[id];
-        for(int edge=0;edge<6;edge++)for(int step=0;step<steps;step++){var local=Vector3.Lerp(Corner(edge,.985f),Corner((edge+1)%6,.985f),step/(float)steps);local.y=LocalHeight(cell,local)+.045f;if(cell.Get("terrain","").Text=="water")local.y=Mathf.Max(local.y,RiverSurface+.04f);line.SetPosition(edge*steps+step,center+local);}
+        var center=TilePosition(id);const int steps=8;line.positionCount=6*steps;
+        for(int edge=0;edge<6;edge++)for(int step=0;step<steps;step++){var local=Vector3.Lerp(Corner(edge,.985f),Corner((edge+1)%6,.985f),step/(float)steps);local.y=VisualSurfaceHeight(center+local)+.045f;line.SetPosition(edge*steps+step,center+local);}
 
     }
     public V TileInfo(string id) {
@@ -451,10 +466,10 @@ public sealed partial class CityWorld : MonoBehaviour {
         if(!(pipeline is UniversalRenderPipelineAsset))throw new InvalidOperationException("The city requires the configured official URP pipeline.");
         var cameraObject=new GameObject("CityStrategicCamera");cameraObject.transform.SetParent(transform,false);var camera=cameraObject.AddComponent<Camera>();camera.tag="MainCamera";cameraObject.AddComponent<AudioListener>();camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Srgb("CEE2DC");camera.allowHDR=true;camera.allowMSAA=true;camera.GetUniversalAdditionalCameraData().renderPostProcessing=true;
         CameraController=cameraObject.AddComponent<CityCamera>();CameraController.Initialize(keyboardOwned,pointerOwned);
-        var daylight=new GameObject("FullCityWarmDaylight");daylight.transform.SetParent(transform,false);var sun=daylight.AddComponent<Light>();sun.type=LightType.Directional;sun.color=Srgb("FFF6E9");sun.intensity=1.35f;sun.shadows=LightShadows.Soft;sun.shadowStrength=.58f;sun.shadowBias=.035f;sun.transform.rotation=Quaternion.LookRotation(new Vector3(-.46f,-.76f,-.46f),Vector3.up);RenderSettings.sun=sun;
-        RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=Srgb("D7E6E8");RenderSettings.ambientEquatorColor=Srgb("C1C9CA");RenderSettings.ambientGroundColor=Srgb("9D9E91");
-        RenderSettings.fog=true;RenderSettings.fogMode=FogMode.ExponentialSquared;RenderSettings.fogDensity=.012f;RenderSettings.fogColor=Srgb("CEDCCE");
-        var volumeObject=new GameObject("FullCityDaylightToneMap");volumeObject.transform.SetParent(transform,false);var volume=volumeObject.AddComponent<Volume>();volume.isGlobal=true;profile=ScriptableObject.CreateInstance<VolumeProfile>();profile.Add<Tonemapping>(true).mode.Override(TonemappingMode.Neutral);var color=profile.Add<ColorAdjustments>(true);color.postExposure.Override(0);color.saturation.Override(8);color.contrast.Override(5);volume.profile=profile;
+        var daylight=new GameObject("FullCityNeutralDaylight");daylight.transform.SetParent(transform,false);var sun=daylight.AddComponent<Light>();sun.type=LightType.Directional;sun.color=Srgb("FFFDF6");sun.intensity=1.12f;sun.shadows=LightShadows.Soft;sun.shadowStrength=.76f;sun.shadowBias=.035f;sun.transform.rotation=Quaternion.LookRotation(new Vector3(-.55f,-.72f,-.42f),Vector3.up);RenderSettings.sun=sun;
+        RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=Srgb("9EADB7");RenderSettings.ambientEquatorColor=Srgb("89928F");RenderSettings.ambientGroundColor=Srgb("68685F");
+        RenderSettings.fog=false;
+        var volumeObject=new GameObject("FullCityDaylightToneMap");volumeObject.transform.SetParent(transform,false);var volume=volumeObject.AddComponent<Volume>();volume.isGlobal=true;profile=ScriptableObject.CreateInstance<VolumeProfile>();profile.Add<Tonemapping>(true).mode.Override(TonemappingMode.Neutral);var color=profile.Add<ColorAdjustments>(true);color.postExposure.Override(0);color.saturation.Override(0);color.contrast.Override(8);volume.profile=profile;
     }
     static Color ReadColor(V color)=>new Color((float)color[0].Double,(float)color[1].Double,(float)color[2].Double,color.Count>3?(float)color[3].Double:1);
     LineRenderer MakeLine(string name,float width,Color color,Transform parent) {

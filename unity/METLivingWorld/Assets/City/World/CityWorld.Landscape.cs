@@ -7,103 +7,204 @@ using UnityEngine.Rendering;
 namespace MET.City {
 public sealed partial class CityWorld {
     const float LandscapeExtent=22f;
-    const int LandscapeGridCells=176;
+    const int LandscapeGridCells=256;
     Vector3[] denseSurfaceVertices=Array.Empty<Vector3>();
-    const float RiverSurface=.025f;
+    int[] visibleGroundTriangles=Array.Empty<int>();
+    int[] groundCellTriangleStarts=Array.Empty<int>();
+    int[] groundCellTriangleCounts=Array.Empty<int>();
+    Vector3[] visibleRiverVertices=Array.Empty<Vector3>();
+    int[] visibleRiverTriangles=Array.Empty<int>();
+    Material boundaryGridMaterial;
+    const float RiverSurface=.025f; // Legacy fixture water height; seeded worlds read their source elevation.
     Transform groundRoot,settlementRoot;
     readonly List<Mesh> groundMeshes=new List<Mesh>();
     readonly List<LandSample> landSamples=new List<LandSample>();
     readonly List<Vector3> riverCurve=new List<Vector3>();
-    Texture2D groundAlbedo,waterAlbedo;
+    readonly List<Vector3> foundationCenters=new List<Vector3>();
     string terrainKey="";
     bool openingFramed;
-    struct LandSample {public Vector3 point;public float height;public Color color;}
+    struct LandSample {public Vector3 point;public float height;public Color color;public string terrain;public bool sourceElevation;}
     static Vector3 CellPosition(V cell)=>new Vector3(-Mathf.Sqrt(3)*((float)cell.Get("q",0).Double+(float)cell.Get("r",0).Double*.5f),0,-1.5f*(float)cell.Get("r",0).Double);
     void EnsureLandscape() {
-        var cells=Cells(snapshot);string key=V.From(Ids(cells).Select(id=>V.Arr(id,cells[id].Get("terrain","plain"))).ToArray()).ToJson();
+        var cells=Cells(snapshot);var geography=snapshot.Get("block",V.Map()).Get("geography",V.Map());string key=V.Arr(V.From(Ids(cells).Select(id=>V.Arr(id,cells[id].Get("terrain","plain"),cells[id].Get("elevation01",-1),cells[id].Get("moisture01",-1),cells[id].Get("building",""))).ToArray()),geography).ToJson();
         if(groundRoot!=null&&key==terrainKey)return;
-        DestroyLandscape();tiles.Clear();landSamples.Clear();riverCurve.Clear();terrainKey=key;
+        DestroyLandscape();tiles.Clear();landSamples.Clear();riverCurve.Clear();foundationCenters.Clear();terrainKey=key;
         groundRoot=NewRoot("ContinuousRiverValley_NoExtraGameplayTiles");groundRoot.SetParent(geometryRoot,false);
         var riverAnchors=new List<Vector3>();
         foreach(var id in Ids(cells)) {
             var cell=cells[id];string type=cell.Get("terrain","plain").Text;var position=TilePosition(id);
-            landSamples.Add(new LandSample {point=position,height=type=="hill"?1.15f:type=="forest"?.18f:type=="wet"?.075f:.13f,color=LandColor(type)});
-            if(type=="water")riverAnchors.Add(position);
+            landSamples.Add(new LandSample {point=position,height=cell.Has("elevation01")?.10f+1.8f*(float)cell["elevation01"].Double:type=="hill"?1.35f:type=="forest"?.20f:type=="wet"?.07f:.13f,color=LandColor(type),terrain=type,sourceElevation=cell.Has("elevation01")});
+            if(type=="water"){position.y=cell.Has("elevation01")?.10f+1.8f*(float)cell["elevation01"].Double:RiverSurface;riverAnchors.Add(position);}
+            if(cell.Get("building","").Text!="")foundationCenters.Add(position);
         }
-        riverAnchors.Sort((a,b)=>b.z.CompareTo(a.z));BuildRiverCurve(riverAnchors);
-        CreateGroundAlbedo();
-        terrainMaterials["continuous"]=Surface("ContinuousLivingValley",Color.white);terrainMaterials["continuous"].SetTexture("_BaseMap",groundAlbedo);terrainMaterials["continuous"].SetFloat("_Smoothness",.05f);
+        var orderedRiver=geography.Get("river_ids",V.Arr());
+        if(orderedRiver.Count>1) {
+            riverAnchors.Clear();foreach(var riverId in orderedRiver){if(!cells.Has(riverId.Text))continue;var cell=cells[riverId.Text];var point=TilePosition(riverId.Text);point.y=cell.Has("elevation01")?.10f+1.8f*(float)cell["elevation01"].Double:RiverSurface;riverAnchors.Add(point);}
+        } else if(cells.Values.Any(cell=>cell.Get("river_order",-1).Double>=0)) {
+            riverAnchors.Clear();foreach(var id in Ids(cells).Where(id=>cells[id].Get("river_order",-1).Double>=0).OrderBy(id=>cells[id]["river_order"].Double)){var point=TilePosition(id);point.y=cells[id].Has("elevation01")?.10f+1.8f*(float)cells[id]["elevation01"].Double:RiverSurface;riverAnchors.Add(point);}
+        } else riverAnchors.Sort((a,b)=>b.z.CompareTo(a.z));
+        BuildRiverCurve(riverAnchors);
+        terrainMaterials["continuous"]=LandscapeMaterial("CityLandscapeVertex");
+        terrainMaterials["water"]=LandscapeMaterial("CityRiverVertex");
         BuildBackgroundLandscape();
+        BuildRiverSurface();
         foreach(var id in Ids(cells))CreateTile(id,cells[id]);
-        BuildRiverSurface();BuildBoundaryGrid();
+        BuildBoundaryGrid();
+    }
+    Material LandscapeMaterial(string resource) {
+        string key="Landscape_"+resource;
+        if(surfaceCache.TryGetValue(key,out var cached))return cached;
+        var template=Resources.Load<Material>("Rendering/"+resource);
+        if(template==null)throw new InvalidOperationException("The serialized city landscape material is missing: "+resource);
+        var material=new Material(template){name=resource,enableInstancing=true};ownedMaterials.Add(material);surfaceCache[key]=material;return material;
     }
     static Color LandColor(string type) {
-        switch(type) {case "hill":return Srgb("A79D82");case "forest":return Srgb("547D51");case "wet":return Srgb("729274");case "water":return Srgb("A4A18A");default:return Srgb("88A365");}
+        switch(type) {case "hill":return Srgb("A2A36B");case "forest":return Srgb("426944");case "wet":return Srgb("718D64");case "water":return Srgb("B5A586");default:return Srgb("8AA557");}
     }
     void BuildRiverCurve(List<Vector3> anchors) {
         if(anchors.Count<2)return;
-        var first=anchors[0];var last=anchors[anchors.Count-1];anchors.Insert(0,first+(first-anchors[1]).normalized*15);anchors.Add(last+(last-anchors[anchors.Count-2]).normalized*15);
+        var first=anchors[0];var last=anchors[anchors.Count-1];
+        var upstream=first-anchors[1];upstream.y=0;upstream.Normalize();
+        for(int i=16;i>0;i--)riverCurve.Add(first+upstream*(15*i/16f));
         for(int i=0;i<anchors.Count-1;i++) {
-            var p0=anchors[Mathf.Max(0,i-1)];var p1=anchors[i];var p2=anchors[i+1];var p3=anchors[Mathf.Min(anchors.Count-1,i+2)];
-            int steps=i==0||i==anchors.Count-2?16:8;
-            for(int j=0;j<steps;j++){float t=j/(float)steps;float t2=t*t,t3=t2*t;riverCurve.Add(.5f*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t2+(-p0+3*p1-3*p2+p3)*t3));}
+            var p1=anchors[i];var p2=anchors[i+1];var p0=i>0?anchors[i-1]:2*p1-p2;var p3=i+2<anchors.Count?anchors[i+2]:2*p2-p1;
+            const int steps=16;
+            for(int j=0;j<steps;j++){float t=j/(float)steps;float t2=t*t,t3=t2*t;var point=.5f*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t2+(-p0+3*p1-3*p2+p3)*t3);point.y=Mathf.Lerp(p1.y,p2.y,t);riverCurve.Add(point);}
         }
-        riverCurve.Add(anchors[anchors.Count-1]);
+        riverCurve.Add(last);var downstream=last-anchors[anchors.Count-2];downstream.y=0;downstream.Normalize();
+        for(int i=1;i<=16;i++)riverCurve.Add(last+downstream*(15*i/16f));
     }
-    float RiverDistance(Vector3 point) {
-        float nearest=float.PositiveInfinity;
+    void RiverProjection(Vector3 point,out float distance,out float height) {
+        float nearest=float.PositiveInfinity;height=RiverSurface;point.y=0;
         for(int i=0;i<riverCurve.Count-1;i++) {
-            var a=riverCurve[i];var delta=riverCurve[i+1]-a;float t=Mathf.Clamp01(Vector3.Dot(point-a,delta)/Mathf.Max(.001f,delta.sqrMagnitude));var difference=point-(a+delta*t);nearest=Mathf.Min(nearest,difference.x*difference.x+difference.z*difference.z);
+            var a=riverCurve[i];var delta=riverCurve[i+1]-a;float h0=a.y,dh=delta.y;a.y=0;delta.y=0;
+            float t=Mathf.Clamp01(Vector3.Dot(point-a,delta)/Mathf.Max(.001f,delta.sqrMagnitude));var difference=point-(a+delta*t);float d2=difference.sqrMagnitude;
+            if(d2<nearest){nearest=d2;height=h0+dh*t;}
         }
-        return Mathf.Sqrt(nearest);
+        distance=Mathf.Sqrt(nearest);
     }
+    float RiverDistance(Vector3 point) {RiverProjection(point,out var distance,out var height);return distance;}
+    float RiverHeightAt(Vector3 point) {RiverProjection(point,out var distance,out var height);return height;}
     static float RiverHalfWidth(Vector3 point)=>.46f+.045f*Mathf.Sin(point.z*.75f+point.x*.22f);
-    float HeightAt(Vector3 point) {
-        float height=0,weights=0;
-        foreach(var sample in landSamples) {float dx=point.x-sample.point.x,dz=point.z-sample.point.z,d2=dx*dx+dz*dz;float w=1/(.9f+d2*d2);height+=sample.height*w;weights+=w;}
-        height=weights>0?height/weights:.13f;
-        height+=(Mathf.PerlinNoise(point.x*.21f+9,point.z*.21f+3)-.5f)*.24f;
-        float distance=RiverDistance(point);float shore=RiverHalfWidth(point);
-        float shoreline=shore+.22f;
-        if(distance<shoreline)height=Mathf.Lerp(-.14f,RiverSurface,Mathf.SmoothStep(0,1,Mathf.InverseLerp(shore-.18f,shoreline,distance)));
-        else if(distance<shoreline+.65f)height=Mathf.Lerp(RiverSurface,Mathf.Max(RiverSurface+.055f,height),Mathf.SmoothStep(0,1,Mathf.InverseLerp(shoreline,shoreline+.65f,distance)));
+    float RawHeightAt(Vector3 point) {
+        // Broad shaped ridges make the hill silhouette readable. No fine noise or tiled height texture.
+        float height=.13f+.032f*Mathf.Sin(point.x*.75f+point.z*.48f)+.025f*Mathf.Sin(point.z*1.15f-point.x*.3f);
+        bool hasElevation=landSamples.Count>0&&landSamples[0].sourceElevation;
+        if(hasElevation) {
+            float weighted=0,weights=0;foreach(var sample in landSamples){float dx=point.x-sample.point.x,dz=point.z-sample.point.z,d2=dx*dx+dz*dz,w=1/(.025f+d2*d2);weighted+=sample.height*w;weights+=w;}
+            height=weighted/weights;
+        }
+        foreach(var sample in landSamples) {
+            float dx=point.x-sample.point.x,dz=point.z-sample.point.z;
+            if(sample.terrain=="hill") {
+                float along=dx*.84f+dz*.54f,across=-dx*.54f+dz*.84f;
+                float radius=Mathf.Sqrt(along*along*.52f+across*across*1.4f);
+                float envelope=1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(.12f,1.58f,radius));
+                float ridge=1-.23f*Mathf.Abs(Mathf.Sin(along*2.7f+.4f));
+                if(hasElevation)height+=.68f*envelope*ridge;else height=Mathf.Max(height,.13f+sample.height*envelope*ridge);
+            } else if(!hasElevation&&sample.terrain=="wet") {
+                float blend=1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(.35f,1.1f,Mathf.Sqrt(dx*dx+dz*dz)));
+                height=Mathf.Lerp(height,.075f,blend);
+            }
+        }
         return height;
     }
-    Vector3 GroundNormal(Vector3 point) {
-        const float d=.04f;return new Vector3(HeightAt(point+Vector3.left*d)-HeightAt(point+Vector3.right*d),2*d,HeightAt(point+Vector3.back*d)-HeightAt(point+Vector3.forward*d)).normalized;
+    float HeightAt(Vector3 point) {
+        float height=RawHeightAt(point);
+        // Occupied plots keep a ground-level flat court; the transition is in the land, not a hex plinth.
+        foreach(var center in foundationCenters) {
+            float dx=point.x-center.x,dz=point.z-center.z,distance=Mathf.Sqrt(dx*dx+dz*dz);
+            if(distance<.92f)height=Mathf.Lerp(height,RawHeightAt(center),1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(.68f,.92f,distance)));
+        }
+        RiverProjection(point,out float riverDistance,out float riverHeight);float shore=RiverHalfWidth(point);
+        if(riverDistance<shore+.05f)height=Mathf.Lerp(riverHeight-.17f,riverHeight-.015f,Mathf.SmoothStep(0,1,Mathf.InverseLerp(shore-.13f,shore+.05f,riverDistance)));
+        else if(riverDistance<shore+.55f)height=Mathf.Lerp(riverHeight-.015f,Mathf.Max(riverHeight+.08f,height),Mathf.SmoothStep(0,1,Mathf.InverseLerp(shore+.05f,shore+.55f,riverDistance)));
+        else if(riverDistance<shore+1.15f)height=Mathf.Lerp(Mathf.Max(riverHeight+.08f,height),height,Mathf.SmoothStep(0,1,Mathf.InverseLerp(shore+.55f,shore+1.15f,riverDistance)));
+        return height;
     }
-    Color AlbedoAt(Vector3 point) {
-        Color color=Color.black;float weights=0;
-        foreach(var sample in landSamples) {float dx=point.x-sample.point.x,dz=point.z-sample.point.z,d2=dx*dx+dz*dz,w=1/(.28f+d2*d2);color+=sample.color*w;weights+=w;}
-        color=weights>0?color/weights:LandColor("plain");
-        float broad=Mathf.PerlinNoise(point.x*.65f+17,point.z*.65f+5),grain=Mathf.PerlinNoise(point.x*7.3f+31,point.z*7.3f+11),fine=Mathf.PerlinNoise(point.x*14.5f+3,point.z*14.5f+9);
-        color*=.82f+broad*.24f+grain*.10f+fine*.04f;
-        float patch=Mathf.SmoothStep(.58f,.79f,Mathf.PerlinNoise(point.x*1.3f+6,point.z*1.3f+23));color=Color.Lerp(color,Srgb("9E997B"),patch*.24f);
-        float distance=RiverDistance(point),shore=RiverHalfWidth(point);float bankBlend=1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(shore+.06f,shore+.40f,distance));color=Color.Lerp(color,Srgb("C6B99B"),bankBlend*.85f);
-        float edge=Mathf.Clamp01((Mathf.Max(Mathf.Abs(point.x),Mathf.Abs(point.z))-10)/12);color=Color.Lerp(color,Srgb("97A786"),edge*.4f);color.a=1;return color;
+    public float VisualGroundHeight(Vector3 point) {
+        if(denseSurfaceVertices.Length==0)return HeightAt(point);
+        float step=2*LandscapeExtent/LandscapeGridCells,x=(point.x+LandscapeExtent)/step,z=(point.z+LandscapeExtent)/step;
+        int ix=Mathf.Clamp(Mathf.FloorToInt(x),0,LandscapeGridCells-1),iz=Mathf.Clamp(Mathf.FloorToInt(z),0,LandscapeGridCells-1);
+        point.x=Mathf.Clamp(point.x,-LandscapeExtent,LandscapeExtent);point.z=Mathf.Clamp(point.z,-LandscapeExtent,LandscapeExtent);
+        int cell=iz*LandscapeGridCells+ix,start=groundCellTriangleStarts[cell],end=start+groundCellTriangleCounts[cell];
+        for(int i=start;i<end;i+=3) {
+            var a=denseSurfaceVertices[visibleGroundTriangles[i]];var b=denseSurfaceVertices[visibleGroundTriangles[i+1]];var c=denseSurfaceVertices[visibleGroundTriangles[i+2]];
+            float denominator=(b.z-c.z)*(a.x-c.x)+(c.x-b.x)*(a.z-c.z);
+            float u=((b.z-c.z)*(point.x-c.x)+(c.x-b.x)*(point.z-c.z))/denominator;
+            float v=((c.z-a.z)*(point.x-c.x)+(a.x-c.x)*(point.z-c.z))/denominator;
+            if(u>=-.00001f&&v>=-.00001f&&u+v<=1.00001f)return u*a.y+v*b.y+(1-u-v)*c.y;
+        }
+        return HeightAt(point);
     }
-    void CreateGroundAlbedo() {
-        const int size=512;groundAlbedo=new Texture2D(size,size,TextureFormat.RGBA32,true,false){name="SharedProceduralValleyAlbedo_NotBakedLighting",wrapMode=TextureWrapMode.Clamp,filterMode=FilterMode.Bilinear};var colors=new Color[size*size];
-        for(int y=0;y<size;y++)for(int x=0;x<size;x++){var point=new Vector3((x/(float)(size-1)*2-1)*LandscapeExtent,0,(y/(float)(size-1)*2-1)*LandscapeExtent);colors[y*size+x]=AlbedoAt(point);}
-        groundAlbedo.SetPixels(colors);groundAlbedo.Apply(true,true);
+    public float ForestDensityAt(Vector3 point) {
+        float forest=0,total=0;
+        var warped=point+new Vector3(Mathf.Sin(point.z*2.1f+point.x*.6f)*.10f,0,Mathf.Sin(point.x*1.9f-point.z*.7f)*.10f);
+        foreach(var sample in landSamples){float dx=warped.x-sample.point.x,dz=warped.z-sample.point.z,w=Mathf.Exp(-(dx*dx+dz*dz)*1.45f);total+=w;if(sample.terrain=="forest")forest+=w;}
+        float density=total>0?Mathf.SmoothStep(0,1,Mathf.InverseLerp(.12f,.82f,forest/total)):0;
+        float shore=Mathf.SmoothStep(0,1,Mathf.InverseLerp(RiverHalfWidth(point)+.15f,RiverHalfWidth(point)+.42f,RiverDistance(point)));
+        return density*shore;
+    }
+    public float VisualSurfaceHeight(Vector3 point) {
+        float height=VisualGroundHeight(point);
+        for(int i=0;i<visibleRiverTriangles.Length;i+=3) {
+            var a=visibleRiverVertices[visibleRiverTriangles[i]];var b=visibleRiverVertices[visibleRiverTriangles[i+1]];var c=visibleRiverVertices[visibleRiverTriangles[i+2]];
+            float denominator=(b.z-c.z)*(a.x-c.x)+(c.x-b.x)*(a.z-c.z);
+            if(Mathf.Abs(denominator)<.000001f)continue;
+            float u=((b.z-c.z)*(point.x-c.x)+(c.x-b.x)*(point.z-c.z))/denominator;
+            float v=((c.z-a.z)*(point.x-c.x)+(a.x-c.x)*(point.z-c.z))/denominator;
+            if(u>=0&&v>=0&&u+v<=1)height=Mathf.Max(height,u*a.y+v*b.y+(1-u-v)*c.y);
+        }
+        return height;
+    }
+    Color AlbedoAt(Vector3 point,Vector3 normal) {
+        // A narrow, shaped boundary between source terrain types. This is color classification only.
+        var warped=point+new Vector3(Mathf.Sin(point.z*2.1f+point.x*.6f)*.10f,0,Mathf.Sin(point.x*1.9f-point.z*.7f)*.10f);
+        float nearest=float.PositiveInfinity,second=float.PositiveInfinity;LandSample first=new LandSample(),other=new LandSample();
+        foreach(var sample in landSamples) {
+            float dx=warped.x-sample.point.x,dz=warped.z-sample.point.z,distance=Mathf.Sqrt(dx*dx+dz*dz);
+            if(distance<nearest){second=nearest;other=first;nearest=distance;first=sample;}
+            else if(distance<second){second=distance;other=sample;}
+        }
+        var color=landSamples.Count>0?first.color:LandColor("plain");
+        if(first.terrain!=other.terrain)color=Color.Lerp(color,other.color,.5f*(1-Mathf.SmoothStep(0,1,(second-nearest)/.24f)));
+        float broad=.98f+.025f*Mathf.Sin(point.x*1.7f+point.z*.6f)*Mathf.Sin(point.z*1.3f-point.x*.4f);color*=broad;
+        float slope=1-normal.y;
+        if(point.y>.30f) {
+            float rock=Mathf.SmoothStep(0,1,Mathf.InverseLerp(.12f,.30f,slope));
+            color=Color.Lerp(color,Srgb("A7A395"),rock*.94f);
+            float seams=.5f+.5f*Mathf.Sin(point.y*19+point.x*.8f+point.z*.4f);color*=1-rock*seams*.10f;
+        }
+        float distanceToRiver=RiverDistance(point),shore=RiverHalfWidth(point);
+        float gravel=1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(shore+.25f,shore+.65f,distanceToRiver));
+        color=Color.Lerp(color,Srgb("A5A59B"),gravel);
+        float sand=1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(shore+.08f,shore+.40f,distanceToRiver));
+        color=Color.Lerp(color,Srgb("CCBB94"),sand);color.a=1;return SurfaceColor(color);
     }
     Vector2 GroundUV(Vector3 point)=>new Vector2(point.x/(2*LandscapeExtent)+.5f,point.z/(2*LandscapeExtent)+.5f);
     Mesh LandscapeHex(string id,bool analysis) {
-        // Clip the visible dense-grid triangles in XYZ. Every new vertex remains on its source plane.
+        // Clip the visible adaptive-ground triangles in XYZ. Every new vertex remains on its source plane.
         var center=TilePosition(id);var boundary=new Vector3[6];for(int i=0;i<6;i++)boundary[i]=center+Corner(i,1);
         float minX=boundary.Min(p=>p.x),maxX=boundary.Max(p=>p.x),minZ=boundary.Min(p=>p.z),maxZ=boundary.Max(p=>p.z),step=2*LandscapeExtent/LandscapeGridCells;
         int x0=Mathf.Clamp(Mathf.FloorToInt((minX+LandscapeExtent)/step),0,LandscapeGridCells-1),x1=Mathf.Clamp(Mathf.FloorToInt((maxX+LandscapeExtent)/step),0,LandscapeGridCells-1);
         int z0=Mathf.Clamp(Mathf.FloorToInt((minZ+LandscapeExtent)/step),0,LandscapeGridCells-1),z1=Mathf.Clamp(Mathf.FloorToInt((maxZ+LandscapeExtent)/step),0,LandscapeGridCells-1);
-        var vertices=new List<Vector3>();var uv=new List<Vector2>();var triangles=new List<int>();bool water=analysis&&Cells(snapshot)[id].Get("terrain","").Text=="water";
+        var vertices=new List<Vector3>();var uv=new List<Vector2>();var triangles=new List<int>();
         Action<Vector3,Vector3,Vector3> append=(a,b,c)=> {
             var polygon=new List<Vector3>{a,b,c};
             for(int edge=0;edge<6&&polygon.Count>0;edge++)polygon=ClipToHexEdge(polygon,boundary[edge],boundary[(edge+1)%6]);
             if(polygon.Count<3)return;int start=vertices.Count;
-            foreach(var point in polygon){var local=point-center;if(water)local.y=Mathf.Max(local.y,RiverSurface);vertices.Add(local);uv.Add(GroundUV(point));}
+            foreach(var point in polygon){vertices.Add(point-center);uv.Add(GroundUV(point));}
             for(int i=1;i<polygon.Count-1;i++)triangles.AddRange(new[]{start,start+i,start+i+1});
         };
         for(int z=z0;z<=z1;z++)for(int x=x0;x<=x1;x++) {
-            int i=z*(LandscapeGridCells+1)+x;var a=denseSurfaceVertices[i];var b=denseSurfaceVertices[i+LandscapeGridCells+1];var c=denseSurfaceVertices[i+1];var d=denseSurfaceVertices[i+LandscapeGridCells+2];append(a,b,c);append(c,b,d);
+            int cell=z*LandscapeGridCells+x,start=groundCellTriangleStarts[cell],end=start+groundCellTriangleCounts[cell];
+            for(int i=start;i<end;i+=3)append(denseSurfaceVertices[visibleGroundTriangles[i]],denseSurfaceVertices[visibleGroundTriangles[i+1]],denseSurfaceVertices[visibleGroundTriangles[i+2]]);
+        }
+        // The nearest ray hit must be the same visible surface, including water over the riverbed.
+        for(int i=0;i<visibleRiverTriangles.Length;i+=3) {
+            var a=visibleRiverVertices[visibleRiverTriangles[i]];var b=visibleRiverVertices[visibleRiverTriangles[i+1]];var c=visibleRiverVertices[visibleRiverTriangles[i+2]];
+            if(Mathf.Max(a.x,Mathf.Max(b.x,c.x))<minX||Mathf.Min(a.x,Mathf.Min(b.x,c.x))>maxX||Mathf.Max(a.z,Mathf.Max(b.z,c.z))<minZ||Mathf.Min(a.z,Mathf.Min(b.z,c.z))>maxZ)continue;
+            append(a,b,c);
         }
         var mesh=new Mesh{name=analysis?"AnalysisClippedFromVisibleGroundTriangles":"TileColliderClippedFromVisibleGroundTriangles"};mesh.SetVertices(vertices);mesh.SetUVs(0,uv);mesh.SetTriangles(triangles,0);mesh.RecalculateNormals();mesh.RecalculateBounds();groundMeshes.Add(mesh);return mesh;
     }
@@ -118,41 +219,82 @@ public sealed partial class CityWorld {
     }
     static float HexEdgeSide(Vector3 a,Vector3 b,Vector3 point)=>(b.x-a.x)*(point.z-a.z)-(b.z-a.z)*(point.x-a.x);
     void BuildBackgroundLandscape() {
-        // One visible surface for both the real city and its visual extension. Hex meshes only pick and analyse.
-        const int cells=LandscapeGridCells;var vertices=new Vector3[(cells+1)*(cells+1)];var normals=new Vector3[vertices.Length];var uv=new Vector2[vertices.Length];var triangles=new int[cells*cells*6];
-        for(int z=0;z<=cells;z++)for(int x=0;x<=cells;x++){int i=z*(cells+1)+x;var point=new Vector3((x/(float)cells*2-1)*LandscapeExtent,0,(z/(float)cells*2-1)*LandscapeExtent);point.y=HeightAt(point);vertices[i]=point;normals[i]=GroundNormal(point);uv[i]=GroundUV(point);}
-        for(int z=0;z<cells;z++)for(int x=0;x<cells;x++){int i=z*(cells+1)+x,t=(z*cells+x)*6;triangles[t]=i;triangles[t+1]=i+cells+1;triangles[t+2]=i+1;triangles[t+3]=i+1;triangles[t+4]=i+cells+1;triangles[t+5]=i+cells+2;}
-        denseSurfaceVertices=vertices;
-        var mesh=new Mesh{name="SingleVisibleContinuousLandscape_QuarterUnitGrid",vertices=vertices,normals=normals,uv=uv,triangles=triangles};mesh.RecalculateBounds();groundMeshes.Add(mesh);CreateGroundRenderer("OnlyVisibleLandscapeSurface_NoExtraGameplay",mesh,terrainMaterials["continuous"]);mesh.UploadMeshData(true);
-    }
-    void CreateGroundRenderer(string label,Mesh mesh,Material material) {
-        var holder=new GameObject(label);holder.transform.SetParent(groundRoot,false);holder.AddComponent<MeshFilter>().sharedMesh=mesh;var renderer=holder.AddComponent<MeshRenderer>();renderer.sharedMaterial=material;renderer.shadowCastingMode=ShadowCastingMode.Off;renderer.receiveShadows=true;
-    }
-    void CreateWaterAlbedo() {
-        const int width=128,height=256;waterAlbedo=new Texture2D(width,height,TextureFormat.RGBA32,true,false){name="SharedRiverDepthAndFlowAlbedo_NotBakedLighting",wrapMode=TextureWrapMode.Repeat,filterMode=FilterMode.Bilinear};var colors=new Color[width*height];
-        for(int y=0;y<height;y++)for(int x=0;x<width;x++) {
-            float u=x/(float)(width-1),v=y/(float)(height-1),bank=Mathf.Pow(Mathf.Abs(u*2-1),2.6f),phase=v*Mathf.PI*2;
-            var color=Color.Lerp(Srgb("387384"),Srgb("82AAA6"),bank);float turbulence=Mathf.PerlinNoise(u*11+Mathf.Sin(phase)*2+3,Mathf.Cos(phase)*3+7)-.5f;
-            float ripple=Mathf.Pow(Mathf.Max(0,Mathf.Sin(phase*3+u*7+Mathf.Sin(phase)*1.3f)),12)*.008f;color*=.97f+turbulence*.10f;color+=new Color(ripple*.6f,ripple,ripple,0);color.a=1;colors[y*width+x]=color;
+        // One surface supplies terrain, the 61 colliders and clipped analysis triangles.
+        const int cells=LandscapeGridCells,shoreSubdivisions=4;float step=2*LandscapeExtent/cells,fineStep=step/shoreSubdivisions;
+        var refined=new bool[cells*cells];
+        for(int z=0;z<cells;z++)for(int x=0;x<cells;x++) {
+            var point=new Vector3(-LandscapeExtent+(x+.5f)*step,0,-LandscapeExtent+(z+.5f)*step);
+            refined[z*cells+x]=RiverDistance(point)<RiverHalfWidth(point)+1.15f+step;
         }
-        waterAlbedo.SetPixels(colors);waterAlbedo.Apply(true,true);terrainMaterials["water"].SetTexture("_BaseMap",waterAlbedo);terrainMaterials["water"].SetColor("_BaseColor",Color.white);terrainMaterials["water"].SetFloat("_Smoothness",.28f);
+        var vertices=new List<Vector3>();var triangles=new List<int>();var indices=new Dictionary<int,int>();
+        groundCellTriangleStarts=new int[cells*cells];groundCellTriangleCounts=new int[cells*cells];
+        Func<int,int,int> vertex=(x,z)=> {
+            int key=z*(cells*shoreSubdivisions+1)+x;if(indices.TryGetValue(key,out int index))return index;
+            var point=new Vector3(-LandscapeExtent+x*fineStep,0,-LandscapeExtent+z*fineStep);point.y=HeightAt(point);
+            index=vertices.Count;vertices.Add(point);indices.Add(key,index);return index;
+        };
+        for(int z=0;z<cells;z++)for(int x=0;x<cells;x++) {
+            int cell=z*cells+x,start=triangles.Count,x0=x*shoreSubdivisions,z0=z*shoreSubdivisions;
+            groundCellTriangleStarts[cell]=start;
+            if(refined[cell]) {
+                for(int dz=0;dz<shoreSubdivisions;dz++)for(int dx=0;dx<shoreSubdivisions;dx++) {
+                    int a=vertex(x0+dx,z0+dz),b=vertex(x0+dx,z0+dz+1),c=vertex(x0+dx+1,z0+dz),d=vertex(x0+dx+1,z0+dz+1);
+                    triangles.AddRange(new[]{a,b,c,c,b,d});
+                }
+            } else {
+                bool left=x>0&&refined[cell-1],top=z+1<cells&&refined[cell+cells],right=x+1<cells&&refined[cell+1],bottom=z>0&&refined[cell-cells];
+                if(left||top||right||bottom) {
+                    // Neighboring fine edges share every vertex; the outer transition has no T junctions.
+                    var ring=new List<int>();
+                    for(int i=0;i<shoreSubdivisions;i+=left?1:shoreSubdivisions)ring.Add(vertex(x0,z0+i));
+                    for(int i=0;i<shoreSubdivisions;i+=top?1:shoreSubdivisions)ring.Add(vertex(x0+i,z0+shoreSubdivisions));
+                    for(int i=0;i<shoreSubdivisions;i+=right?1:shoreSubdivisions)ring.Add(vertex(x0+shoreSubdivisions,z0+shoreSubdivisions-i));
+                    for(int i=0;i<shoreSubdivisions;i+=bottom?1:shoreSubdivisions)ring.Add(vertex(x0+shoreSubdivisions-i,z0));
+                    int center=vertex(x0+shoreSubdivisions/2,z0+shoreSubdivisions/2);
+                    for(int i=0;i<ring.Count;i++)triangles.AddRange(new[]{center,ring[i],ring[(i+1)%ring.Count]});
+                } else {
+                    int a=vertex(x0,z0),b=vertex(x0,z0+shoreSubdivisions),c=vertex(x0+shoreSubdivisions,z0),d=vertex(x0+shoreSubdivisions,z0+shoreSubdivisions);
+                    triangles.AddRange(new[]{a,b,c,c,b,d});
+                }
+            }
+            groundCellTriangleCounts[cell]=triangles.Count-start;
+        }
+        denseSurfaceVertices=vertices.ToArray();visibleGroundTriangles=triangles.ToArray();
+        var normals=new Vector3[vertices.Count];var colors=new Color[vertices.Count];var uv=new Vector2[vertices.Count];
+        for(int i=0;i<visibleGroundTriangles.Length;i+=3) {
+            int a=visibleGroundTriangles[i],b=visibleGroundTriangles[i+1],c=visibleGroundTriangles[i+2];
+            var normal=Vector3.Cross(vertices[b]-vertices[a],vertices[c]-vertices[a]);normals[a]+=normal;normals[b]+=normal;normals[c]+=normal;
+        }
+        for(int i=0;i<vertices.Count;i++){normals[i].Normalize();colors[i]=AlbedoAt(vertices[i],normals[i]);uv[i]=GroundUV(vertices[i]);}
+        var mesh=new Mesh{name="SingleVisibleVertexColorLandscape",indexFormat=IndexFormat.UInt32,vertices=denseSurfaceVertices,normals=normals,colors=colors,uv=uv,triangles=visibleGroundTriangles};mesh.RecalculateBounds();groundMeshes.Add(mesh);CreateGroundRenderer("OnlyVisibleLandscapeSurface_NoExtraGameplay",mesh,terrainMaterials["continuous"],true);mesh.UploadMeshData(true);
+    }
+    void CreateGroundRenderer(string label,Mesh mesh,Material material,bool castShadow=false) {
+        var holder=new GameObject(label);holder.transform.SetParent(groundRoot,false);holder.AddComponent<MeshFilter>().sharedMesh=mesh;var renderer=holder.AddComponent<MeshRenderer>();renderer.sharedMaterial=material;renderer.shadowCastingMode=castShadow?ShadowCastingMode.On:ShadowCastingMode.Off;renderer.receiveShadows=true;
     }
     void BuildRiverSurface() {
-        if(riverCurve.Count<2)return;CreateWaterAlbedo();const int across=8;var vertices=new Vector3[riverCurve.Count*(across+1)];var uv=new Vector2[vertices.Length];var triangles=new List<int>();float length=0;
+        if(riverCurve.Count<2)return;const int across=16;var vertices=new Vector3[riverCurve.Count*(across+1)];var colors=new Color[vertices.Length];var uv=new Vector2[vertices.Length];var triangles=new List<int>();float length=0;
         for(int i=0;i<riverCurve.Count;i++) {
-            var point=riverCurve[i];if(i>0)length+=Vector3.Distance(point,riverCurve[i-1]);var direction=i+1<riverCurve.Count?riverCurve[i+1]-point:point-riverCurve[i-1];var side=Vector3.Cross(Vector3.up,direction).normalized;float width=RiverHalfWidth(point)+.25f;
-            for(int j=0;j<=across;j++){float t=j/(float)across;var position=point+side*(t*2-1)*width;position.y=RiverSurface;int index=i*(across+1)+j;vertices[index]=position;uv[index]=new Vector2(t,length*.45f);if(i+1<riverCurve.Count&&j<across){int a=index,b=index+1,c=index+across+1,d=c+1;triangles.AddRange(new[]{a,c,b,b,c,d});}}
+            var point=riverCurve[i];if(i>0)length+=Vector3.Distance(point,riverCurve[i-1]);var direction=i+1<riverCurve.Count?riverCurve[i+1]-point:point-riverCurve[i-1];var side=Vector3.Cross(Vector3.up,direction).normalized;float width=RiverHalfWidth(point)+.04f;
+            for(int j=0;j<=across;j++) {
+                float t=j/(float)across;var position=point+side*(t*2-1)*width;position.y=RiverHeightAt(position);int index=i*(across+1)+j;vertices[index]=position;uv[index]=new Vector2(t,length);
+                float edge=Mathf.Abs(t*2-1),shallow=Mathf.SmoothStep(0,1,Mathf.InverseLerp(.66f,1,edge));
+                var color=Color.Lerp(Srgb("235468"),Srgb("679083"),shallow);colors[index]=SurfaceColor(color);
+                if(i+1<riverCurve.Count&&j<across){int a=index,b=index+1,c=index+across+1,d=c+1;triangles.AddRange(new[]{a,c,b,b,c,d});}
+            }
         }
-        var mesh=new Mesh{name="SourceDerivedRiverWithShallowMargins",vertices=vertices,uv=uv,triangles=triangles.ToArray()};mesh.RecalculateNormals();mesh.RecalculateBounds();groundMeshes.Add(mesh);CreateGroundRenderer("ContinuousValleyRiver_NoGameplay",mesh,terrainMaterials["water"]);mesh.UploadMeshData(true);
+        visibleRiverVertices=vertices;visibleRiverTriangles=triangles.ToArray();
+        var mesh=new Mesh{name="SourceDerivedRiverDeepChannelNarrowShallows",vertices=vertices,colors=colors,uv=uv,triangles=visibleRiverTriangles};mesh.RecalculateNormals();mesh.RecalculateBounds();groundMeshes.Add(mesh);CreateGroundRenderer("ContinuousValleyRiver_NoGameplay",mesh,terrainMaterials["water"]);mesh.UploadMeshData(true);
     }
     void BuildBoundaryGrid() {
         var vertices=new List<Vector3>();var triangles=new List<int>();var seen=new HashSet<string>(StringComparer.Ordinal);
         foreach(var id in tiles.Keys){var center=TilePosition(id);for(int edge=0;edge<6;edge++) {
             var a=center+Corner(edge,1);var b=center+Corner((edge+1)%6,1);string ka=Mathf.RoundToInt(a.x*1000)+","+Mathf.RoundToInt(a.z*1000),kb=Mathf.RoundToInt(b.x*1000)+","+Mathf.RoundToInt(b.z*1000);string key=StringComparer.Ordinal.Compare(ka,kb)<0?ka+"/"+kb:kb+"/"+ka;if(!seen.Add(key))continue;
             var along=(b-a).normalized;var across=Vector3.Cross(Vector3.up,along)*.006f;const int steps=8;
-            for(int step=0;step<steps;step++){var from=Vector3.Lerp(a,b,step/(float)steps);var to=Vector3.Lerp(a,b,(step+1)/(float)steps);int index=vertices.Count;foreach(var point in new[]{from-across,from+across,to-across,to+across}){var p=point;p.y=HeightAt(p)+.032f;vertices.Add(p);}triangles.AddRange(new[]{index,index+2,index+1,index+1,index+2,index+3});}
+            for(int step=0;step<steps;step++){var from=Vector3.Lerp(a,b,step/(float)steps);var to=Vector3.Lerp(a,b,(step+1)/(float)steps);int index=vertices.Count;foreach(var point in new[]{from-across,from+across,to-across,to+across}){var p=point;p.y=VisualSurfaceHeight(p)+.032f;vertices.Add(p);}triangles.AddRange(new[]{index,index+2,index+1,index+1,index+2,index+3});}
         }}
-        var mesh=new Mesh{name="SubdividedUniqueGameplayGridEdges"};mesh.SetVertices(vertices);mesh.SetTriangles(triangles,0);mesh.RecalculateNormals();mesh.RecalculateBounds();groundMeshes.Add(mesh);var material=new Material(overlay){name="SoftTerrainBoundaryGrid"};var color=Srgb("63805E");color.a=.24f;material.SetColor("_BaseColor",SurfaceColor(color));ownedMaterials.Add(material);CreateGroundRenderer("GameplayHexBoundaries",mesh,material);mesh.UploadMeshData(true);
+        var mesh=new Mesh{name="SubdividedUniqueGameplayGridEdges"};mesh.SetVertices(vertices);mesh.SetTriangles(triangles,0);mesh.RecalculateNormals();mesh.RecalculateBounds();groundMeshes.Add(mesh);
+        if(boundaryGridMaterial==null){boundaryGridMaterial=new Material(overlay){name="SoftTerrainBoundaryGrid"};var color=Srgb("63805E");color.a=.24f;boundaryGridMaterial.SetColor("_BaseColor",SurfaceColor(color));ownedMaterials.Add(boundaryGridMaterial);}
+        CreateGroundRenderer("GameplayHexBoundaries",mesh,boundaryGridMaterial);mesh.UploadMeshData(true);
     }
     Mesh plotCourtMesh;
     void BuildPlotCourt(Transform parent) {
@@ -165,8 +307,10 @@ public sealed partial class CityWorld {
     }
     void DestroyLandscape() {
         denseSurfaceVertices=Array.Empty<Vector3>();
+        visibleGroundTriangles=Array.Empty<int>();groundCellTriangleStarts=Array.Empty<int>();groundCellTriangleCounts=Array.Empty<int>();
+        visibleRiverVertices=Array.Empty<Vector3>();visibleRiverTriangles=Array.Empty<int>();
         if(groundRoot!=null){groundRoot.gameObject.SetActive(false);Destroy(groundRoot.gameObject);groundRoot=null;}
-        foreach(var mesh in groundMeshes)if(mesh!=null)Destroy(mesh);groundMeshes.Clear();if(groundAlbedo!=null)Destroy(groundAlbedo);groundAlbedo=null;if(waterAlbedo!=null)Destroy(waterAlbedo);waterAlbedo=null;
+        foreach(var mesh in groundMeshes)if(mesh!=null)Destroy(mesh);groundMeshes.Clear();
     }
 }
 }

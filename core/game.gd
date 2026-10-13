@@ -56,7 +56,8 @@ func log_event(kind:String,payload:Dictionary={},text:String="") -> void:
 	Civic.event(self,kind,payload,text)
 func select_block(index:int) -> String:
 	if s.phase!="select_block" or index<0 or index>2:return "起点已确定。"
-	s.block_index=index;s.cells=Hex.make_map(index)
+	s.block_index=index;s.cells=Hex.make_map(index,int(s.seed))
+	s.block.geography=Hex.geography(s.cells,int(s.seed),index)
 	s.block.display_name=["河湾","林缘旧村","北部高台"][index]
 	for key in s.cells:
 		var cell=s.cells[key];var ts=[]
