@@ -1,0 +1,791 @@
+--- a/unity/METLivingWorld/Assets/City/UI/CityBlueprintDesk.cs
++++ b/unity/METLivingWorld/Assets/City/UI/CityBlueprintDesk.cs
+@@ -17,35 +17,58 @@
+  public void OpenBlueprintDesk(){OpenArchive(Bonus.pending(G).Count>0?"blueprints":"bonuses");}
+  int BlueprintStyle(string bid)=>CityIllustrationCatalog.StyleForBonus(bid);
+  Color BlueprintAccent(string bid)=>CityIllustrationCatalog.AccentForStyle(BlueprintStyle(bid));
+- string ScopeName(string scope)=>scope=="building"?"建筑方案":scope=="organization"?"运营商方案":"本街区 Block";
++ string ScopeName(string scope)=>scope=="building"?"建筑方案":scope=="organization"?"运营商方案":"本街区方案";
++ string BlueprintRewardSource(V reward){var source=reward.Get("source","城市成长").Text;
++  return source.StartsWith("annual:",StringComparison.Ordinal)?"年度奖励":source.StartsWith("population:",StringComparison.Ordinal)?"人口成长奖励":source.Contains(":")?"城市成长奖励":source;
++ }
++ string BlueprintEffectSummary(V candidate){
++  if(candidate.Get("bonus_id","").Text=="__currency__")return "领取 "+F(candidate.Get("compensation",30).Double,0)+" 通货，不恢复 DT";
++  var effects=candidate.Get("effects",V.Arr());var definition=G.c.bonuses.Get(candidate.Get("bonus_id","").Text,V.Map());
++  var beneficial=effects.FirstOrDefault(x=>!BlueprintEffectAdverse(x));
++  if(beneficial==null){
++   var purpose=definition.Get("player_highlights",V.Arr()).FirstOrDefault(x=>!x.Text.StartsWith("代价",StringComparison.Ordinal)&&!x.Text.StartsWith("成本",StringComparison.Ordinal));
++   if(purpose!=null)return purpose.Text+(effects.Count>0?" · "+Stat(effects[0].Get("label","规则").Text)+" "+FormatEffect(effects[0],effects[0].Get("before",0).Double)+" → "+FormatEffect(effects[0],effects[0].Get("after",0).Double):"");
++   if(effects.Count==0)return definition.Get("summary","结构或关系规则，展开查看适用条件").Text;
++  }
++  var first=beneficial??effects[0];return Stat(first.Get("label","方案效果").Text)+" "+FormatEffect(first,first.Get("before",0).Double)+" → "+FormatEffect(first,first.Get("after",0).Double)+
++   (effects.Count>1?" · 另有 "+(effects.Count-1)+" 项规则":"");
++ }
++ bool BlueprintEffectAdverse(V effect){
++  string label=effect.Get("label","").Text;bool cost=label.Contains("投入")||label.Contains("需求")||label.Contains("污染")||label.Contains("维护")||label.Contains("暴露")||label.Contains("短缺")||label.Contains("衰减");
++  return cost?effect.Get("after",0).Double>effect.Get("before",0).Double:effect.Get("after",0).Double<effect.Get("before",0).Double;
++ }
+  void BlueprintArt(Transform parent,string bid,float height,float fill=1){var node=Node("Blueprint Drawing "+bid,parent);Height(node,height);var art=node.gameObject.AddComponent<CityBlueprintArt>();art.Style=BlueprintStyle(bid);art.Fill=fill;art.Accent=BlueprintAccent(bid);art.color=parent.GetComponentInParent<CityDeskTone>()?.Light==true?new Color(.43f,.47f,.41f):Color.white;art.raycastTarget=false;}
+  Text PaperLabel(Transform parent,string text,int size=17,bool muted=false,float height=0)=>Label(parent,text,size,muted?PaperMuted:PaperInk,height);
+  RectTransform PaperDocument(Transform parent,string title,string subtitle=""){
+   var surface=Surface("Detail "+title,parent,Paper);
+   var layout=surface.gameObject.AddComponent<VerticalLayoutGroup>();layout.padding=new RectOffset(22,22,18,18);layout.spacing=10;layout.childControlWidth=layout.childControlHeight=true;layout.childForceExpandHeight=false;
+   surface.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;
+-  PaperLabel(surface,title,27);if(subtitle!="")PaperLabel(surface,subtitle,14,true);return surface;
++  PaperLabel(surface,title,22);if(subtitle!="")PaperLabel(surface,subtitle,16,true);return surface;
+  }
+  void BuildBonusBucket(){
+   _bonusBucket=Surface("Bonus Blueprint Bucket",_root,new Color(.045f,.10f,.12f,.97f));Pin(_bonusBucket,new Vector2(1,1),new Vector2(1,1),new Vector2(-326,-8),new Vector2(120,60));
+-  var icon=HudIcon(_bonusBucket,"bonus",new Color(.67f,.84f,.85f),25);Pin(icon,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(20,0),new Vector2(25,25));
+-  _bucketCount=Label(_bonusBucket,"许可",13,Ink);Stretch(_bucketCount.rectTransform,40,4,4,4);_bucketCount.resizeTextForBestFit=true;_bucketCount.resizeTextMinSize=12;_bucketCount.resizeTextMaxSize=20;_bucketCount.alignment=TextAnchor.MiddleLeft;
++  var icon=HudIcon(_bonusBucket,"bonus",new Color(.67f,.84f,.85f),24);Pin(icon,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(20,0),new Vector2(24,24));
++  _bucketCount=Label(_bonusBucket,"许可",15,Ink);HudFont(_bucketCount,15);Stretch(_bucketCount.rectTransform,40,4,4,4);_bucketCount.resizeTextForBestFit=true;_bucketCount.resizeTextMinSize=12;_bucketCount.resizeTextMaxSize=Mathf.RoundToInt(15*TextScale);_bucketCount.alignment=TextAnchor.MiddleLeft;
+   var frame=_bonusBucket.GetComponentInChildren<CityHudFrame>();if(frame!=null)frame.enabled=false;
+   var button=_bonusBucket.gameObject.AddComponent<Button>();button.onClick.AddListener(()=>OpenArchive("bonuses"));AddDeskTip(_bonusBucket.gameObject,"Bonus 部署许可",()=>"这里的数量是未安装副本。另有 "+Bonus.pending(G).Count+" 份提案等待领取。安装消耗1份；拆下不返还。已部署实例在建筑与库存中单独标记。");
+  }
+- void RefreshBucket(){if(_bucketCount==null)return;long count=0;foreach(var w in S["block"].Get("bonus_wallet",V.Map()).Values)count+=w.Get("charges",0).Long;_bucketCount.text="许可 "+count;}
++ void RefreshBucket(){if(_bucketCount==null)return;long count=0;foreach(var w in S["block"].Get("bonus_wallet",V.Map()).Values)count+=w.Get("charges",0).Long;_bucketCount.resizeTextMaxSize=Mathf.RoundToInt(15*TextScale);_bucketCount.text="许可 "+count;}
+  void BlueprintOffersPage(){var pending=Bonus.pending(G);if(pending.Count==0){PaperLabel(PaperDocument(_body,"所有提案已处理"),"已领取蓝图可从 Bonus 安装。",17,true);Button(_body,"打开 Bonus",()=>Navigate("bonuses"),true);return;}BlueprintRewardCard(pending[0],Runtime.ViewCanEditFocused);if(pending.Count>1)Label(_body,"后面还有 "+(pending.Count-1)+" 份已保存提案，按原队列依次处理。",15,Muted);}
+  void BlueprintRewardCard(V reward,bool actionable){
+   var rid=reward["reward_id"].Text;var kind=reward.Get("kind","copy").Text;
+   if(!actionable){var note=Card(_body,"稍后的提案",reward.Get("source","城市成长").Text+" · 候选已保存，先处理前一份。",Muted);Label(note,string.Join(" / ",reward["choices"].Select(c=>c.Get("name","方案").Text)),16,Muted);return;}
+   _rewardSelections.TryGetValue(rid,out var chosen);chosen=chosen??"";
+-  var head=Row(_body,"Blueprint Proposal Heading",48);Label(head,kind=="research"?"蓝图研究提案":"为城市留下一种可能",27,Ink);Label(head,reward.Get("source","城市成长").Text+" · "+reward["choices"].Count+" 选 1",15,Muted);
+-  var row=Row(_body,"Blueprint Candidates",330*TextScale);
+-  foreach(var candidateValue in reward["choices"]){var candidate=candidateValue;var bid=candidate["bonus_id"].Text;var selected=chosen==bid;var tile=Surface("Blueprint Candidate "+rid+" "+bid,row,BlueprintBlue);Height(tile,330*TextScale);
+-   var visual=Column(tile,"Candidate Paper",7);Stretch(visual,4,4,4,4);visual.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(18,18,14,14);
+-   Label(visual,candidate.Get("name",bid=="__currency__"?"通货补偿":bid).Text,24,Ink,43*TextScale);Label(visual,bid+" / "+candidate.Get("grade","").Text,12,Muted,24);
+-   var drawing=Node("Candidate Art",visual);Height(drawing,167*TextScale);var art=drawing.gameObject.AddComponent<CityBlueprintArt>();art.Style=BlueprintStyle(bid);art.Accent=BlueprintAccent(bid);art.Fill=selected?1:0;art.color=new Color(.77f,.85f,.81f);art.raycastTarget=false;
+-   Label(visual,kind=="research"?candidate.Get("grade","基础").Text+" → "+candidate.Get("target_grade","改良").Text:candidate.Get("preview_reason","已保存候选").Text,15,selected?Gold:Muted,40*TextScale);
++  var head=Row(_body,"Blueprint Proposal Heading",48);Label(head,kind=="research"?"蓝图研究提案":"为城市留下一种可能",22,Ink);var origin=Label(head,BlueprintRewardSource(reward)+" · "+reward["choices"].Count+" 选 1",16,Muted);AddDeskTip(origin.gameObject,"奖励来源",()=>reward.Get("source","城市成长").Text);
++  var row=Row(_body,"Blueprint Candidates",330*TextScale);row.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight=true;
++  foreach(var candidateValue in reward["choices"]){var candidate=candidateValue;var bid=candidate["bonus_id"].Text;var selected=chosen==bid;var tile=Surface("Blueprint Candidate "+rid+" "+bid,row,BlueprintBlue);
++   var tileLayout=tile.gameObject.AddComponent<VerticalLayoutGroup>();tileLayout.padding=new RectOffset(4,4,4,4);tileLayout.childControlWidth=tileLayout.childControlHeight=true;tileLayout.childForceExpandWidth=true;tileLayout.childForceExpandHeight=false;
++   var tileSize=tile.gameObject.AddComponent<LayoutElement>();tileSize.minHeight=330*TextScale;tileSize.minWidth=0;tileSize.preferredWidth=0;tileSize.flexibleWidth=1;
++   var visual=Column(tile,"Candidate Paper",7);visual.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(14,14,12,12);
++   Label(visual,candidate.Get("name",bid=="__currency__"?"通货补偿":bid).Text,22,Ink);
++   Label(visual,bid=="__currency__"?"城市补助":kind=="research"?candidate.Get("grade","基础").Text+" → "+candidate.Get("target_grade","改良").Text:candidate.Get("grade","基础").Text+" · "+ScopeName(candidate.Get("scope","building").Text),16,Muted);
++   var drawing=Node("Candidate Art",visual);Height(drawing,110*TextScale);var art=drawing.gameObject.AddComponent<CityBlueprintArt>();art.Style=BlueprintStyle(bid);art.Accent=BlueprintAccent(bid);art.Fill=selected?1:0;art.color=new Color(.77f,.85f,.81f);art.raycastTarget=false;
++   Label(visual,BlueprintEffectSummary(candidate),16,selected?Gold:Ink);
++   Label(visual,bid=="__currency__"?"直接入账":kind=="research"?"升级本街区全部同名方案":"领取1份许可，安装后生效",16,Muted);
+    var b=tile.gameObject.AddComponent<Button>();b.interactable=!_blueprintBusy;var motion=tile.gameObject.AddComponent<CityBlueprintMotion>();motion.Art=art;motion.Visual=visual;motion.ReducedMotion=()=>Runtime.DisplaySettings.Get("reduced_motion",false).Bool;motion.SetChosen(selected);
+    if(selected){var outline=tile.gameObject.AddComponent<Outline>();outline.effectColor=Gold;outline.effectDistance=new Vector2(2,2);}
+    b.onClick.AddListener(()=>{if(_blueprintBusy)return;HideDeskTip();_rewardSelections[rid]=bid;PlayCue("select");RenderPage();var current=_body.GetComponentsInChildren<Button>().FirstOrDefault(x=>x.name=="Blueprint Candidate "+rid+" "+bid);if(current!=null)EventSystem.current.SetSelectedGameObject(current.gameObject);});
+@@ -53,16 +76,17 @@
+   if(chosen==""){Label(_body,"悬停看一角 · 点选看效果",16,Muted);return;}
+   var selectedCandidate=reward["choices"].FirstOrDefault(c=>c["bonus_id"].Text==chosen);if(selectedCandidate==null)return;
+   var effect=Card(_body,"效果检视 / "+selectedCandidate.Get("name",chosen).Text,kind=="research"?"研究升级本街区全部同名副本；不扩大部署尺度。":"领取仅获得1份副本，安装后才生效。",Green);
++  Label(effect,BlueprintEffectSummary(selectedCandidate),17,Ink);
+   if(chosen=="__currency__")Metric(effect,"通货补偿",F(reward.Get("compensation",30).Double,0),"不恢复 DT。");else{
+    BlueprintRuleRows(effect,selectedCandidate.Get("effects",V.Arr()),chosen);
+-   Fold(effect,"适用条件与完整规则",deep=>{Label(deep,selectedCandidate.Get("stacking_note","").Text,15,Muted);Raw(deep,G.c.bonuses[chosen]);});
++   Fold(effect,"适用条件与完整规则",deep=>{Label(deep,selectedCandidate.Get("preview_reason","").Text,16,Muted);Label(deep,selectedCandidate.Get("stacking_note","").Text,16,Muted);Raw(deep,G.c.bonuses[chosen]);});
+   }
+   var actions=Row(effect,"Blueprint Selection Actions",50);Button(actions,"取消预选",()=>{_rewardSelections.Remove(rid);HideDeskTip();RenderPage();var original=_body.GetComponentsInChildren<Button>().FirstOrDefault(x=>x.name=="Blueprint Candidate "+rid+" "+chosen);if(original!=null)EventSystem.current.SetSelectedGameObject(original.gameObject);});
+   Button(actions,kind=="research"?"确认研究":"确认领取",()=>ClaimBlueprint(rid,chosen),true,_blueprintBusy||!Runtime.ViewCanEditFocused);
+  }
+  void BlueprintRuleRows(Transform parent,V effects,string bid){
+   if(effects.Count==0){var t=Label(parent,"关系与结构方案 · 展开查看适用规则",17,Blue);AddDeskTip(t.gameObject,"结构效果",()=>"此方案包含条件、关系、配方或结构规则；不能把它误读成无条件的产出加成。\n"+G.c.bonuses.Get(bid,V.Map()).Get("description","").Text);return;}
+-  foreach(var rowValue in effects){var e=rowValue;var r=Row(parent,"Blueprint Rule",42);Label(r,e.Get("label","规则").Text,17,Muted);var value=Button(r,FormatEffect(e,e.Get("before",0).Double)+" → "+FormatEffect(e,e.Get("after",0).Double),()=>{},false);value.GetComponentInChildren<Text>().color=new Color(.45f,.89f,.80f);Height((RectTransform)value.transform,38*TextScale);
++  foreach(var rowValue in effects){var e=rowValue;var r=Row(parent,"Blueprint Rule",42);Label(r,Stat(e.Get("label","规则").Text),17,Muted);var value=Button(r,FormatEffect(e,e.Get("before",0).Double)+" → "+FormatEffect(e,e.Get("after",0).Double),()=>{},false);value.GetComponentInChildren<Text>().color=BlueprintEffectAdverse(e)?Gold:Green;Height((RectTransform)value.transform,38*TextScale);
+    AddDeskTip(value.gameObject,e.Get("label","规则").Text,()=>"这是规则参数，不是保证的实际月产。实际适配和收益将在安装前按同一步模拟。\n"+Bonus.card(G,bid)["stacking_note"].Text+"\n规则来源："+e.Get("rule_id",bid).Text);value.onClick.AddListener(()=>ShowDeskTip(value.GetComponent<CityDeskTooltip>(),true));
+   }
+  }
+@@ -86,22 +110,23 @@
+   if(ids.Length==0){Label(_body,"还没有已领取蓝图。年度、人口与主题奖励会带来新的建设提案。",18,Muted);return;}
+   if(_inventoryChoice==""||!G.c.bonuses.Has(_inventoryChoice)){Label(_body,"选择一份蓝图，查看真实适配位置。",18,Muted);BlueprintInventoryChoices(_body,ids);return;}
+   var chosen=Bonus.card(G,_inventoryChoice);_blueprintScope=chosen["scope"].Text;
+-  var selected=CompactTaskCard(_body,"Selected blueprint");var banner=Row(selected,"Blueprint identity",72*TextScale);var image=Node("Selected drawing",banner);Width(image,86*TextScale);Height(image,68*TextScale);BlueprintArt(image,_inventoryChoice,66*TextScale);var summary=Column(banner,"Blueprint summary",2);summary.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(summary,chosen["name"].Text,20,Ink,31*TextScale);Label(summary,"未安装 "+chosen["copies"].Long+" · 已部署 "+Bonus.active_count(G,_inventoryChoice)+" · "+ScopeName(_blueprintScope),14,Muted);Button(selected,"更换蓝图",()=>{_inventoryChoice="";_blueprintHost="";_blueprintSlot="";RenderPage();});
++  var selected=CompactTaskCard(_body,"Selected blueprint");var banner=Row(selected,"Blueprint identity",72*TextScale);var image=Node("Selected drawing",banner);Width(image,86*TextScale);Height(image,68*TextScale);BlueprintArt(image,_inventoryChoice,66*TextScale);var summary=Column(banner,"Blueprint summary",2);summary.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(summary,chosen["name"].Text,20,Ink,31*TextScale);Label(summary,"未安装 "+chosen["copies"].Long+" · 已部署 "+Bonus.active_count(G,_inventoryChoice)+" · "+ScopeName(_blueprintScope),16,Muted);Label(selected,BlueprintEffectSummary(chosen),16,Ink);Button(selected,"更换蓝图",()=>{_inventoryChoice="";_blueprintHost="";_blueprintSlot="";RenderPage();});
+   var target=Column(_body,"Blueprint Installation Desk",9);target.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);
+   if(_blueprintScope=="building")BuildingInstallTarget(target,chosen);else ScopeInstallTarget(target,chosen);
+   Fold(_body,"其他库存与已部署来源",deep=>BlueprintInventoryChoices(deep,ids));
+  }
+  void BlueprintInventoryChoices(Transform parent,string[] ids){
+-  foreach(var bid in ids){var id=bid;var card=Bonus.card(G,id);var box=CompactTaskCard(parent,"Inventory "+id);var row=Row(box,"Inventory choice",72*TextScale);var visual=Node("Inventory illustration",row);Width(visual,82*TextScale);Height(visual,65*TextScale);BlueprintArt(visual,id,62*TextScale);var info=Column(row,"Inventory summary",2);info.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(info,card["name"].Text,18,Ink,28*TextScale);Label(info,"未安装 "+card["copies"].Long+" · 已部署 "+Bonus.active_count(G,id),14,Muted);var button=Button(row,card["copies"].Long>0?"选择":"查看",()=>{_inventoryChoice=id;_blueprintScope=card["scope"].Text;_blueprintHost="";_blueprintSlot="";_installView=V.Map();RenderPage();},_inventoryChoice==id,_blueprintBusy);Width((RectTransform)button.transform,105*TextScale);
++  foreach(var bid in ids){var id=bid;var card=Bonus.card(G,id);var box=CompactTaskCard(parent,"Inventory "+id);var row=Row(box,"Inventory choice",72*TextScale);var visual=Node("Inventory illustration",row);Width(visual,82*TextScale);Height(visual,65*TextScale);BlueprintArt(visual,id,62*TextScale);var info=Column(row,"Inventory summary",2);info.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(info,card["name"].Text,18,Ink,28*TextScale);Label(info,"未安装 "+card["copies"].Long+" · 已部署 "+Bonus.active_count(G,id),16,Muted);var button=Button(row,card["copies"].Long>0?"选择":"查看",()=>{_inventoryChoice=id;_blueprintScope=card["scope"].Text;_blueprintHost="";_blueprintSlot="";_installView=V.Map();RenderPage();},_inventoryChoice==id,_blueprintBusy);Width((RectTransform)button.transform,105*TextScale);
+    button.name="InventoryChoice "+id;
+-   foreach(var instance in S["bonus_instances"].Values.Where(x=>x.Get("active",false).Bool&&x["bonus_id"].Text==id)){var at=instance;var location=Button(box,"↳ "+G.project_name(at["host_id"].Text)+(at["slot"].Text!=""?" / "+G.slot_label(at["host_id"].Text,at["slot"].Text):" / "+ScopeName(at["host_type"].Text)),()=>{if(at["host_type"].Text=="building"){SelectBuilding(at["host_id"].Text);Navigate("building",at["host_id"].Text);}else ShowMessage("已部署于"+G.project_name(at["host_id"].Text)+" · "+ScopeName(at["host_type"].Text));});location.name="InstalledLocation "+at["id"].Text;Fold(box,"实例来源 / "+at["id"].Text,deep=>Raw(deep,at));}
++   Label(box,BlueprintEffectSummary(card),16,Ink);
++   foreach(var instance in S["bonus_instances"].Values.Where(x=>x.Get("active",false).Bool&&x["bonus_id"].Text==id)){var at=instance;var location=Button(box,"↳ "+G.project_name(at["host_id"].Text)+(at["slot"].Text!=""?" / "+G.slot_label(at["host_id"].Text,at["slot"].Text):" / "+ScopeName(at["host_type"].Text)),()=>{if(at["host_type"].Text=="building"){SelectBuilding(at["host_id"].Text);Navigate("building",at["host_id"].Text);}else ShowMessage("已部署于"+G.project_name(at["host_id"].Text)+" · "+ScopeName(at["host_type"].Text));});location.name="InstalledLocation "+at["id"].Text;Fold(box,"实例来源与完整记录",deep=>Raw(deep,at));}
+   }
+  }
+  void ChooseBlueprintTarget(string host,string slot=""){HideDeskTip();_blueprintHost=host;_blueprintSlot=slot;_installView=V.Map();_blueprintVersion="";_moreBlueprintBuildings=false;RenderPage();if(slot!=""){var action=_body.GetComponentsInChildren<Button>().FirstOrDefault(x=>(x.GetComponentInChildren<Text>()?.text.StartsWith("安装 · ")==true||x.GetComponentInChildren<Text>()?.text.StartsWith("替换 · ")==true));if(action!=null){EventSystem.current.SetSelectedGameObject(action.gameObject);ScrollDeskFocus(action.transform);}}}
+  void BuildingInstallTarget(Transform parent,V chosen){
+   var bid=chosen["bonus_id"].Text;var projects=G.playable_ids().Select(x=>x.Text).OrderByDescending(id=>G.slot_ids(id).Any(s=>G.bonus_eligible(bid,"building",id,s.Text,S["projects"][id]["slots"][s].Text)=="")).ToArray();
+   if(_blueprintHost==""||!S["projects"].Has(_blueprintHost))_blueprintHost=SelectedBuilding!=""&&S["projects"].Has(SelectedBuilding)?SelectedBuilding:projects.FirstOrDefault()??"";
+-  var sites=Row(parent,"Blueprint Building Choices",50);foreach(var id in projects.Take(3)){var host=id;bool fits=G.slot_ids(host).Any(x=>G.bonus_eligible(bid,"building",host,x.Text,S["projects"][host]["slots"][x].Text)=="");Button(sites,(fits?"✓ ":"— ")+G.project_name(host)+" / "+S["projects"][host]["tile"].Text,()=>ChooseBlueprintTarget(host),_blueprintHost==host);}
++  var sites=Row(parent,"Blueprint Building Choices",50);foreach(var id in projects.Take(3)){var host=id;bool fits=G.slot_ids(host).Any(x=>G.bonus_eligible(bid,"building",host,x.Text,S["projects"][host]["slots"][x].Text)=="");var hostButton=Button(sites,(fits?"✓ ":"— ")+G.project_name(host)+"\n"+S["projects"][host]["tile"].Text,()=>ChooseBlueprintTarget(host),_blueprintHost==host);Height((RectTransform)hostButton.transform,64*TextScale);}
+   if(projects.Length>3)Button(sites,"全部 "+projects.Length+" 栋 ▾",()=>{_moreBlueprintBuildings=!_moreBlueprintBuildings;RenderPage();});
+   if(_moreBlueprintBuildings){for(int i=3;i<projects.Length;i+=2){var line=Row(parent,"More Blueprint Buildings",50);foreach(var id in projects.Skip(i).Take(2)){var host=id;Button(line,G.project_name(host)+" / "+S["projects"][host]["tile"].Text,()=>ChooseBlueprintTarget(host),_blueprintHost==host);}}}
+   if(_blueprintHost==""){Label(parent,"先建成一座适用建筑，再安装这份方案。",18,Muted);return;}
+@@ -111,7 +136,7 @@
+   if(_blueprintSlot!="")BlueprintInstallationPreview(parent,chosen,"building",_blueprintHost,_blueprintSlot);else Label(parent,"先选择建筑上的兼容槽位。",16,Muted);
+  }
+  void ScopeInstallTarget(Transform parent,V card){
+-  var bid=card["bonus_id"].Text;var scope=card["scope"].Text;Label(parent,ScopeName(scope),24,Blue);
++  var bid=card["bonus_id"].Text;var scope=card["scope"].Text;Label(parent,ScopeName(scope),22,Blue);
+   Label(parent,scope=="block"?"只作用当前街区，不扩展到整个 District。":"作用于当前街区中该运营商管理的适用建筑。",16,Muted);
+   if(scope=="block")_blueprintHost=S["block"]["id"].Text;
+   else {var organizations=Rules.ids(S["organizations"]).Select(x=>x.Text).ToArray();for(int i=0;i<organizations.Length;i+=3){var row=Row(parent,"Blueprint Organization Choices",50);foreach(var host in organizations.Skip(i).Take(3))Button(row,G.project_name(host),()=>ChooseBlueprintTarget(host),host==_blueprintHost);}}
+@@ -122,10 +147,13 @@
+   var bid=card["bonus_id"].Text;var key=_planner.version(G)+"|"+S["block"]["bonus_wallet"].ToJson()+"|"+S["bonus_instances"].ToJson()+"|"+bid+scope+host+slot;
+   if(key!=_blueprintVersion||_installView.Count==0){_installView=BlueprintPreview.For(G,bid,scope,host,slot);_blueprintVersion=key;}
+   var view=_installView;var box=Card(parent,"安装前后 / "+card["name"].Text,"同一步模拟 · 不提前消耗真实副本",Green);
++  Label(box,"安装目标："+(scope=="building"?G.project_name(host)+" · "+G.slot_label(host,slot):G.project_name(host)+" · "+ScopeName(scope)),17,Ink);
+   if(!view.Get("ok",false).Bool){Label(box,view.Get("error","当前不能安装。").Text,18,Gold);return;}
+-  foreach(var changed in view["stat_rows"].Take(4)){var e=changed;var line=Row(box,"Actual Rule Difference",40);Label(line,Stat(e["field"].Text),16,Muted);var b=Button(line,F(e["before"].Double,3)+" → "+F(e["after"].Double,3),()=>{});b.GetComponentInChildren<Text>().color=new Color(.45f,.89f,.80f);Height((RectTransform)b.transform,36*TextScale);AddDeskTip(b.gameObject,Stat(e["field"].Text)+" / 真实乘区",()=>ExplainBlueprintTrace(view,e["field"].Text));b.onClick.AddListener(()=>ShowDeskTip(b.GetComponent<CityDeskTooltip>(),true));}
+-  var step=view["same_step"];var cash=step["cashflow"];Metric(box,"下周期经营净额",F(cash["before"].Double,2)+" → "+F(cash["after"].Double,2)+" /月");
+-  var energy=step["energy_need"];if(Math.Abs(energy["after"].Double-energy["before"].Double)>.00001)Metric(box,"真实用电需求",F(energy["before"].Double,2)+" → "+F(energy["after"].Double,2));
++  if(view["stat_rows"].Count>0)Label(box,scope=="building"?"本楼规则变化":"所选范围规则变化",17,Muted);
++  foreach(var changed in view["stat_rows"].Take(4)){var e=changed;var line=Row(box,"Actual Rule Difference",40);Label(line,Stat(e["field"].Text),16,Muted);var b=Button(line,F(e["before"].Double,3)+" → "+F(e["after"].Double,3),()=>{});b.GetComponentInChildren<Text>().color=BlueprintAdverse(e["field"].Text,e["before"].Double,e["after"].Double)?Gold:Green;Height((RectTransform)b.transform,36*TextScale);AddDeskTip(b.gameObject,Stat(e["field"].Text)+" / 真实乘区",()=>ExplainBlueprintTrace(view,e["field"].Text));b.onClick.AddListener(()=>ShowDeskTip(b.GetComponent<CityDeskTooltip>(),true));}
++  Label(box,"全城同一步预测",17,Muted);
++  var step=view["same_step"];var cash=step["cashflow"];Metric(box,"经营净额",F(cash["before"].Double,2)+" → "+F(cash["after"].Double,2)+" /月","",cash["after"].Double<cash["before"].Double?Gold:Green);
++  var energy=step["energy_need"];if(Math.Abs(energy["after"].Double-energy["before"].Double)>.00001)Metric(box,"用电需求",F(energy["before"].Double,2)+" → "+F(energy["after"].Double,2),"",energy["after"].Double>energy["before"].Double?Gold:Green);
+   foreach(var kind in step["services"].Keys){var pair=step["services"][kind];if(Math.Abs(pair["after"].Double-pair["before"].Double)>.00001)Metric(box,Service(kind)+"实际人数",F(pair["before"].Double,2)+" → "+F(pair["after"].Double,2));}
+   string old=scope=="building"?S["projects"][host]["slots"].Get(slot,"").Text:"";
+   Label(box,old!=""?"替换会停用旧方案；不返还旧副本，另消耗1份新副本。":"确认消耗1份未安装副本；拆下不返还。",15,Gold);
+@@ -137,6 +165,11 @@
+   },true,_blueprintBusy||!Runtime.ViewCanEditFocused);
+   Fold(box,"完整效果、代价与来源",deep=>{foreach(var stat in view["stat_rows"])Label(deep,Stat(stat["field"].Text)+" "+F(stat["before"].Double,4)+" → "+F(stat["after"].Double,4),15,Muted);Raw(deep,view["rule_trace"]);Raw(deep,view["same_step"]);});
+  }
++ bool BlueprintAdverse(string field,double before,double after){
++  bool cost=field=="pollution"||field=="energy_demand"||field=="maintenance"||field=="service_decay"||
++   field=="exposure_multiplier"||field=="shortage_multiplier"||field=="population_maintenance"||field.StartsWith("input.",StringComparison.Ordinal);
++  return cost?after>before:after<before;
++ }
+  string ExplainBlueprintTrace(V view,string field){
+   var trace=view["rule_trace"]["after"].Get(field,V.Map());var before=view["before_stats"].Get(field,0).Double;var after=view["after_stats"].Get(field,0).Double;
+   return "即时规则："+F(before,4)+" → "+F(after,4)+"\n统一乘区：(基础值 + 加值合计) × 各来源乘数，再应用 floor / cap / override。\n"+"base="+trace.Get("base","—").Text+"  add="+trace.Get("add","—").Text+"  multiply="+trace.Get("multiply","—").Text+"\n同宿主同名先按 w=1+(n−1)/3 合成；实际修正以本卡配置与来源为准。";
+@@ -146,7 +179,7 @@
+   var portrait=Node("Native Building Wire Drawing",paper);Height(portrait,compact?78*TextScale:106*TextScale);var art=portrait.gameObject.AddComponent<CityBlueprintArt>();art.Style=CityIllustrationCatalog.StyleForBuilding(p["def"].Text);art.Accent=Domain(p);art.Fill=.5f;art.color=new Color(.67f,.84f,.85f);art.raycastTarget=false;
+   foreach(var slotValue in G.slot_ids(id)){var slot=slotValue.Text;var iid=p["slots"][slot].Text;var row=Row(paper,"Pinned Slot "+slot,compact?55*TextScale:68*TextScale);var icon=Node("Slot drawing",row);Width(icon,compact?48*TextScale:58*TextScale);Height(icon,compact?48*TextScale:58*TextScale);var info=Column(row,"Slot summary",2);info.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);PaperLabel(info,G.slot_label(id,slot),15);
+    if(iid==""){PaperLabel(info,"空闲槽位",14,true);if(!compact){var action=Button(row,"选择蓝图",()=>{_blueprintHost=id;_blueprintSlot=slot;Navigate("bonuses");});Width((RectTransform)action.transform,145*TextScale);}}
+-   else {var ins=S["bonus_instances"][iid];var bid=ins["bonus_id"].Text;var drawing=icon.gameObject.AddComponent<CityBlueprintArt>();drawing.Style=BlueprintStyle(bid);drawing.Accent=BlueprintAccent(bid);drawing.Fill=1;drawing.color=new Color(.67f,.84f,.85f);drawing.raycastTarget=false;var marker=PaperLabel(info,"✓ 已部署 · "+G.c.bonuses[bid]["name"].Text,14,true);marker.gameObject.name="InstalledSlot "+iid;if(!compact){var action=Button(row,"管理 / 替换",()=>Navigate("slot",id+"|"+slot));Width((RectTransform)action.transform,145*TextScale);Fold(paper,"实例来源 / "+iid,deep=>Raw(deep,ins));}}
++   else {var ins=S["bonus_instances"][iid];var bid=ins["bonus_id"].Text;var drawing=icon.gameObject.AddComponent<CityBlueprintArt>();drawing.Style=BlueprintStyle(bid);drawing.Accent=BlueprintAccent(bid);drawing.Fill=1;drawing.color=new Color(.67f,.84f,.85f);drawing.raycastTarget=false;var marker=PaperLabel(info,"✓ 已部署 · "+G.c.bonuses[bid]["name"].Text,14,true);marker.gameObject.name="InstalledSlot "+iid;if(!compact){var action=Button(row,"管理 / 替换",()=>Navigate("slot",id+"|"+slot));Width((RectTransform)action.transform,145*TextScale);Fold(paper,"实例来源与完整记录",deep=>Raw(deep,ins));}}
+   }
+   return paper;
+  }
+@@ -159,6 +192,37 @@
+  }
+  RectTransform CompactTaskCard(Transform parent,string name){
+   var card=Surface(name,parent,new Color(.055f,.11f,.125f,.96f));var layout=card.gameObject.AddComponent<VerticalLayoutGroup>();layout.padding=new RectOffset(12,12,10,10);layout.spacing=6;layout.childControlWidth=layout.childControlHeight=true;layout.childForceExpandHeight=false;card.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;return card;
++ }
++ string TaskAmount(double value)=>value.ToString("0.########",System.Globalization.CultureInfo.InvariantCulture);
++ string TaskChoiceCost(V definition,string choiceId){
++  if(choiceId=="decline")return "无支出 · 无惩罚";
++  var parts=new List<string>();double money=definition.Get("currency",0).Double,deposit=definition.Get("deposit",0).Double;
++  if(money+deposit>0)parts.Add("即时支付 "+TaskAmount(money+deposit)+" 通货"+(deposit>0?"（含保证金 "+TaskAmount(deposit)+"，完成退还）":""));
++  foreach(var id in definition.Get("resources",V.Map()).Keys)parts.Add("交付 "+TaskAmount(definition["resources"][id].Double)+" "+Resource(id));
++  return parts.Count==0?"无即时支出":string.Join(" · ",parts);
++ }
++ string TaskChoiceOutcome(V definition,string choiceId,string fallback){
++  if(choiceId=="decline")return "婉拒这份委任，不新增任务";
++  var parts=new List<string>();
++  bool later=definition.Has("metric")||definition.Has("delivery_resource")||definition.Has("trade_amount")||definition.Has("person_months");
++  if(definition.Get("arrival_people",0).Double>0)parts.Add("下个来生月迎来 "+TaskAmount(definition["arrival_people"].Double)+" 人");
++  if(definition.Has("metric")&&definition.Has("improve"))parts.Add("目标：将"+Service(definition["metric"].Text)+"覆盖提高 "+TaskAmount(definition["improve"].Double*100)+" 个百分点");
++  if(definition.Get("delivery_amount",0).Double>0)parts.Add("目标：交付 "+TaskAmount(definition["delivery_amount"].Double)+" "+Resource(definition.Get("delivery_resource","").Text));
++  if(definition.Get("trade_amount",0).Double>0)parts.Add("目标：实际"+(definition.Get("trade_side","").Text=="buy"?"进口":"成交")+" "+TaskAmount(definition["trade_amount"].Double)+" "+Resource(definition.Get("trade_resource","goods").Text));
++  if(definition.Get("person_months",0).Double>0)parts.Add("目标：累计服务 "+TaskAmount(definition["person_months"].Double)+" 人·月");
++  if(definition.Get("deadline_months",0).Double>0)parts.Add("期限 "+TaskAmount(definition["deadline_months"].Double)+" 月");
++  if(definition.Get("reward_kind","").Text=="research")parts.Add((later?"完成后":"接受即")+"获得蓝图研究提案");
++  else if(definition.Get("reward_kind","").Text=="copy")parts.Add((later?"完成后":"接受即")+"获得方案选择提案");
++  if(definition.Get("cash_reward",0).Double>0)parts.Add((later?"完成奖励 ":"接受即得 ")+TaskAmount(definition["cash_reward"].Double)+" 通货");
++  var candidates=definition.Get("bonus_ids",V.Arr());
++  if(candidates.Count>0)parts.Add("候选方向："+string.Join("、",candidates.Take(3).Select(id=>G.c.bonuses.Get(id,V.Map()).Get("name","蓝图方案").Text))+(candidates.Count>3?"等":""));
++  return parts.Count==0?fallback:string.Join(" · ",parts);
++ }
++ string TaskChoiceAffordability(V definition,string choiceId){
++  if(choiceId=="decline")return "";
++  if(S.Get("currency",0).Double+1e-06<definition.Get("currency",0).Double+definition.Get("deposit",0).Double)return "当前通货不足";
++  foreach(var resource in definition.Get("resources",V.Map()).Keys)if(G.inventory_total(resource)+1e-06<definition["resources"][resource].Double)return Resource(resource)+"库存不足";
++  return "";
+  }
+  void PlanningTaskEvents(Transform parent,V view,string filter=""){
+   foreach(var eventValue in view["events"]){
+@@ -169,21 +233,25 @@
+     if(evt.Get("delivery_remaining",0).Double>0){var resource=evt["delivery_resource"].Text;Button(active,"交付 "+Resource(resource)+" · 还需 "+F(evt["delivery_remaining"].Double),()=>Command(g=>Themes.deliver(g,resource,-1,id)),true);}
+     Fold(active,"合同结果、代价与来源",deep=>{var single=view.Duplicate(true);single["events"]=V.Arr(evt);LegacyThemeEvents(deep,single);});continue;}
+    var definition=evt.Get("definition",Themes._event_definition(G,id));
+-   var card=CompactTaskCard(parent,"Card "+evt["name"].Text);Label(card,"待决定 · "+evt["name"].Text,21,Gold,31);Label(card,evt["description"].Text,15,Muted);
++   var card=CompactTaskCard(parent,"Card "+evt["name"].Text);Label(card,"待决定 · "+evt["name"].Text,22,Gold,33*TextScale);Label(card,evt["description"].Text,16,Muted);
+    foreach(var raw in evt["choices"]){var choice=raw;var cid=choice["id"].Text;var def=cid=="decline"?V.Map():definition.Get("choices",V.Arr()).Count>0?Themes._event_choice_definition(definition,cid):definition;
+-    var option=Row(card,"Proposal "+cid,100*TextScale);option.GetComponent<HorizontalLayoutGroup>().spacing=9;
+-    var art=Node("Proposal art",option);Width(art,94*TextScale);Height(art,86*TextScale);if(cid=="decline"){var mark=Label(art,"—",28,Muted,74);Stretch(mark.rectTransform);mark.alignment=TextAnchor.MiddleCenter;}else Illustration(art,OptionPicture(id,cid,def),78*TextScale);
+-    var copy=Column(option,"Proposal detail",3);copy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(copy,choice["label"].Text,18,Ink,27*TextScale);
+-    var cost=choice.Get("cost_text","").Text;if(cost=="")cost=cid=="decline"?"不支付代价，不附加惩罚。":"无即时支出";Label(copy,cost,14,cid=="decline"?Muted:Gold);
+-    var names=def.Get("bonus_ids",V.Arr()).Select(b=>G.c.bonuses.Get(b,V.Map()).Get("name",b).Text).ToArray();if(names.Length>0)Label(copy,(def.Get("reward_kind","").Text=="research"?"研究候选：":"方案候选：")+string.Join(" / ",names),14,Green);
+-    var choose=Button(option,"选择",()=>Command(g=>Themes.choose_event(g,id,cid)),cid!="decline",!choice.Get("available",true).Bool);choose.name="ProposalChoice "+id+"|"+cid;Width((RectTransform)choose.transform,102*TextScale);Height((RectTransform)choose.transform,42*TextScale);
++    var option=Row(card,"Proposal "+cid,110*TextScale);option.GetComponent<HorizontalLayoutGroup>().spacing=9;option.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
++    var art=Node("Proposal art",option);Width(art,86*TextScale);Height(art,86*TextScale);if(cid=="decline"){var mark=Label(art,"—",28,Muted,74);Stretch(mark.rectTransform);mark.alignment=TextAnchor.MiddleCenter;}else Illustration(art,OptionPicture(id,cid,def),82*TextScale);
++    var copy=Column(option,"Proposal detail",5);copy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);var copyWidth=copy.gameObject.AddComponent<LayoutElement>();copyWidth.minWidth=0;copyWidth.preferredWidth=0;copyWidth.flexibleWidth=1;
++    Label(copy,choice["label"].Text,20,Ink);
++    Label(copy,TaskChoiceOutcome(def,cid,evt["description"].Text),16,Ink);
++    Label(copy,TaskChoiceCost(def,cid),16,cid=="decline"?Muted:Gold);
++    var unavailable=choice.Get("available",true).Bool?TaskChoiceAffordability(def,cid):choice.Get("reason","当前不可选").Text;
++    if(unavailable!="")Label(copy,unavailable,16,Gold);
++    var caption=cid=="decline"?"婉拒":choice["label"].Text;
++    var choose=Button(copy,caption,()=>Command(g=>Themes.choose_event(g,id,cid)),cid!="decline",!choice.Get("available",true).Bool);choose.name="ProposalChoice "+id+"|"+cid;
+    }
+-   Fold(card,"出现条件与合同细则",deep=>Raw(deep,definition));
++   Fold(card,"候选、出现条件与完整规则",deep=>{foreach(var choice in evt["choices"]){Label(deep,choice["label"].Text+" · "+choice.Get("cost_text","").Text,16,Muted);}Raw(deep,definition);});
+   }
+  }
+  void PlanningTasksPage(){
+   var view=Themes.view(G);if(view.Get("id","").Text==""){ThemesPage();return;}
+-  var offered=view["events"].Count(e=>e["status"].Text=="offered");if(offered>0){Label(_body,"等待决定 · "+offered,18,Gold,30);PlanningTaskEvents(_body,view,"offered");}
++  var offered=view["events"].Count(e=>e["status"].Text=="offered");if(offered>0){Label(_body,"等待决定 · "+offered,18,Gold,30*TextScale);PlanningTaskEvents(_body,view,"offered");}
+   var completed=view["completed"].Bool;var card=CompactTaskCard(_body,"City commission");var heading=Row(card,"Commission identity",106*TextScale);heading.GetComponent<HorizontalLayoutGroup>().spacing=12;
+   var art=Node("Commission illustration",heading);Width(art,112*TextScale);Height(art,100*TextScale);Illustration(art,ThemePicture(view["id"].Text),94*TextScale);
+   var identity=Column(heading,"Commission summary",3);identity.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(identity,view["name"].Text,22,Ink,33*TextScale);Label(identity,completed?"✓ 已完成 · 归档":"进行中 · M"+view["stage"].Long+" / 3 · "+view["stage_name"].Text,16,completed?Green:Gold,28*TextScale);
+--- a/unity/METLivingWorld/Assets/City/UI/CityConstructionDecision.cs
++++ b/unity/METLivingWorld/Assets/City/UI/CityConstructionDecision.cs
+@@ -34,13 +34,15 @@
+   if(_proposal.Get("ok",false).Bool)ConstructionBenefits(_body,_baseline,_proposal);
+   else Label(_body,_proposal.Get("error","暂时无法计算建成后的变化，请重新选择方案。").Text,18,Gold);
+ 
+-  Label(_body,"由谁运营",20,Ink);
++  Label(_body,"选择运营方案",20,Ink);
+   foreach(var item in offers){
+    var option=item;var operatorInfo=G.c.operators[item["operator_org"]];bool chosen=item["id"].Text==_offer;
+    var optionButton=Button(_body,(chosen?"✓  ":"")+operatorInfo["name"].Text,()=>{_offer=option["id"].Text;RenderPage();},chosen);
+    optionButton.name="OperatorChoice "+item["id"].Text;
+-   Height((RectTransform)optionButton.transform,42*TextScale);
+-   var optionLabel=optionButton.GetComponentInChildren<Text>();optionLabel.alignment=TextAnchor.MiddleLeft;
++   Height((RectTransform)optionButton.transform,67*TextScale);
++   var optionLabel=optionButton.GetComponentInChildren<Text>();optionLabel.alignment=TextAnchor.UpperLeft;Stretch(optionLabel.rectTransform,12,6,12,30*TextScale);
++   var route=Label(optionButton.transform,"成长路线："+string.Join(" → ",item["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)),14,Muted);
++   Stretch(route.rectTransform,12,34*TextScale,12,5);route.alignment=TextAnchor.MiddleLeft;
+    AddDeskTip(optionButton.gameObject,operatorInfo["name"].Text,operatorInfo.Get("summary","").Text+"\n成长槽位："+string.Join(" → ",item["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)));
+   }
+   Fold(_body,"运营者与成长路线",details=>{
+--- a/unity/METLivingWorld/Assets/City/CityEvidence.Ui5.cs
++++ b/unity/METLivingWorld/Assets/City/CityEvidence.Ui5.cs
+@@ -44,7 +44,7 @@
+     IEnumerator Ui5HeadlessJourney(){
+         Check("ui5_requires_batchmode",Application.isBatchMode,
+             "--validate-ui5-headless requires the Player -batchmode argument");
+-        Check("ui5_application_version",Application.version=="0.7.0-ui.5-local",Application.version);
++        Check("ui5_application_version",Application.version=="0.7.0-ui.5.1-local",Application.version);
+         BeginUi5Offscreen();
+         yield return null;
+         Check("ui5_offscreen_render_target_ready",Ui5OffscreenReady);
+@@ -52,7 +52,7 @@
+             ui5UiCamera.pixelWidth==Ui5Width&&ui5UiCamera.pixelHeight==Ui5Height,
+             V.Arr(ui5Camera.pixelWidth,ui5Camera.pixelHeight,ui5UiCamera.pixelWidth,ui5UiCamera.pixelHeight));
+         ui5HeadlessEvidence=V.Map(
+-            "build_scope","UI5 native Player, batchmode diagnostic flag, isolated save root; version 0.7.0-ui.5-local.",
++            "build_scope","UI5.1 native Player, batchmode diagnostic flag, isolated save root; version 0.7.0-ui.5.1-local.",
+             "capture_scope","Three URP SingleCameraRequest renders at 1920x1080: the original world camera keeps its production postprocessing, while the existing overlay uGUI canvas is temporarily bound to a no-postprocess UI camera rendered over black and white mattes. Actual CityFoliage.LateUpdate draw submissions are replayed immediately before each manual world/portrait render, because coroutine captures precede ordinary LateUpdate. The two UI mattes reconstruct coverage in linear color and are composited over the world image. This is a diagnostic offscreen composite, not a Player window screenshot.",
+             "input_scope","Programmatic Unity Button callbacks only. No OS window, mouse, keyboard, foreground activation, fullscreen, or human input claim.",
+             "pending_real_input",V.Arr("Visible fullscreen 1920x1080 presentation","OS mouse hit targets and hover/dwell tooltips","OS keyboard navigation, L / Shift+L and Esc with focus ownership","map pointer hover, source marker and click gate","human readability and usability","GPU frame pacing and system load"));
+@@ -60,6 +60,7 @@
+         // Preserve the previous real earned progression, copy, preview and save/load regression.
+         // UI4 focus/dwell checks are deliberately not imported into this batchmode route.
+         yield return BlueprintUIJourney();
++        yield return Ui51EarnedArchivePages();
+         Click("返回地图");yield return null;
+         Check("ui5_selected_building_context",!string.IsNullOrEmpty(city.Interface.SelectedBuilding)&&
+             city.Interface.GetComponentsInChildren<RawImage>(true).Any(x=>x.name=="Committed Model Camera Image"&&x.gameObject.activeInHierarchy));
+@@ -71,6 +72,8 @@
+         var milestoneView=city.Interface.Ui5EvidenceMilestones();
+         Check("ui5_milestones_three_saved_record_groups",milestoneView.Get("stage_count",0).Long==3,
+             milestoneView);
++        Check("ui51_milestones_saved_states_match",milestoneView.Get("saved_states_match",false).Bool,milestoneView);
++        CheckUi5ArchivePage("milestones_default",new[]{"Milestone Stage 1","Milestone Stage 2","Milestone Stage 3","Milestones Theme Action"});
+         Check("ui5_milestones_read_only",GameplayState()==milestoneState);
+         yield return Capture("ui5-milestones.png");
+ 
+@@ -123,6 +126,7 @@
+         Check("ui5_city_opens_overview",ui.IsModal&&ui.Ui5EvidencePage()=="overview");
+         Check("ui5_overview_contains_city_situation",ui.Ui5EvidenceOverview().Get("city_situation",false).Bool,
+             ui.Ui5EvidenceOverview());
++        CheckUi5ArchivePage("overview_default",new[]{"Overview Next Action","Overview Living Summary","Overview Supply Summary","Overview Construction Summary"});
+         yield return Capture("ui5-city-overview.png");
+         Click("返回地图");yield return null;
+         Check("ui5_city_close_returns_to_map",!ui.IsModal);
+@@ -159,7 +163,18 @@
+         var tenderState=GameplayState();
+         Check("ui5_tender_live_source_comparison",ui.ComparisonBaseline.Count>0&&ui.ComparisonProposal.Count>0,
+             V.Map("baseline_count",ui.ComparisonBaseline.Count,"proposal_count",ui.ComparisonProposal.Count));
++        CheckUi5ArchivePage("tender_default",game.s["draft"]["offers"].Select(x=>"OperatorChoice "+x["id"].Text).ToArray());
+         yield return Capture("ui5-tender.png");
++        city.Runtime.SetDisplaySetting("ui_scale",1.2);
++        city.Runtime.SetDisplaySetting("text_scale",1.5);ui.ApplyDisplay();RefreshUi5CanvasScale();ui.OpenArchive("tender");yield return null;
++        CheckUi5ArchivePage("tender_ui120_text150");
++        var tenderFooter=ui.GetComponentsInChildren<RectTransform>(true).FirstOrDefault(x=>x.name=="Construction Decision Footer"&&x.gameObject.activeInHierarchy);
++        var tenderPrimary=ui.GetComponentsInChildren<RectTransform>(true).FirstOrDefault(x=>x.name=="Construction Primary"&&x.gameObject.activeInHierarchy);
++        Check("ui51_tender_primary_fixed_visible",tenderFooter!=null&&tenderPrimary!=null&&
++            Ui5Inside(Ui5ScreenRect(tenderPrimary))&&Ui5Contained(Ui5ScreenRect(tenderPrimary),Ui5ScreenRect(tenderFooter)));
++        yield return Capture("ui51-tender-ui120-text150.png");
++        city.Runtime.SetDisplaySetting("ui_scale",1);
++        city.Runtime.SetDisplaySetting("text_scale",1);ui.ApplyDisplay();RefreshUi5CanvasScale();ui.OpenArchive("tender");yield return null;
+         var mapFold=ui.GetComponentsInChildren<Button>(true).FirstOrDefault(b=>b.gameObject.activeInHierarchy&&
+             b.GetComponentInChildren<Text>()?.text=="在地图上比较 ›");
+         Check("ui5_map_comparison_disclosure",mapFold!=null&&mapFold.IsInteractable());
+@@ -193,8 +208,8 @@
+         Click("返回地图");yield return null;
+         CheckUi5Hud("ui120_text150");
+         var largeFonts=ui.Ui5EvidenceHudFonts();
+-        Check("ui5_text150_hud_font_targets",largeFonts.Get("layer",0).Long==18&&
+-            largeFonts.Get("navigation",0).Long==21&&largeFonts.Get("pause",0).Long==21,largeFonts);
++        Check("ui5_text150_hud_font_targets",largeFonts.Get("layer",0).Long==21&&
++            largeFonts.Get("navigation",0).Long==22&&largeFonts.Get("pause",0).Long==22,largeFonts);
+         yield return Capture("ui5-ui120-text150.png");
+         var brandText=ui.GetComponentsInChildren<Text>(true).FirstOrDefault(x=>x.name=="HUD Brand"&&x.gameObject.activeInHierarchy);
+         var speedButton=ui.GetComponentsInChildren<Button>(true).FirstOrDefault(x=>x.name=="HUD 1×"&&x.gameObject.activeInHierarchy);
+@@ -210,13 +225,62 @@
+         text100.onClick.Invoke();yield return null;
+         Click("返回地图");yield return null;
+         var restoredFonts=ui.Ui5EvidenceHudFonts();
+-        Check("ui5_text100_hud_font_targets_restored",restoredFonts.Get("layer",0).Long==12&&
+-            restoredFonts.Get("navigation",0).Long==14&&restoredFonts.Get("pause",0).Long==14,restoredFonts);
++        Check("ui5_text100_hud_font_targets_restored",restoredFonts.Get("layer",0).Long==14&&
++            restoredFonts.Get("navigation",0).Long==15&&restoredFonts.Get("pause",0).Long==15,restoredFonts);
+         Check("ui5_display_roundtrip_80_100_120",Math.Abs(city.Runtime.DisplaySettings.Get("ui_scale",0).Double-1)<.001&&
+             Math.Abs(city.Runtime.DisplaySettings.Get("text_scale",0).Double-1)<.001);
+         Check("ui5_city_state_valid",city.Runtime.Session.Validate()=="");
+         Check("ui5_no_native_errors",errors.Count==0,V.From(errors));
+         ui5HeadlessEvidence["screenshots"]=V.From(ui5Captures);
++    }
++
++    // Run while BlueprintUIJourney's earned, saved city is still loaded. Page callbacks
++    // and disclosure buttons must leave the serialized game (including RNG) untouched.
++    IEnumerator Ui51EarnedArchivePages(){
++        var ui=city.Interface;var game=city.Runtime.Game;
++        city.Runtime.SetPaused(true);
++        Check("ui51_earned_page_content",Themes.view(game).Get("id","").Text!=""&&
++            (game.s["block"].Get("bonus_wallet",V.Map()).Count>0||game.s.Get("bonus_instances",V.Map()).Count>0));
++        city.Runtime.SetDisplaySetting("ui_scale",1);
++        city.Runtime.SetDisplaySetting("text_scale",1);ui.ApplyDisplay();RefreshUi5CanvasScale();yield return null;
++        foreach(var page in new[]{"themes","bonuses"}){
++            var before=GameplayState();ui.OpenArchive(page);yield return null;
++            Check("ui51_earned_open_read_only_"+page,GameplayState()==before);
++            CheckUi5ArchivePage(page+"_default");
++            yield return Capture("ui51-"+(page=="themes"?"tasks":"bonuses")+"-default.png");
++            var fold=Ui5ArchiveFold(page=="themes"?"完整委任、改向与历史":"其他库存与已部署来源");
++            Check("ui51_earned_fold_available_"+page,fold!=null&&fold.IsInteractable());
++            fold.onClick.Invoke();yield return null;
++            Check("ui51_earned_fold_read_only_"+page,GameplayState()==before);
++            var scroll=ui.GetComponentsInChildren<ScrollRect>(true).FirstOrDefault(x=>x.name=="Archive Scroll");
++            if(scroll!=null)scroll.verticalNormalizedPosition=0;
++            yield return null;
++            CheckUi5ArchivePage(page+"_default_expanded");
++            yield return Capture("ui51-"+(page=="themes"?"tasks":"bonuses")+"-default-detail.png");
++        }
++        city.Runtime.SetDisplaySetting("ui_scale",1.2);
++        city.Runtime.SetDisplaySetting("text_scale",1.5);ui.ApplyDisplay();RefreshUi5CanvasScale();yield return null;
++        foreach(var page in new[]{"overview","milestones","themes","bonuses"}){
++            var before=GameplayState();ui.OpenArchive(page);yield return null;
++            Check("ui51_combined_open_read_only_"+page,GameplayState()==before);
++            CheckUi5ArchivePage(page+"_ui120_text150");
++            if(page=="overview")Check("ui51_combined_overview_semantics",ui.Ui5EvidenceOverview().Get("city_situation",false).Bool);
++            if(page=="milestones")Check("ui51_combined_milestone_semantics",ui.Ui5EvidenceMilestones().Get("saved_states_match",false).Bool);
++            var shortName=page=="themes"?"tasks":page;
++            yield return Capture("ui51-"+shortName+"-ui120-text150.png");
++            if(page!="themes"&&page!="bonuses")continue;
++            var fold=Ui5ArchiveFold(page=="themes"?"完整委任、改向与历史":"其他库存与已部署来源");
++            Check("ui51_combined_fold_available_"+page,fold!=null&&fold.IsInteractable());
++            fold.onClick.Invoke();yield return null;
++            Check("ui51_combined_fold_read_only_"+page,GameplayState()==before);
++            var scroll=ui.GetComponentsInChildren<ScrollRect>(true).FirstOrDefault(x=>x.name=="Archive Scroll");
++            if(scroll!=null)scroll.verticalNormalizedPosition=0;
++            yield return null;
++            CheckUi5ArchivePage(page+"_ui120_text150_expanded");
++            yield return Capture("ui51-"+shortName+"-ui120-text150-detail.png");
++        }
++        city.Runtime.SetDisplaySetting("ui_scale",1);
++        city.Runtime.SetDisplaySetting("text_scale",1);ui.ApplyDisplay();RefreshUi5CanvasScale();yield return null;
+     }
+ 
+     void BeginUi5Offscreen(){
+@@ -412,7 +476,48 @@
+     }
+     bool Ui5Inside(Rect box)=>box.width>0&&box.height>0&&box.xMin>=-1&&box.yMin>=-1&&
+         box.xMax<=(Ui5HeadlessOnly?Ui5Width:Screen.width)+1&&box.yMax<=Ui5ViewportHeight+1;
++    static bool Ui5Contained(Rect box,Rect parent)=>box.width>0&&box.height>0&&
++        box.xMin>=parent.xMin-1&&box.xMax<=parent.xMax+1&&box.yMin>=parent.yMin-1&&box.yMax<=parent.yMax+1;
+     static bool Ui5Separate(Rect a,Rect b)=>a.xMax<=b.xMin+1||b.xMax<=a.xMin+1||a.yMax<=b.yMin+1||b.yMax<=a.yMin+1;
++    void Ui51LayoutCheck(string name,bool passed,object detail=null){
++        checks.Add(V.Map("name",name,"passed",passed,"detail",V.From(detail)));
++        if(!passed)errors.Add("UI5.1 layout check failed: "+name);
++    }
++    void CheckUi5ArchivePage(string stage,string[] firstViewportNodes=null){
++        RefreshUi5CanvasScale();Canvas.ForceUpdateCanvases();
++        var ui=city.Interface;var roots=ui.GetComponentsInChildren<RectTransform>(true);
++        var panel=roots.FirstOrDefault(x=>x.name=="L3 City Side Panel"&&x.gameObject.activeInHierarchy);
++        var scroll=roots.FirstOrDefault(x=>x.name=="Archive Scroll"&&x.gameObject.activeInHierarchy);
++        Ui51LayoutCheck("ui5_archive_layout_roots_"+stage,panel!=null&&scroll!=null);
++        var panelBox=Ui5ScreenRect(panel);var viewport=Ui5ScreenRect(scroll);
++        Ui51LayoutCheck("ui5_archive_panel_inside_"+stage,Ui5Inside(panelBox),Ui5Box(panelBox));
++        if(firstViewportNodes!=null){
++            var found=firstViewportNodes.Select(name=>roots.FirstOrDefault(x=>x.name==name&&x.gameObject.activeInHierarchy&&x.transform.IsChildOf(scroll))).ToArray();
++            Ui51LayoutCheck("ui5_first_viewport_"+stage,found.All(x=>x!=null&&Ui5Contained(Ui5ScreenRect(x),viewport)),
++                V.From(found.Select((x,i)=>V.Map("node",firstViewportNodes[i],"rect",x==null?V.Map():Ui5Box(Ui5ScreenRect(x)))).ToArray()));
++        }
++        var overviewArt=roots.FirstOrDefault(x=>x.name=="Overview Action Art"&&x.gameObject.activeInHierarchy);
++        if(overviewArt!=null&&overviewArt.childCount>0)Ui51LayoutCheck("ui51_overview_art_contained_"+stage,
++            Ui5Contained(Ui5ScreenRect((RectTransform)overviewArt.GetChild(0)),Ui5ScreenRect(overviewArt)));
++        bool displayed(RectTransform r){var box=Ui5ScreenRect(r);return !r.IsChildOf(scroll)||Ui5Contained(box,viewport);}
++        var text=panel.GetComponentsInChildren<Text>(true).Where(x=>x.gameObject.activeInHierarchy&&x.text!=""&&displayed(x.rectTransform)).ToArray();
++        var clipped=text.Where(x=>x.preferredHeight>x.rectTransform.rect.height+3f).Take(8).ToArray();
++        Ui51LayoutCheck("ui5_public_text_fits_"+stage,clipped.Length==0,
++            V.From(clipped.Select(x=>V.Map("text",x.text,"preferred",x.preferredHeight,"height",x.rectTransform.rect.height)).ToArray()));
++        var overlaps=new List<V>();
++        foreach(var layout in panel.GetComponentsInChildren<HorizontalOrVerticalLayoutGroup>(true)){
++            if(!layout.gameObject.activeInHierarchy)continue;
++            var children=layout.transform.Cast<Transform>().OfType<RectTransform>()
++                .Where(x=>x.gameObject.activeInHierarchy&&displayed(x)&&!(x.GetComponent<LayoutElement>()?.ignoreLayout??false)).ToArray();
++            for(int i=0;i<children.Length;i++)for(int j=i+1;j<children.Length;j++){
++                var a=Ui5ScreenRect(children[i]);var b=Ui5ScreenRect(children[j]);
++                if(!Ui5Separate(a,b))overlaps.Add(V.Map("parent",layout.name,"a",children[i].name,"b",children[j].name,"a_box",Ui5Box(a),"b_box",Ui5Box(b)));
++            }
++        }
++        Ui51LayoutCheck("ui5_public_siblings_separate_"+stage,overlaps.Count==0,V.From(overlaps.Take(8).ToArray()));
++    }
++    Button Ui5ArchiveFold(string prefix)=>city.Interface.GetComponentsInChildren<Button>(true).FirstOrDefault(b=>
++        b.gameObject.activeInHierarchy&&b.GetComponentInChildren<Text>()?.text.StartsWith(prefix,StringComparison.Ordinal)==true);
+     Button Ui5HudButton(string group,string caption){
+         var root=city.Interface.GetComponentsInChildren<RectTransform>(true).FirstOrDefault(x=>x.name==group);
+         return root==null?null:root.GetComponentsInChildren<Button>(true).FirstOrDefault(b=>
+@@ -509,13 +614,16 @@
+     public V Ui5EvidenceConstructionIntent()=>Ui5EvidenceEnabled?
+         V.Map("active",ConstructionIntentActive,"base_id",_base):V.Map();
+     public V Ui5EvidenceOverview()=>Ui5EvidenceEnabled?
+-        V.Map("page",_page,"city_situation",_page=="overview"&&_body.GetComponentsInChildren<Text>(false)
+-            .Any(x=>x.text.Contains("城市此刻"))):V.Map();
++        V.Map("page",_page,"city_situation",_page=="overview"&&new[]{"Overview Next Action","Overview Living Summary","Overview Supply Summary","Overview Construction Summary"}
++            .All(name=>_body.GetComponentsInChildren<RectTransform>(false).Any(x=>x.name==name&&x.gameObject.activeInHierarchy))):V.Map();
+     public V Ui5EvidenceMilestones(){
+         if(!Ui5EvidenceEnabled)return V.Map();
+-        var texts=_body.GetComponentsInChildren<Text>(false).Select(x=>x.text).ToArray();
+-        int stages=Enumerable.Range(1,3).Count(n=>texts.Any(t=>t.Contains("阶段 "+n)));
+-        return V.Map("page",_page,"stage_count",stages,
++        var rows=_body.GetComponentsInChildren<RectTransform>(false);
++        int stages=Enumerable.Range(1,3).Count(n=>rows.Any(x=>x.name=="Milestone Stage "+n&&x.gameObject.activeInHierarchy));
++        var themeId=S["block"].Get("theme",V.Map()).Get("id","").Text;
++        var saved=S["block"].Get("theme",V.Map()).Get("milestone_ids",V.Arr());
++        bool states=Enumerable.Range(1,3).All(n=>{var row=rows.FirstOrDefault(x=>x.name=="Milestone Stage "+n);var reading=row==null?"":row.GetComponentInChildren<Text>()?.text??"";return reading.Contains(themeId!=""&&saved.Contains(themeId+":M"+n)?"已存档":themeId==""?"未开始":"尚未存档");});
++        return V.Map("page",_page,"stage_count",stages,"saved_states_match",states,
+             "saved_ids",S["block"].Get("theme",V.Map()).Get("milestone_ids",V.Arr()).Duplicate(true));
+     }
+     public V Ui5EvidenceHudFonts(){
+--- a/unity/METLivingWorld/Assets/City/UI/CityHud.cs
++++ b/unity/METLivingWorld/Assets/City/UI/CityHud.cs
+@@ -20,8 +20,8 @@
+     Button _planningNoticeButton;
+     readonly Dictionary<string,Button> _hudLayerButtons=new Dictionary<string,Button>();
+     bool _planningNoticesOpen, _planningOverviewOpen=true, _planningBuildOpen;
+-    readonly Color _hudFill=new Color(.055f,.085f,.115f,.96f);
+-    readonly Color _hudButtonFill=new Color(.075f,.12f,.15f,.72f);
++    readonly Color _hudFill=new Color(.045f,.075f,.10f,.98f);
++    readonly Color _hudButtonFill=new Color(.075f,.12f,.15f,.94f);
+     readonly Color _hudEdge=new Color(.22f,.78f,.76f,.58f);
+ 
+     // The shell owns creation order; all values and actions still read the detached game view.
+@@ -74,11 +74,11 @@
+             cell.GetComponentInChildren<CityHudFrame>().DividerOnly=true;
+             var glyph=HudIcon(cell,kinds[i],i==2?Green:i==3||i==5||i==6?Gold:Blue,28);
+             Pin(glyph,new Vector2(0,.5f),new Vector2(.5f,.5f),new Vector2(22,0),new Vector2(28,28));
+-            var caption=Label(cell,name=="电力"?"供 / 需":name,12,Muted);
++            var caption=Label(cell,name=="电力"?"供 / 需":name,13,Muted);
+             Pin(caption.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(46,-9),new Vector2(90,20));
+-            var value=Label(cell,"—",20,Ink);
++            var value=Label(cell,"—",21,Ink);
+             value.name="HUD Value "+name;value.resizeTextForBestFit=true;
+-            value.resizeTextMinSize=12;value.resizeTextMaxSize=20;
++            value.resizeTextMinSize=12;value.resizeTextMaxSize=21;
+             value.verticalOverflow=VerticalWrapMode.Truncate;
+             Pin(value.rectTransform,new Vector2(0,0),new Vector2(0,0),new Vector2(46,7),new Vector2(90,30));value.alignment=TextAnchor.MiddleLeft;
+             if(i==0)_dt=value;else if(i==1)_population=value;else if(i==2)_food=value;else _planningStockValues.Add(value);
+@@ -138,13 +138,13 @@
+         var row=Row(_planningLayers,"Map Layer Buttons",62);Stretch(row,6,6,6,6);row.GetComponent<HorizontalLayoutGroup>().spacing=2;
+         foreach(var pair in new[]{new[]{"terrain","地貌"},new[]{"service","服务"},new[]{"employment","就业"},new[]{"pollution","环境"},new[]{"heat","余热"},new[]{"stock","库存"},new[]{"energy","电力"}}){
+             var layer=pair[0];var button=HudButton(row,pair[1],layer,()=>SetLayer(layer),62);_hudLayerButtons[layer]=button;
+-            var caption=button.GetComponentInChildren<Text>();HudFont(caption,12);caption.alignment=TextAnchor.LowerCenter;Stretch(caption.rectTransform,0,28,0,3);
++            var caption=button.GetComponentInChildren<Text>();HudFont(caption,14);caption.alignment=TextAnchor.LowerCenter;Stretch(caption.rectTransform,0,28,0,3);
+             var icon=button.GetComponentInChildren<CityHudGlyph>().rectTransform;Pin(icon,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-8),new Vector2(24,24));
+             AddDeskTip(button.gameObject,pair[1]+"图层",()=>LayerLabel(layer)+" · "+(MapSourcePhase=="committed"?"最近周期实际":MapSourcePhase=="baseline"?"同一步现状预测":"同一步建成预测"));
+         }
+         _planningLegend=HudSurface("HUD Layer Source",_root,new Color(.04f,.075f,.10f,.94f));
+         Pin(_planningLegend,new Vector2(.5f,0),new Vector2(.5f,0),new Vector2(0,103),new Vector2(560,30));
+-        _legend=Label(_planningLegend,"地貌 · 最近周期实际 · L / Shift+L",12,Ink,27);Stretch(_legend.rectTransform,8,1,8,1);_legend.alignment=TextAnchor.MiddleCenter;
++        _legend=Label(_planningLegend,"地貌 · 最近周期实际 · L / Shift+L",13,Ink,27);Stretch(_legend.rectTransform,8,1,8,1);_legend.alignment=TextAnchor.MiddleCenter;
+     }
+     void BuildPlanningFooter() {
+         _planningRail=Node("HUD Navigation",_root);
+@@ -154,12 +154,12 @@
+         for(int i=0;i<nav.Length;i++){
+             string route=nav[i][0];var button=HudButton(_planningRail,nav[i][1],nav[i][2],()=>OpenArchive(route),60);_topRoutes[route]=button;
+             Pin((RectTransform)button.transform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(positions[i],0),new Vector2(widths[i],60));
+-            var label=button.GetComponentInChildren<Text>();HudFont(label,14);Stretch(label.rectTransform,35,0,4,0);
+-            var icon=button.GetComponentInChildren<CityHudGlyph>().rectTransform;icon.anchoredPosition=new Vector2(18,0);icon.sizeDelta=new Vector2(21,21);
++            var label=button.GetComponentInChildren<Text>();HudFont(label,15);Stretch(label.rectTransform,35,0,4,0);
++            var icon=button.GetComponentInChildren<CityHudGlyph>().rectTransform;icon.anchoredPosition=new Vector2(18,0);icon.sizeDelta=new Vector2(24,24);
+         }
+         _planningBuildMenu=HudSurface("HUD Construction",_root);
+         Pin(_planningBuildMenu,new Vector2(0,0),new Vector2(0,0),new Vector2(18,18),new Vector2(420,124));
+-        _buildHint=Label(_planningBuildMenu,"建设 · 先选类型，再点空地",12,Muted,22);
++        _buildHint=Label(_planningBuildMenu,"建设 · 先选类型，再点空地",13,Muted,22);
+         Pin(_buildHint.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-6),new Vector2(395,24));
+         int foundationIndex=0;
+         foreach(var choice in G.c.v040["progression"]["tier1"]){
+@@ -169,7 +169,7 @@
+                 BeginConstructionIntent();_base=baseId;_contextKey="";RefreshContext();RefreshHudGeometry();
+             },86);button.name="HUD Build Choice "+baseId;_foundationButtons[baseId]=button;
+             Pin((RectTransform)button.transform,new Vector2(0,0),new Vector2(0,0),new Vector2(8+foundationIndex++*136,6),new Vector2(132,84));
+-            var label=button.GetComponentInChildren<Text>();HudFont(label,14);label.alignment=TextAnchor.LowerCenter;Stretch(label.rectTransform,4,48,4,3);
++            var label=button.GetComponentInChildren<Text>();HudFont(label,15);label.alignment=TextAnchor.LowerCenter;Stretch(label.rectTransform,4,48,4,3);
+             var artNode=Node("Foundation Illustration "+baseId,button.transform);Pin(artNode,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-2),new Vector2(95,49));
+             var art=artNode.gameObject.AddComponent<CityBlueprintArt>();art.ShowDrafting=false;art.Style=CityIllustrationCatalog.StyleForBuilding(baseId);art.Accent=CityIllustrationCatalog.AccentForStyle(art.Style);art.Fill=1;art.color=Color.white;art.raycastTarget=false;
+             AddDeskTip(button.gameObject,name,()=>ConstructionPurpose(G.c.projects[baseId])+"。选择类型后点一块空闲陆地，查看实际报价与建成效果。");
+@@ -184,7 +184,7 @@
+             Runtime.SetPaused(!Runtime.WorldPaused);
+         },48,true);
+         Pin((RectTransform)_pause.transform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(164,0),new Vector2(61,48));
+-        HudFont(_pause.GetComponentInChildren<Text>(),14);
++        HudFont(_pause.GetComponentInChildren<Text>(),15);Stretch(_pause.GetComponentInChildren<Text>().rectTransform,3,2,3,2);
+         int speedIndex=0;foreach(var mode in G.c.beta["time"]["modes"]){
+             var id=mode["id"].Text;var index=speedIndex++;
+             var button=HudButton(_planningTime,index==0?"1×":index==1?"›":index==2?"»":"»»","",()=>{if(_mapViewing){ShowMessage("请先返回方案比较页面。");return;}Runtime.SetMode(id);if(Runtime.MandatoryPending)OpenArchive("settlement");},48);
+@@ -212,7 +212,7 @@
+         var clock=Clock.summary(G);var speed=clock.Get("acceleration",0).Double;
+         _time.text=clock.Get("date","").Text+" · "+(Runtime.WorldPaused?"已暂停":F(speed,0)+"×");
+         _planningClock.text=clock.Get("date","").Text+"\n"+(Runtime.MandatoryPending?"待处理决定":Runtime.WorldPaused?"已暂停":F(speed,0)+"×  运行中");
+-        _pause.GetComponentInChildren<Text>().text=Runtime.WorldPaused?"继续":"暂停";
++        _pause.GetComponentInChildren<Text>().text=Runtime.MandatoryPending?"处理":Runtime.WorldPaused?"继续":"暂停";
+         if(_legend!=null)_legend.text=LayerLabel(Layer)+" · "+(MapSourcePhase=="committed"?"最近周期实际":MapSourcePhase=="baseline"?"同一步现状预测":"同一步建成预测")+" · L / Shift+L";
+         RefreshPlanningObjective();
+         RefreshHudGeometry();
+@@ -227,7 +227,7 @@
+             if(!child.name.StartsWith("HUD Resource "))continue;var cell=(RectTransform)child;cell.anchoredPosition=new Vector2(84+i++*cellWidth,0);cell.sizeDelta=new Vector2(cellWidth,-6);
+             foreach(var text in child.GetComponentsInChildren<Text>()){
+                 var rect=text.rectTransform;rect.sizeDelta=new Vector2(cellWidth-49,rect.sizeDelta.y);
+-                if(text.name.StartsWith("HUD Value ")){text.resizeTextMinSize=Mathf.RoundToInt(12*TextScale);text.resizeTextMaxSize=Mathf.RoundToInt(20*TextScale);}
++                if(text.name.StartsWith("HUD Value ")){text.resizeTextMinSize=Mathf.RoundToInt(12*TextScale);text.resizeTextMaxSize=Mathf.RoundToInt(21*TextScale);}
+             }
+         }
+         foreach(var entry in _hudLayerButtons){bool active=entry.Key==Layer;entry.Value.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;entry.Value.GetComponentInChildren<Text>().color=active?Ink:Muted;entry.Value.GetComponentInChildren<CityHudFrame>().enabled=active;}
+@@ -236,10 +236,15 @@
+         if(_buildHint!=null)_buildHint.text=ConstructionIntentActive?G.c.projects[_base]["name"].Text+" · 点空地选址 / Esc 取消":"建设 · 先选类型，再点空地";
+         if(_planningOverview!=null&&_guidanceTitle!=null){
+             _planningOverview.gameObject.SetActive(!_archiveOpen);
+-            Height(_guidanceTitle.rectTransform,52*TextScale);Height(_guidanceReason.rectTransform,60*TextScale);Height((RectTransform)_guidanceButton.transform,43*TextScale);
+-            _planningOverview.sizeDelta=new Vector2(350,_planningOverviewOpen?100+188*TextScale:43);
++            float titleHeight=HudMeasuredHeight(_guidanceTitle,312,36*TextScale),reasonHeight=HudMeasuredHeight(_guidanceReason,312,46*TextScale);
++            Height(_guidanceTitle.rectTransform,titleHeight);Height(_guidanceReason.rectTransform,reasonHeight);Height((RectTransform)_guidanceButton.transform,43*TextScale);
++            _planningOverview.sizeDelta=new Vector2(350,_planningOverviewOpen?98+titleHeight+reasonHeight+73*TextScale:43);
+         }
+         LayoutMapInspectionHud();
++    }
++    float HudMeasuredHeight(Text label,float width,float minimum){
++        var settings=label.GetGenerationSettings(new Vector2(width,0));
++        return Mathf.Max(minimum,label.cachedTextGeneratorForLayout.GetPreferredHeight(label.text,settings)/label.pixelsPerUnit);
+     }
+     string PlanningResourceExplanation(string name) {
+         if(name=="DT")return "有限主动加速预算。仅额外推进的本地时间消耗 DT；不与通货混为一谈。剩余："+F(S.Get("dt",0).Double,4);
+--- a/unity/METLivingWorld/Assets/City/UI/CityInterface.cs
++++ b/unity/METLivingWorld/Assets/City/UI/CityInterface.cs
+@@ -99,7 +99,7 @@
+    ArchiveCategory(_page)=="themes"?new[]{new[]{"themes","委任"},new[]{"settlement","决定"},new[]{"milestones","里程碑"}}:
+    ArchiveCategory(_page)=="records"?new[]{new[]{"records","城市记录"},new[]{"sources","规则来源"},new[]{"settings","显示设置"}}:
+    new[]{new[]{"city","城市"},new[]{"governance","治理"},new[]{"network","物流"},new[]{"science","科研"},new[]{"city_project","城建"},new[]{"heritage","城史"},new[]{"content","成果"}};
+-  foreach(var route in routes){var id=route[0];var button=Tab(_localNav,route[1],id,()=>Navigate(id),_page);Height((RectTransform)button.transform,39*TextScale);HudFont(button.GetComponentInChildren<Text>(),14);}
++  foreach(var route in routes){var id=route[0];var button=Tab(_localNav,route[1],id,()=>Navigate(id),_page);Height((RectTransform)button.transform,39*TextScale);HudFont(button.GetComponentInChildren<Text>(),15);}
+  }
+  InputField InputBox(Transform parent,string value,string placeholder,float width=0){var r=Surface("Input "+placeholder,parent,new Color(.04f,.08f,.09f));Height(r,48*TextScale);if(width>0)Width(r,width);var input=r.gameObject.AddComponent<InputField>();var t=Label(r,"",17);Stretch(t.rectTransform,12,7,12,7);input.textComponent=t;var p=Label(r,placeholder,16,Muted);Stretch(p.rectTransform,12,7,12,7);input.placeholder=p;input.text=value;input.characterLimit=512;return input;}
+  RectTransform Card(Transform parent,string heading,string note="",Color? color=null){var outer=Surface("Card "+heading,parent,Raised);var body=Column(outer);var fitter=outer.gameObject.AddComponent<ContentSizeFitter>();fitter.verticalFit=ContentSizeFitter.FitMode.PreferredSize;var layout=outer.gameObject.AddComponent<VerticalLayoutGroup>();layout.childControlWidth=layout.childControlHeight=true;layout.childForceExpandHeight=false;Label(body,heading,22,color??Ink);if(note!="")Label(body,note,17,Muted);return body;}
+@@ -107,9 +107,13 @@
+  void Meter(Transform parent,string label,double value,double capacity,string suffix="",Color? color=null){Metric(parent,label,F(value)+" / "+F(capacity)+suffix,"",color);var node=Node("Meter "+label,parent);Height(node,9);var g=node.gameObject.AddComponent<CityGraphic>();g.Kind="bar";g.Ratio=(float)(value/Math.Max(.000001,capacity));g.color=color??Green;g.raycastTarget=false;}
+  void Mark(Transform parent,string kind,Color color,float size=98){var r=Node("Site mark",parent);Width(r,size);Height(r,size);var g=r.gameObject.AddComponent<CityGraphic>();g.Kind=kind;g.color=color;g.raycastTarget=false;}
+  void Fold(Transform parent,string name,Action<RectTransform> render){
+-  var box=Column(parent,"Disclosure",6);var content=Column(box,"DisclosureBody",7);content.gameObject.SetActive(false);bool rendered=false;
+-  var b=Button(box,name+" ›",()=>{if(!rendered){render(content);rendered=true;}content.gameObject.SetActive(!content.gameObject.activeSelf);RefreshModalOwnership();});
+-  b.transform.SetAsFirstSibling();
++  var box=Column(parent,"Disclosure",4);box.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);
++  var content=Column(box,"DisclosureBody",7);content.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(12,8,8,8);content.gameObject.SetActive(false);bool rendered=false;
++  Button b=null;
++  b=Button(box,name+" ›",()=>{if(!rendered){render(content);rendered=true;}bool open=!content.gameObject.activeSelf;content.gameObject.SetActive(open);b.GetComponentInChildren<Text>().text=name+(open?" ⌄":" ›");RefreshModalOwnership();});
++  b.transform.SetAsFirstSibling();b.GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;
++  b.GetComponent<Image>().color=new Color(.07f,.115f,.14f,.78f);
++
+  }
+  void Raw(Transform parent,V value){var text=value.ToJson(true,true);foreach(var block in ChunkText(text,4000))Label(parent,block,13,Muted,Math.Max(40,block.Split('\n').Length*21*TextScale));}
+  IEnumerable<string> ChunkText(string text,int limit){for(var offset=0;offset<text.Length;offset+=limit)yield return text.Substring(offset,Math.Min(limit,text.Length-offset));}
+@@ -127,7 +131,7 @@
+   _subtitle=Label(_archive,"",14,Muted);Pin(_subtitle.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(20,-57),new Vector2(710,30));
+   var close=Button(_archive,"×",CloseArchive);Pin((RectTransform)close.transform,new Vector2(1,1),new Vector2(1,1),new Vector2(-16,-14),new Vector2(42,39));
+   _pageNav=Row(_archive,"Archive Categories",42);Pin(_pageNav,new Vector2(0,1),new Vector2(0,1),new Vector2(20,-102),new Vector2(860,42));_pageNav.GetComponent<HorizontalLayoutGroup>().spacing=6;
+-  foreach(var p in new[]{new[]{"city","城市"},new[]{"overview","经营"},new[]{"bonuses","Bonus"},new[]{"themes","任务"},new[]{"records","更多"}}){var id=p[0];_archiveTabs[id]=Button(_pageNav,p[1],()=>Navigate(id));Height((RectTransform)_archiveTabs[id].transform,40*TextScale);}
++  foreach(var p in new[]{new[]{"city","全域"},new[]{"overview","城市"},new[]{"bonuses","Bonus"},new[]{"themes","任务"},new[]{"records","更多"}}){var id=p[0];_archiveTabs[id]=Button(_pageNav,p[1],()=>Navigate(id));Height((RectTransform)_archiveTabs[id].transform,40*TextScale);}
+   _localNav=Row(_archive,"Archive Section Tabs",39);Pin(_localNav,new Vector2(0,1),new Vector2(0,1),new Vector2(20,-154),new Vector2(860,39));_localNav.GetComponent<HorizontalLayoutGroup>().spacing=5;
+   var scroll=Node("Archive Scroll",_archive);_archiveScroll=scroll;Stretch(scroll,20,204,22,68);var image=scroll.gameObject.AddComponent<Image>();image.color=new Color(.01f,.025f,.03f,.15f);scroll.gameObject.AddComponent<RectMask2D>();var sr=scroll.gameObject.AddComponent<ScrollRect>();sr.horizontal=false;sr.movementType=ScrollRect.MovementType.Clamped;sr.viewport=scroll;_body=Column(scroll,"Archive Body",9);_body.anchorMin=new Vector2(0,1);_body.anchorMax=new Vector2(1,1);_body.pivot=new Vector2(.5f,1);_body.sizeDelta=new Vector2(-12,0);sr.content=_body;
+   var track=Surface("Archive scroll track",_archive,new Color(.10f,.17f,.19f));_archiveScrollTrack=track;track.anchorMin=new Vector2(1,0);track.anchorMax=new Vector2(1,1);track.pivot=new Vector2(1,.5f);track.offsetMin=new Vector2(-14,68);track.offsetMax=new Vector2(-9,-204);var thumb=Surface("Archive scroll thumb",track,new Color(.26f,.59f,.55f));Stretch(thumb);var bar=track.gameObject.AddComponent<Scrollbar>();bar.direction=Scrollbar.Direction.BottomToTop;bar.handleRect=thumb;bar.targetGraphic=thumb.GetComponent<Image>();sr.verticalScrollbar=bar;sr.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.AutoHide;
+@@ -178,7 +182,7 @@
+   selected=selected??scope.GetComponentsInChildren<Selectable>(false).FirstOrDefault(x=>x.gameObject.activeInHierarchy&&x.IsInteractable());
+   if(selected!=null)EventSystem.current.SetSelectedGameObject(selected.gameObject);
+  }
+- void LayoutArchive(){float factor=Mathf.Clamp((float)Runtime.DisplaySettings.Get("ui_scale",1).Double,.8f,1.2f);float availableWidth=1920/factor,availableHeight=1080/factor;bool decision=_page=="tender";_archive.GetComponent<Image>().color=decision?new Color(.025f,.055f,.065f,1):HudPanel;float width=Mathf.Min(decision?660:_page=="overview"||_page=="milestones"?720:900,availableWidth*.55f),height=Mathf.Min(870,availableHeight-112);_archive.sizeDelta=new Vector2(width,height);_archive.anchoredPosition=new Vector2(-16,-84);_title.rectTransform.sizeDelta=new Vector2(width-94,42);_subtitle.rectTransform.sizeDelta=new Vector2(width-94,30);_pageNav.sizeDelta=new Vector2(width-40,42*TextScale);_localNav.anchoredPosition=new Vector2(20,-108-42*TextScale);_localNav.sizeDelta=new Vector2(width-40,39*TextScale);var controls=42*TextScale;_footer.sizeDelta=new Vector2(width-40,controls);foreach(Transform child in _footer)Height((RectTransform)child,controls);float top,bottom;if(decision){float headerHeight=126*TextScale,footerHeight=108*TextScale;_decisionHeader.anchoredPosition=new Vector2(20,-94);_decisionHeader.sizeDelta=new Vector2(width-40,headerHeight);_decisionFooter.anchoredPosition=new Vector2(20,12);_decisionFooter.sizeDelta=new Vector2(width-40,footerHeight);top=94+headerHeight+8;bottom=12+footerHeight+8;}else{top=_page=="start"?102f:118+81*TextScale;bottom=22+controls;}Stretch(_archiveScroll,20,top,22,bottom);_archiveScrollTrack.offsetMin=new Vector2(-14,bottom);_archiveScrollTrack.offsetMax=new Vector2(-9,-top);}
++ void LayoutArchive(){float factor=Mathf.Clamp((float)Runtime.DisplaySettings.Get("ui_scale",1).Double,.8f,1.2f);float availableWidth=1920/factor,availableHeight=1080/factor;bool decision=_page=="tender";_archive.GetComponent<Image>().color=decision?new Color(.04f,.075f,.095f,1):HudPanel;float width=Mathf.Min(decision?660:_page=="overview"||_page=="milestones"?720:900,availableWidth*.55f),height=Mathf.Min(870,availableHeight-112);_archive.sizeDelta=new Vector2(width,height);_archive.anchoredPosition=new Vector2(-16,-84);_title.rectTransform.sizeDelta=new Vector2(width-94,42);_subtitle.rectTransform.sizeDelta=new Vector2(width-94,30);_pageNav.sizeDelta=new Vector2(width-40,42*TextScale);_localNav.anchoredPosition=new Vector2(20,-108-42*TextScale);_localNav.sizeDelta=new Vector2(width-40,39*TextScale);var controls=42*TextScale;_footer.sizeDelta=new Vector2(width-40,controls);foreach(Transform child in _footer)Height((RectTransform)child,controls);float top,bottom;if(decision){float headerHeight=112*TextScale,footerHeight=108*TextScale;_decisionHeader.anchoredPosition=new Vector2(20,-94);_decisionHeader.sizeDelta=new Vector2(width-40,headerHeight);_decisionFooter.anchoredPosition=new Vector2(20,12);_decisionFooter.sizeDelta=new Vector2(width-40,footerHeight);top=94+headerHeight+8;bottom=12+footerHeight+8;}else{top=_page=="start"?102f:118+81*TextScale;bottom=22+controls;}Stretch(_archiveScroll,20,top,22,bottom);_archiveScrollTrack.offsetMin=new Vector2(-14,bottom);_archiveScrollTrack.offsetMax=new Vector2(-9,-top);}
+ 
+  void RenderPage(){CancelDeskTipsForPanel();DismissMapInspection();LayoutArchive();Clear(_body);Clear(_decisionHeader);Clear(_decisionFooter);_body.anchoredPosition=Vector2.zero;bool decision=_page=="tender";_pageNav.gameObject.SetActive(_page!="start"&&!decision);_footer.gameObject.SetActive(!decision);_decisionHeader.gameObject.SetActive(decision);_decisionFooter.gameObject.SetActive(decision);UpdateArchiveTabs();UpdateLocalArchiveTabs();_title.text=PageTitle(_page);_subtitle.text=decision?"选择运营者，查看变化，再确认建造":(S["block"].Get("display_name","河谷登陆点").Text)+" · 本地时间暂停";
+   switch(_page){case "city":CityArcPage();break;case "district_start":DistrictStartPage();break;case "block_start":NewBlockPage();break;case "governance":GovernancePage();break;case "network":NetworkPage();break;case "science":SciencePage();break;case "city_project":CityProjectPage();break;case "heritage":HeritagePage();break;case "content":ContentPage();break;case "start":StartPage();break;case "overview":OverviewPage();break;case "resources":ResourcesPage();break;case "population":PopulationPage();break;case "market":MarketPage();break;case "policies":PoliciesPage();break;case "bonuses":BonusesPage();break;case "themes":PlanningTasksPage();break;case "milestones":MilestonesPage();break;case "blueprints":BlueprintOffersPage();break;case "settlement":SettlementPage();break;case "records":RecordsPage();break;case "settings":SettingsPage();break;case "building":BuildingPage();break;case "upgrades":UpgradePage();break;case "slot":NativeSlotPage();break;case "tender":TenderPage();break;case "sources":SourcesPage();break;case "record":RecordPage();break;default:OverviewPage();break;}
+--- a/unity/METLivingWorld/Assets/City/UI/CityMaterialStyle.cs
++++ b/unity/METLivingWorld/Assets/City/UI/CityMaterialStyle.cs
+@@ -5,7 +5,7 @@
+ public sealed class CityDeskTone : MonoBehaviour { public bool Light; }
+ public sealed partial class CityInterface {
+  static readonly Color HudPanel = new Color(.045f,.075f,.105f,.98f);
+- static readonly Color HudRaised = new Color(.07f,.11f,.15f,.94f);
++ static readonly Color HudRaised = new Color(.075f,.12f,.15f,.98f);
+  static readonly Color HudCyan = new Color(.36f,.51f,.57f,.30f);
+  static readonly Color HudText = new Color(.92f,.96f,.96f);
+  static readonly Color HudMuted = new Color(.64f,.75f,.78f);
+@@ -20,7 +20,7 @@
+   bool scroll=name.Contains("scroll ");
+   bool panel=!button&&!scroll;
+   image.sprite=null;image.type=Image.Type.Simple;
+-  image.color=scroll||button?requested:HudPanel;
++  image.color=scroll||button?requested:name=="L3 City Side Panel"?HudPanel:HudRaised;
+   image.raycastTarget=true;
+   var tone=node.GetComponent<CityDeskTone>()??node.gameObject.AddComponent<CityDeskTone>();
+   tone.Light=false;
+@@ -30,7 +30,7 @@
+   edge.SetAsFirstSibling();
+   edge.gameObject.AddComponent<LayoutElement>().ignoreLayout=true;
+   var frame=edge.gameObject.AddComponent<CityHudFrame>();
+-  frame.color=panel?HudCyan:new Color(.38f,.70f,.65f,.55f);
++  frame.color=panel?HudCyan:new Color(.38f,.70f,.65f,.42f);
+   frame.enabled=panel||requested.g>requested.r*2.5f;
+   frame.raycastTarget=false;
+   frame.ShowAccent=name=="L3 City Side Panel";
+--- a/unity/METLivingWorld/Assets/City/UI/CityMilestones.cs
++++ b/unity/METLivingWorld/Assets/City/UI/CityMilestones.cs
+@@ -4,19 +4,37 @@
+ namespace MET.City {
+ public sealed partial class CityInterface {
+  void MilestonesPage(){
+-  var theme=Themes.view(G);var saved=S["block"].Get("theme",V.Map()).Get("milestone_ids",V.Arr());
+-  var identity=Card(_body,theme.Get("name","这片河谷的成长").Text,"每一项达成都来自城市已经保存的记录。",Green);
+-  Illustration(identity,ThemePicture(theme.Get("id","").Text),95);
+-  if(theme.Get("id","").Text==""){Label(identity,"还没有选择发展主题。先看看你想让城市长成什么。",18,Muted);Button(identity,"选择发展主题",()=>Navigate("themes"),true);return;}
+-  var history=theme.Get("history",V.Arr());
++  var theme=Themes.view(G);var themeId=theme.Get("id","").Text;
++  var saved=S["block"].Get("theme",V.Map()).Get("milestone_ids",V.Arr());
++  var history=theme.Get("history",V.Arr());var definition=themeId==""?V.Map():Themes._definition(G,themeId);
++  var stages=definition.Get("stages",V.Arr());
++  var summary=CompactTaskCard(_body,"Milestones Summary");
++  Label(summary,themeId==""?"城市成长":theme.Get("name","城市成长").Text,20,Green,31*TextScale);
++  var ordinals=new[]{"第一","第二","第三"};
+   for(int n=1;n<=3;n++){
+-   var id=theme["id"].Text+":M"+n;bool met=saved.Contains(id);
++   var id=themeId+":M"+n;var met=themeId!=""&&saved.Contains(id);
+    var record=history.FirstOrDefault(x=>x.Get("kind","").Text=="milestone"&&x.Get("id","").Text==id);
+-   var row=Card(_body,(met?"✓  ":"○  ")+"阶段 "+n,met?"已达成 · 已存入城市记录":"尚未达成",met?Green:Muted);
+-   if(record!=null){Label(row,record.Get("name","城市阶段").Text,18);Fold(row,"查看记录依据",deep=>Raw(deep,record));}
++   var stage=stages.Count>=n?stages[n-1]:V.Map();
++   var name=record!=null?record.Get("name",stage.Get("name","城市阶段")).Text:stage.Get("name",themeId==""?"待选择方向":"城市阶段").Text;
++   var row=CompactTaskCard(summary,"Milestone Stage "+n);
++   Label(row,(met?"✓ ":"○ ")+ordinals[n-1]+"阶段 · "+name+" · "+(met?"已存档":themeId==""?"未开始":"尚未存档"),17,met?Green:Muted,43*TextScale);
+   }
+-  Button(_body,theme.Get("completed",false).Bool?"查看主题成果":"查看当前任务",()=>Navigate("themes"),true);
+-  Fold(_body,"城市完整记录",deep=>{Button(deep,"城市声音与历史",()=>Navigate("records"));Button(deep,"地区与城市遗产",()=>Navigate("heritage"));});
++  var action=Button(summary,themeId==""?"选择发展主题":theme.Get("completed",false).Bool?"查看主题成果":"查看当前任务",()=>Navigate("themes"),true);action.name="Milestones Theme Action";
++  var details=Column(_body,"Milestones Detail Folds",4);
++  Fold(details,"阶段状态说明",deep=>Label(deep,themeId==""?"尚未选定主题，三个阶段等待开始。":theme.Get("completed",false).Bool?"主题已完成；勾选只依据保存的阶段记录。":"当前目标读数和阶段存档分别展示，未存档不等于尚未满足。",16,Muted));
++  Fold(details,"当前阶段目标",deep=>{
++   if(themeId==""){Label(deep,"先选择发展主题，随后查看真实目标。",16,Muted);return;}
++   if(theme.Get("completed",false).Bool){Label(deep,"主题已完成；阶段达成以保存记录为准。",16,Green);return;}
++   foreach(var goal in theme.Get("goals",V.Arr())){var factor=goal.Get("unit","").Text=="%"?100:1;
++    Label(deep,(goal.Get("met",false).Bool?"✓ ":"○ ")+goal.Get("label","目标").Text+"  "+F(goal.Get("value",0).Double*factor,1)+(goal.Get("comparison","min").Text=="max"?" ≤ ":" / ")+F(goal.Get("target",0).Double*factor,1)+goal.Get("unit","").Text,16,goal.Get("met",false).Bool?Green:Gold);
++   }
++   if(theme.Get("steady_required_seconds",0).Double>0)Label(deep,"稳定时长 "+Clock.duration(G,theme.Get("steady_seconds",0).Double)+" / "+Clock.duration(G,theme.Get("steady_required_seconds",0).Double),16,Muted);
++  });
++  Fold(details,"阶段依据与主题定义",deep=>{for(int n=1;n<=3;n++){
++   var id=themeId+":M"+n;var record=history.FirstOrDefault(x=>x.Get("kind","").Text=="milestone"&&x.Get("id","").Text==id);
++   if(record!=null){Label(deep,record.Get("name","阶段记录").Text,17,Green);Raw(deep,record);}
++  }Raw(deep,S["block"].Get("theme",V.Map()).Get("milestone_ids",V.Arr()));Raw(deep,history);if(definition.Count>0)Raw(deep,definition);});
++  Fold(details,"城市完整记录",deep=>{Button(deep,"城市声音与历史",()=>Navigate("records"));Button(deep,"地区与城市遗产",()=>Navigate("heritage"));});
+  }
+ }
+ }
+--- a/unity/METLivingWorld/Assets/City/UI/CityPages.cs
++++ b/unity/METLivingWorld/Assets/City/UI/CityPages.cs
+@@ -14,40 +14,37 @@
+  void StartPage(){if(Runtime.Session.s["phase"].Text=="choose_district"){DistrictStartPage();return;}if(S["phase"].Text=="select_block"){Label(_body,"同一片河谷，不同的第一步。",27,Ink);Label(_body,"选择登陆位置，随后从本次起源中确定最初居民与补给。",18,Muted);var row=Row(_body,"Landing Sites",460);var names=new[]{"河湾","林缘旧村","北部高台"};var notes=new[]{"临水平地，邻近水岸。先铺开生活供给，再选择工业方向。","森林与既有住区相接。地块条件改变后续方案的价值。","高地与开阔地并存。保留水岸与土地特征，按实际场地规划。"};for(var i=0;i<3;i++){var index=i;var box=Card(row,"0"+(i+1)+"  "+names[i],notes[i],i==0?Blue:i==1?Green:Gold);Illustration(box,i==0?3:i==1?1:10,160);Button(box,"在此登陆",()=>Command(g=>g.select_block(index)),true);}}
+   else {Label(_body,"为城市选定本次起源",27);var row=Row(_body,"Origins",420);foreach(var choice in S["origin_choices"]){var id=choice.Text;var origin=G.c.origins[id];var box=Card(row,origin.Get("name",id).Text,origin.Get("story",origin.Get("hint","")).Text,Gold);Illustration(box,id=="village"?3:id=="miners"?10:id=="charter"?12:1,130);Metric(box,"起始补充通货",F(origin.Get("cash",0).Double,0));foreach(var resource in new[]{"food","material","goods"})if(origin.Get(resource,0).Double!=0)Metric(box,Resource(resource),Signed(origin[resource].Double));Button(box,"确立起源 · 安顿居民",()=>{Command(g=>g.choose_origin(id));CloseArchive();},true);}}
+  }
++ RectTransform OverviewBrief(Transform parent,string name){var card=Surface(name,parent,new Color(.055f,.11f,.125f,.96f));var layout=card.gameObject.AddComponent<VerticalLayoutGroup>();layout.padding=new RectOffset(10,10,5,5);layout.spacing=4;layout.childControlWidth=layout.childControlHeight=true;layout.childForceExpandHeight=false;card.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;return card;}
+  void OverviewPage(){
+-  var m=S["metrics"];var queue=Construction.queue(G);var guidance=CityGuidanceView();
+-  var focus=Card(_body,guidance["title"].Text,guidance["reason"].Text,guidance.Get("severity",0).Long>=2?Gold:Green);
+-  Illustration(focus,guidance["id"].Text=="housing"?17:guidance["id"].Text=="food"?3:guidance["id"].Text=="energy"?7:guidance["id"].Text=="material"||guidance["id"].Text=="queue"?12:guidance["id"].Text=="reward"?11:2,75*TextScale);
+-  Button(focus,guidance["action_label"].Text+" ›",RunCityGuidanceAction,true);
+-  var pulse=Card(_body,"城市此刻",Clock.summary(G)["date"].Text,Blue);
+-  Label(pulse,"居民  "+F(m.Get("population",0).Double,0)+" 人     待安置  "+F(m.Get("homeless",0).Double,0)+" 人",17,Ink,35*TextScale);
+-  Label(pulse,"粮食库存  "+F(G.inventory_total("food"))+"     通货  "+F(S.Get("currency",0).Double),17,Ink,35*TextScale);
+-  Label(pulse,"经营净额  "+KnownRate(m.Get("cashflow",0).Double),17,Ink,35*TextScale);
++  var m=S["metrics"];var queue=Construction.queue(G);var guidance=CityGuidanceView();var settled=S.Get("simulation_tick",0).Long>0;
++  var focus=OverviewBrief(_body,"Overview Next Action");
++  var heading=Row(focus,"Overview Focus Heading",34*TextScale);heading.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
++  var art=Node("Overview Action Art",heading);Width(art,38*TextScale);Height(art,32*TextScale);
++  Illustration(art,guidance["id"].Text=="housing"?17:guidance["id"].Text=="food"?3:guidance["id"].Text=="energy"?7:guidance["id"].Text=="material"?12:2,30*TextScale);Stretch((RectTransform)art.GetChild(0));
++  var headingText=Label(heading,"下一步 · "+guidance["title"].Text,20,guidance.Get("severity",0).Long>=2?Gold:Green,32*TextScale);headingText.GetComponent<LayoutElement>().flexibleWidth=1;
++  Label(focus,guidance["reason"].Text,16,Muted,40*TextScale);
++  var action=Button(focus,guidance["action_label"].Text+" ›",RunCityGuidanceAction,true);action.name="Overview Primary Action";
+ 
+-  var homes=Card(_body,"居住与生活","看居民是否有住处，以及实际收到多少口粮。",Green);
+-  Illustration(homes,17,65*TextScale);
+-  Label(homes,"已安置 "+F(m.Get("housed",0).Double,0)+" 人  ·  待安置 "+F(m.Get("homeless",0).Double,0)+" 人",16,Ink,38*TextScale);
+-  Label(homes,S.Get("simulation_tick",0).Long>0?"实际口粮满足 "+F(Progress.food_ratio(G)*100,0)+"%":"实际口粮满足率等待首次结算",15,Muted,34*TextScale);
+-  Button(homes,"查看住区与服务",()=>Navigate("population"));
++  var homes=OverviewBrief(_body,"Overview Living Summary");
++  Label(homes,"居住 · 已安置 "+F(m.Get("housed",0).Double,0)+" / 待 "+F(m.Get("homeless",0).Double,0)+" 人 · "+(settled?"口粮 "+F(Progress.food_ratio(G)*100,1)+"%":"口粮待结算"),17,Green,45*TextScale);
+ 
+-  var supply=Card(_body,"供给与经营","从库存、实际流向和电力供需追查变化。",Blue);
+-  Illustration(supply,3,65*TextScale);
+-  Label(supply,S.Get("simulation_tick",0).Long>0?"粮食净变 "+Signed(m.Get("flows",V.Map()).Get("food",0).Double)+" /月  ·  电力满足 "+F(m.Get("energy_ratio",1).Double*100,0)+"%":"最近周期流向和电力满足率等待首次结算",15,Ink,38*TextScale);
+-  Button(supply,"检查资源与财政",()=>Navigate("resources"));
+-  Fold(supply,"市场与完整来源",deep=>{Button(deep,"市场订单",()=>Navigate("market"));Button(deep,"规则与来源",()=>Navigate("sources"));});
++  var supply=OverviewBrief(_body,"Overview Supply Summary");
++  Label(supply,"供给 · 粮食 "+F(G.inventory_total("food"))+" · 通货 "+F(S.Get("currency",0).Double)+" · "+(settled?"净额 "+KnownRate(m.Get("cashflow",0).Double):"月率待结算"),17,Blue,45*TextScale);
+ 
+-  var works=Card(_body,"建设与成长",queue.Count==0?"当前没有排队工程。":"共 "+queue.Count+" 项工程共享施工能力和材料。",Gold);
+-  Illustration(works,12,65*TextScale);
+-  Label(works,"施工能力 "+F(Construction.capacity(G))+" CP/月  ·  队列 "+queue.Count+" 项",16,Ink,38*TextScale);
+-  Button(works,"查看主题与方向",()=>Navigate("themes"));
+-  Fold(works,"施工队列与优先级",deep=>{foreach(var job in Construction.queue(G)){
+-   var id=job["id"].Text;var line=Card(deep,job["name"].Text,job.Get("paused",false).Bool?"已暂停":"施工中",Gold);
+-   Meter(line,"已完成施工",job["total"].Double-job["work"].Double,job["total"].Double," CP",Gold);
+-   Label(line,"仍需材料 "+F(job["material"].Double),15,Muted,30*TextScale);
+-   var controls=Row(line,"工程操作",55*TextScale);foreach(var priority in new[]{-1,0,1}){var p=priority;Button(controls,p<0?"延后":p>0?"优先":"普通",()=>Command(g=>Construction.set_priority(g,id,p)));}
++  var works=OverviewBrief(_body,"Overview Construction Summary");
++  Label(works,"建设 · 工程 "+queue.Count+" 项 · CP "+F(Construction.capacity(G))+"/月 · "+(queue.Count>0?queue[0].Get("paused",false).Bool?"首项已暂停":"首项待施工":"可规划新址"),17,Gold,45*TextScale);
++
++  var details=Column(_body,"Overview Detail Folds",4);
++  Fold(details,"居住与服务详情",deep=>{Label(deep,settled?"实际口粮满足 "+F(Progress.food_ratio(G)*100,1)+"%":"口粮满足率等待首次结算",16,Muted);Button(deep,"查看居民与服务",()=>Navigate("population"));});
++  Fold(details,"供给与来源详情",deep=>{Label(deep,settled?"粮食净变 "+Signed(m.Get("flows",V.Map()).Get("food",0).Double)+" /月 · 电力满足 "+F(m.Get("energy_ratio",1).Double*100,1)+"%":"实际流向与电力满足率等待首次结算",16,Muted);Button(deep,"资源与财政",()=>Navigate("resources"));Button(deep,"市场订单",()=>Navigate("market"));Button(deep,"规则与来源",()=>Navigate("sources"));});
++  Fold(details,"施工队列与优先级",deep=>{foreach(var job in Construction.queue(G)){
++   var id=job["id"].Text;var line=CompactTaskCard(deep,"Overview Queue Job "+id);
++   Label(line,job["name"].Text+(job.Get("paused",false).Bool?" · 已暂停":" · 排队中"),17,Gold);
++   Label(line,"已做 "+F(job["total"].Double-job["work"].Double)+" / "+F(job["total"].Double)+" CP  ·  仍需材料 "+F(job["material"].Double),16,Muted);
++   var controls=Row(line,"Overview Queue Priority",55*TextScale);foreach(var priority in new[]{-1,0,1}){var p=priority;Button(controls,p<0?"延后":p>0?"优先":"普通",()=>Command(g=>Construction.set_priority(g,id,p)));}
+    Button(line,"建筑档案",()=>Navigate("building",id));
+   }});
+-  Fold(_body,"更多管理与城市记录",deep=>{Button(deep,"Bonus 与蓝图",()=>Navigate("bonuses"));Button(deep,"政策",()=>Navigate("policies"));Button(deep,"城市记录",()=>Navigate("records"));});
++  Fold(details,"方向、方案与记录",deep=>{Button(deep,"城市委任",()=>Navigate("themes"));Button(deep,"Bonus 与蓝图",()=>Navigate("bonuses"));Button(deep,"政策",()=>Navigate("policies"));Button(deep,"城市记录",()=>Navigate("records"));});
+  }
+  string KnownRate(double value)=>S.Get("simulation_tick",0).Long>0?Signed(value)+" /月":"等待首次实际结算";
+  void ResourcesPage(){var m=S["metrics"];var audit=S.Get("audit",V.Map());Label(_body,"当前库存与最近周期实际流向",27);Label(_body,"库存是当前持有量；以下月率来自实际结算，电力使用供需能力口径。",16,Muted);
+--- a/unity/METLivingWorld/Assets/Editor/CityProject.cs
++++ b/unity/METLivingWorld/Assets/Editor/CityProject.cs
+@@ -91,7 +91,7 @@
+             Require(road!=null&&road.shader!=null&&!ShaderUtil.ShaderHasError(road.shader),"Road surface shader failed: "+style);
+         }
+         PlayerSettings.companyName = "MET"; PlayerSettings.productName = "MET 来生 Unity Beta";
+-        PlayerSettings.bundleVersion = "0.7.0-ui.5-local";
++        PlayerSettings.bundleVersion = "0.7.0-ui.5.1-local";
+         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, "com.projectmet.laisheng.unitybeta");
+         PlayerSettings.colorSpace = ColorSpace.Linear;
+         PlayerSettings.defaultScreenWidth = 1920; PlayerSettings.defaultScreenHeight = 1080;
