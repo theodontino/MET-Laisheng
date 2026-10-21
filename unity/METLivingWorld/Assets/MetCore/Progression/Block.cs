@@ -34,11 +34,12 @@ public static class Block {
         var theme=g.s["block"].Get("theme",V.Map());
         var eligible=theme.Get("completed",false).Bool?theme.Get("id","").Text:"";
         g.s["block"]["ending"]=V.Map("triggered",true,"eligible_theme",eligible,"capstone_claimed",false,"archive_id","","local_elapsed_seconds",g.s.Get("beta_time",V.Map()).Get("local_elapsed_seconds",0).Double,"theme_at_zero",theme.Get("id","").Text);
+        if(g.world_managed)g.s["block"]["ending"]["build_result"]=RogueContent.CaptureEnding(g,eligible);
         g.s["block"]["naming_rights"]=true;
         g.s["block"]["naming_reward_granted"]=true;
         g.s["settings"]["user_paused"]=true;
         if (g.s.Get("beta_time").IsMap) {g.s["beta_time"]["mode"]="normal";g.s["beta_time"]["pause_reason"]="dt_zero";}
-        g.log_event("dt_zero",V.Map("eligible_theme",eligible),"高速发展预算已耗尽。可以为这座城市命名，继续常速经营，或留存记录后独立重开。");
+        g.log_event("dt_zero",V.Map("eligible_theme",eligible),"高速发展预算已耗尽。可以为这个街区命名并继续常速经营，在同一城市扩展街区或开启后续地区。");
     }
     public static V capstone_definitions(Game g) { return g.c.capstones.IsMap?g.c.capstones.Duplicate(true):V.Map(); }
     public static string claim_capstone(Game g) {

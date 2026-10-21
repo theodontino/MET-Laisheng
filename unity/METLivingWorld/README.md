@@ -1,5 +1,8 @@
 # 完整 MET 来生 Unity 迁移
 
+<!-- ui5-current-entry -->
+当前 UI5 已在本工程的普通 `City.unity` 启动路径中启用，不需要测试参数。使用 Unity **6000.6.5f1** 打开本目录，并打开 `Assets/Scenes/City.unity` 运行；不要误选下方历史切片的 `HeroValley.unity`。独立应用包采用同一游戏源码，区别只是输出名称与隔离存档。普通启动证据和整体 UI 未完成项见[UI5 接入报告](../../docs/ui_planning/UI5_INTEGRATION.md)。
+
 当前使用 **Unity 6000.6.5f1**、URP **17.6.0**、uGUI **2.6.0**，场景为 `Assets/Scenes/City.unity`。原生 C# 核心、完整管理 UI 与动态 61 格城市继续同一套 Beta 玩法；原 Godot 项目保留。Unity 存档独立，无跨引擎导入要求。
 
 从仓库根目录用 `bash tools/test_unity_city.sh editor` 进行两阶段导入，`mac` 构建 macOS，`native` 运行隔离存档的原生验证。编辑器必须合法激活。174 项核心检查、88 个完整状态对照已通过；Unity 原生画面和操作证据以 [完整迁移记录](../../docs/unity_port/FULL_MIGRATION.md) 的实际结果为准。

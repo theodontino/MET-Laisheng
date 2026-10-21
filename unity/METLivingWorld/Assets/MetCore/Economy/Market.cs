@@ -26,7 +26,7 @@ public static class Market {
   var result=V.Arr();if(!g.s.Get("projects").IsMap)return result;var ids=g.playable_ids().Duplicate();ids.Items.Sort((a,b)=>StringComparer.Ordinal.Compare(a.Text,b.Text));
   foreach(var id in ids){var p=g.s["projects"][id];if(p.Get("status","").Text!="running"||p.Get("paused",false).Bool)continue;var stats=_stats(g,id.Text);var candidate=g.c.beta["external_market_candidate"];
    var capacity=Math.Max(0,stats.Get("trade_capacity",0).Double)/candidate["legacy_capacity_reference"].Double*candidate["freight_capacity_per_real_hour"].Double*Math.Max(0,candidate["coupling_multiplier"].Double);
-   var usage=Math.Min(1,Math.Max(0,p.Get("usage",1).Double));var available=capacity*usage;if(available<=.000001)continue;result.Add(V.Map("id",id.Text,"capacity",capacity,"usage",usage,"available",available));}
+   var usage=Math.Min(1,Math.Max(0,p.Get("usage",1).Double));var available=capacity*usage*(g.world_managed?g.world_effects.Get("freight_multiplier",1).Double:1);if(available<=.000001)continue;result.Add(V.Map("id",id.Text,"capacity",capacity,"usage",usage,"available",available));}
   return result;
  }
  public static double _total_capacity(Game g){var total=0.0;foreach(var row in _freight_sources(g))total+=row["available"].Double;return total;}
@@ -68,7 +68,7 @@ public static class Market {
   g.s["metrics"]["market_cash_delta"]=g.s["metrics"].Get("market_cash_delta",0).Double+cash_delta;
  }
  public static void tick(Game g,double h,double external_seconds=-1.0) {
-  if(h<=0)return;if(external_seconds<0)external_seconds=h*g.c.beta["units"]["earth_seconds_per_month"].Double;if(double.IsNaN(external_seconds)||double.IsInfinity(external_seconds)||external_seconds<0)return;
+  if(g.world_managed||h<=0)return;if(external_seconds<0)external_seconds=h*g.c.beta["units"]["earth_seconds_per_month"].Double;if(double.IsNaN(external_seconds)||double.IsInfinity(external_seconds)||external_seconds<0)return;
   ensure(g);var block=g.s["block"];var market_state=block["market_state"];var market=market_state["resources"];
   foreach(var resource in market.Keys){var state=market[resource];var tau=Math.Max(.000001,g.c.beta["external_market_candidate"]["pressure_relaxation_time_constant_real_seconds"].Double);state["pressure"]=state.Get("pressure",0).Double*Math.Exp(-external_seconds/tau);market[resource]=state;}
   market_state["resources"]=market;block["market_state"]=market_state;g.s["block"]=block;var quotes=V.Map();foreach(var resource in market.Keys)quotes[resource]=quote(g,resource);

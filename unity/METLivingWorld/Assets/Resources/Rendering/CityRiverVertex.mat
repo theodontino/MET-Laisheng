@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 236b07813b0e43d2bbdecba0b19d3f56, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: [_CITY_RIVER]
+  m_ValidKeywords:
+  - _CITY_RIVER
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -19,15 +20,33 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties:
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _DryDetail:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ForestDetail:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GroundDetail:
+        m_Texture: {fileID: 2800000, guid: 949d47b6c2ba1448b8e74c2e61128ef1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RockDetail:
+        m_Texture: {fileID: 2800000, guid: 3bf334c7804bb473b8d86c92ae7b1f23, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Smoothness: 0.46
+    - _DetailStrength: 0.7
     - _Metallic: 0
     - _River: 1
+    - _RockSurface: 0
+    - _Smoothness: 0.46
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

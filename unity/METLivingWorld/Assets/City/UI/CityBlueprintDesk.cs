@@ -1,0 +1,267 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using MET.Core;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+namespace MET.City {
+public sealed partial class CityInterface {
+ readonly Color Paper=new Color(.045f,.09f,.105f,.98f),PaperInk=new Color(.88f,.94f,.93f),PaperMuted=new Color(.58f,.72f,.74f),BlueprintBlue=new Color(.035f,.09f,.12f,.98f);
+ readonly Dictionary<string,string> _rewardSelections=new Dictionary<string,string>();
+ bool _moreBlueprintBuildings;
+ string _inventoryChoice="",_blueprintHost="",_blueprintSlot="",_blueprintScope="building",_blueprintVersion="";
+ V _installView=V.Map();bool _blueprintBusy,_receiptSkip;RectTransform _receipt,_bonusBucket;Text _bucketCount;
+ public V BlueprintDiagnostics=>V.Map("choice",_inventoryChoice,"host",_blueprintHost,"slot",_blueprintSlot,"scope",_blueprintScope,"busy",_blueprintBusy,"preview",_installView.Duplicate(true),"tooltip",DeskTipOpen,"tooltip_pending",DeskTipPending,"tooltip_deadline",_deskDwell.ReadyAt,"page",_page,"pending",Bonus.pending(G).Count);
+ public void OpenBlueprintDesk(){OpenArchive(Bonus.pending(G).Count>0?"blueprints":"bonuses");}
+ int BlueprintStyle(string bid)=>CityIllustrationCatalog.StyleForBonus(bid);
+ Color BlueprintAccent(string bid)=>CityIllustrationCatalog.AccentForStyle(BlueprintStyle(bid));
+ string ScopeName(string scope)=>scope=="building"?"建筑方案":scope=="organization"?"运营商方案":"本街区方案";
+ string BlueprintRewardSource(V reward){var source=reward.Get("source","城市成长").Text;
+  return source.StartsWith("annual:",StringComparison.Ordinal)?"年度奖励":source.StartsWith("population:",StringComparison.Ordinal)?"人口成长奖励":source.Contains(":")?"城市成长奖励":source;
+ }
+ string BlueprintEffectSummary(V candidate){
+  if(candidate.Get("bonus_id","").Text=="__currency__")return "领取 "+F(candidate.Get("compensation",30).Double,0)+" 通货，不恢复 DT";
+  var effects=candidate.Get("effects",V.Arr());var definition=G.c.bonuses.Get(candidate.Get("bonus_id","").Text,V.Map());
+  var beneficial=effects.FirstOrDefault(x=>!BlueprintEffectAdverse(x));
+  if(beneficial==null){
+   var purpose=definition.Get("player_highlights",V.Arr()).FirstOrDefault(x=>!x.Text.StartsWith("代价",StringComparison.Ordinal)&&!x.Text.StartsWith("成本",StringComparison.Ordinal));
+   if(purpose!=null)return purpose.Text+(effects.Count>0?" · "+Stat(effects[0].Get("label","规则").Text)+" "+FormatEffect(effects[0],effects[0].Get("before",0).Double)+" → "+FormatEffect(effects[0],effects[0].Get("after",0).Double):"");
+   if(effects.Count==0)return definition.Get("summary","结构或关系规则，展开查看适用条件").Text;
+  }
+  var first=beneficial??effects[0];return Stat(first.Get("label","方案效果").Text)+" "+FormatEffect(first,first.Get("before",0).Double)+" → "+FormatEffect(first,first.Get("after",0).Double)+
+   (effects.Count>1?" · 另有 "+(effects.Count-1)+" 项规则":"");
+ }
+ bool BlueprintEffectAdverse(V effect){
+  string label=effect.Get("label","").Text;bool cost=label.Contains("投入")||label.Contains("需求")||label.Contains("污染")||label.Contains("维护")||label.Contains("暴露")||label.Contains("短缺")||label.Contains("衰减");
+  return cost?effect.Get("after",0).Double>effect.Get("before",0).Double:effect.Get("after",0).Double<effect.Get("before",0).Double;
+ }
+ void BlueprintArt(Transform parent,string bid,float height,float fill=1){var node=Node("Blueprint Drawing "+bid,parent);Height(node,height);var art=node.gameObject.AddComponent<CityBlueprintArt>();art.Style=BlueprintStyle(bid);art.Fill=fill;art.Accent=BlueprintAccent(bid);art.color=parent.GetComponentInParent<CityDeskTone>()?.Light==true?new Color(.43f,.47f,.41f):Color.white;art.raycastTarget=false;}
+ Text PaperLabel(Transform parent,string text,int size=17,bool muted=false,float height=0)=>Label(parent,text,size,muted?PaperMuted:PaperInk,height);
+ RectTransform PaperDocument(Transform parent,string title,string subtitle=""){
+  var surface=Surface("Detail "+title,parent,Paper);
+  var layout=surface.gameObject.AddComponent<VerticalLayoutGroup>();layout.padding=new RectOffset(22,22,18,18);layout.spacing=10;layout.childControlWidth=layout.childControlHeight=true;layout.childForceExpandHeight=false;
+  surface.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;
+  PaperLabel(surface,title,22);if(subtitle!="")PaperLabel(surface,subtitle,16,true);return surface;
+ }
+ void BuildBonusBucket(){
+  _bonusBucket=Surface("Bonus Blueprint Bucket",_root,new Color(.045f,.10f,.12f,.97f));Pin(_bonusBucket,new Vector2(1,1),new Vector2(1,1),new Vector2(-326,-8),new Vector2(120,60));
+  var icon=HudIcon(_bonusBucket,"bonus",new Color(.67f,.84f,.85f),24);Pin(icon,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(20,0),new Vector2(24,24));
+  _bucketCount=Label(_bonusBucket,"许可",15,Ink);HudFont(_bucketCount,15);Stretch(_bucketCount.rectTransform,40,4,4,4);_bucketCount.resizeTextForBestFit=true;_bucketCount.resizeTextMinSize=12;_bucketCount.resizeTextMaxSize=Mathf.RoundToInt(15*TextScale);_bucketCount.alignment=TextAnchor.MiddleLeft;
+  var frame=_bonusBucket.GetComponentInChildren<CityHudFrame>();if(frame!=null)frame.enabled=false;
+  var button=_bonusBucket.gameObject.AddComponent<Button>();button.onClick.AddListener(()=>OpenArchive("bonuses"));AddDeskTip(_bonusBucket.gameObject,"Bonus 部署许可",()=>"这里的数量是未安装副本。另有 "+Bonus.pending(G).Count+" 份提案等待领取。安装消耗1份；拆下不返还。已部署实例在建筑与库存中单独标记。");
+ }
+ void RefreshBucket(){if(_bucketCount==null)return;long count=0;foreach(var w in S["block"].Get("bonus_wallet",V.Map()).Values)count+=w.Get("charges",0).Long;_bucketCount.resizeTextMaxSize=Mathf.RoundToInt(15*TextScale);_bucketCount.text="许可 "+count;}
+ void BlueprintOffersPage(){var pending=Bonus.pending(G);if(pending.Count==0){PaperLabel(PaperDocument(_body,"所有提案已处理"),"已领取蓝图可从 Bonus 安装。",17,true);Button(_body,"打开 Bonus",()=>Navigate("bonuses"),true);return;}BlueprintRewardCard(pending[0],Runtime.ViewCanEditFocused);if(pending.Count>1)Label(_body,"后面还有 "+(pending.Count-1)+" 份已保存提案，按原队列依次处理。",15,Muted);}
+ void BlueprintRewardCard(V reward,bool actionable){
+  var rid=reward["reward_id"].Text;var kind=reward.Get("kind","copy").Text;
+  if(!actionable){var note=Card(_body,"稍后的提案",reward.Get("source","城市成长").Text+" · 候选已保存，先处理前一份。",Muted);Label(note,string.Join(" / ",reward["choices"].Select(c=>c.Get("name","方案").Text)),16,Muted);return;}
+  _rewardSelections.TryGetValue(rid,out var chosen);chosen=chosen??"";
+  var head=Row(_body,"Blueprint Proposal Heading",48);Label(head,kind=="research"?"蓝图研究提案":"为城市留下一种可能",22,Ink);var origin=Label(head,BlueprintRewardSource(reward)+" · "+reward["choices"].Count+" 选 1",16,Muted);AddDeskTip(origin.gameObject,"奖励来源",()=>reward.Get("source","城市成长").Text);
+  var row=Row(_body,"Blueprint Candidates",330*TextScale);row.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight=true;
+  foreach(var candidateValue in reward["choices"]){var candidate=candidateValue;var bid=candidate["bonus_id"].Text;var selected=chosen==bid;var tile=Surface("Blueprint Candidate "+rid+" "+bid,row,BlueprintBlue);
+   var tileLayout=tile.gameObject.AddComponent<VerticalLayoutGroup>();tileLayout.padding=new RectOffset(4,4,4,4);tileLayout.childControlWidth=tileLayout.childControlHeight=true;tileLayout.childForceExpandWidth=true;tileLayout.childForceExpandHeight=false;
+   var tileSize=tile.gameObject.AddComponent<LayoutElement>();tileSize.minHeight=330*TextScale;tileSize.minWidth=0;tileSize.preferredWidth=0;tileSize.flexibleWidth=1;
+   var visual=Column(tile,"Candidate Paper",7);visual.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(14,14,12,12);
+   Label(visual,candidate.Get("name",bid=="__currency__"?"通货补偿":bid).Text,22,Ink);
+   Label(visual,bid=="__currency__"?"城市补助":kind=="research"?candidate.Get("grade","基础").Text+" → "+candidate.Get("target_grade","改良").Text:candidate.Get("grade","基础").Text+" · "+ScopeName(candidate.Get("scope","building").Text),16,Muted);
+   var drawing=Node("Candidate Art",visual);Height(drawing,110*TextScale);var art=drawing.gameObject.AddComponent<CityBlueprintArt>();art.Style=BlueprintStyle(bid);art.Accent=BlueprintAccent(bid);art.Fill=selected?1:0;art.color=new Color(.77f,.85f,.81f);art.raycastTarget=false;
+   Label(visual,BlueprintEffectSummary(candidate),16,selected?Gold:Ink);
+   Label(visual,bid=="__currency__"?"直接入账":kind=="research"?"升级本街区全部同名方案":"领取1份许可，安装后生效",16,Muted);
+   var b=tile.gameObject.AddComponent<Button>();b.interactable=!_blueprintBusy;var motion=tile.gameObject.AddComponent<CityBlueprintMotion>();motion.Art=art;motion.Visual=visual;motion.ReducedMotion=()=>Runtime.DisplaySettings.Get("reduced_motion",false).Bool;motion.SetChosen(selected);
+   if(selected){var outline=tile.gameObject.AddComponent<Outline>();outline.effectColor=Gold;outline.effectDistance=new Vector2(2,2);}
+   b.onClick.AddListener(()=>{if(_blueprintBusy)return;HideDeskTip();_rewardSelections[rid]=bid;PlayCue("select");RenderPage();var current=_body.GetComponentsInChildren<Button>().FirstOrDefault(x=>x.name=="Blueprint Candidate "+rid+" "+bid);if(current!=null)EventSystem.current.SetSelectedGameObject(current.gameObject);});
+  }
+  if(chosen==""){Label(_body,"悬停看一角 · 点选看效果",16,Muted);return;}
+  var selectedCandidate=reward["choices"].FirstOrDefault(c=>c["bonus_id"].Text==chosen);if(selectedCandidate==null)return;
+  var effect=Card(_body,"效果检视 / "+selectedCandidate.Get("name",chosen).Text,kind=="research"?"研究升级本街区全部同名副本；不扩大部署尺度。":"领取仅获得1份副本，安装后才生效。",Green);
+  Label(effect,BlueprintEffectSummary(selectedCandidate),17,Ink);
+  if(chosen=="__currency__")Metric(effect,"通货补偿",F(reward.Get("compensation",30).Double,0),"不恢复 DT。");else{
+   BlueprintRuleRows(effect,selectedCandidate.Get("effects",V.Arr()),chosen);
+   Fold(effect,"适用条件与完整规则",deep=>{Label(deep,selectedCandidate.Get("preview_reason","").Text,16,Muted);Label(deep,selectedCandidate.Get("stacking_note","").Text,16,Muted);Raw(deep,G.c.bonuses[chosen]);});
+  }
+  var actions=Row(effect,"Blueprint Selection Actions",50);Button(actions,"取消预选",()=>{_rewardSelections.Remove(rid);HideDeskTip();RenderPage();var original=_body.GetComponentsInChildren<Button>().FirstOrDefault(x=>x.name=="Blueprint Candidate "+rid+" "+chosen);if(original!=null)EventSystem.current.SetSelectedGameObject(original.gameObject);});
+  Button(actions,kind=="research"?"确认研究":"确认领取",()=>ClaimBlueprint(rid,chosen),true,_blueprintBusy||!Runtime.ViewCanEditFocused);
+ }
+ void BlueprintRuleRows(Transform parent,V effects,string bid){
+  if(effects.Count==0){var t=Label(parent,"关系与结构方案 · 展开查看适用规则",17,Blue);AddDeskTip(t.gameObject,"结构效果",()=>"此方案包含条件、关系、配方或结构规则；不能把它误读成无条件的产出加成。\n"+G.c.bonuses.Get(bid,V.Map()).Get("description","").Text);return;}
+  foreach(var rowValue in effects){var e=rowValue;var r=Row(parent,"Blueprint Rule",42);Label(r,Stat(e.Get("label","规则").Text),17,Muted);var value=Button(r,FormatEffect(e,e.Get("before",0).Double)+" → "+FormatEffect(e,e.Get("after",0).Double),()=>{},false);value.GetComponentInChildren<Text>().color=BlueprintEffectAdverse(e)?Gold:Green;Height((RectTransform)value.transform,38*TextScale);
+   AddDeskTip(value.gameObject,e.Get("label","规则").Text,()=>"这是规则参数，不是保证的实际月产。实际适配和收益将在安装前按同一步模拟。\n"+Bonus.card(G,bid)["stacking_note"].Text+"\n规则来源："+e.Get("rule_id",bid).Text);value.onClick.AddListener(()=>ShowDeskTip(value.GetComponent<CityDeskTooltip>(),true));
+  }
+ }
+ string FormatEffect(V effect,double value){var mode=effect.Get("mode","").Text;return mode=="multiply"?"×"+F(value,3):mode=="fraction"?F(value*100,1)+"%":F(value,3)+effect.Get("unit","").Text;}
+ void ClaimBlueprint(string rid,string bid){
+  if(_blueprintBusy)return;var pending=Bonus.pending(G);if(pending.Count==0||pending[0]["reward_id"].Text!=rid){ShowMessage("这份提案已处理，队列已刷新。");RenderPage();return;}
+  _blueprintBusy=true;var error=Runtime.Execute(g=>Bonus.choose(g,rid,bid));if(error!=""){_blueprintBusy=false;RenderPage();return;}_rewardSelections.Remove(rid);HideDeskTip();_inventoryChoice=bid=="__currency__"?"":bid;_blueprintSlot="";_installView=V.Map();Navigate("bonuses");RefreshBucket();StartCoroutine(BlueprintReceipt(bid));
+ }
+ IEnumerator BlueprintReceipt(string bid){
+  _receiptSkip=false;_receipt=Surface("Approved Blueprint Flight",_root,BlueprintBlue);Pin(_receipt,new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(260,286));
+  var body=Column(_receipt);Stretch(body);Label(body,bid=="__currency__"?"通货补偿":G.c.bonuses[bid]["name"].Text,23,Ink);BlueprintArt(body,bid,140);var accepted=Label(body,"✓  已领取",23,Green,38);accepted.alignment=TextAnchor.MiddleCenter;
+  var transfer=Node("Receipt Transfer",_receipt);Stretch(transfer,80,80,80,80);HudIcon(transfer,"bonus",Green,74);transfer.gameObject.SetActive(false);HideDeskTip();_receipt.SetAsLastSibling();
+  float elapsed=0,duration=Runtime.DisplaySettings.Get("reduced_motion",false).Bool?0:1.05f;
+  Vector2 destination=_root.InverseTransformPoint(_bonusBucket.TransformPoint(_bonusBucket.rect.center));
+  while(elapsed<duration&&!_receiptSkip){elapsed+=Mathf.Min(UnityEngine.Time.unscaledDeltaTime,.05f);float t=Mathf.Clamp01(elapsed/duration);float travel=Mathf.SmoothStep(0,1,Mathf.Clamp01((t-.40f)/.60f));bool moving=t>.42f;if(moving){body.gameObject.SetActive(false);transfer.gameObject.SetActive(true);}_receipt.anchoredPosition=Vector2.Lerp(Vector2.zero,destination,travel);_receipt.localScale=Vector3.one*Mathf.Lerp(1,.12f,travel);yield return null;}
+  if(_receipt!=null){ForgetFonts(_receipt);Destroy(_receipt.gameObject);_receipt=null;}_blueprintBusy=false;if(_archiveOpen&&_page=="bonuses")RenderPage();ShowMessage(bid=="__currency__"?"补偿已入账。":"蓝图已领取 · 可从 Bonus 安装");
+ }
+ void BlueprintInventoryPage(){
+  var head=Row(_body,"Bonus Bucket Heading",34);Label(head,"本街区 · 未安装 / 已部署",16,Muted);if(Bonus.pending(G).Count>0)Button(head,"还有 "+Bonus.pending(G).Count+" 份提案 ↗",()=>Navigate("blueprints"),true);
+  var ids=Rules.ids(S["block"].Get("bonus_wallet",V.Map())).Select(x=>x.Text).Union(S["bonus_instances"].Values.Where(x=>x.Get("active",false).Bool).Select(x=>x["bonus_id"].Text)).Distinct().ToArray();
+  if(ids.Length==0){Label(_body,"还没有已领取蓝图。年度、人口与主题奖励会带来新的建设提案。",18,Muted);return;}
+  if(_inventoryChoice==""||!G.c.bonuses.Has(_inventoryChoice)){Label(_body,"选择一份蓝图，查看真实适配位置。",18,Muted);BlueprintInventoryChoices(_body,ids);return;}
+  var chosen=Bonus.card(G,_inventoryChoice);_blueprintScope=chosen["scope"].Text;
+  var selected=CompactTaskCard(_body,"Selected blueprint");var banner=Row(selected,"Blueprint identity",72*TextScale);var image=Node("Selected drawing",banner);Width(image,86*TextScale);Height(image,68*TextScale);BlueprintArt(image,_inventoryChoice,66*TextScale);var summary=Column(banner,"Blueprint summary",2);summary.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(summary,chosen["name"].Text,20,Ink,31*TextScale);Label(summary,"未安装 "+chosen["copies"].Long+" · 已部署 "+Bonus.active_count(G,_inventoryChoice)+" · "+ScopeName(_blueprintScope),16,Muted);Label(selected,BlueprintEffectSummary(chosen),16,Ink);Button(selected,"更换蓝图",()=>{_inventoryChoice="";_blueprintHost="";_blueprintSlot="";RenderPage();});
+  var target=Column(_body,"Blueprint Installation Desk",9);target.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);
+  if(_blueprintScope=="building")BuildingInstallTarget(target,chosen);else ScopeInstallTarget(target,chosen);
+  Fold(_body,"其他库存与已部署来源",deep=>BlueprintInventoryChoices(deep,ids));
+ }
+ void BlueprintInventoryChoices(Transform parent,string[] ids){
+  foreach(var bid in ids){var id=bid;var card=Bonus.card(G,id);var box=CompactTaskCard(parent,"Inventory "+id);var row=Row(box,"Inventory choice",72*TextScale);var visual=Node("Inventory illustration",row);Width(visual,82*TextScale);Height(visual,65*TextScale);BlueprintArt(visual,id,62*TextScale);var info=Column(row,"Inventory summary",2);info.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(info,card["name"].Text,18,Ink,28*TextScale);Label(info,"未安装 "+card["copies"].Long+" · 已部署 "+Bonus.active_count(G,id),16,Muted);var button=Button(row,card["copies"].Long>0?"选择":"查看",()=>{_inventoryChoice=id;_blueprintScope=card["scope"].Text;_blueprintHost="";_blueprintSlot="";_installView=V.Map();RenderPage();},_inventoryChoice==id,_blueprintBusy);Width((RectTransform)button.transform,105*TextScale);
+   button.name="InventoryChoice "+id;
+   Label(box,BlueprintEffectSummary(card),16,Ink);
+   foreach(var instance in S["bonus_instances"].Values.Where(x=>x.Get("active",false).Bool&&x["bonus_id"].Text==id)){var at=instance;var location=Button(box,"↳ "+G.project_name(at["host_id"].Text)+(at["slot"].Text!=""?" / "+G.slot_label(at["host_id"].Text,at["slot"].Text):" / "+ScopeName(at["host_type"].Text)),()=>{if(at["host_type"].Text=="building"){SelectBuilding(at["host_id"].Text);Navigate("building",at["host_id"].Text);}else ShowMessage("已部署于"+G.project_name(at["host_id"].Text)+" · "+ScopeName(at["host_type"].Text));});location.name="InstalledLocation "+at["id"].Text;Fold(box,"实例来源与完整记录",deep=>Raw(deep,at));}
+  }
+ }
+ void ChooseBlueprintTarget(string host,string slot=""){HideDeskTip();_blueprintHost=host;_blueprintSlot=slot;_installView=V.Map();_blueprintVersion="";_moreBlueprintBuildings=false;RenderPage();if(slot!=""){var action=_body.GetComponentsInChildren<Button>().FirstOrDefault(x=>(x.GetComponentInChildren<Text>()?.text.StartsWith("安装 · ")==true||x.GetComponentInChildren<Text>()?.text.StartsWith("替换 · ")==true));if(action!=null){EventSystem.current.SetSelectedGameObject(action.gameObject);ScrollDeskFocus(action.transform);}}}
+ void BuildingInstallTarget(Transform parent,V chosen){
+  var bid=chosen["bonus_id"].Text;var projects=G.playable_ids().Select(x=>x.Text).OrderByDescending(id=>G.slot_ids(id).Any(s=>G.bonus_eligible(bid,"building",id,s.Text,S["projects"][id]["slots"][s].Text)=="")).ToArray();
+  if(_blueprintHost==""||!S["projects"].Has(_blueprintHost))_blueprintHost=SelectedBuilding!=""&&S["projects"].Has(SelectedBuilding)?SelectedBuilding:projects.FirstOrDefault()??"";
+  var sites=Row(parent,"Blueprint Building Choices",50);foreach(var id in projects.Take(3)){var host=id;bool fits=G.slot_ids(host).Any(x=>G.bonus_eligible(bid,"building",host,x.Text,S["projects"][host]["slots"][x].Text)=="");var hostButton=Button(sites,(fits?"✓ ":"— ")+G.project_name(host)+"\n"+S["projects"][host]["tile"].Text,()=>ChooseBlueprintTarget(host),_blueprintHost==host);Height((RectTransform)hostButton.transform,64*TextScale);}
+  if(projects.Length>3)Button(sites,"全部 "+projects.Length+" 栋 ▾",()=>{_moreBlueprintBuildings=!_moreBlueprintBuildings;RenderPage();});
+  if(_moreBlueprintBuildings){for(int i=3;i<projects.Length;i+=2){var line=Row(parent,"More Blueprint Buildings",50);foreach(var id in projects.Skip(i).Take(2)){var host=id;Button(line,G.project_name(host)+" / "+S["projects"][host]["tile"].Text,()=>ChooseBlueprintTarget(host),_blueprintHost==host);}}}
+  if(_blueprintHost==""){Label(parent,"先建成一座适用建筑，再安装这份方案。",18,Muted);return;}
+  BuildingOverviewPaper(parent,_blueprintHost,true);
+  if(chosen["copies"].Long<=0){Label(parent,"没有未安装副本。已装实例可定位，不能作为库存重复使用。",17,Gold);return;}
+  var slots=Row(parent,"Blueprint Compatible Slots",54);foreach(var s in G.slot_ids(_blueprintHost)){var slot=s.Text;var iid=S["projects"][_blueprintHost]["slots"][slot].Text;var error=G.bonus_eligible(bid,"building",_blueprintHost,slot,iid);var b=Button(slots,(_blueprintSlot==slot?"✓ ":"")+G.slot_label(_blueprintHost,slot)+(error==""?iid==""?" · 可安装":" · 可替换":" · 条件不符"),()=>ChooseBlueprintTarget(_blueprintHost,slot),_blueprintSlot==slot,error!="");if(error!="")Label(parent,G.slot_label(_blueprintHost,slot)+"："+error,15,Gold);AddDeskTip(b.gameObject,"槽位适配",()=>error==""?"真实槽位与建筑适配检查已通过。安装时仍会重新检查库存、互斥和当前状态。":error);}
+  if(_blueprintSlot!="")BlueprintInstallationPreview(parent,chosen,"building",_blueprintHost,_blueprintSlot);else Label(parent,"先选择建筑上的兼容槽位。",16,Muted);
+ }
+ void ScopeInstallTarget(Transform parent,V card){
+  var bid=card["bonus_id"].Text;var scope=card["scope"].Text;Label(parent,ScopeName(scope),22,Blue);
+  Label(parent,scope=="block"?"只作用当前街区，不扩展到整个 District。":"作用于当前街区中该运营商管理的适用建筑。",16,Muted);
+  if(scope=="block")_blueprintHost=S["block"]["id"].Text;
+  else {var organizations=Rules.ids(S["organizations"]).Select(x=>x.Text).ToArray();for(int i=0;i<organizations.Length;i+=3){var row=Row(parent,"Blueprint Organization Choices",50);foreach(var host in organizations.Skip(i).Take(3))Button(row,G.project_name(host),()=>ChooseBlueprintTarget(host),host==_blueprintHost);}}
+  if(_blueprintHost=="")return;
+  if(card["copies"].Long<=0){Label(parent,"没有未安装副本。已部署实例保持来源记录。",17,Gold);return;}BlueprintInstallationPreview(parent,card,scope,_blueprintHost,"");
+ }
+ void BlueprintInstallationPreview(Transform parent,V card,string scope,string host,string slot){
+  var bid=card["bonus_id"].Text;var key=_planner.version(G)+"|"+S["block"]["bonus_wallet"].ToJson()+"|"+S["bonus_instances"].ToJson()+"|"+bid+scope+host+slot;
+  if(key!=_blueprintVersion||_installView.Count==0){_installView=BlueprintPreview.For(G,bid,scope,host,slot);_blueprintVersion=key;}
+  var view=_installView;var box=Card(parent,"安装前后 / "+card["name"].Text,"同一步模拟 · 不提前消耗真实副本",Green);
+  Label(box,"安装目标："+(scope=="building"?G.project_name(host)+" · "+G.slot_label(host,slot):G.project_name(host)+" · "+ScopeName(scope)),17,Ink);
+  if(!view.Get("ok",false).Bool){Label(box,view.Get("error","当前不能安装。").Text,18,Gold);return;}
+  if(view["stat_rows"].Count>0)Label(box,scope=="building"?"本楼规则变化":"所选范围规则变化",17,Muted);
+  foreach(var changed in view["stat_rows"].Take(4)){var e=changed;var line=Row(box,"Actual Rule Difference",40);Label(line,Stat(e["field"].Text),16,Muted);var b=Button(line,F(e["before"].Double,3)+" → "+F(e["after"].Double,3),()=>{});b.GetComponentInChildren<Text>().color=BlueprintAdverse(e["field"].Text,e["before"].Double,e["after"].Double)?Gold:Green;Height((RectTransform)b.transform,36*TextScale);AddDeskTip(b.gameObject,Stat(e["field"].Text)+" / 真实乘区",()=>ExplainBlueprintTrace(view,e["field"].Text));b.onClick.AddListener(()=>ShowDeskTip(b.GetComponent<CityDeskTooltip>(),true));}
+  Label(box,"全城同一步预测",17,Muted);
+  var step=view["same_step"];var cash=step["cashflow"];Metric(box,"经营净额",F(cash["before"].Double,2)+" → "+F(cash["after"].Double,2)+" /月","",cash["after"].Double<cash["before"].Double?Gold:Green);
+  var energy=step["energy_need"];if(Math.Abs(energy["after"].Double-energy["before"].Double)>.00001)Metric(box,"用电需求",F(energy["before"].Double,2)+" → "+F(energy["after"].Double,2),"",energy["after"].Double>energy["before"].Double?Gold:Green);
+  foreach(var kind in step["services"].Keys){var pair=step["services"][kind];if(Math.Abs(pair["after"].Double-pair["before"].Double)>.00001)Metric(box,Service(kind)+"实际人数",F(pair["before"].Double,2)+" → "+F(pair["after"].Double,2));}
+  string old=scope=="building"?S["projects"][host]["slots"].Get(slot,"").Text:"";
+  Label(box,old!=""?"替换会停用旧方案；不返还旧副本，另消耗1份新副本。":"确认消耗1份未安装副本；拆下不返还。",15,Gold);
+  var actions=Row(box,"Blueprint Install Actions",50);Button(actions,"取消安装预览",()=>{_blueprintSlot="";_blueprintHost="";_installView=V.Map();_inventoryChoice="";RenderPage();});
+  var expectedCopies=card["copies"].Long;var focused=Runtime.Session.FocusedBlockId;Button(actions,old==""?"安装 · 消耗1份":"替换 · 消耗1份",()=>{
+   if(_blueprintBusy)return;_blueprintBusy=true;
+   var error=Runtime.Execute(g=>{if(Runtime.Session.FocusedBlockId!=focused||g.s["block"]["bonus_wallet"].Get(bid,V.Map()).Get("charges",0).Long!=expectedCopies)return "库存或街区已变化，请重新预览。";if(scope=="building"&&g.s["projects"].Get(host,V.Map()).Get("slots",V.Map()).Get(slot,"").Text!=old)return "槽位已变化，请重新预览。";return Bonus.install(g,bid,scope,host,slot);});
+   _blueprintBusy=false;_blueprintVersion="";_installView=V.Map();if(error!=""){RenderPage();return;}PlayCue("confirm");RefreshBucket();if(scope=="building"){SelectBuilding(host);Navigate("building",host);}else {RenderPage();ShowMessage("方案已部署到"+G.project_name(host)+" · "+ScopeName(scope));}
+  },true,_blueprintBusy||!Runtime.ViewCanEditFocused);
+  Fold(box,"完整效果、代价与来源",deep=>{foreach(var stat in view["stat_rows"])Label(deep,Stat(stat["field"].Text)+" "+F(stat["before"].Double,4)+" → "+F(stat["after"].Double,4),15,Muted);Raw(deep,view["rule_trace"]);Raw(deep,view["same_step"]);});
+ }
+ bool BlueprintAdverse(string field,double before,double after){
+  bool cost=field=="pollution"||field=="energy_demand"||field=="maintenance"||field=="service_decay"||
+   field=="exposure_multiplier"||field=="shortage_multiplier"||field=="population_maintenance"||field.StartsWith("input.",StringComparison.Ordinal);
+  return cost?after>before:after<before;
+ }
+ string ExplainBlueprintTrace(V view,string field){
+  var trace=view["rule_trace"]["after"].Get(field,V.Map());var before=view["before_stats"].Get(field,0).Double;var after=view["after_stats"].Get(field,0).Double;
+  return "即时规则："+F(before,4)+" → "+F(after,4)+"\n统一乘区：(基础值 + 加值合计) × 各来源乘数，再应用 floor / cap / override。\n"+"base="+trace.Get("base","—").Text+"  add="+trace.Get("add","—").Text+"  multiply="+trace.Get("multiply","—").Text+"\n同宿主同名先按 w=1+(n−1)/3 合成；实际修正以本卡配置与来源为准。";
+ }
+ RectTransform BuildingOverviewPaper(Transform parent,string id,bool compact=false){
+  var p=S["projects"][id];var paper=PaperDocument(parent,G.project_name(id),"建筑概况 / T"+p.Get("tier",1).Long+" · "+G.c.operators[p["operator_org"]]["name"].Text+" · "+p["tile"].Text);
+  var portrait=Node("Native Building Wire Drawing",paper);Height(portrait,compact?78*TextScale:106*TextScale);var art=portrait.gameObject.AddComponent<CityBlueprintArt>();art.Style=CityIllustrationCatalog.StyleForBuilding(p["def"].Text);art.Accent=Domain(p);art.Fill=.5f;art.color=new Color(.67f,.84f,.85f);art.raycastTarget=false;
+  foreach(var slotValue in G.slot_ids(id)){var slot=slotValue.Text;var iid=p["slots"][slot].Text;var row=Row(paper,"Pinned Slot "+slot,compact?55*TextScale:68*TextScale);var icon=Node("Slot drawing",row);Width(icon,compact?48*TextScale:58*TextScale);Height(icon,compact?48*TextScale:58*TextScale);var info=Column(row,"Slot summary",2);info.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);PaperLabel(info,G.slot_label(id,slot),15);
+   if(iid==""){PaperLabel(info,"空闲槽位",14,true);if(!compact){var action=Button(row,"选择蓝图",()=>{_blueprintHost=id;_blueprintSlot=slot;Navigate("bonuses");});Width((RectTransform)action.transform,145*TextScale);}}
+   else {var ins=S["bonus_instances"][iid];var bid=ins["bonus_id"].Text;var drawing=icon.gameObject.AddComponent<CityBlueprintArt>();drawing.Style=BlueprintStyle(bid);drawing.Accent=BlueprintAccent(bid);drawing.Fill=1;drawing.color=new Color(.67f,.84f,.85f);drawing.raycastTarget=false;var marker=PaperLabel(info,"✓ 已部署 · "+G.c.bonuses[bid]["name"].Text,14,true);marker.gameObject.name="InstalledSlot "+iid;if(!compact){var action=Button(row,"管理 / 替换",()=>Navigate("slot",id+"|"+slot));Width((RectTransform)action.transform,145*TextScale);Fold(paper,"实例来源与完整记录",deep=>Raw(deep,ins));}}
+  }
+  return paper;
+ }
+ void NativeSlotPage(){
+  var parts=_pageContext.Split('|');if(parts.Length<2||!S["projects"].Has(parts[0]))return;var host=parts[0];var slot=parts[1];var iid=S["projects"][host]["slots"].Get(slot,"").Text;
+  BuildingOverviewPaper(_body,host);
+  if(iid!=""){var rack=Card(_body,"管理已安装方案","拆下不返还已消耗副本；替换另耗新副本。",Gold);var current=iid;var instance=S["bonus_instances"][iid];Label(rack,"原提供方 "+G.c.operators[instance["provider_org"]]["name"].Text+" · 合同组织 "+G.c.operators[instance.Get("contract_org",instance["provider_org"])]["name"].Text,16,Muted);Fold(rack,"已安装规则与实例来源",deep=>{Raw(deep,instance);Raw(deep,Rules.bonus_rules(G,instance["bonus_id"].Text,Math.Max(1,Bonus.active_count(G,instance["bonus_id"].Text,"building",host))));});Button(rack,"拆下当前方案（不返还副本）",()=>Confirm("拆下当前方案？","旧实例会停用，副本不会退回；依赖的弹性槽须先清空。",()=>Command(g=>{if(g.s["projects"][host]["slots"].Get(slot,"").Text!=current)return "槽位已变化，请重新查看。";return g.clear_slot(host,slot);})));Button(rack,"重签为本楼自营 · "+F(G.c.balance["recontract_cost"].Double,0),()=>Command(g=>g.recontract(host,slot)));}
+  var availableIds=Rules.ids(S["block"]["bonus_wallet"]).Select(x=>x.Text).Where(bid=>S["block"]["bonus_wallet"][bid].Get("charges",0).Long>0&&Bonus.card(G,bid)["scope"].Text=="building").ToArray();for(int i=0;i<availableIds.Length;i+=3){var available=Row(_body,"Inventory For Slot",50);foreach(var bid in availableIds.Skip(i).Take(3)){var err=G.bonus_eligible(bid,"building",host,slot,iid);Button(available,G.c.bonuses[bid]["name"].Text,()=>{_inventoryChoice=bid;_blueprintScope="building";_blueprintHost=host;_blueprintSlot=slot;RenderPage();},_inventoryChoice==bid,err!="");if(err!="")Label(_body,G.c.bonuses[bid]["name"].Text+"："+err,15,Muted);}}
+  if(_inventoryChoice!=""&&G.c.bonuses.Has(_inventoryChoice)&&_blueprintHost==host&&_blueprintSlot==slot)BlueprintInstallationPreview(_body,Bonus.card(G,_inventoryChoice),"building",host,slot);
+ }
+ RectTransform CompactTaskCard(Transform parent,string name){
+  var card=Surface(name,parent,new Color(.055f,.11f,.125f,.96f));var layout=card.gameObject.AddComponent<VerticalLayoutGroup>();layout.padding=new RectOffset(12,12,10,10);layout.spacing=6;layout.childControlWidth=layout.childControlHeight=true;layout.childForceExpandHeight=false;card.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;return card;
+ }
+ string TaskAmount(double value)=>value.ToString("0.########",System.Globalization.CultureInfo.InvariantCulture);
+ string TaskChoiceCost(V definition,string choiceId){
+  if(choiceId=="decline")return "无支出 · 无惩罚";
+  var parts=new List<string>();double money=definition.Get("currency",0).Double,deposit=definition.Get("deposit",0).Double;
+  if(money+deposit>0)parts.Add("即时支付 "+TaskAmount(money+deposit)+" 通货"+(deposit>0?"（含保证金 "+TaskAmount(deposit)+"，完成退还）":""));
+  foreach(var id in definition.Get("resources",V.Map()).Keys)parts.Add("交付 "+TaskAmount(definition["resources"][id].Double)+" "+Resource(id));
+  return parts.Count==0?"无即时支出":string.Join(" · ",parts);
+ }
+ string TaskChoiceOutcome(V definition,string choiceId,string fallback){
+  if(choiceId=="decline")return "婉拒这份委任，不新增任务";
+  var parts=new List<string>();
+  bool later=definition.Has("metric")||definition.Has("delivery_resource")||definition.Has("trade_amount")||definition.Has("person_months");
+  if(definition.Get("arrival_people",0).Double>0)parts.Add("下个来生月迎来 "+TaskAmount(definition["arrival_people"].Double)+" 人");
+  if(definition.Has("metric")&&definition.Has("improve"))parts.Add("目标：将"+Service(definition["metric"].Text)+"覆盖提高 "+TaskAmount(definition["improve"].Double*100)+" 个百分点");
+  if(definition.Get("delivery_amount",0).Double>0)parts.Add("目标：交付 "+TaskAmount(definition["delivery_amount"].Double)+" "+Resource(definition.Get("delivery_resource","").Text));
+  if(definition.Get("trade_amount",0).Double>0)parts.Add("目标：实际"+(definition.Get("trade_side","").Text=="buy"?"进口":"成交")+" "+TaskAmount(definition["trade_amount"].Double)+" "+Resource(definition.Get("trade_resource","goods").Text));
+  if(definition.Get("person_months",0).Double>0)parts.Add("目标：累计服务 "+TaskAmount(definition["person_months"].Double)+" 人·月");
+  if(definition.Get("deadline_months",0).Double>0)parts.Add("期限 "+TaskAmount(definition["deadline_months"].Double)+" 月");
+  if(definition.Get("reward_kind","").Text=="research")parts.Add((later?"完成后":"接受即")+"获得蓝图研究提案");
+  else if(definition.Get("reward_kind","").Text=="copy")parts.Add((later?"完成后":"接受即")+"获得方案选择提案");
+  if(definition.Get("cash_reward",0).Double>0)parts.Add((later?"完成奖励 ":"接受即得 ")+TaskAmount(definition["cash_reward"].Double)+" 通货");
+  var candidates=definition.Get("bonus_ids",V.Arr());
+  if(candidates.Count>0)parts.Add("候选方向："+string.Join("、",candidates.Take(3).Select(id=>G.c.bonuses.Get(id,V.Map()).Get("name","蓝图方案").Text))+(candidates.Count>3?"等":""));
+  return parts.Count==0?fallback:string.Join(" · ",parts);
+ }
+ string TaskChoiceAffordability(V definition,string choiceId){
+  if(choiceId=="decline")return "";
+  if(S.Get("currency",0).Double+1e-06<definition.Get("currency",0).Double+definition.Get("deposit",0).Double)return "当前通货不足";
+  foreach(var resource in definition.Get("resources",V.Map()).Keys)if(G.inventory_total(resource)+1e-06<definition["resources"][resource].Double)return Resource(resource)+"库存不足";
+  return "";
+ }
+ void PlanningTaskEvents(Transform parent,V view,string filter=""){
+  foreach(var eventValue in view["events"]){
+   var evt=eventValue;var offered=evt["status"].Text=="offered";if(filter=="offered"&&!offered||filter=="active"&&offered)continue;
+   var id=evt["id"].Text;
+   if(!offered){var active=CompactTaskCard(parent,"Active contract "+id);Label(active,"进行中 · "+evt["name"].Text,19,Blue,29*TextScale);Label(active,evt["description"].Text,15,Muted);if(evt.Get("deadline_seconds",-1).Double>=0)Label(active,"剩余期限  "+Clock.duration(G,evt["deadline_seconds"].Double),15,Gold);
+    if(evt.Get("target",0).Double>0){var factor=evt.Get("unit","").Text=="%"?100:1;var progress=Row(active,"Contract progress",31*TextScale);Label(progress,"实际进度",15,Muted);var reading=Label(progress,F(evt.Get("progress",0).Double*factor,1)+" / "+F(evt["target"].Double*factor,1)+evt.Get("unit","").Text,15,Ink);reading.alignment=TextAnchor.MiddleRight;}
+    if(evt.Get("delivery_remaining",0).Double>0){var resource=evt["delivery_resource"].Text;Button(active,"交付 "+Resource(resource)+" · 还需 "+F(evt["delivery_remaining"].Double),()=>Command(g=>Themes.deliver(g,resource,-1,id)),true);}
+    Fold(active,"合同结果、代价与来源",deep=>{var single=view.Duplicate(true);single["events"]=V.Arr(evt);LegacyThemeEvents(deep,single);});continue;}
+   var definition=evt.Get("definition",Themes._event_definition(G,id));
+   var card=CompactTaskCard(parent,"Card "+evt["name"].Text);Label(card,"待决定 · "+evt["name"].Text,22,Gold,33*TextScale);Label(card,evt["description"].Text,16,Muted);
+   foreach(var raw in evt["choices"]){var choice=raw;var cid=choice["id"].Text;var def=cid=="decline"?V.Map():definition.Get("choices",V.Arr()).Count>0?Themes._event_choice_definition(definition,cid):definition;
+    var option=Row(card,"Proposal "+cid,110*TextScale);option.GetComponent<HorizontalLayoutGroup>().spacing=9;option.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
+    var art=Node("Proposal art",option);Width(art,86*TextScale);Height(art,86*TextScale);if(cid=="decline"){var mark=Label(art,"—",28,Muted,74);Stretch(mark.rectTransform);mark.alignment=TextAnchor.MiddleCenter;}else Illustration(art,OptionPicture(id,cid,def),82*TextScale);
+    var copy=Column(option,"Proposal detail",5);copy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);var copyWidth=copy.gameObject.AddComponent<LayoutElement>();copyWidth.minWidth=0;copyWidth.preferredWidth=0;copyWidth.flexibleWidth=1;
+    Label(copy,choice["label"].Text,20,Ink);
+    Label(copy,TaskChoiceOutcome(def,cid,evt["description"].Text),16,Ink);
+    Label(copy,TaskChoiceCost(def,cid),16,cid=="decline"?Muted:Gold);
+    var unavailable=choice.Get("available",true).Bool?TaskChoiceAffordability(def,cid):choice.Get("reason","当前不可选").Text;
+    if(unavailable!="")Label(copy,unavailable,16,Gold);
+    var caption=cid=="decline"?"婉拒":choice["label"].Text;
+    var choose=Button(copy,caption,()=>Command(g=>Themes.choose_event(g,id,cid)),cid!="decline",!choice.Get("available",true).Bool);choose.name="ProposalChoice "+id+"|"+cid;
+   }
+   Fold(card,"候选、出现条件与完整规则",deep=>{foreach(var choice in evt["choices"]){Label(deep,choice["label"].Text+" · "+choice.Get("cost_text","").Text,16,Muted);}Raw(deep,definition);});
+  }
+ }
+ void PlanningTasksPage(){
+  var view=Themes.view(G);if(view.Get("id","").Text==""){ThemesPage();return;}
+  var offered=view["events"].Count(e=>e["status"].Text=="offered");if(offered>0){Label(_body,"等待决定 · "+offered,18,Gold,30*TextScale);PlanningTaskEvents(_body,view,"offered");}
+  var completed=view["completed"].Bool;var card=CompactTaskCard(_body,"City commission");var heading=Row(card,"Commission identity",106*TextScale);heading.GetComponent<HorizontalLayoutGroup>().spacing=12;
+  var art=Node("Commission illustration",heading);Width(art,112*TextScale);Height(art,100*TextScale);Illustration(art,ThemePicture(view["id"].Text),94*TextScale);
+  var identity=Column(heading,"Commission summary",3);identity.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);Label(identity,view["name"].Text,22,Ink,33*TextScale);Label(identity,completed?"✓ 已完成 · 归档":"进行中 · M"+view["stage"].Long+" / 3 · "+view["stage_name"].Text,16,completed?Green:Gold,28*TextScale);
+  var stages=view["history"].Where(e=>e.Get("kind","").Text=="milestone"&&e.Get("id","").Text.StartsWith(view["id"].Text+":M",StringComparison.Ordinal)).ToArray();var milestoneIds=S["block"].Get("theme",V.Map()).Get("milestone_ids",V.Arr());Label(identity,"阶段记录  "+string.Join("   ",new[]{1,2,3}.Select(n=>milestoneIds.Contains(view["id"].Text+":M"+n)?"✓ M"+n:"○ M"+n)),14,Muted,24*TextScale);
+  if(!completed){foreach(var goal in view["goals"]){double factor=goal["unit"].Text=="%"?100:1;var row=Row(card,"Commission goal",31*TextScale);Label(row,(goal["met"].Bool?"✓ ":"○ ")+goal["label"].Text,16,goal["met"].Bool?Green:Ink);var reading=Label(row,F(goal["value"].Double*factor,1)+(goal["comparison"].Text=="max"?" ≤ ":" / ")+F(goal["target"].Double*factor,1)+goal["unit"].Text,16,goal["met"].Bool?Green:Gold);reading.alignment=TextAnchor.MiddleRight;if(goal["kind"].Text=="delivery"&&!goal["met"].Bool&&goal["id"].Text.StartsWith("delivery_",StringComparison.Ordinal)){var resource=goal["id"].Text.Substring(9);Button(card,"从库存交付 "+Resource(resource),()=>Command(g=>Themes.deliver(g,resource)),true);}}
+   if(view["steady_required_seconds"].Double>0)Label(card,"稳定时长  "+Clock.duration(G,view["steady_seconds"].Double)+" / "+Clock.duration(G,view["steady_required_seconds"].Double),15,Muted);
+  }else {Label(card,"M1–M3 的达成以保存的阶段记录为准。",14,Muted);Fold(card,"完成记录",deep=>{foreach(var entry in stages)Label(deep,entry.Get("name",entry.Get("id","阶段")).Text+" · "+entry.Get("status_label","阶段达成").Text,15,Green);if(stages.Length==0)foreach(var milestone in milestoneIds)if(milestone.Text.StartsWith(view["id"].Text+":M",StringComparison.Ordinal))Label(deep,milestone.Text+" · 已保存阶段达成",15,Green);});Fold(card,"当前城市读数（仅供参考）",deep=>{foreach(var goal in view["goals"]){double factor=goal["unit"].Text=="%"?100:1;Label(deep,goal["label"].Text+"  "+F(goal["value"].Double*factor,1)+" / "+F(goal["target"].Double*factor,1)+goal["unit"].Text,14,Muted);}});}
+  if(Bonus.pending(G).Count>0)Button(_body,"待领取蓝图 · "+Bonus.pending(G).Count,()=>Navigate("blueprints"),true);
+  PlanningTaskEvents(_body,view,"active");
+  Fold(_body,"完整委任、改向与历史",deep=>{var previous=_body;try{_body=deep;ThemesPage();}finally{_body=previous;}});
+ }
+}
+}

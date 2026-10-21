@@ -20,8 +20,11 @@ def main():
     files += sorted((ROOT / "content/beta").glob("*.json"))
     for source in files:
         copy(source, ASSETS / "StreamingAssets/MetContent" / source.relative_to(ROOT / "content"))
-    for name in ("NotoSansSC-VF.ttf", "OFL-NotoSansSC.txt"):
-        copy(ROOT / "assets/fonts" / name, ASSETS / "Resources/CityFonts" / name)
+    # The checked-in static Regular instance is built by build_city_font.py.
+    # Copying the upstream variable font back into Resources packages every
+    # weight and restores the old Thin default when referenced accidentally.
+    copy(ROOT / "assets/fonts/OFL-NotoSansSC.txt", ASSETS / "Resources/CityFonts/OFL-NotoSansSC.txt")
+    assert (ASSETS / "Resources/CityFonts/NotoSansSC.ttf").is_file(), "Run tools/build_city_font.py first"
     for source in sorted((ROOT / "assets/audio030").glob("*.wav")):
         copy(source, ASSETS / "Resources/CityAudio" / source.name)
     notices = ASSETS / "StreamingAssets/ThirdPartyNotices"

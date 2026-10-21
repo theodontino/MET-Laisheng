@@ -75,13 +75,23 @@ public static class CityProject {
         KeepInstancingVariants();
         MaterialAsset("CitySurface", "Universal Render Pipeline/Lit");
         MaterialAsset("CityOverlay", "Universal Render Pipeline/Unlit", true);
+        PrepareTerrainDetail();
         foreach (var resource in new[] { "CityLandscapeVertex", "CityRiverVertex" }) {
             var material = AssetDatabase.LoadAssetAtPath<Material>("Assets/Resources/Rendering/" + resource + ".mat");
             Require(material != null && material.shader != null, "City terrain material is missing: " + resource);
             Require(!ShaderUtil.ShaderHasError(material.shader), "City terrain shader import failed: " + resource);
+            material.SetFloat("_DetailStrength", .7f);
+            material.SetTexture("_GroundDetail", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/CityTerrain/HandpaintedGrass-v1.png"));
+            material.SetTexture("_RockDetail", AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/CityTerrain/HandpaintedRock-v1.png"));
+            EditorUtility.SetDirty(material);
+        }
+        CitySurfaceStyles.Prepare();
+        foreach(var style in new[]{"Dirt","Stone","Gravel"}) {
+            var road=AssetDatabase.LoadAssetAtPath<Material>("Assets/Resources/Rendering/CityRoad"+style+".mat");
+            Require(road!=null&&road.shader!=null&&!ShaderUtil.ShaderHasError(road.shader),"Road surface shader failed: "+style);
         }
         PlayerSettings.companyName = "MET"; PlayerSettings.productName = "MET 来生 Unity Beta";
-        PlayerSettings.bundleVersion = "0.5.0-beta.2-unity.3";
+        PlayerSettings.bundleVersion = "0.7.0-ui.5.1-local";
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, "com.projectmet.laisheng.unitybeta");
         PlayerSettings.colorSpace = ColorSpace.Linear;
         PlayerSettings.defaultScreenWidth = 1920; PlayerSettings.defaultScreenHeight = 1080;
@@ -111,20 +121,16 @@ public static class CityProject {
     }
 
     static void PrepareTerrainDetail() {
-        const string texturePath = "Assets/Resources/CityTerrain/GrassGround.jpg";
+        foreach (var texturePath in new[] {"Assets/Resources/CityTerrain/HandpaintedGrass-v1.png", "Assets/Resources/CityTerrain/HandpaintedRock-v1.png"}) {
         var importer = (TextureImporter)AssetImporter.GetAtPath(texturePath);
+        Require(importer != null, "Original painted ground texture is missing.");
         importer.sRGBTexture = true; importer.mipmapEnabled = true;
         importer.wrapMode = TextureWrapMode.Repeat; importer.filterMode = FilterMode.Trilinear;
-        importer.anisoLevel = 4; importer.maxTextureSize = 1024;
-        importer.textureCompression = TextureImporterCompression.Compressed;
+        importer.anisoLevel = 8; importer.maxTextureSize = 2048;
+        importer.npotScale = TextureImporterNPOTScale.None;
+        importer.textureCompression = TextureImporterCompression.CompressedHQ;
         importer.isReadable = false; importer.SaveAndReimport();
-        MaterialAsset("CityTerrainSurface", "Universal Render Pipeline/Lit");
-        var material = AssetDatabase.LoadAssetAtPath<Material>("Assets/Resources/Rendering/CityTerrainSurface.mat");
-        material.SetTexture("_DetailAlbedoMap", AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath));
-        material.SetTextureScale("_DetailAlbedoMap", new Vector2(18, 18));
-        material.SetFloat("_DetailAlbedoMapScale", .32f);
-        material.DisableKeyword("_DETAIL_MULX2"); material.EnableKeyword("_DETAIL_SCALED");
-        EditorUtility.SetDirty(material);
+        }
     }
 
     [MenuItem("MET/City/Generate full game scene")]
@@ -135,7 +141,8 @@ public static class CityProject {
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate | ImportAssetOptions.ForceSynchronousImport);
             Require(AssetDatabase.LoadAssetAtPath<GameObject>(path) != null, "Official glTFast import failed: " + path);
         }
-        Require(AssetDatabase.LoadAssetAtPath<Font>("Assets/Resources/CityFonts/NotoSansSC-VF.ttf") != null,
+        CityNatureAssets.Prepare();
+        Require(AssetDatabase.LoadAssetAtPath<Font>("Assets/Resources/CityFonts/NotoSansSC.ttf") != null,
             "Licensed Chinese font did not import.");
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
         var root = new GameObject("MET_Laisheng_City");

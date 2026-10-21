@@ -18,6 +18,13 @@ public sealed partial class Game {
         if(!cy.Get("population_stability").IsMap)return "人口里程碑记录损坏。";
         foreach(var elapsed in cy["population_stability"].Values)if(!is_num(elapsed)||elapsed.Double<0)return "人口持续时间损坏。";
         foreach(var grade in value["block"].Get("blueprint_levels",V.Map()).Values)if(!is_num(grade)||grade.Double<0||grade.Double>2||grade.Double!=Math.Floor(grade.Double))return "蓝图等级损坏。";
+        if(value["block"].Has("city_trade_totals")) {
+            if(!value["block"]["city_trade_totals"].IsMap)return "城市贸易累计记录损坏。";
+            foreach(var row in value["block"]["city_trade_totals"].Values) {
+                foreach(var key in new[]{"buy","sell","adverse_exports"})if(!is_num(row.Get(key))||row[key].Double<0)return "城市贸易累计数量损坏。";
+                if(!is_num(row.Get("currency_delta")))return "城市贸易累计资金损坏。";
+            }
+        }
         var ids=V.Map();var sources=V.Map();
         foreach(var reward in value["block"].Get("reward_choices",V.Arr())) {
             if(!reward.IsMap||!reward.Get("choices").IsArray)return "奖励记录损坏。";

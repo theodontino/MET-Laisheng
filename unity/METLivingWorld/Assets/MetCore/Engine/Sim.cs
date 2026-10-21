@@ -277,12 +277,27 @@ public static class Sim {
             if(Math.Abs(audit["resources"][r]["error"].Double)>.00001)return "资源守恒失败："+r;
         }
         if(recycled>env["pollution_produced"].Double+.00001||heat_used>env["heat_produced"].Double+.00001)return "Field额度重复结算。";
+        if(g.world_managed) {
+            double advancedBefore=0,advancedAfter=0;
+            foreach(var p in s["projects"].Values)advancedBefore+=p["inventory"].Get("advanced_components",0).Double;
+            foreach(var inventory in inventories.Values)advancedAfter+=inventory.Get("advanced_components",0).Double;
+            audit["resources"]["advanced_components"]=V.Map("before",advancedBefore,"produced",0.0,"consumed",0.0,"lost",0.0,"after",advancedAfter,"error",advancedBefore-advancedAfter);
+            flows["advanced_components"]=(advancedAfter-advancedBefore)/h;
+        }
         next["audit"]=audit;
         next["metrics"]=V.Map("flows",flows,"income",(tax+rent+pollution_tax)/h,"upkeep",maintenance/h,"cashflow",(tax+rent+pollution_tax-maintenance)/h,"energy",energy_supplied,"energy_need",energy_need,
             "service_links",service["links"],"exposure_links",V.Arr(),"employment_links",labor["links"],"allocation",receipt["receipts"],"stock_movements",movements,"spilled",spilled,"utilization",activity,
             "service_pools",service["pools"],"service_covered",service["covered"],"pollution_recycled",recycled/h,"heat_used",heat_used/h,"heat_receipts",heat_receipts,
             "activity_ledger",ledger,"fiscal_ledger",fiscal,"population_energy",population_energy,"energy_sources",energy_sources,"energy_requests",energy_requests,"requested",V.Map(),"energy_ratio",energy_ratio,"reconcile_rounds",reserved.Get("reconcile_rounds",0),
             "tax_basis",V.Map("mode",taxmode,"people",people,"production",production/h,"trade",trade/h,"pollution_fee",pollution_tax/h,"land_rent",rent/h));
+        if(g.world_managed) {
+            var operated=V.Map();
+            foreach(var item in s["bonus_instances"].Pairs)if(item.Value.Get("active",false).Bool) {
+                var instance=item.Value;string bonus=instance["bonus_id"].Text;
+                operated[item.Key]=V.Map("bonus_id",bonus,"host_type",instance["host_type"],"host_id",instance["host_id"],"level",s["block"]["blueprint_levels"].Get(bonus,0));
+            }
+            next["metrics"]["bonus_operations"]=operated;
+        }
         foreach(var cid in Rules.ids(claims))foreach(var r in claims[cid]["needs"].Keys)next["metrics"]["requested"][r]=next["metrics"]["requested"].Get(r,0).Double+claims[cid]["needs"][r].Double/h;
         foreach(var used in receipt["receipts"]) {
             var owner=claims[used["consumer"]]["owner"];

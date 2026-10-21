@@ -55,7 +55,8 @@ public static class Clock {
         result=Math.Min(result,_next_period(now,g.c.beta["units"]["earth_seconds_per_year"].Double));
         double arrival=(g.s["event_cursor"].Long+1)*g.c.beta["economy_candidates"]["arrival_interval_months"].Double*month-now;
         if(arrival>0)result=Math.Min(result,arrival);
-        double capacity=Construction.capacity(g)*Clamp(g.s["metrics"].Get("energy_ratio",1).Double,0,1);
+        double capacity=Construction.capacity(g)*Clamp(g.s["metrics"].Get("energy_ratio",1).Double,0,1)
+            *(1-Clamp(g.s["block"].Get("city_cp_reserve",0).Double,0,1));
         if(capacity>0)foreach(var row in Construction.queue(g)) {
             if(row["paused"].Bool)continue;double work=row["work"].Double;
             if(work>0)result=Math.Min(result,work/capacity*month);

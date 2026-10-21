@@ -29,6 +29,8 @@ public sealed partial class CityWorld : MonoBehaviour {
     public V SourceRelations {get;private set;}=V.Arr();
     public event Action<string> LayerChanged;
     public event Action<string> HoverChanged;
+    // Returning true consumes only a deliberate, mature map-inspection click.
+    public Func<string,bool> TryInspectClick;
     public V AssetCoverage {get;private set;}=V.Map();
     public V SelectionInfo=>TileInfo(SelectedTile);
     public V Legend {get;private set;}=V.Map();
@@ -47,6 +49,8 @@ public sealed partial class CityWorld : MonoBehaviour {
     readonly List<LineRenderer> relations=new List<LineRenderer>();
     Material stone,road,bank,overlay,lineMaterial,construction,metal;
     LineRenderer hoverOutline,selectionOutline;
+    readonly List<LineRenderer> inspectionOutlines=new List<LineRenderer>();
+    readonly List<string> inspectionSourceTiles=new List<string>();
     CityFoliage foliage;
     VolumeProfile profile;
     static IEnumerable<string> Ids(V map)=>map.Keys.OrderBy(x=>x,StringComparer.Ordinal);
@@ -59,7 +63,7 @@ public sealed partial class CityWorld : MonoBehaviour {
         try {
             LoadMaterials();LoadModels();CreateEnvironment();
             geometryRoot=NewRoot("CommittedCityGeometry");analysisRoot=NewRoot("SourceAwareAnalysis");
-            var trees=new GameObject("SharedOriginalForest");trees.transform.SetParent(transform,false);foliage=trees.AddComponent<CityFoliage>();foliage.Initialize(GetModel("CityModels/valley_tree_01"));
+            InitializeNature();
             hoverOutline=MakeLine("TileHover",.027f,Srgb("E9DDB9"),transform);selectionOutline=MakeLine("TileSelection",.041f,Srgb("F8E8A4"),transform);hoverOutline.loop=selectionOutline.loop=true;
             hoverOutline.enabled=selectionOutline.enabled=false;
             if(getSnapshot!=null)Present(getSnapshot());
@@ -74,6 +78,7 @@ public sealed partial class CityWorld : MonoBehaviour {
         PresentGeometryIncremental();
         if(SelectedTile!=""&&!tiles.ContainsKey(SelectedTile))SelectedTile="";
         SetOutline(selectionOutline,SelectedTile);RefreshAnalysis();
+        RefreshInspectionSources();
     }
     string StructureKey(V view) {
         var cells=V.Arr();var projects=V.Arr();
@@ -140,44 +145,29 @@ public sealed partial class CityWorld : MonoBehaviour {
         string def=p.Get("def","").Text;string tile=p["tile"].Text;var binding=BindingFor(p);string resource=binding["resource"].Text;var source=assetRegistry["assets"][resource];
         var holder=new GameObject("Building_"+id);holder.transform.SetParent(settlementRoot,false);holder.transform.localPosition=TilePosition(tile)+Vector3.up*(tiles[tile].SurfaceHeight+.012f);
         var identity=holder.AddComponent<CityBuildingIdentity>();identity.BuildingId=id;identity.TileId=tile;identity.DefinitionId=def;identity.ModelResource=resource;identity.Origin=source["origin"].Text;identity.License=source["license"].Text;identity.AssignedPurpose=binding.Get("purpose",Purpose(p)).Text;identity.DirectModel=identity.Origin=="project-original"&&resource=="CityModels/"+def;identity.Status=p.Get("status","running").Text;identity.OperatorId=p.Get("operator_org","").Text;identity.SlotCount=p.Get("slots",V.Map()).Values.Count(x=>x.Text!="");buildings[id]=identity;
-        BuildPlotCourt(holder.transform);
-        float width=(float)binding.Get("width",1.08).Double*Mathf.Clamp((float)p.Get("size_scale",1).Double,.8f,1.1f);float height=(float)binding.Get("max_height",1.25).Double;
-        if(identity.Status=="construction")BuildScaffolding(holder.transform);
+        float visualScale=SettlementModelScale(def);
+        float width=(float)binding.Get("width",1.08).Double*Mathf.Clamp((float)p.Get("size_scale",1).Double,.8f,1.1f)*visualScale;float height=(float)binding.Get("max_height",1.25).Double*visualScale;
+        if(identity.Status=="construction"){AdaptSettlementConstruction(holder.transform);BuildSettlementCourt(holder.transform);BuildScaffolding(holder.transform);}
         else {
             var model=Instantiate(GetModel(resource),holder.transform,false);model.name="Imported_"+resource.Substring(resource.LastIndexOf('/')+1);identity.VisualHeight=FitImportedModel(model,holder.transform,width,height,(float)binding.Get("rotation",30).Double);
-            foreach(var renderer in model.GetComponentsInChildren<Renderer>(true)){HarmonizeImportedPalette(renderer,def=="secondary_school");renderer.shadowCastingMode=ShadowCastingMode.On;renderer.receiveShadows=true;}
+            AdaptSettlementBuilding(holder.transform,model);BuildSettlementCourt(holder.transform);
+            foreach(var renderer in model.GetComponentsInChildren<Renderer>(true)){HarmonizeImportedPalette(renderer,resource,identity.AssignedPurpose);renderer.shadowCastingMode=ShadowCastingMode.On;renderer.receiveShadows=true;}
             BuildUseDetails(holder.transform,binding);
-            foreach(var prop in binding.Get("props",V.Arr()))PlaceImportedProp(holder.transform,prop);
+            BuildSettlementWings(holder.transform,identity.AssignedPurpose);
             if(p.Get("upgrade_job",V.Map()).Count>0)BuildScaffolding(holder.transform);
         }
-        var operatorColor=OperatorColor(identity.OperatorId);Ribbon("OperatorBand",holder.transform.position+new Vector3(-.43f,.018f,.48f),holder.transform.position+new Vector3(.43f,.018f,.48f),.075f,Surface("Operator_"+identity.OperatorId,operatorColor),settlementRoot);
-        for(int slot=0;slot<Math.Min(8,identity.SlotCount);slot++) {
-            var marker=GameObject.CreatePrimitive(PrimitiveType.Sphere);marker.name="InstalledScheme_"+slot;marker.transform.SetParent(holder.transform,false);marker.transform.localPosition=new Vector3(-.31f+slot*.095f,.08f,.54f);marker.transform.localScale=Vector3.one*.055f;Destroy(marker.GetComponent<Collider>());marker.GetComponent<Renderer>().sharedMaterial=metal;
+        // Purpose, operator, slots and state remain on identity/UI. At town
+        // scale the authored landmark and its low wings carry the map silhouette.
+        if(p.Get("paused",false).Bool) {
+            var barrier=GroundFabric(holder.transform.position+SettlementOffset(0,.55f),.035f);
+            FabricBox("PausedEntranceBarrier",holder.transform,barrier,new Vector3(.25f,.035f,.045f),Surface("PausedEntrance",Srgb("917561")),30);
         }
-        BuildPurposeMarker(holder.transform,p,identity.Status=="construction",identity.VisualHeight+.09f,identity.AssignedPurpose);
-        if(p.Get("paused",false).Bool)MakeFlag(holder.transform,Srgb("AB6E49"),"Paused",.30f);
-        coverage[def]=V.Map("resource",resource,"origin",identity.Origin,"license",identity.License,"direct_original_model",identity.DirectModel,"purpose",identity.AssignedPurpose,"assignment",binding.Get("assignment","Legacy family fallback"),"props",binding.Get("props",V.Arr()).Duplicate(true),"rendered_primary",identity.Status!="construction","normalized_height",identity.VisualHeight);
+        coverage[def]=V.Map("resource",resource,"origin",identity.Origin,"license",identity.License,"direct_original_model",identity.DirectModel,"purpose",identity.AssignedPurpose,"palette_family",BuildingPaletteFamily(identity.AssignedPurpose),"roof_color_srgb",ColorUtility.ToHtmlStringRGB(BuildingTypeColor(identity.AssignedPurpose)),"wall_color_srgb",ColorUtility.ToHtmlStringRGB(BuildingWallTone(identity.AssignedPurpose)),"assignment",binding.Get("assignment","Legacy family fallback"),"props",binding.Get("props",V.Arr()).Duplicate(true),"rendered_primary",identity.Status!="construction","normalized_height",identity.VisualHeight,"presentation_scale",visualScale,"rendered_props",V.Arr(),"simplified_wings",identity.Status!="construction");
     }
     V BindingFor(V p) {
         string def=p.Get("def","").Text;if(Bindings.Has(def))return Bindings[def];
         var traits=p.Get("traits",V.Arr());string fallback=traits.Contains("building.residential")?"residence":traits.Contains("building.agricultural")?"homestead":traits.Contains("building.service")?"neighborhood":"workshop";
         return V.Map("resource","CityModels/"+fallback,"purpose",Purpose(p),"width",1.0,"max_height",1.2);
-    }
-    readonly Dictionary<Material,Material> importedPalette=new Dictionary<Material,Material>();
-    void HarmonizeImportedPalette(Renderer renderer,bool texturePalette) {
-        var materials=renderer.sharedMaterials;bool changed=false;
-        for(int i=0;i<materials.Length;i++) {
-            var source=materials[i];if(source==null)continue;
-            string property=source.HasProperty("baseColorFactor")?"baseColorFactor":"_BaseColor";if(!source.HasProperty(property))continue;
-            var color=source.GetColor(property);
-            if(!texturePalette&&(color.g<.3f||color.g<color.r*1.4f||color.g<color.b*1.12f))continue;
-            if(!importedPalette.TryGetValue(source,out var muted)) {
-                muted=new Material(source){name="CityPalette_"+source.name,enableInstancing=true};
-                var tone=texturePalette?color*.58f:SurfaceColor(Srgb("89AB98"));tone.a=color.a;muted.SetColor(property,tone);ownedMaterials.Add(muted);importedPalette[source]=muted;
-            }
-            materials[i]=muted;changed=true;
-        }
-        if(changed)renderer.sharedMaterials=materials;
     }
     // Bounds are read from official imported geometry after node transforms; this is not a GLB parser.
     public static Bounds GroundBounds(GameObject imported,Transform localSpace) {
@@ -203,13 +193,39 @@ public sealed partial class CityWorld : MonoBehaviour {
     }
     void BuildUseDetails(Transform parent,V binding) {
         string detail=binding.Get("surface_detail","").Text;var center=parent.position;
+        var identity=parent.GetComponent<CityBuildingIdentity>();
+        if(identity==null||!settlementSites.TryGetValue(identity.TileId,out var site))return;
         if(detail=="farmland"||detail=="modern_farmland") {
+            // A compact side field leaves the primary door and its stairs open.
+            // Reserve it before wings/infill/roads are resolved; rows remain terrain-following.
+            var half=Vector2.zero;var slot=Vector2.zero;bool found=false;
+            var sideSlots=new[]{new Vector2(-.66f,0),new Vector2(.66f,0),new Vector2(-.66f,-.20f),new Vector2(.66f,-.20f),new Vector2(-.66f,.20f),new Vector2(.66f,.20f)};
+            foreach(var size in new[]{new Vector2(.12f,.245f),new Vector2(.09f,.16f),new Vector2(.07f,.115f)}) {
+                var candidates=sideSlots.Concat(SettlementEmptyCandidates(sideSlots[0]).Where(v=>Mathf.Abs(v.x)>=Mathf.Abs(v.y)*.85f));
+                foreach(var candidate in candidates) {
+                    var patch=new Rect(candidate.x-size.x,candidate.y-size.y,size.x*2,size.y*2);
+                    if(site.obstacles.Any(r=>r.Overlaps(ExpandedSiteRect(patch,.025f))))continue;
+                    if(!SettlementSlotAvoidsReservedRoads(identity.TileId,patch))continue;
+                    var corners=new[]{new Vector2(patch.xMin,patch.yMin),new Vector2(patch.xMax,patch.yMin),new Vector2(patch.xMax,patch.yMax),new Vector2(patch.xMin,patch.yMax)};
+                    if(corners.Any(v=>!SettlementPointInTile(site.center+SettlementOffset(v.x,v.y),identity.TileId,.025f)))continue;
+                    if(ExpandedSiteRect(patch,.12f).Contains(site.entrance))continue;
+                    if(corners.Any(v=>!DryFabricPoint(site.center+SettlementOffset(v.x,v.y))))continue;
+                    half=size;slot=candidate;site.obstacles.Add(ExpandedSiteRect(patch,.055f));found=true;break;
+                }
+                if(found)break;
+            }
+            if(!found)return;
             var soil=Surface("CultivatedSoil",Srgb("8F7959"));var crop=Surface("CropRows",Srgb("86975B"));
-            for(int row=0;row<4;row++){float z=.32f+row*.08f;Ribbon("FieldSoil",center+new Vector3(-.40f,.014f,z),center+new Vector3(.40f,.014f,z),.055f,soil,settlementRoot);Ribbon("CropRow",center+new Vector3(-.37f,.022f,z),center+new Vector3(.37f,.022f,z),.018f,crop,settlementRoot);}
+            for(int row=0;row<3;row++) {
+                float x=slot.x+(row-1)*(half.x-.032f);
+                var from=site.center+SettlementOffset(x,slot.y-half.y+.025f);var to=site.center+SettlementOffset(x,slot.y+half.y-.025f);
+                FabricRibbon("FieldSoil",new[]{GroundFabric(from),GroundFabric(to)},Mathf.Min(.055f,half.x*.4f),soil,parent);
+                var crops=FabricRibbon("CropRow",new[]{GroundFabric(from),GroundFabric(to)},Mathf.Min(.018f,half.x*.2f),crop,parent);crops.transform.position+=Vector3.up*.008f;
+            }
         } else if(detail=="school_courtyard") {
-            var court=MakeLine("SchoolPlayCourt",.010f,Srgb("DFD9BC"),parent);court.loop=true;court.positionCount=4;court.SetPositions(new[]{center+new Vector3(-.32f,.024f,.40f),center+new Vector3(.28f,.024f,.40f),center+new Vector3(.28f,.024f,.56f),center+new Vector3(-.32f,.024f,.56f)});
-        } else if(detail=="medical_cross") {
-            var path=Surface("ClinicEntrance",Srgb("C5BCA0"));Ribbon("ClinicAccess",center+new Vector3(0,.018f,.35f),center+new Vector3(0,.018f,.60f),.17f,path,settlementRoot);
+            site.natureKeepClear.Add(new Rect(-.32f+site.offset.x,.40f+site.offset.y,.60f,.16f));
+            var court=MakeLine("SchoolPlayCourt",.010f,Srgb("DFD9BC"),parent);court.loop=true;court.positionCount=4;
+            court.SetPositions(new[]{GroundFabric(center+SettlementOffset(-.32f,.40f),.034f),GroundFabric(center+SettlementOffset(.28f,.40f),.034f),GroundFabric(center+SettlementOffset(.28f,.56f),.034f),GroundFabric(center+SettlementOffset(-.32f,.56f),.034f)});
         }
     }
     static string Purpose(V p) {
@@ -307,7 +323,7 @@ public sealed partial class CityWorld : MonoBehaviour {
         if(!keyboard&&Input.GetKeyDown(KeyCode.L))CycleLayer(Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift)?-1:1);
         if(keyboard||(pointerOwned!=null&&pointerOwned(pointer))) {ClearHover();return;}
         string hovered=PickTile(pointer);if(hovered!=HoveredTile){HoveredTile=hovered;SetOutline(hoverOutline,hovered);HoverChanged?.Invoke(hovered);}
-        if(Input.GetMouseButtonDown(0)&&hovered!="")RequestSelection(hovered,true);
+        if(Input.GetMouseButtonDown(0)&&hovered!=""&&!(TryInspectClick?.Invoke(hovered)??false))RequestSelection(hovered,true);
     }
     void SetOutline(LineRenderer line,string id) {
         if(line==null)return;line.enabled=id!=""&&tiles.ContainsKey(id);if(!line.enabled)return;
@@ -315,49 +331,48 @@ public sealed partial class CityWorld : MonoBehaviour {
         for(int edge=0;edge<6;edge++)for(int step=0;step<steps;step++){var local=Vector3.Lerp(Corner(edge,.985f),Corner((edge+1)%6,.985f),step/(float)steps);local.y=VisualSurfaceHeight(center+local)+.045f;line.SetPosition(edge*steps+step,center+local);}
 
     }
+    public V InspectionForTile(string id) => MapInspection.Describe(snapshot,id,Layer,baseline,proposal,DeltaMetric,true);
+    public bool InspectionScreenPosition(string id,out Vector2 screen) {
+        screen=Vector2.zero;
+        if(CameraController==null||!tiles.TryGetValue(id??"",out var ground))return false;
+        var position=TilePosition(id)+Vector3.up*(ground.SurfaceHeight+.20f);
+        var projected=CameraController.WorldCamera.WorldToScreenPoint(position);
+        if(projected.z<=0)return false;
+        screen=new Vector2(projected.x,projected.y);return true;
+    }
+    public void HighlightInspectionSources(IEnumerable<string> sources) {
+        inspectionSourceTiles.Clear();
+        if(sources!=null)foreach(var source in sources) {
+            var tile=SourceTile(source??"");
+            if(tiles.ContainsKey(tile)&&!inspectionSourceTiles.Contains(tile))inspectionSourceTiles.Add(tile);
+        }
+        RefreshInspectionSources();
+    }
+    void RefreshInspectionSources() {
+        for(int i=0;i<inspectionSourceTiles.Count;i++) {
+            LineRenderer line;
+            if(i<inspectionOutlines.Count)line=inspectionOutlines[i];
+            else {line=MakeLine("InspectionSource_"+i,.055f,Srgb("69D9CD"),transform);line.loop=true;inspectionOutlines.Add(line);}
+            SetOutline(line,inspectionSourceTiles[i]);
+        }
+        for(int i=inspectionSourceTiles.Count;i<inspectionOutlines.Count;i++)inspectionOutlines[i].enabled=false;
+    }
+    public bool FocusInspectionSource(string source) {
+        var tile=SourceTile(source??"");
+        if(!tiles.ContainsKey(tile)||CameraController==null)return false;
+        CameraController.Focus(TilePosition(tile));return true;
+    }
     public V TileInfo(string id) {
         if(!Cells(snapshot).Has(id??""))return V.Map();var cell=Cells(snapshot)[id];var info=V.Map("tile",id,"terrain",cell.Get("terrain","plain"),"fields",cell.Get("fields",V.Map()).Duplicate(true),"source_phase",SourcePhase,"layer",Layer,"value",LayerValue(snapshot,id,Layer),"projects",V.Arr());
         foreach(var bid in Ids(snapshot.Get("projects",V.Map())))if(snapshot["projects"][bid].Get("tile","").Text==id)info["projects"].Add(V.Map("id",bid,"def",snapshot["projects"][bid]["def"],"inventory",snapshot["projects"][bid].Get("inventory",V.Map()).Duplicate(true),"operator",snapshot["projects"][bid].Get("operator_org",""),"status",snapshot["projects"][bid].Get("status","")));
         return info;
     }
     double LayerValue(V view,string tile,string layer) {
-        var cells=Cells(view);if(!cells.Has(tile))return 0;var fields=cells[tile].Get("fields",V.Map());var projects=view.Get("projects",V.Map());var groups=view.Get("groups",V.Map());var metrics=view.Get("metrics",V.Map());
-        if(layer=="delta") {
-            if(!ComparisonReady())return 0;return LayerValue(proposal,tile,DeltaMetric)-LayerValue(baseline,tile,DeltaMetric);
-        }
-        if(layer=="terrain")return 0;
-        if(layer=="employment") {
-            double employed=0,people=0;foreach(var gid in Ids(groups)) {var group=groups[gid];if(projects.Get(group.Get("host",""),V.Map()).Get("tile","").Text!=tile)continue;people+=group["count"].Double;foreach(var count in group.Get("employment",V.Map()).Values)employed+=count.Double;}
-            if(people>0)return Math.Min(1,employed/people);double reachable=0;foreach(var contribution in fields.Get("employment",V.Arr()))reachable+=contribution.Get("value",0).Double;return reachable;
-        }
-        if(layer=="pollution"||layer=="heat") {
-            double total=0;foreach(var contribution in fields.Get(layer,V.Arr()))total+=contribution.Get("value",0).Double;return total;
-        }
-        if(layer=="service"||layer=="medical"||layer=="education"||layer=="entertainment"||layer=="commercial") {
-            string kind=layer=="service"?"medical":layer;double covered=0,people=0;
-            foreach(var gid in Ids(groups)) {
-                var group=groups[gid];string host=group.Get("host","").Text;if(projects.Get(host,V.Map()).Get("tile","").Text!=tile)continue;
-                people+=group["count"].Double;covered+=metrics.Get("service_covered",V.Map()).Get(gid,V.Map()).Get(kind,0).Double;
-            }
-            // Occupied tiles show delivered coverage; other tiles show best provider reach.
-            if(people>0)return Math.Min(1,covered/people);
-            var bySource=new Dictionary<string,double>();foreach(var contribution in fields.Get(kind,V.Arr())) {
-                string source=contribution.Get("source_id","").Text;double value=contribution.Get("value",0).Double;
-                bySource[source]=Math.Max(bySource.TryGetValue(source,out var prior)?prior:0,value);
-            }
-            return bySource.Count>0?bySource.Values.Max():0;
-        }
-        double valueTotal=0;
-        foreach(var bid in Ids(projects)) {
-            var p=projects[bid];if(p.Get("tile","").Text!=tile)continue;
-            if(layer=="energy") {
-                valueTotal+=metrics.Get("energy_sources",V.Map()).Get(bid,0).Double-metrics.Get("energy_requests",V.Map()).Get(bid,0).Double;
-                foreach(var gid in Ids(groups))if(groups[gid]["host"].Text==bid)valueTotal-=metrics.Get("population_energy",V.Map()).Get(gid,0).Double;
-            } else valueTotal+=p.Get("inventory",V.Map()).Get(layer=="stock"?"food":layer,0).Double;
-        }
-        return valueTotal;
+        if(layer=="delta"&&!ComparisonReady())return 0;
+        return MapInspection.Value(view,tile,layer,baseline,proposal,DeltaMetric);
     }
     bool ComparisonReady()=>baseline.IsMap&&proposal.IsMap&&baseline.Has("tick")&&proposal.Has("tick")&&baseline["tick"]==proposal["tick"]&&Cells(baseline).Count>0&&Cells(proposal).Count>0;
+
     void RefreshAnalysis() {
         if(analysisRoot==null)return;
         double max=Layer=="service"||Layer=="medical"||Layer=="education"||Layer=="entertainment"||Layer=="commercial"?1:Layer=="pollution"?2:Layer=="heat"?5:Layer=="employment"?3:Layer=="energy"?10:Layer=="delta"?1:30;
@@ -435,9 +450,7 @@ public sealed partial class CityWorld : MonoBehaviour {
     static Color OperatorColor(string id) {
         switch(id) {case "commons":return Srgb("729785");case "steel":return Srgb("8C9BA3");case "civic":return Srgb("C3AC79");case "meridian":return Srgb("AD8973");default:return Srgb("A39F83");}
     }
-    static Color PurposeColor(string purpose) {
-        switch(purpose) {case "medical":return Srgb("DC8172");case "education":return Srgb("BDA573");case "energy":return Srgb("C99858");case "agriculture":case "green":return Srgb("789255");case "housing":return Srgb("C9B797");case "logistics":return Srgb("879CA2");case "commercial":return Srgb("B28371");default:return Srgb("929D9E");}
-    }
+    static Color PurposeColor(string purpose)=>BuildingTypeColor(purpose);
     readonly Dictionary<string,Material> surfaceCache=new Dictionary<string,Material>(StringComparer.Ordinal);
     Material Surface(string name,Color color) {
         if(surfaceCache.TryGetValue(name,out var found))return found;
@@ -480,12 +493,21 @@ public sealed partial class CityWorld : MonoBehaviour {
     GameObject Ribbon(string name,Vector3[] points,float width,Material material,Transform parent) {
         var vertices=new Vector3[points.Length*2];var triangles=new int[(points.Length-1)*6];
         for(int i=0;i<points.Length;i++) {
-            var direction=i+1<points.Length?points[i+1]-points[i]:points[i]-points[i-1];var right=Vector3.Cross(Vector3.up,direction).normalized*width*.5f;vertices[i*2]=points[i]-right;vertices[i*2+1]=points[i]+right;
+            var before=Horizontal(points[i]-points[Mathf.Max(0,i-1)]).normalized;
+            var after=Horizontal(points[Mathf.Min(points.Length-1,i+1)]-points[i]).normalized;
+            if(i==0)before=after;if(i==points.Length-1)after=before;
+            var incoming=Vector3.Cross(Vector3.up,before);var outgoing=Vector3.Cross(Vector3.up,after);
+            var join=(incoming+outgoing).normalized;
+            // Intersect both sides of a corner instead of turning one vertex pair
+            // toward the next segment, which shears a broad triangular wedge.
+            float alignment=Vector3.Dot(join,outgoing);
+            var right=alignment>.25f?join*(width*.5f/Mathf.Max(.5f,alignment)):outgoing*(width*.5f);
+            vertices[i*2]=parent.InverseTransformPoint(points[i]-right);vertices[i*2+1]=parent.InverseTransformPoint(points[i]+right);
             if(i+1<points.Length){int k=i*6,v=i*2;triangles[k]=v;triangles[k+1]=v+2;triangles[k+2]=v+1;triangles[k+3]=v+1;triangles[k+4]=v+2;triangles[k+5]=v+3;}
         }
         var mesh=new Mesh {name=name,vertices=vertices,triangles=triangles};mesh.RecalculateNormals();mesh.RecalculateBounds();ownedMeshes.Add(mesh);var holder=new GameObject(name);holder.transform.SetParent(parent,false);holder.AddComponent<MeshFilter>().sharedMesh=mesh;var render=holder.AddComponent<MeshRenderer>();render.sharedMaterial=material;render.shadowCastingMode=ShadowCastingMode.Off;return holder;
     }
-    void OnDestroy() {DestroyLandscape();if(plotCourtMesh!=null)Destroy(plotCourtMesh);foreach(var mesh in ownedMeshes)if(mesh!=null)Destroy(mesh);foreach(var material in ownedMaterials)if(material!=null)Destroy(material);if(profile!=null)Destroy(profile);}
+    void OnDestroy() {DisposeImportedPalette();DestroyLandscape();if(plotCourtMesh!=null)Destroy(plotCourtMesh);foreach(var mesh in ownedMeshes)if(mesh!=null)Destroy(mesh);foreach(var material in ownedMaterials)if(material!=null)Destroy(material);if(profile!=null)Destroy(profile);}
 }
 /// <summary>Tile authority is its stable ID, independent of scene node names and world coordinates.</summary>
 public sealed class CityTileIdentity : MonoBehaviour {
