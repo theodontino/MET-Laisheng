@@ -3,6 +3,7 @@ extends RefCounted
 ## goals, consumes RNG, creates rewards, or replays pre-selection trade history.
 const MONTH_SECONDS := 1555200.0
 const Rng = preload("res://core/rng.gd")
+const Catalog = preload("res://core/catalog.gd")
 static var _theme_data:Array = []
 static var _event_data:Array = []
 
@@ -407,18 +408,59 @@ static func _find_event(g, id:String) -> Dictionary:
 		if str(event.id) == id: return event
 	return {}
 
+static func _event_choice_definition(def:Dictionary, choice_id:String) -> Dictionary:
+	for choice in def.get("choices", []):
+		if str(choice.id) != choice_id: continue
+		var selected = def.duplicate(true)
+		selected.erase("choices")
+		for key in choice:
+			if key not in ["id", "label"]:
+				selected[key] = choice[key].duplicate(true) if choice[key] is Dictionary or choice[key] is Array else choice[key]
+		selected.name = str(def.name) + " · " + str(choice.label)
+		selected.choice_id = choice_id
+		selected.choice_label = choice.label
+		return selected
+	return {}
+
+static func _effective_event_definition(event:Dictionary) -> Dictionary:
+	var def = _event_definition(str(event.get("id", "")))
+	return def if str(event.get("choice_id", "")) == "" else _event_choice_definition(def, str(event.choice_id))
+
+static func _event_cost_text(def:Dictionary) -> String:
+	var parts:Array[String] = []
+	var description = str(def.get("description", ""))
+	if description != "": parts.append(description)
+	var money = float(def.get("currency", 0))
+	var deposit = float(def.get("deposit", 0))
+	if money + deposit > 0:
+		parts.append("即时支付 %.1f 通货%s。" % [money + deposit, ("（其中保证金 %.1f，成功退还）" % deposit) if deposit > 0 else ""])
+	for resource in def.get("resources", {}):
+		parts.append("扣除 %.1f %s。" % [float(def.resources[resource]), str(Catalog.RESOURCE_NAMES.get(resource, resource))])
+	if float(def.get("deadline_months", 0)) > 0: parts.append("接受后限期 %.1f 来生月。" % float(def.deadline_months))
+	if float(def.get("cash_reward", 0)) > 0: parts.append("完成奖励 %.1f 通货。" % float(def.cash_reward))
+	if str(def.get("reward_kind", "")) != "": parts.append("完成后领取一项蓝图研究。" if str(def.reward_kind) == "research" else "完成后领取一张方案副本。")
+	return " ".join(parts)
+
+static func _event_unavailable_reason(g, def:Dictionary) -> String:
+	if str(def.get("reward_kind", "")) != "research": return ""
+	for reward in g.Bonus.pending(g):
+		if str(reward.get("kind", "")) == "research": return "先领取已有蓝图研究奖励，再决定这条付费研究分支。"
+	if g.Bonus.research_candidates(g, _event_pool(def)).is_empty():
+		return "尚未拥有这条分支可升级的方案；先取得副本、选择其他分支或免费婉拒。"
+	return ""
+
 static func choose_event(g, event_id:String, choice_id:String) -> String:
 	ensure(g)
 	if g.s.get("phase", "") != "play": return "当前不能处理事件。"
 	var event = _find_event(g, event_id)
 	if event.is_empty() or str(event.get("status", "")) != "offered": return "该事件已经处理或不存在。"
-	if choice_id not in ["accept", "decline"]: return "未知事件选择。"
 	if choice_id == "decline":
 		event.status = "declined"
 		_record(g, "event_declined", {"id":event_id})
 		g.revision += 1
 		return ""
 	if bool(event.get("token", false)):
+		if choice_id != "accept": return "未知事件选择。"
 		g.s.block.theme.reforge_tokens = int(g.s.block.theme.reforge_tokens) + 1
 		event.status = "completed"
 		_record(g, "reforge_token", {"id":event_id, "use_dt_cost":_reforge_cost(g)})
@@ -426,6 +468,13 @@ static func choose_event(g, event_id:String, choice_id:String) -> String:
 		return ""
 	var def = _event_definition(event_id)
 	if def.is_empty(): return "事件定义不存在。"
+	var branched = not def.get("choices", []).is_empty()
+	if branched: def = _event_choice_definition(def, choice_id)
+	elif choice_id != "accept": return "未知事件选择。"
+	if def.is_empty(): return "未知事件选择。"
+	if branched:
+		var unavailable = _event_unavailable_reason(g, def)
+		if unavailable != "": return unavailable
 	var baseline = float(_metrics(g).get(str(def.get("metric", "")), 0))
 	if def.has("improve") and baseline + float(def.improve) > 1.000001:
 		return "当前覆盖率已较高，无法再提高合同要求的百分点；可以免费婉拒。"
@@ -436,6 +485,7 @@ static func choose_event(g, event_id:String, choice_id:String) -> String:
 	# Costs are committed only after all resource and currency checks pass.
 	g.s.currency = float(g.s.currency) - cost
 	for r in def.get("resources", {}): _audit_delivery(g, str(r), float(def.resources[r]), "event:" + event_id)
+	if branched: event.choice_id = choice_id
 	event.status = "active"
 	event.accepted_seconds = _now(g)
 	event.deposit = float(def.get("deposit", 0))
@@ -443,7 +493,12 @@ static func choose_event(g, event_id:String, choice_id:String) -> String:
 	event.trade_cursor = g.s.block.get("trade_history", []).size()
 	event.progress = 0.0
 	event.baseline = baseline
-	_record(g, "event_accepted", {"id":event_id, "currency_cost":cost})
+	var receipt = {"id":event_id, "currency_cost":cost}
+	if branched:
+		receipt.choice_id = choice_id
+		receipt.choice_label = def.choice_label
+		receipt.resources = def.get("resources", {}).duplicate(true)
+	_record(g, "event_accepted", receipt)
 	if def.has("arrival_people"):
 		var due = (floorf(_now(g) / MONTH_SECONDS) + 1.0) * MONTH_SECONDS
 		g.s.block.theme.arrivals.append({"event_id":event_id, "people":float(def.arrival_people), "due_seconds":due, "arrived":false})
@@ -475,7 +530,7 @@ static func _complete_event(g, event:Dictionary, def:Dictionary) -> void:
 static func _update_events(g, metrics:Dictionary, local_seconds:float) -> void:
 	for event in g.s.block.theme.events:
 		if str(event.get("status", "")) != "active": continue
-		var def = _event_definition(str(event.id))
+		var def = _effective_event_definition(event)
 		if def.is_empty(): continue
 		var deadline = float(event.get("deadline_at", -1))
 		# Exact boundary counts; later ticks cannot retroactively satisfy a contract.
@@ -508,7 +563,7 @@ static func _fail_event(g, event:Dictionary) -> void:
 
 static func _deliver_event(g, id:String, amount:float) -> String:
 	var event = _find_event(g, id)
-	var def = _event_definition(id)
+	var def = _effective_event_definition(event)
 	if event.is_empty() or str(event.get("status", "")) != "active" or not def.has("delivery_resource"): return "没有可主动交付的事件合同。"
 	if float(event.get("deadline_at", -1)) >= 0 and _now(g) > float(event.deadline_at) + 0.0001: return "该合同已经超过本地时间期限。"
 	var resource = str(def.delivery_resource)
@@ -555,7 +610,7 @@ static func next_boundary_seconds(g) -> float:
 
 static func _event_view(g, event:Dictionary) -> Dictionary:
 	var token = bool(event.get("token", false))
-	var def = _event_definition(str(event.id))
+	var def = _effective_event_definition(event)
 	var row = {"id":str(event.id), "name":"委任重铸权" if token else str(def.get("name", event.id)),
 		"status":str(event.get("status", "")), "description":("获得一次重铸权；使用仍需%.2f DT，完成主题后不可更换。" % _reforge_cost(g)) if token else str(def.get("description", "")),
 		"deadline_seconds":maxf(0, float(event.get("deadline_at", -1)) - _now(g)) if float(event.get("deadline_at", -1)) >= 0 else -1.0,
@@ -567,7 +622,13 @@ static func _event_view(g, event:Dictionary) -> Dictionary:
 		row.unit = "%"
 		row.description += " 目标实际覆盖：%.0f%%。" % (float(row.target) * 100.0)
 	if row.status == "offered":
-		row.choices = [{"id":"accept", "label":"接受", "cost_text":row.description}, {"id":"decline", "label":"婉拒", "cost_text":"不支付代价，不附加惩罚。"}]
+		for choice in def.get("choices", []):
+			var selected = _event_choice_definition(def, str(choice.id))
+			var reason = _event_unavailable_reason(g, selected)
+			row.choices.append({"id":choice.id, "label":choice.label, "cost_text":_event_cost_text(selected) + (" " + reason if reason != "" else ""), "available":reason == "", "reason":reason})
+		if row.choices.is_empty(): row.choices.append({"id":"accept", "label":"接受", "cost_text":row.description if token else _event_cost_text(def)})
+		row.choices.append({"id":"decline", "label":"婉拒", "cost_text":"不支付代价，不附加惩罚。"})
+	row.definition = def.duplicate(true)
 	return row
 
 static func _history_view(entry:Dictionary) -> Dictionary:
@@ -575,6 +636,7 @@ static func _history_view(entry:Dictionary) -> Dictionary:
 	var id = str(row.get("id", ""))
 	var kind = str(row.get("kind", ""))
 	var event = _event_definition(id)
+	if str(row.get("choice_id", "")) != "": event = _event_choice_definition(event, str(row.choice_id))
 	var parts = id.split(":")
 	var theme = _definition(str(parts[0])) if not parts.is_empty() else {}
 	row.name = str(event.get("name", theme.get("name", id)))

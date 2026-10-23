@@ -151,10 +151,19 @@ public static class Rules {
                 var factor=c.v040["progression"]["upgrade_operation_factor"].Double;stats[id]["efficiency"]*=factor;
                 foreach(var key in stats[id].Keys)if(key.StartsWith("service.",StringComparison.Ordinal)||key=="output.energy")stats[id][key]*=factor;
             }
+            if(g.world_managed) {
+                var def=p.Get("def","").Text;
+                var advanced=id.Text=="municipal"?20.0:def=="freight"?80.0:def=="manufacturing"?20.0:0.0;
+                if(advanced>0)stats[id]["storage.advanced_components"]=advanced;
+            }
             configs[id]=V.Map();recipes[id]=V.Arr();emitters[id]=V.Arr();trace[id]=V.Map();numeric[id]=V.Map();transforms[id]=V.Arr();
             foreach(var r in p.Get("retained_storage",V.Map()).Keys)stats[id]["retained_storage."+r]=p["retained_storage"][r].Double;
         }
         contexts.Add(V.Map("host_type","block","host",s["block"]["id"],"rules",c.data["world_rules"],"specificity",0,"name","基础世界","provider","","uid","world","eligibility",V.Arr()));
+        if(g.world_managed)foreach(var source in ids(g.world_effects.Get("sources",V.Map()))) {
+            var effect=g.world_effects["sources"][source];
+            contexts.Add(V.Map("host_type","block","host",s["block"]["id"],"rules",effect["rules"],"specificity",10,"name",effect["name"],"provider","","uid",source,"eligibility",V.Arr()));
+        }
         foreach(var slot in ids(s["block"]["policies"])) {
             var policy=c.policies[s["block"]["policies"][slot]];
             contexts.Add(V.Map("host_type","block","host",s["block"]["id"],"rules",policy["rules"],"specificity",10,"name",policy["name"],"provider","","uid","policy:"+policy["id"].Text,"eligibility",V.Arr()));

@@ -15,7 +15,10 @@ public static class Construction {
  }
  public static string set_priority(Game g,string id,int value){if(!g.s["projects"].Has(id))return "项目不存在。";g.s["projects"][id]["construction_priority"]=Math.Min(1,Math.Max(-1,value));g.refresh_metrics();return "";}
  public static void tick(Game g,double h) {
-  var remaining=capacity(g)*h*Math.Min(1,Math.Max(0,g.s["metrics"].Get("energy_ratio",1).Double));var used=0.0;var material_used=0.0;
+  var available=capacity(g)*h*Math.Min(1,Math.Max(0,g.s["metrics"].Get("energy_ratio",1).Double));
+  var reserve=available*Math.Min(1,Math.Max(0,g.s["block"].Get("city_cp_reserve",0).Double));
+  if(g.s["block"].Get("city_context",false).Bool)g.s["block"]["city_cp_last"]=V.Map("cp",reserve,"available",available,"hours",h,"tick",g.s["simulation_tick"]);
+  var remaining=available-reserve;var used=0.0;var material_used=0.0;
   foreach(var row in queue(g)){if(row["paused"].Bool)continue;var p=g.s["projects"][row["id"]];var job=p[row["upgrade"].Bool?"upgrade_job":"job"];
    var rate=job["material"].Double/Math.Max(1e-15,job["work"].Double);var work=Math.Min(remaining,job["work"].Double);if(rate>0)work=Math.Min(work,g.inventory_total("material")/rate);var material=work*rate;
    if(material>0)g.withdraw_stock("material",material);job["work"]=Math.Max(0,job["work"].Double-work);job["material"]=Math.Max(0,job["material"].Double-material);

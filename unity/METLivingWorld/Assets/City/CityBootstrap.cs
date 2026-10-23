@@ -21,12 +21,17 @@ public sealed class CityBootstrap : MonoBehaviour {
         World.Initialize(() => Interface.MapSnapshot, Interface.SelectTile,
             () => Interface.KeyboardOwned, Interface.PointerOwned,
             () => !Interface.MapViewing && !Interface.IsModal);
+        Interface.AttachMapInspection(World);
+        World.TryInspectClick = Interface.TryLockMapInspection;
         World.SetSourcePhase(Interface.MapSourcePhase);
         World.SetLayer(Interface.Layer);
         Interface.DisplayChanged += Display;
         Display(Runtime.DisplaySettings);
         if (World.Failure != "") Interface.ShowMessage("地图资源导入失败：" + World.Failure);
-        if (CityEvidence.Requested()) gameObject.AddComponent<CityEvidence>();
+        if (CityMemoryEvidence.Requested() || CityEvidence.Requested()) Application.runInBackground = true;
+        if(System.Array.IndexOf(System.Environment.GetCommandLineArgs(),"--manual-ui-evidence")>=0)gameObject.AddComponent<CityMouseEvidence>();
+        if (CityMemoryEvidence.Requested()) gameObject.AddComponent<CityMemoryEvidence>();
+        else if (CityEvidence.Requested()) gameObject.AddComponent<CityEvidence>();
     }
 
     void Present(MET.Core.V snapshot) {
@@ -43,6 +48,8 @@ public sealed class CityBootstrap : MonoBehaviour {
         Interface.SelectionChanged -= Select;
         Interface.LayerChanged -= World.SetLayer;
         World.LayerChanged -= Interface.SetLayer;
+        World.TryInspectClick = null;
+        Interface.DismissMapInspection();
         Interface.DisplayChanged -= Display;
     }
 }

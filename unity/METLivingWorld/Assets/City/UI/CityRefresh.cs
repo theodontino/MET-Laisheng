@@ -39,11 +39,12 @@ public sealed partial class CityInterface {
  }
  string ContextDisplayKey(){
   if(_mapViewing||SelectedTile==""||!S["cells"].Has(SelectedTile)){ReleaseContextPreview();return "hidden";}
-  var tile=S["cells"][SelectedTile];var key=V.Arr(_cityIdentity,StyleKey(),SelectedTile,SelectedBuilding,tile["building"]);
+  var tile=S["cells"][SelectedTile];var key=V.Arr(_cityIdentity,StyleKey(),SelectedTile,SelectedBuilding,tile["building"],Runtime.ViewCanEditFocused);
   if(SelectedBuilding!=""&&S["projects"].Has(SelectedBuilding)){
    ReleaseContextPreview();
    var p=S["projects"][SelectedBuilding];var st=G.project_stats(SelectedBuilding);
    key.Add(V.Arr(p["def"],G.project_name(SelectedBuilding),p.Get("tier",1),p["operator_org"],p.Get("paused",false),p["status"]));
+   foreach(var slot in G.slot_ids(SelectedBuilding)){var iid=p["slots"].Get(slot,"").Text;var ins=S["bonus_instances"].Get(iid,V.Map());key.Add(V.Arr(slot,iid,ins.Get("bonus_id","")));}
    if(p.Get("paused",false).Bool)return key.ToJson();
    var upgrading=p.Get("upgrade_job",V.Map()).Count!=0;key.Add(upgrading);
    if(p["status"].Text=="construction"||upgrading){

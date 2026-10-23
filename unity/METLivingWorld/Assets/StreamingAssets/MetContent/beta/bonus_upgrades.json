@@ -125,6 +125,72 @@
           2.1
         ]
       }
+    },
+    "P09": {
+      "P09.1": {
+        "value": [
+          1.15,
+          1.22,
+          1.3
+        ]
+      },
+      "P09.2": {
+        "value": [
+          1.2,
+          1.28,
+          1.36
+        ]
+      }
+    },
+    "R19": {
+      "R19.1": {
+        "value": [
+          0.8,
+          0.73,
+          0.66
+        ]
+      }
+    },
+    "O08": {
+      "O08.1": {
+        "value": [
+          0.85,
+          0.78,
+          0.71
+        ]
+      },
+      "O08.2": {
+        "value": [
+          0.9,
+          0.84,
+          0.78
+        ]
+      }
+    },
+    "B10": {
+      "B10.1": {
+        "fraction": [
+          0.08,
+          0.1,
+          0.12
+        ]
+      }
+    },
+    "P05": {
+      "P05.1": {
+        "value": [
+          0.1,
+          0.13,
+          0.16
+        ]
+      },
+      "P05.2": {
+        "value": [
+          0.4,
+          0.46,
+          0.52
+        ]
+      }
     }
   },
   "rule_policies": {
@@ -200,6 +266,10 @@
     },
     "P06.2": {
       "strength_field": "rate"
+    },
+    "B10.1": {
+      "strength_field": "fraction",
+      "maximum": 0.25
     }
   },
   "benefit_rules": {
@@ -316,6 +386,20 @@
     "R17": [],
     "R18": [
       "R18.1"
+    ],
+    "P09": [
+      "P09.1",
+      "P09.2"
+    ],
+    "R19": [
+      "R19.1"
+    ],
+    "O08": [
+      "O08.1",
+      "O08.2"
+    ],
+    "B10": [
+      "B10.1"
     ]
   },
   "structural_policy": "Idempotent unless a rule has an explicit numeric policy. Copies never repeat a field network, relation, slot, recipe chain or boolean. Numeric benefits and costs scale together; multipliers clamp at zero, conversion fractions at one."

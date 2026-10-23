@@ -1,0 +1,395 @@
+{
+  "schema": 1,
+  "version": "rogue-content.1",
+  "ending_profiles": [
+    {
+      "id": "heat_neighborhood",
+      "theme": "industrial",
+      "name": "余热工人社区",
+      "description": "已把真实工业余热送到用热者，原工会总部和所有装置留在原街区。后续服务/综合街区可以选择带成本的工人社区规约。",
+      "gate": {
+        "metric": "heat_used",
+        "minimum": 0.2,
+        "rule_keys": [
+          "heat_service",
+          "redirect_product_heat",
+          "redirect_pollution_heat"
+        ],
+        "rule_fields": [
+          "heat_service",
+          "heat_discount"
+        ]
+      },
+      "specializations": [
+        "services",
+        "balanced"
+      ],
+      "cost_by_grade": [
+        {
+          "money": 25,
+          "stock": {
+            "material": 2
+          }
+        },
+        {
+          "money": 35,
+          "stock": {
+            "material": 3
+          }
+        },
+        {
+          "money": 45,
+          "stock": {
+            "material": 4
+          }
+        }
+      ],
+      "charter_rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "value": {
+            "medical": 1.08
+          },
+          "targets": "self",
+          "values": [
+            {
+              "medical": 1.08
+            },
+            {
+              "medical": 1.12
+            },
+            {
+              "medical": 1.16
+            }
+          ],
+          "id": "heat_neighborhood:1",
+          "priority": 0,
+          "key": "service_capacity_multiplier"
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "exposure_multiplier",
+          "mode": "multiply",
+          "value": 0.96,
+          "targets": "self",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "values": [
+            0.96,
+            0.93,
+            0.9
+          ],
+          "id": "heat_neighborhood:2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "mode": "multiply",
+          "value": 1.06,
+          "targets": "self",
+          "values": [
+            1.06,
+            1.08,
+            1.1
+          ],
+          "id": "heat_neighborhood:3",
+          "priority": 0
+        }
+      ],
+      "tradeoff": "医疗与防护更强，启动材料、通货和长期维护也更多。"
+    },
+    {
+      "id": "circular_industry",
+      "theme": "industrial",
+      "name": "循环材料工艺",
+      "description": "已用实际污染回收到材料/制成品，原地标仍留原区。后续工业街区可采用材料优先的生产规约。",
+      "gate": {
+        "metric": "pollution_recycled",
+        "minimum": 0.2,
+        "rule_input_types": [
+          "pollution"
+        ]
+      },
+      "specializations": [
+        "industrial"
+      ],
+      "cost_by_grade": [
+        {
+          "money": 25,
+          "stock": {
+            "material": 2,
+            "goods": 1
+          }
+        },
+        {
+          "money": 35,
+          "stock": {
+            "material": 3,
+            "goods": 2
+          }
+        },
+        {
+          "money": 45,
+          "stock": {
+            "material": 4,
+            "goods": 3
+          }
+        }
+      ],
+      "charter_rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.material",
+          "mode": "multiply",
+          "value": 1.08,
+          "targets": "self",
+          "when": {
+            "traits": [
+              "building.industrial"
+            ]
+          },
+          "values": [
+            1.08,
+            1.12,
+            1.16
+          ],
+          "id": "circular_industry:1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "mode": "multiply",
+          "value": 0.96,
+          "targets": "self",
+          "when": {
+            "traits": [
+              "building.industrial"
+            ]
+          },
+          "values": [
+            0.96,
+            0.94,
+            0.92
+          ],
+          "id": "circular_industry:2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "mode": "multiply",
+          "value": 1.06,
+          "targets": "self",
+          "when": {
+            "traits": [
+              "building.industrial"
+            ]
+          },
+          "values": [
+            1.06,
+            1.08,
+            1.1
+          ],
+          "id": "circular_industry:3",
+          "priority": 0
+        }
+      ],
+      "tradeoff": "材料优先，牺牲部分制成品产能并增加维护；缺制成品的城市未必适合。"
+    },
+    {
+      "id": "care_neighborhood",
+      "theme": "civic",
+      "name": "近邻照护网络",
+      "description": "以实际医疗覆盖和已部署照护方案完成安居主题。后续综合/服务街区可以继承照护规约，源管委会留原区。",
+      "gate": {
+        "metric": "medical",
+        "minimum": 0.85,
+        "rule_fields": [
+          "service.medical",
+          "shortage_multiplier",
+          "exposure_multiplier",
+          "service_decay"
+        ],
+        "rule_keys": [
+          "adjacent_service_priority"
+        ]
+      },
+      "specializations": [
+        "balanced",
+        "services"
+      ],
+      "cost_by_grade": [
+        {
+          "money": 20,
+          "stock": {
+            "food": 2
+          }
+        },
+        {
+          "money": 30,
+          "stock": {
+            "food": 3
+          }
+        },
+        {
+          "money": 40,
+          "stock": {
+            "food": 4
+          }
+        }
+      ],
+      "charter_rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "value": {
+            "medical": 1.08
+          },
+          "targets": "self",
+          "values": [
+            {
+              "medical": 1.08
+            },
+            {
+              "medical": 1.12
+            },
+            {
+              "medical": 1.16
+            }
+          ],
+          "id": "care_neighborhood:1",
+          "priority": 0,
+          "key": "service_capacity_multiplier"
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "population_maintenance",
+          "mode": "multiply",
+          "value": 1.06,
+          "targets": "self",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "values": [
+            1.06,
+            1.08,
+            1.1
+          ],
+          "id": "care_neighborhood:2",
+          "priority": 0
+        }
+      ],
+      "tradeoff": "加强医疗供给，但启动口粮及居民维护更高；粮食吃紧时需先补供给。"
+    },
+    {
+      "id": "learning_neighborhood",
+      "theme": "civic",
+      "name": "居住学园",
+      "description": "以实际教育覆盖和已部署教育方案完成安居主题。后续科研/服务街区可以选择学园规约，减少住房换教育与知识产出。",
+      "gate": {
+        "metric": "education",
+        "minimum": 0.75,
+        "rule_fields": [
+          "service.education"
+        ],
+        "rule_to": [
+          "service.education"
+        ],
+        "rule_keys": [
+          "volunteer_education"
+        ]
+      },
+      "specializations": [
+        "research",
+        "services"
+      ],
+      "cost_by_grade": [
+        {
+          "money": 25,
+          "stock": {
+            "material": 2,
+            "goods": 1
+          }
+        },
+        {
+          "money": 35,
+          "stock": {
+            "material": 3,
+            "goods": 2
+          }
+        },
+        {
+          "money": 45,
+          "stock": {
+            "material": 4,
+            "goods": 3
+          }
+        }
+      ],
+      "charter_rules": [
+        {
+          "op": "configure",
+          "phase": "spatial",
+          "value": {
+            "education": 1.08
+          },
+          "targets": "self",
+          "values": [
+            {
+              "education": 1.08
+            },
+            {
+              "education": 1.12
+            },
+            {
+              "education": 1.16
+            }
+          ],
+          "id": "learning_neighborhood:1",
+          "priority": 0,
+          "key": "service_capacity_multiplier"
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "housing",
+          "mode": "multiply",
+          "value": 0.97,
+          "targets": "self",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "values": [
+            0.97,
+            0.95,
+            0.93
+          ],
+          "id": "learning_neighborhood:2",
+          "priority": 0
+        }
+      ],
+      "knowledge_multiplier": [
+        1.04,
+        1.08,
+        1.12
+      ],
+      "tradeoff": "教育与知识更强，住房更少且要付材料和通货；人口拥挤时需要先扩房。"
+    }
+  ]
+}

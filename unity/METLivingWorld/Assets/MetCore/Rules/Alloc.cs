@@ -137,6 +137,7 @@ public static class Alloc {
                 if(kind.Text=="education"&&cfg.Has("volunteer_education"))foreach(var group in s["groups"].Values) {
                     if(group["host"]==id&&group["education"]>=cfg["volunteer_education"]["threshold"])capacity+=group["count"].Double*cfg["volunteer_education"]["capacity_per_pop"].Double;
                 }
+                capacity*=cfg.Get("service_capacity_multiplier",V.Map()).Get(kind,1).Double;
                 if(p["status"].Text=="running"&&!p["paused"].Bool&&capacity>0) { capacities[id.Text+"|"+kind.Text]=capacity;todo.Add(id); }
             }
             while(todo.Count>0) {

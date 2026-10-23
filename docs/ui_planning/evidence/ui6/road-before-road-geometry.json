@@ -1,0 +1,176 @@
+{
+  "geometry": "pre_fix_ui6_baseline",
+  "sites": [
+    {
+      "tile": "0,0",
+      "construction": false,
+      "footprint": [
+        -0.25489658117294312,
+        -0.32687258720397949,
+        0.25489658117294312,
+        0.32687258720397949
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        0.0,
+        0.56687259674072266
+      ],
+      "entrance_beyond_ring_centerline": 0.0950000137090683,
+      "entrance_connection": "none",
+      "floor": 0.78653049468994141,
+      "ground_at_entrance": 0.77750343084335327
+    },
+    {
+      "tile": "0,1",
+      "construction": false,
+      "footprint": [
+        -0.32478830218315125,
+        -0.25850647687911987,
+        0.3247884213924408,
+        0.25850653648376465
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        5.9604644775390625E-08,
+        0.49850654602050781
+      ],
+      "entrance_beyond_ring_centerline": 0.0950000137090683,
+      "entrance_connection": "none",
+      "floor": 0.70635730028152466,
+      "ground_at_entrance": 0.683557391166687
+    },
+    {
+      "tile": "0,2",
+      "construction": false,
+      "footprint": [
+        -0.33458614349365234,
+        -0.241536483168602,
+        0.33458608388900757,
+        0.24153642356395721
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        -2.9802322387695313E-08,
+        0.48153641819953918
+      ],
+      "entrance_beyond_ring_centerline": 0.0949999988079071,
+      "entrance_connection": "none",
+      "floor": 0.69872450828552246,
+      "ground_at_entrance": 0.66921341419219971
+    },
+    {
+      "tile": "1,0",
+      "construction": false,
+      "footprint": [
+        -0.37977701425552368,
+        -0.29286333918571472,
+        0.37977695465087891,
+        0.29286333918571472
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        -2.9802322387695313E-08,
+        0.5328633189201355
+      ],
+      "entrance_beyond_ring_centerline": 0.094999983906745911,
+      "entrance_connection": "none",
+      "floor": 1.0388071537017822,
+      "ground_at_entrance": 1.0113513469696045
+    },
+    {
+      "tile": "-1,0",
+      "construction": false,
+      "footprint": [
+        -0.39489302039146423,
+        -0.26668176054954529,
+        0.39489313960075378,
+        0.26668176054954529
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        5.9604644775390625E-08,
+        0.50668174028396606
+      ],
+      "entrance_beyond_ring_centerline": 0.094999983906745911,
+      "entrance_connection": "none",
+      "floor": 0.70536351203918457,
+      "ground_at_entrance": 0.68849718570709229
+    },
+    {
+      "tile": "1,1",
+      "construction": false,
+      "footprint": [
+        -0.37727245688438416,
+        -0.1676015406847,
+        0.37727245688438416,
+        0.1676015406847
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        0.0,
+        0.407601535320282
+      ],
+      "entrance_beyond_ring_centerline": 0.0949999988079071,
+      "entrance_connection": "none",
+      "floor": 0.9948498010635376,
+      "ground_at_entrance": 0.97382587194442749
+    },
+    {
+      "tile": "-1,1",
+      "construction": false,
+      "footprint": [
+        -0.32333546876907349,
+        -0.17222289741039276,
+        0.32333552837371826,
+        0.1722228080034256
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        2.9802322387695313E-08,
+        0.41222280263900757
+      ],
+      "entrance_beyond_ring_centerline": 0.0949999988079071,
+      "entrance_connection": "none",
+      "floor": 0.59699428081512451,
+      "ground_at_entrance": 0.57902193069458008
+    },
+    {
+      "tile": "-1,2",
+      "construction": false,
+      "footprint": [
+        -0.290488064289093,
+        -0.15511634945869446,
+        0.290488064289093,
+        0.15511634945869446
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        0.0,
+        0.39511632919311523
+      ],
+      "entrance_beyond_ring_centerline": 0.094999983906745911,
+      "entrance_connection": "none",
+      "floor": 0.57380801439285278,
+      "ground_at_entrance": 0.55545949935913086
+    },
+    {
+      "tile": "-1,3",
+      "construction": false,
+      "footprint": [
+        -0.25489673018455505,
+        -0.3268725574016571,
+        0.25489667057991028,
+        0.3268725574016571
+      ],
+      "ring_margin": 0.14499999582767487,
+      "entrance": [
+        -2.9802322387695313E-08,
+        0.56687253713607788
+      ],
+      "entrance_beyond_ring_centerline": 0.094999983906745911,
+      "entrance_connection": "none",
+      "floor": 0.56923925876617432,
+      "ground_at_entrance": 0.55714952945709229
+    }
+  ]
+}

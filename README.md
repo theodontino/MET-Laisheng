@@ -1,5 +1,13 @@
 # MET · 来生 0.5.0-beta.2
 
+<!-- ui5-current-entry -->
+当前 Unity 主游戏界面为本地 `0.7.0-ui.5-local`，已接入 `unity/METLivingWorld/Assets/Scenes/City.unity`。进入当前 UI 请打开该 Unity 工程与场景；下方 `project.godot` 是保留的旧引擎入口。独立 UI5 包仅用于另命名构建和隔离存档。普通无界面启动、新城/读档证据及尚未完成的整体界面问题见[UI5 接入与视觉复核](docs/ui_planning/UI5_INTEGRATION.md)。本轮未提交、推送或发布。
+
+<!-- rogue-content-1 -->
+Unity 本地内容版 `0.6.0-content.1-local`：四张新方案、六组付费议案与首次归零成果—同城接续规约已完成；[实际验收与本地包](docs/rogue_content/ACCEPTANCE.md)。
+
+2026-10-14 本地 Unity 分支已接入永久 City / District / Block 发展弧。其授权、范围和本机验收见[城市发展弧](docs/city_arc/CONTRACT.md)与[当前验收](docs/city_arc/ACCEPTANCE.md)。本轮只在本地构建，不发布；下文单 Block 描述保留为 Godot / 已发布 Beta 的历史基线。
+
 MET 是一款关于“把一个地方慢慢养成城市”的游戏：土地给你条件，居民给你需求，资源给你限制，委托给你机会，Bonus 给你特殊办法，而你之前做过的每个决定，都会改变下一步什么才值得做。
 
 愿景与长期原则见[项目宪法](docs/PROJECT_CONSTITUTION.md)，本轮实施依据为 [Beta v3 设计包](docs/beta/design-v3/00_READ_FIRST.md)。设计目标、已经实现的规则、实际测试结果分别记录；设计文档不代表所有体验目标已经得到验证。
@@ -44,7 +52,7 @@ renderer 和 driver 覆写只作用于本次进程，`project.godot` 默认仍�
 
 ### Unity 移植验证
 
-用户已授权完整迁移，当前 [Unity 工程](unity/METLivingWorld/README.md) 使用 **6000.6.5f1**，保留同一套 Beta 内容与玩法，存档独立。原生 C# 核心已有 **174/174** 专项检查与 **88/88** Godot/C# 完整状态对照通过；最新 macOS 通用 Player `0.5.0-beta.2-unity.3` 在 Apple M5 Max / Metal、1920×1080 下 **152/152** 原生检查通过，已接入种子地理、连续林带、真实状态驱动的邻格肌理及增量对象更新。首版画面被用户否定后，已修正不限帧、重复 UI 重建和地表/透明图层，默认稳定 60 帧；这仍是迁移测试版美术。原 Godot 游戏保留。运行、画面与交付证据见 [完整 Unity 迁移记录](docs/unity_port/FULL_MIGRATION.md)，早期固定 Hero 切片仍按[历史验收](docs/unity_port/ACCEPTANCE.md)阅读。
+用户已授权完整迁移，当前 [Unity 工程](unity/METLivingWorld/README.md) 使用 **6000.6.5f1**，保留同一套 Beta 内容与玩法，存档独立。原生 C# 核心 **174/174**、已有 Godot/C# 完整状态对照 **88/88** 通过。当前本地 macOS 通用候选为 `0.6.0-visual.16-local`，接续 City 发展弧，采用用户认可的中等尺度建筑群、更广的用途墙色、四种地表风格和三种道路材质。新原型为每栋主楼绘制完整贴地圆角环路，按六边方向接出紧密联系道路，并在本格避让附楼、田块与自然物；天然丘陵保留，建筑使用坡肩选址和局部支撑。Apple M5 Max / Metal、1920×1080 下 **241/241** 原生检查通过。同一四街区存档的新进程短测，暂停 RSS 约 **590 MiB**、常速约 **615 MiB**，常速帧间隔 p95 **17.63 ms**，默认限帧 60 FPS。当前是环路简单版本，尚不宣称与 Civ6 等质；候选只在本地交付。实际画面、占用范围及历史版本见 [完整 Unity 迁移记录](docs/unity_port/FULL_MIGRATION.md)，本机 Civ6 原始配置的调研见[参考报告](docs/unity_port/CIV6_LOCAL_REFERENCE.md)。原 Godot 游戏保留，早期固定 Hero 切片仍按[历史验收](docs/unity_port/ACCEPTANCE.md)阅读。
 
 ## 一局怎样推进
 

@@ -1,0 +1,2306 @@
+{
+  "status": "passed",
+  "unity_version": "6000.6.5f1",
+  "application_version": "0.7.0-ui.6",
+  "platform": "OSXPlayer",
+  "graphics_device": "Apple M5 Max",
+  "graphics_api": "Metal",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "checks": [
+    {
+      "name": "isolated_save_root",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "runtime_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_import",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ui6_fullscreen",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-new-city.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-new-city.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_earned_fixture_exists",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_收起侧栏",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-all.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-all.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-steps-only.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-steps-only.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-lanes-only.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-lanes-only.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_road_camera_unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_road_access",
+      "passed": true,
+      "detail": {
+        "terrain_policy": "natural_surface_local_supports",
+        "primary_sites": 9,
+        "slope_repositioned_sites": 0,
+        "slope_supported_sites": 1,
+        "max_footprint_relief": 0.042966187000274658,
+        "min_floor_clearance": 0.015999972820281982,
+        "access_terminal_count": 23,
+        "access_reached_count": 23,
+        "unreachable_access_terminals": 0,
+        "unreachable_details": {}
+      }
+    },
+    {
+      "name": "ui6_entries_inside_ring",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_hover_progress_visible_pending",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_hover_progress_has_screen_area",
+      "passed": true,
+      "detail": {
+        "rect": [
+          -30.0,
+          -2.0,
+          60.0,
+          4.0
+        ],
+        "corners": [
+          [
+            719.0,
+            998.0,
+            0.0
+          ],
+          [
+            719.0,
+            1002.0,
+            0.0
+          ],
+          [
+            779.0,
+            1002.0,
+            0.0
+          ],
+          [
+            779.0,
+            998.0,
+            0.0
+          ]
+        ],
+        "ratio": 0.4016214907169342
+      }
+    },
+    {
+      "name": "capture_size_ui6-hover-pending.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-hover-pending.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_hover_progress_clears_on_open",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-hover-open.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-hover-open.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-overview.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-overview.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_overview_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-economy_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-economy_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_economy_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_economy_home_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-bonus_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-bonus_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonus_home_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-tasks_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-tasks_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_tasks_home_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-archive_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-archive_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_archive_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_archive_home_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-resources.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-resources.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_resources",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_resources_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_resources_Resource balance workspace viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_resources_Resource balance workspace viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_resources_Resource balance workspace viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-population.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-population.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_population",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_population_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_population_Population master detail viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_population_Population master detail viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-construction.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-construction.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_construction",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_construction_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-building.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-building.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_building",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_building_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-upgrades.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-upgrades.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_upgrades",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_upgrades_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_upgrades_Upgrade current candidate comparison viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_upgrades_Upgrade current candidate comparison viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-market.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-market.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_market",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_market_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_market_Market quotes orders editor viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_market_Market quotes orders editor viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_market_Market quotes orders editor viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-policies.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-policies.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_policies",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_policies_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_policies_Policy current candidate comparison viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_policies_Policy current candidate comparison viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-bonuses.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-bonuses.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_bonuses",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonuses_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonuses_Bonus deployment workspace viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonuses_Bonus deployment workspace viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonuses_Bonus deployment workspace viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-blueprints.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-blueprints.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_blueprints",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_blueprints_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_blueprints_Saved reward candidates viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_blueprints_Saved reward candidates viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_blueprints_Saved reward candidates viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-themes.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-themes.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_themes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_themes_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_themes_Current city matters viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_themes_Current city matters viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-milestones.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-milestones.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_milestones",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_milestones_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_milestones_Growth route viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_milestones_Growth route viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-settlement.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-settlement.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_settlement",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settlement_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settlement_Saved reward candidates viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settlement_Saved reward candidates viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settlement_Saved reward candidates viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-city.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-city.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_city",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_Permanent city hierarchy viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_Permanent city hierarchy viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-governance.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-governance.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_governance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_governance_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_governance_District promises and problems viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_governance_District promises and problems viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-network.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-network.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_network",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_network_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_network_Regional links and editor viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_network_Regional links and editor viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-science.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-science.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_science",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_science_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_science_Technology relations and research viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_science_Technology relations and research viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-city_project.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-city_project.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_city_project",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_project_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_project_City project stages and contributions viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_project_City project stages and contributions viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-records.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-records.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_records",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_records_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_records_City records viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_records_City records viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-heritage.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-heritage.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_heritage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_heritage_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_heritage_City history and portable licenses viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_heritage_City history and portable licenses viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-content.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-content.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_content",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_content_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_content_City content catalogue viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_content_City content catalogue viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-settings.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-settings.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_settings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settings_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settings_Settings display viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-sources.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-sources.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_sources",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_sources_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_only_collapse_overview",
+      "passed": true,
+      "detail": [
+        "收起侧栏"
+      ]
+    },
+    {
+      "name": "active_callback_收起侧栏",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_collapse_closes_overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_navigation_readonly_overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_only_collapse_economy_home",
+      "passed": true,
+      "detail": [
+        "收起侧栏"
+      ]
+    },
+    {
+      "name": "active_callback_收起侧栏",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_collapse_closes_economy_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_navigation_readonly_economy_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_only_collapse_bonus_home",
+      "passed": true,
+      "detail": [
+        "收起侧栏"
+      ]
+    },
+    {
+      "name": "active_callback_收起侧栏",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_collapse_closes_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_navigation_readonly_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_only_collapse_tasks_home",
+      "passed": true,
+      "detail": [
+        "收起侧栏"
+      ]
+    },
+    {
+      "name": "active_callback_收起侧栏",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_collapse_closes_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_navigation_readonly_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_only_collapse_archive_home",
+      "passed": true,
+      "detail": [
+        "收起侧栏"
+      ]
+    },
+    {
+      "name": "active_callback_收起侧栏",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_collapse_closes_archive_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_sidebar_navigation_readonly_archive_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_永久城市 · 地区与长期发展 ›",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_specific_parent_overview",
+      "passed": true,
+      "detail": [
+        "‹ 返回城市状况",
+        "关闭面板"
+      ]
+    },
+    {
+      "name": "active_callback_‹ 返回城市状况",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_returns_to_sidebar_overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_永久城市 · 地区与长期发展 ›",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_关闭面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_close_to_map_overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_navigation_readonly_overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_打开资源收支面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_specific_parent_economy_home",
+      "passed": true,
+      "detail": [
+        "‹ 返回经营",
+        "关闭面板"
+      ]
+    },
+    {
+      "name": "active_callback_‹ 返回经营",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_returns_to_sidebar_economy_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_打开资源收支面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_关闭面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_close_to_map_economy_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_navigation_readonly_economy_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_打开 Bonus 部署面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_specific_parent_bonus_home",
+      "passed": true,
+      "detail": [
+        "‹ 返回Bonus",
+        "关闭面板"
+      ]
+    },
+    {
+      "name": "active_callback_‹ 返回Bonus",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_returns_to_sidebar_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_打开 Bonus 部署面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_关闭面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_close_to_map_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_navigation_readonly_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_打开任务与决定面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_specific_parent_tasks_home",
+      "passed": true,
+      "detail": [
+        "‹ 返回任务",
+        "关闭面板"
+      ]
+    },
+    {
+      "name": "active_callback_‹ 返回任务",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_returns_to_sidebar_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_打开任务与决定面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_关闭面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_close_to_map_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_navigation_readonly_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_打开城市记录面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_specific_parent_archive_home",
+      "passed": true,
+      "detail": [
+        "‹ 返回档案",
+        "关闭面板"
+      ]
+    },
+    {
+      "name": "active_callback_‹ 返回档案",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_returns_to_sidebar_archive_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_打开城市记录面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_关闭面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_close_to_map_archive_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_detail_navigation_readonly_archive_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_永久城市 · 地区与长期发展 ›",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_查看承诺与治理",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_nested_governance_returns_to_city",
+      "passed": true,
+      "detail": [
+        "‹ 返回永久城市与地区",
+        "关闭面板"
+      ]
+    },
+    {
+      "name": "active_callback_‹ 返回永久城市与地区",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_city_keeps_its_sidebar_parent",
+      "passed": true,
+      "detail": [
+        "‹ 返回城市状况",
+        "关闭面板"
+      ]
+    },
+    {
+      "name": "active_callback_关闭面板",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_resource_direct_context",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_brand_opens_settings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-scale-80.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-scale-80.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-scale-100.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-scale-100.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-scale-120.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-scale-120.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-font-125.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-font-125.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-font-150.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-font-150.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_actual_DTzero_before_claim",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_actual_DTzero_before_claim",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-state-actual_DTzero_before_claim.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-state-actual_DTzero_before_claim.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_paid_before_successor",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_paid_before_successor",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-state-paid_before_successor.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-state-paid_before_successor.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_bonus_check",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_bonus_check",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_reward_preselect_does_not_claim",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确认领取",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_reward_claim_advances_saved_queue",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-bonus-comparison.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-bonus-comparison.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_安装 · 消耗1份",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_install_consumes_exactly_one_copy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_install_valid_city",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-bonus-installed.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-bonus-installed.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_report_exists",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_normal_command_report",
+      "passed": true,
+      "detail": [
+        "project_rejects_missing_prerequisites",
+        "research_rejects_missing_prerequisites",
+        "science_project_views_are_read_only",
+        "research_without_operating_education_does_not_progress",
+        "real_research_precision_engineering",
+        "advanced_without_operating_factory_does_not_progress",
+        "real_research_superconductors",
+        "real_research_fusion_physics",
+        "advanced_components_are_independent_stock",
+        "block_startup_withdraws_real_source",
+        "district_handover_preserves_autonomy",
+        "real_supply_crisis_retires_and_preserves_district",
+        "real_supply_crisis_retires_and_preserves_district",
+        "real_supply_crisis_retires_and_preserves_district",
+        "cross_district_advanced_stock_arrives_with_real_freight_cost",
+        "project_delivery_withdraws_real_stock",
+        "project_no_advanced_delivery_no_progress",
+        "city_cp_reserve_cannot_double_spend_local_queue",
+        "city_and_local_construction_share_actual_capacity",
+        "return_pays_actual_organization_cost",
+        "same_city_endless_after_tokamak",
+        "advanced_production_stock_transport_project_are_conserved",
+        "advanced_actual_material_goods_money_energy_costs",
+        "completed_city_keeps_operating",
+        "project_feedback_completes_once",
+        "repeated_science_callback_cannot_mint_or_spend_twice",
+        "whole_city_science_project_roundtrip"
+      ]
+    },
+    {
+      "name": "content_restore_ui6_full_city",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_full_city",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_multiblock_and_autonomy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-fullcity-city.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-fullcity-city.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_browse_readonly_city",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-fullcity-governance.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-fullcity-governance.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_browse_readonly_governance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-fullcity-network.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-fullcity-network.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_browse_readonly_network",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_autonomous_district_ui",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-fullcity-autonomous-district.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-fullcity-autonomous-district.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_district_selection_readonly",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_查看承诺与治理",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_autonomous_governance_return_action",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-fullcity-autonomous-governance.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-fullcity-autonomous-governance.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_autonomous_governance_readonly",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_fullcity_report_source_unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_task_earned_world",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_task_earned_world",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_starts_unselected_and_editable",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_real_workshop_tender",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_real_workshop_payment",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_工业基地",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_theme_selected_via_ui",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_normal_clock_step_0",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": "annual"
+      }
+    },
+    {
+      "name": "ui6_task_reward_queue_progress_advance_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_candidate_R001852",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_preselect_readonly_R001852",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确认领取",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_saved_claim_R001852",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_copy_R001852",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_normal_clock_step_1",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 7,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_2",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_3",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": "发展主题阶段完成，请查看奖励与下一目标。"
+      }
+    },
+    {
+      "name": "capture_size_ui6-task-stage-1.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-task-stage-1.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_stage_saved_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_queue_progress_advance_4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_candidate_R001853",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_preselect_readonly_R001853",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确认领取",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_saved_claim_R001853",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_copy_R001853",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_normal_clock_step_4",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_5",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_6",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_7",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_8",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_9",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_10",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_11",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": "发展主题阶段完成，请查看奖励与下一目标。"
+      }
+    },
+    {
+      "name": "capture_size_ui6-task-stage-2.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-task-stage-2.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_stage_saved_2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_queue_progress_advance_12",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_candidate_R001854",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_preselect_readonly_R001854",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确认领取",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_saved_claim_R001854",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_copy_R001854",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_normal_clock_step_12",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_13",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_14",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_15",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_16",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_17",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_18",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_normal_clock_step_19",
+      "passed": true,
+      "detail": {
+        "advanced": 0.25,
+        "local_seconds": 388800.0,
+        "external_seconds": 388800.0,
+        "active_real_seconds": 388800.0,
+        "spent": 0.0,
+        "steps": 6,
+        "local_months": {
+          "K000003": 0.25,
+          "K000113": 0.25,
+          "K000124": 0.25,
+          "K000236": 0.25
+        },
+        "reason": ""
+      }
+    },
+    {
+      "name": "ui6_task_reaches_real_delivery_stage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-task-before-delivery.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-task-before-delivery.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_real_stock_before_material",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_从库存交付 材料",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_ui_withdraws_material",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_delivery_saved_material",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_real_stock_before_goods",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_从库存交付 低级制成品",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_ui_withdraws_goods",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_delivery_saved_goods",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_delivery_completes_milestone",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_completion_earns_saved_reward",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-task-stage-achieved.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-task-stage-achieved.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_queue_progress_completion",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_candidate_R001855",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_preselect_readonly_R001855",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确认研究",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_saved_claim_R001855",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_reward_research_R001855",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_final_reward_claimed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_已完成",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-task-reward-claimed.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-task-reward-claimed.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_task_result_city_valid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_manual_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_manual_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_收起侧栏",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_save_export",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "errors": [],
+  "frame_intervals_ms": {
+    "samples": 0,
+    "median": 0.0,
+    "p95": 0.0
+  },
+  "resource_sample": {},
+  "growth_fixtures": [],
+  "hillside_buildings": {},
+  "forecast_geography": {},
+  "visible_river_boundary_picks": [],
+  "rogue_content": [],
+  "blueprint_ui": [],
+  "ui4_revision": {},
+  "construction_ux": {},
+  "ui5_headless": {},
+  "measurement_scope": "UI6 native fullscreen Player screenshots, read-only page browsing and programmatic callbacks on an earned checkpoint. OS input and performance are separate acceptance."
+}

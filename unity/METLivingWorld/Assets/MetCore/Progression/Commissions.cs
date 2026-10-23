@@ -160,6 +160,11 @@ public static class Commissions {
             }
             case "adverse_exports": {
                 double total = 0.0;
+                if(g.world_managed) {
+                    var baseline=active.Get("city_trade_baseline",V.Map());
+                    foreach(var resource in g.s["block"].Get("city_trade_totals",V.Map()).Keys)total+=Math.Max(0,g.s["block"]["city_trade_totals"][resource].Get("adverse_exports",0).Double-baseline.Get(resource,V.Map()).Get("adverse_exports",0).Double);
+                    return total;
+                }
                 foreach (var row in _history_slice(g,active)) {
                     if ((row.Get("side","") != "sell")) { continue; }
                     string resource = row.Get("resource","").Text;
@@ -305,6 +310,7 @@ public static class Commissions {
         if ((offer.Count == 0)) { return "这份委托当前不可接取。"; }
         V trade_rows = g.s["block"].Get("trade_history",V.Arr());
         V active = V.Map("id", commission_id, "name", offer.Get("name",commission_id).Text, "domain", offer.Get("domain","").Text, "started_at", g.s.Get("local_hours",0).Double, "started_tick", (int)g.s.Get("simulation_tick",0).Long, "deadline_at", -(1.0), "goals", offer.Get("goals",V.Arr()).Duplicate(true), "goal_progress", V.Map(), "progress_now", V.Map(), "delivered_goods", 0.0, "trade_cursor", trade_rows.Count, "status", "active");
+        if(g.world_managed)active["city_trade_baseline"]=g.s["block"].Get("city_trade_totals",V.Map()).Duplicate(true);
         double deadline = offer.Get("fail_conditions",V.Map()).Get("deadline_hours",0).Double;
         if ((deadline > 0)) { active["deadline_at"] = V.From((active["started_at"].Double + deadline)); }
         state["active"] = active;

@@ -1,0 +1,132 @@
+{
+  "status": "passed",
+  "unity_version": "6000.6.5f1",
+  "application_version": "0.7.0-ui.6",
+  "platform": "OSXPlayer",
+  "graphics_device": "Apple M5 Max",
+  "graphics_api": "Metal",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "checks": [
+    {
+      "name": "isolated_save_root",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "runtime_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_import",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ui6_fullscreen",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-new-city.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-new-city.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_earned_fixture_exists",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_返回地图",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-all.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-all.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-steps-only.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-steps-only.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-lanes-only.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-lanes-only.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_road_camera_unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_road_access",
+      "passed": true,
+      "detail": {
+        "terrain_policy": "natural_surface_local_supports",
+        "primary_sites": 9,
+        "slope_repositioned_sites": 0,
+        "slope_supported_sites": 1,
+        "max_footprint_relief": 0.042966187000274658,
+        "min_floor_clearance": 0.015999972820281982,
+        "access_terminal_count": 23,
+        "access_reached_count": 23,
+        "unreachable_access_terminals": 0,
+        "unreachable_details": {}
+      }
+    }
+  ],
+  "errors": [],
+  "frame_intervals_ms": {
+    "samples": 0,
+    "median": 0.0,
+    "p95": 0.0
+  },
+  "resource_sample": {},
+  "growth_fixtures": [],
+  "hillside_buildings": {},
+  "forecast_geography": {},
+  "visible_river_boundary_picks": [],
+  "rogue_content": [],
+  "blueprint_ui": [],
+  "ui4_revision": {},
+  "construction_ux": {},
+  "ui5_headless": {},
+  "measurement_scope": "UI6 native fullscreen Player screenshots, read-only page browsing and programmatic callbacks on an earned checkpoint. OS input and performance are separate acceptance."
+}
