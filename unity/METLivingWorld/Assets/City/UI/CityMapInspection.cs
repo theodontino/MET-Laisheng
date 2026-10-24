@@ -10,6 +10,7 @@ namespace MET.City {
 public sealed partial class CityInterface {
  const float InspectionDelay=2f;
  CityWorld _inspectionWorld;
+ string _inspectionSuppressed="";
  string _inspectionHover="",_inspectionLock="",_inspectionLayer="",_inspectionPhase="",_inspectionCity="",_inspectionSelected="",_inspectionSignature="";
  double _inspectionHoverAt,_inspectionNextRefresh;
  double _inspectionMarkerRefreshAt;V _inspectionMarkerData=V.Map();
@@ -40,7 +41,7 @@ public sealed partial class CityInterface {
   Pin(_inspectionPanel,new Vector2(1,1),new Vector2(1,1),new Vector2(-18,-428),new Vector2(346,482));
   var title=Label(_inspectionPanel,"地格来源",19,Green);
   Pin(title.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(13,-9),new Vector2(275,30));
-  var close=Button(_inspectionPanel,"×",DismissMapInspection);
+  var close=Button(_inspectionPanel,"×",CloseMapInspection);
   Pin((RectTransform)close.transform,new Vector2(1,1),new Vector2(1,1),new Vector2(-7,-7),new Vector2(35,34));
   var viewport=Surface("Map source viewport",_inspectionPanel,new Color(.025f,.07f,.08f,.72f));
   Stretch(viewport,8,48,8,8);viewport.gameObject.AddComponent<Mask>().showMaskGraphic=true;
@@ -78,9 +79,10 @@ public sealed partial class CityInterface {
   if(_inspectionPanel!=null)_inspectionPanel.gameObject.SetActive(false);
   _inspectionWorld?.HighlightInspectionSources(null);
  }
+ public void CloseMapInspection(){var tile=_inspectionHover;DismissMapInspection();_inspectionSuppressed=tile;}
  public bool HandleMapInspectionEscape() {
-  if(!MapInspectionOpen&&_inspectionHover=="")return false;
-  DismissMapInspection();return true;
+  bool visible=MapInspectionOpen||(_inspectionMature&&Layer!="terrain");
+  CloseMapInspection();return visible;
  }
  public bool TryLockMapInspection(string tile) {
   if(_inspectionWorld==null||tile==""||!_inspectionMature||_inspectionHover!=tile||
@@ -117,6 +119,8 @@ public sealed partial class CityInterface {
   bool onScreen=pointer.x>=0&&pointer.y>=0&&pointer.x<=Screen.width&&pointer.y<=Screen.height;
   bool overHud=PointerOwned(pointer);
   string hovered=!blocked&&!motion&&!overHud&&onScreen?_inspectionWorld.PickTile(pointer):"";
+  if(hovered!=_inspectionSuppressed)_inspectionSuppressed="";
+  if(hovered==_inspectionSuppressed)hovered="";
   if(hovered!=_inspectionHover) {
    ResetInspectionHover();_inspectionHover=hovered;_inspectionHoverAt=Time.realtimeSinceStartupAsDouble;
   }

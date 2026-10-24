@@ -68,6 +68,7 @@ public sealed partial class CityInterface {
         _planningTop.pivot=new Vector2(.5f,1);_planningTop.offsetMin=new Vector2(0,-76);_planningTop.offsetMax=Vector2.zero;
         var brand=Label(_planningTop,"MET",24,Ink);Pin(brand.rectTransform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(18,0),new Vector2(65,40));
         brand.raycastTarget=true;var menu=brand.gameObject.AddComponent<Button>();menu.onClick.AddListener(()=>OpenArchive("settings"));
+        AddDeskTip(brand.gameObject,"MET · 系统菜单",()=>TopbarResourceSummary("met"));
         brand.name="HUD Brand";brand.resizeTextForBestFit=true;brand.resizeTextMinSize=18;brand.resizeTextMaxSize=24;brand.verticalOverflow=VerticalWrapMode.Truncate;brand.alignment=TextAnchor.MiddleLeft;
         string[] names={"DT","人口","粮食","材料","制成品","通货"};string[] kinds={"dt","population","food","material","goods","currency"};
         for(int i=0;i<names.Length;i++){
@@ -86,7 +87,7 @@ public sealed partial class CityInterface {
             if(i==0)_dt=value;else if(i==1)_population=value;else if(i==2)_food=value;else _planningStockValues.Add(value);
             var resource=kinds[i];var resourceButton=cell.gameObject.AddComponent<Button>();resourceButton.onClick.AddListener(()=>OpenResourcePage(resource));
             var detail=Label(cell,"",12,Muted);detail.name="HUD Detail "+resource;Pin(detail.rectTransform,new Vector2(0,0),new Vector2(0,0),new Vector2(46,2),new Vector2(100,20));_resourceDetails[resource]=detail;
-            AddDeskTip(cell.gameObject,name,()=>PlanningResourceExplanation(name));
+            AddDeskTip(cell.gameObject,name,()=>TopbarResourceSummary(resource));
         }
         _time=Label(_planningTop,"",14,Muted,24);_time.gameObject.SetActive(false);
     }
@@ -112,7 +113,7 @@ public sealed partial class CityInterface {
         _guidanceReason=Label(_planningOverviewBody,"",15,Muted,66*TextScale);
         _guidanceButton=Button(_planningOverviewBody,"查看城市",RunCityGuidanceAction,true);_guidanceButton.name="HUD Next Action";
         AttachCityGuidancePointerGuard();
-        var more=HudButton(_planningOverviewBody,"查看城市状况 ›","",()=>OpenArchive("overview"),30*TextScale);more.GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;
+        var more=HudButton(_planningOverviewBody,"查看当前任务 ›","",()=>OpenArchive("tasks_home"),30*TextScale);more.GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;
     }
     void BuildPlanningReminders() {
         _planningUrgent=Column(_root,"Priority Reminders",5);
@@ -152,13 +153,14 @@ public sealed partial class CityInterface {
     }
     void BuildPlanningFooter() {
         _planningRail=HudSurface("HUD Navigation",_root);
-        Pin(_planningRail,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-96),new Vector2(100,344));
-        var nav=new[]{new[]{"overview","城市","city"},new[]{"resources","经营","stock"},new[]{"bonuses","Bonus","bonus"},new[]{"themes","任务","task"},new[]{"records","档案","license"}};
+        Pin(_planningRail,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-96),new Vector2(100,482));
+        var nav=new[]{new[]{"city","城市","city"},new[]{"population_home","居民与服务","population"},new[]{"construction","施工","build"},new[]{"economy_home","财政","currency"},new[]{"bonus_home","Bonus","bonus"},new[]{"tasks_home","任务","task"},new[]{"records","档案","license"}};
         for(int i=0;i<nav.Length;i++){
-            string route=nav[i][0];var button=HudButton(_planningRail,nav[i][1],nav[i][2],()=>OpenArchive(SidebarForPage(route)),64);_topRoutes[route]=button;
+            string route=nav[i][0];var button=HudButton(_planningRail,nav[i][1],nav[i][2],()=>OpenSection(route),64);_topRoutes[route]=button;
             Pin((RectTransform)button.transform,new Vector2(0,1),new Vector2(0,1),new Vector2(4,-4-i*68),new Vector2(92,64));
-            var label=button.GetComponentInChildren<Text>();HudFont(label,15);Stretch(label.rectTransform,4,32,4,2);label.alignment=TextAnchor.LowerCenter;
+            var label=button.GetComponentInChildren<Text>();HudFont(label,route=="population_home"?12:15);Stretch(label.rectTransform,2,32,2,2);label.alignment=TextAnchor.LowerCenter;
             var icon=button.GetComponentInChildren<CityHudGlyph>().rectTransform;Pin(icon,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-7),new Vector2(23,23));
+            if(route=="city"){button.interactable=false;label.text="城市\n暂未开放";HudFont(label,11);Stretch(label.rectTransform,2,27,2,0);AddDeskTip(button.gameObject,"永久城市","暂未开放。已有记录可在档案查阅。");}
         }
         _planningBuildMenu=HudSurface("HUD Construction",_root);
         Pin(_planningBuildMenu,new Vector2(0,0),new Vector2(0,0),new Vector2(18,18),new Vector2(420,124));
@@ -236,7 +238,7 @@ public sealed partial class CityInterface {
         foreach(var entry in _hudLayerButtons){bool active=entry.Key==Layer;entry.Value.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;entry.Value.GetComponentInChildren<Text>().color=active?Ink:Muted;entry.Value.GetComponentInChildren<CityHudFrame>().enabled=active;}
         foreach(var entry in _foundationButtons){bool active=ConstructionIntentActive&&entry.Key==_base;entry.Value.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;entry.Value.GetComponentInChildren<CityHudFrame>().enabled=active;}
         foreach(var entry in _topRoutes){bool active=_archiveOpen&&(_page==entry.Key||entry.Key==ArchiveCategory(_page));entry.Value.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;}
-        if(_bonusBucket!=null){Pin(_bonusBucket,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-450),new Vector2(100,48));}
+        if(_bonusBucket!=null){Pin(_bonusBucket,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-588),new Vector2(100,48));}
         if(_buildHint!=null)_buildHint.text=ConstructionIntentActive?G.c.projects[_base]["name"].Text+" · 点空地选址 / Esc 取消":"建设 · 先选类型，再点空地";
         if(_planningOverview!=null&&_guidanceTitle!=null){
             _planningOverview.gameObject.SetActive(!_archiveOpen);

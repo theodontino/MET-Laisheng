@@ -65,27 +65,47 @@ public sealed partial class CityInterface {
  void ResourceBalanceRow(Transform parent,string caption,string value,Color color){var row=Row(parent,"Resource balance "+caption,32*TextScale);Height(row,32*TextScale);Label(row,caption,16,Muted,32*TextScale);var amount=Label(row,value,18,color,32*TextScale);amount.alignment=TextAnchor.MiddleRight;}
  void HistoryChart(Transform parent,V history,string key,string title,Color color){var records=history.Where(item=>item.Has(key)&&item[key].IsNumber&&item.Get("h").IsNumber).ToArray();if(records.Length<2){Label(parent,title+"：记录尚不足，未知值不画成零。",14,Muted);return;}Label(parent,title+" · 横轴来生月 / 纵轴实际通货",15,Muted);var r=Node("Measured History",parent);Height(r,260);var chart=r.gameObject.AddComponent<XCharts.Runtime.LineChart>();chart.Init();chart.UpdateTheme(XCharts.Runtime.ThemeType.Dark);chart.theme.sharedTheme.font=_font;chart.theme.transparentBackground=true;chart.EnsureChartComponent<XCharts.Runtime.Title>().show=false;chart.EnsureChartComponent<XCharts.Runtime.Tooltip>().show=true;chart.EnsureChartComponent<XCharts.Runtime.Legend>().show=false;var x=chart.EnsureChartComponent<XCharts.Runtime.XAxis>();var y=chart.EnsureChartComponent<XCharts.Runtime.YAxis>();x.type=XCharts.Runtime.Axis.AxisType.Category;y.type=XCharts.Runtime.Axis.AxisType.Value;x.splitNumber=8;x.boundaryGap=false;var grid=chart.EnsureChartComponent<XCharts.Runtime.GridCoord>();grid.left=80;grid.right=25;grid.top=22;grid.bottom=45;chart.RemoveData();var serie=chart.AddSerie<XCharts.Runtime.Line>(title);serie.lineStyle.color=color;serie.animation.enable=!Runtime.DisplaySettings.Get("reduced_motion",false).Bool;foreach(var item in records){chart.AddXAxisData(F(item["h"].Double,2));chart.AddData(0,item[key].Double);}chart.RefreshChart();}
 
- string _residentChoice="";
+ string _residentChoice="",_residentFilter="";
+ readonly Dictionary<string,string> _residentFilterChoices=new Dictionary<string,string>();
  string ResidentHostName(string host)=>host=="homeless"?"待安置住户":G.project_name(host);
  void PopulationPage(){
   var m=S["metrics"];var columns=WorkspaceColumns("Population master detail",.38f,.62f);var list=columns[0];var detail=columns[1];
-  Label(list,"居住与服务",24,Green);Meter(list,"已安置 / 住房容量",m.Get("housed",0).Double,m.Get("housing",0).Double," 人",Green);Metric(list,"待安置",F(m.Get("homeless",0).Double)+" 人");Metric(list,"健康 / 幸福",F(m.Get("health",0).Double)+" / "+F(m.Get("happiness",0).Double));foreach(var kind in new[]{"food","medical","education","entertainment","commercial"}){var ratio=kind=="food"?Progress.food_ratio(G):Progress.service_ratio(G,kind);Meter(list,kind=="food"?"实际口粮":Service(kind),ratio*100,100," %",ratio<.75?Gold:Blue);}
-  Label(list,"住户名册",21,Blue);var ids=Rules.ids(S["groups"]).Select(x=>x.Text).ToArray();if(!ids.Contains(_residentChoice))_residentChoice=ids.FirstOrDefault()??"";foreach(var gid in ids){var groupId=gid;var group=S["groups"][gid];Button(list,(_residentChoice==gid?"● ":"")+ResidentHostName(group["host"].Text)+" · "+F(group["count"].Double)+" 人",()=>{_residentChoice=groupId;RenderPage();},_residentChoice==gid);}
+  Fold(list,"全城居住与服务汇总",citySummary=>{Label(citySummary,"居住与服务",24,Green);Meter(citySummary,"已安置 / 住房容量",m.Get("housed",0).Double,m.Get("housing",0).Double," 人",Green);Metric(citySummary,"待安置",F(m.Get("homeless",0).Double)+" 人");Metric(citySummary,"健康 / 幸福",F(m.Get("health",0).Double)+" / "+F(m.Get("happiness",0).Double));foreach(var kind in new[]{"food","medical","education","entertainment","commercial"}){var ratio=kind=="food"?Progress.food_ratio(G):Progress.service_ratio(G,kind);Meter(citySummary,kind=="food"?"实际口粮":Service(kind),ratio*100,100," %",ratio<.75?Gold:Blue);}});
+  var filter=new[]{"homeless","food","medical","education","entertainment","commercial"}.Contains(_pageContext)?_pageContext:"all";
+  Label(list,"住户名册 · "+PopulationFilterName(filter),21,Blue);
+  var filterTabs=Row(list,"Resident filters primary",38*TextScale);foreach(var keyValue in new[]{"all","homeless","food"}){var key=keyValue;Button(filterTabs,PopulationFilterName(key),()=>Navigate("population",key),filter==key);}
+  var serviceTabs=Row(list,"Resident filters services",38*TextScale);foreach(var keyValue in new[]{"medical","education","entertainment","commercial"}){var key=keyValue;Button(serviceTabs,PopulationFilterName(key),()=>Navigate("population",key),filter==key);}
+  var allIds=Rules.ids(S["groups"]).Select(x=>x.Text).ToArray();var ids=allIds.Where(gid=>ResidentMatchesFilter(S["groups"][gid],filter)).ToArray();
+  if(_residentFilter!=filter){if(_residentFilter!=""&&_residentChoice!="")_residentFilterChoices[_residentFilter]=_residentChoice;_residentFilter=filter;_residentChoice=_residentFilterChoices.TryGetValue(filter,out var remembered)&&ids.Contains(remembered)?remembered:ids.FirstOrDefault()??"";}
+  else if(!ids.Contains(_residentChoice))_residentChoice=ids.FirstOrDefault()??"";
+  Label(list,filter=="all"?ids.Length+" 户":ids.Length+" 户符合筛选 · 按最近实际分配",15,Muted);
+  foreach(var gid in ids){var groupId=gid;var group=S["groups"][gid];var reading=filter!="all"&&filter!="homeless"?" · "+F(group.Get("living",V.Map()).Get(filter,0).Double*100,1)+"%":"";Button(list,(_residentChoice==gid?"● ":"")+ResidentHostName(group["host"].Text)+" · "+F(group["count"].Double)+" 人"+reading,()=>{_residentChoice=groupId;_residentFilterChoices[filter]=groupId;RenderPage();},_residentChoice==gid);}
+  if(ids.Length==0)Label(list,"没有符合当前筛选的住户。",16,Muted);
   if(_residentChoice!=""){
    var gid=_residentChoice;var group=S["groups"][gid];var host=group["host"].Text;Label(detail,ResidentHostName(host)+" · 住户 "+gid,25,Green);Metric(detail,"实际人口",F(group["count"].Double)+" 人");foreach(var key in new[]{"health","happiness","education"})Metric(detail,V.Map("health","健康","happiness","幸福","education","教育").Get(key,key).Text,F(group.Get(key,0).Double)+" /100");var living=group.Get("living",V.Map());Metric(detail,"失业比例",F(living.Get("unemployment",1).Double*100)+"%");Metric(detail,"污染暴露",F(living.Get("pollution",0).Double,3));
    Label(detail,"口粮与服务实际分配",20,Blue);foreach(var kind in new[]{"food","medical","education","entertainment","commercial"})Meter(detail,kind=="food"?"口粮":Service(kind),living.Get(kind,0).Double*100,100," %",Blue);
    if(host!="homeless")Button(detail,"定位住宅 / 建筑档案",()=>{SelectBuilding(host);Navigate("building",host);});
    Label(detail,"就业去向",20,Blue);var links=m.Get("employment_links",V.Arr()).Where(x=>x.Get("source",x.Get("group",x.Get("group_id",""))).Text==gid).ToArray();if(links.Length==0)Label(detail,"暂无实际分配岗位。",16,Muted);foreach(var link in links){Label(detail,G.project_name(link.Get("target","").Text)+" · "+F(link.Get("people",0).Double)+" 人",17);Fold(detail,"就业分配凭据",c=>Raw(c,link));}
    Label(detail,"服务来源",20,Blue);foreach(var link in m.Get("service_links",V.Arr()))if(link.Get("group","").Text==gid){Label(detail,Service(link.Get("kind","").Text)+" ← "+G.project_name(link.Get("source","").Text)+" · "+F(link.Get("people",0).Double)+" 人",16,Muted);Fold(detail,"服务分配凭据",c=>Raw(c,link));}Fold(detail,"住户完整记录",c=>Raw(c,group));
-  }else Label(detail,"尚无住户，迁入后可逐户查看生活与就业。",20,Muted);
+  }else Label(detail,allIds.Length==0?"尚无住户，迁入后可逐户查看生活与就业。":"当前筛选没有住户。可切换其他服务或查看全部住户。",20,Muted);
   Fold(detail,"全城实际就业网络",c=>{foreach(var link in m.Get("employment_links",V.Arr())){var gid=link.Get("source",link.Get("group_id","")).Text;var home=S["groups"].Get(gid,V.Map()).Get("host",link.Get("home","")).Text;Label(c,ResidentHostName(home)+" → "+G.project_name(link.Get("target","").Text)+" · "+F(link.Get("people",0).Double)+" 人",16);}});
   WorkspaceActions(S.Get("migration_paused",false).Bool?"恢复迁入":"暂停迁入",()=>Command(g=>{g.toggle_migration();return "";}));WorkspaceActions(S.Get("goods_active",false).Bool?"生活用品已启用":"公布生活用品计划",()=>Command(g=>g.enable_goods()),S.Get("goods_active",false).Bool);WorkspaceActions("就业图层",()=>{SetLayer("employment");InspectMapFromPage();});
  }
  void ConstructionPage(){
   var queue=Construction.queue(G);var summary=OverviewBrief(_body,"Construction shared summary");Label(summary,"共享施工 · "+F(Construction.capacity(G))+" CP/月",23,Blue);Label(summary,"材料库存 "+F(G.inventory_total("material"))+" · 电力满足 "+F(S["metrics"].Get("energy_ratio",1).Double*100,1)+"%",17,Muted);Label(summary,"按优先级共享 CP；实际取用材料，暂停保留进度。",16,Muted);var last=S["block"].Get("construction_last",V.Map());if(last.Count>0){Label(summary,"最近周期 · 施工 "+F(last.Get("cp",0).Double)+" CP / 材料 "+F(last.Get("material",0).Double),17,Gold);Fold(summary,"实际施工凭据",c=>Raw(c,last));}
   Label(_body,"队列 · "+queue.Count+" 项工程",22,Gold);if(queue.Count==0)Label(_body,"当前没有施工项目。选择空地规划新建筑。",19,Muted);
-  foreach(var job in queue){var id=job["id"].Text;var line=CompactTaskCard(_body,"Construction queue "+id);Label(line,job["name"].Text+(job.Get("upgrade",false).Bool?" · 升级":" · 新建")+(job.Get("paused",false).Bool?" · 已暂停":""),21,Gold);Meter(line,"已完成",job["total"].Double-job["work"].Double,job["total"].Double," CP",Blue);Metric(line,"尚需材料",F(job["material"].Double));var controls=Row(line,"Construction priority",46*TextScale);foreach(var priority in new[]{1,0,-1}){var value=priority;Button(controls,(job.Get("priority",0).Long==value?"✓ ":"")+(value>0?"优先":value<0?"延后":"普通"),()=>Command(g=>Construction.set_priority(g,id,value)));}var actions=Row(line);Button(actions,job.Get("paused",false).Bool?"恢复施工":"暂停施工",()=>Command(g=>g.set_paused(id,!job.Get("paused",false).Bool)));Button(actions,"建筑与来源",()=>Navigate("building",id));}
-  WorkspaceActions("材料收支",()=>Navigate("resources","material"));WorkspaceActions("返回城市选址",CloseArchive);
+  foreach(var job in queue){
+   var id=job["id"].Text;var line=CompactTaskCard(_body,"Construction queue "+id);Label(line,job["name"].Text+(job.Get("upgrade",false).Bool?" · 升级":" · 新建")+(job.Get("paused",false).Bool?" · 已暂停":""),21,Gold);
+   Meter(line,"已完成",job["total"].Double-job["work"].Double,job["total"].Double," CP",Blue);Metric(line,"尚需施工",F(job["work"].Double)+" CP");Metric(line,"尚需材料",F(job["material"].Double));
+   var capacity=Construction.capacity(G);var energy=S["metrics"].Get("energy_ratio",1).Double;var inventory=G.inventory_total("material");
+   var reason=job.Get("paused",false).Bool?"工程已暂停，保留当前进度":capacity<=0?"全城没有可用施工能力":energy<=0?"电力满足为零，施工能力无法投入":job["material"].Double>0&&inventory<=0?"材料库存为零，等待补给":"按队列优先级共享施工能力";
+   Label(line,"当前限制 · "+reason,16,job.Get("paused",false).Bool||capacity<=0||energy<=0||job["material"].Double>0&&inventory<=0?Gold:Muted);
+   if(energy>0&&energy<.999)Label(line,"电力将共享施工能力压至 "+F(capacity*energy)+" CP/月",15,Gold);
+   if(job["material"].Double>inventory)Label(line,"完成本项还缺 "+F(job["material"].Double-inventory)+" 材料（全城库存共享）",15,Gold);
+   var controls=Row(line,"Construction priority",46*TextScale);foreach(var priority in new[]{1,0,-1}){var value=priority;Button(controls,(job.Get("priority",0).Long==value?"✓ ":"")+(value>0?"优先":value<0?"延后":"普通"),()=>Command(g=>Construction.set_priority(g,id,value)));}
+   var actions=Row(line);Button(actions,job.Get("paused",false).Bool?"恢复施工":"暂停施工",()=>Command(g=>g.set_paused(id,!job.Get("paused",false).Bool)));Button(actions,"建筑与来源",()=>Navigate("building",id));
+  }
+  WorkspaceActions("前往财政 · 材料收支 ›",()=>Navigate("resources","material"));WorkspaceActions("返回城市选址",CloseArchive);
  }
  void RenderStatus(){RenderPlanningStatus();}
  void RefreshContext(){
@@ -99,8 +119,8 @@ public sealed partial class CityInterface {
   body.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(11,11,9,9);
   if(!Runtime.ViewCanEditFocused){
    Label(body,"自治地区 · 实际城市状态",21,Blue,27);
-   Label(body,"居民和供给继续运行；回任后可调整建设与构筑。",15,Muted,42);
-   var govern=Button(body,"查看回任与治理条件 ›",()=>Navigate("governance",Runtime.Session.Block(Runtime.Session.FocusedBlockId)["district_id"].Text),true);Height((RectTransform)govern.transform,42*TextScale);return;
+   Label(body,"居民和供给继续运行。永久城市治理暂未开放，当前可查看历史记录。",15,Muted,42);
+   var govern=Button(body,"查看历史档案 ›",()=>Navigate("heritage"),true);Height((RectTransform)govern.transform,42*TextScale);return;
   }
   if(SelectedBuilding!=""&&S["projects"].Has(SelectedBuilding)){
    var id=SelectedBuilding;var p=S["projects"][id];var st=G.project_stats(id);

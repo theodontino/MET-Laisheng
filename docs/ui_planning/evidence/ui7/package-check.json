@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "version": "0.7.0-ui.7",
+  "architectures": [
+    "x86_64",
+    "arm64"
+  ],
+  "zip_bundle_integrity": "passed",
+  "signing": "ad-hoc; not Developer ID signed or notarized",
+  "size_bytes": 72260095
+}

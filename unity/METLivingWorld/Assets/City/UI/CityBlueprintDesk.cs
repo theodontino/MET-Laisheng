@@ -49,12 +49,12 @@ public sealed partial class CityInterface {
   var icon=HudIcon(_bonusBucket,"bonus",new Color(.67f,.84f,.85f),24);Pin(icon,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(20,0),new Vector2(24,24));
   _bucketCount=Label(_bonusBucket,"许可",15,Ink);HudFont(_bucketCount,15);Stretch(_bucketCount.rectTransform,40,4,4,4);_bucketCount.resizeTextForBestFit=true;_bucketCount.resizeTextMinSize=12;_bucketCount.resizeTextMaxSize=Mathf.RoundToInt(15*TextScale);_bucketCount.alignment=TextAnchor.MiddleLeft;
   var frame=_bonusBucket.GetComponentInChildren<CityHudFrame>();if(frame!=null)frame.enabled=false;
-  var button=_bonusBucket.gameObject.AddComponent<Button>();button.onClick.AddListener(()=>OpenArchive("bonuses"));AddDeskTip(_bonusBucket.gameObject,"Bonus 部署许可",()=>"这里的数量是未安装副本。另有 "+Bonus.pending(G).Count+" 份提案等待领取。安装消耗1份；拆下不返还。已部署实例在建筑与库存中单独标记。");
+  var button=_bonusBucket.gameObject.AddComponent<Button>();button.onClick.AddListener(()=>OpenArchive("bonus_home"));AddDeskTip(_bonusBucket.gameObject,"Bonus 部署许可",()=>"这里的数量是未安装副本。另有 "+Bonus.pending(G).Count+" 份提案等待领取。安装消耗1份；拆下不返还。已部署实例在建筑与库存中单独标记。");
  }
  void RefreshBucket(){if(_bucketCount==null)return;long count=0;foreach(var w in S["block"].Get("bonus_wallet",V.Map()).Values)count+=w.Get("charges",0).Long;_bucketCount.resizeTextMaxSize=Mathf.RoundToInt(15*TextScale);_bucketCount.text="许可 "+count;}
  void BlueprintOffersPage(){
   var pending=Bonus.pending(G);
-  if(pending.Count==0){var columns=WorkspaceColumns("Reward queue",1);PaperLabel(PaperDocument(columns[0],"所有提案已处理"),"已领取蓝图可从 Bonus 安装。",17,true);WorkspaceActions("打开 Bonus",()=>Navigate("bonuses"));return;}
+  if(pending.Count==0){var columns=WorkspaceColumns("Reward queue",1);PaperLabel(PaperDocument(columns[0],"所有提案已处理"),"已领取蓝图可从 Bonus 安装。",17,true);WorkspaceActions("前往 Bonus 使用",()=>Navigate("bonus_home"));return;}
   BlueprintRewardCard(pending[0],Runtime.ViewCanEditFocused);
  }
 
@@ -90,7 +90,7 @@ public sealed partial class CityInterface {
  string FormatEffect(V effect,double value){var mode=effect.Get("mode","").Text;return mode=="multiply"?"×"+F(value,3):mode=="fraction"?F(value*100,1)+"%":F(value,3)+effect.Get("unit","").Text;}
  void ClaimBlueprint(string rid,string bid){
   if(_blueprintBusy)return;var pending=Bonus.pending(G);if(pending.Count==0||pending[0]["reward_id"].Text!=rid){ShowMessage("这份提案已处理，队列已刷新。");RenderPage();return;}
-  var claimPage=_page;_blueprintBusy=true;var error=Runtime.Execute(g=>Bonus.choose(g,rid,bid));if(error!=""){_blueprintBusy=false;RenderPage();return;}_rewardSelections.Remove(rid);HideDeskTip();_inventoryChoice=bid=="__currency__"?"":bid;_blueprintSlot="";_installView=V.Map();if(claimPage=="settlement"){_settlementStep=Bonus.pending(G).Count>0?"rewards":"summary";RenderPage();}else if(claimPage=="blueprints"&&Bonus.pending(G).Count>0)RenderPage();else Navigate("bonuses");RefreshBucket();StartCoroutine(BlueprintReceipt(bid));
+  _blueprintBusy=true;var error=Runtime.Execute(g=>Bonus.choose(g,rid,bid));if(error!=""){_blueprintBusy=false;RenderPage();return;}_rewardSelections.Remove(rid);HideDeskTip();_inventoryChoice=bid=="__currency__"?"":bid;_blueprintSlot="";_installView=V.Map();RenderPage();RefreshBucket();StartCoroutine(BlueprintReceipt(bid));
  }
  IEnumerator BlueprintReceipt(string bid){
   _receiptSkip=false;_receipt=Surface("Approved Blueprint Flight",_root,BlueprintBlue);Pin(_receipt,new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(260,286));

@@ -48,10 +48,6 @@ public sealed partial class CityInterface {
   double supply=m.Get("energy",0).Double,need=m.Get("energy_need",0).Double;SetCapacity("energy",need,supply,F(need,1)+"/"+F(supply,1));
  }
  void SetCapacity(string id,double demand,double supply,string text){if(!_capacityBars.TryGetValue(id,out var bar))return;bar.Ratio=supply>0?(float)Math.Min(1,demand/supply):demand>0?1:0;bar.color=demand>supply+0.0001?Red:demand>0&&demand>=supply*.85?Gold:Green;bar.SetVerticesDirty();_capacityReadings[id].text=text;}
- string CapacityExplanation(string id){
-  var m=S["metrics"];if(id=="energy"){double supply=m.Get("energy",0).Double,need=m.Get("energy_need",0).Double;return "需求 "+F(need,2)+" / 供给 "+F(supply,2)+"；"+(supply>=need?"余量 ":"缺口 ")+F(Math.Abs(supply-need),2)+"。供需为能力，来源详情可点击查看。";}
-  var last=S["block"].Get("construction_last",V.Map());var reserve=S["block"].Get("city_cp_last",V.Map());double h=last.Get("hours",0).Double,rh=reserve.Get("hours",0).Double;
-  return "青色：本区实际使用；金色：城市工程预留。读数为合计占用 / 有效供给。\n标称施工能力 "+F(Construction.capacity(G),2)+" CP/月；电力满足 "+F(m.Get("energy_ratio",1).Double*100,1)+"%。最近周期本区实际使用 "+(h>0?F(last.Get("cp",0).Double/h,2):"待结算")+"，城市工程预留 "+(rh>0?F(reserve.Get("cp",0).Double/rh,2):"待结算")+" CP/月。缺材料或暂停会降低实际使用；预留不等于城市工程已经消耗。";
- }
+ string CapacityExplanation(string id)=>TopbarResourceSummary(id);
 }
 }

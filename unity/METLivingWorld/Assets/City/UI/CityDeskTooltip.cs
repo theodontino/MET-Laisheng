@@ -23,7 +23,7 @@ public sealed class CityDeskTipFocus : MonoBehaviour,IPointerEnterHandler,IPoint
  public void OnDeselect(BaseEventData e){Owner?.QueueHideDeskTip();}
 }
 public sealed partial class CityInterface {
- RectTransform _deskTip;CityDeskTooltip _deskTipSource,_pendingDeskTip;Button _deskTipClose;GameObject _tipReturn;ScrollRect _deskTipScroll;
+ RectTransform _deskTip;CityDeskTooltip _deskTipSource,_pendingDeskTip;Button _deskTipClose;GameObject _tipReturn;ScrollRect _deskTipScroll;Text _deskTipCopy;double _tipRefreshAt;
  readonly DwellIntent _deskDwell=new DwellIntent(2);
  double _tipHideAt=-1;bool _tipPinned,_tipRestoring,_tipPointerInside,_tipOpenedByKeyboard,_pendingDeskPointer;
  static double DeskNow=>UnityEngine.Time.realtimeSinceStartupAsDouble;
@@ -34,15 +34,17 @@ public sealed partial class CityInterface {
   if(target.GetComponent<Selectable>()==null){var graphic=target.GetComponent<Graphic>();if(graphic==null){graphic=target.AddComponent<Image>();graphic.color=Color.clear;}graphic.raycastTarget=true;var button=target.AddComponent<Button>();button.transition=Selectable.Transition.None;button.onClick.AddListener(()=>ShowDeskTip(tip,true));}
  }
  void BuildDeskTip(){
-  _deskTip=Surface("Desk Explanation",_root,HudPanel);Pin(_deskTip,new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(430,230));
+  _deskTip=Surface("Desk Explanation",_root,HudPanel);_deskTip.GetComponent<Image>().color=new Color(HudPanel.r,HudPanel.g,HudPanel.b,1);Pin(_deskTip,new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(430,230));
   var shadow=_deskTip.gameObject.AddComponent<Shadow>();shadow.effectColor=new Color(0,0,0,.52f);shadow.effectDistance=new Vector2(3,-4);
   var keeper=_deskTip.gameObject.AddComponent<CityDeskTipFocus>();keeper.Owner=this;_deskTip.gameObject.SetActive(false);
  }
  bool DeskSourceAllowed(CityDeskTooltip source){
   if(source==null||!source.isActiveAndEnabled||!source.gameObject.activeInHierarchy||_blueprintBusy||!Application.isFocused)return false;
-  if(IsModal){Transform owner=_confirm!=null?_confirm.transform:_archive;if(owner==null||!source.transform.IsChildOf(owner))return false;}
+  if(_confirm!=null)return source.transform.IsChildOf(_confirm.transform);
+  if(IsModal&&!source.transform.IsChildOf(_archive)&&!IsTopbarTip(source)&&!source.transform.IsChildOf(_planningRail))return false;
   return true;
  }
+ bool IsTopbarTip(CityDeskTooltip source)=>source!=null&&_planningTop!=null&&source.transform.IsChildOf(_planningTop);
  public void RequestDeskTip(CityDeskTooltip source,bool pointer){
   if(_tipRestoring||!DeskSourceAllowed(source))return;
   if(DeskTipOpen){var selected=EventSystem.current?.currentSelectedGameObject;if(_tipPinned||(selected!=null&&selected.transform.IsChildOf(_deskTip)))return;if(_deskTipSource==source){KeepDeskTip();return;}CloseDeskTip(false,false);}
@@ -63,17 +65,23 @@ public sealed partial class CityInterface {
  void PresentDeskTip(CityDeskTooltip source,bool locked,bool keyboard){
   if(!DeskSourceAllowed(source))return;_tipHideAt=-1;
   if(_deskTip==null)BuildDeskTip();Clear(_deskTip);_deskTipSource=source;_tipPinned=locked;_tipOpenedByKeyboard=keyboard;_tipReturn=source.gameObject;_tipPointerInside=false;
-  float width=Mathf.Min(430,_root.rect.width-24);
-  string explanation=source.Body?.Invoke()??"";float lineWidth=Mathf.Max(12,(width-40)/(15*TextScale));float tipHeight=Mathf.Min(_root.rect.height-24,Mathf.Clamp(86+Mathf.Ceil(explanation.Length/lineWidth)*20*TextScale,130,350));_deskTip.sizeDelta=new Vector2(width,tipHeight);
+  float width=Mathf.Min(IsTopbarTip(source)?480:430,_root.rect.width-24);
+  string explanation=source.Body?.Invoke()??"";float tipHeight=230;_deskTip.sizeDelta=new Vector2(width,tipHeight);
   var heading=Label(_deskTip,source.Heading,18,HudText);Pin(heading.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(18,-14),new Vector2(width-72,33));
   // Long explanations scroll inside the small overlay rather than expand across the screen.
   var viewport=Node("Explanation Text Viewport",_deskTip);Stretch(viewport,18,52,18,14);viewport.gameObject.AddComponent<RectMask2D>();var viewportImage=viewport.gameObject.AddComponent<Image>();viewportImage.color=Color.clear;
-  var copy=Label(viewport,explanation,15,HudMuted);copy.rectTransform.anchorMin=new Vector2(0,1);copy.rectTransform.anchorMax=Vector2.one;copy.rectTransform.pivot=new Vector2(.5f,1);copy.rectTransform.sizeDelta=new Vector2(0,0);copy.rectTransform.anchoredPosition=Vector2.zero;var fit=copy.gameObject.AddComponent<ContentSizeFitter>();fit.verticalFit=ContentSizeFitter.FitMode.PreferredSize;
+  var copy=Label(viewport,explanation,IsTopbarTip(source)?18:15,IsTopbarTip(source)?HudText:HudMuted);_deskTipCopy=copy;_tipRefreshAt=DeskNow+.25;copy.rectTransform.anchorMin=new Vector2(0,1);copy.rectTransform.anchorMax=Vector2.one;copy.rectTransform.pivot=new Vector2(.5f,1);copy.rectTransform.sizeDelta=new Vector2(0,0);copy.rectTransform.anchoredPosition=Vector2.zero;var fit=copy.gameObject.AddComponent<ContentSizeFitter>();fit.verticalFit=ContentSizeFitter.FitMode.PreferredSize;
   var scroll=viewport.gameObject.AddComponent<ScrollRect>();_deskTipScroll=scroll;scroll.horizontal=false;scroll.viewport=viewport;scroll.content=copy.rectTransform;scroll.movementType=ScrollRect.MovementType.Clamped;scroll.scrollSensitivity=24;
   _deskTipClose=Button(_deskTip,"×",HideDeskTip);Pin((RectTransform)_deskTipClose.transform,new Vector2(1,1),new Vector2(1,1),new Vector2(-8,-8),new Vector2(34,32));var navigation=_deskTipClose.navigation;navigation.mode=Navigation.Mode.None;_deskTipClose.navigation=navigation;var closeKeeper=_deskTipClose.gameObject.AddComponent<CityDeskTipFocus>();closeKeeper.Owner=this;closeKeeper.TrackPointer=false;
+  tipHeight=DeskTipHeight(copy,width);_deskTip.sizeDelta=new Vector2(width,tipHeight);
   PositionDeskTip(source,width,tipHeight);_deskTip.gameObject.SetActive(true);_deskTip.SetAsLastSibling();
-  var group=_deskTip.GetComponent<CanvasGroup>()??_deskTip.gameObject.AddComponent<CanvasGroup>();group.interactable=true;group.blocksRaycasts=true;
+  var group=_deskTip.GetComponent<CanvasGroup>()??_deskTip.gameObject.AddComponent<CanvasGroup>();group.alpha=1;group.interactable=true;group.blocksRaycasts=true;
   if(locked)EventSystem.current?.SetSelectedGameObject(_deskTipClose.gameObject);
+ }
+ float DeskTipHeight(Text copy,float width){var settings=copy.GetGenerationSettings(new Vector2(width-36,0));float content=copy.cachedTextGeneratorForLayout.GetPreferredHeight(copy.text,settings)/copy.pixelsPerUnit;return Mathf.Min(_root.rect.height-110,Mathf.Clamp(content+76,150,460));}
+ void RefreshTopbarTip(){
+  if(!DeskTipOpen||!IsTopbarTip(_deskTipSource)||_deskTipCopy==null||DeskNow<_tipRefreshAt)return;_tipRefreshAt=DeskNow+.25;
+  var value=_deskTipSource.Body?.Invoke()??"";if(value==_deskTipCopy.text)return;_deskTipCopy.text=value;float width=_deskTip.sizeDelta.x,height=DeskTipHeight(_deskTipCopy,width);_deskTip.sizeDelta=new Vector2(width,height);PositionDeskTip(_deskTipSource,width,height);
  }
  void PositionDeskTip(CityDeskTooltip source,float width,float height){
   var anchor=DeskTipBounds(source.transform);
@@ -91,7 +99,7 @@ public sealed partial class CityInterface {
  }
  public void SetDeskTipPointer(bool inside){_tipPointerInside=inside;if(inside)KeepDeskTip();else QueueHideDeskTip();}
  public void KeepDeskTip(){_tipHideAt=-1;}
- public void QueueHideDeskTip(){_tipHideAt=DeskNow+.18;}
+ public void QueueHideDeskTip(){_tipHideAt=DeskNow+.45;}
  void SuppressHeldTip(CityDeskTooltip source){if(source==null)return;if(source.PointerInside)_deskDwell.Suppress(TipKey(source,true));if(source.FocusInside)_deskDwell.Suppress(TipKey(source,false));}
  void CloseDeskTip(bool suppress,bool restore){
   if(suppress){SuppressHeldTip(_pendingDeskTip);SuppressHeldTip(_deskTipSource);}_deskDwell.Cancel();
@@ -110,6 +118,7 @@ public sealed partial class CityInterface {
   bool toastLive=_toast!=null&&UnityEngine.Time.unscaledTime<_toastUntil;if(_planningToastSurface!=null)_planningToastSurface.gameObject.SetActive(toastLive&&!_archiveOpen);if(_archiveOpen&&_subtitle!=null)_subtitle.text=toastLive&&_toastPage==_page?"通知："+_toast.text:_page=="tender"?(S["draft"].Count==0?"先在地图选择一块空闲陆地":"选位置  ›  选方案  ›  开工"):PageSubtitle;
   if(_pendingDeskTip!=null){if(!DeskSourceAllowed(_pendingDeskTip)||(_pendingDeskPointer?!_pendingDeskTip.PointerInside:!_pendingDeskTip.FocusInside)){_pendingDeskTip=null;_deskDwell.Cancel();}else if(_deskDwell.Mature(DeskNow)){var source=_pendingDeskTip;bool keyboard=!_pendingDeskPointer;_pendingDeskTip=null;_deskDwell.Presented();PresentDeskTip(source,false,keyboard);}}
   if(DeskTipOpen&&_deskTipSource!=null&&!DeskSourceAllowed(_deskTipSource))CloseDeskTip(false,false);
+  RefreshTopbarTip();
   if(DeskTipOpen&&_tipHideAt>=0&&DeskNow>=_tipHideAt){var selected=EventSystem.current?.currentSelectedGameObject;bool focusInside=selected!=null&&selected.transform.IsChildOf(_deskTip);bool anchorHeld=_deskTipSource!=null&&(_deskTipSource.PointerInside||(_tipOpenedByKeyboard&&_deskTipSource.FocusInside));if(!_tipPinned&&!_tipPointerInside&&!focusInside&&!anchorHeld)CloseDeskTip(false,false);_tipHideAt=-1;}
   if(EventSystem.current!=null&&Input.GetKeyDown(KeyCode.F1)){var source=EventSystem.current.currentSelectedGameObject?.GetComponent<CityDeskTooltip>();if(source!=null)ShowDeskTip(source,true);}
   if(DeskTipOpen&&_deskTipScroll!=null){var selected=EventSystem.current?.currentSelectedGameObject;if(selected!=null&&selected.transform.IsChildOf(_deskTip)){float scrollStep=Input.GetKeyDown(KeyCode.PageDown)?-.75f:Input.GetKeyDown(KeyCode.PageUp)?.75f:Input.GetKeyDown(KeyCode.DownArrow)?-.12f:Input.GetKeyDown(KeyCode.UpArrow)?.12f:0;if(scrollStep!=0)_deskTipScroll.verticalNormalizedPosition=Mathf.Clamp01(_deskTipScroll.verticalNormalizedPosition+scrollStep);}}

@@ -83,7 +83,7 @@ public sealed partial class CityInterface {
    var eligible=ending.Get("eligible_theme","").Text;var landmark=Block.capstone_definitions(G).Get(eligible,V.Map());if(landmark.Count!=0){var cap=Card(detail,landmark.Get("name","主题定型建筑").Text,"主题已完成 · 具备正式挂牌资格",CityWorld.BuildingTypeColor("special"));Mark(cap,"public",CityWorld.BuildingTypeColor("special"),130);Button(cap,ending.Get("capstone_claimed",false).Bool?"已经正式挂牌":"正式挂牌 · 领取定型建筑",()=>Command(g=>Block.claim_capstone(g)),true,ending.Get("capstone_claimed",false).Bool);Fold(cap,"完整规则与来源",c=>Raw(c,landmark));}else Label(detail,"本次未达成主题奖励条件。继续经营可完成主题，但不追补此次地标资格。",17,Muted);
    Button(intro,"保存街区记录",()=>Command(g=>{var result=Block.archive(g);return result.Get("ok",false).Bool?"":result.Get("error","记录保存失败。").Text;}));
   }else{
-   BuildLegacyCards(main,true);var next=Card(detail,"同城后续发展","原地标和部署留在原街区；同城成果按来源与真实投入采用。",Green);Button(next,"扩展同城 · 新街区",()=>Navigate("block_start"));Button(next,"查看下一地区任期",()=>Navigate("district_start"));Button(next,"查看地区治理与后续发展",()=>Navigate("governance"),true);
+   BuildLegacyCards(main,true);var next=Card(detail,"同城后续发展 · 暂未开放","已有长期成果与来源只读保留。街区可继续常速经营。",Muted);Button(next,"查看已保存成果",()=>Navigate("content"));
   }
   WorkspaceHint(pending.Count>0?"还有 "+pending.Count+" 份待领奖励；候选按原保存队列领取。":Runtime.PendingDecisions?"当前事项仍有待决定合同。":"结算可以结束；街区继续常速经营。");
   if(pending.Count>0)WorkspaceActions("前往领取奖励",()=>{_settlementStep="rewards";RenderPage();});

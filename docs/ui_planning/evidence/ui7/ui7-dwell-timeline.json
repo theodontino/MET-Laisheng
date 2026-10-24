@@ -1,0 +1,10 @@
+{
+  "clock": "Unity realtimeSinceStartupAsDouble",
+  "delay_seconds": 2,
+  "elapsed_seconds": 5.343023500000001,
+  "input": "synthetic Unity IPointerEnter/Exit callbacks; production focus guard retained",
+  "screenshots": [
+    "ui7-hover-0700ms-pending.png",
+    "ui7-hover-2150ms-open.png"
+  ]
+}

@@ -1,0 +1,998 @@
+{
+  "status": "passed",
+  "unity_version": "6000.6.5f1",
+  "application_version": "0.7.0-ui.7",
+  "platform": "OSXPlayer",
+  "graphics_device": "Apple M5 Max",
+  "graphics_api": "Metal",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "checks": [
+    {
+      "name": "isolated_save_root",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "runtime_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_import",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ui7_fullscreen_1920_1080",
+      "passed": true,
+      "detail": {
+        "fullscreen": true,
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "ui7_focused_real_window",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_下一步 · 选择规约",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_下一步 · 选择地点",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_支付启动投入 · 建立地区",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确立起源 · 安顿居民",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_first_city_playable",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_first_tick_is_pending",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-first-tick-pending.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-first-tick-pending.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_earned_report_exists",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_fixture_normal_command_provenance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui7_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui7_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_population_home",
+      "passed": true,
+      "detail": {
+        "page": "population_home",
+        "context": "",
+        "owner": "population_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_no_footer_population_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-common-population_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-common-population_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_construction",
+      "passed": true,
+      "detail": {
+        "page": "construction",
+        "context": "",
+        "owner": "construction",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_no_footer_construction",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-common-construction.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-common-construction.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_economy_home",
+      "passed": true,
+      "detail": {
+        "page": "economy_home",
+        "context": "",
+        "owner": "economy_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_no_footer_economy_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-common-economy_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-common-economy_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_bonus_home",
+      "passed": true,
+      "detail": {
+        "page": "bonus_home",
+        "context": "",
+        "owner": "bonus_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_no_footer_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-common-bonus_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-common-bonus_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_tasks_home",
+      "passed": true,
+      "detail": {
+        "page": "tasks_home",
+        "context": "",
+        "owner": "tasks_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_no_footer_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-common-tasks_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-common-tasks_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_records",
+      "passed": true,
+      "detail": {
+        "page": "records",
+        "context": "",
+        "owner": "records",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_no_footer_records",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-common-records.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-common-records.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_common_roots_readonly",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_task_common_shows_earned_progress",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-task-earned-progress.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-task-earned-progress.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_pending_map_hover_does_not_consume_escape",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_escape_suppresses_same_map_target",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_prefix_医疗 · 满足",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_population_shortage_filter",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_rail_enabled_construction",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_topbar_enabled_材料",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_resources",
+      "passed": true,
+      "detail": {
+        "page": "resources",
+        "context": "material",
+        "owner": "economy_home",
+        "parents": 1
+      }
+    },
+    {
+      "name": "active_callback_粮食",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_制成品",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_resource_switch_has_one_parent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_header_back_available",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_economy_home",
+      "passed": true,
+      "detail": {
+        "page": "economy_home",
+        "context": "",
+        "owner": "economy_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_rail_enabled_population_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_category_restores_filter",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_rail_enabled_population_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_population_home",
+      "passed": true,
+      "detail": {
+        "page": "population_home",
+        "context": "",
+        "owner": "population_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_topbar_enabled_材料",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_resource_has_fiscal_rail_ownership",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_resource_has_building_source",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_building_keeps_fiscal_context",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_header_back_available",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_local_back_restores_resource",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_scrollable_resource_details",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_map_view_preserves_selection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_map_return_keeps_context_selection_scroll",
+      "passed": true,
+      "detail": {
+        "scroll": 0.37000000476837158,
+        "selection": "0,1"
+      }
+    },
+    {
+      "name": "ui7_rail_enabled_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_成长路线",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_growth_peer_has_no_parent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_已完成",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_completed_peer_has_no_parent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_preserves_gameplay",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-navigation-resource-owner.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-navigation-resource-owner.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_modal_topbar_real_dwell_pending",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-hover-0700ms-pending.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-hover-0700ms-pending.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_modal_topbar_dwell_opens_after_two_seconds",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_tooltip_readable_close",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-hover-2150ms-open.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-hover-2150ms-open.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_overlay_pointer_can_read",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_close_restores_source_focus",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_confirmation_owns_tooltip_input",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_取消",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_quick_summary_no_scroll_人口",
+      "passed": true,
+      "detail": {
+        "content": 274.0,
+        "viewport": 284.0
+      }
+    },
+    {
+      "name": "ui7_quick_summary_no_scroll_粮食",
+      "passed": true,
+      "detail": {
+        "content": 274.0,
+        "viewport": 284.0
+      }
+    },
+    {
+      "name": "capture_size_ui7-food-quick-summary.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-food-quick-summary.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_quick_summary_no_scroll_材料",
+      "passed": true,
+      "detail": {
+        "content": 274.0,
+        "viewport": 284.0
+      }
+    },
+    {
+      "name": "ui7_quick_summary_no_scroll_制成品",
+      "passed": true,
+      "detail": {
+        "content": 274.0,
+        "viewport": 284.0
+      }
+    },
+    {
+      "name": "ui7_quick_summary_no_scroll_通货",
+      "passed": true,
+      "detail": {
+        "content": 274.0,
+        "viewport": 284.0
+      }
+    },
+    {
+      "name": "ui7_hover_preserves_gameplay",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_topbar_enabled_人口",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_population_home",
+      "passed": true,
+      "detail": {
+        "page": "population_home",
+        "context": "",
+        "owner": "population_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "active_callback_恢复迁入",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_common_population_real_migration_action",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_暂停迁入",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_topbar_enabled_通货",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_economy_home",
+      "passed": true,
+      "detail": {
+        "page": "economy_home",
+        "context": "",
+        "owner": "economy_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_finance_common_has_actual_operating_data",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_查看收支详表 ›",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_finance_detail_context",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_dt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_population",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_food",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_material",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_goods",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_currency",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_cp",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_energy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_contextual_summary_met",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_summaries_readonly",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-ui-scale-80.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-ui-scale-80.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_scale_keeps_fullscreen_80",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-ui-scale-100.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-ui-scale-100.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_scale_keeps_fullscreen_100",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-ui-scale-120.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-ui-scale-120.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_scale_keeps_fullscreen_120",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-font-125.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-font-125.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-font-150.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-font-150.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui7_reward_source",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui7_reward_source",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_earned_pending_rewards",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_比较并领取奖励 ›",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_reward_preselection_readonly",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确认领取",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_reward_saved_and_stays_tasks",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-task-reward-claimed.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-task-reward-claimed.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_rail_enabled_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_bonus_home",
+      "passed": true,
+      "detail": {
+        "page": "bonus_home",
+        "context": "",
+        "owner": "bonus_home",
+        "parents": 0
+      }
+    },
+    {
+      "name": "ui7_earned_installable_copy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_bonus_install_explicit_context",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-bonus-install-comparison.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-bonus-install-comparison.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_安装 · 消耗1份",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_install_one_earned_copy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-bonus-installed.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-bonus-installed.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui7_real_dt_zero",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui7_real_dt_zero",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_earned_dt_zero",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-task-dt-zero.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-task-dt-zero.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_周期回顾与街区结算 ›",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_navigation_settlement",
+      "passed": true,
+      "detail": {
+        "page": "settlement",
+        "context": "",
+        "owner": "tasks_home",
+        "parents": 1
+      }
+    },
+    {
+      "name": "capture_size_ui7-task-capstone-ready.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-task-capstone-ready.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_archived_world_fixture_exists",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_archived_world_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui7_archived_world",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui7_archived_world",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_locked_route_city",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_locked_route_governance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_locked_route_network",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_locked_route_science",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_locked_route_city_project",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_locked_route_district_start",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_locked_route_block_start",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_locked_route_overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui7-archived-world-preserved.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui7-archived-world-preserved.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_source_reports_unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui7_manual_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui7_manual_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui7_manual_export",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "errors": [],
+  "frame_intervals_ms": {
+    "samples": 0,
+    "median": 0.0,
+    "p95": 0.0
+  },
+  "resource_sample": {},
+  "growth_fixtures": [],
+  "hillside_buildings": {},
+  "forecast_geography": {},
+  "visible_river_boundary_picks": [],
+  "rogue_content": [],
+  "blueprint_ui": [],
+  "ui4_revision": {},
+  "construction_ux": {},
+  "ui5_headless": {},
+  "measurement_scope": "UI7 native fullscreen Player screenshots, earned fixture restore, category/common/detail navigation, synthetic pointer/focus events and real-time tooltip dwell. No OS mouse/keyboard or human usability claim."
+}
