@@ -30,7 +30,7 @@ public sealed partial class CityInterface {
   bool visible=!_archiveOpen&&!_mapViewing&&!ConstructionWindowOpen&&SelectedTile!=""&&S["cells"].Has(SelectedTile);
   _context.gameObject.SetActive(visible);if(!visible)return;
   _tileSummary=TileSummary.describe(G,SelectedTile);_tileEnergy=MapInspection.Describe(S,SelectedTile,"energy",includeNeighbors:false);string key=ContextDisplayKey();if(key==_contextKey)return;
-  _contextKey=key;ContextRebuildCount++;Clear(_tileHeader);Clear(_tileBody);Clear(_tileFooter);_tileBody.name="Local facts "+SelectedTile;
+  ContextRebuildCount++;Clear(_tileHeader);Clear(_tileBody);Clear(_tileFooter);_tileBody.name="Local facts "+SelectedTile;
   var data=_tileSummary;var buildings=data["buildings"];var cell=data["cell"];bool empty=buildings.Count==0,water=cell.Get("traits",V.Arr()).Contains("tile.water");
   var title=TileText(_tileHeader,(empty?"地块":buildings[0]["name"].Text)+" · "+SelectedTile,21,Green);Pin(title.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(14,-5),new Vector2(510,36*TextScale));
   var close=Button(_tileHeader,"×",DismissLocalSelection);Pin((RectTransform)close.transform,new Vector2(1,1),new Vector2(1,1),new Vector2(-8,-5),new Vector2(36,36));
@@ -44,7 +44,7 @@ public sealed partial class CityInterface {
   RenderTileSlots(data);
   RenderTileAdjacency(data);
   BuildTileActions(empty,water);
-  _renderedTile=TileStateKey;Canvas.ForceUpdateCanvases();_tileScroll.StopMovement();_tileScroll.verticalNormalizedPosition=_tilePositions.TryGetValue(_renderedTile,out var position)?position:1;
+  _contextKey=key;_renderedTile=TileStateKey;Canvas.ForceUpdateCanvases();_tileScroll.StopMovement();_tileScroll.verticalNormalizedPosition=_tilePositions.TryGetValue(_renderedTile,out var position)?position:1;
  }
  void RenderTileIdentity(V data,bool empty,bool water){
   var strip=TileBlock(_tileBody,"Identity portrait and metrics",100);
@@ -58,7 +58,7 @@ public sealed partial class CityInterface {
   string details=empty?"选择下方建筑类型":data["buildings"][0]["operator_name"].Text+"\nT"+data["buildings"][0]["tier"].Text+" · "+status;
   var operatorLabel=TileText(identity,details,14,empty?Muted:Green);operatorLabel.rectTransform.anchorMin=Vector2.zero;operatorLabel.rectTransform.anchorMax=new Vector2(1,.61f);operatorLabel.rectTransform.offsetMin=Vector2.zero;operatorLabel.rectTransform.offsetMax=Vector2.zero;
   if(empty){var condition=TileText(identity,status,14,water?Gold:Green);condition.rectTransform.anchorMin=new Vector2(0,.34f);condition.rectTransform.anchorMax=new Vector2(1,.62f);condition.rectTransform.offsetMin=condition.rectTransform.offsetMax=Vector2.zero;operatorLabel.rectTransform.anchorMax=new Vector2(1,.33f);}
-  AddDeskTip(identity.gameObject,"地块与运营",terrain+" · "+traits+"\n"+details);var identityImage=identity.gameObject.AddComponent<Image>();identityImage.color=Color.clear;
+  AddDeskTip(identity.gameObject,"地块与运营",terrain+" · "+traits+"\n"+details);
   var metrics=Node("People and workplace matrix",strip);TileBounds(metrics,.62f,1);
   var people=data["people"];string[] names={"居住人口","居民就业","本地岗位","岗位使用"};double[] values={people["population"].Double,people["resident_employed"].Double,people["workplace_jobs"].Double,people["workplace_jobs_filled"].Double};
   for(int i=0;i<4;i++){var metric=TileTint(metrics,"People metric "+i,_tileBand);metric.anchorMin=new Vector2((i%2)*.5f,i<2?.5f:0);metric.anchorMax=new Vector2((i%2+1)*.5f,i<2?1:.5f);metric.offsetMin=new Vector2(2,2);metric.offsetMax=new Vector2(-2,-2);TileStatCell(metric,names[i],F(values[i])+"人");}
