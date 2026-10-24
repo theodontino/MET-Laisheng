@@ -1,6 +1,14 @@
-# Modern strategy HUD — UI.8
+# Modern strategy HUD — UI.9
 
 The visual language follows the user-approved Stellaris-reference concept of 2026-10-15 (Library `libfile_25717c339e688191a18ed99c487e2ffe`). The 2026-10-23 page-remake request and subsequent left-sidebar/two-level corrections supersede the old uniform archive and centered-window layout. Existing city assets and gameplay rules are preserved.
+
+## UI9 tile presentation refinement (2026-10-25)
+
+The user supplied a Crusader Kings county/holding panel as an information-organization reference. The tile panel now combines an actual building portrait, terrain/operator/status facts and a two-by-two population/workplace block. Resource flows use a shared-column table with a grouped consumption header (production inputs, residents and construction), gross output and net local production/consumption. Electricity capacity stays separate from monthly stock flows. Cash source attribution uses each actual source name, including land rent and pollution-related income.
+
+Services use a compact four-cell coverage/reachability matrix (two columns for enlarged type), environment readings sit alongside one another, and Bonus appears as a clickable graphical socket strip. Clicking a metric/section expands local sources in place. Persistent bottom actions occupy a single row. The 600-wide panel and the existing HUD placement remain; no new intermediary page is introduced. The reference informs density and grouping, while MET keeps its own dark/teal visual language.
+
+Implementation and build checks are recorded in [UI9 delivery](UI9_DELIVERY.md). Player appearance and input acceptance remain user-owned.
 
 ## UI8 superseding decisions (2026-10-25)
 
