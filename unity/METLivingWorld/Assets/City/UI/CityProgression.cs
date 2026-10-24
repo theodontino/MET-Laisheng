@@ -10,47 +10,50 @@ public sealed partial class CityInterface {
  void RewardCard(V reward,bool actionable){BlueprintRewardCard(reward,actionable);}
  void ThemesPage(){
   var view=Themes.view(G);var tab=_pageContext=="growth"?"growth":_pageContext=="completed"?"completed":"current";
-  var tabs=Row(_body,"Tasks sections",42);foreach(var entry in new[]{new[]{"current","当前事项"},new[]{"growth","成长路线"},new[]{"completed","已完成"}}){var id=entry[0];Button(tabs,entry[1],()=>Navigate("themes",id),tab==id);}
+  if(Bonus.pending(G).Count>0)WorkspaceActions("领取奖励 · "+Bonus.pending(G).Count,()=>Navigate("blueprints"));
+  if(Runtime.MandatoryPending)WorkspaceActions("处理周期结算",()=>Navigate("settlement"));
   if(tab=="completed"){ThemeCompletedPage(view);return;}
   if(tab=="growth"){ThemeGrowthPage(view);return;}
-  var columns=WorkspaceColumns("Current city matters",1.1f,1);var matters=columns[0];var commission=columns[1];
-  Label(matters,"待决定与进行中的合同",21,Gold);
-  if(view["events"].Count==0)Label(matters,"当前没有待决定或进行中的合同。",17,Muted);
-  PlanningTaskEvents(matters,view);
-  if(view.Get("id","").Text==""){ThemeSelection(commission,view);return;}
-  ThemeCommission(commission,view);
-  if(Bonus.pending(G).Count>0)WorkspaceActions("领取奖励 · "+Bonus.pending(G).Count,()=>Navigate("blueprints"));
-  WorkspaceHint(view["name"].Text+" · "+(view["completed"].Bool?"主题已完成":"M"+view["stage"].Long+" / 3 · "+view["stage_name"].Text));
+  Transform commission=_body,matters=_body;
+  if(view["events"].Count>0){var columns=WorkspaceColumns("Current city matters",1.15f,1);commission=columns[0];matters=columns[1];}
+  if(view.Get("id","").Text=="")ThemeSelection(commission,view);else ThemeCommission(commission,view);
+  if(view["events"].Count>0){Label(matters,"当前合同与待决定委任",21,Gold);UnifiedTaskContracts(matters,view);}
+  else Label(_body,"当前没有待决定或进行中的合同。",16,Muted);
+  WorkspaceHint(view.Get("completed",false).Bool?"成果已记录；待领取提案与街区定型在结算办理。":"状态、交付和累计均按实际模拟推进；时间统一使用来生月。");
  }
  void ThemeSelection(Transform parent,V view){
   Label(parent,"选择街区的发展主题",23,Gold);Label(parent,"选择不消耗 DT。改向需要真实重铸权并支付代价。",16,Muted);
   foreach(var choice in view["choices"]){var id=choice["id"].Text;var box=Card(parent,choice["name"].Text,choice["description"].Text,Green);Illustration(box,ThemePicture(id),116);Button(box,"选择此主题",()=>Command(g=>Themes.select(g,id)),true);}
  }
  void ThemeCommission(Transform parent,V view){
-  var completed=view["completed"].Bool;var card=Card(parent,view["name"].Text,completed?"主题已完成 · 阶段凭据见已完成":"M"+view["stage"].Long+" / 3 · "+view["stage_name"].Text,completed?Gold:Green);Illustration(card,ThemePicture(view["id"].Text),110);
-  if(completed){Button(card,"查看已完成成果",()=>Navigate("themes","completed"));return;}
-  foreach(var goal in view["goals"]){double factor=goal["unit"].Text=="%"?100:1;Metric(card,(goal["met"].Bool?"✓ ":"○ ")+goal["label"].Text,F(goal["value"].Double*factor,1)+(goal["comparison"].Text=="max"?" ≤ ":" / ")+F(goal["target"].Double*factor,1)+goal["unit"].Text,"",goal["met"].Bool?Green:Gold);
-   if(goal["kind"].Text=="delivery"&&!goal["met"].Bool&&goal["id"].Text.StartsWith("delivery_",StringComparison.Ordinal)){var resource=goal["id"].Text.Substring(9);Button(card,"从库存交付 "+Resource(resource),()=>Command(g=>Themes.deliver(g,resource)),true);}
-  }
-  if(view["steady_required_seconds"].Double>0)Metric(card,"状态稳定时长",Clock.duration(G,view["steady_seconds"].Double)+" / "+Clock.duration(G,view["steady_required_seconds"].Double));
+  var completed=view["completed"].Bool;var card=Card(parent,view["name"].Text,completed?"主题已完成 · 阶段凭据见已完成":"M"+view["stage"].Long+" / 3 · "+view["stage_name"].Text,completed?Gold:Green);
+  if(completed){Label(card,"已获得与待领取成果保留。命名与定型建筑按 DT 实际归零时的资格办理。",16,Muted);Button(card,"查看已完成成果",()=>Navigate("tasks_home","completed"));Button(card,"前往周期与街区结算",()=>Navigate("settlement"));return;}
+  var stage=view["stages"][(int)view["stage"].Long-1];
+  Label(card,"阶段奖励 · "+ThemeStageReward(stage),17,Green);
+  if(stage["hold_months"].Double>0){Metric(card,"连续稳定",F(stage["held_months"].Double,2)+" / "+F(stage["hold_months"].Double)+" 来生月");Label(card,"全部状态目标同时满足才累计稳定时长；任一状态失守后重新计时。",15,Muted);}
+  else Label(card,"无需额外稳定时长；全部目标达成即可完成本阶段。",15,Muted);
+  foreach(var goal in stage["goals"])ThemeCurrentGoal(card,view,goal);
+  Fold(card,"完整主题定义与来源",c=>Raw(c,Themes._definition(G,view["id"].Text)));
  }
  void ThemeGrowthPage(V view){
-  var columns=WorkspaceColumns("Growth route",1.1f,1);var route=columns[0];var direction=columns[1];
-  if(view.Get("id","").Text==""){ThemeSelection(route,view);Label(direction,"选向后按三阶段推进成长。",18,Muted);return;}
-  ThemeMilestoneRoute(route,view);
-  var progress=Card(direction,"发展方向 / "+view["name"].Text,"已有与待领成果在改向后保留。",Blue);Metric(progress,"重铸权",view["reforge_tokens"].Long+" 份");
-  if(view["can_reforge"].Bool){Label(progress,"每次支付1份重铸权 + "+F(view["reforge_dt_cost"].Double,2)+" DT。",16,Gold);foreach(var candidate in view["choices"]){var id=candidate["id"].Text;if(id==view["id"].Text)continue;Button(progress,"改向「"+candidate["name"].Text+"」",()=>Confirm("确认重铸主题？","消耗1份重铸权与 "+F(view["reforge_dt_cost"].Double,2)+" DT，已有和待领奖励保留。",()=>Command(g=>Themes.reforge(g,id))));}}
-  else Label(progress,"当前不满足重铸条件。",16,Muted);
-  Fold(direction,"主题定义与完整阶段要求",c=>Raw(c,Themes._definition(G,view["id"].Text)));
-  WorkspaceHint("成长路线保留三个阶段；当前交付与合同在当前事项处理。");
+  if(view.Get("id","").Text==""){ThemeSelection(_body,view);return;}
+  Label(_body,view["name"].Text+" · 三阶段成长路线",22,Green);
+  Fold(_body,"发展方向与重铸 · 持有 "+view["reforge_tokens"].Long+" 份重铸权",progress=>{
+   Label(progress,"已有与待领成果保留。重铸需1份重铸权 + "+F(view["reforge_dt_cost"].Double,2)+" DT。",16,Muted);
+   if(view["can_reforge"].Bool){foreach(var candidate in view["choices"]){var id=candidate["id"].Text;if(id==view["id"].Text)continue;Button(progress,"改向「"+candidate["name"].Text+"」",()=>Confirm("确认重铸主题？","消耗1份重铸权与 "+F(view["reforge_dt_cost"].Double,2)+" DT，已有和待领奖励保留。",()=>Command(g=>Themes.reforge(g,id))));}}
+   else Label(progress,view["completed"].Bool?"本轮主题已经完成，发展方向已定型。":"当前重铸权或 DT 不足。",16,Muted);
+  });
+  ThemeMilestoneRoute(_body,view);
+  WorkspaceHint("已完成仅依据已保存的阶段记录；未来阶段数值只作当前城市参考。累计与交付在进入阶段后重新计算。");
  }
  void ThemeCompletedPage(V view){
-  var columns=WorkspaceColumns("Completed city matters",1,1);var history=columns[0];var evidence=columns[1];Label(history,"主题与合同记录",21,Green);
-  var entries=view.Get("history",V.Arr()).Reverse().ToArray();if(entries.Length==0)Label(history,"尚无已保存的主题或合同记录。",17,Muted);
-  foreach(var entry in entries){var box=Card(history,entry.Get("name",entry.Get("id","主题记录")).Text,entry.Get("status_label","城市记录").Text,Blue);if(entry.Get("reason","").Text!="")Label(box,entry["reason"].Text,15,Muted);Fold(box,"来源凭据",c=>Raw(c,entry));}
-  Label(evidence,"成长成果存档",21,Gold);Label(evidence,view.Get("completed",false).Bool?"✓ 本轮主题已完成":"本轮主题尚未完成",18,view.Get("completed",false).Bool?Green:Muted);Fold(evidence,"已保存的阶段标识",c=>Raw(c,S["block"].Get("theme",V.Map()).Get("milestone_ids",V.Arr())));
-  Fold(evidence,"历史城市成果记录",c=>{foreach(var row in Civic.task_rows(G)){Label(c,row["name"].Text+" · "+row["status"].Text,18);Label(c,row["reading"].Text,15,Muted);}Raw(c,S.Get("city_goal",V.Map()));});
-  WorkspaceHint("只依据真实保存记录显示完成状态。");
+  var stages=view.Get("history",V.Arr()).Where(entry=>entry.Get("kind","").Text=="milestone").Reverse().ToArray();
+  Label(_body,"已保存的阶段成果",21,Green);
+  if(stages.Length==0)Label(_body,"尚无已保存的阶段达成记录。当前城市达标不会补写历史完成状态。",17,Muted);
+  foreach(var entry in stages){var box=Card(_body,entry["name"].Text,"已保存达成记录 · 第 "+F(entry.Get("local_seconds",0).Double/Themes.MONTH_SECONDS,2)+" 来生月",Green);var stageNumber=entry.Get("id","").Text.EndsWith(":M1",StringComparison.Ordinal)?1:entry.Get("id","").Text.EndsWith(":M2",StringComparison.Ordinal)?2:3;Label(box,stageNumber==1?"阶段奖励：方案副本选择提案。":"阶段奖励：蓝图研究提案。",16,Muted);Fold(box,"达成来源凭据",c=>Raw(c,entry));}
+  Fold(_body,"合同与发展方向的完整历史",history=>{foreach(var entry in view.Get("history",V.Arr()).Where(e=>e.Get("kind","").Text!="milestone").Reverse()){var box=Card(history,entry.Get("name",entry.Get("id","主题记录")).Text,entry.Get("status_label","城市记录").Text,Blue);if(entry.Get("reason","").Text!="")Label(box,entry["reason"].Text,15,Muted);Fold(box,"来源凭据",c=>Raw(c,entry));}});
+  Button(_body,"领取提案与办理街区定型",()=>Navigate("settlement"));
+  WorkspaceHint("阶段完成记录、合同历史和奖励领取分别保留；命名与地标资格在 DT 实际归零时确定。");
  }
 
  void ThemeEvents(Transform parent,V view){PlanningTaskEvents(parent,view);}

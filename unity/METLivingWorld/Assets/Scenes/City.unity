@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1301410531
+--- !u!1 &897844885
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,11 +127,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1301410536}
-  - component: {fileID: 1301410535}
-  - component: {fileID: 1301410534}
-  - component: {fileID: 1301410533}
-  - component: {fileID: 1301410532}
+  - component: {fileID: 897844890}
+  - component: {fileID: 897844889}
+  - component: {fileID: 897844888}
+  - component: {fileID: 897844887}
+  - component: {fileID: 897844886}
   m_Layer: 0
   m_Name: MET_Laisheng_City
   m_TagString: Untagged
@@ -139,61 +139,61 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1301410532
+--- !u!114 &897844886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301410531}
+  m_GameObject: {fileID: 897844885}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4291af9e9a68b4659a7f7014dd3a2b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MET.City.CityBootstrap
---- !u!114 &1301410533
+--- !u!114 &897844887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301410531}
+  m_GameObject: {fileID: 897844885}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f84a85c9e87f4d5b9f3cb5f4108260f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MET.City.CityWorld
---- !u!114 &1301410534
+--- !u!114 &897844888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301410531}
+  m_GameObject: {fileID: 897844885}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7d429f8b80fd4b41b9e983af104d17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MET.City.CityInterface
---- !u!114 &1301410535
+--- !u!114 &897844889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301410531}
+  m_GameObject: {fileID: 897844885}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4d50cae3b0654e3f842582f33490a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MET.City.CityRuntime
---- !u!4 &1301410536
+--- !u!4 &897844890
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301410531}
+  m_GameObject: {fileID: 897844885}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -206,4 +206,4 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1301410536}
+  - {fileID: 897844890}

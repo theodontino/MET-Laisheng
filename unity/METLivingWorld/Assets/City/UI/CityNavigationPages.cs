@@ -104,29 +104,8 @@ public sealed partial class CityInterface {
   Label(parent,"全部阶段条件与稳定时长达成后，获得"+(theme["stage"].Long==1?"方案副本选择提案。":"蓝图研究提案。"),15,Green);
   Button(parent,"从库存交付 "+F(take)+" "+Resource(resource),()=>Command(g=>Themes.deliver(g,resource)),true,take<=.000001);
  }
- void TasksHomePage(){
-  var theme=Themes.view(G);var chosen=theme.Get("id","").Text!="";var complete=theme.Get("completed",false).Bool;
-  if(Bonus.pending(G).Count>0)WorkspaceActions("领取奖励 · "+Bonus.pending(G).Count,()=>Navigate("blueprints"));
-  if(Runtime.MandatoryPending)WorkspaceActions("处理周期结算",()=>Navigate("settlement"));
-  var current=CompactTaskCard(_body,"Current theme goals");Label(current,chosen?theme["name"].Text:"选择发展主题",23,Green);
-  if(!chosen){Label(current,"选定方向后，按三个阶段推进城市成长。",16,Muted);Button(current,"比较主题并选择 ›",()=>Navigate("themes","current"),true);}
-  else if(complete){Label(current,"三个阶段已经完成，成果与来源已保存。",17,Green);Button(current,"查看已完成成果 ›",()=>Navigate("themes","completed"));}
-  else{
-   Label(current,"M"+theme["stage"].Long+" / 3 · "+theme["stage_name"].Text,17,Muted);
-   foreach(var goal in theme["goals"]){var factor=goal["unit"].Text=="%"?100:1;var block=OverviewBrief(current,"Current goal "+goal["id"].Text);Label(block,(goal["met"].Bool?"✓ ":"○ ")+goal["label"].Text,18,goal["met"].Bool?Green:Gold);Label(block,F(goal["value"].Double*factor,1)+(goal["comparison"].Text=="max"?" ≤ ":" / ")+F(goal["target"].Double*factor,1)+goal["unit"].Text,17,Ink);if(goal["kind"].Text=="delivery"&&!goal["met"].Bool&&goal["id"].Text.StartsWith("delivery_",StringComparison.Ordinal))CommonThemeDelivery(block,theme,goal);}
-   if(theme["steady_required_seconds"].Double>0)Metric(current,"状态稳定时长",Clock.duration(G,theme["steady_seconds"].Double)+" / "+Clock.duration(G,theme["steady_required_seconds"].Double));
-  }
-  Label(_body,"当前合同与待决定事项",20,Blue);
-  if(theme["events"].Count==0)Label(_body,"当前没有进行中合同或待决定委任。",16,Muted);
-  foreach(var evt in theme["events"]){var id=evt["id"].Text;var offered=evt["status"].Text=="offered";var box=CompactTaskCard(_body,"Common task event "+id);Label(box,(offered?"待决定 · ":"进行中 · ")+evt["name"].Text,20,offered?Gold:Blue);Label(box,evt["description"].Text,16,Muted);
-   if(evt.Get("deadline_seconds",-1).Double>=0)Metric(box,"剩余期限",Clock.duration(G,evt["deadline_seconds"].Double));
-   if(!offered&&evt.Get("target",0).Double>0){var factor=evt.Get("unit","").Text=="%"?100:1;Meter(box,"实际进度",evt.Get("progress",0).Double*factor,evt["target"].Double*factor," "+evt.Get("unit","").Text,Blue);}
-   if(!offered&&evt.Get("delivery_remaining",0).Double>0){var resource=evt["delivery_resource"].Text;var def=evt.Get("definition",Themes._event_definition(G,id));var reserve=resource=="food"?def.Get("reserve_months",0).Double*Themes._population_metrics(G).Get("food_demand",0).Double:0;var take=Math.Min(evt["delivery_remaining"].Double,Math.Max(0,G.inventory_total(resource)-reserve));Label(box,"本次扣除 "+F(take)+" "+Resource(resource)+" · 还需 "+F(evt["delivery_remaining"].Double)+(reserve>0?" · 保留口粮 "+F(reserve):""),15,Gold);Label(box,TaskChoiceOutcome(def,"accepted",evt["description"].Text),15,Green);Button(box,"交付 "+F(take)+" "+Resource(resource),()=>Command(g=>Themes.deliver(g,resource,-1,id)),true,take<=.000001);}
-   Button(box,offered?"比较选项、代价与奖励 ›":"查看合同条件与来源 ›",()=>Navigate("themes","current"));
-  }
-  var pending=Bonus.pending(G);if(pending.Count>0){var rewards=CompactTaskCard(_body,"Task pending rewards");Label(rewards,"待领取提案 · "+pending.Count,20,Gold);foreach(var reward in pending.Take(3))Label(rewards,BlueprintRewardSource(reward)+" · "+(reward.Get("kind",reward.Get("requested_kind","copy")).Text=="research"?"蓝图研究":"方案副本选择"),16,Muted);Button(rewards,"比较并领取奖励 ›",()=>Navigate("blueprints"),true);}
-  var links=HomeDetailLinks();Button(links,"成长路线与改向 ›",()=>Navigate("themes","growth"));Button(links,"已完成的任务与来源 ›",()=>Navigate("themes","completed"));Button(links,"周期回顾与街区结算 ›",()=>Navigate("settlement"));
- }
+ void TasksHomePage(){ThemesPage();}
+
  void ArchiveHomePage(){
   var voices=_feedback.history().Count;var alerts=_feedbackView.Get("alerts",V.Arr()).Count;
   Label(_body,"城市留下的记录与成果",17,Blue);

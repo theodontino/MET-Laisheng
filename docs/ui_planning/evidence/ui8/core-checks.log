@@ -1,0 +1,47 @@
+PASS select
+PASS origin
+PASS old saves have no crews
+PASS crew read APIs do not mutate
+PASS first quote: 60 vs 60
+PASS first purchase
+PASS upfront payment: 9940 vs 9940
+PASS second quote: 120 vs 120
+PASS second purchase
+PASS third quote: 240 vs 240
+PASS civic purchase receipt: -60 vs -60
+PASS second civic receipt: -120 vs -120
+PASS unaffordable purchase rejected
+PASS failed purchase has no changes
+PASS pause preserves duration: 1 vs 1
+PASS offline preserves duration: 1 vs 1
+PASS select
+PASS origin
+PASS settlement crew
+PASS crew nominal is not multiplied by bonus: 8 vs 8
+PASS first half-month: 96 vs 96
+PASS expiry inside interval includes only active portion: 91 vs 91
+PASS partial expiry crew CP: 2 vs 2
+PASS expiry removes active count
+PASS expired crew does not increase quote: 60 vs 60
+PASS select
+PASS origin
+PASS city reserve excludes purchased CP: 0.5 vs 0.5
+PASS energy applies to purchased CP: 1.5 vs 1.5
+PASS select
+PASS origin
+PASS empty queue still expires
+PASS select
+PASS origin
+PASS real simulation crossing expiry
+PASS Sim uses pre-expiry portion despite advanced local time: 4 vs 4
+PASS tile summary read-only
+PASS actual settlement available
+PASS construction material receipt matches settlement: 7.2 vs 7.2
+PASS tax source receipts reconcile with untouched aggregate: 16.2 vs 16.2
+PASS select
+PASS origin
+PASS crew survives serialized state reload: 120 vs 120
+PASS loaded duration retained: 1 vs 1
+PASS no materials means no construction despite crews: 0 vs 0
+PASS waiting for material still consumes game duration: 0.5 vs 0.5
+UI8 CORE PASS 46 assertions; no Player/UI acceptance performed.

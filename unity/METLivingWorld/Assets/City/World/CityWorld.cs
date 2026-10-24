@@ -9,7 +9,7 @@ namespace MET.City {
 /// <summary>Detached city-snapshot projection. This component has no Game or persistence handle.</summary>
 public sealed partial class CityWorld : MonoBehaviour {
     public const int GroundLayer=8;
-    public static readonly string[] Layers={"terrain","service","employment","pollution","heat","stock"};
+    public static readonly string[] Layers={"terrain","medical","education","entertainment","commercial","employment","pollution","heat","stock","energy"};
     public CityCamera CameraController {get;private set;}
     public string SelectedTile {get;private set;}="";
     public string HoveredTile {get;private set;}="";
@@ -287,7 +287,8 @@ public sealed partial class CityWorld : MonoBehaviour {
     }
     static string NormalizeLayer(string value) {
         switch(value) {
-            case "terrain":case "service":case "employment":case "pollution":case "heat":case "stock":
+            case "service":return "medical";
+            case "terrain":case "employment":case "pollution":case "heat":case "stock":
             case "energy":case "food":case "material":case "goods":case "medical":case "education":case "entertainment":case "commercial":case "delta":return value;
             default:return "terrain";
         }
@@ -296,7 +297,7 @@ public sealed partial class CityWorld : MonoBehaviour {
         if(AllLinks==enabled)return;AllLinks=enabled;DrawRelations();UpdateLegend();
     }
     public void CycleLayer(int direction=1) {
-        string group=Layer=="food"||Layer=="material"||Layer=="goods"?"stock":Layer=="medical"||Layer=="education"||Layer=="entertainment"||Layer=="commercial"?"service":Layer;
+        string group=Layer=="food"||Layer=="material"||Layer=="goods"?"stock":Layer=="service"?"medical":Layer;
         var available=ComparisonReady()?Layers.Concat(new[]{"delta"}).ToArray():Layers;
         int index=Array.IndexOf(available,group);if(index<0)index=0;SetLayer(available[(index+(direction<0?available.Length-1:1))%available.Length]);
     }

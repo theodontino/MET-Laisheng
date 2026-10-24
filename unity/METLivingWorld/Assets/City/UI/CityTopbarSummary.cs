@@ -33,11 +33,16 @@ public sealed partial class CityInterface {
    text.Append("\n点击：财政收支");return text.ToString();
   }
   if(resource=="cp"){
-   var last=block.Get("construction_last",V.Map());var reserve=block.Get("city_cp_last",V.Map());var queue=Construction.queue(G);double h=last.Get("hours",0).Double,rh=reserve.Get("hours",0).Double;
-   text.Append("可用施工能力  "+(settled&&m.Get("energy_ratio").IsNumber?F(Construction.capacity(G)*Math.Min(1,Math.Max(0,m["energy_ratio"].Double)),1)+" CP/月":"待结算")+"\n");
-   text.Append("本区实际使用  "+(h>0?F(last.Get("cp",0).Double/h,1)+" CP/月":"待结算")+"\n城市工程预留  "+(rh>0?F(reserve.Get("cp",0).Double/rh,1)+" CP/月":"待结算")+"\n施工 "+queue.Count(x=>!x.Get("paused",false).Bool)+" 项  ·  暂停 "+queue.Count(x=>x.Get("paused",false).Bool)+" 项\n");
+   var last=block.Get("construction_last",V.Map());var reserve=block.Get("city_cp_last",V.Map());var queue=Construction.queue(G);var capacity=Construction.capacity_breakdown(G);var crews=Construction.crews(G);double h=last.Get("hours",0).Double,rh=reserve.Get("hours",0).Double;
+   text.Append("当前施工能力  "+F(capacity["effective"].Double,1)+" CP/月\n本区可用  "+F(capacity["local_effective"].Double,1)+" · 城市预留 "+F(capacity["city_effective"].Double,1)+" CP/月\n");
+   text.Append("常设 "+F(capacity["base_total"].Double,1)+" ＋ 临时队 "+F(capacity["crews_nominal"].Double,1)+" CP/月（名义）\n供电满足 "+F(capacity["energy_ratio"].Double*100,0)+"%"+(settled?"":"（尚无实际结算）")+"\n");
+   text.Append("临时施工队  "+crews.Count+" 队 · 不乘方案效率\n");
+   foreach(var crew in crews.Take(3))text.Append(crew["id"].Text+"  剩余 "+CrewRemaining(crew)+"\n");
+   if(crews.Count>3)text.Append("其余 "+(crews.Count-3)+" 队详见施工管理\n");
+   text.Append("最近本区实际使用  "+(h>0?F(last.Get("cp",0).Double/h,1)+" CP/月":"待结算")+"\n最近城市工程预留  "+(rh>0?F(reserve.Get("cp",0).Double/rh,1)+" CP/月":"待结算")+"\n施工 "+queue.Count(x=>!x.Get("paused",false).Bool)+" 项  ·  暂停 "+queue.Count(x=>x.Get("paused",false).Bool)+" 项\n");
+   text.Append("队列尚需 "+F(queue.Sum(x=>x["work"].Double),1)+" CP / "+F(queue.Sum(x=>x["material"].Double),1)+" 材料\n");
    var first=queue.FirstOrDefault(x=>!x.Get("paused",false).Bool);if(first!=null)text.Append("优先施工："+first["name"].Text+"\n"+S["projects"][first["id"]].Get("bottleneck","等待施工").Text+"\n");
-   text.Append("\n点击：施工队列");return text.ToString();
+   text.Append("\n点击：施工队列与临时施工队");return text.ToString();
   }
   if(resource=="energy"){
    if(!settled){text.Append("供电情况待结算\n\n点击：电力供需详表");return text.ToString();}

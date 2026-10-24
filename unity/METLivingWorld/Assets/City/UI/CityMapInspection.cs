@@ -84,26 +84,16 @@ public sealed partial class CityInterface {
   bool visible=MapInspectionOpen||(_inspectionMature&&Layer!="terrain");
   CloseMapInspection();return visible;
  }
- public bool TryLockMapInspection(string tile) {
-  if(_inspectionWorld==null||tile==""||!_inspectionMature||_inspectionHover!=tile||
-     _inspectionLayer!=Layer||_inspectionPhase!=MapSourcePhase||_inspectionCity!=_cityIdentity||
-     IsModal||MapViewing||ConstructionIntentActive||KeyboardOwned||PointerOwned(Input.mousePosition)||
-     Input.GetMouseButton(1)||Input.GetMouseButton(2)||Mathf.Abs(Input.mouseScrollDelta.y)>.01f)return false;
-  // Clicking an occupied site keeps the established building-selection action.
-  var cells=S.Get("cells",V.Map());
-  if(cells.Has(tile)&&cells[tile].Get("building","").Text!=""&&SelectedTile!=tile)return false;
-  LockMapInspection(tile);return true;
- }
+ public bool TryLockMapInspection(string tile) { return false; }
  void LockMapInspection(string tile) {
-  if(_inspectionWorld==null||tile=="")return;
-  _inspectionLock=tile;_inspectionSignature="";_inspectionNextRefresh=0;
-  if(_inspectionPanel!=null)_inspectionPanel.gameObject.SetActive(true);
-  RefreshInspectionPanel();
+  // Click selection owns the complete tile panel; there is no second pinned source panel.
+  if(tile==""||IsModal)return;
+  DismissMapInspection();SelectTile(tile);
  }
  public void UpdateMapInspectionInput() {
   if(_inspectionWorld==null||_root==null)return;
   bool unavailable=!Application.isFocused||IsModal||MapViewing||ConstructionIntentActive;
-  if(_inspectionSelectedButton!=null)_inspectionSelectedButton.gameObject.SetActive(!unavailable&&SelectedTile!="");
+  if(_inspectionSelectedButton!=null)_inspectionSelectedButton.gameObject.SetActive(false);
   if(unavailable&&(MapInspectionOpen||_inspectionHover!=""))DismissMapInspection();
   if(_inspectionLayer!=Layer||_inspectionPhase!=MapSourcePhase||_inspectionCity!=_cityIdentity) {
    bool cityChanged=_inspectionCity!=_cityIdentity;

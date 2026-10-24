@@ -236,7 +236,7 @@ public static class Rules {
                 case "relate":configs[id][r["relation"]]=true;break;
                 case "slot_add":configs[id]["slot_added"]=r;break;
             }
-            double count=0;
+            double count=0;var contributors=V.Arr();
             foreach(var other in ids(stats)) {
                 if(near(s,id.Text,other.Text)!=1||s["projects"][other]["status"].Text!="running"||s["projects"][other]["paused"].Bool)continue;
                 var t=semantic_traits(s,other.Text);var own=semantic_traits(s,id.Text);
@@ -245,11 +245,11 @@ public static class Rules {
                 var amount=compatible?.1:.1*configs[id].Get("universal_adjacency",0).Double;
                 if(compatible&&own.Contains("building.industrial")&&s["projects"][id]["operator_org"]==s["projects"][other]["operator_org"])amount*=stats[id].Get("synergy.same_industrial",1).Double;
                 if(compatible&&own.Contains("building.commercial")&&t.Contains("building.industrial"))amount*=configs[id].Get("industrial_adjacency",1).Double;
-                count+=amount;
+                count+=amount;if(amount!=0)contributors.Add(V.Map("source_id",other,"tile",s["projects"][other]["tile"],"amount",amount,"compatible",compatible));
             }
             if(count>0) {
                 stats[id]["efficiency"]*=1+count;
-                trace[id]["spatial_synergy"]=V.Map("base",1.0,"value",1+count,"rules",V.Arr(V.Map("source","相邻建筑关系","mode","multiply","value",1+count)));
+                trace[id]["spatial_synergy"]=V.Map("base",1.0,"value",1+count,"contributors",contributors,"rules",V.Arr(V.Map("source","相邻建筑关系","mode","multiply","value",1+count)));
             }
             if(!s["projects"][id].Get("special",false).Bool&&g.cohesion(id.Text)["active"].Bool) {
                 var reward=c.operators[s["projects"][id]["operator_org"]].Get("cohesion_efficiency",.03).Double;stats[id]["efficiency"]*=1+reward;

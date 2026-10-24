@@ -11,12 +11,12 @@ public sealed partial class CityInterface {
   public PageLayout(float width,float height=860,string placement="dock",string scope="街区"){Width=width;Height=height;Placement=placement;Scope=scope;}
  }
  readonly Dictionary<string,PageLayout> _pageLayouts=new Dictionary<string,PageLayout>{
-  {"population_home",new PageLayout(640,800)},{"economy_home",new PageLayout(680,800)},{"bonus_home",new PageLayout(760,800)},{"tasks_home",new PageLayout(720,800)},{"archive_home",new PageLayout(560,760)},
+  {"population_home",new PageLayout(640,800)},{"economy_home",new PageLayout(680,800)},{"bonus_home",new PageLayout(760,800)},{"tasks_home",new PageLayout(1120,800)},{"archive_home",new PageLayout(560,760)},
   {"overview",new PageLayout(560,800,"dock")},{"construction",new PageLayout(600,800,"dock")},
   {"building",new PageLayout(520,760,"dock")},{"population",new PageLayout(1040)},
   {"resources",new PageLayout(1200)},{"market",new PageLayout(1200)},{"policies",new PageLayout(1120)},
   {"bonuses",new PageLayout(1360)},{"slot",new PageLayout(1360)},{"blueprints",new PageLayout(1200)},
-  {"themes",new PageLayout(1080)},{"milestones",new PageLayout(1080)},{"settlement",new PageLayout(1200)},
+  {"themes",new PageLayout(1120,800)},{"milestones",new PageLayout(1120,800)},{"settlement",new PageLayout(1200)},
   {"city",new PageLayout(1360,860,"dock","城市")},{"governance",new PageLayout(960,820,"dock","地区")},
   {"network",new PageLayout(1280,860,"dock","城市")},{"science",new PageLayout(1280,860,"dock","城市")},
   {"city_project",new PageLayout(1040,820,"dock","城市")},{"heritage",new PageLayout(1200,860,"dock","城市")},

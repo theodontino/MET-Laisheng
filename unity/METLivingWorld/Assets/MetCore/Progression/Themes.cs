@@ -701,11 +701,35 @@ public static class Themes {
         else if ((kind == "reforge_token")) { row["reason"] = V.From(string.Format(System.Globalization.CultureInfo.InvariantCulture,"使用仍需{0:F2} DT；获得重铸权不等于免费换向。",row.Get("use_dt_cost",0).Double)); }
         return row;
     }
+    // Detached presentation data: future counters start at zero, and saved completion
+    // comes only from the milestone history, never a forecast against today's city.
+    public static V stage_view(Game g, string theme_id, int number) => _stage_view(g,theme_id,number,_metrics(g));
+    static V _stage_view(Game g, string theme_id, int number, V metrics) {
+        V t = g.s.Get("block",V.Map()).Get("theme",V.Map());
+        V definition = _definition(g,theme_id);
+        if (definition.Count == 0) return V.Map();
+        V stage = definition["stages"][number-1];
+        string milestone = theme_id + ":M" + number;
+        bool saved = t.Get("history",V.Arr()).Any(entry => entry.Get("kind","").Text == "milestone" && entry.Get("id","").Text == milestone);
+        bool current = theme_id == t.Get("id","").Text && number == t.Get("stage",1).Long && !t.Get("completed",false).Bool && !saved;
+        V row = V.Map("id",milestone,"number",number,"name",stage["name"].Text,"saved",saved,"current",current,
+            "hold_months",stage.Get("hold_months",0).Double,"held_months",current?t.Get("steady_seconds",0).Double/MONTH_SECONDS:0,
+            "reward_kind",number==1?"copy":"research","goals",V.Arr());
+        foreach (var goal in stage["goals"]) {
+            bool state = goal["kind"].Text == "state";
+            double value = state ? metrics.Get(goal["metric"].Text,0).Double : current ? t.Get("counters",V.Map()).Get(goal["metric"].Text,0).Double : 0;
+            double target = goal.Get("min",goal.Get("max",0)).Double;
+            row["goals"].Add(V.Map("id",goal["metric"].Text,"label",goal["label"].Text,"value",value,"target",target,
+                "unit",goal["unit"].Text,"kind",goal["kind"].Text,"comparison",goal.Has("max")?"max":"min",
+                "met",_met(value,goal),"missing",Math.Max(0,goal.Has("max")?value-target:target-value)));
+        }
+        return row;
+    }
     public static V view(Game g) {
         V t = g.s.Get("block",V.Map()).Get("theme",V.Map());
         string id = t.Get("id","").Text;
         V definition = _definition(g,id);
-        V row = V.Map("id", id, "name", definition.Get("name","尚未选择发展主题").Text, "stage", (int)t.Get("stage",1).Long, "completed", t.Get("completed",false).Bool, "stage_name", "", "goals", V.Arr(), "steady_seconds", t.Get("steady_seconds",0).Double, "steady_required_seconds", 0.0, "reforge_tokens", (int)t.Get("reforge_tokens",0).Long, "reforge_dt_cost", _reforge_cost(g), "reforge_opportunity_chance", _token_chance(g), "can_reforge", ((id != "") && !(t.Get("completed",false).Bool) && ((int)t.Get("reforge_tokens",0).Long > 0) && (g.s.Get("dt",0).Double >= _reforge_cost(g))), "choices", V.Arr(), "events", V.Arr(), "history", V.Arr());
+        V row = V.Map("id", id, "name", definition.Get("name","尚未选择发展主题").Text, "stage", (int)t.Get("stage",1).Long, "completed", t.Get("completed",false).Bool, "stage_name", "", "goals", V.Arr(), "steady_seconds", t.Get("steady_seconds",0).Double, "steady_required_seconds", 0.0, "reforge_tokens", (int)t.Get("reforge_tokens",0).Long, "reforge_dt_cost", _reforge_cost(g), "reforge_opportunity_chance", _token_chance(g), "can_reforge", ((id != "") && !(t.Get("completed",false).Bool) && ((int)t.Get("reforge_tokens",0).Long > 0) && (g.s.Get("dt",0).Double >= _reforge_cost(g))), "choices", V.Arr(), "events", V.Arr(), "history", V.Arr(), "stages", V.Arr());
         foreach (var entry in t.Get("history",V.Arr())) { row["history"].Add(_history_view(g,entry)); }
         foreach (var item in _themes(g)) { row["choices"].Add(V.Map("id", item["id"].Text, "name", item["name"].Text, "description", item["description"].Text)); }
         if (!((definition.Count == 0))) {
@@ -713,10 +737,8 @@ public static class Themes {
             row["stage_name"] = V.From(stage["name"].Text);
             row["steady_required_seconds"] = V.From((stage.Get("hold_months",0).Double * MONTH_SECONDS));
             V metrics = _metrics(g);
-            foreach (var goal in stage["goals"]) {
-                double value = ((goal["kind"].Text == "state") ? metrics.Get(goal["metric"].Text,0).Double : t.Get("counters",V.Map()).Get(goal["metric"].Text,0).Double);
-                row["goals"].Add(V.Map("id", goal["metric"].Text, "label", goal["label"].Text, "value", value, "target", goal.Get("min",goal.Get("max",0)).Double, "unit", goal["unit"].Text, "met", _met(value,goal), "comparison", (goal.Has("max") ? "max" : "min"), "kind", goal["kind"].Text));
-            }
+            for (int number=1;number<=3;number++) row["stages"].Add(_stage_view(g,id,number,metrics));
+            row["goals"] = row["stages"][(int)row["stage"].Long-1]["goals"].Duplicate(true);
         }
         foreach (var evt in t.Get("events",V.Arr())) {
             if ((V.Arr("offered", "active").Contains(evt.Get("status","").Text))) { row["events"].Add(_event_view(g,evt)); }

@@ -55,7 +55,7 @@ public static class MapInspection {
         }
         return total;
     }
-    static string Label(string layer)=>layer switch {"terrain"=>"地貌","service"=>"医疗服务","medical"=>"医疗","education"=>"教育","entertainment"=>"文娱","commercial"=>"商业","employment"=>"就业","pollution"=>"污染","heat"=>"余热","stock"=>"粮食库存","food"=>"粮食库存","material"=>"材料库存","goods"=>"制成品库存","energy"=>"本格能源净量","delta"=>"同一步变化",_=>layer};
+    static string Label(string layer)=>layer switch {"terrain"=>"地貌","service"=>"医疗服务","medical"=>"医疗","education"=>"教育","entertainment"=>"娱乐","commercial"=>"消费","employment"=>"就业","pollution"=>"污染","heat"=>"余热","stock"=>"粮食库存","food"=>"粮食库存","material"=>"材料库存","goods"=>"制成品库存","energy"=>"本格能源净量","delta"=>"同一步变化",_=>layer};
     static string Unit(string layer)=>IsService(layer)||layer=="employment"?"%":layer=="pollution"?"场强":layer=="heat"?"热量":IsStock(layer)?"单位":layer=="energy"?"能源/周期":"";
     static string Format(double n,string unit) {var number=n.ToString(Math.Abs(n)>=100?"0.#":"0.##",CultureInfo.InvariantCulture);return unit=="%"?(n*100).ToString("0.#",CultureInfo.InvariantCulture)+"%":unit==""?number:number+" "+unit;}
     static string Phase(V view)=>view.Get("source_phase",view.Get("forecast",false).Bool?"next_tick":"actual").Text;

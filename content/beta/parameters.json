@@ -1,4 +1,5 @@
 {
+  "construction_crews": {"nominal_cp_per_month": 4.0, "duration_months": 1.0, "base_cost": 60.0, "cost_multiplier": 2.0},
   "document_version": "3.0-design",
   "implementation_status": "implemented_candidate_requires_acceptance_and_live_balance",
   "baseline_commit": "3e7f00cb8aa0177df6f04e0ec490414bd8f019aa",

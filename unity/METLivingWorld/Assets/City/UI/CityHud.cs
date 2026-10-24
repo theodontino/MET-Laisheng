@@ -19,7 +19,9 @@ public sealed partial class CityInterface {
         _planningBonusCount, _planningPendingCount, _planningCopyCount, _planningBuildToggle;
     Button _planningNoticeButton;
     readonly Dictionary<string,Button> _hudLayerButtons=new Dictionary<string,Button>();
-    bool _planningNoticesOpen, _planningOverviewOpen=true, _planningBuildOpen;
+    bool _planningNoticesOpen, _planningOverviewOpen, _planningBuildOpen;
+    readonly List<Button> _hudSpeedButtons=new List<Button>();
+    Text _hudBonusBadge;
     readonly Color _hudFill=new Color(.045f,.075f,.10f,.98f);
     readonly Color _hudButtonFill=new Color(.075f,.12f,.15f,.94f);
     readonly Color _hudEdge=new Color(.22f,.78f,.76f,.58f);
@@ -65,7 +67,7 @@ public sealed partial class CityInterface {
     void BuildPlanningResources() {
         _planningTop=HudSurface("HUD Resources",_root,new Color(.045f,.073f,.10f,.98f));
         _planningTop.anchorMin=new Vector2(0,1);_planningTop.anchorMax=Vector2.one;
-        _planningTop.pivot=new Vector2(.5f,1);_planningTop.offsetMin=new Vector2(0,-76);_planningTop.offsetMax=Vector2.zero;
+        _planningTop.pivot=new Vector2(.5f,1);_planningTop.offsetMin=new Vector2(0,-64);_planningTop.offsetMax=Vector2.zero;
         var brand=Label(_planningTop,"MET",24,Ink);Pin(brand.rectTransform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(18,0),new Vector2(65,40));
         brand.raycastTarget=true;var menu=brand.gameObject.AddComponent<Button>();menu.onClick.AddListener(()=>OpenArchive("settings"));
         AddDeskTip(brand.gameObject,"MET · 系统菜单",()=>TopbarResourceSummary("met"));
@@ -112,6 +114,7 @@ public sealed partial class CityInterface {
         _guidanceTitle=Label(_planningOverviewBody,"",22,Ink,55*TextScale);
         _guidanceReason=Label(_planningOverviewBody,"",15,Muted,66*TextScale);
         _guidanceButton=Button(_planningOverviewBody,"查看城市",RunCityGuidanceAction,true);_guidanceButton.name="HUD Next Action";
+        _planningOverviewBody.gameObject.SetActive(_planningOverviewOpen);
         AttachCityGuidancePointerGuard();
         var more=HudButton(_planningOverviewBody,"查看当前任务 ›","",()=>OpenArchive("tasks_home"),30*TextScale);more.GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;
     }
@@ -130,21 +133,13 @@ public sealed partial class CityInterface {
         Pin(_planningToastSurface,new Vector2(.5f,0),new Vector2(.5f,0),new Vector2(0,158),new Vector2(780,45));
         _toast=Label(_planningToastSurface,"",15,Ink,41);Stretch(_toast.rectTransform,12,2,12,2);_toast.alignment=TextAnchor.MiddleCenter;_planningToastSurface.gameObject.SetActive(false);
     }
-    void BuildPlanningContext() {
-        _context=HudSurface("HUD Site Context",_root);
-        Pin(_context,new Vector2(0,0),new Vector2(0,0),new Vector2(18,154),new Vector2(480,0));
-        _context.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;
-        var layout=_context.gameObject.AddComponent<VerticalLayoutGroup>();layout.spacing=4;layout.padding=new RectOffset(8,8,7,7);layout.childControlWidth=layout.childControlHeight=true;layout.childForceExpandHeight=false;
-        _context.gameObject.SetActive(false);
-    }
+    void BuildPlanningContext() {BuildTilePanel();}
     void BuildPlanningMapFilters() {
         _planningLayers=HudSurface("HUD Map Layers",_root);
         Pin(_planningLayers,new Vector2(.5f,0),new Vector2(.5f,0),new Vector2(0,18),new Vector2(560,76));
-        var row=Row(_planningLayers,"Map Layer Buttons",62);Stretch(row,6,6,6,6);row.GetComponent<HorizontalLayoutGroup>().spacing=2;
-        foreach(var pair in new[]{new[]{"terrain","地貌"},new[]{"service","服务"},new[]{"employment","就业"},new[]{"pollution","环境"},new[]{"heat","余热"},new[]{"stock","库存"},new[]{"energy","电力"}}){
-            var layer=pair[0];var button=HudButton(row,pair[1],layer,()=>SetLayer(layer),62);_hudLayerButtons[layer]=button;
-            var caption=button.GetComponentInChildren<Text>();HudFont(caption,14);caption.alignment=TextAnchor.LowerCenter;Stretch(caption.rectTransform,0,28,0,3);
-            var icon=button.GetComponentInChildren<CityHudGlyph>().rectTransform;Pin(icon,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-8),new Vector2(24,24));
+        foreach(var pair in new[]{new[]{"terrain","地貌"},new[]{"medical","医疗"},new[]{"education","教育"},new[]{"entertainment","休闲"},new[]{"commercial","商业"},new[]{"employment","就业"},new[]{"pollution","污染"},new[]{"heat","余热"},new[]{"stock","库存"},new[]{"energy","电力"}}){
+            var layer=pair[0];var button=HudButton(_planningLayers,pair[1],layer,()=>SetLayer(layer),46);_hudLayerButtons[layer]=button;
+            var caption=button.GetComponentInChildren<Text>();HudFont(caption,12);caption.alignment=TextAnchor.MiddleLeft;
             AddDeskTip(button.gameObject,pair[1]+"图层",()=>LayerLabel(layer)+" · "+(MapSourcePhase=="committed"?"最近周期实际":MapSourcePhase=="baseline"?"同一步现状预测":"同一步建成预测"));
         }
         _planningLegend=HudSurface("HUD Layer Source",_root,new Color(.04f,.075f,.10f,.94f));
@@ -156,28 +151,13 @@ public sealed partial class CityInterface {
         Pin(_planningRail,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-96),new Vector2(100,482));
         var nav=new[]{new[]{"city","城市","city"},new[]{"population_home","居民与服务","population"},new[]{"construction","施工","build"},new[]{"economy_home","财政","currency"},new[]{"bonus_home","Bonus","bonus"},new[]{"tasks_home","任务","task"},new[]{"records","档案","license"}};
         for(int i=0;i<nav.Length;i++){
-            string route=nav[i][0];var button=HudButton(_planningRail,nav[i][1],nav[i][2],()=>OpenSection(route),64);_topRoutes[route]=button;
-            Pin((RectTransform)button.transform,new Vector2(0,1),new Vector2(0,1),new Vector2(4,-4-i*68),new Vector2(92,64));
-            var label=button.GetComponentInChildren<Text>();HudFont(label,route=="population_home"?12:15);Stretch(label.rectTransform,2,32,2,2);label.alignment=TextAnchor.LowerCenter;
-            var icon=button.GetComponentInChildren<CityHudGlyph>().rectTransform;Pin(icon,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-7),new Vector2(23,23));
-            if(route=="city"){button.interactable=false;label.text="城市\n暂未开放";HudFont(label,11);Stretch(label.rectTransform,2,27,2,0);AddDeskTip(button.gameObject,"永久城市","暂未开放。已有记录可在档案查阅。");}
-        }
-        _planningBuildMenu=HudSurface("HUD Construction",_root);
-        Pin(_planningBuildMenu,new Vector2(0,0),new Vector2(0,0),new Vector2(18,18),new Vector2(420,124));
-        _buildHint=Label(_planningBuildMenu,"建设 · 先选类型，再点空地",13,Muted,22);
-        Pin(_buildHint.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-6),new Vector2(395,24));
-        int foundationIndex=0;
-        foreach(var choice in G.c.v040["progression"]["tier1"]){
-            var baseId=choice.Text;var name=G.c.projects[baseId]["name"].Text;
-            var button=HudButton(_planningBuildMenu,name,"",()=>{
-                if(!Runtime.ViewCanEditFocused){OpenArchive("governance");return;}
-                BeginConstructionIntent();_base=baseId;_contextKey="";RefreshContext();RefreshHudGeometry();
-            },86);button.name="HUD Build Choice "+baseId;_foundationButtons[baseId]=button;
-            Pin((RectTransform)button.transform,new Vector2(0,0),new Vector2(0,0),new Vector2(8+foundationIndex++*136,6),new Vector2(132,84));
-            var label=button.GetComponentInChildren<Text>();HudFont(label,15);label.alignment=TextAnchor.LowerCenter;Stretch(label.rectTransform,4,48,4,3);
-            var artNode=Node("Foundation Illustration "+baseId,button.transform);Pin(artNode,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-2),new Vector2(95,49));
-            var art=artNode.gameObject.AddComponent<CityBlueprintArt>();art.ShowDrafting=false;art.Style=CityIllustrationCatalog.StyleForBuilding(baseId);art.Accent=CityIllustrationCatalog.AccentForStyle(art.Style);art.Fill=1;art.color=Color.white;art.raycastTarget=false;
-            AddDeskTip(button.gameObject,name,()=>ConstructionPurpose(G.c.projects[baseId])+"。选择类型后点一块空闲陆地，查看实际报价与建成效果。");
+            string route=nav[i][0];var button=HudButton(_planningRail,nav[i][1],nav[i][2],()=>OpenSection(route),40);_topRoutes[route]=button;
+            var label=button.GetComponentInChildren<Text>();HudFont(label,route=="population_home"?12:14);label.alignment=TextAnchor.MiddleLeft;
+            if(route=="city"){button.interactable=false;label.text="城市 · 待开放";HudFont(label,11);AddDeskTip(button.gameObject,"永久城市","暂未开放。已有记录可在档案查阅。");}
+            if(route=="bonus_home"){
+                _hudBonusBadge=Label(button.transform,"0",11,Gold);_hudBonusBadge.name="HUD Bonus License Badge";_hudBonusBadge.alignment=TextAnchor.MiddleCenter;
+                AddDeskTip(button.gameObject,"Bonus 部署许可",()=>"未安装副本 "+S["block"].Get("bonus_wallet",V.Map()).Values.Sum(w=>w.Get("charges",0).Long)+" 份；另有 "+Bonus.pending(G).Count+" 份提案待领取。安装消耗副本，拆下不返还。");
+            }
         }
         _planningTime=HudSurface("HUD Time Controls",_root);
         Pin(_planningTime,new Vector2(1,0),new Vector2(1,0),new Vector2(-18,18),new Vector2(440,76));
@@ -193,7 +173,7 @@ public sealed partial class CityInterface {
         int speedIndex=0;foreach(var mode in G.c.beta["time"]["modes"]){
             var id=mode["id"].Text;var index=speedIndex++;
             var button=HudButton(_planningTime,index==0?"1×":index==1?"›":index==2?"»":"»»","",()=>{if(_mapViewing){ShowMessage("请先返回方案比较页面。");return;}Runtime.SetMode(id);if(Runtime.MandatoryPending)OpenArchive("settlement");},48);
-            var speedLabel=button.GetComponentInChildren<Text>();HudFont(speedLabel,14);Stretch(speedLabel.rectTransform,3,2,3,2);
+            _hudSpeedButtons.Add(button);var speedLabel=button.GetComponentInChildren<Text>();HudFont(speedLabel,14);Stretch(speedLabel.rectTransform,3,2,3,2);
             Pin((RectTransform)button.transform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(230+index*51,0),new Vector2(48,48));
             AddDeskTip(button.gameObject,"时间速度",()=>mode.Get("label",id).Text);
         }
@@ -214,6 +194,7 @@ public sealed partial class CityInterface {
         long copies=0;foreach(var item in S.Get("block",V.Map()).Get("bonus_wallet",V.Map()).Values)copies+=item.Get("charges",0).Long;
 
         if(_planningCopyCount!=null)_planningCopyCount.text=copies.ToString(CultureInfo.InvariantCulture);
+        if(_hudBonusBadge!=null)_hudBonusBadge.text=copies.ToString(CultureInfo.InvariantCulture);
         var clock=Clock.summary(G);var speed=clock.Get("acceleration",0).Double;
         _time.text=clock.Get("date","").Text+" · "+(Runtime.WorldPaused?"已暂停":F(speed,0)+"×");
         _planningClock.text=clock.Get("date","").Text+"\n"+(Runtime.MandatoryPending?"待处理决定":Runtime.WorldPaused?"已暂停":F(speed,0)+"×  运行中");
@@ -225,30 +206,58 @@ public sealed partial class CityInterface {
     }
     void RefreshHudGeometry(){
         if(_planningTop==null)return;
-        if(_planningClock!=null){var clock=Clock.summary(G);_planningClock.text=clock.Get("date","").Text+"\n"+(Runtime.MandatoryPending?"待处理决定":Runtime.DecisionOpen?"规划中 · 已暂停":Runtime.WorldPaused?"已暂停":F(clock.Get("acceleration",0).Double,0)+"×  运行中");}
-        float factor=Mathf.Clamp((float)Runtime.DisplaySettings.Get("ui_scale",1).Double,.8f,1.2f);float cellWidth=Mathf.Min(190,(1920/factor-420)/6);int i=0;
-        var brand=_planningTop.Find("HUD Brand")?.GetComponent<Text>();if(brand!=null)brand.resizeTextMaxSize=Mathf.RoundToInt(24*TextScale);
+        float ui=Mathf.Clamp((float)Runtime.DisplaySettings.Get("ui_scale",1).Double,.8f,1.2f);
+        float width=_root.rect.width>100?_root.rect.width:1920/ui,height=_root.rect.height>100?_root.rect.height:1080/ui;
+        float font=TextScale,gap=12,top=64,navY=top+gap,navRow=40+16*(font-1),navHeight=8+7*(navRow+4);
+        _planningTop.offsetMin=new Vector2(0,-top);_planningTop.offsetMax=Vector2.zero;
+        var brand=_planningTop.Find("HUD Brand")?.GetComponent<Text>();if(brand!=null){HudFont(brand,22);brand.resizeTextMaxSize=Mathf.RoundToInt(22*font);}
+        float cellWidth=Mathf.Min(190,(width-84-324)/6);int i=0;
         foreach(Transform child in _planningTop){
-            if(!child.name.StartsWith("HUD Resource "))continue;var cell=(RectTransform)child;cell.anchoredPosition=new Vector2(84+i++*cellWidth,0);cell.sizeDelta=new Vector2(cellWidth,-6);
+            if(!child.name.StartsWith("HUD Resource "))continue;var cell=(RectTransform)child;cell.anchoredPosition=new Vector2(84+i++*cellWidth,0);cell.sizeDelta=new Vector2(cellWidth,-4);
+            var icon=child.GetComponentInChildren<CityHudGlyph>();if(icon!=null)Pin(icon.rectTransform,new Vector2(0,.5f),new Vector2(.5f,.5f),new Vector2(20,0),new Vector2(24,24));
             foreach(var text in child.GetComponentsInChildren<Text>()){
-                var rect=text.rectTransform;rect.sizeDelta=new Vector2(cellWidth-49,rect.sizeDelta.y);
-                if(text.name.StartsWith("HUD Value ")){text.resizeTextMinSize=Mathf.RoundToInt(12*TextScale);text.resizeTextMaxSize=Mathf.RoundToInt(21*TextScale);}
+                bool value=text.name.StartsWith("HUD Value "),detail=text.name.StartsWith("HUD Detail ");int size=value?18:detail?10:11;HudFont(text,size);
+                Pin(text.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(38,detail?-43:value?-19:-1),new Vector2(cellWidth-42,detail?17:value?28:20));
+                if(value){text.resizeTextMinSize=Mathf.RoundToInt(11*font);text.resizeTextMaxSize=Mathf.RoundToInt(18*font);}
             }
         }
-        foreach(var entry in _hudLayerButtons){bool active=entry.Key==Layer;entry.Value.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;entry.Value.GetComponentInChildren<Text>().color=active?Ink:Muted;entry.Value.GetComponentInChildren<CityHudFrame>().enabled=active;}
-        foreach(var entry in _foundationButtons){bool active=ConstructionIntentActive&&entry.Key==_base;entry.Value.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;entry.Value.GetComponentInChildren<CityHudFrame>().enabled=active;}
-        foreach(var entry in _topRoutes){bool active=_archiveOpen&&(_page==entry.Key||entry.Key==ArchiveCategory(_page));entry.Value.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;}
-        if(_bonusBucket!=null){Pin(_bonusBucket,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-588),new Vector2(100,48));}
-        if(_buildHint!=null)_buildHint.text=ConstructionIntentActive?G.c.projects[_base]["name"].Text+" · 点空地选址 / Esc 取消":"建设 · 先选类型，再点空地";
-        if(_planningOverview!=null&&_guidanceTitle!=null){
-            _planningOverview.gameObject.SetActive(!_archiveOpen);
-            float titleHeight=HudMeasuredHeight(_guidanceTitle,312,36*TextScale),reasonHeight=HudMeasuredHeight(_guidanceReason,312,46*TextScale);
-            Height(_guidanceTitle.rectTransform,titleHeight);Height(_guidanceReason.rectTransform,reasonHeight);Height((RectTransform)_guidanceButton.transform,43*TextScale);
-            _planningOverview.sizeDelta=new Vector2(350,_planningOverviewOpen?98+titleHeight+reasonHeight+73*TextScale:43);
+        var capacity=_planningTop.Find("HUD Capacity") as RectTransform;if(capacity!=null){Pin(capacity,new Vector2(1,.5f),new Vector2(1,.5f),new Vector2(-12,0),new Vector2(304,58));int index=0;foreach(Transform child in capacity){if(!child.name.StartsWith("Capacity "))continue;Pin((RectTransform)child,new Vector2(0,1),new Vector2(0,1),new Vector2(5,-index++*29),new Vector2(294,28));}}
+        if(_planningRail!=null){Pin(_planningRail,new Vector2(0,1),new Vector2(0,1),new Vector2(gap,-navY),new Vector2(144,navHeight));i=0;foreach(var entry in _topRoutes){
+            var button=entry.Value;Pin((RectTransform)button.transform,new Vector2(0,1),new Vector2(0,1),new Vector2(4,-4-i++*(navRow+4)),new Vector2(136,navRow));
+            var label=button.GetComponentInChildren<Text>();Stretch(label.rectTransform,35,2,entry.Key=="bonus_home"?32:3,2);label.alignment=TextAnchor.MiddleLeft;
+            var icon=button.GetComponentInChildren<CityHudGlyph>();if(icon!=null)Pin(icon.rectTransform,new Vector2(0,.5f),new Vector2(.5f,.5f),new Vector2(18,0),new Vector2(22,22));
+            bool active=_archiveOpen&&(_page==entry.Key||entry.Key==ArchiveCategory(_page));button.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;
+        }}
+        if(_hudBonusBadge!=null){HudFont(_hudBonusBadge,11);Pin(_hudBonusBadge.rectTransform,new Vector2(1,.5f),new Vector2(1,.5f),new Vector2(-3,0),new Vector2(30,navRow-4));}
+        if(_bonusBucket!=null&&_topRoutes.TryGetValue("bonus_home",out var bonus)){var anchor=(RectTransform)bonus.transform;_bonusBucket.position=anchor.TransformPoint(anchor.rect.center);_bonusBucket.sizeDelta=anchor.rect.size;_bonusBucket.gameObject.SetActive(false);}
+        float contextWidth=600,contextBottom=gap,contextHeight=Mathf.Min(520,height-navY-navHeight-gap-contextBottom);
+        if(_context!=null)Pin(_context,new Vector2(0,0),new Vector2(0,0),new Vector2(gap,contextBottom),new Vector2(contextWidth,Mathf.Max(160,contextHeight)));
+        float timeWidth=360+40*(font-1),timeHeight=68,clockWidth=140+40*(font-1);
+        if(_planningTime!=null){Pin(_planningTime,new Vector2(1,0),new Vector2(1,0),new Vector2(-gap,gap),new Vector2(timeWidth,timeHeight));
+            if(_planningClock!=null){var clock=Clock.summary(G);_planningClock.text=clock.Get("date","").Text+"\n"+(Runtime.MandatoryPending?"待处理决定":Runtime.DecisionOpen?"规划中 · 已暂停":Runtime.WorldPaused?"已暂停":F(clock.Get("acceleration",0).Double,0)+"×  运行中");HudFont(_planningClock,12);Pin(_planningClock.rectTransform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(8,0),new Vector2(clockWidth-8,54));}
+            if(_pause!=null)Pin((RectTransform)_pause.transform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(clockWidth+4,0),new Vector2(48,46));
+            for(i=0;i<_hudSpeedButtons.Count;i++)Pin((RectTransform)_hudSpeedButtons[i].transform,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(clockWidth+56+i*39,0),new Vector2(36,46));
         }
-        if(_planningUrgent!=null){float y=115+(_planningOverviewOpen?_planningOverview.sizeDelta.y:43);Pin(_planningUrgent,new Vector2(1,1),new Vector2(1,1),new Vector2(-18,-y),new Vector2(350,0));}
-        if(_planningNoticeButton!=null)Pin((RectTransform)_planningNoticeButton.transform,new Vector2(1,0),new Vector2(1,0),new Vector2(-18,110),new Vector2(160,36));
-        if(_planningNoticePanel!=null)Pin(_planningNoticePanel,new Vector2(1,0),new Vector2(1,0),new Vector2(-18,154),new Vector2(350,0));
+        float layerLeft=contextWidth+2*gap,layerRight=width-timeWidth-2*gap,layerSpace=layerRight-layerLeft,layerCell=64+24*(font-1);
+        int layerColumns=layerSpace>=10*layerCell?10:5;float layerWidth=layerColumns*layerCell,layerHeight=layerColumns==10?46:92,layerX=(layerLeft+layerRight)/2;
+        if(_planningLayers!=null){Pin(_planningLayers,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap),new Vector2(layerWidth,layerHeight));i=0;foreach(var entry in _hudLayerButtons){
+            var button=entry.Value;Pin((RectTransform)button.transform,new Vector2(0,1),new Vector2(0,1),new Vector2(i%layerColumns*layerCell,-i/layerColumns*46),new Vector2(layerCell-2,44));i++;
+            var caption=button.GetComponentInChildren<Text>();HudFont(caption,12);Stretch(caption.rectTransform,27,2,1,2);
+            var icon=button.GetComponentInChildren<CityHudGlyph>();if(icon!=null)Pin(icon.rectTransform,new Vector2(0,.5f),new Vector2(.5f,.5f),new Vector2(13,0),new Vector2(20,20));
+            bool active=entry.Key==Layer;button.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;caption.color=active?Ink:Muted;button.GetComponentInChildren<CityHudFrame>().enabled=active;
+        }}
+        if(_planningLegend!=null)Pin(_planningLegend,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap+layerHeight+4),new Vector2(layerWidth,28*font));
+        if(_planningToastSurface!=null)Pin(_planningToastSurface,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap+layerHeight+8+28*font),new Vector2(Mathf.Min(layerSpace,780),45));
+        if(_planningOverview!=null&&_guidanceTitle!=null){
+            _planningOverview.gameObject.SetActive(!_archiveOpen);_planningOverviewBody.gameObject.SetActive(_planningOverviewOpen);
+            float titleHeight=HudMeasuredHeight(_guidanceTitle,312,36*font),reasonHeight=HudMeasuredHeight(_guidanceReason,312,46*font);
+            Height(_guidanceTitle.rectTransform,titleHeight);Height(_guidanceReason.rectTransform,reasonHeight);Height((RectTransform)_guidanceButton.transform,43*font);
+            Pin(_planningOverview,new Vector2(1,1),new Vector2(1,1),new Vector2(-gap,-navY),new Vector2(350,_planningOverviewOpen?98+titleHeight+reasonHeight+73*font:43));
+            var header=_planningOverview.GetComponentInChildren<Button>();if(header!=null)header.GetComponentInChildren<Text>().text=_planningOverviewOpen?"下一步  ▴":"下一步  ▾";
+        }
+        if(_planningUrgent!=null)Pin(_planningUrgent,new Vector2(1,1),new Vector2(1,1),new Vector2(-gap,-navY-(_planningOverview!=null?_planningOverview.sizeDelta.y:43)-gap),new Vector2(350,0));
+        if(_planningNoticeButton!=null)Pin((RectTransform)_planningNoticeButton.transform,new Vector2(1,0),new Vector2(1,0),new Vector2(-gap,gap+timeHeight+8),new Vector2(160,36));
+        if(_planningNoticePanel!=null)Pin(_planningNoticePanel,new Vector2(1,0),new Vector2(1,0),new Vector2(-gap,gap+timeHeight+50),new Vector2(350,0));
         LayoutMapInspectionHud();
     }
     float HudMeasuredHeight(Text label,float width,float minimum){

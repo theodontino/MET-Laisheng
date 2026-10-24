@@ -90,8 +90,14 @@ public sealed class CityHudGlyph : CityHudMesh {
     else{Line(.37f,.62f,.67f,.62f,1.6f);Line(.37f,.49f,.65f,.49f,1.6f);Line(.37f,.36f,.58f,.36f,1.6f);}break;
    case "terrain":
     Poly(V(.10f,.19f),V(.35f,.78f),V(.52f,.42f),V(.67f,.68f),V(.91f,.19f));Line(.29f,.64f,.39f,.64f,1.4f);break;
-   case "service":
-    Disc(.5f,.51f,.29f);Box(.45f,.33f,.55f,.69f);Box(.32f,.46f,.68f,.56f);break;
+   case "service": case "medical":
+    Box(.40f,.13f,.60f,.87f);Box(.13f,.40f,.87f,.60f);break;
+   case "education":
+    Path(2,V(.12f,.18f),V(.12f,.80f),V(.50f,.70f),V(.88f,.80f),V(.88f,.18f),V(.50f,.10f),V(.12f,.18f));Line(.50f,.10f,.50f,.70f,2);break;
+   case "entertainment":
+    Poly(V(.50f,.92f),V(.62f,.64f),V(.92f,.61f),V(.69f,.40f),V(.76f,.10f),V(.50f,.26f),V(.24f,.10f),V(.31f,.40f),V(.08f,.61f),V(.38f,.64f));break;
+   case "commercial":
+    Path(2,V(.16f,.15f),V(.16f,.64f),V(.84f,.64f),V(.84f,.15f),V(.16f,.15f));Path(2,V(.34f,.64f),V(.34f,.85f),V(.66f,.85f),V(.66f,.64f));break;
    case "pollution":
     Disc(.33f,.43f,.16f);Disc(.50f,.60f,.21f);Disc(.70f,.43f,.17f);Box(.24f,.27f,.78f,.43f);break;
    case "stock":

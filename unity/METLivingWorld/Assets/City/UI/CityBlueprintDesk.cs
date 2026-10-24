@@ -45,13 +45,15 @@ public sealed partial class CityInterface {
   PaperLabel(surface,title,22);if(subtitle!="")PaperLabel(surface,subtitle,16,true);return surface;
  }
  void BuildBonusBucket(){
-  _bonusBucket=Surface("Bonus Blueprint Bucket",_root,new Color(.045f,.10f,.12f,.97f));Pin(_bonusBucket,new Vector2(1,1),new Vector2(1,1),new Vector2(-326,-8),new Vector2(120,60));
-  var icon=HudIcon(_bonusBucket,"bonus",new Color(.67f,.84f,.85f),24);Pin(icon,new Vector2(0,.5f),new Vector2(0,.5f),new Vector2(20,0),new Vector2(24,24));
-  _bucketCount=Label(_bonusBucket,"许可",15,Ink);HudFont(_bucketCount,15);Stretch(_bucketCount.rectTransform,40,4,4,4);_bucketCount.resizeTextForBestFit=true;_bucketCount.resizeTextMinSize=12;_bucketCount.resizeTextMaxSize=Mathf.RoundToInt(15*TextScale);_bucketCount.alignment=TextAnchor.MiddleLeft;
-  var frame=_bonusBucket.GetComponentInChildren<CityHudFrame>();if(frame!=null)frame.enabled=false;
-  var button=_bonusBucket.gameObject.AddComponent<Button>();button.onClick.AddListener(()=>OpenArchive("bonus_home"));AddDeskTip(_bonusBucket.gameObject,"Bonus 部署许可",()=>"这里的数量是未安装副本。另有 "+Bonus.pending(G).Count+" 份提案等待领取。安装消耗1份；拆下不返还。已部署实例在建筑与库存中单独标记。");
+  // Keep a nonvisual destination for the existing reward flight animation.
+  _bonusBucket=Node("Bonus Blueprint Bucket",_root);_bonusBucket.gameObject.SetActive(false);
+  _bucketCount=Label(_bonusBucket,"",11,Gold);_bucketCount.gameObject.SetActive(false);
  }
- void RefreshBucket(){if(_bucketCount==null)return;long count=0;foreach(var w in S["block"].Get("bonus_wallet",V.Map()).Values)count+=w.Get("charges",0).Long;_bucketCount.resizeTextMaxSize=Mathf.RoundToInt(15*TextScale);_bucketCount.text="许可 "+count;}
+ void RefreshBucket(){
+  long count=0;foreach(var w in S["block"].Get("bonus_wallet",V.Map()).Values)count+=w.Get("charges",0).Long;
+  if(_bucketCount!=null)_bucketCount.text=count.ToString();
+  if(_hudBonusBadge!=null)_hudBonusBadge.text=count.ToString();
+ }
  void BlueprintOffersPage(){
   var pending=Bonus.pending(G);
   if(pending.Count==0){var columns=WorkspaceColumns("Reward queue",1);PaperLabel(PaperDocument(columns[0],"所有提案已处理"),"已领取蓝图可从 Bonus 安装。",17,true);WorkspaceActions("前往 Bonus 使用",()=>Navigate("bonus_home"));return;}

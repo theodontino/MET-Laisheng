@@ -6,121 +6,150 @@ using UnityEngine.UI;
 
 namespace MET.City {
 public sealed partial class CityInterface {
- // A construction decision stays attached to its site, operator and price while details scroll.
- void TenderPage(){
-  var draft=S["draft"];
-  if(draft.Count==0||draft.Get("offers",V.Arr()).Count==0){
-   _title.text="选择建造位置";_subtitle.text="先在地图选择一块空闲陆地";
-   Label(_decisionHeader,"还没有待建项目",23,Ink);
-   Label(_body,"从左侧「建设」选择建筑，再点一块空地。",18,Muted);
-   Button(_decisionFooter,"回到地图选位置",CloseArchive,true);return;
-  }
-  var offers=draft["offers"];
-  if(!offers.Any(x=>x["id"].Text==_offer))_offer=offers[0]["id"].Text;
-  _baseline=_planner.snapshot(G);var previews=V.Map();
-  foreach(var item in offers)previews[item["id"]]=_planner.compare(G,draft["base"].Text,draft["tile"].Text,item);
-  var selected=offers.First(x=>x["id"].Text==_offer);_proposal=previews[_offer];_previewVersion=_planner.version(G);PublishComparison();
-  var definition=G.c.projects[draft["base"]];var cost=Draft.offer_cost(G,selected);
-  var org=G.c.operators[selected["operator_org"]];string building=definition["name"].Text;
-  _title.text="建造"+building;_subtitle.text="选位置  ›  选方案  ›  开工";
-  var identity=Row(_decisionHeader,"Construction Identity",96*TextScale);identity.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
-  var art=Node("Construction Building Illustration",identity);Width(art,112);Height(art,88*TextScale);
-  var drawing=art.gameObject.AddComponent<CityBlueprintArt>();drawing.ShowDrafting=false;drawing.Style=CityIllustrationCatalog.StyleForBuilding(draft["base"].Text);drawing.Fill=1;drawing.Accent=CityIllustrationCatalog.AccentForStyle(drawing.Style);drawing.raycastTarget=false;
-  var identityText=Column(identity,"Construction identity text",2,false);identityText.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);identityText.gameObject.AddComponent<LayoutElement>().flexibleWidth=1;
-  Label(identityText,building+" · 地块 "+draft["tile"].Text,21,Ink,29*TextScale);
-  Label(identityText,ConstructionPurpose(definition),16,Muted,25*TextScale);
-  Label(identityText,"运营者："+org["name"].Text,17,Green,27*TextScale);
-
-  if(_proposal.Get("ok",false).Bool)ConstructionBenefits(_body,_baseline,_proposal);
-  else Label(_body,_proposal.Get("error","暂时无法计算建成后的变化，请重新选择方案。").Text,18,Gold);
-
-  Label(_body,"选择运营方案",20,Ink);
-  foreach(var item in offers){
-   var option=item;var operatorInfo=G.c.operators[item["operator_org"]];bool chosen=item["id"].Text==_offer;
-   var optionButton=Button(_body,(chosen?"✓  ":"")+operatorInfo["name"].Text,()=>{_offer=option["id"].Text;RenderPage();},chosen);
-   optionButton.name="OperatorChoice "+item["id"].Text;
-   Height((RectTransform)optionButton.transform,67*TextScale);
-   var optionLabel=optionButton.GetComponentInChildren<Text>();optionLabel.alignment=TextAnchor.UpperLeft;Stretch(optionLabel.rectTransform,12,6,12,30*TextScale);
-   var route=Label(optionButton.transform,"成长路线："+string.Join(" → ",item["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)),14,Muted);
-   Stretch(route.rectTransform,12,34*TextScale,12,5);route.alignment=TextAnchor.MiddleLeft;
-   AddDeskTip(optionButton.gameObject,operatorInfo["name"].Text,operatorInfo.Get("summary","").Text+"\n成长槽位："+string.Join(" → ",item["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)));
-  }
-  Fold(_body,"运营者与成长路线",details=>{
-   foreach(var item in offers){var info=G.c.operators[item["operator_org"]];Label(details,info["name"].Text,19,Ink);Label(details,info.Get("summary","").Text,16,Muted);Label(details,"T1 → T2 → T3："+string.Join(" → ",item["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)),16,Blue);}
-   var rerollCost=Draft.reroll_cost(G)["currency"].Double;string fingerprint=draft.ToJson(false,true);
-   var reroll=Button(details,"另找一组运营者 · "+F(rerollCost,0)+" 通货",()=>{
-    if(!_archiveOpen||_page!="tender")return;
-    var error=Runtime.Execute(g=>g.s["draft"].ToJson(false,true)!=fingerprint?"报价已经变化，请重新查看。":g.reroll());
-    if(error=="")_offer="";RenderPage();
-   },false,S["currency"].Double<rerollCost);
-   AddDeskTip(reroll.gameObject,"另找运营者","立即支付这笔通货，重新抽取三名运营者。之后的重抽会涨价，已支付的重抽费不退还。");
-  });
-  if(_proposal.Get("ok",false).Bool){
-   // Keep the complete same-step source report reachable without making it the first decision screen.
-   var baseSnapshot=_baseline;var result=_proposal;
-   Fold(_body,"全部变化与计算依据",details=>Impact(details,baseSnapshot,result));
-   Fold(_body,"在地图上比较",map=>{
-    Button(map,"地图 · 现状预测",()=>ShowForecastMap("baseline",baseSnapshot));
-    Button(map,"地图 · 建成后",()=>ShowForecastMap("proposal",result["map_snapshot"]));
-    Button(map,"本次改变图层",()=>{SetLayer("delta");ShowForecastMap("proposal",result["map_snapshot"]);});
-   });
-  }
-
-  double cash=cost["currency"].Double,balance=S["currency"].Double;
-  var costText=Label(_decisionFooter,balance>=cash?"支付后余 "+F(balance-cash,0)+" 通货 · 施工需 "+F(cost["material"].Double,0)+" 材料":"还差 "+F(cash-balance,0)+" 通货 · 可保留方案稍后建造",16,balance>=cash?Muted:Gold,28*TextScale);costText.name="Construction Costs";
-  var controls=Row(_decisionFooter,"Construction decision actions",46*TextScale);controls.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
-  var defer=Button(controls,"先不建",()=>{if(!_archiveOpen||_page!="tender")return;if(Runtime.Execute(g=>g.cancel_draft())=="")CloseArchive();});defer.name="Construction Defer";
-  Width((RectTransform)defer.transform,126*TextScale);
-  AddDeskTip(defer.gameObject,"先不建","返回地图并保留这一类建筑的报价。不支付建设费；已经支付的重抽费不会退回。");
-  string offerId=_offer,expectedDraft=draft.ToJson(false,true),expectedVersion=_previewVersion,targetTile=draft["tile"].Text;
-  bool submitted=false;
-  var build=Button(controls,"开始建造 · "+F(cash,0)+" 通货",()=>{
-   if(submitted||!_archiveOpen||_page!="tender"||_offer!=offerId)return;
-   submitted=true;
-   // Execute flushes before this callback. Match the detached preview version and exact draft,
-   // not only offer:0, whose ID can be reused by a later tender.
-   var error=Runtime.Execute(g=>_planner.version(G)!=expectedVersion||g.s["draft"].ToJson(false,true)!=expectedDraft?
-    "城市或报价已变化，已刷新，请重新确认。":g.accept_offer(offerId));
-   if(error!=""){RenderPage();return;}
-   CloseArchive();SelectedTile=targetTile;SelectedBuilding=S["cells"][targetTile]["building"].Text;RefreshContext();SelectionChanged?.Invoke(SelectedTile,SelectedBuilding);
-   ShowMessage(building+"已开工。施工会随城市运行推进，点建筑查看进度。");
-  },true,balance<cash||!_proposal.Get("ok",false).Bool);build.name="Construction Primary";var mainSize=build.GetComponent<LayoutElement>();mainSize.minWidth=0;mainSize.preferredWidth=0;mainSize.flexibleWidth=1;
-  AddDeskTip(build.gameObject,"确认并开工","立即支付 "+F(cash,0)+" 通货。施工过程中逐步消耗 "+F(cost["material"].Double,0)+" 材料，需要 "+F(cost["cp"].Double)+" CP 施工量，与其他工程共享施工能力。材料不足时工程会等待。上方效果按假定已建成计算，不代表立即获得。");
- }
-
+ // Compatibility entry only. Navigation intercepts this route before archive history changes.
+ void TenderPage(){var draft=S["draft"];if(draft.Count!=0)OpenConstructionWindow(draft["base"].Text,draft["tile"].Text);}
  string ConstructionPurpose(V definition){
   var stats=definition.Get("stats",V.Map());var purposes=V.Arr();
   if(stats.Get("housing",0).Double>0)purposes.Add("提供住房");
   foreach(var resource in new[]{"food","material","goods"})if(stats.Get("output."+resource,0).Double>0)purposes.Add("生产"+Resource(resource));
   if(stats.Keys.Any(key=>key.StartsWith("service.",StringComparison.Ordinal)&&stats[key].Double>0))purposes.Add("提供社区服务");
-  return purposes.Count>0?string.Join(" · ",purposes.Select(x=>x.Text)):"在这块土地上开始建设";
+  if(stats.Get("output.energy",0).Double>0)purposes.Add("提供电力");
+  return purposes.Count>0?string.Join(" · ",purposes.Select(x=>x.Text)):"建设城市设施";
  }
- void ConstructionBenefits(Transform parent,V baseline,V proposal){
-  var section=Column(parent,"Construction Benefits",7);section.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,2,6);
-  Label(section,"建成后会改变什么",20,Ink);
-  var explain=Label(section,"与不建设相比 · 同一次结算预测",14,Muted);
-  AddDeskTip(explain.gameObject,"建成后预测","两边都计算同一次结算：一边不建设，一边假定这栋楼已建成。这里不扣建设费和施工材料，也不模拟施工等待；详细记录在「全部变化与计算依据」。");
-  int shown=0;
-  if(Math.Abs(proposal["housing"].Double)>.0001){ConstructionBenefit(section,"住房容量",Signed(proposal["housing"].Double)+" 人",proposal["housing"].Double>=0?Green:Gold);shown++;}
-  foreach(var resource in new[]{"food","material","goods"}){
-   double diff=proposal["world"].Get("flows",V.Map()).Get(resource,0).Double-baseline["metrics"].Get("flows",V.Map()).Get(resource,0).Double;
-   if(Math.Abs(diff)<.0001)continue;
-   ConstructionBenefit(section,"全城"+Resource(resource)+"净流量",Signed(diff)+" /月",diff>=0?Green:Gold);shown++;
+ void RenderConstructionOffers(){
+  var draft=S["draft"];
+  if(draft.Get("base","").Text!=_constructionId||draft.Get("tile","").Text!=_constructionTile||draft.Get("offers",V.Arr()).Count==0){
+   _constructionTitle.text="建造方案已变化";_constructionSubtitle.text="请返回所选地块重新打开建造窗口。";Button(_constructionFooter,"返回地块",CloseConstructionWindow);return;
   }
-  foreach(var kind in proposal["added_service"].Keys){double value=proposal["added_service"][kind].Double;if(Math.Abs(value)<.0001)continue;ConstructionBenefit(section,Service(kind)+"覆盖",Signed(value)+" 人",value>=0?Green:Gold);shown++;}
-  if(shown==0)Label(section,"本次预测没有新增住房或资源、服务净收益。",16,Gold);
-  ConstructionBenefit(section,"全城每月收支变化",Signed(proposal["cashflow"].Double)+" 通货/月",proposal["cashflow"].Double>=0?Green:Gold);
-  var concerns=V.Arr();
-  if(Math.Abs(proposal["energy_supply"].Double)>.0001)concerns.Add("供电 "+Signed(proposal["energy_supply"].Double));
-  if(Math.Abs(proposal["energy_demand"].Double)>.0001)concerns.Add("用电 "+Signed(proposal["energy_demand"].Double));
-  if(concerns.Count>0)Label(section,"电力能力："+string.Join(" · ",concerns.Select(x=>x.Text)),16,Muted);
-  if(proposal["harmed"].Double>.0001)Label(section,F(proposal["harmed"].Double,0)+" 位现有居民的污染暴露将上升。",16,Gold);
-  if(proposal["affected"].Count>0)Label(section,F(proposal["affected"].Count,0)+" 座现有建筑的预计运行率会下降；展开全部变化查看。",16,Gold);
-  if(proposal["activity"].Get("utilization",0).Double<.99)Label(section,"预计运行率 "+F(proposal["activity"].Get("utilization",0).Double*100,0)+"% · 受人手、投入与电力等条件影响",16,Gold);
+  var offers=draft["offers"];if(!offers.Any(x=>x["id"].Text==_constructionOffer))_constructionOffer=offers[0]["id"].Text;
+  var definition=G.c.projects[_constructionId];var name=definition["name"].Text;
+  _constructionTitle.text="建造 · "+name;_constructionSubtitle.text="地块 "+_constructionTile+"  ·  "+ConstructionPurpose(definition)+"  ·  选择运营者，再确认开工";
+  _constructionBaseline=_constructionPlanner.snapshot(G);
+  var previews=V.Map();foreach(var offer in offers)previews[offer["id"]]=_constructionPlanner.compare(G,_constructionId,_constructionTile,offer);
+  var selected=offers.First(x=>x["id"].Text==_constructionOffer);_constructionProposal=previews[_constructionOffer];
+  Label(_constructionHeader,"选中运营者："+G.c.operators[selected["operator_org"]]["name"].Text+"  ·  T1 → T2 → T3："+string.Join(" → ",selected["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)),17,Green,32*TextScale);
+  var columns=ConstructionColumns(_constructionBody,"Operator Comparison",offers.Count);
+  for(int i=0;i<offers.Count;i++){
+   var offer=offers[i];var card=columns[i];var info=G.c.operators[offer["operator_org"]];var forecast=previews[offer["id"]];var cost=Draft.offer_cost(G,offer);var chosen=offer["id"].Text==_constructionOffer;
+   Label(card,info["name"].Text,21,chosen?Green:Ink);Label(card,ConstructionPurpose(definition),15,Muted);
+   Label(card,"槽轨："+string.Join(" → ",offer["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)),16,Blue);
+   Label(card,info.Get("summary","").Text,14,Muted);
+   Label(card,ConstructionGainSummary(_constructionBaseline,forecast),15,forecast.Get("ok",false).Bool?Green:Gold);
+   Label(card,"即付 "+F(cost["currency"].Double,0)+" 通货 · "+F(cost["material"].Double,0)+" 材料 / "+F(cost["cp"].Double)+" CP",14,Muted);
+   var id=offer["id"].Text;var choose=Button(card,chosen?"✓ 已选方案":"选择此方案",()=>{_constructionOffer=id;RefreshConstructionWindow();},chosen);choose.name="Construction Operator "+id;
+  }
+  ConstructionFold(_constructionBody,"reroll","另找运营者 · 付费重抽",details=>{
+   var rerollCost=Draft.reroll_cost(G)["currency"].Double;string expected=draft.ToJson(false,true);
+   Label(details,"立即支付费用，重新征集三名运营者；重抽费用会增长且不退还。关闭窗口会保留当前报价。",15,Muted);
+   Button(details,"支付 "+F(rerollCost,0)+" 通货 · 另找一组",()=>{
+    if(!_constructionOpen||_constructionMode!="build")return;
+    var error=Runtime.Execute(g=>g.s["draft"].ToJson(false,true)!=expected?"报价已经变化，请重新查看。":g.reroll());
+    if(error=="")_constructionOffer="";RefreshConstructionWindow();
+   },false,S["currency"].Double<rerollCost);
+  });
+  RenderConstructionImpact(_constructionBaseline,_constructionProposal,_constructionProposal.Get("target","").Text,"不建设","假定建成");
+  var selectedCost=Draft.offer_cost(G,selected);double cash=selectedCost["currency"].Double;
+  var blocked=!_constructionProposal.Get("ok",false).Bool?_constructionProposal.Get("error","预测暂不可用").Text:S["currency"].Double<cash?"还差 "+F(cash-S["currency"].Double,0)+" 通货；可以关闭窗口，经营后沿用此报价。":"";
+  var offerId=_constructionOffer;var expectedDraft=draft.ToJson(false,true);var expectedVersion=_constructionPlanner.version(G);
+  ConstructionCosts(cash,selectedCost["material"].Double,selectedCost["cp"].Double,blocked,()=>{
+   if(!_constructionOpen||_constructionSubmitting||_constructionMode!="build"||_constructionOffer!=offerId)return;
+   _constructionSubmitting=true;
+   var error=Runtime.Execute(g=>_constructionPlanner.version(G)!=expectedVersion||g.s["draft"].ToJson(false,true)!=expectedDraft?"城市或报价已变化，已刷新，请重新确认。":g.accept_offer(offerId));
+   _constructionSubmitting=false;
+   if(error!=""){RefreshConstructionWindow();return;}ConstructionSucceeded(name+"已开工。施工会随城市运行推进。");
+  },"开始建造 · "+F(cash,0)+" 通货");
  }
- void ConstructionBenefit(Transform parent,string title,string value,Color color){
-  var line=Row(parent,"Construction Benefit "+title,34*TextScale);
-  var label=Label(line,title,17,Muted,30*TextScale);var figure=Label(line,value,20,color,30*TextScale);figure.alignment=TextAnchor.MiddleRight;
+ string ConstructionGainSummary(V baseline,V proposal){
+  if(!proposal.Get("ok",false).Bool)return proposal.Get("error","预测暂不可用").Text;
+  var lines=V.Arr();var world=proposal["map_snapshot"]["metrics"];var before=baseline["metrics"];
+  foreach(var resource in new[]{"food","material","goods"}){
+   double diff=world.Get("flows",V.Map()).Get(resource,0).Double-before.Get("flows",V.Map()).Get(resource,0).Double;
+   if(Math.Abs(diff)>.001)lines.Add(Resource(resource)+" "+Signed(diff)+"/月");
+  }
+  double housing=world.Get("housing",0).Double-before.Get("housing",0).Double;if(Math.Abs(housing)>.001)lines.Add("住房 "+Signed(housing)+" 人");
+  foreach(var kind in G.c.balance["service_kinds"]){string key=kind.Text;double diff=world.Get("service_links",V.Arr()).Where(x=>x["kind"].Text==key).Sum(x=>x["people"].Double)-before.Get("service_links",V.Arr()).Where(x=>x["kind"].Text==key).Sum(x=>x["people"].Double);if(Math.Abs(diff)>.001)lines.Add(Service(key)+" "+Signed(diff)+" 人");}
+  double energy=world.Get("energy",0).Double-before.Get("energy",0).Double;if(Math.Abs(energy)>.001)lines.Add("供电 "+Signed(energy));
+  lines.Add("经营 "+Signed(world.Get("cashflow",0).Double-before.Get("cashflow",0).Double)+"/月");return string.Join(" · ",lines.Select(x=>x.Text));
+ }
+ void RenderConstructionUpgrades(){
+  var id=_constructionId;
+  if(!S["projects"].Has(id)){_constructionTitle.text="建筑已不可用";Button(_constructionFooter,"返回地图",CloseConstructionWindow);return;}
+  var p=S["projects"][id];var choices=Development.choices(G,id).Select(x=>x.Text).ToArray();
+  _constructionTitle.text="升级 · "+G.project_name(id);_constructionSubtitle.text="地块 "+_constructionTile+"  ·  当前 T"+p["tier"].Text+"  ·  运营者、已有槽位、库存与历史继续保留";
+  Label(_constructionHeader,"运营者："+G.c.operators[p["operator_org"]]["name"].Text+"  ·  成长槽轨："+string.Join(" → ",p["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)),17,Green,32*TextScale);
+  if(!choices.Contains(_constructionUpgrade))_constructionUpgrade=choices.FirstOrDefault()??"";
+  if(_constructionUpgrade==""){Label(_constructionBody,"当前没有后续升级方向。",21,Muted);Button(_constructionFooter,"返回建筑",CloseConstructionWindow);return;}
+  var cards=ConstructionColumns(_constructionBody,"Upgrade Direction Comparison",choices.Length);
+  for(int i=0;i<choices.Length;i++){
+   var node=choices[i];var view=Development.preview(G,id,node);var card=cards[i];var definition=G.c.projects[node];bool chosen=node==_constructionUpgrade;
+   Label(card,view["name"].Text+" · T"+(p["tier"].Long+1),21,chosen?Green:Ink);Label(card,ConstructionPurpose(definition),15,Muted);
+   Label(card,"新槽："+Catalog.SLOT_NAMES.Get(view["slot"],view["slot"]).Text+" · 槽轨延续",16,Blue);
+   foreach(var diff in view["gains"].Concat(view["losses"]))Label(card,Stat(diff["stat"].Text)+"："+F(diff["before"].Double)+" → "+F(diff["after"].Double)+"（"+Signed(diff["delta"].Double)+"）",15,diff["delta"].Double>=0?Green:Gold);
+   Label(card,"即付 "+F(view["cost"].Double,0)+" 通货 · "+F(view["material"].Double,0)+" 材料 / "+F(view["construction_required"].Double)+" CP",14,Muted);
+   var choose=Button(card,chosen?"✓ 已选方向":"选择此方向",()=>{_constructionUpgrade=node;RefreshConstructionWindow();},chosen);choose.name="Construction Upgrade "+node;
+  }
+  var selected=_constructionUpgrade;var upgrade=Development.preview(G,id,selected);
+  _constructionBaseline=_constructionPlanner.snapshot(G);var clone=_constructionPlanner.copy_game(G);
+  clone.s["projects"][id]["upgrade_choice"]=selected;clone.s["projects"][id]["upgrade_job"]=V.Map("work",0.0,"total",upgrade["construction_required"],"material",0.0,"cp",true);
+  Development.complete(clone,id);clone.refresh_metrics();var previewError=Sim.tick(clone,G.c.balance["tick_hours"].Double);
+  _constructionProposal=V.Map("ok",previewError=="","error",previewError,"map_snapshot",_constructionPlanner.display_copy(clone));
+  RenderConstructionImpact(_constructionBaseline,_constructionProposal,id,"不升级","假定升级完工");
+  ConstructionFold(_constructionBody,"upgrade-continuity","施工与保留内容",details=>{
+   Label(details,"升级施工期间运营系数 "+F(upgrade["operation_factor"].Double,2)+"；工程完成后解锁下一槽。",16,Muted);
+   foreach(var resource in new[]{"food","material","goods"})Label(details,"当前"+Resource(resource)+"库存 "+F(p["inventory"].Get(resource,0).Double),16,Muted);
+   Raw(details,G.c.projects[selected]);Raw(details,p["history"]);
+  });
+  var cash=upgrade["cost"].Double;
+  string blocked=p["status"].Text!="running"||p["upgrade_job"].Count!=0?"请等当前施工完成后再升级。":S["currency"].Double<cash?"升级经费不足，还差 "+F(cash-S["currency"].Double,0)+" 通货。":previewError;
+  var expectedVersion=_constructionPlanner.version(G);
+  ConstructionCosts(cash,upgrade["material"].Double,upgrade["construction_required"].Double,blocked,()=>{
+   if(!_constructionOpen||_constructionSubmitting||_constructionMode!="upgrade"||_constructionUpgrade!=selected)return;
+   _constructionSubmitting=true;var error=Runtime.Execute(g=>_constructionPlanner.version(G)!=expectedVersion?"城市已变化，预测已刷新，请重新确认。":Development.start_upgrade(g,id,selected));_constructionSubmitting=false;
+   if(error!=""){RefreshConstructionWindow();return;}ConstructionSucceeded(G.project_name(id)+"已开始升级。");
+  },"开始升级 · "+F(cash,0)+" 通货");
+ }
+ void RenderConstructionImpact(V baseline,V proposal,string target,string beforeLabel,string afterLabel){
+  if(!proposal.Get("ok",false).Bool){Label(_constructionBody,proposal.Get("error","预测暂不可用").Text,18,Gold);return;}
+  var after=proposal["map_snapshot"];var old=baseline["metrics"];var now=after["metrics"];
+  Label(_constructionBody,"所选方案 · 同一步城市变化",21,Ink);
+  Label(_constructionBody,"两边均结算下一步。假定项目已完工，不扣本次建设费、不模拟施工等待；实际库存另列。",14,Muted);
+  ConstructionCompareLine(_constructionBody,"指标",beforeLabel,afterLabel,"变化",true);
+  foreach(var resource in new[]{"food","material","goods"})ConstructionCompareNumber(Resource(resource)+"净流量",old.Get("flows",V.Map()).Get(resource,0).Double,now.Get("flows",V.Map()).Get(resource,0).Double," /月");
+  ConstructionCompareNumber("经营净额",old.Get("cashflow",0).Double,now.Get("cashflow",0).Double," 通货/月");
+  ConstructionCompareNumber("供电能力",old.Get("energy",0).Double,now.Get("energy",0).Double,"");
+  ConstructionCompareNumber("用电需求能力",old.Get("energy_need",0).Double,now.Get("energy_need",0).Double,"");
+  ConstructionCompareNumber("住房容量",old.Get("housing",0).Double,now.Get("housing",0).Double," 人");
+  foreach(var kind in G.c.balance["service_kinds"]){
+   string key=kind.Text;double before=old.Get("service_links",V.Arr()).Where(x=>x["kind"].Text==key).Sum(x=>x["people"].Double),value=now.Get("service_links",V.Arr()).Where(x=>x["kind"].Text==key).Sum(x=>x["people"].Double);
+   ConstructionCompareNumber(Service(key)+"实际覆盖",before,value," 人");
+  }
+  ConstructionCompareNumber("全城平均污染场强",ConstructionPollution(baseline),ConstructionPollution(after),"",3);
+  ConstructionCompareNumber("污染场强 >0.001 的地格占比",ConstructionPollutedArea(baseline),ConstructionPollutedArea(after),"%",1);
+  var exposure=0.0;foreach(var gid in baseline["groups"].Keys){var group=after["groups"].Get(gid,V.Map());if(group.Count!=0&&group.Get("living",V.Map()).Get("pollution",0).Double-baseline["groups"][gid].Get("living",V.Map()).Get("pollution",0).Double>.015)exposure+=baseline["groups"][gid]["count"].Double;}
+  Label(_constructionBody,"污染暴露上升的现有居民："+F(exposure,0)+" 人（暴露增加超过 0.015）；面积与平均场强均以全城全部地格为分母。",14,exposure>0?Gold:Muted);
+  var beforeTrace=baseline.Get("compiled",V.Map()).Get("trace",V.Map());var afterTrace=after.Get("compiled",V.Map()).Get("trace",V.Map());
+  double nextSynergy=afterTrace.Get(target,V.Map()).Get("spatial_synergy",V.Map()).Get("value",1).Double;
+  if(baseline["projects"].Has(target))ConstructionCompareNumber("本楼相邻加成倍率",beforeTrace.Get(target,V.Map()).Get("spatial_synergy",V.Map()).Get("value",1).Double,nextSynergy,"×",2);
+  else ConstructionCompareLine(_constructionBody,"本楼相邻加成倍率","尚无建筑",F(nextSynergy,2)+"×","相邻增益 "+Signed((nextSynergy-1)*100)+"%");
+  ConstructionFold(_constructionBody,"adjacency","相邻建筑、投入竞争与完整计算来源",details=>{
+   foreach(var contributor in afterTrace.Get(target,V.Map()).Get("spatial_synergy",V.Map()).Get("contributors",V.Arr()))Label(details,"相邻来源："+G.project_name(contributor["source_id"].Text)+" · 地块 "+contributor["tile"].Text+" · 效率 "+Signed(contributor["amount"].Double*100)+"%",16,Blue);
+   foreach(var building in baseline["projects"].Keys){
+    if(!after["projects"].Has(building)||building==target)continue;
+    double before=old.Get("utilization",V.Map()).Get(building,V.Map()).Get("utilization",0).Double,value=now.Get("utilization",V.Map()).Get(building,V.Map()).Get("utilization",0).Double;
+    double priorSynergy=beforeTrace.Get(building,V.Map()).Get("spatial_synergy",V.Map()).Get("value",1).Double,synergy=afterTrace.Get(building,V.Map()).Get("spatial_synergy",V.Map()).Get("value",1).Double;
+    if(Math.Abs(value-before)>.001||Math.Abs(synergy-priorSynergy)>.001)Label(details,G.project_name(building)+"：运行率 "+F(before*100)+"% → "+F(value*100)+"% · 相邻倍率 "+F(priorSynergy,2)+" → "+F(synergy,2),15,value>=before?Muted:Gold);
+   }
+   Label(details,"所选项目的实际投入、产出与规则",18,Blue);Raw(details,now.Get("activity_ledger",V.Map()).Get(target,V.Arr()));Raw(details,afterTrace.Get(target,V.Map()));
+   Label(details,"同一步现状来源",18,Blue);Raw(details,baseline);Label(details,"同一步完工后来源",18,Blue);Raw(details,after);
+  });
+  ConstructionFold(_constructionBody,"inventory","当前库存与仓容（非预测库存）",details=>{foreach(var resource in new[]{"food","material","goods"})Meter(details,Resource(resource),G.inventory_total(resource),G.stock_cap(resource)," 单位",Blue);});
+ }
+ double ConstructionPollution(V snapshot){var tiles=snapshot.Get("tiles",V.Map());return tiles.Count==0?0:tiles.Values.Sum(tile=>Rules.aggregate(tile.Get("fields",V.Map()).Get("pollution",V.Arr())))/tiles.Count;}
+ double ConstructionPollutedArea(V snapshot){var tiles=snapshot.Get("tiles",V.Map());return tiles.Count==0?0:100.0*tiles.Values.Count(tile=>Rules.aggregate(tile.Get("fields",V.Map()).Get("pollution",V.Arr()))>.001)/tiles.Count;}
+ void ConstructionCompareNumber(string title,double before,double after,string unit,int digits=1){ConstructionCompareLine(_constructionBody,title,F(before,digits)+unit,F(after,digits)+unit,Signed(after-before,digits)+unit);}
+ void ConstructionCompareLine(Transform parent,string title,string before,string after,string delta,bool heading=false){
+  var row=Row(parent,"Construction Comparison "+title,34*TextScale);var fields=new[]{title,before,after,delta};
+  for(int i=0;i<fields.Length;i++){var text=Label(row,fields[i],heading?15:16,heading?Blue:i==0?Muted:Ink,31*TextScale);var element=text.GetComponent<LayoutElement>();element.minWidth=0;element.preferredWidth=0;element.flexibleWidth=i==0?1.4f:1;if(i>0)text.alignment=TextAnchor.MiddleRight;}
  }
 }
 }

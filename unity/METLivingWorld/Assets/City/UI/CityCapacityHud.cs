@@ -41,7 +41,7 @@ public sealed partial class CityInterface {
   var m=S.Get("metrics",V.Map());var last=S["block"].Get("construction_last",V.Map());var reservation=S["block"].Get("city_cp_last",V.Map());
   double h=last.Get("hours",0).Double,used=h>0?last.Get("cp",0).Double/h:0;
   double reserved=reservation.Get("hours",0).Double>0?reservation.Get("cp",0).Double/reservation["hours"].Double:0;
-  double cp=Construction.capacity(G)*Math.Min(1,Math.Max(0,m.Get("energy_ratio",1).Double));
+  double cp=Construction.capacity_breakdown(G)["effective"].Double;
   SetCapacity("cp",used,cp,h>0?F(used+reserved,1)+"/"+F(cp,1):"待结算");
   if(_cpReservation!=null){float start=cp>0?Mathf.Clamp01((float)(used/cp)):0,end=cp>0?Mathf.Clamp01((float)((used+reserved)/cp)):0;_cpReservation.anchorMin=new Vector2(start,0);_cpReservation.anchorMax=new Vector2(end,1);_cpReservation.offsetMin=_cpReservation.offsetMax=Vector2.zero;_cpReservation.gameObject.SetActive(end>start);}
 
