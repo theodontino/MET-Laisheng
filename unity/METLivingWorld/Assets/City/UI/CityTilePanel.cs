@@ -57,8 +57,8 @@ public sealed partial class CityInterface {
   var identity=Node("Identity facts",strip);TileBounds(identity,.25f,.62f);
   var cell=data["cell"];var terrain=TileTerrain(cell.Get("terrain","plain").Text);var traits=G.c.tags_text(cell.Get("traits",V.Arr()));
   var terrainLabel=TileText(identity,terrain+" · "+traits,14,Blue);terrainLabel.rectTransform.anchorMin=new Vector2(0,.62f);terrainLabel.rectTransform.anchorMax=Vector2.one;terrainLabel.rectTransform.offsetMin=Vector2.zero;terrainLabel.rectTransform.offsetMax=Vector2.zero;
-  string status=!Runtime.ViewCanEditFocused?"只读街区":water?"水域 · 不可建造":empty?"空地 · 可建造":data["buildings"][0]["paused"].Bool?"已暂停":data["buildings"][0]["status"].Text=="construction"?"施工中":data["buildings"][0]["upgrade_job"].Count>0?"升级中":"运行中";
-  string details=empty?"选择下方建筑类型":data["buildings"][0]["operator_name"].Text+"\nT"+data["buildings"][0]["tier"].Text+" · "+status;
+  string status=!Runtime.ViewCanEditFocused?"只读街区":water?"水域 · 不可建造":empty?"空地 · 可建造":data["buildings"][0]["paused"].Bool?"已暂停":data["buildings"][0]["status"].Text=="construction"?"施工中":data["buildings"][0]["upgrade_job"].Count>0?"升级中 · 原楼降效运营":"运行中";
+  string details=empty?(!Runtime.ViewCanEditFocused?"该街区当前仅可查看":water?"水域不可建设":"选择下方建筑类型"):data["buildings"][0]["operator_name"].Text+"\nT"+data["buildings"][0]["tier"].Text+" · "+status;
   var operatorLabel=TileText(identity,details,14,empty?Muted:Green);operatorLabel.rectTransform.anchorMin=Vector2.zero;operatorLabel.rectTransform.anchorMax=new Vector2(1,.61f);operatorLabel.rectTransform.offsetMin=Vector2.zero;operatorLabel.rectTransform.offsetMax=Vector2.zero;
   if(empty){var condition=TileText(identity,status,14,water?Gold:Green);condition.rectTransform.anchorMin=new Vector2(0,.34f);condition.rectTransform.anchorMax=new Vector2(1,.62f);condition.rectTransform.offsetMin=condition.rectTransform.offsetMax=Vector2.zero;operatorLabel.rectTransform.anchorMax=new Vector2(1,.33f);}
   AddDeskTip(identity.gameObject,"地块与运营",terrain+" · "+traits+"\n"+details);
@@ -78,7 +78,7 @@ public sealed partial class CityInterface {
    foreach(var group in S["groups"].Pairs)foreach(var job in group.Value.Get("employment",V.Map()).Pairs)if(data["buildings"].Any(b=>b["id"].Text==job.Key))TileLine(parent,ResidentHostName(group.Value["host"].Text)+" → "+G.project_name(job.Key),F(job.Value.Double)+" 人");
   });
   if(!empty){var p=data["buildings"][0];var job=p["upgrade_job"].Count>0?p["upgrade_job"]:p["status"].Text=="construction"?p["job"]:V.Map();if(job.Count>0){
-   TileHeading(_tileBody,"施工进度",F(job["total"].Double-job["work"].Double)+" / "+F(job["total"].Double)+" CP");
+   TileHeading(_tileBody,p["upgrade_job"].Count>0?"升级进度 · 原楼继续运营":"新建进度 · 完工后投产",F(job["total"].Double-job["work"].Double)+" / "+F(job["total"].Double)+" CP");
    var track=TileBlock(_tileBody,"Local construction progress",6);var bg=TileTint(track,"Progress base",new Color(.2f,.3f,.32f,1));Stretch(bg);var fill=TileTint(track,"Completed work",Green);fill.anchorMin=Vector2.zero;fill.anchorMax=new Vector2((float)Math.Max(0,1-job["work"].Double/Math.Max(.000001,job["total"].Double)),1);fill.offsetMin=fill.offsetMax=Vector2.zero;
    var priority=Row(_tileBody,"Project priority",30*TextScale);priority.GetComponent<HorizontalLayoutGroup>().spacing=5;
    var remaining=TileText(priority,"还需 "+F(job["material"].Double)+" 材料",14,Muted);remaining.GetComponent<LayoutElement>().flexibleWidth=1;
@@ -90,7 +90,7 @@ public sealed partial class CityInterface {
   TileHeading(parent,"净收入","来源 ›",()=>ToggleTileDisclosure("economy"));
   foreach(var resource in new[]{"food","material","goods"}){
    var row=data["resources"].FirstOrDefault(x=>x["resource"].Text==resource)??V.Map();
-   double net=row["production"].Double-row["building_input"].Double-row["resident_consumption"].Double-row["construction_material"].Double-row["production_lost"].Double;
+   double net=row.Get("production",0).Double-row.Get("building_input",0).Double-row.Get("resident_consumption",0).Double-row.Get("construction_material",0).Double-row.Get("production_lost",0).Double;
    TileMatrixRow(parent,new[]{Resource(resource),settled?TileSigned(net):"待结算"},new[]{0f,.54f,1f},true,net<0?Gold:Green);
   }
   var cash=data["cash"];double cashNet=cash["income_attributed"].Double-cash["upkeep"].Double;
