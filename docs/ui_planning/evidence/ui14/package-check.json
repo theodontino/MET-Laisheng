@@ -1,0 +1,10 @@
+{
+  "version": "0.7.0-ui.14",
+  "architectures": "x86_64 arm64",
+  "archive_bytes": 72391895,
+  "archive_entries": 514,
+  "zip_integrity": "passed",
+  "native_extract": "bundle and signature verified",
+  "signature": "ad-hoc; not Developer ID or notarized",
+  "player_visual_and_input": "user acceptance pending"
+}

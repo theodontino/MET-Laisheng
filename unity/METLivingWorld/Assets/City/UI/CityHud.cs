@@ -150,7 +150,7 @@ public sealed partial class CityInterface {
     void BuildPlanningFooter() {
         _planningRail=HudSurface("HUD Navigation",_root);
         Pin(_planningRail,new Vector2(0,1),new Vector2(0,1),new Vector2(12,-96),new Vector2(100,482));
-        var nav=new[]{new[]{"city","城市","city"},new[]{"population_home","居民与服务","population"},new[]{"economy_home","资源与财政","currency"},new[]{"construction","施工","build"},new[]{"tasks_home","任务与成长","task"},new[]{"bonus_home","Bonus","bonus"},new[]{"records","档案","license"}};
+        var nav=new[]{new[]{"city","城市","city"},new[]{"population_home","居民与服务","population"},new[]{"economy_home","资源与财政","currency"},new[]{"construction","施工","build"},new[]{"tasks_home","任务与成长","task"},new[]{"bonus_home","Bonus","bonus"},new[]{"records","档案","archive"}};
         foreach(var title in new[]{"街区经营","发展与能力","城市记忆"})_navGroupLabels.Add(Label(_planningRail,title,10,Muted));
         for(int i=0;i<nav.Length;i++){
             string route=nav[i][0];var button=HudButton(_planningRail,nav[i][1],nav[i][2],()=>OpenSection(route),40);_topRoutes[route]=button;

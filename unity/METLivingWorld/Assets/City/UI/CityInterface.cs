@@ -47,7 +47,7 @@ public sealed partial class CityInterface : MonoBehaviour {
  float TextScale=>Mathf.Clamp((float)Runtime.DisplaySettings.Get("text_scale",1).Double,1,1.5f);
  static string F(double n,int d=1)=>n.ToString("F"+d,CultureInfo.InvariantCulture);
  static string Signed(double n,int d=1)=>n.ToString("+0."+new string('0',d)+";-0."+new string('0',d)+";0."+new string('0',d),CultureInfo.InvariantCulture);
- string Resource(string id)=>id=="advanced_components"?"高级部件":Catalog.RESOURCE_NAMES.Get(id,id).Text;
+ string Resource(string id)=>id=="currency"?"通货":id=="advanced_components"?"高级部件":Catalog.RESOURCE_NAMES.Get(id,id).Text;
  string Service(string id)=>Catalog.SERVICE_NAMES.Get(id,id).Text;
  string Stat(string id)=>V.Map("municipal_storage","市政仓容","housing","住房","jobs","岗位","efficiency","建筑效率","personnel_mult","人员效率","energy_demand","用电需求","pollution","污染","maintenance","维护","construction_capacity","施工能力","trade_capacity","货运能力","output.food","粮食产出","output.material","材料产出","output.goods","制成品产出","output.energy","供电能力","input.food","粮食投入","input.material","材料投入","input.goods","制成品投入","storage.food","粮食仓容","storage.material","材料仓容","storage.goods","制成品仓容","service.medical","医疗容量","service.education","教育容量","service.commercial","商业容量","service.entertainment","娱乐容量").Get(id,id).Text;
  Color Domain(V p){

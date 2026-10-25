@@ -27,9 +27,9 @@ public sealed partial class CityInterface {
   OperatingStateNote();
   var housing=OperatingSection(_body,"人口与安居","健康 "+F(m.Get("health",0).Double,1)+" · 幸福 "+F(m.Get("happiness",0).Double,1));
   var homes=OperatingGrid(housing,"Housing and employment");
-  OperatingMeter(OperatingCell(homes),"city","住房入住",m.Get("housed",0).Double,m.Get("housing",0).Double,"人",m.Get("homeless",0).Double>0?"待安置 "+F(m.Get("homeless",0).Double)+" 人":"可再安置 "+F(m.Get("vacancies",0).Double)+" 人",Green);
-  OperatingMeter(OperatingCell(homes),"population","居民就业",employed,population,"人","尚未就业 "+F(Math.Max(0,population-employed))+" 人",Blue,settled);
-  OperatingMeter(housing,"build","本地岗位使用",employed,jobs,"岗位","空余 "+F(Math.Max(0,jobs-employed))+" 个岗位 · 与居民就业分别统计",Blue,settled);
+  OperatingMeter(OperatingCell(homes),"home","住房入住",m.Get("housed",0).Double,m.Get("housing",0).Double,"人",m.Get("homeless",0).Double>0?"待安置 "+F(m.Get("homeless",0).Double)+" 人":"可再安置 "+F(m.Get("vacancies",0).Double)+" 人",Green);
+  OperatingMeter(OperatingCell(homes),"employment","居民就业",employed,population,"人","尚未就业 "+F(Math.Max(0,population-employed))+" 人",Blue,settled);
+  OperatingMeter(housing,"employment","本地岗位使用",employed,jobs,"岗位","空余 "+F(Math.Max(0,jobs-employed))+" 个岗位 · 与居民就业分别统计",Blue,settled);
   var services=OperatingSection(_body,"服务缺口",settled?"最近实际分配":"待首次实际结算");
   for(int i=0;i<4;i+=2){var pair=OperatingGrid(services,"Service meters "+i);foreach(var kindValue in new[]{"medical","education","entertainment","commercial"}.Skip(i).Take(2)){
    var kind=kindValue;double ratio=Progress.service_ratio(G,kind);var pools=m.Get("service_pools",V.Map()).Values.Where(pool=>pool.Get("kind","").Text==kind);double capacity=pools.Sum(pool=>pool.Get("capacity",0).Double);int affected=S["groups"].Values.Count(group=>ResidentMatchesFilter(group,kind));
@@ -53,7 +53,7 @@ public sealed partial class CityInterface {
   var m=S["metrics"];bool settled=S.Get("simulation_tick",0).Long>0;var selected=_operatingEconomyResource;OperatingStateNote();
   var stocks=OperatingSection(_body,"库存与经营月流",settled?"最近实际 / 来生月":"月流待结算");
   var resources=new[]{"food","material","goods","currency"};for(int i=0;i<resources.Length;i+=2){var row=OperatingGrid(stocks,"Stock cards "+i);foreach(var resourceValue in resources.Skip(i).Take(2)){
-   var resource=resourceValue;var card=OperatingCard(row,"Resource stock "+resource);var heading=Row(card,"Stock heading",30*TextScale);OperatingGlyph(heading,resource,24);Label(heading,Resource(resource),15,Muted,30*TextScale);
+   var resource=resourceValue;var card=OperatingCard(row,"Resource stock "+resource);var heading=Row(card,"Stock heading",30*TextScale);OperatingGlyph(heading,resource,24);var title=Label(heading,Resource(resource),15,Muted,30*TextScale);var titleSize=title.GetComponent<LayoutElement>();titleSize.minWidth=0;titleSize.preferredWidth=0;titleSize.flexibleWidth=1;
    var amount=resource=="currency"?S.Get("currency",0).Double:G.inventory_total(resource);Label(card,F(amount),23,Ink,35*TextScale);double net=resource=="currency"?m.Get("cashflow",0).Double:m.Get("flows",V.Map()).Get(resource,0).Double;Label(card,settled?Signed(net)+" /月":"月流待结算",15,net<0?Gold:Green,28*TextScale);OperatingButton(card,(selected==resource?"✓ ":"")+"追查月流 ›",()=>{_operatingEconomyResource=resource;RenderPage();},selected==resource);
   }}
   OperatingMeter(stocks,"energy","电力占用",m.Get("energy_need",0).Double,m.Get("energy",0).Double,"容量",settled?"余缺 "+Signed(m.Get("energy",0).Double-m.Get("energy_need",0).Double)+" · 供需按全城能力分配":"实际供需待结算",Blue,settled);OperatingButton(stocks,(selected=="energy"?"✓ ":"")+"供给与用电来源 ›",()=>{_operatingEconomyResource="energy";RenderPage();},selected=="energy");

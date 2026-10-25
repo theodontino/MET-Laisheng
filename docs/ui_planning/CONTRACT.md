@@ -1,6 +1,10 @@
-# Modern strategy HUD — UI.13
+# Modern strategy HUD — UI.14
 
 The visual language follows the user-approved Stellaris-reference concept of 2026-10-15 (Library `libfile_25717c339e688191a18ed99c487e2ffe`). The 2026-10-23 page-remake request and subsequent left-sidebar/two-level corrections supersede the old uniform archive and centered-window layout. Existing city assets and gameplay rules are preserved.
+
+## UI14 reusable icon library (2026-10-25)
+
+Use the original MET Civic icon set in `assets/ui/icons/met-civic-v1/`: stable semantic IDs, editable 32-unit SVGs and transparent tintable PNGs. Native HUD glyphs preserve square artwork bounds even inside rectangular layouts; heading icon slots retain fixed width and labels receive remaining space. Housing, population, employment, construction and archives have distinct symbols. Full panel frames remain rectangular. Sources and reuse rules are documented with the library; engineering evidence is in [UI14 delivery](UI14_DELIVERY.md). This changes artwork and presentation only.
 
 ## UI13 demo V3 migration (2026-10-25)
 
