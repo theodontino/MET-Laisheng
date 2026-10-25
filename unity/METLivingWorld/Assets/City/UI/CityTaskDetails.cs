@@ -35,11 +35,7 @@ public sealed partial class CityInterface {
   }
  }
  void ThemeGoalAction(Transform parent,string id){
-  if(id=="trade"){Button(parent,"前往市场",()=>Navigate("market"));return;}
-  if(id=="currency"){Button(parent,"查看财政与收支",()=>Navigate("economy_home"));return;}
-  if(id=="food_stock_months"||id=="food_self_sufficiency"){Button(parent,"查看食物库存与月流量",()=>Navigate("resources","food"));return;}
-  if(id=="housed"||id=="homeless"||id=="health"||id=="happiness"||id=="commercial_person_months"||id=="industrial_labor"){Button(parent,"查看人口与实际服务",()=>Navigate("population_home"));return;}
-  Button(parent,"查看建设与服务条件",()=>Navigate("construction"));
+  Button(parent,"处理此目标 ›",()=>HandleGoalDestination(id));
  }
  void ThemeCurrentGoal(Transform parent,V theme,V goal){
   var box=CompactTaskCard(parent,"Current theme goal "+goal["id"].Text);var factor=goal["unit"].Text=="%"?100:1;var unit=goal["unit"].Text;var id=goal["id"].Text;
@@ -69,8 +65,8 @@ public sealed partial class CityInterface {
     Label(card,TaskChoiceOutcome(def,"accepted",evt["description"].Text).Replace(" 月"," 来生月"),16,Green);
     if(def.Get("deposit",0).Double>0)Label(card,"完成退还保证金 "+F(def["deposit"].Double)+" 通货；逾期失去该机会与已付保证金。",15,Muted);
     if(evt.Get("delivery_remaining",0).Double>0){var resource=evt["delivery_resource"].Text;var reserve=resource=="food"?def.Get("reserve_months",0).Double*Themes._population_metrics(G).Get("food_demand",0).Double:0;var stock=G.inventory_total(resource);var take=Math.Min(evt["delivery_remaining"].Double,Math.Max(0,stock-reserve));Label(card,"库存 "+F(stock)+" · 还需 "+F(evt["delivery_remaining"].Double)+(reserve>0?" · 保留口粮 "+F(reserve):"")+" · 本次扣除 "+F(take),15,Gold);Button(card,"交付 "+F(take)+" "+Resource(resource),()=>Command(g=>Themes.deliver(g,resource,-1,id)),true,take<=.000001);}
-    else if(def.Has("trade_amount"))Button(card,"前往市场完成实际成交",()=>Navigate("market"));
-    else if(def.Has("metric")||def.Has("person_months"))Button(card,"查看人口与实际服务",()=>Navigate("population_home"));
+    else if(def.Has("trade_amount"))Button(card,"前往市场完成实际成交",()=>HandleGoalDestination("trade"));
+    else if(def.Has("metric")||def.Has("person_months"))Button(card,"查看人口与实际服务",()=>HandleGoalDestination(def.Get("metric","commercial_person_months").Text));
    }
    Fold(card,"完整合同与来源",c=>{Raw(c,evt);Raw(c,def);});
   }

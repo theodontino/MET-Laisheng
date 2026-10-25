@@ -20,7 +20,7 @@ public sealed partial class CityInterface {
   bool scroll=name.Contains("scroll ");
   bool panel=!button&&!scroll;
   image.sprite=null;image.type=Image.Type.Simple;
-  image.color=scroll||button?requested:name=="L3 City Side Panel"?HudPanel:HudRaised;
+  image.color=requested;
   image.raycastTarget=true;
   var tone=node.GetComponent<CityDeskTone>()??node.gameObject.AddComponent<CityDeskTone>();
   tone.Light=false;

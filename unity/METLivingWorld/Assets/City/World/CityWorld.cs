@@ -375,9 +375,15 @@ public sealed partial class CityWorld : MonoBehaviour {
     }
     bool ComparisonReady()=>baseline.IsMap&&proposal.IsMap&&baseline.Has("tick")&&proposal.Has("tick")&&baseline["tick"]==proposal["tick"]&&Cells(baseline).Count>0&&Cells(proposal).Count>0;
 
+    public static double AnalysisMaximum(string layer)=>layer=="service"||layer=="medical"||layer=="education"||layer=="entertainment"||layer=="commercial"?1:layer=="pollution"?2:layer=="heat"?5:layer=="employment"?3:layer=="energy"?10:layer=="delta"?1:30;
+    public static Color AnalysisTint(string layer,double value,double scale,bool resident=true,string metric="pollution"){
+        float t=Mathf.Clamp01((float)(Math.Abs(value)/Math.Max(.001,scale)));var low=Srgb("243B4A");
+        var high=layer=="employment"?(resident?Srgb("4CE0BF"):Srgb("86B8FF")):layer=="pollution"?Srgb("EB6652"):layer=="heat"?Srgb("DB9545"):layer=="delta"?((metric=="pollution"?value>0:value<0)?Srgb("A65745"):Srgb("5C9C90")):layer=="energy"?(value<0?Srgb("A65745"):Srgb("5C9C90")):Srgb("599792");
+        return Color.Lerp(low,high,t);
+    }
     void RefreshAnalysis() {
         if(analysisRoot==null)return;
-        double max=Layer=="service"||Layer=="medical"||Layer=="education"||Layer=="entertainment"||Layer=="commercial"?1:Layer=="pollution"?2:Layer=="heat"?5:Layer=="employment"?3:Layer=="energy"?10:Layer=="delta"?1:30;
+        double max=AnalysisMaximum(Layer);
         double employmentReachMax=Layer=="employment"?Math.Max(1,tiles.Keys.Where(id=>!MapInspection.HasResidents(snapshot,id)).Select(id=>LayerValue(snapshot,id,Layer)).DefaultIfEmpty(1).Max()):1;
         var block=new MaterialPropertyBlock();
         foreach(var pair in tiles) {
@@ -385,9 +391,7 @@ public sealed partial class CityWorld : MonoBehaviour {
             double value=LayerValue(snapshot,pair.Key,Layer);
             bool employmentRatio=Layer=="employment"&&MapInspection.HasResidents(snapshot,pair.Key);
             double scale=Layer=="employment"?(employmentRatio?1:employmentReachMax):max;float t=Mathf.Clamp01((float)Math.Abs(value)/Mathf.Max(.001f,(float)scale));
-            bool burden=DeltaMetric=="pollution";
-            Color low=Srgb("243B4A"),high=Layer=="employment"?(employmentRatio?Srgb("4CE0BF"):Srgb("86B8FF")):Layer=="pollution"?Srgb("EB6652"):Layer=="heat"?Srgb("DB9545"):Layer=="delta"?((burden?value>0:value<0)?Srgb("A65745"):Srgb("5C9C90")):Layer=="energy"?(value<0?Srgb("A65745"):Srgb("5C9C90")):Srgb("599792");
-            var color=Color.Lerp(low,high,t);color.a=.73f;block.SetColor("_BaseColor",color);pair.Value.Analysis.SetPropertyBlock(block);
+            var color=AnalysisTint(Layer,value,scale,employmentRatio,DeltaMetric);color.a=.73f;block.SetColor("_BaseColor",color);pair.Value.Analysis.SetPropertyBlock(block);
         }
         DrawRelations();UpdateLegend();
     }
@@ -396,6 +400,7 @@ public sealed partial class CityWorld : MonoBehaviour {
         int affected=0;double aggregate=0;
         foreach(var id in tiles.Keys){double value=LayerValue(snapshot,id,Layer);if(Math.Abs(value)>1e-9)affected++;aggregate+=value;}
         Legend=V.Map("layer",Layer,"source_phase",SourcePhase,"city_tiles",tiles.Count,"affected_tiles",affected,"area_fraction",tiles.Count>0?(double)affected/tiles.Count:0,"value_sum",aggregate,"relation_count",RelationCount,"offmap_relations",OffMapRelationCount,"self_relations",SelfRelationCount,"all_links",AllLinks,"displayed_relations",DisplayedRelationCount,"hidden_relations",HiddenRelationCount,"relation_scope",AllLinks?"city":SelectedTile!=""?"selected":"city_preview","comparison_ready",ComparisonReady(),"delta_metric",DeltaMetric,"service_reading","Delivered coverage for occupied tiles; best source reach for unoccupied tiles.","employment_reading","Resident employment ratio (teal); summed provider access strength without residents (blue, not percent).","energy_reading","Local source capacity minus local demand; municipal supply remains in the city ledger.");
+        Legend["scale_max"]=AnalysisMaximum(Layer);Legend["employment_reach_max"]=Layer=="employment"?Math.Max(1,tiles.Keys.Where(id=>!MapInspection.HasResidents(snapshot,id)).Select(id=>LayerValue(snapshot,id,Layer)).DefaultIfEmpty(1).Max()):1;
         Legend["delta_label"]=DeltaMetric=="pollution"?"污染场强变化":"同一步 "+DeltaMetric+" 变化";
         Legend["delta_polarity"]=DeltaMetric=="pollution"?"红色增加污染，绿色减少污染":"绿色增加供给，红色减少供给";
     }

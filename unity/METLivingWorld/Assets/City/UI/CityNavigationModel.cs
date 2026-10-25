@@ -30,6 +30,7 @@ public sealed partial class CityInterface {
   {"district_start",new PageDefinition("city",PageRole.Locked)},{"block_start",new PageDefinition("city",PageRole.Locked)}
  };
  sealed class SectionVisit {public string Page,Context,Owner;public bool Advanced;public KeyValuePair<string,string>[] Parents;}
+ readonly Dictionary<string,bool> _parentPageModes=new Dictionary<string,bool>();
  readonly Dictionary<string,SectionVisit> _sectionVisits=new Dictionary<string,SectionVisit>();
  string _contextSection="";Button _pageBack;
  PageDefinition Definition(string page)=>_pages.TryGetValue(page,out var spec)?spec:new PageDefinition("records",PageRole.Locked);
@@ -63,7 +64,7 @@ public sealed partial class CityInterface {
   _sectionVisits[_cityIdentity+"/"+section]=new SectionVisit{Page=_page,Context=_pageContext,Owner=_contextSection,Parents=_navigation.ToArray(),Advanced=_advancedWorkspace};
  }
  void PrepareNavigation(string page){
-  CancelDeskTipsForPanel();DismissMapInspection();EndConstructionIntent();if(ConstructionWindowOpen)CloseConstructionWindow();if(_mapViewing)ReturnFromMapView();
+  CloseObjectDrawer(false);CancelDeskTipsForPanel();DismissMapInspection();EndConstructionIntent();if(ConstructionWindowOpen)CloseConstructionWindow();if(_mapViewing)ReturnFromMapView();
   if(_page!=page&&_comparisonValid)ClearComparison();
   if(!_archiveOpen){_archiveEntryFocus=EventSystem.current?.currentSelectedGameObject;_archiveOpen=true;Runtime.SetDecisionOpen(true);}_shield.SetActive(true);
  }
@@ -89,23 +90,25 @@ public sealed partial class CityInterface {
   OpenArchive(section);
  }
  void Navigate(string page,string context=""){
+  if(page=="building"){OpenObjectDrawer(page,context);return;}
   if(TryOpenConstructionRoute(page,context))return;
   string requested=page;page=NormalizePage(page);if(page=="tasks_home")context=TaskContext(requested,context);if(!PageAvailable(page))return;
   bool local=Definition(page).Role==PageRole.Local,opened=_archiveOpen;string owner=opened?ArchiveCategory(_page):Definition(page).Section;
   RememberSection();PrepareNavigation(page);
   if(local){
    if(opened&&_navigation.Any(frame=>frame.Key==page&&frame.Value==context)){while(_navigation.Count>0){var parent=_navigation.Pop();if(parent.Key==page&&parent.Value==context)break;}}
-   else if(opened&&_page!=page)_navigation.Push(new KeyValuePair<string,string>(_page,_pageContext));
+   else if(opened&&_page!=page){_parentPageModes[_cityIdentity+"/"+_page+"/"+_pageContext]=_advancedWorkspace;_navigation.Push(new KeyValuePair<string,string>(_page,_pageContext));}
    else if(!opened)SetCanonicalParents(page);
    _contextSection=owner;
   }else{_contextSection="";SetCanonicalParents(page,context);}
   _advancedWorkspace=IsAdvancedRoute(page)||(page=="tasks_home"&&context!="current");_page=page;_pageContext=context;RenderPage();
  }
  void Back(){
+  if(ObjectDrawerOpen&&!ConstructionWindowOpen&&!_mapViewing){CloseObjectDrawer();return;}
   if(ConstructionWindowOpen){CloseConstructionWindow();return;}if(_mapViewing){ReturnFromMapView();return;}RememberSection();
   if(_advancedWorkspace&&HasCompactVersion(_page)){CollapseAdvancedWorkspace();return;}if(_navigation.Count==0){CloseArchive();return;}
   if(_comparisonValid)ClearComparison();var parent=_navigation.Pop();_page=parent.Key;_pageContext=parent.Value;
-  if(Definition(_page).Role!=PageRole.Local)_contextSection="";_advancedWorkspace=IsAdvancedRoute(_page);RenderPage();
+  if(Definition(_page).Role!=PageRole.Local)_contextSection="";_advancedWorkspace=_parentPageModes.TryGetValue(_cityIdentity+"/"+_page+"/"+_pageContext,out var advanced)?advanced:IsAdvancedRoute(_page);RenderPage();
  }
  string NavigationTrail(){
   string section=ArchiveCategory(_page);string sectionName=section=="economy_home"?"资源与财政":section=="tasks_home"?"任务与成长":PageTitle(section);

@@ -14,7 +14,7 @@ public sealed partial class CityInterface {
  Text _constructionTitle,_constructionSubtitle;
  readonly Planning _constructionPlanner=new Planning();
  readonly HashSet<string> _constructionFolds=new HashSet<string>();
- bool _constructionOpen,_constructionSubmitting;
+ bool _constructionOpen,_constructionSubmitting,_constructionResetScroll;
  string _constructionMode="",_constructionId="",_constructionTile="",_constructionKey="",_constructionOffer="",_constructionUpgrade="";
  V _constructionBaseline=V.Map(),_constructionProposal=V.Map();
  public bool ConstructionWindowOpen=>_constructionOpen;
@@ -40,7 +40,9 @@ public sealed partial class CityInterface {
   CancelDeskTipsForPanel();DismissMapInspection();EndConstructionIntent();
   BuildConstructionWindow();
   var key=mode+":"+id+":"+tile;
-  if(key!=_constructionKey){_constructionFolds.Clear();_constructionOffer="";_constructionUpgrade="";_constructionScroll.verticalNormalizedPosition=1;}
+  if(key!=_constructionKey){_constructionFolds.Clear();_constructionOffer="";_constructionUpgrade="";_constructionResetScroll=true;}
+  // A new proposal starts at the top after its content has a measured height.
+  // Setting normalized position while the shield is inactive/empty uses stale bounds.
   _constructionMode=mode;_constructionId=id;_constructionTile=tile;_constructionKey=key;
   SelectedTile=tile;SelectedBuilding=S["cells"][tile].Get("building","").Text;
   _constructionOpen=true;_constructionShield.SetActive(true);_constructionShield.transform.SetAsLastSibling();
@@ -53,7 +55,7 @@ public sealed partial class CityInterface {
   _constructionScroll.StopMovement();_constructionShield.SetActive(false);
   // The retained draft is deliberately untouched: close / Esc never charges or redraws offers.
   if(S["cells"].Has(_constructionTile)){SelectedTile=_constructionTile;SelectedBuilding=S["cells"][_constructionTile].Get("building","").Text;}
-  Runtime.SetDecisionOpen(_archiveOpen);RefreshContext();RefreshModalOwnership(true);
+  Runtime.SetDecisionOpen(_archiveOpen||ObjectDrawerOpen);RefreshObjectDrawer();RefreshContext();RefreshModalOwnership(true);
   SelectionChanged?.Invoke(SelectedTile,SelectedBuilding);
  }
  void BuildConstructionWindow(){
@@ -73,7 +75,7 @@ public sealed partial class CityInterface {
   _constructionViewport.gameObject.AddComponent<RectMask2D>();
   _constructionScroll=_constructionViewport.gameObject.AddComponent<ScrollRect>();_constructionScroll.horizontal=false;
   _constructionScroll.scrollSensitivity=48;_constructionScroll.movementType=ScrollRect.MovementType.Clamped;_constructionScroll.viewport=_constructionViewport;
-  _constructionBody=Column(_constructionViewport,"Construction Window Body",12);_constructionBody.anchorMin=new Vector2(0,1);_constructionBody.anchorMax=new Vector2(1,1);_constructionBody.pivot=new Vector2(.5f,1);_constructionBody.sizeDelta=new Vector2(-12,0);
+  _constructionBody=Column(_constructionViewport,"Construction Window Body",12);_constructionBody.anchorMin=new Vector2(0,1);_constructionBody.anchorMax=new Vector2(1,1);_constructionBody.pivot=new Vector2(.5f,1);_constructionBody.sizeDelta=new Vector2(-12,0);_constructionBody.anchoredPosition=Vector2.zero;
   _constructionBody.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(12,12,8,14);_constructionScroll.content=_constructionBody;
   _constructionTrack=Surface("Construction Window Scroll Track",_constructionWindow,new Color(.10f,.17f,.19f));
   var thumb=Surface("Construction Window Scroll Thumb",_constructionTrack,new Color(.26f,.59f,.55f));Stretch(thumb);
@@ -86,7 +88,7 @@ public sealed partial class CityInterface {
   Pin(_constructionWindow,new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(1280,760));
   Pin(_constructionTitle.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(24,-16),new Vector2(1180,40*TextScale));
   Pin(_constructionSubtitle.rectTransform,new Vector2(0,1),new Vector2(0,1),new Vector2(24,-18-40*TextScale),new Vector2(1180,25*TextScale));
-  var headerTop=25+65*TextScale;var headerHeight=33*TextScale;var footerHeight=124*TextScale;
+  var headerTop=25+65*TextScale;var headerHeight=29*TextScale;var footerHeight=96*TextScale;
   Pin(_constructionHeader,new Vector2(0,1),new Vector2(0,1),new Vector2(24,-headerTop),new Vector2(1232,headerHeight));
   Pin(_constructionFooter,new Vector2(0,0),new Vector2(0,0),new Vector2(24,14),new Vector2(1232,footerHeight));
   float top=headerTop+headerHeight+8,bottom=footerHeight+26;
@@ -95,21 +97,44 @@ public sealed partial class CityInterface {
  }
  public void RefreshConstructionWindow(){
   if(!_constructionOpen||_constructionSubmitting)return;
-  float scroll=_constructionScroll.verticalNormalizedPosition;
+  float scroll=_constructionResetScroll?1:_constructionScroll.verticalNormalizedPosition;
   Clear(_constructionHeader);Clear(_constructionBody);Clear(_constructionFooter);RefreshConstructionWindowLayout();
   if(_constructionMode=="build")RenderConstructionOffers();else RenderConstructionUpgrades();
-  Canvas.ForceUpdateCanvases();_constructionScroll.StopMovement();_constructionScroll.verticalNormalizedPosition=scroll;
+  LayoutRebuilder.ForceRebuildLayoutImmediate(_constructionBody);Canvas.ForceUpdateCanvases();_constructionScroll.StopMovement();
+  if(_constructionResetScroll)_constructionBody.anchoredPosition=new Vector2(_constructionBody.anchoredPosition.x,0);
+  _constructionScroll.verticalNormalizedPosition=Mathf.Clamp01(scroll);_constructionResetScroll=false;
   RefreshModalOwnership();
  }
  RectTransform[] ConstructionColumns(Transform parent,string name,int count){
-  var row=Row(parent,name,0);var layout=row.GetComponent<HorizontalLayoutGroup>();layout.childForceExpandHeight=true;
+  var row=Row(parent,name,0);var layout=row.GetComponent<HorizontalLayoutGroup>();layout.childForceExpandHeight=true;layout.spacing=12;
   var result=new RectTransform[count];
   for(int i=0;i<count;i++){
    var outer=Surface(name+" Candidate "+i,row,Raised);var element=outer.gameObject.AddComponent<LayoutElement>();element.minWidth=0;element.preferredWidth=0;element.flexibleWidth=1;
-   var group=outer.gameObject.AddComponent<VerticalLayoutGroup>();group.childControlWidth=group.childControlHeight=true;group.childForceExpandHeight=false;
-   result[i]=Column(outer,name+" Content "+i,5);
+   var group=outer.gameObject.AddComponent<VerticalLayoutGroup>();group.childControlWidth=group.childControlHeight=true;group.childForceExpandHeight=false;group.padding=new RectOffset(0,0,0,0);
+   result[i]=Column(outer,name+" Content "+i,4);result[i].GetComponent<VerticalLayoutGroup>().padding=new RectOffset(14,14,12,12);
   }
   return result;
+ }
+ void ConstructionChoice(RectTransform card,string name,string caption,bool chosen,Action select){
+  var outer=(RectTransform)card.parent;var image=outer.GetComponent<Image>();image.color=chosen?new Color(.12f,.26f,.24f,.99f):new Color(.065f,.13f,.15f,.97f);
+  var frame=outer.GetComponentInChildren<CityHudFrame>();if(frame!=null){frame.color=chosen?new Color(.45f,.78f,.67f,.95f):new Color(.30f,.42f,.39f,.6f);frame.ShowAccent=chosen;}
+  var button=outer.gameObject.AddComponent<Button>();button.targetGraphic=image;button.onClick.AddListener(()=>{PlayCue("select");select();});button.name=name;
+  var heading=Row(card,"Choice heading",31*TextScale);var headingLayout=heading.GetComponent<HorizontalLayoutGroup>();headingLayout.spacing=6;headingLayout.childForceExpandWidth=false;
+  var title=ConstructionText(heading,caption,20,chosen?Green:Ink);title.name="Construction Choice Title";var width=title.GetComponent<LayoutElement>();width.minWidth=width.preferredWidth=0;width.flexibleWidth=1;
+  // Let Text report its wrapped preferred height after the heading gets its
+  // real width. Keep the measured first-line minimum, rather than a fixed height.
+  width.preferredHeight=-1;
+  var state=ConstructionText(heading,chosen?"已选":"选择",13,chosen?Green:Muted);Width(state.rectTransform,42*TextScale);state.alignment=TextAnchor.MiddleRight;
+  // Selection is expressed by the entire card, its edge and its text; no wide nested button.
+ }
+ Text ConstructionText(Transform parent,string value,int size=14,Color? color=null,int lines=1){
+  var text=Label(parent,value,size,color??Ink);
+  // Noto Sans SC's ascender + descender is about 1.45 em. A size+8 box
+  // clips an entire 20/23-point first line when Text uses Truncate.
+  float fontLine=_font.fontSize>0?(float)_font.lineHeight/_font.fontSize:1.5f;
+  float measured=Mathf.Ceil(text.fontSize*Mathf.Max(1.5f,fontLine)*(1+(lines-1)*text.lineSpacing))+2*TextScale;
+  Height(text.rectTransform,Mathf.Max((size+8)*lines*TextScale,measured));
+  text.verticalOverflow=VerticalWrapMode.Truncate;return text;
  }
  void ConstructionFold(Transform parent,string key,string caption,Action<RectTransform> render){
   var box=Column(parent,"Construction Disclosure "+key,4);box.GetComponent<VerticalLayoutGroup>().padding=new RectOffset();
@@ -125,11 +150,13 @@ public sealed partial class CityInterface {
  }
  void ConstructionCosts(double cash,double material,double cp,string blocked,Action submit,string action){
   double after=S["currency"].Double-cash;
-  var cost=Label(_constructionFooter,"即付 "+F(cash,0)+" 通货  ·  支付后 "+F(after,0)+" 通货  ·  施工 "+F(material,0)+" 材料 / "+F(cp)+" CP",17,after>=0?Ink:Gold,30*TextScale);cost.name="Construction Window Costs";
-  var reason=Label(_constructionFooter,blocked!=""?blocked:"材料随施工消耗；与全城工程共享施工能力。效果是假定完工后的同一步预测。",14,blocked!=""?Gold:Muted,27*TextScale);reason.name="Construction Window Blocked Reason";
-  var row=Row(_constructionFooter,"Construction Window Actions",46*TextScale);row.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
-  var cancel=Button(row,"取消",CloseConstructionWindow);cancel.name="Construction Window Cancel";Width((RectTransform)cancel.transform,170);
-  var start=Button(row,action,submit,true,blocked!="");start.name="Construction Window Start";var element=start.GetComponent<LayoutElement>();element.minWidth=0;element.preferredWidth=0;element.flexibleWidth=1;
+  var row=Row(_constructionFooter,"Construction Window Actions",58*TextScale);var layout=row.GetComponent<HorizontalLayoutGroup>();layout.childForceExpandWidth=false;layout.childAlignment=TextAnchor.MiddleLeft;
+  var costs=Column(row,"Construction Cost and Balance",2);costs.GetComponent<VerticalLayoutGroup>().padding=new RectOffset();var flexible=costs.gameObject.AddComponent<LayoutElement>();flexible.minWidth=0;flexible.preferredWidth=0;flexible.flexibleWidth=1;
+  var cost=ConstructionText(costs,"即付 "+F(cash,0)+" 通货　·　支付后 "+F(after,0),17,after>=0?Ink:Gold);cost.name="Construction Window Costs";
+  ConstructionText(costs,"施工另需 "+F(material,0)+" 材料 / "+F(cp)+" CP",13,Muted);
+  var cancel=Button(row,"取消",CloseConstructionWindow);cancel.name="Construction Window Cancel";Width((RectTransform)cancel.transform,120*TextScale);
+  var start=Button(row,action,submit,true,blocked!="");start.name="Construction Window Start";Width((RectTransform)start.transform,190*TextScale);
+  var reason=ConstructionText(_constructionFooter,blocked!=""?blocked:"材料随进度消耗；按队列优先级共享本区施工能力。",13,blocked!=""?Gold:Muted);reason.name="Construction Window Blocked Reason";
  }
  void ConstructionSucceeded(string message){
   var tile=_constructionTile;CloseConstructionWindow();if(_archiveOpen)CloseArchive();

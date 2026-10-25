@@ -11,7 +11,7 @@ public sealed partial class CityInterface {
     RectTransform _planningTop, _planningObjective, _planningUrgent, _planningNoticePanel,
         _planningLayers, _planningBuildMenu, _planningTime, _planningLegend, _planningToastSurface;
     RectTransform _planningOverview, _planningOverviewBody, _planningRail;
-    Text _guidanceTitle,_guidanceReason,_buildHint;Button _guidanceButton;
+    Text _guidanceTitle,_guidanceReason,_buildHint,_goalSummaryText;CityGraphic _goalProgress;RectTransform _goalSummary;Button _guidanceButton;
     readonly Dictionary<string,Button> _foundationButtons=new Dictionary<string,Button>();
     readonly Dictionary<string,Button> _topRoutes=new Dictionary<string,Button>();
     readonly List<Text> _planningStockValues = new List<Text>();
@@ -108,9 +108,11 @@ public sealed partial class CityInterface {
         },42);
         header.GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;
         Pin((RectTransform)header.transform,new Vector2(.5f,1),new Vector2(.5f,1),Vector2.zero,new Vector2(348,42));
+        _goalSummary=Column(_planningOverview,"Goal summary",5,false);_goalSummary.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(16,16,6,6);
+        _goalSummaryText=Label(_goalSummary,"",14,Ink,48*TextScale);var progress=Node("Goal measured progress",_goalSummary);Height(progress,6);_goalProgress=progress.gameObject.AddComponent<CityGraphic>();_goalProgress.Kind="bar";_goalProgress.color=Green;_goalProgress.raycastTarget=false;
         _planningOverviewBody=Column(_planningOverview,"Overview Groups",10);
         var layout=_planningOverviewBody.GetComponent<VerticalLayoutGroup>();layout.padding=new RectOffset(18,18,10,15);
-        Pin(_planningOverviewBody,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-43),new Vector2(348,0));
+        Pin(_planningOverviewBody,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-120*TextScale),new Vector2(348,0));
         _planningObjective=_planningOverviewBody;
         _guidanceTitle=Label(_planningOverviewBody,"",18,Ink,42*TextScale);
         _guidanceReason=Label(_planningOverviewBody,"",13,Muted,52*TextScale);
@@ -249,13 +251,15 @@ public sealed partial class CityInterface {
             var icon=button.GetComponentInChildren<CityHudGlyph>();if(icon!=null)Pin(icon.rectTransform,new Vector2(0,.5f),new Vector2(.5f,.5f),new Vector2(13,0),new Vector2(20,20));
             bool active=entry.Key==Layer;button.GetComponent<Image>().color=active?new Color(.12f,.28f,.25f,.96f):Color.clear;caption.color=active?Ink:Muted;button.GetComponentInChildren<CityHudFrame>().enabled=active;
         }}
-        if(_planningLegend!=null)Pin(_planningLegend,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap+layerHeight+4),new Vector2(layerWidth,28*font));
-        if(_planningToastSurface!=null)Pin(_planningToastSurface,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap+layerHeight+8+28*font),new Vector2(Mathf.Min(layerSpace,780),45));
+        if(_planningLegend!=null)Pin(_planningLegend,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap+layerHeight+4),new Vector2(layerWidth,(Layer=="terrain"?28:76)*font));
+        if(_planningToastSurface!=null)Pin(_planningToastSurface,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap+layerHeight+8+(Layer=="terrain"?28:76)*font),new Vector2(Mathf.Min(layerSpace,780),45));
         if(_planningOverview!=null&&_guidanceTitle!=null){
-            _planningOverview.gameObject.SetActive(!_archiveOpen);_planningOverviewBody.gameObject.SetActive(_planningOverviewOpen);
+            _planningOverview.gameObject.SetActive((!_archiveOpen||CompactWorkspaceOpen)&&!ObjectDrawerVisible&&!ConstructionWindowOpen);_planningOverviewBody.gameObject.SetActive(_planningOverviewOpen);
             float titleHeight=HudMeasuredHeight(_guidanceTitle,312,36*font),reasonHeight=HudMeasuredHeight(_guidanceReason,312,46*font);
             Height(_guidanceTitle.rectTransform,titleHeight);Height(_guidanceReason.rectTransform,reasonHeight);Height((RectTransform)_guidanceButton.transform,43*font);
-            Pin(_planningOverview,new Vector2(1,1),new Vector2(1,1),new Vector2(-gap,-navY),new Vector2(350,_planningOverviewOpen?98+titleHeight+reasonHeight+73*font:43));
+            Pin(_planningOverview,new Vector2(1,1),new Vector2(1,1),new Vector2(-gap,-navY),new Vector2(350,_planningOverviewOpen?120*font+titleHeight+reasonHeight+100*font:120*font));
+            Pin(_goalSummary,new Vector2(0,1),new Vector2(0,1),new Vector2(0,-42),new Vector2(350,76*font));Height(_goalSummaryText.rectTransform,48*font);
+            Pin(_planningOverviewBody,new Vector2(.5f,1),new Vector2(.5f,1),new Vector2(0,-120*font),new Vector2(348,0));
             var header=_planningOverview.GetComponentInChildren<Button>();if(header!=null)header.GetComponentInChildren<Text>().text=_planningOverviewOpen?"下一步  ▴":"下一步  ▾";
         }
         if(_planningUrgent!=null)Pin(_planningUrgent,new Vector2(1,1),new Vector2(1,1),new Vector2(-gap,-navY-(_planningOverview!=null?_planningOverview.sizeDelta.y:43)-gap),new Vector2(350,0));
@@ -280,6 +284,12 @@ public sealed partial class CityInterface {
         _guidanceTitle.text=guidance["title"].Text;_guidanceReason.text=guidance["reason"].Text;
         _guidanceButton.GetComponentInChildren<Text>().text=guidance["action_label"].Text+"  ›";
         _guidanceTitle.color=guidance.Get("severity",0).Long>=2?Gold:Ink;
+        if(_goalSummaryText!=null){var theme=Themes.view(G);var goals=theme.Get("goals",V.Arr());var goal=goals.FirstOrDefault(x=>!x.Get("met",false).Bool)??goals.FirstOrDefault();
+            if(goal!=null){var factor=goal.Get("unit","").Text=="%"?100:1;var upper=goal.Get("comparison","").Text=="max";var target=goal.Get("target",0).Double;var value=goal.Get("value",0).Double;
+                _goalSummaryText.text=theme.Get("name","当前目标").Text+" · "+goal.Get("label","").Text+"\n"+F(value*factor)+(upper?" ≤ ":" / ")+F(target*factor)+goal.Get("unit","").Text;
+                _goalProgress.gameObject.SetActive(target>0&&!upper);_goalProgress.Ratio=(float)(target>0?value/target:0);_goalProgress.color=goal.Get("met",false).Bool?Green:Gold;_goalProgress.SetVerticesDirty();
+            }else{_goalSummaryText.text=guidance["title"].Text;_goalProgress.gameObject.SetActive(false);}
+        }
     }
     string HudNoticeTitle(string text)=>text.Length>13?text.Substring(0,12)+"…":text;
     void RenderPlanningStatus() {

@@ -14,7 +14,7 @@ public sealed partial class CityInterface {
   {"population_home",new PageLayout(660,920)},{"economy_home",new PageLayout(640,900)},{"bonus_home",new PageLayout(670,960)},{"tasks_home",new PageLayout(700,960)},{"archive_home",new PageLayout(560,760)},
   {"overview",new PageLayout(560,800,"dock")},{"construction",new PageLayout(680,920,"dock")},
   {"building",new PageLayout(520,760,"dock")},{"population",new PageLayout(1040)},
-  {"resources",new PageLayout(1200)},{"market",new PageLayout(700,920)},{"policies",new PageLayout(1120)},
+  {"resources",new PageLayout(1200)},{"market",new PageLayout(700,920)},{"policies",new PageLayout(700,920)},
   {"bonuses",new PageLayout(1360)},{"slot",new PageLayout(1360)},{"blueprints",new PageLayout(1200)},
   {"themes",new PageLayout(1120,800)},{"milestones",new PageLayout(1120,800)},{"settlement",new PageLayout(1200)},
   {"city",new PageLayout(1360,860,"dock","城市")},{"governance",new PageLayout(960,820,"dock","地区")},
@@ -76,7 +76,7 @@ public sealed partial class CityInterface {
  void OpenResourcePage(string resource){
   if(resource=="dt"){_settingsCategory="city";OpenArchive("settings");return;}
   if(resource=="population"){OpenArchive("population_home");return;}
-  if(resource=="currency"){OpenArchive("economy_home");return;}
+  if(resource=="currency"){_operatingEconomyResource="currency";OpenArchive("economy_home");return;}
   if(resource=="cp")Navigate("construction");else {_operatingEconomyResource=resource;Navigate("economy_home");}
  }
 }

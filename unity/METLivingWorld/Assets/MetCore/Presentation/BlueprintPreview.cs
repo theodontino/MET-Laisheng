@@ -22,7 +22,10 @@ public static class BlueprintPreview {
         double total=0;foreach(var pool in g.s["metrics"].Get("service_pools",V.Map()).Values)if(pool.Get("kind","").Text==kind)total+=pool.Get("capacity",0).Double;return total;
     }
     static double Output(Game g,string resource,double step)=>g.s.Get("audit",V.Map()).Get("resources",V.Map()).Get(resource,V.Map()).Get("produced",0).Double/step;
-    public static V For(Game g,string bid,string hostType,string hostId,string slot="") {
+    public static V For(Game g,string bid,string hostType,string hostId,string slot="") => Evaluate(g,bid,hostType,hostId,slot,false);
+    // Catalogue inspection installs effects only in the detached proposal; no wallet is fabricated.
+    public static V Inspect(Game g,string bid,string hostType,string hostId,string slot="") => Evaluate(g,bid,hostType,hostId,slot,true);
+    static V Evaluate(Game g,string bid,string hostType,string hostId,string slot,bool inspect) {
         if(g==null)return V.Map("ok",false,"error","城市尚未就绪。");
         var planner=new Planning();var token=planner.version(g);var before=planner.copy_game(g);var after=planner.copy_game(g);
         var beforeStats=Stats(before,hostType,hostId);var beforeTrace=Trace(before,hostType,hostId);var beforeInstances=Instances(before,bid,hostType,hostId);
@@ -30,7 +33,15 @@ public static class BlueprintPreview {
             "before_stats",beforeStats,"after_stats",V.Map(),"stat_rows",V.Arr(),"before_instances",beforeInstances.Count,"after_instances",beforeInstances.Count,
             "before_instance_records",beforeInstances,"after_instance_records",beforeInstances.Duplicate(true),"before_copies",Copies(before,bid),"after_copies",Copies(before,bid),
             "rule_trace",V.Map("before",beforeTrace,"after",V.Map()),"baseline",V.Map(),"proposal",V.Map(),"same_step",V.Map());
-        string error=Bonus.install(after,bid,hostType,hostId,slot);
+        string error;
+        if(!inspect)error=Bonus.install(after,bid,hostType,hostId,slot);
+        else {
+            var card=Bonus.card(after,bid);
+            var old=hostType=="building"?after.s["projects"].Get(hostId,V.Map()).Get("slots",V.Map()).Get(slot,"").Text:"";
+            error=!after.c.bonuses.Has(bid)?"未知方案。":after.s.Get("phase","").Text!="play"?"当前不能部署方案。":card.Get("scope","building").Text!=hostType?"方案部署尺度不匹配。":Bonus.duplicate_error(after,bid,hostType,hostId,old);
+            if(error==""){var provider=hostType=="building"?after.s["projects"].Get(hostId,V.Map()).Get("operator_org","civic").Text:hostType=="organization"?hostId:"civic";error=after._install_bonus(bid,hostType,hostId,provider,slot);}
+        }
+        result["inspection_only"]=inspect;
         if(error!=""){result["error"]=error;return result;}
         // Capture immediate rule compilation separately from subsequent operation and shortage effects.
         var afterStats=Stats(after,hostType,hostId);var afterInstances=Instances(after,bid,hostType,hostId);var rows=V.Arr();

@@ -83,6 +83,7 @@ public sealed partial class CityInterface {
  }
  public void UpdateMapInspectionInput() {
   if(_inspectionWorld==null||_root==null)return;
+  RefreshMapLegend();
   bool unavailable=!Application.isFocused||IsModal||ConstructionIntentActive;
   if(_inspectionSelectedButton!=null)_inspectionSelectedButton.gameObject.SetActive(false);
   if(unavailable&&MapInspectionOpen)DismissMapInspection();

@@ -1,6 +1,16 @@
-# Modern strategy HUD — UI.14
+# Modern strategy HUD — UI.15
 
 The visual language follows the user-approved Stellaris-reference concept of 2026-10-15 (Library `libfile_25717c339e688191a18ed99c487e2ffe`). The 2026-10-23 page-remake request and subsequent left-sidebar/two-level corrections supersede the old uniform archive and centered-window layout. Existing city assets and gameplay rules are preserved.
+
+## UI15 audit corrections (2026-10-26)
+
+The frozen Demo V3 is the layout and interaction reference; [UI14 audit](UI14_DEMO_V3_AUDIT.md) records the previous implementation gaps. Building inspection uses an attached object drawer while preserving the originating list, advanced mode and scroll. Actual map location allows tile interaction and an explicit return; forecast maps retain their separate read-only meaning. Task actions carry the relevant resource/service filter and an independent return-to-goal cue.
+
+Construction and upgrade choices separate candidate identity/traits from selected-plan effects and current cost/constraints. Equal costs appear once, real differing costs remain comparable, and total city changes start folded. Reward candidates likewise use an independent operation window. Fixed confirmation controls remain visible when the comparison body scrolls. Text sizing must accommodate the bundled Chinese font's actual line metrics, not merely a positive RectTransform size.
+
+Residents include empty housing and linked real service providers; finance exposes existing attributed building sources without counting them twice; policies have compact and full comparisons. Bonus catalogue inspection is read-only even without an owned copy; installation retains actual eligibility and inventory requirements. Archive search and pagination expose existing records without fabricating history. Map legend colors/ranges come from the renderer, and upper-bound objectives display thresholds rather than an increasing progress bar.
+
+The existing real opening commands and their RNG timing are preserved. Replacing them with the demo's deferred final confirmation is outside this correction. Engineering evidence and delivery limits belong in [UI15 delivery](UI15_DELIVERY.md); fixture screenshots are not Player or human-input acceptance.
 
 ## UI14 reusable icon library (2026-10-25)
 

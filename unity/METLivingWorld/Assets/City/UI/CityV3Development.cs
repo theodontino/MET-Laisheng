@@ -12,8 +12,8 @@ public sealed partial class CityInterface {
  // Real goals/capacities supply every bar denominator; zero thresholds use text.
  void V3DevMeter(Transform parent,string title,double current,double target,string unit,bool met,bool upper=false){
   var row=Row(parent,"V3 objective reading",27*TextScale);Label(row,(met?"✓ ":"")+title,16,met?Green:Muted,27*TextScale);
-  var reading=Label(row,F(current,1)+unit+" / "+(upper?"≤ ":"")+F(target,1)+unit,16,Ink,27*TextScale);reading.alignment=TextAnchor.MiddleRight;
-  if(target>0){var bar=Node("V3 measured goal "+title,parent);Height(bar,8*TextScale);var chart=bar.gameObject.AddComponent<CityGraphic>();chart.Kind="bar";chart.Ratio=(float)(current/target);chart.color=met?Green:upper&&current>target?Red:Gold;chart.raycastTarget=false;}
+  var reading=Label(row,F(current,1)+unit+(upper?" ≤ ":" / ")+F(target,1)+unit,16,Ink,27*TextScale);reading.alignment=TextAnchor.MiddleRight;
+  if(target>0&&!upper){var bar=Node("V3 measured goal "+title,parent);Height(bar,8*TextScale);var chart=bar.gameObject.AddComponent<CityGraphic>();chart.Kind="bar";chart.Ratio=(float)(current/target);chart.color=met?Green:upper&&current>target?Red:Gold;chart.raycastTarget=false;}
  }
  RectTransform V3DevSection(Transform parent,string title,string note=""){
   var card=CompactTaskCard(parent,"V3 "+title);Label(card,title,19,Ink,30*TextScale);if(note!="")V3DevText(card,note);return card;
@@ -47,7 +47,7 @@ public sealed partial class CityInterface {
  }
  void V3ThemeChoices(Transform parent,V view){
   var section=V3DevSection(parent,"选择发展主题","选择不消耗 DT；以后改向需要真实重铸权并支付 DT。");
-  foreach(var choice in view["choices"]){var id=choice["id"].Text;var card=CompactTaskCard(section,"V3 theme "+id);var row=Row(card,"V3 theme choice",60*TextScale);var art=Node("Theme illustration",row);Width(art,62*TextScale);Illustration(art,ThemePicture(id),58*TextScale);var copy=Column(row,"Theme detail",3);copy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset();Label(copy,choice["name"].Text,18,Green,28*TextScale);V3DevText(copy,choice["description"].Text);V3DevSmallButton(card,"选择「"+choice["name"].Text+"」",()=>Command(g=>Themes.select(g,id)),true,!Runtime.ViewCanEditFocused);}
+  foreach(var choice in view["choices"]){var id=choice["id"].Text;var card=CompactTaskCard(section,"V3 theme "+id);var row=Row(card,"V3 theme choice",60*TextScale);var art=Node("Theme illustration",row);Width(art,62*TextScale);Height(art,60*TextScale);Illustration(art,ThemePicture(id),58*TextScale);Stretch((RectTransform)art.GetChild(0));var copy=Column(row,"Theme detail",3);copy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset();Label(copy,choice["name"].Text,18,Green,28*TextScale);V3DevText(copy,choice["description"].Text);V3DevSmallButton(card,"选择「"+choice["name"].Text+"」",()=>Command(g=>Themes.select(g,id)),true,!Runtime.ViewCanEditFocused);}
  }
  void V3TaskGoal(Transform parent,V theme,V goal){
   var id=goal["id"].Text;var factor=goal["unit"].Text=="%"?100:1;var unit=goal["unit"].Text;bool met=goal["met"].Bool,upper=goal["comparison"].Text=="max";
@@ -58,10 +58,7 @@ public sealed partial class CityInterface {
   else V3DevSmallButton(row,"处理 ›",()=>V3GoalDestination(id));
  }
  void V3GoalDestination(string id){
-  if(id=="trade")Navigate("market");else if(id=="currency")Navigate("economy_home");
-  else if(id=="food_stock_months"||id=="food_self_sufficiency"||id=="food_surplus")Navigate("resources","food");
-  else if(id=="housed"||id=="homeless"||id=="health"||id=="happiness"||id=="commercial_people"||id=="commercial_person_months"||id=="industrial_labor"||id=="food"||id=="medical"||id=="education"||id=="commercial"||id=="entertainment")Navigate("population_home");
-  else Navigate("construction");
+  HandleGoalDestination(id);
  }
  void V3TaskContract(Transform parent,V evt){
   var id=evt["id"].Text;var definition=evt["definition"];bool offered=evt["status"].Text=="offered";
@@ -69,7 +66,7 @@ public sealed partial class CityInterface {
   if(offered){
    V3DevText(box,evt["description"].Text);
    foreach(var raw in evt["choices"]){var choice=raw;var cid=choice["id"].Text;var def=cid=="decline"?V.Map():definition.Get("choices",V.Arr()).Count>0?Themes._event_choice_definition(definition,cid):definition;
-    var option=CompactTaskCard(box,"V3 contract choice "+id+" "+cid);if(cid!="decline"){var row=Row(option,"V3 contract option",48*TextScale);var art=Node("Contract illustration",row);Width(art,50*TextScale);Illustration(art,OptionPicture(id,cid,def),46*TextScale);V3DevText(row,choice["label"].Text,Ink);V3DevText(option,TaskChoiceOutcome(def,cid,evt["description"].Text).Replace(" 月"," 来生月"),Green);}
+    var option=CompactTaskCard(box,"V3 contract choice "+id+" "+cid);if(cid!="decline"){var row=Row(option,"V3 contract option",48*TextScale);var art=Node("Contract illustration",row);Width(art,50*TextScale);Height(art,48*TextScale);Illustration(art,OptionPicture(id,cid,def),46*TextScale);Stretch((RectTransform)art.GetChild(0));V3DevText(row,choice["label"].Text,Ink);V3DevText(option,TaskChoiceOutcome(def,cid,evt["description"].Text).Replace(" 月"," 来生月"),Green);}
     V3DevText(option,TaskChoiceCost(def,cid),cid=="decline"?Muted:Gold);var reason=choice.Get("available",true).Bool?TaskChoiceAffordability(def,cid):choice.Get("reason","当前不可选").Text;if(reason!="")V3DevText(option,reason,Gold);
     V3DevSmallButton(option,cid=="decline"?"婉拒":choice["label"].Text,()=>Command(g=>Themes.choose_event(g,id,cid)),cid!="decline",!choice.Get("available",true).Bool||reason!=""||!Runtime.ViewCanEditFocused);
    }
@@ -79,29 +76,27 @@ public sealed partial class CityInterface {
    V3DevText(box,TaskChoiceOutcome(definition,"accepted",evt["description"].Text).Replace(" 月"," 来生月"),Green);V3DevText(box,"接受时的支出："+TaskChoiceCost(definition,"accepted").Replace("即时支付 ",""),Gold);
    if(definition.Get("deposit",0).Double>0)V3DevText(box,"完成退还保证金 "+F(definition["deposit"].Double)+" 通货；逾期失去该机会与已付保证金。");
    if(evt.Get("delivery_remaining",0).Double>0){var resource=evt["delivery_resource"].Text;var reserve=resource=="food"?definition.Get("reserve_months",0).Double*Themes._population_metrics(G).Get("food_demand",0).Double:0;var stock=G.inventory_total(resource);var take=Math.Min(evt["delivery_remaining"].Double,Math.Max(0,stock-reserve));V3DevText(box,Resource(resource)+"库存 "+F(stock)+" · 还需 "+F(evt["delivery_remaining"].Double)+(reserve>0?" · 保留口粮 "+F(reserve):""));V3DevSmallButton(box,"交付 "+F(take)+" "+Resource(resource),()=>Command(g=>Themes.deliver(g,resource,-1,id)),true,take<=.000001||!Runtime.ViewCanEditFocused);}
-   else if(definition.Has("trade_amount"))V3DevSmallButton(box,"前往市场成交",()=>Navigate("market"));
-   else if(definition.Has("metric")||definition.Has("person_months"))V3DevSmallButton(box,"查看人口与服务",()=>Navigate("population_home"));
+   else if(definition.Has("trade_amount"))V3DevSmallButton(box,"前往市场成交",()=>HandleGoalDestination("trade"));
+   else if(definition.Has("metric")||definition.Has("person_months"))V3DevSmallButton(box,"查看人口与服务",()=>HandleGoalDestination(definition.Get("metric","commercial_person_months").Text));
   }
   Fold(box,"完整合同与来源",c=>{Raw(c,evt);Raw(c,definition);});
  }
  void V3RewardChoices(Transform parent,V reward){
-  var rid=reward["reward_id"].Text;_rewardSelections.TryGetValue(rid,out var chosen);chosen=chosen??"";var kind=reward.Get("kind","copy").Text;
   var section=V3DevSection(parent,"待领取奖励 · "+Bonus.pending(G).Count,BlueprintRewardSource(reward)+" · "+reward["choices"].Count+" 选 1 · 按保存顺序领取");
-  foreach(var raw in reward["choices"]){var candidate=raw;var bid=candidate["bonus_id"].Text;var box=CompactTaskCard(section,"V3 reward "+rid+" "+bid);var row=Row(box,"V3 reward choice",68*TextScale);var art=Node("Reward drawing",row);Width(art,70*TextScale);BlueprintArt(art,bid,66*TextScale,chosen==bid?1:.35f);var copy=Column(row,"V3 reward detail",3);copy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset();V3DevText(copy,candidate.Get("name",bid=="__currency__"?"通货补偿":bid).Text,chosen==bid?Gold:Ink);V3DevText(copy,BlueprintEffectSummary(candidate));V3DevSmallButton(box,chosen==bid?"✓ 已预选":"预选这项",()=>{_rewardSelections[rid]=bid;RenderPage();},chosen==bid,_blueprintBusy||!Runtime.ViewCanEditFocused);}
-  V3DevText(section,kind=="research"?"研究升级本街区全部同名方案；不增加库存副本。":"领取1份部署许可；安装后才生效。",Green);
-  V3DevSmallButton(section,kind=="research"?"确认研究":"确认领取",()=>ClaimBlueprint(rid,chosen),true,chosen==""||_blueprintBusy||!Runtime.ViewCanEditFocused);
-  V3DevSmallButton(section,"候选完整规则与来源 ↗",()=>Navigate("blueprints"));
+  V3DevSmallButton(section,"选择奖励 ↗",()=>OpenRewardModal(reward["reward_id"].Text),true,_blueprintBusy||!Runtime.ViewCanEditFocused);
  }
 
  void V3BonusPage(){
   var wallet=S["block"].Get("bonus_wallet",V.Map());var instances=S["bonus_instances"].Values.Where(x=>x.Get("active",false).Bool).ToArray();var pending=Bonus.pending(G);
   var header=Row(_body,"V3 bonus heading",36*TextScale);Label(header,"Bonus 安装",22,Ink,33*TextScale);V3DevSmallButton(header,"蓝图与来源 ↗",()=>OpenAdvancedWorkspace("bonus_home"));
   V3DevText(_body,"库存 "+wallet.Values.Sum(w=>w.Get("charges",0).Long)+" 份 · 已安装 "+instances.Length+" 份");
-  var filters=Row(_body,"V3 bonus filters",35*TextScale);foreach(var entry in new[]{new[]{"available","库存副本"},new[]{"deployed","已安装"},new[]{"all","全部方案"}}){var id=entry[0];V3DevSmallButton(filters,entry[1],()=>{_v3BonusFilter=id;_inventoryChoice="";_blueprintHost="";_blueprintSlot="";RenderPage();},_v3BonusFilter==id);}
+  var filters=Row(_body,"V3 bonus filters",35*TextScale);foreach(var entry in new[]{new[]{"available","库存副本"},new[]{"deployed","已安装"},new[]{"all","全部方案"}}){var id=entry[0];V3DevSmallButton(filters,entry[1],()=>{_v3BonusFilter=id;RenderPage();},_v3BonusFilter==id);}
   if(pending.Count>0)V3DevSmallButton(_body,"待领取奖励 · "+pending.Count,()=>Navigate("tasks_home"),true);
-  var ids=G.c.bonuses.Keys.Where(id=>_v3BonusFilter=="available"?wallet.Get(id,V.Map()).Get("charges",0).Long>0:_v3BonusFilter=="deployed"?instances.Any(x=>x["bonus_id"].Text==id):true).OrderBy(id=>G.c.bonuses[id].Get("name",id).Text,StringComparer.Ordinal).ToArray();
-  if(ids.Length==0){V3DevText(_body,_v3BonusFilter=="available"?"暂无库存副本。完成任务并领取奖励后，可在这里安装。":"暂无已安装副本。先选择库存，再指定建筑与槽位。");return;}
-  if(!ids.Contains(_inventoryChoice))_inventoryChoice=ids[0];
+  BlueprintSearch(_body);
+  var ids=FilteredBlueprintIds();
+  if(ids.Length==0)V3DevText(_body,"没有符合筛选的方案。可切换全部方案或清除搜索；当前选择与目标保留。");
+  if(!G.c.bonuses.Has(_inventoryChoice))_inventoryChoice=ids.FirstOrDefault()??"";
+  if(_inventoryChoice=="")return;
   for(int i=0;i<ids.Length;i+=2){var row=Row(_body,"V3 bonus inventory pair",124*TextScale);row.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight=true;row.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;for(int j=i;j<Math.Min(i+2,ids.Length);j++)V3BonusChoice(row,ids[j]);if(i+1==ids.Length){var spacer=Node("Bonus grid spacer",row);spacer.gameObject.AddComponent<LayoutElement>().flexibleWidth=1;}}
   var card=Bonus.card(G,_inventoryChoice);_blueprintScope=card["scope"].Text;var detail=V3DevSection(_body,card["name"].Text,card["grade"].Text+" · "+ScopeName(_blueprintScope)+" · 库存 "+card["copies"].Long+" 份");
   V3DevText(detail,BlueprintEffectSummary(card),Ink);V3DevText(detail,card.Get("preview_reason","").Text);
@@ -112,8 +107,8 @@ public sealed partial class CityInterface {
  }
  void V3BonusChoice(Transform parent,string bid){
   var card=Bonus.card(G,bid);var box=CompactTaskCard(parent,"V3 inventory "+bid);var layout=box.gameObject.AddComponent<LayoutElement>();layout.minWidth=0;layout.preferredWidth=0;layout.flexibleWidth=1;
-  var row=Row(box,"V3 inventory graphic",56*TextScale);var art=Node("Inventory drawing",row);Width(art,52*TextScale);BlueprintArt(art,bid,54*TextScale,_inventoryChoice==bid?1:.35f);var copy=Column(row,"Inventory compact copy",2);copy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset();V3DevText(copy,card["name"].Text,_inventoryChoice==bid?Green:Ink);V3DevText(copy,"库存 "+card["copies"].Long+" · 已装 "+Bonus.active_count(G,bid)+" · "+card["grade"].Text);
-  V3DevText(box,BlueprintEffectSummary(card));V3DevSmallButton(box,_inventoryChoice==bid?"✓ 已选择":"选择方案",()=>{_inventoryChoice=bid;_blueprintHost="";_blueprintSlot="";_blueprintVersion="";_installView=V.Map();RenderPage();},_inventoryChoice==bid,_blueprintBusy);
+  var row=Row(box,"V3 inventory graphic",56*TextScale);var art=Node("Inventory drawing",row);Width(art,52*TextScale);Height(art,56*TextScale);BlueprintArt(art,bid,54*TextScale,_inventoryChoice==bid?1:.35f);Stretch((RectTransform)art.GetChild(0));var copy=Column(row,"Inventory compact copy",2);copy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset();V3DevText(copy,card["name"].Text,_inventoryChoice==bid?Green:Ink);V3DevText(copy,"库存 "+card["copies"].Long+" · 已装 "+Bonus.active_count(G,bid)+" · "+card["grade"].Text);
+  V3DevText(box,BlueprintEffectSummary(card));V3DevSmallButton(box,_inventoryChoice==bid?"✓ 已选择":"选择方案",()=>{_inventoryChoice=bid;_blueprintVersion="";_installView=V.Map();RenderPage();},_inventoryChoice==bid,_blueprintBusy);
  }
  void V3BonusSelect(Transform parent,string label,string[] labels,int selected,Action<int> choose){
   V3DevText(parent,label);if(labels.Length==0)return;var root=Surface("V3 select "+label,parent,Raised);Height(root,38*TextScale);var dropdown=root.gameObject.AddComponent<Dropdown>();var caption=Label(root,"",15,Ink);Stretch(caption.rectTransform,10,4,30,4);dropdown.captionText=caption;
@@ -146,9 +141,8 @@ public sealed partial class CityInterface {
  void V3BonusPreview(Transform parent,V card,string scope,string host,string slot){
   var bid=card["bonus_id"].Text;var old=scope=="building"?S["projects"][host]["slots"].Get(slot,"").Text:"";var prior=S["bonus_instances"].Get(old,V.Map());
   if(prior.Get("bonus_id","").Text==bid){V3DevText(parent,"该槽已安装「"+card["name"].Text+"」。同一槽无需重复安装；可从上方选择其他槽位。",Green);return;}
-  if(card["copies"].Long<=0){V3DevText(parent,"没有库存副本；已安装记录仍保留。领取同名副本后可继续安装。");return;}
-  var key=_planner.version(G)+"|"+S["block"]["bonus_wallet"].ToJson()+"|"+S["bonus_instances"].ToJson()+"|"+bid+scope+host+slot;if(key!=_blueprintVersion||_installView.Count==0){_installView=BlueprintPreview.For(G,bid,scope,host,slot);_blueprintVersion=key;}
-  var view=_installView;if(!view.Get("ok",false).Bool){V3DevText(parent,view.Get("error","当前不能安装。").Text,Gold);return;}
+  var key=_planner.version(G)+"|"+S["block"]["bonus_wallet"].ToJson()+"|"+S["bonus_instances"].ToJson()+"|"+bid+scope+host+slot;if(key!=_blueprintVersion||_installView.Count==0){_installView=card["copies"].Long<=0?BlueprintPreview.Inspect(G,bid,scope,host,slot):BlueprintPreview.For(G,bid,scope,host,slot);_blueprintVersion=key;}
+  var view=_installView;if(!view.Get("ok",false).Bool){BlueprintPreviewUnavailable(parent,card,view);return;}
   var comparison=V3DevSection(parent,"安装前后变化",old==""?"空槽 → "+card["name"].Text:G.c.bonuses[prior["bonus_id"]]["name"].Text+" → "+card["name"].Text);int changes=0;
   foreach(var stat in view["stat_rows"])if(V3BonusDifference(comparison,Stat(stat["field"].Text),stat["before"].Double,stat["after"].Double,"",BlueprintAdverse(stat["field"].Text,0,1)))changes++;
   var step=view["same_step"];V3DevText(comparison,"全城同一步预测 · 仅显示变化");foreach(var measure in new[]{new[]{"cashflow","经营净额"," /月"},new[]{"energy_supply","电力供给容量",""},new[]{"energy_need","用电需求",""}}){var pair=step[measure[0]];if(V3BonusDifference(comparison,measure[1],pair["before"].Double,pair["after"].Double,measure[2],measure[0]=="energy_need"))changes++;}
@@ -158,9 +152,9 @@ public sealed partial class CityInterface {
   foreach(var resource in step["resource_outputs"].Keys){var a=baseline["audit"].Get("resources",V.Map()).Get(resource,V.Map());var b=proposal["audit"].Get("resources",V.Map()).Get(resource,V.Map());foreach(var measure in new[]{new[]{"produced","月产出"},new[]{"consumed","月消耗"},new[]{"lost","月溢出损失"},new[]{"after","步末库存"}}){double divisor=measure[0]=="after"?1:months;if(V3BonusDifference(comparison,Resource(resource)+measure[1],a.Get(measure[0],0).Double/divisor,b.Get(measure[0],0).Double/divisor,"",measure[0]=="consumed"||measure[0]=="lost"))changes++;}}
   foreach(var field in new[]{new[]{"heat_used","实际余热利用"},new[]{"pollution_recycled","实际污染回收"}})if(V3BonusDifference(comparison,field[1],baseline["metrics"].Get(field[0],0).Double,proposal["metrics"].Get(field[0],0).Double))changes++;
   if(changes==0)V3DevText(comparison,"同一步汇总暂无可见数值变化；停运、施工与短缺等当前条件已计入。");
-  V3DevText(comparison,"消耗1份「"+card["name"].Text+"」 · 库存 "+card["copies"].Long+" → "+view["after_copies"].Long,Gold);V3DevText(comparison,old==""?"不额外消耗通货或材料；安装后才生效。":"原方案停用，旧副本不返还；另消耗1份新副本。",Gold);
+  V3DevText(comparison,card["copies"].Long<=0?"目录预览 · 需要领取1份副本后才能安装":"消耗1份「"+card["name"].Text+"」 · 库存 "+card["copies"].Long+" → "+view["after_copies"].Long,Gold);V3DevText(comparison,old==""?"不额外消耗通货或材料；安装后才生效。":"原方案停用，旧副本不返还；另消耗1份新副本。",Gold);
   var expected=card["copies"].Long;var focused=Runtime.Session.FocusedBlockId;
-  V3DevSmallButton(comparison,old==""?"安装副本":"替换安装",()=>{Action install=()=>V3InstallBonus(bid,scope,host,slot,old,expected,focused);if(old!="")Confirm("替换当前方案？","消耗1份「"+card["name"].Text+"」，原方案停用且旧副本不返还。",install);else install();},true,_blueprintBusy||!Runtime.ViewCanEditFocused);
+  V3DevSmallButton(comparison,old==""?"安装副本":"替换安装",()=>{Action install=()=>V3InstallBonus(bid,scope,host,slot,old,expected,focused);if(old!="")Confirm("替换当前方案？","消耗1份「"+card["name"].Text+"」，原方案停用且旧副本不返还。",install);else install();},true,card["copies"].Long<=0||_blueprintBusy||!Runtime.ViewCanEditFocused);
   Fold(comparison,"完整比较与实例来源",c=>{Raw(c,view["rule_trace"]);Raw(c,view["same_step"]);Raw(c,view["before_instance_records"]);Raw(c,view["after_instance_records"]);});
  }
  void V3InstallBonus(string bid,string scope,string host,string slot,string old,long expected,string focused){
