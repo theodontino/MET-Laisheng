@@ -11,10 +11,10 @@ public sealed partial class CityInterface {
   public PageLayout(float width,float height=860,string placement="dock",string scope="街区"){Width=width;Height=height;Placement=placement;Scope=scope;}
  }
  readonly Dictionary<string,PageLayout> _pageLayouts=new Dictionary<string,PageLayout>{
-  {"population_home",new PageLayout(640,800)},{"economy_home",new PageLayout(680,800)},{"bonus_home",new PageLayout(760,800)},{"tasks_home",new PageLayout(1120,800)},{"archive_home",new PageLayout(560,760)},
-  {"overview",new PageLayout(560,800,"dock")},{"construction",new PageLayout(600,800,"dock")},
+  {"population_home",new PageLayout(660,920)},{"economy_home",new PageLayout(640,900)},{"bonus_home",new PageLayout(670,960)},{"tasks_home",new PageLayout(700,960)},{"archive_home",new PageLayout(560,760)},
+  {"overview",new PageLayout(560,800,"dock")},{"construction",new PageLayout(680,920,"dock")},
   {"building",new PageLayout(520,760,"dock")},{"population",new PageLayout(1040)},
-  {"resources",new PageLayout(1200)},{"market",new PageLayout(1200)},{"policies",new PageLayout(1120)},
+  {"resources",new PageLayout(1200)},{"market",new PageLayout(700,920)},{"policies",new PageLayout(1120)},
   {"bonuses",new PageLayout(1360)},{"slot",new PageLayout(1360)},{"blueprints",new PageLayout(1200)},
   {"themes",new PageLayout(1120,800)},{"milestones",new PageLayout(1120,800)},{"settlement",new PageLayout(1200)},
   {"city",new PageLayout(1360,860,"dock","城市")},{"governance",new PageLayout(960,820,"dock","地区")},
@@ -32,7 +32,7 @@ public sealed partial class CityInterface {
  readonly Dictionary<string,Dictionary<string,float>> _pageScrollMemory=new Dictionary<string,Dictionary<string,float>>();
  string _renderedPageKey="";
  PageLayout CurrentPageLayout=>_pageLayouts.TryGetValue(_page,out var layout)?layout:new PageLayout(1040);
- string PageStateKey=>_cityIdentity+"/"+_page+"/"+_pageContext;
+ string PageStateKey=>_cityIdentity+"/"+_page+"/"+_pageContext+(_advancedWorkspace?"/advanced":"/compact");
  string PageScopeLabel(){var scope=CurrentPageLayout.Scope;return scope=="街区"?"街区 · "+S["block"].Get("display_name","当前街区").Text:scope;}
  string PageSubtitle=>PageScopeLabel()+"  /  "+NavigationTrail()+"  ·  已暂停";
  void RememberWorkspace(){
@@ -77,7 +77,7 @@ public sealed partial class CityInterface {
   if(resource=="dt"){_settingsCategory="city";OpenArchive("settings");return;}
   if(resource=="population"){OpenArchive("population_home");return;}
   if(resource=="currency"){OpenArchive("economy_home");return;}
-  Navigate(resource=="cp"?"construction":"resources",resource);
+  if(resource=="cp")Navigate("construction");else {_operatingEconomyResource=resource;Navigate("economy_home");}
  }
 }
 }

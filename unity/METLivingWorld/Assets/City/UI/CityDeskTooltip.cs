@@ -75,7 +75,7 @@ public sealed partial class CityInterface {
   _deskTipClose=Button(_deskTip,"×",HideDeskTip);Pin((RectTransform)_deskTipClose.transform,new Vector2(1,1),new Vector2(1,1),new Vector2(-8,-8),new Vector2(34,32));var navigation=_deskTipClose.navigation;navigation.mode=Navigation.Mode.None;_deskTipClose.navigation=navigation;var closeKeeper=_deskTipClose.gameObject.AddComponent<CityDeskTipFocus>();closeKeeper.Owner=this;closeKeeper.TrackPointer=false;
   tipHeight=DeskTipHeight(copy,width);_deskTip.sizeDelta=new Vector2(width,tipHeight);
   PositionDeskTip(source,width,tipHeight);_deskTip.gameObject.SetActive(true);_deskTip.SetAsLastSibling();
-  var group=_deskTip.GetComponent<CanvasGroup>()??_deskTip.gameObject.AddComponent<CanvasGroup>();group.alpha=1;group.interactable=true;group.blocksRaycasts=true;
+  var group=_deskTip.GetComponent<CanvasGroup>();if(group==null)group=_deskTip.gameObject.AddComponent<CanvasGroup>();group.alpha=1;group.interactable=true;group.blocksRaycasts=true;
   if(locked)EventSystem.current?.SetSelectedGameObject(_deskTipClose.gameObject);
  }
  float DeskTipHeight(Text copy,float width){var settings=copy.GetGenerationSettings(new Vector2(width-36,0));float content=copy.cachedTextGeneratorForLayout.GetPreferredHeight(copy.text,settings)/copy.pixelsPerUnit;return Mathf.Min(_root.rect.height-110,Mathf.Clamp(content+76,150,460));}

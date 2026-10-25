@@ -1,0 +1,5 @@
+Unity6000.6.5f1 macOS Universal build: Success.
+V3 WORKSPACE CHECKS PASS: 185 actual page renders; 4040 assertions; UI80/100/120% × font100/125/150%.
+Includes compact/advanced route restoration, real snapshot Bonus preview, unchanged fixture state/RNG, no fixture store writes.
+Known Unity Editor SearchDatabase startup exception retained separately from game/UI assertions.
+Player screenshots and real input: user acceptance pending; no new visual or mouse acceptance claimed.

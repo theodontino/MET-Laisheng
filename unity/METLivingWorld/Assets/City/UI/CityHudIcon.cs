@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace MET.City {
 /// <summary>Original, atlas-free vector language for the command HUD.</summary>
+[RequireComponent(typeof(CanvasRenderer))]
 public abstract class CityHudMesh : MaskableGraphic {
  protected VertexHelper Mesh;
  protected Rect Bounds;

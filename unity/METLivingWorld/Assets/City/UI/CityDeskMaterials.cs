@@ -141,7 +141,8 @@ namespace MET.City
 
     /// <summary>Native lightweight desk objects. Kind: pin, clip, bucket, roll, stamp. Keep raycastTarget off for decorative use.</summary>
     [AddComponentMenu("MET/City/Desk Prop")]
-    public class CityDeskProp : MaskableGraphic
+    [RequireComponent(typeof(CanvasRenderer))]
+public class CityDeskProp : MaskableGraphic
     {
         public string Kind = "pin";
         private VertexHelper mesh;

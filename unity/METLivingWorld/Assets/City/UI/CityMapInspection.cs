@@ -53,7 +53,7 @@ public sealed partial class CityInterface {
   float scale=Mathf.Clamp((float)Runtime.DisplaySettings.Get("ui_scale",1).Double,.8f,1.2f);
   float top=99+(_planningOverviewOpen?100+188*TextScale:43)+16;
   _inspectionPanel.anchoredPosition=new Vector2(-18,-top);
-  _inspectionPanel.sizeDelta=new Vector2(346,Mathf.Min(482,1080/scale-top-170));
+  _inspectionPanel.sizeDelta=new Vector2(346,Mathf.Min(482,1440/scale-top-170));
  }
 
  void InspectSelectedTile(){

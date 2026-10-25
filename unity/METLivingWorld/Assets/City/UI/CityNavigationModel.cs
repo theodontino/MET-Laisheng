@@ -29,14 +29,14 @@ public sealed partial class CityInterface {
   {"science",new PageDefinition("city",PageRole.Locked)},{"city_project",new PageDefinition("city",PageRole.Locked)},
   {"district_start",new PageDefinition("city",PageRole.Locked)},{"block_start",new PageDefinition("city",PageRole.Locked)}
  };
- sealed class SectionVisit {public string Page,Context,Owner;public KeyValuePair<string,string>[] Parents;}
+ sealed class SectionVisit {public string Page,Context,Owner;public bool Advanced;public KeyValuePair<string,string>[] Parents;}
  readonly Dictionary<string,SectionVisit> _sectionVisits=new Dictionary<string,SectionVisit>();
  string _contextSection="";Button _pageBack;
  PageDefinition Definition(string page)=>_pages.TryGetValue(page,out var spec)?spec:new PageDefinition("records",PageRole.Locked);
  string ArchiveCategory(string page){var definition=Definition(page);return definition.Role==PageRole.Local&&_contextSection!=""?_contextSection:definition.Section;}
  bool IsSidebarPage(string page)=>Definition(page).Role==PageRole.Common;
  string SidebarForPage(string page)=>ArchiveCategory(page);
- bool HasLocalTabs=>Definition(_page).Role!=PageRole.Local&&(ArchiveCategory(_page)=="economy_home"||ArchiveCategory(_page)=="tasks_home"||ArchiveCategory(_page)=="records");
+ bool HasLocalTabs=>Definition(_page).Role!=PageRole.Local&&(ArchiveCategory(_page)=="economy_home"||(ArchiveCategory(_page)=="tasks_home"&&_advancedWorkspace)||ArchiveCategory(_page)=="records");
  void UpdateArchiveTabs(){foreach(var item in _topRoutes){bool selected=_archiveOpen&&item.Key==ArchiveCategory(_page);item.Value.GetComponent<Image>().color=selected?new Color(.10f,.25f,.27f,.98f):_hudButtonFill;}}
  void UpdateLocalArchiveTabs(){
   Clear(_localNav);_localNav.gameObject.SetActive(HasLocalTabs);if(!HasLocalTabs)return;
@@ -46,7 +46,7 @@ public sealed partial class CityInterface {
    case "tasks_home":routes=new[]{new[]{"tasks_home","当前事项","current"},new[]{"tasks_home","成长路线","growth"},new[]{"tasks_home","已完成","completed"}};active=_pageContext=="growth"||_pageContext=="completed"?_pageContext:"current";break;
    default:routes=new[]{new[]{"records","记录",""},new[]{"content","成果",""},new[]{"heritage","遗产",""},new[]{"sources","规则与来源",""}};if(_page=="record")active="records";break;
   }
-  foreach(var route in routes){var id=route[0];var context=route[2];string key=context==""?id:context;var button=Tab(_localNav,route[1],key,()=>Navigate(id,context),active);Height((RectTransform)button.transform,39*TextScale);HudFont(button.GetComponentInChildren<Text>(),15);}
+  foreach(var route in routes){var id=route[0];var context=route[2];string key=context==""?id:context;var button=Tab(_localNav,route[1],key,()=>{bool expanded=_advancedWorkspace;Navigate(id,context);if(expanded&&!_advancedWorkspace){_advancedWorkspace=true;RenderPage();}},active);Height((RectTransform)button.transform,39*TextScale);HudFont(button.GetComponentInChildren<Text>(),15);}
  }
  string NormalizePage(string page)=>page=="archive_home"?"records":page=="tasks"||page=="themes"||page=="milestones"?"tasks_home":page;
  string TaskContext(string page,string context)=>context=="current"||context=="growth"||context=="completed"?context:page=="milestones"?"growth":"current";
@@ -60,7 +60,7 @@ public sealed partial class CityInterface {
  void RememberSection(){
   if(!_archiveOpen)return;RememberWorkspace();var section=ArchiveCategory(_page);
   if(section=="settings"||section=="start"||section=="city")return;
-  _sectionVisits[_cityIdentity+"/"+section]=new SectionVisit{Page=_page,Context=_pageContext,Owner=_contextSection,Parents=_navigation.ToArray()};
+  _sectionVisits[_cityIdentity+"/"+section]=new SectionVisit{Page=_page,Context=_pageContext,Owner=_contextSection,Parents=_navigation.ToArray(),Advanced=_advancedWorkspace};
  }
  void PrepareNavigation(string page){
   CancelDeskTipsForPanel();DismissMapInspection();EndConstructionIntent();if(ConstructionWindowOpen)CloseConstructionWindow();if(_mapViewing)ReturnFromMapView();
@@ -77,14 +77,15 @@ public sealed partial class CityInterface {
   string requested=page;page=NormalizePage(page);if(!PageAvailable(page))return;
   string context=_lastPageContexts.TryGetValue(_cityIdentity+"/"+page,out var saved)?saved:"";
   if(page=="tasks_home")context=TaskContext(requested,requested=="tasks_home"?context:"");
-  RememberSection();PrepareNavigation(page);_contextSection="";SetCanonicalParents(page,context);_page=page;_pageContext=context;RenderPage();
+  RememberSection();PrepareNavigation(page);_advancedWorkspace=IsAdvancedRoute(page)||(page=="tasks_home"&&context!="current");_contextSection="";SetCanonicalParents(page,context);_page=page;_pageContext=context;RenderPage();
  }
  void OpenSection(string section){
   if(!PageAvailable(section))return;bool same=_archiveOpen&&ArchiveCategory(_page)==section;RememberSection();
   if(!same&&_sectionVisits.TryGetValue(_cityIdentity+"/"+section,out var visit)){
-   PrepareNavigation(visit.Page);_page=visit.Page;_pageContext=visit.Context;_contextSection=visit.Owner;_navigation.Clear();
+   PrepareNavigation(visit.Page);_advancedWorkspace=visit.Advanced;_page=visit.Page;_pageContext=visit.Context;_contextSection=visit.Owner;_navigation.Clear();
    for(int i=visit.Parents.Length-1;i>=0;i--)_navigation.Push(visit.Parents[i]);RenderPage();return;
   }
+  if(section=="tasks_home")_lastPageContexts[_cityIdentity+"/tasks_home"]="current";
   OpenArchive(section);
  }
  void Navigate(string page,string context=""){
@@ -98,16 +99,16 @@ public sealed partial class CityInterface {
    else if(!opened)SetCanonicalParents(page);
    _contextSection=owner;
   }else{_contextSection="";SetCanonicalParents(page,context);}
-  _page=page;_pageContext=context;RenderPage();
+  _advancedWorkspace=IsAdvancedRoute(page)||(page=="tasks_home"&&context!="current");_page=page;_pageContext=context;RenderPage();
  }
  void Back(){
   if(ConstructionWindowOpen){CloseConstructionWindow();return;}if(_mapViewing){ReturnFromMapView();return;}RememberSection();
-  if(_navigation.Count==0){CloseArchive();return;}
+  if(_advancedWorkspace&&HasCompactVersion(_page)){CollapseAdvancedWorkspace();return;}if(_navigation.Count==0){CloseArchive();return;}
   if(_comparisonValid)ClearComparison();var parent=_navigation.Pop();_page=parent.Key;_pageContext=parent.Value;
-  if(Definition(_page).Role!=PageRole.Local)_contextSection="";RenderPage();
+  if(Definition(_page).Role!=PageRole.Local)_contextSection="";_advancedWorkspace=IsAdvancedRoute(_page);RenderPage();
  }
  string NavigationTrail(){
-  string section=ArchiveCategory(_page);string sectionName=section=="economy_home"?"财政":section=="tasks_home"?"任务":PageTitle(section);
+  string section=ArchiveCategory(_page);string sectionName=section=="economy_home"?"资源与财政":section=="tasks_home"?"任务与成长":PageTitle(section);
   if(section=="start"||section=="settings")return PageTitle(_page);
   string suffix=_page=="tasks_home"?(_pageContext=="growth"?"成长路线":_pageContext=="completed"?"已完成":"当前事项"):_page==section?"":PageTitle(_page);
   if(_page=="resources")suffix+=" · "+(_pageContext=="energy"?"电力供需":_pageContext=="currency"?"财政":Resource(_pageContext==""?"food":_pageContext));

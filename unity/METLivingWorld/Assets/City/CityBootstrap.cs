@@ -20,7 +20,7 @@ public sealed class CityBootstrap : MonoBehaviour {
         World.SetFabricSources(Runtime.Game.c.projects, Runtime.Game.compiled.Get("stats", MET.Core.V.Map()));
         World.Initialize(() => Interface.MapSnapshot, Interface.SelectTile,
             () => Interface.KeyboardOwned, Interface.PointerOwned,
-            () => !Interface.MapViewing && !Interface.IsModal);
+            () => Interface.MapInteractionAvailable);
         Interface.AttachMapInspection(World);
         World.TryInspectClick = Interface.TryLockMapInspection;
         World.SetSourcePhase(Interface.MapSourcePhase);

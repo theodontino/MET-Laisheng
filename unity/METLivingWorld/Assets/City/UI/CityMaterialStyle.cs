@@ -4,12 +4,12 @@ namespace MET.City {
 // Kept for callers that still test this component while the desk pages migrate.
 public sealed class CityDeskTone : MonoBehaviour { public bool Light; }
 public sealed partial class CityInterface {
- static readonly Color HudPanel = new Color(.045f,.075f,.105f,.98f);
- static readonly Color HudRaised = new Color(.075f,.12f,.15f,.98f);
- static readonly Color HudCyan = new Color(.36f,.51f,.57f,.30f);
- static readonly Color HudText = new Color(.92f,.96f,.96f);
- static readonly Color HudMuted = new Color(.64f,.75f,.78f);
- static readonly Color HudGold = new Color(1f,.76f,.37f);
+ static readonly Color HudPanel = new Color(.078f,.141f,.153f,.99f);
+ static readonly Color HudRaised = new Color(.11f,.20f,.19f,.99f);
+ static readonly Color HudCyan = new Color(.32f,.44f,.38f,.55f);
+ static readonly Color HudText = new Color(.89f,.92f,.90f);
+ static readonly Color HudMuted = new Color(.62f,.73f,.68f);
+ static readonly Color HudGold = new Color(.87f,.74f,.48f);
 
  void DressSurface(RectTransform node,string name,Color requested){
   var image=node.GetComponent<Image>();

@@ -322,7 +322,7 @@ public sealed partial class CityWorld : MonoBehaviour {
         if(CameraController==null||Failure!="")return;
         bool keyboard=keyboardOwned!=null&&keyboardOwned();var pointer=(Vector2)Input.mousePosition;
         if(!keyboard&&Input.GetKeyDown(KeyCode.L))CycleLayer(Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift)?-1:1);
-        if(keyboard||(pointerOwned!=null&&pointerOwned(pointer))) {ClearHover();return;}
+        if(pointerOwned!=null&&pointerOwned(pointer)) {ClearHover();return;}
         string hovered=PickTile(pointer);if(hovered!=HoveredTile){HoveredTile=hovered;SetOutline(hoverOutline,hovered);HoverChanged?.Invoke(hovered);}
         if(Input.GetMouseButtonDown(0)&&hovered!=""&&!(TryInspectClick?.Invoke(hovered)??false))RequestSelection(hovered,true);
     }

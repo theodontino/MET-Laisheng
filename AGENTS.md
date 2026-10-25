@@ -6,7 +6,7 @@ The latest authorized presentation contract is [Modern strategy HUD](docs/ui_pla
 
 The mainline construction comparison uses same-step baseline/proposal snapshots, current inventory, monthly resource flows, electricity supply/demand capacity and environment changes. Preserve independent UI scale (80/100/120%), map zoom and font size, `L`/`Shift+L` layer cycling, keyboard ownership in text fields/modal/desks, and source labels when comparing map forecasts. Environment area graphics use all city tiles as their denominator. Read [construction impact acceptance](docs/beta/UI_IMPACTS_ACCEPTANCE.md) for actual evidence; do not treat a design requirement or an old screenshot as new acceptance.
 
-Throughout pre-1.0, the game defaults to desktop fullscreen with a minimum supported resolution of **1920×1080**. The user explicitly excludes testing different window sizes. Validate this fullscreen baseline; do not reintroduce small-window or mobile layout work as an acceptance requirement.
+User update, 2026-10-25: the game defaults to desktop fullscreen **2560×1440 (2K)**. Use this as the current UI baseline; previous 1920×1080 evidence remains historical. The user explicitly excludes testing different window sizes. Validate this fullscreen baseline; do not reintroduce small-window or mobile layout work as an acceptance requirement.
 
 ## Project vision and scope
 

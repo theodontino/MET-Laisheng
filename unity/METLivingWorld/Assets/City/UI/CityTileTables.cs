@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using MET.Core;
 namespace MET.City {
 public sealed partial class CityInterface {
- readonly Color _tileBand=new Color(.035f,.075f,.09f,.92f);
- readonly Color _tileRule=new Color(.25f,.48f,.50f,.35f);
+ readonly Color _tileBand=new Color(.10f,.18f,.18f,.88f);
+ readonly Color _tileRule=new Color(.30f,.42f,.38f,.5f);
  RectTransform TileBlock(Transform parent,string name,float height){
   var node=Node(name,parent);Height(node,height*TextScale);return node;
  }
@@ -21,9 +21,9 @@ public sealed partial class CityInterface {
  }
  void TileHeading(Transform parent,string title,string note="",Action action=null){
   var node=TileBlock(parent,"Tile section "+title,25);var line=TileTint(node,"Section divider",_tileRule);Stretch(line,0,24*TextScale,0,0);
-  var caption=TileText(node,title,16,Blue);TileBounds(caption.rectTransform,0,.55f);
-  if(action!=null){var button=Button(node,note,action);Pin((RectTransform)button.transform,new Vector2(1,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(82,24*TextScale));HudFont(button.GetComponentInChildren<Text>(),13);Stretch(button.GetComponentInChildren<Text>().rectTransform,4,0,4,0);}
-  else {var hint=TileText(node,note,13,Muted,TextAnchor.MiddleRight);TileBounds(hint.rectTransform,.55f,1);}
+  var caption=TileText(node,title,13,Ink);TileBounds(caption.rectTransform,0,note==""?1:.68f);
+  if(action!=null){var button=Button(node,note,action);Pin((RectTransform)button.transform,new Vector2(1,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(68,24*TextScale));HudFont(button.GetComponentInChildren<Text>(),13);Stretch(button.GetComponentInChildren<Text>().rectTransform,4,0,4,0);}
+  else {var hint=TileText(node,note,11,Muted,TextAnchor.MiddleRight);TileBounds(hint.rectTransform,.52f,1);}
  }
  // All rows share the same column boundaries. The expense group spans three columns.
  static readonly float[] TileResourceColumns={0,.22f,.37f,.52f,.67f,.82f,1};
@@ -52,6 +52,18 @@ public sealed partial class CityInterface {
  void TileStatCell(Transform parent,string title,string value,Color? color=null){
   var caption=TileText(parent,title,13,Muted);caption.rectTransform.anchorMin=new Vector2(0,.6f);caption.rectTransform.anchorMax=Vector2.one;caption.rectTransform.offsetMin=new Vector2(6,0);caption.rectTransform.offsetMax=new Vector2(-6,0);
   var amount=TileText(parent,value,17,color??Ink);amount.lineSpacing=1;amount.verticalOverflow=VerticalWrapMode.Overflow;amount.rectTransform.anchorMin=Vector2.zero;amount.rectTransform.anchorMax=new Vector2(1,.6f);amount.rectTransform.offsetMin=new Vector2(6,1);amount.rectTransform.offsetMax=new Vector2(-6,0);
+ }
+ // Ratios use existing local totals and effective capacities, never presentation estimates.
+ void TileCapacity(RectTransform parent,string label,double value,double capacity,string unit,int index,int count,string disclosure){
+  var meter=TileTint(parent,"Capacity "+label,Color.clear);meter.anchorMin=new Vector2(0,1-(float)(index+1)/count);meter.anchorMax=new Vector2(1,1-(float)index/count);meter.offsetMin=new Vector2(0,2);meter.offsetMax=new Vector2(0,-1);
+  bool overflow=value>capacity+.0001;var tone=overflow?Gold:Green;
+  var caption=TileText(meter,label,11,Muted);caption.rectTransform.anchorMin=new Vector2(0,.35f);caption.rectTransform.anchorMax=Vector2.one;caption.rectTransform.offsetMin=new Vector2(0,0);caption.rectTransform.offsetMax=Vector2.zero;
+  string reading=capacity<=0&&value==0?"暂无容量":F(value,1)+" / "+F(capacity,1)+" "+unit;
+  var number=TileText(meter,reading,11,overflow?Gold:Ink,TextAnchor.MiddleRight);number.rectTransform.anchorMin=new Vector2(.32f,.35f);number.rectTransform.anchorMax=Vector2.one;number.rectTransform.offsetMin=number.rectTransform.offsetMax=Vector2.zero;
+  var track=TileTint(meter,"Capacity denominator",new Color(.18f,.27f,.25f,1));track.anchorMin=Vector2.zero;track.anchorMax=new Vector2(1,0);track.offsetMin=new Vector2(0,3);track.offsetMax=new Vector2(0,9);
+  var fill=TileTint(track,"Capacity used",tone);fill.anchorMin=Vector2.zero;fill.anchorMax=new Vector2(capacity>0?Mathf.Clamp01((float)(value/capacity)):0,1);fill.offsetMin=fill.offsetMax=Vector2.zero;
+  meter.GetComponent<Image>().raycastTarget=true;var button=meter.gameObject.AddComponent<Button>();button.onClick.AddListener(()=>ToggleTileDisclosure(disclosure));
+  AddDeskTip(meter.gameObject,label,reading+(overflow?" · 超出当前容量":"")+"\n点击查看人数、岗位与来源。");
  }
  void TileFieldCell(RectTransform row,V field,int index,int count,string label,bool service){
   var cell=TileGridCell(row,"Field "+field["layer"].Text,index,count);

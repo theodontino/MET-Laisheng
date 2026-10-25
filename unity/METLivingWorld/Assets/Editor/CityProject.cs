@@ -91,10 +91,11 @@ public static class CityProject {
             Require(road!=null&&road.shader!=null&&!ShaderUtil.ShaderHasError(road.shader),"Road surface shader failed: "+style);
         }
         PlayerSettings.companyName = "MET"; PlayerSettings.productName = "MET 来生 Unity Beta";
-        PlayerSettings.bundleVersion = "0.7.0-ui.12";
+        PlayerSettings.bundleVersion = "0.7.0-ui.13";
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, "com.projectmet.laisheng.unitybeta");
         PlayerSettings.colorSpace = ColorSpace.Linear;
-        PlayerSettings.defaultScreenWidth = 1920; PlayerSettings.defaultScreenHeight = 1080;
+        PlayerSettings.defaultScreenWidth = 2560; PlayerSettings.defaultScreenHeight = 1440;
+        PlayerSettings.defaultIsNativeResolution = false;
         PlayerSettings.fullScreenMode = FullScreenMode.FullScreenWindow; PlayerSettings.runInBackground = false;
         var defines = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.Standalone);
         if (Array.IndexOf(defines.Split(';'), "GLTFAST_KEEP_MESH_DATA") < 0)

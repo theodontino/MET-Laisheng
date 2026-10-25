@@ -58,7 +58,7 @@ with open(sys.argv[1],'rb') as f: print(plistlib.load(f)['CFBundleExecutable'])
 PY
 )
     "$MET_UNITY_MAC_OUTPUT/Contents/MacOS/$executable" --validate-city --capture-city \
-      -screen-fullscreen 1 -screen-width 1920 -screen-height 1080 \
+      -screen-fullscreen 1 -screen-width 2560 -screen-height 1440 \
       -logFile "$MET_UNITY_RUN_DIR/player.log"
     ;;
   *) printf '%s\n' 'Usage: tools/test_unity_city.sh [core|city-core|editor|mac|native]' >&2; exit 2 ;;

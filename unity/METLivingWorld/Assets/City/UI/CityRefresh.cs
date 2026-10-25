@@ -38,7 +38,7 @@ public sealed partial class CityInterface {
   return V.Arr(_cityIdentity,StyleKey(),alerts,summaries.Count,theme,_statusPending,bubbles).ToJson();
  }
  string ContextDisplayKey(){
-  if(_mapViewing||SelectedTile==""||!S["cells"].Has(SelectedTile))return "hidden";
+  if((_mapViewing&&!_mapFromCompact)||SelectedTile==""||!S["cells"].Has(SelectedTile))return "hidden";
   return V.Arr(_cityIdentity,StyleKey(),SelectedTile,SelectedBuilding,Runtime.ViewCanEditFocused,TileVisibleKey(_tileSummary),TileVisibleKey(_tileEnergy)).ToJson();
  }
  V TileVisibleKey(V value){

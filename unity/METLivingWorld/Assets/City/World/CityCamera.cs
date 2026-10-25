@@ -31,8 +31,8 @@ public sealed class CityCamera : MonoBehaviour {
     void Update() {
         if(WorldCamera==null)return;
         bool blocked=keyboardOwned!=null&&keyboardOwned();var pointer=(Vector2)Input.mousePosition;bool overUI=pointerOwned!=null&&pointerOwned(pointer);
-        if(!blocked&&!overUI) {
-            if(Input.GetKeyDown(KeyCode.Home))ResetView();
+        if(!overUI) {
+            if(!blocked&&Input.GetKeyDown(KeyCode.Home))ResetView();
             if(Input.GetMouseButtonDown(1)||Input.GetMouseButtonDown(2)) {dragging=true;lastMouse=Input.mousePosition;}
             if(dragging&&(Input.GetMouseButton(1)||Input.GetMouseButton(2))) {var mouse=Input.mousePosition;Pan(mouse-lastMouse);lastMouse=mouse;}
             var scroll=Input.mouseScrollDelta.y;if(Mathf.Abs(scroll)>.01f)Zoom(Mathf.Pow(.9f,scroll));

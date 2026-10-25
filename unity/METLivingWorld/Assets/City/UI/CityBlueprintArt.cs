@@ -6,7 +6,8 @@ namespace MET.City
 {
     /// <summary>Replaceable, procedural axonometric study. No game data or external texture required.</summary>
     [AddComponentMenu("MET/City/Blueprint Art")]
-    public class CityBlueprintArt : MaskableGraphic
+    [RequireComponent(typeof(CanvasRenderer))]
+public class CityBlueprintArt : MaskableGraphic
     {
         public int Style;
         public bool ShowDrafting = true;

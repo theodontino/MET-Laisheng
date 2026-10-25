@@ -31,7 +31,7 @@ public sealed class CityRuntime : MonoBehaviour {
  static long Monotonic()=>Stopwatch.GetTimestamp();
  void Awake() {
   Application.targetFrameRate=60;QualitySettings.vSyncCount=0;
-  Screen.SetResolution(1920,1080,FullScreenMode.FullScreenWindow);Application.runInBackground=false;
+  Screen.SetResolution(2560,1440,FullScreenMode.FullScreenWindow);Application.runInBackground=false;
   StorageRoot=Environment.GetEnvironmentVariable("MET_UNITY_SAVE_ROOT");if(string.IsNullOrWhiteSpace(StorageRoot))StorageRoot=Application.persistentDataPath;
   var catalog=new Catalog(Path.Combine(Application.streamingAssetsPath,"MetContent"));Session=new CitySession(catalog,StorageRoot);_origin=Monotonic();
   Session.New(DateTime.UtcNow.Ticks%2147483000,Utc());

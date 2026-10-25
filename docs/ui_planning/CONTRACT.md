@@ -1,6 +1,14 @@
-# Modern strategy HUD — UI.9
+# Modern strategy HUD — UI.13
 
 The visual language follows the user-approved Stellaris-reference concept of 2026-10-15 (Library `libfile_25717c339e688191a18ed99c487e2ffe`). The 2026-10-23 page-remake request and subsequent left-sidebar/two-level corrections supersede the old uniform archive and centered-window layout. Existing city assets and gameplay rules are preserved.
+
+## UI13 demo V3 migration (2026-10-25)
+
+The approved independent V3 demo is the current presentation target. Its small graphical global workspaces sit beside a 158-wide navigation rail; detailed views expand across the available screen and collapse back into their own workspace. The selected tile is a separate map-owned lower-left 640 × 520 panel, never a global workspace. Selecting the map while a compact workspace is open temporarily hides that workspace and preserves a named return, its scroll and selections. Construction and upgrades remain independent centered operation windows.
+
+The current navigation order is City (unavailable), Residents and Services, Resources and Finance, Construction, Tasks and Growth, Bonus, Archives. Capacity/usage uses bars plus exact values with real denominators; flow sources use a shared signed axis; inventory stays an absolute quantity. Local net income and services/environment share the horizontal tile body. The full source tables, history, policies and same-step decisions remain reachable.
+
+The default desktop fullscreen and UI reference is now **2560 × 1440 (2K)**. UI 80/100/120% and independent font settings remain available. Native game snapshots and commands supply the V3 layouts; no demo balance, fake data, gameplay rules, save schema or RNG changes are introduced by this migration. User performs visual and real-input acceptance; engineering checks and macOS build are recorded separately in [UI13 delivery](UI13_DELIVERY.md).
 
 ## UI9 tile presentation refinement (2026-10-25)
 
@@ -46,7 +54,7 @@ Use the actual FIFO reward queue, `Bonus.choose`, wallet copies, slot eligibilit
 
 ## Validation and delivery boundary
 
-Unity 6000.6.5f1 and existing uGUI 2.6.0 helpers remain. Desktop fullscreen 1920×1080 is the supported acceptance baseline. UI scale (80/100/120%), map zoom and font controls remain independent; keyboard ownership and reduced motion remain supported. Main/column/map-source scroll sensitivity is 48, explanation scrolling 24. Ordinary UI and map hover share their existing two-second wait, visualized with a thin progress bar that clears on cancellation or completion.
+Unity 6000.6.5f1 and existing uGUI 2.6.0 helpers remain. Desktop fullscreen 2560×1440 is the current default and reference baseline (superseding 1920×1080). UI scale (80/100/120%), map zoom and font controls remain independent; keyboard ownership and reduced motion remain supported. Main/column/map-source scroll sensitivity is 48, explanation scrolling 24. Ordinary UI and map hover share their existing two-second wait, visualized with a thin progress bar that clears on cancellation or completion.
 
 The 2026-10-23 implementation request explicitly adopts the standing macOS delivery authorization in AGENTS.md, superseding this document's earlier local-only restriction: after required checks, package the actual macOS app as a ZIP and deliver a corresponding prerelease. Preserve earlier artifacts and unrelated uncommitted work. Source publication and native input/visual acceptance must be reported separately and accurately.
 

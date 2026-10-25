@@ -101,7 +101,7 @@ public sealed partial class CityInterface {
   float elapsed=0,duration=Runtime.DisplaySettings.Get("reduced_motion",false).Bool?0:1.05f;
   Vector2 destination=_root.InverseTransformPoint(_bonusBucket.TransformPoint(_bonusBucket.rect.center));
   while(elapsed<duration&&!_receiptSkip){elapsed+=Mathf.Min(UnityEngine.Time.unscaledDeltaTime,.05f);float t=Mathf.Clamp01(elapsed/duration);float travel=Mathf.SmoothStep(0,1,Mathf.Clamp01((t-.40f)/.60f));bool moving=t>.42f;if(moving){body.gameObject.SetActive(false);transfer.gameObject.SetActive(true);}_receipt.anchoredPosition=Vector2.Lerp(Vector2.zero,destination,travel);_receipt.localScale=Vector3.one*Mathf.Lerp(1,.12f,travel);yield return null;}
-  if(_receipt!=null){ForgetFonts(_receipt);Destroy(_receipt.gameObject);_receipt=null;}_blueprintBusy=false;if(_archiveOpen&&(_page=="bonuses"||_page=="settlement"||_page=="blueprints"))RenderPage();ShowMessage(bid=="__currency__"?"补偿已入账。":"蓝图已领取 · 可从 Bonus 安装");
+  if(_receipt!=null){ForgetFonts(_receipt);Destroy(_receipt.gameObject);_receipt=null;}_blueprintBusy=false;if(_archiveOpen&&(_page=="bonuses"||_page=="bonus_home"||_page=="tasks_home"||_page=="settlement"||_page=="blueprints"))RenderPage();ShowMessage(bid=="__currency__"?"补偿已入账。":"蓝图已领取 · 可从 Bonus 安装");
  }
  void BlueprintInventoryPage(){
   var columns=WorkspaceColumns("Bonus deployment workspace",.9f,1.05f,1.35f);var inventory=columns[0];var targets=columns[1];var comparison=columns[2];
