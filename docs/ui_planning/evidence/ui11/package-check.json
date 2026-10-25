@@ -1,0 +1,8 @@
+{
+  "version": "0.7.0-ui.11",
+  "architectures": "x86_64 arm64",
+  "zip_bytes": 72280419,
+  "zip_integrity": "passed",
+  "map_checks": 10,
+  "player_acceptance": "user owned; not performed"
+}

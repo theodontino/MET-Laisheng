@@ -39,15 +39,18 @@ public sealed partial class CityInterface {
   _tileFooter.anchorMin=Vector2.zero;_tileFooter.anchorMax=new Vector2(1,0);_tileFooter.pivot=new Vector2(.5f,0);_tileFooter.sizeDelta=new Vector2(-20,footer);_tileFooter.anchoredPosition=new Vector2(0,8);
   Stretch(_tileViewport,8,header,8,footer+15);
   RenderTileIdentity(data,empty,water);
-  RenderTileEconomy(data,empty);
-  RenderTileFields(data);
+  var overview=TileBlock(_tileBody,"Net income and local services",208);
+  var economy=Column(overview,"Local net income",4,false);TileBounds(economy,0,.4f);economy.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);
+  var services=Column(overview,"Local services and environment",4,false);TileBounds(services,.4f,1);services.GetComponent<VerticalLayoutGroup>().padding=new RectOffset(0,0,0,0);
+  RenderTileEconomy(economy,data,empty);
+  RenderTileFields(services,data);
   RenderTileSlots(data);
   RenderTileAdjacency(data);
   BuildTileActions(empty,water);
   _contextKey=key;_renderedTile=TileStateKey;Canvas.ForceUpdateCanvases();_tileScroll.StopMovement();_tileScroll.verticalNormalizedPosition=_tilePositions.TryGetValue(_renderedTile,out var position)?position:1;
  }
  void RenderTileIdentity(V data,bool empty,bool water){
-  var strip=TileBlock(_tileBody,"Identity portrait and metrics",100);
+  var strip=TileBlock(_tileBody,"Identity portrait and metrics",120);
   var portrait=Node("Portrait region",strip);TileBounds(portrait,0,.25f,0,0);
   if(!empty){var building=data["buildings"][0];ContextBuildingPortrait(portrait,building["id"].Text,building["def"].Text);Stretch((RectTransform)portrait.GetChild(0),0,0,0,0);}
   else {var icon=HudIcon(portrait,"terrain",water?Blue:Green,70);Stretch(icon,14,12,14,12);}
@@ -61,7 +64,19 @@ public sealed partial class CityInterface {
   AddDeskTip(identity.gameObject,"地块与运营",terrain+" · "+traits+"\n"+details);
   var metrics=Node("People and workplace matrix",strip);TileBounds(metrics,.62f,1);
   var people=data["people"];string[] names={"居住人口","居民就业","本地岗位","岗位使用"};double[] values={people["population"].Double,people["resident_employed"].Double,people["workplace_jobs"].Double,people["workplace_jobs_filled"].Double};
-  for(int i=0;i<4;i++){var metric=TileTint(metrics,"People metric "+i,_tileBand);metric.anchorMin=new Vector2((i%2)*.5f,i<2?.5f:0);metric.anchorMax=new Vector2((i%2+1)*.5f,i<2?1:.5f);metric.offsetMin=new Vector2(2,2);metric.offsetMax=new Vector2(-2,-2);TileStatCell(metric,names[i],F(values[i])+"人");}
+  for(int i=0;i<4;i++){var metric=TileTint(metrics,"People metric "+i,_tileBand);metric.anchorMin=new Vector2((i%2)*.5f,i<2?.5f:0);metric.anchorMax=new Vector2((i%2+1)*.5f,i<2?1:.5f);metric.offsetMin=new Vector2(2,2);metric.offsetMax=new Vector2(-2,-2);TileStatCell(metric,names[i],F(values[i])+"人");
+   var disclosure=i<2?"residents":"workplace";metric.GetComponent<Image>().raycastTarget=true;var control=metric.gameObject.AddComponent<Button>();control.onClick.AddListener(()=>ToggleTileDisclosure(disclosure));
+   AddDeskTip(metric.gameObject,names[i],"点击查看本地人数与就业来源。");
+  }
+  TileInlineSource("residents",parent=>{
+   TileHeading(parent,"本地居民与就业");
+   foreach(var group in people["groups"]){TileLine(parent,ResidentHostName(group["host"].Text),F(group["population"].Double)+" 人 / 就业 "+F(group["employed"].Double)+" 人");foreach(var job in group["employment"].Pairs)TileLine(parent,"→ "+G.project_name(job.Key),F(job.Value.Double)+" 人");}
+   if(people["groups"].Count==0)TileLine(parent,"本地居民","无人居住");
+  });
+  TileInlineSource("workplace",parent=>{
+   TileHeading(parent,"本地岗位与使用");TileLine(parent,"岗位容量 / 已使用",F(people["workplace_jobs"].Double)+" / "+F(people["workplace_jobs_filled"].Double)+" 人");
+   foreach(var group in S["groups"].Pairs)foreach(var job in group.Value.Get("employment",V.Map()).Pairs)if(data["buildings"].Any(b=>b["id"].Text==job.Key))TileLine(parent,ResidentHostName(group.Value["host"].Text)+" → "+G.project_name(job.Key),F(job.Value.Double)+" 人");
+  });
   if(!empty){var p=data["buildings"][0];var job=p["upgrade_job"].Count>0?p["upgrade_job"]:p["status"].Text=="construction"?p["job"]:V.Map();if(job.Count>0){
    TileHeading(_tileBody,"施工进度",F(job["total"].Double-job["work"].Double)+" / "+F(job["total"].Double)+" CP");
    var track=TileBlock(_tileBody,"Local construction progress",6);var bg=TileTint(track,"Progress base",new Color(.2f,.3f,.32f,1));Stretch(bg);var fill=TileTint(track,"Completed work",Green);fill.anchorMin=Vector2.zero;fill.anchorMax=new Vector2((float)Math.Max(0,1-job["work"].Double/Math.Max(.000001,job["total"].Double)),1);fill.offsetMin=fill.offsetMax=Vector2.zero;
@@ -70,46 +85,40 @@ public sealed partial class CityInterface {
    foreach(var n in new[]{1,0,-1}){int value=n;string id=p["id"].Text;var b=Button(priority,(p.Get("construction_priority",0).Long==n?"✓ ":"")+(n==1?"优先":n==0?"普通":"延后"),()=>Command(g=>Construction.set_priority(g,id,value)),false,!Runtime.ViewCanEditFocused);Height((RectTransform)b.transform,30*TextScale);HudFont(b.GetComponentInChildren<Text>(),14);}
   }}
  }
- void RenderTileEconomy(V data,bool empty){
-  if(empty){TileHeading(_tileBody,"本地经济","当前为空地");return;}
-  bool settled=data["settlement_available"].Bool;TileHeading(_tileBody,"资源收支",settled?"月流量 · 来源 ›":"待结算",()=>ToggleTileDisclosure("economy"));
-  if(settled){
-   TileResourceHeader(_tileBody);int index=0;
-   foreach(var row in data["resources"].Where(x=>x["resource"].Text!="energy")){
-    double output=row["production"].Double,input=row["building_input"].Double,residents=row["resident_consumption"].Double,construction=row["construction_material"].Double,lost=row["production_lost"].Double;
-    double net=output-input-residents-construction-lost;
-    TileMatrixRow(_tileBody,new[]{Resource(row["resource"].Text),TileNumber(output),TileNumber(input),TileNumber(residents),TileNumber(construction),TileSigned(net)},TileResourceColumns,index++%2==0,net<0?Gold:Green);
-    if(lost>0)TileLine(_tileBody,Resource(row["resource"].Text)+"溢出损耗（已计入净产消）",TileNumber(lost)+" /月",Gold);
-   }
-   if(index==0)TileLine(_tileBody,"本格资源产消","暂无记录");
-  }else TileLine(_tileBody,"产出与消耗","待首次结算",Gold);
-  // Cash is attributed municipal income, not an invented private building wallet.
-  var money=TileBlock(_tileBody,"Cash source matrix",43);var cash=data["cash"];
-  var left=TileGridCell(money,"Attributed income",0,2);TileStatCell(left,"通货收入来源 / 月",settled?TileSigned(cash["income_attributed"].Double):"待结算",Green);
-  var right=TileGridCell(money,"Local upkeep",1,2);TileStatCell(right,"维护支出 / 月",settled?TileNumber(cash["upkeep"].Double):"待结算",Gold);
-  TileInlineSource("economy",parent=>{
-   TileMatrixRow(parent,new[]{"来源","通货 / 月"},new[]{0f,.7f,1f},true);
-   foreach(var row in data["income_sources"])TileLine(parent,row.Get("name","收入来源").Text,TileSigned(row["rate"].Double));
-   foreach(var row in data["fiscal"])TileLine(parent,row.Get("name","维护支出").Text,"−"+F(row["rate"].Double),Gold);
-   foreach(var building in data["buildings"])foreach(var pair in building["inventory"].Pairs)TileLine(parent,Resource(pair.Key)+"当前库存",F(pair.Value.Double));
-   Label(parent,"表内为最近周期折合每月的本格产消；库存还受物流调拨影响。收入来源计入街区财政。",14,Muted,42*TextScale);
-   foreach(var row in data["receipts"].Where(x=>x["resource"].Text!="energy"))TileLine(parent,Resource(row["resource"].Text)+" · "+(row["kind"].Text=="output"?"生产":row.Get("category","").Text=="resident"?"居民消费":row.Get("category","").Text=="construction"?"施工领料":"生产投入"),F(row.Get("rate",0).Double)+" /月");
+ void RenderTileEconomy(RectTransform parent,V data,bool empty){
+  bool settled=data["settlement_available"].Bool;
+  TileHeading(parent,"净收入","来源 ›",()=>ToggleTileDisclosure("economy"));
+  foreach(var resource in new[]{"food","material","goods"}){
+   var row=data["resources"].FirstOrDefault(x=>x["resource"].Text==resource)??V.Map();
+   double net=row["production"].Double-row["building_input"].Double-row["resident_consumption"].Double-row["construction_material"].Double-row["production_lost"].Double;
+   TileMatrixRow(parent,new[]{Resource(resource),settled?TileSigned(net):"待结算"},new[]{0f,.54f,1f},true,net<0?Gold:Green);
+  }
+  var cash=data["cash"];double cashNet=cash["income_attributed"].Double-cash["upkeep"].Double;
+  TileMatrixRow(parent,new[]{"通货",settled?TileSigned(cashNet):"待结算"},new[]{0f,.54f,1f},true,cashNet<0?Gold:Green);
+  var note=TileText(parent,"最近周期折合每月",12,Muted);Height(note.rectTransform,24*TextScale);
+  TileInlineSource("economy",source=>{
+   TileMatrixRow(source,new[]{"来源","通货 / 月"},new[]{0f,.7f,1f},true);
+   foreach(var row in data["income_sources"])TileLine(source,row.Get("name","收入来源").Text,TileSigned(row["rate"].Double));
+   foreach(var row in data["fiscal"])TileLine(source,row.Get("name","维护支出").Text,"−"+F(row["rate"].Double),Gold);
+   foreach(var building in data["buildings"])foreach(var pair in building["inventory"].Pairs)TileLine(source,Resource(pair.Key)+"当前库存",F(pair.Value.Double));
+   Label(source,"表内为最近周期折合每月的本格产消；库存还受物流调拨影响。收入来源计入街区财政。",14,Muted,42*TextScale);
+   foreach(var row in data["receipts"].Where(x=>x["resource"].Text!="energy"))TileLine(source,Resource(row["resource"].Text)+" · "+(row["kind"].Text=="output"?"生产":row.Get("category","").Text=="resident"?"居民消费":row.Get("category","").Text=="construction"?"施工领料":"生产投入"),F(row.Get("rate",0).Double)+" /月");
   });
  }
- void RenderTileFields(V data){
+ void RenderTileFields(RectTransform parent,V data){
   var fields=data["fields"];bool residents=data["people"]["population"].Double>0;
-  TileHeading(_tileBody,"服务与环境",residents?"居民实际满足 · 点击查来源":"服务可达度 · 点击查来源");
+  TileHeading(parent,"服务与环境",residents?"实际满足":"可达度");
   var services=new[]{"medical","education","entertainment","commercial"};var names=new[]{"医疗","教育","娱乐","消费"};
-  int serviceColumns=TextScale>1.2f?2:4;for(int r=0;r<4/serviceColumns;r++){var row=TileBlock(_tileBody,"Service matrix "+r,42);for(int col=0;col<serviceColumns;col++){int i=r*serviceColumns+col;var field=fields.First(x=>x["layer"].Text==services[i]);TileFieldCell(row,field,col,serviceColumns,names[i],true);}}
-  foreach(var kind in services){var field=fields.First(x=>x["layer"].Text==kind);TileInlineSource("field:"+kind,parent=>RenderTileSources(parent,field));}
-  var environment=TileBlock(_tileBody,"Environment matrix",35);
+  int serviceColumns=2;for(int r=0;r<4/serviceColumns;r++){var row=TileBlock(parent,"Service matrix "+r,42);for(int col=0;col<serviceColumns;col++){int i=r*serviceColumns+col;var field=fields.First(x=>x["layer"].Text==services[i]);TileFieldCell(row,field,col,serviceColumns,names[i],true);}}
+  foreach(var kind in services){var field=fields.First(x=>x["layer"].Text==kind);TileInlineSource("field:"+kind,source=>RenderTileSources(source,field));}
+  var environment=TileBlock(parent,"Environment matrix",35);
   TileFieldCell(environment,fields.First(x=>x["layer"].Text=="pollution"),0,2,"污染",false);TileFieldCell(environment,fields.First(x=>x["layer"].Text=="heat"),1,2,"余热",false);
-  foreach(var kind in new[]{"pollution","heat"}){var field=fields.First(x=>x["layer"].Text==kind);TileInlineSource("field:"+kind,parent=>RenderTileSources(parent,field));}
+  foreach(var kind in new[]{"pollution","heat"}){var field=fields.First(x=>x["layer"].Text==kind);TileInlineSource("field:"+kind,source=>RenderTileSources(source,field));}
   if(data["buildings"].Count>0){
    var energy=_tileEnergy;double supply=energy["rows"].Where(x=>x["kind"].Text=="supply").Sum(x=>x["value"].Double),demand=-energy["rows"].Where(x=>x["kind"].Text=="demand").Sum(x=>x["value"].Double);
-   var row=TileBlock(_tileBody,"Local electricity",28);var text=TileText(row,energy["available"].Bool?"电力能力  供给 "+F(supply)+"  /  需求 "+F(demand):"电力能力 · 待结算",14,Blue);Stretch(text.rectTransform,6,0,100,0);
-   var source=Button(row,"来源 ›",()=>ToggleTileDisclosure("energy"));Pin((RectTransform)source.transform,new Vector2(1,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(90,26*TextScale));HudFont(source.GetComponentInChildren<Text>(),13);
-   TileInlineSource("energy",parent=>RenderTileSources(parent,energy));
+   var row=TileBlock(parent,"Local electricity",28);var text=TileText(row,energy["available"].Bool?"供电 "+F(supply)+" / 用电 "+F(demand):"电力能力 · 待结算",14,Blue);Stretch(text.rectTransform,6,0,55,0);
+   var source=Button(row,"来源 ›",()=>ToggleTileDisclosure("energy"));Pin((RectTransform)source.transform,new Vector2(1,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(52,26*TextScale));HudFont(source.GetComponentInChildren<Text>(),13);
+   TileInlineSource("energy",source=>RenderTileSources(source,energy));
   }
  }
  void RenderTileSlots(V data){
@@ -148,6 +157,6 @@ public sealed partial class CityInterface {
   Button(row,"建筑详表 ›",()=>Navigate("building",id));
   foreach(var button in row.GetComponentsInChildren<Button>())Height((RectTransform)button.transform,44*TextScale);
  }
- static string TileTerrain(string terrain)=>terrain switch {"plain"=>"平原","plains"=>"平原","water"=>"水域","river"=>"河流","hill"=>"丘陵","hills"=>"丘陵","mountain"=>"山地","forest"=>"林地",_=>terrain};
+ static string TileTerrain(string terrain)=>terrain switch {"plain"=>"平原","plains"=>"平原","water"=>"水域","river"=>"河流","hill"=>"丘陵","hills"=>"丘陵","mountain"=>"山地","forest"=>"林地","wet"=>"湿地",_=>terrain};
 }
 }

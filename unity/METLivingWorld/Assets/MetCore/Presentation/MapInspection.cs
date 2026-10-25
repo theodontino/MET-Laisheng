@@ -56,6 +56,8 @@ public static class MapInspection {
         return total;
     }
     static string Label(string layer)=>layer switch {"terrain"=>"地貌","service"=>"医疗服务","medical"=>"医疗","education"=>"教育","entertainment"=>"娱乐","commercial"=>"消费","employment"=>"就业","pollution"=>"污染","heat"=>"余热","stock"=>"粮食库存","food"=>"粮食库存","material"=>"材料库存","goods"=>"制成品库存","energy"=>"本格能源净量","delta"=>"同一步变化",_=>layer};
+    public static bool HasResidents(V view,string tile)=>LocalGroups(view,tile).Any(gid=>Groups(view)[gid].Get("count",0).Double>0);
+    static string ReadingUnit(V view,string tile,string layer)=>layer=="employment"&&!HasResidents(view,tile)?"可达度":Unit(layer);
     static string Unit(string layer)=>IsService(layer)||layer=="employment"?"%":layer=="pollution"?"场强":layer=="heat"?"热量":IsStock(layer)?"单位":layer=="energy"?"能源/周期":"";
     static string Format(double n,string unit) {var number=n.ToString(Math.Abs(n)>=100?"0.#":"0.##",CultureInfo.InvariantCulture);return unit=="%"?(n*100).ToString("0.#",CultureInfo.InvariantCulture)+"%":unit==""?number:number+" "+unit;}
     static string Phase(V view)=>view.Get("source_phase",view.Get("forecast",false).Bool?"next_tick":"actual").Text;
@@ -72,10 +74,12 @@ public static class MapInspection {
     static void Note(V notes,string value)=>notes.Add(value);
     static V DescribeOne(V view,string tile,string layer,V baseline,V proposal,string deltaMetric) {
         var rows=V.Arr();var notes=V.Arr();var cells=Cells(view);var cell=cells.Get(tile??"",V.Map());var projects=Projects(view);var groups=Groups(view);var metrics=Metrics(view);
-        string effective=layer=="delta"?deltaMetric:layer,unit=Unit(effective),label=layer=="delta"?"同一步"+Label(effective)+"变化":Label(layer),reading="";
+        string effective=layer=="delta"?deltaMetric:layer,unit=ReadingUnit(layer=="delta"?proposal:view,tile,effective),label=layer=="delta"?"同一步"+Label(effective)+"变化":Label(layer),reading="";
         bool available=cells.Has(tile??"")&&cell.IsMap;
         if(layer=="delta")available=available&&Ready(baseline,proposal)&&Cells(baseline).Has(tile)&&Cells(proposal).Has(tile)&&Available(baseline,tile,deltaMetric)&&Available(proposal,tile,deltaMetric);
         else available=available&&Available(view,tile,layer);
+        if(layer=="delta"&&effective=="employment"&&available&&HasResidents(baseline,tile)!=HasResidents(proposal,tile)) {available=false;Note(notes,"两侧分别为居民就业比例和无居民就业可达度，口径不同，不能相减。");}
+        if(effective=="employment"&&unit=="可达度")label=layer=="delta"?"同一步就业可达变化":"就业可达";
         double value=available?Value(view,tile,layer,baseline,proposal,deltaMetric):0;
         if(!available&&layer!="terrain")Note(notes,layer=="delta"?"缺少同一步且两侧均可读的基线/方案快照；无法计算变化。":"快照缺少该格或该图层所需字段；读数不可用。");
         if(layer=="terrain"&&cells.Has(tile)) {
@@ -112,13 +116,13 @@ public static class MapInspection {
                 if(Math.Abs(linked-raw)>1e-6)Note(notes,"关联线合计与实际"+(IsService(layer)?"覆盖":"就业")+"人数相差 "+Format(raw-linked,"人")+"；以住户实际值为准，未将差额归给任何来源。");
                 if(raw>people+1e-6)Note(notes,"比例显示封顶 100%；原始分子大于居民人数。");
             } else {
-                reading=IsService(layer)?"空格：最佳服务来源可达度":"空格：就业来源可达度之和";
+                reading=IsService(layer)?"无居民地格：最佳服务来源可达度":"无居民地格：就业来源可达度之和（强度，可大于 1，不是就业比例）";
                 var entries=cell.Get("fields",V.Map()).Get(kind,V.Arr());
                 if(IsService(layer)) {
                     var bySource=new Dictionary<string,V>(StringComparer.Ordinal);
                     foreach(var entry in entries){string source=T(entry,"source_id");if(!bySource.TryGetValue(source,out var prior)||entry.Get("value",0).Double>prior.Get("value",0).Double)bySource[source]=entry;}
                     foreach(var pair in bySource.OrderBy(x=>x.Key,StringComparer.Ordinal)){string sourceTile=SourceTile(view,pair.Key);Add(rows,"来源 "+pair.Key,pair.Value.Get("value",0).Double,"%",pair.Key,sourceTile,"reach","此来源取最强场；格子总值取各来源最大值");if(sourceTile=="")Note(notes,"来源 "+pair.Key+" 的位置未随快照提供。");}
-                } else foreach(var entry in entries){string source=T(entry,"source_id"),sourceTile=SourceTile(view,source);Add(rows,"就业来源 "+source,entry.Get("value",0).Double,"%",source,sourceTile,"reach",T(entry,"field_id"));if(sourceTile=="")Note(notes,"来源 "+source+" 的位置未随快照提供。");}
+                } else foreach(var entry in entries){string source=T(entry,"source_id"),sourceTile=SourceTile(view,source);Add(rows,"就业来源 "+source,entry.Get("value",0).Double,"可达度",source,sourceTile,"reach",T(entry,"field_id"));if(sourceTile=="")Note(notes,"来源 "+source+" 的位置未随快照提供。");}
             }
         } else if(available&&layer=="energy") {
             reading="本格项目供给减项目及住户需求";
@@ -135,7 +139,7 @@ public static class MapInspection {
             foreach(var bid in LocalProjects(view,tile)) {var inv=projects[bid].Get("inventory",V.Map());if(inv.Has(resource))Add(rows,"项目库存",inv[resource].Double,unit,bid,tile,"inventory");}
             if(rows.Count==0)Note(notes,"此格没有该资源的项目库存记录。");
         } else if(available) {reading="本格项目库存汇总";foreach(var bid in LocalProjects(view,tile)){var inv=projects[bid].Get("inventory",V.Map());if(inv.Has(layer))Add(rows,"项目库存",inv[layer].Double,unit,bid,tile,"inventory");}}
-        return V.Map("tile",tile??"","layer",layer??"","available",available,"value",available?V.From(value):V.Null,"display",available?Format(value,unit):"—","label",label,"unit",unit,"reading",reading,"source_phase",Phase(view),"rows",rows,"notes",notes,"neighbors",V.Arr());
+        return V.Map("tile",tile??"","layer",layer??"","available",available,"value",available?V.From(value):V.Null,"display",available?Format(value,unit):"—","label",label,"unit",unit,"reading",reading,"reading_kind",effective=="employment"?(unit=="可达度"?"access":"employment_ratio"):effective,"source_phase",Phase(view),"rows",rows,"notes",notes,"neighbors",V.Arr());
     }
     static bool Available(V view,string tile,string layer) {
         var cells=Cells(view);if(!cells.Has(tile??""))return false;

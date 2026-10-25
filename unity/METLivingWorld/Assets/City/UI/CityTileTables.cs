@@ -21,9 +21,9 @@ public sealed partial class CityInterface {
  }
  void TileHeading(Transform parent,string title,string note="",Action action=null){
   var node=TileBlock(parent,"Tile section "+title,25);var line=TileTint(node,"Section divider",_tileRule);Stretch(line,0,24*TextScale,0,0);
-  var caption=TileText(node,title,16,Blue);TileBounds(caption.rectTransform,0,.43f);
-  if(action!=null){var button=Button(node,note,action);Pin((RectTransform)button.transform,new Vector2(1,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(150,24*TextScale));HudFont(button.GetComponentInChildren<Text>(),13);Stretch(button.GetComponentInChildren<Text>().rectTransform,4,0,4,0);}
-  else {var hint=TileText(node,note,13,Muted,TextAnchor.MiddleRight);TileBounds(hint.rectTransform,.43f,1);}
+  var caption=TileText(node,title,16,Blue);TileBounds(caption.rectTransform,0,.55f);
+  if(action!=null){var button=Button(node,note,action);Pin((RectTransform)button.transform,new Vector2(1,.5f),new Vector2(1,.5f),Vector2.zero,new Vector2(82,24*TextScale));HudFont(button.GetComponentInChildren<Text>(),13);Stretch(button.GetComponentInChildren<Text>().rectTransform,4,0,4,0);}
+  else {var hint=TileText(node,note,13,Muted,TextAnchor.MiddleRight);TileBounds(hint.rectTransform,.55f,1);}
  }
  // All rows share the same column boundaries. The expense group spans three columns.
  static readonly float[] TileResourceColumns={0,.22f,.37f,.52f,.67f,.82f,1};
@@ -50,13 +50,13 @@ public sealed partial class CityInterface {
   var cell=TileTint(row,name,_tileBand);TileBounds(cell,(float)index/count,(float)(index+1)/count,1,1);return cell;
  }
  void TileStatCell(Transform parent,string title,string value,Color? color=null){
-  var caption=TileText(parent,title,13,Muted);caption.rectTransform.anchorMin=new Vector2(0,.5f);caption.rectTransform.anchorMax=Vector2.one;caption.rectTransform.offsetMin=new Vector2(6,0);caption.rectTransform.offsetMax=new Vector2(-6,0);
-  var amount=TileText(parent,value,17,color??Ink);amount.rectTransform.anchorMin=Vector2.zero;amount.rectTransform.anchorMax=new Vector2(1,.55f);amount.rectTransform.offsetMin=new Vector2(6,1);amount.rectTransform.offsetMax=new Vector2(-6,0);
+  var caption=TileText(parent,title,13,Muted);caption.rectTransform.anchorMin=new Vector2(0,.6f);caption.rectTransform.anchorMax=Vector2.one;caption.rectTransform.offsetMin=new Vector2(6,0);caption.rectTransform.offsetMax=new Vector2(-6,0);
+  var amount=TileText(parent,value,17,color??Ink);amount.lineSpacing=1;amount.verticalOverflow=VerticalWrapMode.Overflow;amount.rectTransform.anchorMin=Vector2.zero;amount.rectTransform.anchorMax=new Vector2(1,.6f);amount.rectTransform.offsetMin=new Vector2(6,1);amount.rectTransform.offsetMax=new Vector2(-6,0);
  }
  void TileFieldCell(RectTransform row,V field,int index,int count,string label,bool service){
   var cell=TileGridCell(row,"Field "+field["layer"].Text,index,count);
   var icon=HudIcon(cell,field["layer"].Text,Blue,19);Pin(icon,new Vector2(0,1),new Vector2(0,1),new Vector2(5,-5),new Vector2(18,18));
-  var name=TileText(cell,label,14,Muted);name.rectTransform.anchorMin=new Vector2(0,.35f);name.rectTransform.anchorMax=Vector2.one;name.rectTransform.offsetMin=new Vector2(29,0);name.rectTransform.offsetMax=new Vector2(-8,0);
+  var name=TileText(cell,label,13,Muted);name.rectTransform.anchorMin=new Vector2(0,.35f);name.rectTransform.anchorMax=Vector2.one;name.rectTransform.offsetMin=new Vector2(29,0);name.rectTransform.offsetMax=new Vector2(-8,0);
   var available=field.Get("available",false).Bool;var text=available?(service?F(field["value"].Double*100,0)+"%":F(field["value"].Double,2)):"待结算";
   var value=TileText(cell,text,17,available&&service&&field["value"].Double<.95?Gold:Ink,TextAnchor.MiddleRight);TileBounds(value.rectTransform,.43f,1,0,13*TextScale);
   if(service){var track=TileTint(cell,"Coverage track",new Color(.2f,.3f,.32f,1));track.anchorMin=Vector2.zero;track.anchorMax=new Vector2(1,0);track.offsetMin=new Vector2(8,5);track.offsetMax=new Vector2(-8,9);var fill=TileTint(track,"Coverage",available&&field["value"].Double<.95?Gold:Green);fill.anchorMin=Vector2.zero;fill.anchorMax=new Vector2(available?Mathf.Clamp01((float)field["value"].Double):0,1);fill.offsetMin=fill.offsetMax=Vector2.zero;}

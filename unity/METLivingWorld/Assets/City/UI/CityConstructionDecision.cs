@@ -110,28 +110,30 @@ public sealed partial class CityInterface {
  }
  void RenderConstructionImpact(V baseline,V proposal,string target,string beforeLabel,string afterLabel){
   if(!proposal.Get("ok",false).Bool){Label(_constructionBody,proposal.Get("error","预测暂不可用").Text,18,Gold);return;}
+  ConstructionFold(_constructionBody,"city-impact","所选方案 · 同一步城市变化（展开查看）",details=>RenderConstructionImpactDetails(details,baseline,proposal,target,beforeLabel,afterLabel));
+ }
+ void RenderConstructionImpactDetails(Transform parent,V baseline,V proposal,string target,string beforeLabel,string afterLabel){
   var after=proposal["map_snapshot"];var old=baseline["metrics"];var now=after["metrics"];
-  Label(_constructionBody,"所选方案 · 同一步城市变化",21,Ink);
-  Label(_constructionBody,"两边均结算下一步。假定项目已完工，不扣本次建设费、不模拟施工等待；实际库存另列。",14,Muted);
-  ConstructionCompareLine(_constructionBody,"指标",beforeLabel,afterLabel,"变化",true);
-  foreach(var resource in new[]{"food","material","goods"})ConstructionCompareNumber(Resource(resource)+"净流量",old.Get("flows",V.Map()).Get(resource,0).Double,now.Get("flows",V.Map()).Get(resource,0).Double," /月");
-  ConstructionCompareNumber("经营净额",old.Get("cashflow",0).Double,now.Get("cashflow",0).Double," 通货/月");
-  ConstructionCompareNumber("供电能力",old.Get("energy",0).Double,now.Get("energy",0).Double,"");
-  ConstructionCompareNumber("用电需求能力",old.Get("energy_need",0).Double,now.Get("energy_need",0).Double,"");
-  ConstructionCompareNumber("住房容量",old.Get("housing",0).Double,now.Get("housing",0).Double," 人");
+  Label(parent,"两边均结算下一步。假定项目已完工，不扣本次建设费、不模拟施工等待；实际库存另列。",14,Muted);
+  ConstructionCompareLine(parent,"指标",beforeLabel,afterLabel,"变化",true);
+  foreach(var resource in new[]{"food","material","goods"})ConstructionCompareNumber(parent,Resource(resource)+"净流量",old.Get("flows",V.Map()).Get(resource,0).Double,now.Get("flows",V.Map()).Get(resource,0).Double," /月");
+  ConstructionCompareNumber(parent,"经营净额",old.Get("cashflow",0).Double,now.Get("cashflow",0).Double," 通货/月");
+  ConstructionCompareNumber(parent,"供电能力",old.Get("energy",0).Double,now.Get("energy",0).Double,"");
+  ConstructionCompareNumber(parent,"用电需求能力",old.Get("energy_need",0).Double,now.Get("energy_need",0).Double,"");
+  ConstructionCompareNumber(parent,"住房容量",old.Get("housing",0).Double,now.Get("housing",0).Double," 人");
   foreach(var kind in G.c.balance["service_kinds"]){
    string key=kind.Text;double before=old.Get("service_links",V.Arr()).Where(x=>x["kind"].Text==key).Sum(x=>x["people"].Double),value=now.Get("service_links",V.Arr()).Where(x=>x["kind"].Text==key).Sum(x=>x["people"].Double);
-   ConstructionCompareNumber(Service(key)+"实际覆盖",before,value," 人");
+   ConstructionCompareNumber(parent,Service(key)+"实际覆盖",before,value," 人");
   }
-  ConstructionCompareNumber("全城平均污染场强",ConstructionPollution(baseline),ConstructionPollution(after),"",3);
-  ConstructionCompareNumber("污染场强 >0.001 的地格占比",ConstructionPollutedArea(baseline),ConstructionPollutedArea(after),"%",1);
+  ConstructionCompareNumber(parent,"全城平均污染场强",ConstructionPollution(baseline),ConstructionPollution(after),"",3);
+  ConstructionCompareNumber(parent,"污染场强 >0.001 的地格占比",ConstructionPollutedArea(baseline),ConstructionPollutedArea(after),"%",1);
   var exposure=0.0;foreach(var gid in baseline["groups"].Keys){var group=after["groups"].Get(gid,V.Map());if(group.Count!=0&&group.Get("living",V.Map()).Get("pollution",0).Double-baseline["groups"][gid].Get("living",V.Map()).Get("pollution",0).Double>.015)exposure+=baseline["groups"][gid]["count"].Double;}
-  Label(_constructionBody,"污染暴露上升的现有居民："+F(exposure,0)+" 人（暴露增加超过 0.015）；面积与平均场强均以全城全部地格为分母。",14,exposure>0?Gold:Muted);
+  Label(parent,"污染暴露上升的现有居民："+F(exposure,0)+" 人（暴露增加超过 0.015）；面积与平均场强均以全城全部地格为分母。",14,exposure>0?Gold:Muted);
   var beforeTrace=baseline.Get("compiled",V.Map()).Get("trace",V.Map());var afterTrace=after.Get("compiled",V.Map()).Get("trace",V.Map());
   double nextSynergy=afterTrace.Get(target,V.Map()).Get("spatial_synergy",V.Map()).Get("value",1).Double;
-  if(baseline["projects"].Has(target))ConstructionCompareNumber("本楼相邻加成倍率",beforeTrace.Get(target,V.Map()).Get("spatial_synergy",V.Map()).Get("value",1).Double,nextSynergy,"×",2);
-  else ConstructionCompareLine(_constructionBody,"本楼相邻加成倍率","尚无建筑",F(nextSynergy,2)+"×","相邻增益 "+Signed((nextSynergy-1)*100)+"%");
-  ConstructionFold(_constructionBody,"adjacency","相邻建筑、投入竞争与完整计算来源",details=>{
+  if(baseline["projects"].Has(target))ConstructionCompareNumber(parent,"本楼相邻加成倍率",beforeTrace.Get(target,V.Map()).Get("spatial_synergy",V.Map()).Get("value",1).Double,nextSynergy,"×",2);
+  else ConstructionCompareLine(parent,"本楼相邻加成倍率","尚无建筑",F(nextSynergy,2)+"×","相邻增益 "+Signed((nextSynergy-1)*100)+"%");
+  ConstructionFold(parent,"adjacency","相邻建筑、投入竞争与完整计算来源",details=>{
    foreach(var contributor in afterTrace.Get(target,V.Map()).Get("spatial_synergy",V.Map()).Get("contributors",V.Arr()))Label(details,"相邻来源："+G.project_name(contributor["source_id"].Text)+" · 地块 "+contributor["tile"].Text+" · 效率 "+Signed(contributor["amount"].Double*100)+"%",16,Blue);
    foreach(var building in baseline["projects"].Keys){
     if(!after["projects"].Has(building)||building==target)continue;
@@ -142,11 +144,11 @@ public sealed partial class CityInterface {
    Label(details,"所选项目的实际投入、产出与规则",18,Blue);Raw(details,now.Get("activity_ledger",V.Map()).Get(target,V.Arr()));Raw(details,afterTrace.Get(target,V.Map()));
    Label(details,"同一步现状来源",18,Blue);Raw(details,baseline);Label(details,"同一步完工后来源",18,Blue);Raw(details,after);
   });
-  ConstructionFold(_constructionBody,"inventory","当前库存与仓容（非预测库存）",details=>{foreach(var resource in new[]{"food","material","goods"})Meter(details,Resource(resource),G.inventory_total(resource),G.stock_cap(resource)," 单位",Blue);});
+  ConstructionFold(parent,"inventory","当前库存与仓容（非预测库存）",details=>{foreach(var resource in new[]{"food","material","goods"})Meter(details,Resource(resource),G.inventory_total(resource),G.stock_cap(resource)," 单位",Blue);});
  }
  double ConstructionPollution(V snapshot){var tiles=snapshot.Get("tiles",V.Map());return tiles.Count==0?0:tiles.Values.Sum(tile=>Rules.aggregate(tile.Get("fields",V.Map()).Get("pollution",V.Arr())))/tiles.Count;}
  double ConstructionPollutedArea(V snapshot){var tiles=snapshot.Get("tiles",V.Map());return tiles.Count==0?0:100.0*tiles.Values.Count(tile=>Rules.aggregate(tile.Get("fields",V.Map()).Get("pollution",V.Arr()))>.001)/tiles.Count;}
- void ConstructionCompareNumber(string title,double before,double after,string unit,int digits=1){ConstructionCompareLine(_constructionBody,title,F(before,digits)+unit,F(after,digits)+unit,Signed(after-before,digits)+unit);}
+ void ConstructionCompareNumber(Transform parent,string title,double before,double after,string unit,int digits=1){ConstructionCompareLine(parent,title,F(before,digits)+unit,F(after,digits)+unit,Signed(after-before,digits)+unit);}
  void ConstructionCompareLine(Transform parent,string title,string before,string after,string delta,bool heading=false){
   var row=Row(parent,"Construction Comparison "+title,34*TextScale);var fields=new[]{title,before,after,delta};
   for(int i=0;i<fields.Length;i++){var text=Label(row,fields[i],heading?15:16,heading?Blue:i==0?Muted:Ink,31*TextScale);var element=text.GetComponent<LayoutElement>();element.minWidth=0;element.preferredWidth=0;element.flexibleWidth=i==0?1.4f:1;if(i>0)text.alignment=TextAnchor.MiddleRight;}

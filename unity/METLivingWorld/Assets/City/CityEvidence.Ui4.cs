@@ -130,7 +130,7 @@ public sealed partial class CityEvidence {
         Check("ui4_revision_map_actual_source_tiles_highlighted",expectedSources>0&&drawnSources==expectedSources,V.Map("expected",expectedSources,"drawn",drawnSources));
         yield return Capture("ui4-map-values-and-sources.png");
         ui4RevisionEvidence["map"]=V.Map("layer",layer,"tile",tile,"actual_reading",reading,"render",map,"highlighted_source_tiles",expectedSources,
-            "hover_or_click_tested",false,"helper_bypass","Set mature/hover tile and invoked existing LockMapInspection/RefreshInspectionMarkers in LateUpdate; no OS input or eligibility/state mutation.");
+            "hover_or_click_tested",false,"helper_bypass","Enabled map numeric labels and invoked existing LockMapInspection/RefreshInspectionMarkers in LateUpdate; no OS input or eligibility/state mutation.");
         ui4RevisionEvidence["screenshots"].Add("ui4-map-values-and-sources.png");
         string firstSource=reading["rows"].Where(Ui4AttributableSource).Select(row=>row["source_tile"].Text).FirstOrDefault(sourceTile=>sourceTile!=tile)??reading["rows"].First(Ui4AttributableSource)["source_tile"].Text;
         Check("ui4_revision_map_locates_a_different_real_source",firstSource!=tile,V.Map("inspected_tile",tile,"source_tile",firstSource));
@@ -195,11 +195,10 @@ public sealed partial class CityInterface {
     }
     public void Ui4EvidenceRenderInspection(string tile){
         if(!Ui4EvidenceEnabled||!Application.isFocused||_inspectionWorld==null||string.IsNullOrEmpty(tile))return;
-        // Deliberately bypass only the input/dwell gates for deterministic render QA.
+        // Deliberately bypass only the Shift input gate for deterministic render QA.
         // The existing data lookup, panel construction, positioning and source highlights run unchanged.
         _inspectionLayer=Layer;_inspectionPhase=MapSourcePhase;_inspectionCity=_cityIdentity;_inspectionSelected=SelectedTile;
-        _inspectionHover=tile;_inspectionMature=true;_inspectionMarkerData=_inspectionWorld.InspectionForTile(tile);
-        _inspectionMarkerRefreshAt=Time.realtimeSinceStartupAsDouble+.15;
+        _mapNumericLabelsVisible=true;_inspectionMarkerData=V.Arr();_inspectionMarkerRefreshAt=0;
         if(_inspectionLock!=tile)LockMapInspection(tile);else RefreshInspectionPanel();
         RefreshInspectionMarkers();
     }

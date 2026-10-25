@@ -8,20 +8,18 @@ using UnityEngine.UI;
 namespace MET.City {
 /// <summary>Read-only map measurements; the simulation and ordinary selection remain authoritative.</summary>
 public sealed partial class CityInterface {
- const float InspectionDelay=2f;
  CityWorld _inspectionWorld;
- string _inspectionSuppressed="";
- string _inspectionHover="",_inspectionLock="",_inspectionLayer="",_inspectionPhase="",_inspectionCity="",_inspectionSelected="",_inspectionSignature="";
- double _inspectionHoverAt,_inspectionNextRefresh;
+ string _inspectionLock="",_inspectionLayer="",_inspectionPhase="",_inspectionCity="",_inspectionSelected="",_inspectionSignature="";
+ double _inspectionNextRefresh;
  double _inspectionMarkerRefreshAt;V _inspectionMarkerData=V.Map();
- bool _inspectionMature;
+ bool _mapNumericLabelsVisible,_mapShiftArmed;
+ public bool MapNumericLabelsVisible=>_mapNumericLabelsVisible;
  RectTransform _inspectionPanel,_inspectionContent;
  ScrollRect _inspectionScroll;
  Button _inspectionSelectedButton;
  readonly List<RectTransform> _inspectionMarkers=new List<RectTransform>();
  readonly List<Text> _inspectionMarkerText=new List<Text>();
  public bool MapInspectionOpen=>_inspectionLock!="";
- public bool MapInspectionPending=>_inspectionHover!=""&&!_inspectionMature;
 
  public void AttachMapInspection(CityWorld world) {
   if(_inspectionWorld==world)return;
@@ -29,14 +27,6 @@ public sealed partial class CityInterface {
   _inspectionWorld=world;
   _inspectionLayer=Layer;_inspectionPhase=MapSourcePhase;_inspectionCity=_cityIdentity;_inspectionSelected=SelectedTile;
   if(world==null||_root==null)return;
-  for(int i=0;i<7;i++) {
-   var marker=Surface("Map measurement",_root,new Color(.018f,.055f,.065f,.90f));
-   marker.GetComponent<Image>().raycastTarget=false;
-   Pin(marker,new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(i==0?126:92,i==0?48:33));
-   var value=Label(marker,"",i==0?15:14,Ink);
-   Stretch(value.rectTransform,5,2,5,2);value.alignment=TextAnchor.MiddleCenter;
-   _inspectionMarkers.Add(marker);_inspectionMarkerText.Add(value);marker.gameObject.SetActive(false);
-  }
   _inspectionPanel=Surface("Map source inspection",_root,new Color(.018f,.05f,.06f,.97f));
   Pin(_inspectionPanel,new Vector2(1,1),new Vector2(1,1),new Vector2(-18,-428),new Vector2(346,482));
   var title=Label(_inspectionPanel,"地格来源",19,Green);
@@ -70,18 +60,19 @@ public sealed partial class CityInterface {
   if(SelectedTile!=""&&!IsModal&&!MapViewing&&!ConstructionIntentActive)LockMapInspection(SelectedTile);
  }
 
- void ResetInspectionHover() {
-  _inspectionHover="";_inspectionMature=false;_inspectionMarkerRefreshAt=0;_inspectionMarkerData=V.Map();
+ void ResetInspectionReadings() {
+  _inspectionMarkerRefreshAt=0;_inspectionMarkerData=V.Map();
   foreach(var marker in _inspectionMarkers)if(marker!=null)marker.gameObject.SetActive(false);
  }
  public void DismissMapInspection() {
-  _inspectionLock="";_inspectionSignature="";ResetInspectionHover();
+  _inspectionLock="";_inspectionSignature="";ResetInspectionReadings();
   if(_inspectionPanel!=null)_inspectionPanel.gameObject.SetActive(false);
   _inspectionWorld?.HighlightInspectionSources(null);
  }
- public void CloseMapInspection(){var tile=_inspectionHover;DismissMapInspection();_inspectionSuppressed=tile;}
+ public void CloseMapInspection(){DismissMapInspection();}
  public bool HandleMapInspectionEscape() {
-  bool visible=MapInspectionOpen||(_inspectionMature&&Layer!="terrain");
+  bool visible=MapInspectionOpen||(_mapNumericLabelsVisible&&Layer!="terrain");
+  _mapNumericLabelsVisible=false;_mapShiftArmed=false;
   CloseMapInspection();return visible;
  }
  public bool TryLockMapInspection(string tile) { return false; }
@@ -92,46 +83,57 @@ public sealed partial class CityInterface {
  }
  public void UpdateMapInspectionInput() {
   if(_inspectionWorld==null||_root==null)return;
-  bool unavailable=!Application.isFocused||IsModal||MapViewing||ConstructionIntentActive;
+  bool unavailable=!Application.isFocused||IsModal||ConstructionIntentActive;
   if(_inspectionSelectedButton!=null)_inspectionSelectedButton.gameObject.SetActive(false);
-  if(unavailable&&(MapInspectionOpen||_inspectionHover!=""))DismissMapInspection();
+  if(unavailable&&MapInspectionOpen)DismissMapInspection();
   if(_inspectionLayer!=Layer||_inspectionPhase!=MapSourcePhase||_inspectionCity!=_cityIdentity) {
    bool cityChanged=_inspectionCity!=_cityIdentity;
    _inspectionLayer=Layer;_inspectionPhase=MapSourcePhase;_inspectionCity=_cityIdentity;
-   ResetInspectionHover();_inspectionSignature="";
+   ResetInspectionReadings();_inspectionSignature="";
    if(cityChanged)DismissMapInspection();
   }
-  if(_inspectionSelected!=SelectedTile){_inspectionSelected=SelectedTile;ResetInspectionHover();}
+  if(_inspectionSelected!=SelectedTile){_inspectionSelected=SelectedTile;ResetInspectionReadings();}
   bool blocked=unavailable||KeyboardOwned;
-  Vector2 pointer=Input.mousePosition;
-  bool motion=(Input.GetMouseButton(0)&&!Input.GetMouseButtonDown(0))||Input.GetMouseButton(1)||Input.GetMouseButton(2)||Input.GetMouseButtonDown(1)||
-      Input.GetMouseButtonDown(2)||Mathf.Abs(Input.mouseScrollDelta.y)>.01f;
-  bool onScreen=pointer.x>=0&&pointer.y>=0&&pointer.x<=Screen.width&&pointer.y<=Screen.height;
-  bool overHud=PointerOwned(pointer);
-  string hovered=!blocked&&!motion&&!overHud&&onScreen?_inspectionWorld.PickTile(pointer):"";
-  if(hovered!=_inspectionSuppressed)_inspectionSuppressed="";
-  if(hovered==_inspectionSuppressed)hovered="";
-  if(hovered!=_inspectionHover) {
-   ResetInspectionHover();_inspectionHover=hovered;_inspectionHoverAt=Time.realtimeSinceStartupAsDouble;
+  // Toggle on release only after a standalone Shift press. A later L (or any
+  // other key/mouse action) cancels it, preserving Shift+L and text ownership.
+  bool shiftDown=Input.GetKeyDown(KeyCode.LeftShift)||Input.GetKeyDown(KeyCode.RightShift);
+  bool shiftHeld=Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift);
+  if(blocked)_mapShiftArmed=false;
+  else {
+   if(shiftDown)_mapShiftArmed=!Input.GetKey(KeyCode.LeftControl)&&!Input.GetKey(KeyCode.RightControl)&&
+       !Input.GetKey(KeyCode.LeftAlt)&&!Input.GetKey(KeyCode.RightAlt)&&!Input.GetKey(KeyCode.LeftCommand)&&!Input.GetKey(KeyCode.RightCommand);
+   if(Input.GetMouseButton(0)||Input.GetMouseButton(1)||Input.GetMouseButton(2))_mapShiftArmed=false;
+   if(_mapShiftArmed&&Input.anyKeyDown)foreach(KeyCode key in Enum.GetValues(typeof(KeyCode)))
+    if(key!=KeyCode.LeftShift&&key!=KeyCode.RightShift&&Input.GetKeyDown(key)){_mapShiftArmed=false;break;}
+   if(_mapShiftArmed&&!shiftHeld) {_mapShiftArmed=false;_mapNumericLabelsVisible=!_mapNumericLabelsVisible;_inspectionMarkerRefreshAt=0;}
   }
-  if(hovered!=""&&!_inspectionMature&&Time.realtimeSinceStartupAsDouble-_inspectionHoverAt>=InspectionDelay)_inspectionMature=true;
-  if(!_inspectionMature||Layer=="terrain")HideInspectionMarkers();
+  if(blocked||!_mapNumericLabelsVisible||Layer=="terrain")HideInspectionMarkers();
   else RefreshInspectionMarkers();
   if(!blocked&&Input.GetKeyDown(KeyCode.I))InspectSelectedTile();
   if(MapInspectionOpen&&Time.realtimeSinceStartupAsDouble>=_inspectionNextRefresh)RefreshInspectionPanel();
  }
  void HideInspectionMarkers(){foreach(var marker in _inspectionMarkers)if(marker!=null)marker.gameObject.SetActive(false);}
  void RefreshInspectionMarkers() {
-  if(_inspectionWorld==null||_inspectionMarkers.Count==0)return;
-  if(_inspectionMarkerData.Count==0||Time.realtimeSinceStartupAsDouble>=_inspectionMarkerRefreshAt){_inspectionMarkerData=_inspectionWorld.InspectionForTile(_inspectionHover);_inspectionMarkerRefreshAt=Time.realtimeSinceStartupAsDouble+.15;}
-  var data=_inspectionMarkerData;
-  PlaceInspectionMarker(0,_inspectionHover,data.Get("available",false).Bool?
-      data.Get("label","").Text+"  "+data.Get("display","无数据").Text:"无数据");
-  int i=1;
-  foreach(var adjacent in data.Get("neighbors",V.Arr())) {
-   if(i>=_inspectionMarkers.Count)break;
-   PlaceInspectionMarker(i++,adjacent.Get("tile","").Text,adjacent.Get("available",false).Bool?
-       adjacent.Get("display","无数据").Text:"无数据");
+  if(_inspectionWorld==null)return;
+  if(_inspectionMarkerData.Count==0||Time.realtimeSinceStartupAsDouble>=_inspectionMarkerRefreshAt) {
+   _inspectionMarkerData=V.Arr();
+   foreach(var tile in _inspectionWorld.InspectionTiles)_inspectionMarkerData.Add(_inspectionWorld.InspectionForTile(tile,false));
+   _inspectionMarkerRefreshAt=Time.realtimeSinceStartupAsDouble+.25;
+  }
+  int i=0;
+  foreach(var data in _inspectionMarkerData) {
+   if(i>=_inspectionMarkers.Count) {
+    var marker=Surface("Map numeric reading",_root,new Color(.012f,.025f,.038f,.96f));
+    marker.GetComponent<Image>().raycastTarget=false;
+    var border=marker.gameObject.AddComponent<Outline>();border.effectColor=new Color(.23f,.63f,.67f,.85f);border.effectDistance=new Vector2(1,-1);
+    Pin(marker,new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(122,32));
+    var text=Label(marker,"",14,Color.white);text.fontStyle=FontStyle.Bold;
+    Stretch(text.rectTransform,5,2,5,2);text.alignment=TextAnchor.MiddleCenter;text.raycastTarget=false;
+    _inspectionMarkers.Add(marker);_inspectionMarkerText.Add(text);
+   }
+   string kind=data.Get("reading_kind","").Text;
+   string prefix=kind=="employment_ratio"?"就业 ":"";
+   PlaceInspectionMarker(i++,data.Get("tile","").Text,data.Get("available",false).Bool?prefix+data.Get("display","无数据").Text:"无数据");
   }
   while(i<_inspectionMarkers.Count)_inspectionMarkers[i++].gameObject.SetActive(false);
  }
@@ -142,7 +144,7 @@ public sealed partial class CityInterface {
      !RectTransformUtility.ScreenPointToLocalPointInRectangle(_root,point,null,out local)) {
    marker.gameObject.SetActive(false);return;
   }
-  marker.gameObject.SetActive(true);marker.anchoredPosition=local+new Vector2(0,index==0?22:16);
+  marker.gameObject.SetActive(true);marker.anchoredPosition=local+new Vector2(0,18);
   _inspectionMarkerText[index].text=caption;
  }
  void RefreshInspectionPanel() {

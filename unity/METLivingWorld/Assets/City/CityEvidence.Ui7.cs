@@ -51,9 +51,13 @@ public sealed partial class CityEvidence {
   Check("ui7_task_common_shows_earned_progress",activeTheme.Get("id","").Text!=""&&(activeTheme.Get("completed",false).Bool?Ui7Text().Any(t=>t.Contains("三个阶段已经完成")):activeTheme["goals"].All(goal=>Ui7Text().Any(t=>t.Contains(goal["label"].Text)))));
   yield return Capture("ui7-task-earned-progress.png");
   Ui7Call("CloseArchive");yield return null;
-  typeof(CityInterface).GetField("_inspectionHover",Ui7Private).SetValue(city.Interface,"0,0");typeof(CityInterface).GetField("_inspectionMature",Ui7Private).SetValue(city.Interface,false);
-  Check("ui7_pending_map_hover_does_not_consume_escape",!city.Interface.HandleMapInspectionEscape()&&!city.Interface.MapInspectionPending);
-  Check("ui7_escape_suppresses_same_map_target",Ui7Field<string>("_inspectionSuppressed")=="0,0");
+  typeof(CityInterface).GetField("_mapNumericLabelsVisible",Ui7Private).SetValue(city.Interface,false);
+  Check("ui7_hidden_map_numbers_do_not_consume_escape",!city.Interface.HandleMapInspectionEscape());
+  string previousLayer=city.Interface.Layer;city.Interface.SetLayer("employment");
+  typeof(CityInterface).GetField("_mapNumericLabelsVisible",Ui7Private).SetValue(city.Interface,true);
+  Check("ui7_visible_map_numbers_consume_escape",city.Interface.HandleMapInspectionEscape());
+  Check("ui7_escape_hides_map_numbers",!city.Interface.MapNumericLabelsVisible);
+  city.Interface.SetLayer(previousLayer);
   yield return Ui7NavigationChecks();
   yield return Ui7HoverChecks();
   yield return Ui7CommonActionChecks();

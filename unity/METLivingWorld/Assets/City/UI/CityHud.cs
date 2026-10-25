@@ -144,7 +144,7 @@ public sealed partial class CityInterface {
         }
         _planningLegend=HudSurface("HUD Layer Source",_root,new Color(.04f,.075f,.10f,.94f));
         Pin(_planningLegend,new Vector2(.5f,0),new Vector2(.5f,0),new Vector2(0,103),new Vector2(560,30));
-        _legend=Label(_planningLegend,"地貌 · 最近周期实际 · L / Shift+L",13,Ink,27);Stretch(_legend.rectTransform,8,1,8,1);_legend.alignment=TextAnchor.MiddleCenter;
+        _legend=Label(_planningLegend,"地貌 · 最近周期实际 · L / Shift+L · Shift 数值",13,Ink,27);Stretch(_legend.rectTransform,8,1,8,1);_legend.alignment=TextAnchor.MiddleCenter;
     }
     void BuildPlanningFooter() {
         _planningRail=HudSurface("HUD Navigation",_root);
@@ -199,7 +199,7 @@ public sealed partial class CityInterface {
         _time.text=clock.Get("date","").Text+" · "+(Runtime.WorldPaused?"已暂停":F(speed,0)+"×");
         _planningClock.text=clock.Get("date","").Text+"\n"+(Runtime.MandatoryPending?"待处理决定":Runtime.WorldPaused?"已暂停":F(speed,0)+"×  运行中");
         _pause.GetComponentInChildren<Text>().text=Runtime.MandatoryPending?"处理":Runtime.WorldPaused?"继续":"暂停";
-        if(_legend!=null)_legend.text=LayerLabel(Layer)+" · "+(MapSourcePhase=="committed"?"最近周期实际":MapSourcePhase=="baseline"?"同一步现状预测":"同一步建成预测")+" · L / Shift+L";
+        if(_legend!=null)_legend.text=LayerLabel(Layer)+" · "+(MapSourcePhase=="committed"?"最近周期实际":MapSourcePhase=="baseline"?"同一步现状预测":"同一步建成预测")+" · L / Shift+L · Shift 数值";
         RefreshPlanningObjective();
         RefreshHudGeometry();
         RenderPlanningStatus();

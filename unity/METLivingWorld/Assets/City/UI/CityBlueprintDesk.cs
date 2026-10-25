@@ -151,18 +151,26 @@ public sealed partial class CityInterface {
   var view=_installView;var box=Card(parent,"安装前后 / "+card["name"].Text,"同一步模拟 · 不提前消耗真实副本",Green);
   Label(box,"安装目标："+(scope=="building"?G.project_name(host)+" · "+G.slot_label(host,slot):G.project_name(host)+" · "+ScopeName(scope)),17,Ink);
   if(!view.Get("ok",false).Bool){Label(box,view.Get("error","当前不能安装。").Text,18,Gold);return;}
-  if(view["stat_rows"].Count>0)Label(box,scope=="building"?"本楼规则变化":"所选范围规则变化",17,Muted);
-  foreach(var adverse in new[]{false,true}){var changes=view["stat_rows"].Where(e=>BlueprintAdverse(e["field"].Text,e["before"].Double,e["after"].Double)==adverse).ToArray();if(changes.Length>0)Label(box,adverse?"代价与负向变化":"收益与正向变化",18,adverse?Gold:Green);foreach(var changed in changes){var e=changed;var line=Row(box,"Actual Rule Difference",40);Label(line,Stat(e["field"].Text),16,Muted);var b=Button(line,F(e["before"].Double,3)+" → "+F(e["after"].Double,3),()=>{});b.GetComponentInChildren<Text>().color=BlueprintAdverse(e["field"].Text,e["before"].Double,e["after"].Double)?Gold:Green;Height((RectTransform)b.transform,36*TextScale);AddDeskTip(b.gameObject,Stat(e["field"].Text)+" / 真实乘区",()=>ExplainBlueprintTrace(view,e["field"].Text));b.onClick.AddListener(()=>ShowDeskTip(b.GetComponent<CityDeskTooltip>(),true));}}
-  Label(box,"全城同一步预测",17,Muted);
-  var step=view["same_step"];var cash=step["cashflow"];Metric(box,"经营净额",F(cash["before"].Double,2)+" → "+F(cash["after"].Double,2)+" /月","",cash["after"].Double<cash["before"].Double?Gold:Green);
-  var energy=step["energy_need"];Metric(box,"用电需求",F(energy["before"].Double,2)+" → "+F(energy["after"].Double,2),"",energy["after"].Double>energy["before"].Double?Gold:Green);
-  foreach(var kind in step["services"].Keys){var pair=step["services"][kind];if(Math.Abs(pair["after"].Double-pair["before"].Double)>.00001)Metric(box,Service(kind)+"实际人数",F(pair["before"].Double,2)+" → "+F(pair["after"].Double,2));}
-  var supply=step["energy_supply"];Metric(box,"电力供给容量",F(supply["before"].Double,2)+" → "+F(supply["after"].Double,2));
+  var changedStats=view["stat_rows"].Where(e=>BlueprintVisibleChange(e["before"].Double,e["after"].Double,3)).ToArray();
+  if(changedStats.Length>0)Label(box,scope=="building"?"本楼规则变化":"所选范围规则变化",17,Muted);
+  foreach(var adverse in new[]{false,true}){var changes=changedStats.Where(e=>BlueprintAdverse(e["field"].Text,e["before"].Double,e["after"].Double)==adverse).ToArray();if(changes.Length>0)Label(box,adverse?"代价与负向变化":"收益与正向变化",18,adverse?Gold:Green);foreach(var changed in changes){var e=changed;var line=Row(box,"Actual Rule Difference",40);Label(line,Stat(e["field"].Text),16,Muted);var b=Button(line,F(e["before"].Double,3)+" → "+F(e["after"].Double,3),()=>{});b.GetComponentInChildren<Text>().color=BlueprintAdverse(e["field"].Text,e["before"].Double,e["after"].Double)?Gold:Green;Height((RectTransform)b.transform,36*TextScale);AddDeskTip(b.gameObject,Stat(e["field"].Text)+" / 真实乘区",()=>ExplainBlueprintTrace(view,e["field"].Text));b.onClick.AddListener(()=>ShowDeskTip(b.GetComponent<CityDeskTooltip>(),true));}}
+  Label(box,"全城同一步预测 · 仅显示变化",17,Muted);
+  int predictionChanges=0;var step=view["same_step"];
+  foreach(var measure in new[]{new[]{"cashflow","经营净额"," /月"},new[]{"energy_need","用电需求",""},new[]{"energy_supply","电力供给容量",""}}){var pair=step[measure[0]];var adverse=measure[0]=="energy_need"?pair["after"].Double>pair["before"].Double:pair["after"].Double<pair["before"].Double;if(BlueprintChangedMetric(box,measure[1],pair["before"].Double,pair["after"].Double,2,measure[2],adverse?Gold:Green))predictionChanges++;}
+  foreach(var kind in step["services"].Keys){var pair=step["services"][kind];if(BlueprintChangedMetric(box,Service(kind)+"实际人数",pair["before"].Double,pair["after"].Double,2))predictionChanges++;}
   var baseline=view["baseline"];var proposal=view["proposal"];var months=step["months"].Double;
-  foreach(var resource in step.Get("resource_outputs",V.Map()).Keys){var before=baseline["audit"].Get("resources",V.Map()).Get(resource,V.Map());var after=proposal["audit"].Get("resources",V.Map()).Get(resource,V.Map());var resourceCard=Card(box,Resource(resource),"当前库存 "+F(G.inventory_total(resource),3),Blue);foreach(var measure in new[]{new[]{"produced","月产出"},new[]{"consumed","月消耗"},new[]{"lost","月溢出损失"}})Metric(resourceCard,measure[1],F(before.Get(measure[0],0).Double/months,3)+" → "+F(after.Get(measure[0],0).Double/months,3));Metric(resourceCard,"步末库存",F(before.Get("after",0).Double,3)+" → "+F(after.Get("after",0).Double,3));}
-  foreach(var field in new[]{new[]{"heat_used","实际余热利用"},new[]{"pollution_recycled","实际污染回收"}}){var before=baseline["metrics"].Get(field[0],0).Double;var after=proposal["metrics"].Get(field[0],0).Double;Metric(box,field[1],F(before,3)+" → "+F(after,3));}
+  foreach(var resource in step.Get("resource_outputs",V.Map()).Keys){
+   var before=baseline["audit"].Get("resources",V.Map()).Get(resource,V.Map());var after=proposal["audit"].Get("resources",V.Map()).Get(resource,V.Map());
+   var measures=new[]{new[]{"produced","月产出"},new[]{"consumed","月消耗"},new[]{"lost","月溢出损失"},new[]{"after","步末库存"}};
+   var changed=measures.Where(measure=>BlueprintVisibleChange(before.Get(measure[0],0).Double/(measure[0]=="after"?1:months),after.Get(measure[0],0).Double/(measure[0]=="after"?1:months),3)).ToArray();
+   if(changed.Length==0)continue;
+   var resourceCard=Card(box,Resource(resource),"",Blue);
+   foreach(var measure in changed){double divisor=measure[0]=="after"?1:months;if(BlueprintChangedMetric(resourceCard,measure[1],before.Get(measure[0],0).Double/divisor,after.Get(measure[0],0).Double/divisor,3))predictionChanges++;}
+  }
+  foreach(var field in new[]{new[]{"heat_used","实际余热利用"},new[]{"pollution_recycled","实际污染回收"}}){var before=baseline["metrics"].Get(field[0],0).Double;var after=proposal["metrics"].Get(field[0],0).Double;if(BlueprintChangedMetric(box,field[1],before,after,3))predictionChanges++;}
+  foreach(var service in step.Get("service_capacity",V.Map()).Keys){var pair=step["service_capacity"][service];if(BlueprintChangedMetric(box,Service(service)+"供给容量",pair["before"].Double,pair["after"].Double,2))predictionChanges++;}
+  if(predictionChanges==0)Label(box,"当前同一步预测无可见数值变化；规则与适用条件可展开来源查看。",16,Muted);
 
-  foreach(var service in step.Get("service_capacity",V.Map()).Keys){var pair=step["service_capacity"][service];Metric(box,Service(service)+"供给容量",F(pair["before"].Double,2)+" → "+F(pair["after"].Double,2));}
   Metric(box,"未安装副本",view["before_copies"].Long+" → "+view["after_copies"].Long);
   Fold(box,"安装实例与来源",deep=>{Raw(deep,view["before_instance_records"]);Raw(deep,view["after_instance_records"]);});
   string old=scope=="building"?S["projects"][host]["slots"].Get(slot,"").Text:"";
@@ -174,6 +182,12 @@ public sealed partial class CityInterface {
    _blueprintBusy=false;_blueprintVersion="";_installView=V.Map();if(error!=""){RenderPage();return;}PlayCue("confirm");RefreshBucket();if(scope=="building"){SelectBuilding(host);Navigate("building",host);}else {RenderPage();ShowMessage("方案已部署到"+G.project_name(host)+" · "+ScopeName(scope));}
   },_blueprintBusy||!Runtime.ViewCanEditFocused);
   Fold(box,"完整效果、代价与来源",deep=>{foreach(var stat in view["stat_rows"])Label(deep,Stat(stat["field"].Text)+" "+F(stat["before"].Double,4)+" → "+F(stat["after"].Double,4),15,Muted);Raw(deep,view["rule_trace"]);Raw(deep,view["same_step"]);});
+ }
+ // Compare at the precision actually shown, so rounding does not produce unchanged rows.
+ bool BlueprintVisibleChange(double before,double after,int digits)=>F(before==0?0:before,digits)!=F(after==0?0:after,digits)&&Math.Round(before,digits)!=Math.Round(after,digits);
+ bool BlueprintChangedMetric(Transform parent,string title,double before,double after,int digits,string unit="",Color? color=null){
+  if(!BlueprintVisibleChange(before,after,digits))return false;
+  Metric(parent,title,F(before,digits)+" → "+F(after,digits)+unit,"",color);return true;
  }
  bool BlueprintAdverse(string field,double before,double after){
   bool cost=field=="pollution"||field=="energy_demand"||field=="maintenance"||field=="service_decay"||
