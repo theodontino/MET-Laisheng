@@ -1,0 +1,462 @@
+{
+  "ok": true,
+  "scope": "Actual macOS Unity Player, original city scene; synthetic UI navigation-submit events, not human mouse acceptance or gameplay judgement",
+  "resolution": "2560x1440",
+  "graphics": "Apple M5 Max",
+  "checks": [
+    {
+      "name": "original city renderer ready",
+      "passed": true
+    },
+    {
+      "name": "isolated starting fixture paused",
+      "passed": true
+    },
+    {
+      "name": "2K Player capture: 01-existing-map",
+      "passed": true
+    },
+    {
+      "name": "Toolkit replaces only upgrade route",
+      "passed": true
+    },
+    {
+      "name": "modal owns map and pauses runtime",
+      "passed": true
+    },
+    {
+      "name": "opening preview preserves session including RNG",
+      "passed": true
+    },
+    {
+      "name": "city changes initially folded",
+      "passed": true
+    },
+    {
+      "name": "2K Player capture: 02-toolkit-default",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:1915.00, y:1194.00, width:170.00, height:63.00) scroll=(x:441.00, y:306.00, width:1678.00, height:865.00) window=(x:440.00, y:160.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "Toolkit control enabled: candidate-agriculture",
+      "passed": true
+    },
+    {
+      "name": "selecting candidate preserves live city",
+      "passed": true
+    },
+    {
+      "name": "selected alternative highlighted",
+      "passed": true
+    },
+    {
+      "name": "2K Player capture: 03-alternative",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:2235.00, y:1373.75, width:170.00, height:62.50) scroll=(x:761.25, y:488.75, width:1677.50, height:861.25) window=(x:760.00, y:340.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:2226.25, y:1361.25, width:178.75, height:71.25) scroll=(x:761.25, y:510.00, width:1677.50, height:822.50) window=(x:760.00, y:340.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:2200.00, y:1347.50, width:205.00, height:80.00) scroll=(x:761.25, y:530.00, width:1677.50, height:785.00) window=(x:760.00, y:340.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:1915.00, y:1194.00, width:170.00, height:63.00) scroll=(x:441.00, y:306.00, width:1678.00, height:865.00) window=(x:440.00, y:160.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:1906.00, y:1181.00, width:179.00, height:72.00) scroll=(x:441.00, y:326.00, width:1678.00, height:828.00) window=(x:440.00, y:160.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:1880.00, y:1168.00, width:205.00, height:81.00) scroll=(x:441.00, y:348.00, width:1678.00, height:788.00) window=(x:440.00, y:160.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:1701.67, y:1074.17, width:170.00, height:63.33) scroll=(x:227.50, y:183.33, width:1678.33, height:868.33) window=(x:226.67, y:40.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:1692.50, y:1060.83, width:179.17, height:72.50) scroll=(x:227.50, y:205.00, width:1678.33, height:829.17) window=(x:226.67, y:40.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "measured Toolkit window",
+      "passed": true
+    },
+    {
+      "name": "window within panel",
+      "passed": true
+    },
+    {
+      "name": "confirm fixed outside scroll content: footer=(x:1667.50, y:1048.33, width:204.17, height:80.83) scroll=(x:227.50, y:226.67, width:1678.33, height:790.00) window=(x:226.67, y:40.00, width:1680.00, height:1120.00)",
+      "passed": true
+    },
+    {
+      "name": "bundled Chinese font",
+      "passed": true
+    },
+    {
+      "name": "measured title",
+      "passed": true
+    },
+    {
+      "name": "opaque dark Toolkit stylesheet applied",
+      "passed": true
+    },
+    {
+      "name": "candidates compare horizontally",
+      "passed": true
+    },
+    {
+      "name": "vertical scrolling only",
+      "passed": true
+    },
+    {
+      "name": "2K Player capture: 04-large-type",
+      "passed": true
+    },
+    {
+      "name": "expanded comparison scrolls to final row",
+      "passed": true
+    },
+    {
+      "name": "2K Player capture: 05-city-comparison",
+      "passed": true
+    },
+    {
+      "name": "Toolkit control enabled: upgrade-cancel",
+      "passed": true
+    },
+    {
+      "name": "cancel releases ownership",
+      "passed": true
+    },
+    {
+      "name": "cancel did not charge or draw RNG",
+      "passed": true
+    },
+    {
+      "name": "cancel retains tile",
+      "passed": true
+    },
+    {
+      "name": "cancel restores city overview while paused",
+      "passed": true
+    },
+    {
+      "name": "reopen restores clean viewport",
+      "passed": true
+    },
+    {
+      "name": "Toolkit control enabled: upgrade-confirm",
+      "passed": true
+    },
+    {
+      "name": "successful command closes modal",
+      "passed": true
+    },
+    {
+      "name": "exactly one confirmed payment",
+      "passed": true
+    },
+    {
+      "name": "existing upgrade command joined real queue",
+      "passed": true
+    },
+    {
+      "name": "city validates after command",
+      "passed": true
+    },
+    {
+      "name": "confirmed command restores city overview while paused",
+      "passed": true
+    },
+    {
+      "name": "2K Player capture: 06-upgrade-started",
+      "passed": true
+    },
+    {
+      "name": "in-progress project cannot submit duplicate",
+      "passed": true
+    },
+    {
+      "name": "2K Player capture: 07-in-progress-constraint",
+      "passed": true
+    },
+    {
+      "name": "legacy upgrade remains switchable",
+      "passed": true
+    }
+  ],
+  "captures": [
+    "01-existing-map.png",
+    "02-toolkit-default.png",
+    "03-alternative.png",
+    "04-large-type.png",
+    "05-city-comparison.png",
+    "06-upgrade-started.png",
+    "07-in-progress-constraint.png"
+  ],
+  "errors": []
+}

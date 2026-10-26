@@ -254,7 +254,7 @@ public sealed partial class CityInterface {
         if(_planningLegend!=null)Pin(_planningLegend,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap+layerHeight+4),new Vector2(layerWidth,(Layer=="terrain"?28:76)*font));
         if(_planningToastSurface!=null)Pin(_planningToastSurface,new Vector2(0,0),new Vector2(.5f,0),new Vector2(layerX,gap+layerHeight+8+(Layer=="terrain"?28:76)*font),new Vector2(Mathf.Min(layerSpace,780),45));
         if(_planningOverview!=null&&_guidanceTitle!=null){
-            _planningOverview.gameObject.SetActive((!_archiveOpen||CompactWorkspaceOpen)&&!ObjectDrawerVisible&&!ConstructionWindowOpen);_planningOverviewBody.gameObject.SetActive(_planningOverviewOpen);
+            _planningOverview.gameObject.SetActive((!_archiveOpen||CompactWorkspaceOpen)&&!ObjectDrawerVisible&&!ToolkitUpgradeOpen&&!ConstructionWindowOpen);_planningOverviewBody.gameObject.SetActive(_planningOverviewOpen);
             float titleHeight=HudMeasuredHeight(_guidanceTitle,312,36*font),reasonHeight=HudMeasuredHeight(_guidanceReason,312,46*font);
             Height(_guidanceTitle.rectTransform,titleHeight);Height(_guidanceReason.rectTransform,reasonHeight);Height((RectTransform)_guidanceButton.transform,43*font);
             Pin(_planningOverview,new Vector2(1,1),new Vector2(1,1),new Vector2(-gap,-navY),new Vector2(350,_planningOverviewOpen?120*font+titleHeight+reasonHeight+100*font:120*font));

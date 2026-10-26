@@ -48,6 +48,7 @@ public static class CityProject {
         Directory.CreateDirectory("Assets/Scenes");
         Directory.CreateDirectory("Assets/Resources/Rendering");
         AssetDatabase.Refresh();
+        CityToolkitAssets.Prepare();
         var renderer = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(RendererPath);
         if (renderer == null) {
             renderer = ScriptableObject.CreateInstance<UniversalRendererData>();
@@ -91,7 +92,7 @@ public static class CityProject {
             Require(road!=null&&road.shader!=null&&!ShaderUtil.ShaderHasError(road.shader),"Road surface shader failed: "+style);
         }
         PlayerSettings.companyName = "MET"; PlayerSettings.productName = "MET 来生 Unity Beta";
-        PlayerSettings.bundleVersion = "0.7.0-ui.15";
+        PlayerSettings.bundleVersion = "0.7.0-wild-g0.1";
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, "com.projectmet.laisheng.unitybeta");
         PlayerSettings.colorSpace = ColorSpace.Linear;
         PlayerSettings.defaultScreenWidth = 2560; PlayerSettings.defaultScreenHeight = 1440;

@@ -27,7 +27,7 @@ public sealed partial class CityInterface {
  void RefreshTilePanel(){
   if(_context==null)return;if(PointerBusy){_contextDirty=true;return;}_contextDirty=false;
   if(_renderedTile!=""&&_context.gameObject.activeSelf)_tilePositions[_renderedTile]=_tileScroll.verticalNormalizedPosition;
-  bool visible=(!_archiveOpen||_mapFromCompact)&&(!_mapViewing||_mapFromCompact)&&!ConstructionWindowOpen&&SelectedTile!=""&&S["cells"].Has(SelectedTile);
+  bool visible=(!_archiveOpen||_mapFromCompact)&&(!_mapViewing||_mapFromCompact)&&!ToolkitUpgradeOpen&&!ConstructionWindowOpen&&SelectedTile!=""&&S["cells"].Has(SelectedTile);
   _context.gameObject.SetActive(visible);if(!visible)return;
   _tileSummary=TileSummary.describe(G,SelectedTile);_tileEnergy=MapInspection.Describe(S,SelectedTile,"energy",includeNeighbors:false);string key=ContextDisplayKey();if(key==_contextKey)return;
   ContextRebuildCount++;Clear(_tileHeader);Clear(_tileBody);Clear(_tileFooter);_tileBody.name="Local facts "+SelectedTile;

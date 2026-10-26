@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Button name="candidate-button" class="upgrade-candidate">
+    <ui:VisualElement class="candidate-heading"><ui:Label name="candidate-title" class="text-heading wrap candidate-title" /><ui:Label name="candidate-tier" class="tier-badge text-small" /></ui:VisualElement>
+    <ui:Label name="candidate-traits" class="wrap text-small candidate-traits" />
+    <ui:Label name="candidate-slots" class="wrap text-micro muted candidate-slots" />
+    <ui:VisualElement class="candidate-bottom"><ui:Label name="candidate-cost" class="text-micro wrap candidate-cost" /><ui:Label name="candidate-status" class="text-micro candidate-status" /></ui:VisualElement>
+  </ui:Button>
+</ui:UXML>

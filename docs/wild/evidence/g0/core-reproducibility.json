@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "compared_fields": [
+    "commands",
+    "completion_observations",
+    "minute_trace",
+    "opportunity_observations",
+    "dt_spent",
+    "simulation_steps",
+    "submitted_segments"
+  ],
+  "complete_final_city_equal": true,
+  "run_a": "build/wild-g0",
+  "run_b": "build/wild-g0/repeat"
+}

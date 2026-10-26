@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement name="stat-row" class="stat-row">
+    <ui:Label name="stat-label" class="stat-label wrap" />
+    <ui:Label name="stat-before" class="stat-before wrap muted" />
+    <ui:Label name="stat-after" class="stat-after wrap" />
+    <ui:Label name="stat-delta" class="stat-delta wrap" />
+    <ui:Label name="stat-unit" class="stat-unit wrap text-small muted" />
+  </ui:VisualElement>
+</ui:UXML>

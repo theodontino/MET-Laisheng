@@ -1,0 +1,26 @@
+{
+  "seed": 20261026,
+  "utc": 0,
+  "landing": 0,
+  "specialization": "balanced",
+  "origin": "free",
+  "duration_active_seconds": 720,
+  "speed": "advance",
+  "scheduled_builds": [
+    {
+      "active_second": 0,
+      "base": "homestead"
+    },
+    {
+      "active_second": 180,
+      "base": "workshop"
+    },
+    {
+      "active_second": 360,
+      "base": "neighborhood"
+    }
+  ],
+  "offer_policy": "first offered operator",
+  "tile_policy": "empty dry land nearest 0,1 then ordinal tile id",
+  "initial_paused": true
+}
