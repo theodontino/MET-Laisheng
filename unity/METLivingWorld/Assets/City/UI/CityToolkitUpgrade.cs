@@ -10,7 +10,7 @@ public sealed partial class CityInterface {
  string _toolkitBuilding="",_toolkitChoice="",_toolkitVersion="",_toolkitError="";
  bool _toolkitSubmitting;
  GameObject _toolkitPreviousFocus;
- public bool ToolkitUpgradeOpen=>_toolkitUpgrade!=null&&_toolkitUpgrade.IsOpen;
+ public bool ToolkitUpgradeOpen=>WildStarOpen||(_toolkitUpgrade!=null&&_toolkitUpgrade.IsOpen);
  public UpgradeToolkitView ToolkitUpgradeView=>_toolkitUpgrade;
  public bool ToolkitUpgradeEnabled=>Runtime.DisplaySettings.Get("toolkit_upgrade",false).Bool;
  public void SetToolkitUpgradeEnabled(bool enabled){Runtime.SetDisplaySetting("toolkit_upgrade",enabled);}
@@ -29,6 +29,7 @@ public sealed partial class CityInterface {
   RefreshModalOwnership();RefreshHudGeometry();SelectionChanged?.Invoke(SelectedTile,SelectedBuilding);
  }
  public void CloseToolkitUpgrade(){
+  if(WildStarOpen){CloseWildStar();return;}
   if(!ToolkitUpgradeOpen)return;
   _toolkitUpgrade.Hide();_toolkitSubmitting=false;
   Runtime.SetDecisionOpen(_archiveOpen||ObjectDrawerOpen||ConstructionWindowOpen);
@@ -37,7 +38,7 @@ public sealed partial class CityInterface {
   _toolkitPreviousFocus=null;SelectionChanged?.Invoke(SelectedTile,SelectedBuilding);
  }
  void ApplyToolkitDisplay(){if(_toolkitUpgrade!=null)_toolkitUpgrade.ApplyDisplay((float)Runtime.DisplaySettings.Get("ui_scale",1).Double,TextScale,Runtime.DisplaySettings.Get("high_contrast",false).Bool);}
- void RefreshToolkitUpgrade(){if(ToolkitUpgradeOpen&&!_toolkitSubmitting){ApplyToolkitDisplay();_toolkitUpgrade.Refresh(ToolkitUpgradeModel());}}
+ void RefreshToolkitUpgrade(){if(WildStarOpen){RefreshWildStar();return;}if(ToolkitUpgradeOpen&&!_toolkitSubmitting){ApplyToolkitDisplay();_toolkitUpgrade.Refresh(ToolkitUpgradeModel());}}
  void SubmitToolkitUpgrade(){
   if(!ToolkitUpgradeOpen||_toolkitSubmitting)return;
   var id=_toolkitBuilding;var choice=_toolkitChoice;var expected=_toolkitVersion;

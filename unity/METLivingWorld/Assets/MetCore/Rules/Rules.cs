@@ -121,7 +121,7 @@ public static class Rules {
         else foreach(var id in ids(s["projects"])) {
             var p=s["projects"][id];
             if(p.Get("special",false).Bool&&!rule.Get("include_special",false).Bool)continue;
-            if(ht=="organization"&&(p["operator_org"].Text!=host||p.Get("operator_unresolved",false).Bool))continue;
+            if(ht=="organization"&&(p["operator_org"].Text!=host||p.Get("operator_unresolved",false).Bool||p.Has("wild_design")))continue;
             if(any_trait(semantic_traits(s,id.Text),context.Get("eligibility",V.Arr())))sources.Add(id);
         }
         var result=V.Map();var shape=rule.Get("targets","self").Text;
@@ -140,13 +140,14 @@ public static class Rules {
             }
         }
         var rows=V.Arr();
-        foreach(var target in ids(result))if(condition(s,target.Text,rule.Get("when",V.Map()),result[target].Text,context.Get("provider","").Text))rows.Add(V.Map("id",target,"source_id",result[target]));
+        foreach(var target in ids(result))if(!(ht=="organization"&&s["projects"][target].Has("wild_design"))&&condition(s,target.Text,rule.Get("when",V.Map()),result[target].Text,context.Get("provider","").Text))rows.Add(V.Map("id",target,"source_id",result[target]));
         return rows;
     }
     public static V compile(Game g) {
         var s=g.s;var c=g.c;var contexts=V.Arr();var stats=V.Map();var configs=V.Map();var recipes=V.Map();var emitters=V.Map();var trace=V.Map();var numeric=V.Map();var transforms=V.Map();var options=V.Map();
         foreach(var id in ids(s["projects"])) {
             var p=s["projects"][id];stats[id]=c.projects.Has(p["def"])?c.projects[p["def"]]["stats"].Duplicate(true):p["base_stats"].Duplicate(true);
+            WildDesign.ApplyStats(g,p,stats[id]);
             if(p.Get("upgrade_job",V.Map()).Count>0) {
                 var factor=c.v040["progression"]["upgrade_operation_factor"].Double;stats[id]["efficiency"]*=factor;
                 foreach(var key in stats[id].Keys)if(key.StartsWith("service.",StringComparison.Ordinal)||key=="output.energy")stats[id][key]*=factor;
@@ -157,6 +158,7 @@ public static class Rules {
                 if(advanced>0)stats[id]["storage.advanced_components"]=advanced;
             }
             configs[id]=V.Map();recipes[id]=V.Arr();emitters[id]=V.Arr();trace[id]=V.Map();numeric[id]=V.Map();transforms[id]=V.Arr();
+            if(WildDesign.IsFarm(g,p))foreach(var key in new[]{"housing","output.food"})trace[id][key]=V.Map("base",c.wild["forms"][p["def"]][key=="housing"?"housing":"food"],"value",stats[id][key],"rules",V.Arr(V.Map("source","Wild 当前形态基础值与已完成百分比构筑","mode","additive_percentage","value",stats[id][key])));
             foreach(var r in p.Get("retained_storage",V.Map()).Keys)stats[id]["retained_storage."+r]=p["retained_storage"][r].Double;
         }
         contexts.Add(V.Map("host_type","block","host",s["block"]["id"],"rules",c.data["world_rules"],"specificity",0,"name","基础世界","provider","","uid","world","eligibility",V.Arr()));
@@ -223,7 +225,7 @@ public static class Rules {
         }
         foreach(var id in ids(stats)) {
             foreach(var k in ids(numeric[id])) {
-                var result=reduce_number(stats[id].Get(k,0).Double,numeric[id][k]);stats[id][k]=result["value"];trace[id][k]=result;
+                var result=reduce_number(stats[id].Get(k,0).Double,numeric[id][k]);if(WildDesign.IsFarm(g,s["projects"][id])&&trace[id].Has(k))result["wild_basis"]=trace[id][k].Duplicate(true);stats[id][k]=result["value"];trace[id][k]=result;
             }
             foreach(var k in ids(configs[id]))configs[id][k]=configs[id][k]["value"];
             foreach(var r in transforms[id])switch(r["op"].Text) {
@@ -251,7 +253,7 @@ public static class Rules {
                 stats[id]["efficiency"]*=1+count;
                 trace[id]["spatial_synergy"]=V.Map("base",1.0,"value",1+count,"contributors",contributors,"rules",V.Arr(V.Map("source","相邻建筑关系","mode","multiply","value",1+count)));
             }
-            if(!s["projects"][id].Get("special",false).Bool&&g.cohesion(id.Text)["active"].Bool) {
+            if(!s["projects"][id].Get("special",false).Bool&&!WildDesign.IsFarm(g,s["projects"][id])&&g.cohesion(id.Text)["active"].Bool) {
                 var reward=c.operators[s["projects"][id]["operator_org"]].Get("cohesion_efficiency",.03).Double;stats[id]["efficiency"]*=1+reward;
                 trace[id]["cohesion"]=V.Map("base",1.0,"value",1+reward,"rules",V.Arr(V.Map("source","整套自营方案","mode","multiply","value",1+reward)));
             }

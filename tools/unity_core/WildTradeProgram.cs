@@ -1,0 +1,43 @@
+using System;
+using System.Linq;
+using MET.Core;
+// Focused settlement fixture. Freight and stock are explicitly staged so this
+// checks exact settlement/purchase invariants, not early-game freight pacing.
+class WildTradeProgram {
+ static int checks;
+ static void Check(bool ok,string label){if(!ok)throw new Exception(label);checks++;Console.WriteLine("PASS "+label);}
+ static void Near(double actual,double expected,string label)=>Check(Math.Abs(actual-expected)<1e-6*Math.Max(1,Math.Abs(expected)),label+" ("+actual+" / "+expected+")");
+ static void Command(string error,string label)=>Check(error=="",label+(error==""?"":": "+error));
+ static string Cell(Game g)=>Rules.ids(g.s["cells"]).First(x=>!g.s["cells"][x]["traits"].Contains("tile.water")&&g.s["cells"][x]["building"].Text=="").Text;
+ static void Origin(CitySession city){var old=city.FocusedGame.snapshot();Command(city.FocusedGame.choose_origin(city.FocusedGame.s["origin_choices"][0].Text),"choose existing origin");city.AfterLocalCommand(old);}
+ static void Settle(CitySession city,double seconds){city.SettleNetwork(seconds);city.s["external_seconds"]+=seconds;}
+ static V LastOrder(Game g)=>g.s["block"]["trade_orders"][-1];
+ static void Main(string[] args){
+  var c=new Catalog(args[0]);var city=new CitySession(c);Command(city.BeginDistrict(0,"balanced"),"start original district");Origin(city);var g=city.FocusedGame;
+  var unenabled=city.snapshot().ToJson(sortKeys:true);Check(!city.WildView()["enabled"].Bool,"old city remains outside Wild until explicit enable");city.WildView();Check(city.snapshot().ToJson(sortKeys:true)==unenabled,"disabled Wild view is read only");
+  Command(city.EnableWild(),"explicitly enable focused Wild block");var beforeEnable=city.snapshot().ToJson(sortKeys:true);Command(city.EnableWild(),"repeat enable succeeds");Check(city.snapshot().ToJson(sortKeys:true)==beforeEnable,"repeat enable does not duplicate stock or history");
+  Check(Market.order(g,"material","sell",10,0,CitySession.WildHopeCounterparty)!="","starter cannot bypass existing freight requirement");
+  var freight=g.create_building("freight",Cell(g),"civic",true);freight["usage"]=1;g.refresh_metrics();freight["usage"]=1;
+  string existingFarm=g.create_building("homestead",Cell(g),"civic",true)["id"].Text;g.refresh_metrics();double existingCapacity=WildDesign.View(g,existingFarm)["capacity"]["total"].Double;
+  g.s["projects"]["municipal"]["inventory"]["material"]=100;g.s["projects"]["municipal"]["inventory"]["goods"]=20;g.s["currency"]=200;city.ApplyWorldEffects();
+  Check(city.BuyWildHousing()!="","purchase blocked before actual exports");
+  Command(Market.order(g,"material","sell",10,100000,CitySession.WildHopeCounterparty),"open noncrossing Hope order");var cancelled=LastOrder(g);Settle(city,3600);Near(city.WildView()["material_exported"].Double,0,"unfilled order does not grant eligibility");Command(Market.cancel(g,cancelled["id"].Text),"cancel unfilled order");Settle(city,3600);Near(city.WildView()["material_exported"].Double,0,"cancelled order does not grant eligibility");
+  Command(Market.order(g,"material","sell",2,0),"ordinary market export");Settle(city,3600);Near(LastOrder(g)["filled"].Double,2,"ordinary market export actually fills");Near(city.WildView()["material_exported"].Double,0,"untagged market exports do not count for Hope");
+  Command(Market.order(g,"material","sell",2,0,"other"),"other counterparty material export");Settle(city,3600);Near(LastOrder(g)["filled"].Double,2,"other counterparty export actually fills");Near(city.WildView()["material_exported"].Double,0,"other counterparty does not count for Hope");
+  Command(Market.order(g,"goods","sell",1,0,CitySession.WildHopeCounterparty),"Hope goods export");Settle(city,3600);Near(LastOrder(g)["filled"].Double,1,"Hope goods export actually fills");Near(city.WildView()["material_exported"].Double,0,"other resource exports do not count");
+  Command(Market.order(g,"material","buy",1,100,CitySession.WildHopeCounterparty),"Hope material import");Settle(city,3600);Near(LastOrder(g)["filled"].Double,1,"Hope import actually fills");Near(city.WildView()["material_exported"].Double,0,"imports do not count");
+  double stock=g.inventory_total("material");Command(Market.order(g,"material","sell",10,0,CitySession.WildHopeCounterparty),"real Hope material sell");string order=LastOrder(g)["id"].Text;double cap=Math.Min(Market._total_capacity(g),city.s["world_market"]["capacity_per_hour"].Double);Settle(city,3600/cap*3);
+  Near(city.WildView()["material_exported"].Double,3,"partial fill counts only actual shipped quantity");Near(stock-g.inventory_total("material"),3,"partial fill withdraws material once");Check(!city.WildView()["can_purchase"].Bool,"partial fill below requirement stays locked");
+  Check(g.s["block"]["trade_history"][-1]["counterparty"].Text==CitySession.WildHopeCounterparty,"actual history identifies Hope counterparty");Check(city.s["network"]["last_tick"]["outside_trades"][-1]["counterparty"].Text==CitySession.WildHopeCounterparty,"real-time network receipt identifies Hope counterparty");
+  var restored=new CitySession(c);Command(restored.Restore(city.snapshot()),"restore partial export city");city=restored;g=city.FocusedGame;cap=Math.Min(Market._total_capacity(g),city.s["world_market"]["capacity_per_hour"].Double);Settle(city,3600/cap*7);Near(city.WildView()["material_exported"].Double,10,"post-restore fill accumulates exact remaining exports");Near(city.WildView()["eligibility_history"].Count,1,"threshold produces one retained eligibility record");
+  var readonlyState=city.snapshot().ToJson(sortKeys:true);city.WildView();city.WildView();Check(city.snapshot().ToJson(sortKeys:true)==readonlyState,"eligible Wild view does not mutate live state");
+  g.s["currency"]=59;Check(city.BuyWildHousing()!="","eligible purchase still requires actual currency");g.s["currency"]=200;double paidStock=g.inventory_total("material");Command(city.BuyWildHousing(),"buy HousingDesignI with 60 actual currency");Near(g.s["currency"].Double,140,"purchase charges exactly 60 currency");Near(g.inventory_total("material"),paidStock,"purchase does not re-deduct exported material");Near(city.s["wild_technology"]["housing_levels"].Long,1,"city owns one housing technology level");Near(g.world_effects["wild_housing_levels"].Long,1,"existing block receives city technology projection");
+  var purchased=city.snapshot().ToJson(sortKeys:true);Check(city.BuyWildHousing()!="","duplicate purchase refused");Check(city.snapshot().ToJson(sortKeys:true)==purchased,"duplicate purchase changes no wallet or history");city.ApplyWorldEffects();city.ApplyWorldEffects();Near(g.world_effects["wild_housing_levels"].Long,1,"repeated projection does not stack technology levels");
+  Near(WildDesign.View(g,existingFarm)["capacity"]["total"].Double,existingCapacity+2,"existing building receives exactly two city DP");
+  var future=g.create_building("homestead",Cell(g),"civic",true);g.refresh_metrics();Near(WildDesign.View(g,future["id"].Text)["capacity"]["technology"].Double,2,"future building derives two DP from city technology");
+  string first=city.FocusedBlockId;g.s["currency"]=3000;foreach(string r in new[]{"food","material","goods"})g.s["projects"]["municipal"]["inventory"][r]=80;Command(city.BeginBlock(1,"balanced",first),"future block pays normal startup");Origin(city);Command(city.EnableWild(),"explicitly enable future Wild block");Near(city.FocusedGame.world_effects["wild_housing_levels"].Long,1,"future block inherits city projection");var later=city.FocusedGame.create_building("homestead",Cell(city.FocusedGame),"civic",true);Near(WildDesign.View(city.FocusedGame,later["id"].Text)["capacity"]["technology"].Double,2,"future block building receives shared technology");
+  var loaded=new CitySession(c);Command(loaded.Restore(city.snapshot()),"restore purchased city");Near(loaded.WildView()["housing_levels"].Long,1,"restore keeps purchased technology");Near(loaded.WildView()["material_exported"].Double,10,"restore keeps cumulative export eligibility");Check(loaded.Validate()=="","complete purchased city validates");
+  var fresh=new CitySession(c);fresh.s["wild_mode"]=true;Command(fresh.BeginDistrict(0,"balanced"),"dedicated Wild launcher begins normal district onboarding");Origin(fresh);Check(WildDesign.Enabled(fresh.FocusedGame)&&fresh.WildView()["enabled"].Bool,"dedicated Wild mode enables only after actual origin");var started=fresh.snapshot().ToJson(sortKeys:true);fresh.AfterLocalCommand(fresh.FocusedGame.snapshot());Check(fresh.snapshot().ToJson(sortKeys:true)==started,"later ordinary local commands do not duplicate Wild opening grant");
+  Console.WriteLine("WILD TRADE CHECKS "+checks+" passed");
+ }
+}

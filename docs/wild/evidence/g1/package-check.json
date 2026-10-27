@@ -1,0 +1,13 @@
+{
+  "artifact": "MET-Wild-G1.1-macOS.zip",
+  "size_bytes": 72524702,
+  "wild_marker": true,
+  "architectures": [
+    "arm64",
+    "x86_64"
+  ],
+  "signature": "ad-hoc; codesign --verify --deep --strict passed",
+  "zip_check": "unzip -tq passed",
+  "release_tag": "v0.7.0-wild-g1.1",
+  "source": "dedicated native release snapshot based on v0.7.0-wild-g0.1; working branch and index retained"
+}

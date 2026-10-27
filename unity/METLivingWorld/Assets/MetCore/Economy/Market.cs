@@ -30,11 +30,12 @@ public static class Market {
   return result;
  }
  public static double _total_capacity(Game g){var total=0.0;foreach(var row in _freight_sources(g))total+=row["available"].Double;return total;}
- public static string order(Game g,string resource,string side,double amount,double limit_price) {
+ public static string order(Game g,string resource,string side,double amount,double limit_price,string counterparty="") {
   ensure(g);if(g.s.Get("phase","").Text!="play")return "当前不能下贸易订单。";if(resource!="food"&&resource!="material"&&resource!="goods")return "当前市场不交易这种资源。";
   if(side!="buy"&&side!="sell")return "请选择买入或卖出。";if(double.IsNaN(amount)||double.IsInfinity(amount)||amount<=0)return "订单数量必须大于零。";if(double.IsNaN(limit_price)||double.IsInfinity(limit_price))return "限价无效。";
   if(_total_capacity(g)<=.000001)return "需要有正在运行的货运站。";var id=g.uid("T");var quote_now=quote(g,resource);
   var row=V.Map("id",id,"resource",resource,"side",side,"amount",amount,"remaining",amount,"limit_price",limit_price,"created_tick",g.s.Get("simulation_tick",0).Long,"sequence",long.Parse(id.StartsWith("T",StringComparison.Ordinal)?id.Substring(1):id),"created_at",g.s.Get("local_hours",0).Double,"status","open","last_attempt_tick",-1,"quote_at_order",quote_now);
+  row["counterparty"]=counterparty;
   g.s["block"]["trade_orders"].Add(row);g.revision++;return "";
  }
  public static string cancel(Game g,string order_id) {
@@ -89,6 +90,7 @@ public static class Market {
    else if(!g.withdraw_stock(resource,amount)){g.s["block"]["trade_orders"][order_index]=live;continue;}
    var cash_delta=side=="buy"?-amount*unit_price:amount*unit_price;g.s["currency"]=g.s["currency"].Double+cash_delta;
    var trade=V.Map("id",g.uid("X"),"order_id",order_id,"resource",resource,"side",side,"amount",amount,"price",unit_price,"unit_price",unit_price,"mid_price",quote_row["mid"].Double,"limit_price",live["limit_price"].Double,"currency_delta",cash_delta,"tick",g.s.Get("simulation_tick",0).Long,"h",g.s.Get("local_hours",0).Double,"capacity_sources",allocation["sources"]);
+   trade["counterparty"]=live.Get("counterparty","");
    records.Add(trade);ledger["trades"].Add(trade);ledger["used_capacity"]=ledger["used_capacity"].Double+amount;ledger["currency_delta"]=ledger["currency_delta"].Double+cash_delta;
    if(side=="buy"){ledger["bought"][resource]=ledger["bought"].Get(resource,0).Double+amount;per_resource_pressure[resource]=per_resource_pressure.Get(resource,0).Double+amount;}
    else {ledger["sold"][resource]=ledger["sold"].Get(resource,0).Double+amount;per_resource_pressure[resource]=per_resource_pressure.Get(resource,0).Double-amount;}

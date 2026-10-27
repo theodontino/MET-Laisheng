@@ -99,6 +99,7 @@ public sealed partial class CitySession {
             foreach(var item in cost["stock"].Pairs)g.s["projects"]["municipal"]["inventory"][item.Key]=item.Value;
             source["settled"]=true;g.refresh_metrics();Record("startup_delivered",V.Map("block_id",FocusedBlockId,"source_block",source["source_block"],"cost",cost),FocusedBlockId+":startup_delivered");
         }
+        if(s.Get("wild_mode",false).Bool&&g.s.Get("phase","").Text=="play"&&!WildDesign.Enabled(g))EnableWild();
         CaptureHistory();ApplyWorldEffects();
     }
     public double Resume(double utc){s["paused"]=true;double elapsed=Math.Max(0,utc-s["last_seen_utc"].Double);s["last_seen_utc"]=Math.Max(utc,s["last_seen_utc"].Double);s["offline_seconds"]=s["offline_seconds"].Double+elapsed;foreach(var g in Games.Values)g.resume_time(utc);return elapsed;}

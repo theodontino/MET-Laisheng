@@ -35,6 +35,7 @@ public sealed class Planning {
    "existing_food_produced",reference["audit"].Get("resources",V.Map()).Get("food",V.Map()).Get("produced",0).Double/g.c.balance["tick_hours"].Double,
    "existing_food_consumed",reference["audit"].Get("resources",V.Map()).Get("food",V.Map()).Get("consumed",0).Double/g.c.balance["tick_hours"].Double,
    "recycled",clone.s["metrics"]["pollution_recycled"].Double-reference["metrics"].Get("pollution_recycled",0).Double,"tiles",clone.s["cells"],"trace",clone.compiled["trace"].Get(target,V.Map()),"world",clone.s["metrics"]);
+  if(host=="")result["construction_quote"]=WildDesign.BuildQuote(g,@base);
   result["map_delta"]=map_diff(reference,clone);result["map_snapshot"]=display_copy(clone);result["snapshot_id"]=version(g);result["candidate_key"]=key;result["forecast"]=true;result["elapsed_ms"]=(Stopwatch.GetTimestamp()-began)*1000.0/Stopwatch.Frequency;timings.Add(result["elapsed_ms"]);if(timings.Count>200)timings.Items.RemoveAt(0);remember(key,result);return result;
  }
  public V policy(Game g,string id) {

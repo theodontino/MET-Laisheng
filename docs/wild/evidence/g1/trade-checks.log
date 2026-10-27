@@ -1,0 +1,61 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS start original district
+PASS choose existing origin
+PASS old city remains outside Wild until explicit enable
+PASS disabled Wild view is read only
+PASS explicitly enable focused Wild block
+PASS repeat enable succeeds
+PASS repeat enable does not duplicate stock or history
+PASS starter cannot bypass existing freight requirement
+PASS purchase blocked before actual exports
+PASS open noncrossing Hope order
+PASS unfilled order does not grant eligibility (0 / 0)
+PASS cancel unfilled order
+PASS cancelled order does not grant eligibility (0 / 0)
+PASS ordinary market export
+PASS ordinary market export actually fills (2 / 2)
+PASS untagged market exports do not count for Hope (0 / 0)
+PASS other counterparty material export
+PASS other counterparty export actually fills (2 / 2)
+PASS other counterparty does not count for Hope (0 / 0)
+PASS Hope goods export
+PASS Hope goods export actually fills (1 / 1)
+PASS other resource exports do not count (0 / 0)
+PASS Hope material import
+PASS Hope import actually fills (1 / 1)
+PASS imports do not count (0 / 0)
+PASS real Hope material sell
+PASS partial fill counts only actual shipped quantity (3 / 3)
+PASS partial fill withdraws material once (3 / 3)
+PASS partial fill below requirement stays locked
+PASS actual history identifies Hope counterparty
+PASS real-time network receipt identifies Hope counterparty
+PASS restore partial export city
+PASS post-restore fill accumulates exact remaining exports (10 / 10)
+PASS threshold produces one retained eligibility record (1 / 1)
+PASS eligible Wild view does not mutate live state
+PASS eligible purchase still requires actual currency
+PASS buy HousingDesignI with 60 actual currency
+PASS purchase charges exactly 60 currency (140 / 140)
+PASS purchase does not re-deduct exported material (87 / 87)
+PASS city owns one housing technology level (1 / 1)
+PASS existing block receives city technology projection (1 / 1)
+PASS duplicate purchase refused
+PASS duplicate purchase changes no wallet or history
+PASS repeated projection does not stack technology levels (1 / 1)
+PASS existing building receives exactly two city DP (4 / 4)
+PASS future building derives two DP from city technology (2 / 2)
+PASS future block pays normal startup
+PASS choose existing origin
+PASS explicitly enable future Wild block
+PASS future block inherits city projection (1 / 1)
+PASS future block building receives shared technology (2 / 2)
+PASS restore purchased city
+PASS restore keeps purchased technology (1 / 1)
+PASS restore keeps cumulative export eligibility (10 / 10)
+PASS complete purchased city validates
+PASS dedicated Wild launcher begins normal district onboarding
+PASS choose existing origin
+PASS dedicated Wild mode enables only after actual origin
+PASS later ordinary local commands do not duplicate Wild opening grant
+WILD TRADE CHECKS 59 passed

@@ -23,11 +23,24 @@ public sealed partial class CityInterface {
   }
   var offers=draft["offers"];if(!offers.Any(x=>x["id"].Text==_constructionOffer))_constructionOffer=offers[0]["id"].Text;
   var definition=G.c.projects[_constructionId];var name=definition["name"].Text;
-  _constructionTitle.text="建造 · "+name;_constructionSubtitle.text="地块 "+_constructionTile+"  ·  "+ConstructionPurpose(definition)+"  ·  选择运营者，再确认开工";
   _constructionBaseline=_constructionPlanner.snapshot(G);
   var previews=V.Map();foreach(var offer in offers)previews[offer["id"]]=_constructionPlanner.compare(G,_constructionId,_constructionTile,offer);
   var selected=offers.First(x=>x["id"].Text==_constructionOffer);_constructionProposal=previews[_constructionOffer];
-  ConstructionText(_constructionHeader,"比较运营者　·　成长槽位按 T1 / T2 / T3 顺序解锁",14,Muted);
+  bool wildDirect=selected.Get("wild_direct",false).Bool;
+  _constructionTitle.text=wildDirect?"公共建设 · "+name:"建造 · "+name;
+  _constructionSubtitle.text="地块 "+_constructionTile+"  ·  "+(wildDirect?"提供住房 · 生产食物":ConstructionPurpose(definition))+(wildDirect?"  ·  确认建设后进入施工队列":"  ·  选择运营者，再确认开工");
+  if(wildDirect){
+   ConstructionText(_constructionHeader,"农居公共建设　·　住房与农业基础",14,Muted);
+   var panels=ConstructionColumns(_constructionBody,"Farm Public Construction",2);var purpose=panels[0];var capacity=panels[1];var config=G.c.wild;var form=config["forms"][_constructionId];
+   ConstructionText(purpose,"用途与基础能力",18,Ink);
+   ConstructionText(purpose,"提供住房 · 生产食物",15,Green);
+   ConstructionText(purpose,"基础住房 "+F(form["housing"].Double,0)+" 人　·　食物产能 "+F(form["food"].Double)+" /月",14,Muted);
+   double initial=config["initial_dp"].Double,technology=Math.Max(0,G.world_effects.Get("wild_housing_levels",0).Double)*config["technology_dp_per_level"].Double;
+   ConstructionText(capacity,"初始设计容量 "+F(initial+technology,0)+" DP",18,Ink);
+   ConstructionText(capacity,"基础 "+F(initial,0)+"  +  科技 "+F(technology,0),14,Green);
+   ConstructionText(capacity,"完工后打开农居星图，按需安排生长节点。",14,Muted);
+  }else{
+   ConstructionText(_constructionHeader,"比较运营者　·　成长槽位按 T1 / T2 / T3 顺序解锁",14,Muted);
   var columns=ConstructionColumns(_constructionBody,"Operator Comparison",offers.Count);
   var costs=offers.Select(offer=>Draft.offer_cost(G,offer)).ToArray();
   bool sameCosts=costs.All(cost=>cost["currency"]==costs[0]["currency"]&&cost["material"]==costs[0]["material"]&&cost["cp"]==costs[0]["cp"]);
@@ -39,10 +52,11 @@ public sealed partial class CityInterface {
    ConstructionText(card,string.Join(" → ",offer["slot_track"].Select(x=>Catalog.SLOT_NAMES.Get(x,x).Text)),14,Blue);
    if(!sameCosts)ConstructionText(card,"通货 "+F(costs[i]["currency"].Double,0)+"　材料 "+F(costs[i]["material"].Double,0)+"　CP "+F(costs[i]["cp"].Double),13,Muted);
   }
+  }
   var selectedCost=Draft.offer_cost(G,selected);double cash=selectedCost["currency"].Double;
   var blocked=!_constructionProposal.Get("ok",false).Bool?_constructionProposal.Get("error","预测暂不可用").Text:S["currency"].Double<cash?"还差 "+F(cash-S["currency"].Double,0)+" 通货；可关闭窗口，经营后沿用此报价。":"";
   RenderConstructionProposal(_constructionBaseline,_constructionProposal,_constructionProposal.Get("target","").Text,selectedCost["currency"].Double,selectedCost["material"].Double,selectedCost["cp"].Double,blocked,false);
-  ConstructionFold(_constructionBody,"reroll","另找运营者 · 付费重抽",details=>{
+  if(!wildDirect)ConstructionFold(_constructionBody,"reroll","另找运营者 · 付费重抽",details=>{
    var rerollCost=Draft.reroll_cost(G)["currency"].Double;string expected=draft.ToJson(false,true);
    Label(details,"立即支付费用，重新征集三名运营者；重抽费用会增长且不退还。关闭窗口会保留当前报价。",15,Muted);
    Button(details,"支付 "+F(rerollCost,0)+" 通货 · 另找一组",()=>{

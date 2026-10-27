@@ -4,7 +4,7 @@ namespace MET.Core {
 public sealed partial class CitySession {
     public void ApplyWorldEffects() {
         foreach(var pair in Games) {
-            var g=pair.Value;var effects=V.Map("sources",V.Map(),"knowledge_multiplier",1.0,"freight_multiplier",1.0,"capabilities",V.Arr());
+            var g=pair.Value;var effects=V.Map("sources",V.Map(),"knowledge_multiplier",1.0,"freight_multiplier",1.0,"capabilities",V.Arr(),"wild_housing_levels",s.Get("wild_technology",V.Map()).Get("housing_levels",0));
             string district=Block(pair.Key).Get("district_id","").Text;
             foreach(var id in Rules.ids(District(district).Get("institutions",V.Map()))) {
                 var institution=District(district)["institutions"][id];string kind=institution["kind"].Text;var rules=V.Arr();

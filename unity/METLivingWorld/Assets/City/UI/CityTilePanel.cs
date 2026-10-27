@@ -162,7 +162,8 @@ public sealed partial class CityInterface {
   if(empty){foreach(var item in G.c.v040["progression"]["tier1"]){string baseId=item.Text,tile=SelectedTile;var b=Button(row,G.c.projects[baseId]["name"].Text,()=>OpenConstructionWindow(baseId,tile),false,water||!Runtime.ViewCanEditFocused);Height((RectTransform)b.transform,62*TextScale);ConstructionIllustration(b,baseId);}return;}
   string id=SelectedBuilding;var p=S["projects"].Get(id,V.Map());if(p.Count==0)return;bool construction=p["status"].Text=="construction"||p.Get("upgrade_job",V.Map()).Count>0;
   Button(row,p.Get("paused",false).Bool?(construction?"恢复施工":"恢复运营"):(construction?"暂停施工":"暂停运营"),()=>Command(g=>g.set_paused(id,!p.Get("paused",false).Bool)),false,!Runtime.ViewCanEditFocused);
-  Button(row,"升级",()=>OpenUpgradeWindow(id),false,construction||!Runtime.ViewCanEditFocused||Development.choices(G,id).Count==0);
+  bool wild=WildDesign.IsFarm(G,p);
+  Button(row,wild?"建筑星图":"升级",()=>OpenUpgradeWindow(id),false,!wild&&(construction||!Runtime.ViewCanEditFocused||Development.choices(G,id).Count==0));
   Button(row,"建筑详表 ›",()=>Navigate("building",id));
   foreach(var button in row.GetComponentsInChildren<Button>())Height((RectTransform)button.transform,44*TextScale);
  }

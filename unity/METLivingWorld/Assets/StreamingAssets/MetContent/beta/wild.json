@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "family": "farm",
+  "base_construction_cp": 10,
+  "base_cp_per_month": 10,
+  "initial_dp": 2,
+  "technology_dp_per_level": 2,
+  "inherited_dp_per_tier": 2,
+  "progression_dp": 2,
+  "ordinary_material": 10,
+  "slot_dp": [
+    3,
+    9,
+    27
+  ],
+  "slot_goods": 1,
+  "progression_cp": 2,
+  "progression_low_industrial": 1,
+  "opening_low_industrial": 2,
+  "forms": {
+    "homestead": {
+      "name": "农居",
+      "tier": 1,
+      "housing": 10,
+      "food": 10
+    },
+    "agriculture": {
+      "name": "农场",
+      "tier": 2,
+      "housing": 5,
+      "food": 20
+    },
+    "residence": {
+      "name": "公寓",
+      "tier": 2,
+      "housing": 20,
+      "food": 5
+    }
+  },
+  "nodes": {
+    "compound": {
+      "name": "复合强化",
+      "kind": "ordinary",
+      "dp": 1,
+      "housing_pct": 0.1,
+      "food_pct": 0.1
+    },
+    "housing": {
+      "name": "住房强化",
+      "kind": "ordinary",
+      "dp": 1,
+      "housing_pct": 0.1
+    },
+    "production": {
+      "name": "生产强化",
+      "kind": "ordinary",
+      "dp": 1,
+      "food_pct": 0.1
+    },
+    "organization": {
+      "name": "组织槽",
+      "kind": "slot",
+      "slot": "Organization"
+    },
+    "link": {
+      "name": "联系槽",
+      "kind": "slot",
+      "slot": "Link"
+    },
+    "fusion": {
+      "name": "融合槽",
+      "kind": "slot",
+      "slot": "Fusion"
+    },
+    "apartment": {
+      "name": "公寓",
+      "kind": "progression",
+      "target": "residence"
+    },
+    "agriculture": {
+      "name": "农场",
+      "kind": "progression",
+      "target": "agriculture"
+    }
+  },
+  "node_cp_fraction": 0.1,
+  "routes": [
+    {
+      "from": "compound",
+      "to": "housing",
+      "bypass": false
+    },
+    {
+      "from": "compound",
+      "to": "production",
+      "bypass": false
+    },
+    {
+      "from": "housing",
+      "to": "organization",
+      "bypass": false
+    },
+    {
+      "from": "housing",
+      "to": "link",
+      "bypass": false
+    },
+    {
+      "from": "production",
+      "to": "link",
+      "bypass": false
+    },
+    {
+      "from": "production",
+      "to": "fusion",
+      "bypass": false
+    },
+    {
+      "from": "organization",
+      "to": "apartment",
+      "bypass": false
+    },
+    {
+      "from": "link",
+      "to": "apartment",
+      "bypass": false
+    },
+    {
+      "from": "link",
+      "to": "agriculture",
+      "bypass": false
+    },
+    {
+      "from": "fusion",
+      "to": "agriculture",
+      "bypass": false
+    },
+    {
+      "from": "housing",
+      "to": "apartment",
+      "bypass": true
+    },
+    {
+      "from": "production",
+      "to": "agriculture",
+      "bypass": true
+    }
+  ]
+}

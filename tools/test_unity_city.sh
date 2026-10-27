@@ -49,6 +49,11 @@ case "${1:-core}" in
     ;;
   mac)
     unity_step build -batchmode -nographics -executeMethod MET.City.Editor.CityProject.BuildMac
+    # The dedicated Wild package starts its own save directory. Keep this marker
+    # in the exported application, never in the shared project's StreamingAssets.
+    if [[ "${MET_UNITY_WILD_BUILD:-0}" == "1" ]]; then
+      printf '%s\n' 'Wild G1 native farm progression' > "$MET_UNITY_MAC_OUTPUT/Contents/Resources/Data/StreamingAssets/WildG1.txt"
+    fi
     python3 tools/sign_unity_mac.py "$MET_UNITY_MAC_OUTPUT"
     ;;
   native)

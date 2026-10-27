@@ -33,6 +33,7 @@ public sealed partial class CityInterface {
   _base=baseId;BeginConstructionWindow("build",baseId,tile);
  }
  public void OpenUpgradeWindow(string id){
+  if(S["projects"].Has(id)&&WildDesign.IsFarm(G,S["projects"][id])){OpenWildStar(id);return;}
   if(ToolkitUpgradeEnabled){OpenToolkitUpgrade(id);return;}
   if(!S["projects"].Has(id))return;
   Runtime.Flush();BeginConstructionWindow("upgrade",id,S["projects"][id]["tile"].Text);

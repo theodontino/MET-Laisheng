@@ -160,7 +160,8 @@ public sealed partial class CitySession {
                 world["pricing"]["pressure"]=world["pricing"].Get("pressure",0).Double+(side=="buy"?amount:-amount);
                 live["remaining"]=Math.Max(0,live["remaining"].Double-amount);live["filled"]=live.Get("filled",0).Double+amount;live["status"]=live["remaining"].Double<=1e-6?"filled":"partial";live["last_reason"]="";
                 var trade=V.Map("id",g.uid("X"),"order_id",live["id"],"block_id",id,"resource",r,"side",side,"amount",amount,"price",price,"unit_price",price,"mid_price",quote["mid"],"limit_price",live["limit_price"],"currency_delta",cash,"tick",g.s["simulation_tick"],"h",g.s["local_hours"],"external_seconds",now+seconds,"capacity_sources",allocation["sources"],"source","city_outside_market");
-                trades.Add(trade);RememberTrade(g,trade,live);receipt["outside_trades"].Add(trade);FreightAudit(g,r,side,amount,cash);
+                trade["counterparty"]=live.Get("counterparty","");
+                trades.Add(trade);RememberTrade(g,trade,live);receipt["outside_trades"].Add(trade);FreightAudit(g,r,side,amount,cash);RecordWildTrade(trade);
             }
             // Read-side market prices mirror the unique world; no second local settlement runs.
             foreach(var r in market["resources"].Keys) {var pricing=market["resources"][r]["pricing"].Duplicate(true);var q=WorldQuote(r);pricing["mid"]=q["mid"];pricing["buy_price"]=q["buy"];pricing["sell_price"]=q["sell"];block["market_state"]["resources"][r]=pricing;}

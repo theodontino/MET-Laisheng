@@ -28,9 +28,10 @@ public sealed class CityBootstrap : MonoBehaviour {
         Interface.DisplayChanged += Display;
         Display(Runtime.DisplaySettings);
         if (World.Failure != "") Interface.ShowMessage("地图资源导入失败：" + World.Failure);
-        if (CityMemoryEvidence.Requested() || CityEvidence.Requested() || CityWildG0Evidence.Requested()) Application.runInBackground = true;
+        if (CityMemoryEvidence.Requested() || CityEvidence.Requested() || CityWildG0Evidence.Requested() || CityWildG1Evidence.Requested()) Application.runInBackground = true;
         if(System.Array.IndexOf(System.Environment.GetCommandLineArgs(),"--manual-ui-evidence")>=0)gameObject.AddComponent<CityMouseEvidence>();
-        if (CityWildG0Evidence.Requested()) gameObject.AddComponent<CityWildG0Evidence>();
+        if (CityWildG1Evidence.Requested()) gameObject.AddComponent<CityWildG1Evidence>();
+        else if (CityWildG0Evidence.Requested()) gameObject.AddComponent<CityWildG0Evidence>();
         else if (CityMemoryEvidence.Requested()) gameObject.AddComponent<CityMemoryEvidence>();
         else if (CityEvidence.Requested()) gameObject.AddComponent<CityEvidence>();
     }

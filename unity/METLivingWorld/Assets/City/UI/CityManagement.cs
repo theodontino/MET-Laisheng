@@ -8,6 +8,7 @@ namespace MET.City {
 public sealed partial class CityInterface {
  string _tradeResource="food",_tradeSide="buy",_tradeAmount="12",_tradeLimit="";
  void MarketPage(){
+  WildTradeSection(_body);
   if(_pageContext=="food"||_pageContext=="material"||_pageContext=="goods")_tradeResource=_pageContext;
   var columns=WorkspaceColumns("Market quotes and editor",.32f,.68f);var quotes=columns[0];var orders=_body;var editor=columns[1];Label(quotes,"共享市场报价",23,Blue);
   foreach(var resource in new[]{"food","material","goods"}){var r=resource;var q=Market.quote(G,r);var line=CompactTaskCard(quotes,"Market quote "+r);Button(line,(_tradeResource==r?"● ":"")+Resource(r),()=>{_tradeResource=r;_tradeLimit="";_pageContext="";RenderPage();},_tradeResource==r);Metric(line,"买入",F(q.Get("buy_price",0).Double,3));Metric(line,"卖出",F(q.Get("sell_price",0).Double,3));Label(line,"当前库存 "+F(G.inventory_total(r)),15,Muted);}
@@ -16,7 +17,7 @@ public sealed partial class CityInterface {
   Label(editor,"创建限价订单",24,Gold);Label(editor,Resource(_tradeResource),22,Blue);var sides=Row(editor,"Trade side",46*TextScale);Button(sides,(_tradeSide=="buy"?"✓ ":"")+"买入",()=>{_tradeSide="buy";_tradeLimit="";RenderPage();});Button(sides,(_tradeSide=="sell"?"✓ ":"")+"卖出",()=>{_tradeSide="sell";_tradeLimit="";RenderPage();});
   var quote=Market.quote(G,_tradeResource);var price=quote.Get(_tradeSide+"_price",0).Double;if(_tradeLimit=="")_tradeLimit=price.ToString("F3",CultureInfo.InvariantCulture);Metric(editor,"当前单位报价",F(price,3));Label(editor,_tradeSide=="buy"?"买价不高于限价才成交":"卖价不低于限价才成交",17,Gold);Label(editor,"数量",16,Muted);var amount=InputBox(editor,_tradeAmount,"输入正数量");amount.onValueChanged.AddListener(v=>_tradeAmount=v);Label(editor,"每单位限价（可为负）",16,Muted);var limit=InputBox(editor,_tradeLimit,"输入限价");limit.onValueChanged.AddListener(v=>_tradeLimit=v);
   Label(editor,price<0?(_tradeSide=="buy"?"当前负买价：接收资源时收到通货，仍受仓容和运力限制。":"当前负卖价：外运资源时支付处置通货，余额不足只成交可负担部分。"):(_tradeSide=="buy"?"买入支付通货，需要真实空仓容。":"卖出收到通货，真实扣除库存。"),17,Muted);Label(editor,"等待限价、仓容、库存、现金或共享运力时，订单保留。",16,Muted);
-  Button(editor,"提交"+(_tradeSide=="buy"?"买入":"卖出")+Resource(_tradeResource)+"限价订单",()=>{if(!double.TryParse(_tradeAmount,NumberStyles.Float,CultureInfo.InvariantCulture,out var quantity)||!double.TryParse(_tradeLimit,NumberStyles.Float,CultureInfo.InvariantCulture,out var limitPrice)){ShowMessage("请输入有效数量与限价。");return;}Command(g=>Market.order(g,_tradeResource,_tradeSide,quantity,limitPrice));},true,Market._total_capacity(G)<=.000001);WorkspaceActions("资源与财政账目",()=>Navigate("resources",_tradeResource));WorkspaceHint("外部市场按真实在线时间结算，本地加速不扩大运力。");
+  Button(editor,"提交"+(_tradeSide=="buy"?"买入":"卖出")+Resource(_tradeResource)+"限价订单",()=>{if(!double.TryParse(_tradeAmount,NumberStyles.Float,CultureInfo.InvariantCulture,out var quantity)||!double.TryParse(_tradeLimit,NumberStyles.Float,CultureInfo.InvariantCulture,out var limitPrice)){ShowMessage("请输入有效数量与限价。");return;}Command(g=>Market.order(g,_tradeResource,_tradeSide,quantity,limitPrice,TradeCounterparty));},true,Market._total_capacity(G)<=.000001);WorkspaceActions("资源与财政账目",()=>Navigate("resources",_tradeResource));WorkspaceHint("外部市场按真实在线时间结算，本地加速不扩大运力。");
  }
  string _policySlot="Tax";
  string _policyChoice="";

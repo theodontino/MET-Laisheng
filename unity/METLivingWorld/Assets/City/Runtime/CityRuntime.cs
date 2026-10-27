@@ -18,6 +18,7 @@ public sealed class CityRuntime : MonoBehaviour {
  public string StorageRoot {get;private set;}
  public string SavePath=>Path.Combine(StorageRoot,CityStore.SAVE);
  public bool DecisionOpen {get;private set;}
+ public bool WildBuild=>Environment.GetCommandLineArgs().Contains("--wild-g1")||File.Exists(Path.Combine(Application.streamingAssetsPath,"WildG1.txt"));
  public bool Ready=>Session!=null;
  public bool ViewCanEditFocused=>_sessionSnapshot.Get("focused_block_id","").Text!=""&&_sessionSnapshot.Get("active_district_id","").Text!=""&&_sessionSnapshot.Get("blocks",V.Map()).Get(_sessionSnapshot["focused_block_id"].Text,V.Map()).Get("district_id","")==_sessionSnapshot["active_district_id"];
  public bool WorldPaused=>_sessionSnapshot.Get("paused",true).Bool;
@@ -32,10 +33,10 @@ public sealed class CityRuntime : MonoBehaviour {
  void Awake() {
   Application.targetFrameRate=60;QualitySettings.vSyncCount=0;
   Screen.SetResolution(2560,1440,FullScreenMode.FullScreenWindow);Application.runInBackground=false;
-  StorageRoot=Environment.GetEnvironmentVariable("MET_UNITY_SAVE_ROOT");if(string.IsNullOrWhiteSpace(StorageRoot))StorageRoot=Application.persistentDataPath;
+  StorageRoot=Environment.GetEnvironmentVariable("MET_UNITY_SAVE_ROOT");if(string.IsNullOrWhiteSpace(StorageRoot))StorageRoot=WildBuild?Path.Combine(Application.persistentDataPath,"Wild-G1"):Application.persistentDataPath;
   var catalog=new Catalog(Path.Combine(Application.streamingAssetsPath,"MetContent"));Session=new CitySession(catalog,StorageRoot);_origin=Monotonic();
-  Session.New(DateTime.UtcNow.Ticks%2147483000,Utc());
-  if(File.Exists(SavePath)||File.Exists(SavePath+".bak")||File.Exists(SavePath+".tmp")){var loaded=CityStore.read(catalog,SavePath);var error=loaded["ok"].Bool?Session.Restore(loaded["state"]):loaded["error"].Text;if(error==""){Session.Resume(Utc());StartupMessage=(loaded.Get("from_backup",false).Bool?"主档无效，已恢复完整城市备份。":"城市已载入。")+"时间恢复常速并暂停；准备好后继续。";}else{_saveEnabled=false;StartupMessage=error+" 原存档保留，自动保存已停止。";Session.New(DateTime.UtcNow.Ticks%2147483000,Utc());}}
+  Session.New(DateTime.UtcNow.Ticks%2147483000,Utc());if(WildBuild)Session.s["wild_mode"]=true;
+  if(File.Exists(SavePath)||File.Exists(SavePath+".bak")||File.Exists(SavePath+".tmp")){var loaded=CityStore.read(catalog,SavePath);var error=loaded["ok"].Bool?Session.Restore(loaded["state"]):loaded["error"].Text;if(error==""){Session.Resume(Utc());StartupMessage=(loaded.Get("from_backup",false).Bool?"主档无效，已恢复完整城市备份。":"城市已载入。")+"时间恢复常速并暂停；准备好后继续。";}else{_saveEnabled=false;StartupMessage=error+" 原存档保留，自动保存已停止。";Session.New(DateTime.UtcNow.Ticks%2147483000,Utc());if(WildBuild)Session.s["wild_mode"]=true;}}
   Publish();
  }
  void Start(){Publish(world:_sessionSnapshot,stateChanged:false);}
@@ -54,7 +55,7 @@ public sealed class CityRuntime : MonoBehaviour {
  public string SetMode(string mode){Flush();if(!Session.CanEditFocused&&mode!="normal"){var denied="自治地区只能查看常速运行；回任后可以使用 DT。";Notify(denied);return denied;}if(MandatoryPending){var message="请先处理本次年度结算、已保存奖励与待选事件。";Notify(message);return message;}var error=Clock.set_mode(Game,mode);if(error==""){Session.s["paused"]=false;Game.s["settings"]["user_paused"]=false;Game.s["beta_time"]["pause_reason"]="";}else Notify(error);_pending=0;_origin=Monotonic();Publish();SaveInternal();return error;}
  public void SetPaused(bool paused){Flush();if(!paused&&MandatoryPending){Notify("请先在年度 / 尾声页处理结算、奖励与待选事件，再继续经营。");return;}Session.s["paused"]=paused;Game.s["settings"]["user_paused"]=paused;if(!MandatoryPending)Game.s["beta_time"]["pause_reason"]=paused?"manual":"";_pending=0;_origin=Monotonic();Publish();SaveInternal();}
  public void ResumeNormal(){Flush();if(Session.CanEditFocused&&PendingDecisions){Notify("请先处理本次已保存的奖励和待选事件。");return;}Clock.set_mode(Game,"normal");Cycles.acknowledge(Game);Session.s["paused"]=false;Game.s["settings"]["user_paused"]=false;Game.s["beta_time"]["pause_reason"]="";_pending=0;_origin=Monotonic();Publish();SaveInternal();}
- public void NewCity(long seed){Flush();_saveEnabled=true;Session.New(seed,Utc());_pending=0;_origin=Monotonic();Publish();SaveInternal();}
+ public void NewCity(long seed){Flush();_saveEnabled=true;Session.New(seed,Utc());if(WildBuild)Session.s["wild_mode"]=true;_pending=0;_origin=Monotonic();Publish();SaveInternal();}
  public string Load(string path=null){Flush();var loaded=CityStore.read(Game.c,path??SavePath);if(!loaded["ok"].Bool){Notify(loaded["error"].Text);return loaded["error"].Text;}var error=Session.Restore(loaded["state"]);if(error!=""){Notify(error);return error;}Session.Resume(Utc());_saveEnabled=true;_pending=0;_origin=Monotonic();Publish();SaveInternal();Notify("完整城市已载入；常速暂停，准备好后继续。");return "";}
  public string Save(){Flush();var error=SaveInternal();Notify(error==""?"城市已保存。":error);return error;}
  // Only automatic saves are gated. Explicit saves and lifecycle boundaries still
