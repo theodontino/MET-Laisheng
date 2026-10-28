@@ -1,0 +1,5832 @@
+{
+  "ok": true,
+  "scope": "Actual 2560x1440 fullscreen Unity Player rendering; synthetic UI Toolkit NavigationSubmit, explicit paused isolated city and declared debug supplies. Not human/OS mouse input or ordinary-play economy/pacing acceptance.",
+  "synthetic_input": true,
+  "save_root": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/civic-ui/player-9/save",
+  "output": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/civic-ui/player-9",
+  "seed": 20261029,
+  "origin": "free",
+  "building": "B000001",
+  "tile": "0,1",
+  "resolution": "2560x1440",
+  "fullscreen": true,
+  "graphics": "Apple M5 Max",
+  "hold_after_checks": true,
+  "fixture_supplies": {
+    "food": 80,
+    "material": 80,
+    "currency_minimum": 1000,
+    "debug_used": true,
+    "sim_tick_months": 0.02
+  },
+  "checks": [
+    {
+      "name": "full Civic Toolkit shell ready",
+      "passed": true
+    },
+    {
+      "name": "city renderer ready",
+      "passed": true
+    },
+    {
+      "name": "2K fullscreen baseline",
+      "passed": true
+    },
+    {
+      "name": "begin real isolated district",
+      "passed": true
+    },
+    {
+      "name": "choose actual offered origin",
+      "passed": true
+    },
+    {
+      "name": "enable actual Wild",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "00-before-first-settlement: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "00-before-first-settlement: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 00-before-first-settlement",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 00-before-first-settlement",
+      "passed": true
+    },
+    {
+      "name": "declare fixture supply and debug_used",
+      "passed": true
+    },
+    {
+      "name": "actual simulation settlement through Runtime.Execute",
+      "passed": true
+    },
+    {
+      "name": "HUD has actual settled flows",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "baseline: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "baseline: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "baseline: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "baseline: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "baseline: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "baseline: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "baseline: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "baseline: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "baseline: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "baseline: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "baseline: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "baseline: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "baseline: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "baseline: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "legacy root found",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: HUD Resources",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: HUD Overview",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: Priority Reminders",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: HUD 消息 · 0",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: Ordinary Notifications",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: HUD Action Receipt",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: Selected tile",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: HUD Map Layers",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: HUD Layer Source",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: HUD Navigation",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: HUD Time Controls",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: Bonus Blueprint Bucket",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: L3 Archive Shield",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: Desk Explanation",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: Button 返回方案比较 ›",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: Map source inspection",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy hidden and noninteractive: Button 所选来源  I",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy receives no UI raycast at (80.00, 1360.00)",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy receives no UI raycast at (1280.00, 720.00)",
+      "passed": true
+    },
+    {
+      "name": "baseline: legacy receives no UI raycast at (100.00, 150.00)",
+      "passed": true
+    },
+    {
+      "name": "01-city-hud-tile: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "01-city-hud-tile: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 01-city-hud-tile",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 01-city-hud-tile",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: nav-population_home",
+      "passed": true
+    },
+    {
+      "name": "synthetic residents navigation is read only",
+      "passed": true
+    },
+    {
+      "name": "residents: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "residents: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "residents: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "residents: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "02-residents-services: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "02-residents-services: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 02-residents-services",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 02-residents-services",
+      "passed": true
+    },
+    {
+      "name": "browse economy_home preserves city, RNG and balances",
+      "passed": true
+    },
+    {
+      "name": "economy_home: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "economy_home: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "economy_home: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "economy_home: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "legacy root found",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: HUD Resources",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: HUD Overview",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: Priority Reminders",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: HUD 消息 · 0",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: Ordinary Notifications",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: HUD Action Receipt",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: Selected tile",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: HUD Map Layers",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: HUD Layer Source",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: HUD Navigation",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: HUD Time Controls",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: Bonus Blueprint Bucket",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: L3 Archive Shield",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: Desk Explanation",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: Button 返回方案比较 ›",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: Map source inspection",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy hidden and noninteractive: Button 所选来源  I",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy receives no UI raycast at (80.00, 1360.00)",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy receives no UI raycast at (1280.00, 720.00)",
+      "passed": true
+    },
+    {
+      "name": "economy_home: legacy receives no UI raycast at (100.00, 150.00)",
+      "passed": true
+    },
+    {
+      "name": "03-economy: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "03-economy: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 03-economy",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 03-economy",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 市场",
+      "passed": true
+    },
+    {
+      "name": "market tab preserves city/RNG/balances",
+      "passed": true
+    },
+    {
+      "name": "04-market: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "04-market: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 04-market",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 04-market",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 政策",
+      "passed": true
+    },
+    {
+      "name": "policies tab preserves city/RNG/balances",
+      "passed": true
+    },
+    {
+      "name": "05-policies: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "05-policies: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 05-policies",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 05-policies",
+      "passed": true
+    },
+    {
+      "name": "browse construction preserves city, RNG and balances",
+      "passed": true
+    },
+    {
+      "name": "construction: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "construction: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "construction: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "construction: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "legacy root found",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: HUD Resources",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: HUD Overview",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: Priority Reminders",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: HUD 消息 · 0",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: Ordinary Notifications",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: HUD Action Receipt",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: Selected tile",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: HUD Map Layers",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: HUD Layer Source",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: HUD Navigation",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: HUD Time Controls",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: Bonus Blueprint Bucket",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: L3 Archive Shield",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: Desk Explanation",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: Button 返回方案比较 ›",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: Map source inspection",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy hidden and noninteractive: Button 所选来源  I",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy receives no UI raycast at (80.00, 1360.00)",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy receives no UI raycast at (1280.00, 720.00)",
+      "passed": true
+    },
+    {
+      "name": "construction: legacy receives no UI raycast at (100.00, 150.00)",
+      "passed": true
+    },
+    {
+      "name": "06-construction-queue: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "06-construction-queue: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 06-construction-queue",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 06-construction-queue",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: choose offered theme",
+      "passed": true
+    },
+    {
+      "name": "07-tasks-current: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "07-tasks-current: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 07-tasks-current",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 07-tasks-current",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 成长路线",
+      "passed": true
+    },
+    {
+      "name": "growth task tab is read only",
+      "passed": true
+    },
+    {
+      "name": "08-tasks-growth: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "08-tasks-growth: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 08-tasks-growth",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 08-tasks-growth",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 已完成",
+      "passed": true
+    },
+    {
+      "name": "completed task tab is read only",
+      "passed": true
+    },
+    {
+      "name": "09-tasks-completed: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "09-tasks-completed: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 09-tasks-completed",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 09-tasks-completed",
+      "passed": true
+    },
+    {
+      "name": "browse bonus_home preserves city, RNG and balances",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "legacy root found",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: HUD Resources",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: HUD Overview",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: Priority Reminders",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: HUD 消息 · 0",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: Ordinary Notifications",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: HUD Action Receipt",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: Selected tile",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: HUD Map Layers",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: HUD Layer Source",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: HUD Navigation",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: HUD Time Controls",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: Bonus Blueprint Bucket",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: L3 Archive Shield",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: Desk Explanation",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: Button 返回方案比较 ›",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: Map source inspection",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy hidden and noninteractive: Button 所选来源  I",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy receives no UI raycast at (80.00, 1360.00)",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy receives no UI raycast at (1280.00, 720.00)",
+      "passed": true
+    },
+    {
+      "name": "bonus_home: legacy receives no UI raycast at (100.00, 150.00)",
+      "passed": true
+    },
+    {
+      "name": "10-bonus: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "10-bonus: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 10-bonus",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 10-bonus",
+      "passed": true
+    },
+    {
+      "name": "Bonus search TextField exists",
+      "passed": true
+    },
+    {
+      "name": "focused Toolkit TextField owns keyboard",
+      "passed": true
+    },
+    {
+      "name": "TextField focus explicitly releasable",
+      "passed": true
+    },
+    {
+      "name": "released TextField no longer owns focus",
+      "passed": true
+    },
+    {
+      "name": "browse records preserves city, RNG and balances",
+      "passed": true
+    },
+    {
+      "name": "records: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "records: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "records: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "records: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "records: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "records: inner management viewport retains usable size: management-development-record-list",
+      "passed": true
+    },
+    {
+      "name": "records: inner management viewport retains usable size: management-development-record-detail",
+      "passed": true
+    },
+    {
+      "name": "records: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "legacy root found",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: HUD Resources",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: HUD Overview",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: Priority Reminders",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: HUD 消息 · 0",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: Ordinary Notifications",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: HUD Action Receipt",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: Selected tile",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: HUD Map Layers",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: HUD Layer Source",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: HUD Navigation",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: HUD Time Controls",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: Bonus Blueprint Bucket",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: L3 Archive Shield",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: Desk Explanation",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: Button 返回方案比较 ›",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: Map source inspection",
+      "passed": true
+    },
+    {
+      "name": "records: legacy hidden and noninteractive: Button 所选来源  I",
+      "passed": true
+    },
+    {
+      "name": "records: legacy receives no UI raycast at (80.00, 1360.00)",
+      "passed": true
+    },
+    {
+      "name": "records: legacy receives no UI raycast at (1280.00, 720.00)",
+      "passed": true
+    },
+    {
+      "name": "records: legacy receives no UI raycast at (100.00, 150.00)",
+      "passed": true
+    },
+    {
+      "name": "11-archive-records: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "11-archive-records: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 11-archive-records",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 11-archive-records",
+      "passed": true
+    },
+    {
+      "name": "browse settings preserves city, RNG and balances",
+      "passed": true
+    },
+    {
+      "name": "settings: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "settings: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "settings: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "legacy root found",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: HUD Resources",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: HUD Overview",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: Priority Reminders",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: HUD 消息 · 0",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: Ordinary Notifications",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: HUD Action Receipt",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: Selected tile",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: HUD Map Layers",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: HUD Layer Source",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: HUD Navigation",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: HUD Time Controls",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: Bonus Blueprint Bucket",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: L3 Archive Shield",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: Desk Explanation",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: Button 返回方案比较 ›",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: Map source inspection",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy hidden and noninteractive: Button 所选来源  I",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy receives no UI raycast at (80.00, 1360.00)",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy receives no UI raycast at (1280.00, 720.00)",
+      "passed": true
+    },
+    {
+      "name": "settings: legacy receives no UI raycast at (100.00, 150.00)",
+      "passed": true
+    },
+    {
+      "name": "12-settings: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "12-settings: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 12-settings",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 12-settings",
+      "passed": true
+    },
+    {
+      "name": "sources exposes visible inner management list",
+      "passed": true
+    },
+    {
+      "name": "source page offers real scrolling content",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 资源与财政",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 城市档案",
+      "passed": true
+    },
+    {
+      "name": "same archive section rebuild restores actual inner management scroll position",
+      "passed": true
+    },
+    {
+      "name": "existing interface method InspectMapFromPage",
+      "passed": true
+    },
+    {
+      "name": "archive can inspect actual map",
+      "passed": true
+    },
+    {
+      "name": "map inspection leaves state/RNG/balances unchanged",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "existing interface method Navigate",
+      "passed": true
+    },
+    {
+      "name": "building: drawer within screen",
+      "passed": true
+    },
+    {
+      "name": "building: drawer header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "building: drawer fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "building: drawer fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "13-building-drawer: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "13-building-drawer: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 13-building-drawer",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 13-building-drawer",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: civic-drawer-close",
+      "passed": true
+    },
+    {
+      "name": "public upgrade entry opens owned Wild star",
+      "passed": true
+    },
+    {
+      "name": "upgrade preview preserves state/RNG/balances",
+      "passed": true
+    },
+    {
+      "name": "14-building-star: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "14-building-star: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 14-building-star",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 14-building-star",
+      "passed": true
+    },
+    {
+      "name": "existing workshop upgrade preview remains isolated",
+      "passed": true
+    },
+    {
+      "name": "18-workshop-upgrade: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "18-workshop-upgrade: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 18-workshop-upgrade",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 18-workshop-upgrade",
+      "passed": true
+    },
+    {
+      "name": "empty land for actual construction",
+      "passed": true
+    },
+    {
+      "name": "real construction draft opened",
+      "passed": true
+    },
+    {
+      "name": "construction: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "construction: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "construction: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "construction: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "15-construction-preview: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "15-construction-preview: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 15-construction-preview",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 15-construction-preview",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: construction-cancel",
+      "passed": true
+    },
+    {
+      "name": "cancel preserves gameplay/RNG/balances and saved offers",
+      "passed": true
+    },
+    {
+      "name": "reopen same construction draft draws no RNG and charges nothing",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui80-font100",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font100: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui80-font100",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "17-layout-ui80-font100: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "17-layout-ui80-font100: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 17-layout-ui80-font100",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 17-layout-ui80-font100",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui80-font125",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font125: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui80-font125",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui80-font150",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui80-font150: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui80-font150",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui100-font100",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font100: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui100-font100",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui100-font125",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font125: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui100-font125",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "17-layout-ui100-font125: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "17-layout-ui100-font125: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 17-layout-ui100-font125",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 17-layout-ui100-font125",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui100-font150",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui100-font150: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui100-font150",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui120-font100",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font100: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui120-font100",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui120-font125",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font125: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui120-font125",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: top visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: nav visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: tile visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: layers visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: clock visible within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: tile separate from layers",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: tile separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: layers separate from clock",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: nav separate from tile",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: top separate from nav",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: tile within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: tile header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: tile fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: tile fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "saved draft reopens for layout: ui120-font150",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: operation within screen",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: operation header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: operation fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "ui120-font150: operation fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "display changes preserve simulation: ui120-font150",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "17-layout-ui120-font150: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "17-layout-ui120-font150: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 17-layout-ui120-font150",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 17-layout-ui120-font150",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "all scale/layout inspections preserve saved draft and city",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: construction-confirm",
+      "passed": true
+    },
+    {
+      "name": "confirmed construction enters real CP queue",
+      "passed": true
+    },
+    {
+      "name": "real new building occupies selected tile",
+      "passed": true
+    },
+    {
+      "name": "16-construction-confirmed-queue: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "16-construction-confirmed-queue: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 16-construction-confirmed-queue",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 16-construction-confirmed-queue",
+      "passed": true
+    },
+    {
+      "name": "declared fixture trigger uses actual persisted reward draw",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: reward-candidate-B02",
+      "passed": true
+    },
+    {
+      "name": "pending reward preselection keeps persisted candidates/state/RNG/balances",
+      "passed": true
+    },
+    {
+      "name": "20-saved-reward-candidates: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "20-saved-reward-candidates: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 20-saved-reward-candidates",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 20-saved-reward-candidates",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: reward-confirm",
+      "passed": true
+    },
+    {
+      "name": "real reward confirmation consumes exactly one pending record",
+      "passed": true
+    },
+    {
+      "name": "21-reward-receipt: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "21-reward-receipt: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 21-reward-receipt",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 21-reward-receipt",
+      "passed": true
+    },
+    {
+      "name": "existing interface method DismissConfirm",
+      "passed": true
+    },
+    {
+      "name": "22-bonus-inventory-and-target: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "22-bonus-inventory-and-target: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 22-bonus-inventory-and-target",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 22-bonus-inventory-and-target",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "population compact renderer remains separate",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: civic-expand",
+      "passed": true
+    },
+    {
+      "name": "management opens with distinct title and its own screen layout",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "30-management-population: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 30-management-population",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 30-management-population",
+      "passed": true
+    },
+    {
+      "name": "population management header: visual button exists for pointer projection",
+      "passed": true
+    },
+    {
+      "name": "population management header: screen/panel inverse agrees at visual button",
+      "passed": true
+    },
+    {
+      "name": "population management header: actual visual button screen position is UI-owned",
+      "passed": true
+    },
+    {
+      "name": "population management header: panel picking resolves visual button or child",
+      "passed": true
+    },
+    {
+      "name": "existing interface method OpenCivicHomeManagement",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CivicOMState",
+      "passed": true
+    },
+    {
+      "name": "direct home management entry retains explicitly requested dwelling",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 岗位来源",
+      "passed": true
+    },
+    {
+      "name": "population management changes comparison perspective",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 资源与财政",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 材料",
+      "passed": true
+    },
+    {
+      "name": "management dropdown offers 筛选 / 有库存",
+      "passed": true
+    },
+    {
+      "name": "management dropdown offers 排序 / 来源名称 ↑",
+      "passed": true
+    },
+    {
+      "name": "real material inventory has selectable management source",
+      "passed": true
+    },
+    {
+      "name": "public reserve has human-readable source label",
+      "passed": true
+    },
+    {
+      "name": "off-map public reserve does not offer a false map location",
+      "passed": true
+    },
+    {
+      "name": "existing interface method OperatingProjectIdentity",
+      "passed": true
+    },
+    {
+      "name": "selected management source has visible scroll",
+      "passed": true
+    },
+    {
+      "name": "real management inspector/list content supports retained scroll",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "31-management-resources-filtered-source: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 31-management-resources-filtered-source",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 31-management-resources-filtered-source",
+      "passed": true
+    },
+    {
+      "name": "selected actual source offers map locate",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: locate selected management source",
+      "passed": true
+    },
+    {
+      "name": "management Locate enters actual map",
+      "passed": true
+    },
+    {
+      "name": "32-management-source-located-map: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "32-management-source-located-map: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 32-management-source-located-map",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 32-management-source-located-map",
+      "passed": true
+    },
+    {
+      "name": "return to exact management list: visual button exists for pointer projection",
+      "passed": true
+    },
+    {
+      "name": "return to exact management list: screen/panel inverse agrees at visual button",
+      "passed": true
+    },
+    {
+      "name": "return to exact management list: actual visual button screen position is UI-owned",
+      "passed": true
+    },
+    {
+      "name": "return to exact management list: panel picking resolves visual button or child",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: return to exact management list",
+      "passed": true
+    },
+    {
+      "name": "Locate/map/return preserves management view, filter, sort and selection",
+      "passed": true
+    },
+    {
+      "name": "Locate/map/return preserves actual inner reading offset",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 住户与服务",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 资源与财政",
+      "passed": true
+    },
+    {
+      "name": "switching management modules preserves resource view/filter/selection",
+      "passed": true
+    },
+    {
+      "name": "nested source records restore their expansion before scrolling",
+      "passed": true
+    },
+    {
+      "name": "switching management modules restores rebuilt inner reading offset",
+      "passed": true
+    },
+    {
+      "name": "existing interface method NavigationTrail",
+      "passed": true
+    },
+    {
+      "name": "management breadcrumb follows selected material view",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 市场",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "33-management-market: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 33-management-market",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 33-management-market",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 政策",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "34-management-policy-comparison: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 34-management-policy-comparison",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 34-management-policy-comparison",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 施工调度",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "35-management-real-construction-queue: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 35-management-real-construction-queue",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 35-management-real-construction-queue",
+      "passed": true
+    },
+    {
+      "name": "management construction table contains real queued building",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 任务与成长",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 当前事项",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: inner management viewport retains usable size: management-development-tasks-list",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: inner management viewport retains usable size: management-development-tasks-detail",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "36-management-tasks-current: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 36-management-tasks-current",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 36-management-tasks-current",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 三阶段路线",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: inner management viewport retains usable size: management-development-growth-route",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "37-management-tasks-three-stage-route: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 37-management-tasks-three-stage-route",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 37-management-tasks-three-stage-route",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 已保存成果",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: inner management viewport retains usable size: management-development-completed-list",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: inner management viewport retains usable size: management-development-completed-detail",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "38-management-tasks-saved-results: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 38-management-tasks-saved-results",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 38-management-tasks-saved-results",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 资源与财政",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 任务与成长",
+      "passed": true
+    },
+    {
+      "name": "management module revisit restores saved-results task tab",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: Bonus 配装",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 库存副本",
+      "passed": true
+    },
+    {
+      "name": "Bonus management has adjacent actual-target and comparison panes",
+      "passed": true
+    },
+    {
+      "name": "Bonus management reads actually claimed fixture inventory",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: inner management viewport retains usable size: management-development-bonus-inventory",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: inner management viewport retains usable size: management-development-bonus-targets",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: inner management viewport retains usable size: management-development-bonus-comparison",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "39-management-bonus-inventory-target-comparison: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 39-management-bonus-inventory-target-comparison",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 39-management-bonus-inventory-target-comparison",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 城市档案",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: inner management viewport retains usable size: management-development-source-list",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: inner management viewport retains usable size: management-development-source-detail",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "40-management-chronological-records: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 40-management-chronological-records",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 40-management-chronological-records",
+      "passed": true
+    },
+    {
+      "name": "existing interface method OpenAdvancedWorkspace",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "41-management-120-150-population: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 41-management-120-150-population",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 41-management-120-150-population",
+      "passed": true
+    },
+    {
+      "name": "existing interface method OpenAdvancedWorkspace",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: workspace fixed footer outside content",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: inner management viewport retains usable size: ",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "42-management-120-150-resources: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 42-management-120-150-resources",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 42-management-120-150-resources",
+      "passed": true
+    },
+    {
+      "name": "existing interface method OpenAdvancedWorkspace",
+      "passed": true
+    },
+    {
+      "name": "enabled visible synthetic Toolkit button: 三阶段路线",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: inner management viewport retains usable size: management-development-growth-route",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "43-management-120-150-growth: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 43-management-120-150-growth",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 43-management-120-150-growth",
+      "passed": true
+    },
+    {
+      "name": "existing interface method OpenAdvancedWorkspace",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: dedicated management mode active",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: management fills screen independently",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: management has its own module header",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: workspace within screen",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: workspace header/content within panel",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: workspace fixed header outside content",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: management uses dedicated content rather than enlarged compact scroll",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: management has independent reading panes",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: inner management viewport retains usable size: management-development-bonus-inventory",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: inner management viewport retains usable size: management-development-bonus-targets",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: inner management viewport retains usable size: management-development-bonus-comparison",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: adjacent management panes do not overlap",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "44-management-120-150-bonus: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 44-management-120-150-bonus",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 44-management-120-150-bonus",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "all independent management browsing preserves gameplay, RNG and balances",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    },
+    {
+      "name": "actual HUD tooltip anchor: visual button exists for pointer projection",
+      "passed": true
+    },
+    {
+      "name": "actual HUD tooltip anchor: screen/panel inverse agrees at visual button",
+      "passed": true
+    },
+    {
+      "name": "actual HUD tooltip anchor: actual visual button screen position is UI-owned",
+      "passed": true
+    },
+    {
+      "name": "actual HUD tooltip anchor: panel picking resolves visual button or child",
+      "passed": true
+    },
+    {
+      "name": "HUD tooltip contains actual source explanation",
+      "passed": true
+    },
+    {
+      "name": "synthetic PointerOver displays actual HUD tooltip",
+      "passed": true
+    },
+    {
+      "name": "resolved tooltip foreground/background meet 4.5:1 text contrast; measured=17.02",
+      "passed": true
+    },
+    {
+      "name": "actual tooltip stays within screen",
+      "passed": true
+    },
+    {
+      "name": "45-hud-tooltip-readable: text keeps natural line height",
+      "passed": true
+    },
+    {
+      "name": "45-hud-tooltip-readable: meter labels clear progress tracks",
+      "passed": true
+    },
+    {
+      "name": "screen texture: 45-hud-tooltip-readable",
+      "passed": true
+    },
+    {
+      "name": "actual fullscreen 2560x1440: 45-hud-tooltip-readable",
+      "passed": true
+    },
+    {
+      "name": "final real city validates",
+      "passed": true
+    },
+    {
+      "name": "actual screenshot artifacts cover compact pages, independent management and decisions",
+      "passed": true
+    },
+    {
+      "name": "existing interface method CloseArchive",
+      "passed": true
+    }
+  ],
+  "captures": [
+    "00-before-first-settlement.png",
+    "01-city-hud-tile.png",
+    "02-residents-services.png",
+    "03-economy.png",
+    "04-market.png",
+    "05-policies.png",
+    "06-construction-queue.png",
+    "07-tasks-current.png",
+    "08-tasks-growth.png",
+    "09-tasks-completed.png",
+    "10-bonus.png",
+    "11-archive-records.png",
+    "12-settings.png",
+    "13-building-drawer.png",
+    "14-building-star.png",
+    "18-workshop-upgrade.png",
+    "15-construction-preview.png",
+    "17-layout-ui80-font100.png",
+    "17-layout-ui100-font125.png",
+    "17-layout-ui120-font150.png",
+    "16-construction-confirmed-queue.png",
+    "20-saved-reward-candidates.png",
+    "21-reward-receipt.png",
+    "22-bonus-inventory-and-target.png",
+    "30-management-population.png",
+    "31-management-resources-filtered-source.png",
+    "32-management-source-located-map.png",
+    "33-management-market.png",
+    "34-management-policy-comparison.png",
+    "35-management-real-construction-queue.png",
+    "36-management-tasks-current.png",
+    "37-management-tasks-three-stage-route.png",
+    "38-management-tasks-saved-results.png",
+    "39-management-bonus-inventory-target-comparison.png",
+    "40-management-chronological-records.png",
+    "41-management-120-150-population.png",
+    "42-management-120-150-resources.png",
+    "43-management-120-150-growth.png",
+    "44-management-120-150-bonus.png",
+    "45-hud-tooltip-readable.png"
+  ],
+  "layouts": [
+    {
+      "sample": "baseline",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 16.0,
+        "y": 744.0,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 746.0,
+        "width": 738.0,
+        "height": 71.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 817.0,
+        "width": 738.0,
+        "height": 529.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1346.0,
+        "width": 738.0,
+        "height": 77.0
+      }
+    },
+    {
+      "sample": "baseline",
+      "ui_scale": 1.0,
+      "font_scale": 1.0,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2560.0,
+        "height": 1440.0
+      },
+      "tile": {
+        "x": 16.0,
+        "y": 744.0,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "layers": {
+        "x": 780.0,
+        "y": 1331.0,
+        "width": 1340.0,
+        "height": 93.0
+      },
+      "clock": {
+        "x": 2142.0,
+        "y": 1298.0,
+        "width": 402.0,
+        "height": 126.0
+      }
+    },
+    {
+      "sample": "residents",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 226.0,
+        "y": 128.0,
+        "width": 820.0,
+        "height": 1194.0
+      },
+      "header": {
+        "x": 227.0,
+        "y": 130.0,
+        "width": 818.0,
+        "height": 123.0
+      },
+      "content": {
+        "x": 227.0,
+        "y": 253.0,
+        "width": 802.0,
+        "height": 979.0
+      },
+      "footer": {
+        "x": 227.0,
+        "y": 1232.0,
+        "width": 818.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "economy_home",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 226.0,
+        "y": 128.0,
+        "width": 820.0,
+        "height": 1194.0
+      },
+      "header": {
+        "x": 227.0,
+        "y": 130.0,
+        "width": 818.0,
+        "height": 123.0
+      },
+      "content": {
+        "x": 227.0,
+        "y": 321.0,
+        "width": 802.0,
+        "height": 911.0
+      },
+      "footer": {
+        "x": 227.0,
+        "y": 1232.0,
+        "width": 818.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "construction",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 226.0,
+        "y": 128.0,
+        "width": 820.0,
+        "height": 1194.0
+      },
+      "header": {
+        "x": 227.0,
+        "y": 130.0,
+        "width": 818.0,
+        "height": 123.0
+      },
+      "content": {
+        "x": 227.0,
+        "y": 253.0,
+        "width": 802.0,
+        "height": 979.0
+      },
+      "footer": {
+        "x": 227.0,
+        "y": 1232.0,
+        "width": 818.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "bonus_home",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 226.0,
+        "y": 128.0,
+        "width": 820.0,
+        "height": 1194.0
+      },
+      "header": {
+        "x": 227.0,
+        "y": 130.0,
+        "width": 818.0,
+        "height": 123.0
+      },
+      "content": {
+        "x": 227.0,
+        "y": 253.0,
+        "width": 818.0,
+        "height": 1068.0
+      },
+      "footer": {
+        "x": 227.0,
+        "y": 1232.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "records",
+      "region": "management-inner-scroll",
+      "name": "management-development-record-list",
+      "viewport": {
+        "x": 54.0,
+        "y": 468.0,
+        "width": 1275.0,
+        "height": 924.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "records",
+      "region": "management-inner-scroll",
+      "name": "management-development-record-detail",
+      "viewport": {
+        "x": 1367.0,
+        "y": 468.0,
+        "width": 1127.0,
+        "height": 924.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "records",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 179.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 265.0,
+        "width": 2526.0,
+        "height": 1158.0
+      },
+      "footer": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "settings",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 226.0,
+        "y": 128.0,
+        "width": 820.0,
+        "height": 1194.0
+      },
+      "header": {
+        "x": 227.0,
+        "y": 130.0,
+        "width": 818.0,
+        "height": 121.0
+      },
+      "content": {
+        "x": 227.0,
+        "y": 251.0,
+        "width": 818.0,
+        "height": 1070.0
+      },
+      "footer": {
+        "x": 226.0,
+        "y": 128.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "building",
+      "region": "drawer",
+      "management": false,
+      "panel": {
+        "x": 1904.0,
+        "y": 128.0,
+        "width": 640.0,
+        "height": 1194.0
+      },
+      "header": {
+        "x": 1905.0,
+        "y": 130.0,
+        "width": 638.0,
+        "height": 121.0
+      },
+      "content": {
+        "x": 1905.0,
+        "y": 251.0,
+        "width": 622.0,
+        "height": 981.0
+      },
+      "footer": {
+        "x": 1905.0,
+        "y": 1232.0,
+        "width": 638.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "construction",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 440.0,
+        "y": 160.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 441.0,
+        "y": 163.0,
+        "width": 1678.0,
+        "height": 129.0
+      },
+      "content": {
+        "x": 441.0,
+        "y": 292.0,
+        "width": 1678.0,
+        "height": 884.0
+      },
+      "footer": {
+        "x": 441.0,
+        "y": 1176.0,
+        "width": 1678.0,
+        "height": 103.0
+      }
+    },
+    {
+      "sample": "ui80-font100",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 16.25,
+        "y": 1103.75,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "header": {
+        "x": 17.5,
+        "y": 1106.25,
+        "width": 737.5,
+        "height": 73.75
+      },
+      "content": {
+        "x": 17.5,
+        "y": 1180.0,
+        "width": 737.5,
+        "height": 526.25
+      },
+      "footer": {
+        "x": 17.5,
+        "y": 1706.25,
+        "width": 737.5,
+        "height": 76.25
+      }
+    },
+    {
+      "sample": "ui80-font100",
+      "ui_scale": 0.800000011920929,
+      "font_scale": 1.0,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 3200.0,
+        "height": 1800.0
+      },
+      "tile": {
+        "x": 16.25,
+        "y": 1103.75,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "layers": {
+        "x": 780.0,
+        "y": 1691.25,
+        "width": 1980.0,
+        "height": 92.5
+      },
+      "clock": {
+        "x": 2782.5,
+        "y": 1657.5,
+        "width": 401.25,
+        "height": 126.25
+      }
+    },
+    {
+      "sample": "ui80-font100",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 226.25,
+        "y": 127.5,
+        "width": 820.0,
+        "height": 1555.0
+      },
+      "header": {
+        "x": 227.5,
+        "y": 130.0,
+        "width": 817.5,
+        "height": 122.5
+      },
+      "content": {
+        "x": 227.5,
+        "y": 320.0,
+        "width": 817.5,
+        "height": 1272.5
+      },
+      "footer": {
+        "x": 227.5,
+        "y": 1592.5,
+        "width": 817.5,
+        "height": 88.75
+      }
+    },
+    {
+      "sample": "ui80-font100",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 760.0,
+        "y": 340.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 761.25,
+        "y": 342.5,
+        "width": 1677.5,
+        "height": 130.0
+      },
+      "content": {
+        "x": 761.25,
+        "y": 472.5,
+        "width": 1677.5,
+        "height": 885.0
+      },
+      "footer": {
+        "x": 761.25,
+        "y": 1357.5,
+        "width": 1677.5,
+        "height": 101.25
+      }
+    },
+    {
+      "sample": "ui80-font125",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 16.25,
+        "y": 1103.75,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "header": {
+        "x": 17.5,
+        "y": 1106.25,
+        "width": 737.5,
+        "height": 81.25
+      },
+      "content": {
+        "x": 17.5,
+        "y": 1187.5,
+        "width": 721.25,
+        "height": 511.25
+      },
+      "footer": {
+        "x": 17.5,
+        "y": 1698.75,
+        "width": 737.5,
+        "height": 83.75
+      }
+    },
+    {
+      "sample": "ui80-font125",
+      "ui_scale": 0.800000011920929,
+      "font_scale": 1.25,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 3200.0,
+        "height": 1800.0
+      },
+      "tile": {
+        "x": 16.25,
+        "y": 1103.75,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "layers": {
+        "x": 780.0,
+        "y": 1683.75,
+        "width": 1980.0,
+        "height": 100.0
+      },
+      "clock": {
+        "x": 2782.5,
+        "y": 1650.0,
+        "width": 401.25,
+        "height": 133.75
+      }
+    },
+    {
+      "sample": "ui80-font125",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 263.75,
+        "y": 156.25,
+        "width": 820.0,
+        "height": 1526.25
+      },
+      "header": {
+        "x": 265.0,
+        "y": 158.75,
+        "width": 817.5,
+        "height": 140.0
+      },
+      "content": {
+        "x": 265.0,
+        "y": 373.75,
+        "width": 802.5,
+        "height": 1211.25
+      },
+      "footer": {
+        "x": 265.0,
+        "y": 1585.0,
+        "width": 817.5,
+        "height": 96.25
+      }
+    },
+    {
+      "sample": "ui80-font125",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 760.0,
+        "y": 340.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 761.25,
+        "y": 342.5,
+        "width": 1677.5,
+        "height": 150.0
+      },
+      "content": {
+        "x": 761.25,
+        "y": 492.5,
+        "width": 1677.5,
+        "height": 852.5
+      },
+      "footer": {
+        "x": 761.25,
+        "y": 1345.0,
+        "width": 1677.5,
+        "height": 113.75
+      }
+    },
+    {
+      "sample": "ui80-font150",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 16.25,
+        "y": 1103.75,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "header": {
+        "x": 17.5,
+        "y": 1106.25,
+        "width": 737.5,
+        "height": 90.0
+      },
+      "content": {
+        "x": 17.5,
+        "y": 1196.25,
+        "width": 721.25,
+        "height": 493.75
+      },
+      "footer": {
+        "x": 17.5,
+        "y": 1690.0,
+        "width": 737.5,
+        "height": 92.5
+      }
+    },
+    {
+      "sample": "ui80-font150",
+      "ui_scale": 0.800000011920929,
+      "font_scale": 1.5,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 3200.0,
+        "height": 1800.0
+      },
+      "tile": {
+        "x": 16.25,
+        "y": 1103.75,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "layers": {
+        "x": 780.0,
+        "y": 1673.75,
+        "width": 1980.0,
+        "height": 110.0
+      },
+      "clock": {
+        "x": 2782.5,
+        "y": 1641.25,
+        "width": 401.25,
+        "height": 142.5
+      }
+    },
+    {
+      "sample": "ui80-font150",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 302.5,
+        "y": 183.75,
+        "width": 820.0,
+        "height": 1498.75
+      },
+      "header": {
+        "x": 303.75,
+        "y": 186.25,
+        "width": 817.5,
+        "height": 158.75
+      },
+      "content": {
+        "x": 303.75,
+        "y": 428.75,
+        "width": 801.25,
+        "height": 1147.5
+      },
+      "footer": {
+        "x": 303.75,
+        "y": 1576.25,
+        "width": 817.5,
+        "height": 105.0
+      }
+    },
+    {
+      "sample": "ui80-font150",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 760.0,
+        "y": 340.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 761.25,
+        "y": 342.5,
+        "width": 1677.5,
+        "height": 168.75
+      },
+      "content": {
+        "x": 761.25,
+        "y": 511.25,
+        "width": 1661.25,
+        "height": 818.75
+      },
+      "footer": {
+        "x": 761.25,
+        "y": 1330.0,
+        "width": 1677.5,
+        "height": 128.75
+      }
+    },
+    {
+      "sample": "ui100-font100",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 16.0,
+        "y": 744.0,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 746.0,
+        "width": 738.0,
+        "height": 71.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 817.0,
+        "width": 738.0,
+        "height": 529.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1346.0,
+        "width": 738.0,
+        "height": 77.0
+      }
+    },
+    {
+      "sample": "ui100-font100",
+      "ui_scale": 1.0,
+      "font_scale": 1.0,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2560.0,
+        "height": 1440.0
+      },
+      "tile": {
+        "x": 16.0,
+        "y": 744.0,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "layers": {
+        "x": 780.0,
+        "y": 1331.0,
+        "width": 1340.0,
+        "height": 93.0
+      },
+      "clock": {
+        "x": 2142.0,
+        "y": 1298.0,
+        "width": 402.0,
+        "height": 126.0
+      }
+    },
+    {
+      "sample": "ui100-font100",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 226.0,
+        "y": 128.0,
+        "width": 820.0,
+        "height": 1194.0
+      },
+      "header": {
+        "x": 227.0,
+        "y": 130.0,
+        "width": 818.0,
+        "height": 123.0
+      },
+      "content": {
+        "x": 227.0,
+        "y": 321.0,
+        "width": 802.0,
+        "height": 911.0
+      },
+      "footer": {
+        "x": 227.0,
+        "y": 1232.0,
+        "width": 818.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "ui100-font100",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 440.0,
+        "y": 160.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 441.0,
+        "y": 163.0,
+        "width": 1678.0,
+        "height": 129.0
+      },
+      "content": {
+        "x": 441.0,
+        "y": 292.0,
+        "width": 1678.0,
+        "height": 884.0
+      },
+      "footer": {
+        "x": 441.0,
+        "y": 1176.0,
+        "width": 1678.0,
+        "height": 103.0
+      }
+    },
+    {
+      "sample": "ui100-font125",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 16.0,
+        "y": 744.0,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 746.0,
+        "width": 738.0,
+        "height": 79.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 825.0,
+        "width": 722.0,
+        "height": 513.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1338.0,
+        "width": 738.0,
+        "height": 85.0
+      }
+    },
+    {
+      "sample": "ui100-font125",
+      "ui_scale": 1.0,
+      "font_scale": 1.25,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2560.0,
+        "height": 1440.0
+      },
+      "tile": {
+        "x": 16.0,
+        "y": 744.0,
+        "width": 740.0,
+        "height": 680.0
+      },
+      "layers": {
+        "x": 780.0,
+        "y": 1326.0,
+        "width": 1340.0,
+        "height": 98.0
+      },
+      "clock": {
+        "x": 2142.0,
+        "y": 1292.0,
+        "width": 402.0,
+        "height": 132.0
+      }
+    },
+    {
+      "sample": "ui100-font125",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 264.0,
+        "y": 156.0,
+        "width": 820.0,
+        "height": 1166.0
+      },
+      "header": {
+        "x": 265.0,
+        "y": 158.0,
+        "width": 818.0,
+        "height": 139.0
+      },
+      "content": {
+        "x": 265.0,
+        "y": 373.0,
+        "width": 802.0,
+        "height": 851.0
+      },
+      "footer": {
+        "x": 265.0,
+        "y": 1224.0,
+        "width": 818.0,
+        "height": 97.0
+      }
+    },
+    {
+      "sample": "ui100-font125",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 440.0,
+        "y": 160.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 441.0,
+        "y": 163.0,
+        "width": 1678.0,
+        "height": 147.0
+      },
+      "content": {
+        "x": 441.0,
+        "y": 310.0,
+        "width": 1678.0,
+        "height": 855.0
+      },
+      "footer": {
+        "x": 441.0,
+        "y": 1165.0,
+        "width": 1678.0,
+        "height": 114.0
+      }
+    },
+    {
+      "sample": "ui100-font150",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 16.0,
+        "y": 834.0,
+        "width": 740.0,
+        "height": 590.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 836.0,
+        "width": 738.0,
+        "height": 87.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 923.0,
+        "width": 722.0,
+        "height": 407.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1330.0,
+        "width": 738.0,
+        "height": 93.0
+      }
+    },
+    {
+      "sample": "ui100-font150",
+      "ui_scale": 1.0,
+      "font_scale": 1.5,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2560.0,
+        "height": 1440.0
+      },
+      "tile": {
+        "x": 16.0,
+        "y": 834.0,
+        "width": 740.0,
+        "height": 590.0
+      },
+      "layers": {
+        "x": 780.0,
+        "y": 1315.0,
+        "width": 1340.0,
+        "height": 109.0
+      },
+      "clock": {
+        "x": 2142.0,
+        "y": 1284.0,
+        "width": 402.0,
+        "height": 140.0
+      }
+    },
+    {
+      "sample": "ui100-font150",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 302.0,
+        "y": 184.0,
+        "width": 820.0,
+        "height": 1138.0
+      },
+      "header": {
+        "x": 303.0,
+        "y": 186.0,
+        "width": 818.0,
+        "height": 158.0
+      },
+      "content": {
+        "x": 303.0,
+        "y": 428.0,
+        "width": 802.0,
+        "height": 788.0
+      },
+      "footer": {
+        "x": 303.0,
+        "y": 1216.0,
+        "width": 818.0,
+        "height": 105.0
+      }
+    },
+    {
+      "sample": "ui100-font150",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 440.0,
+        "y": 160.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 441.0,
+        "y": 163.0,
+        "width": 1678.0,
+        "height": 166.0
+      },
+      "content": {
+        "x": 441.0,
+        "y": 329.0,
+        "width": 1662.0,
+        "height": 820.0
+      },
+      "footer": {
+        "x": 441.0,
+        "y": 1149.0,
+        "width": 1678.0,
+        "height": 130.0
+      }
+    },
+    {
+      "sample": "ui120-font100",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 15.833333015441895,
+        "y": 650.83331298828125,
+        "width": 740.0,
+        "height": 533.33331298828125
+      },
+      "header": {
+        "x": 16.666666030883789,
+        "y": 652.5,
+        "width": 738.33331298828125,
+        "height": 70.0
+      },
+      "content": {
+        "x": 16.666666030883789,
+        "y": 722.5,
+        "width": 722.49993896484375,
+        "height": 382.5
+      },
+      "footer": {
+        "x": 16.666666030883789,
+        "y": 1105.0,
+        "width": 738.33331298828125,
+        "height": 78.333251953125
+      }
+    },
+    {
+      "sample": "ui120-font100",
+      "ui_scale": 1.2000000476837158,
+      "font_scale": 1.0,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2133.333251953125,
+        "height": 1200.0
+      },
+      "tile": {
+        "x": 15.833333015441895,
+        "y": 650.83331298828125,
+        "width": 740.0,
+        "height": 533.33331298828125
+      },
+      "layers": {
+        "x": 779.99993896484375,
+        "y": 1091.6666259765625,
+        "width": 913.33331298828125,
+        "height": 92.5
+      },
+      "clock": {
+        "x": 1714.9998779296875,
+        "y": 1056.6666259765625,
+        "width": 402.5001220703125,
+        "height": 127.5
+      }
+    },
+    {
+      "sample": "ui120-font100",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 225.83332824707031,
+        "y": 128.33332824707031,
+        "width": 819.99993896484375,
+        "height": 953.33331298828125
+      },
+      "header": {
+        "x": 226.66665649414063,
+        "y": 130.0,
+        "width": 818.3333740234375,
+        "height": 123.33332824707031
+      },
+      "content": {
+        "x": 226.66665649414063,
+        "y": 322.5,
+        "width": 802.5,
+        "height": 668.33331298828125
+      },
+      "footer": {
+        "x": 226.66665649414063,
+        "y": 990.83331298828125,
+        "width": 818.3333740234375,
+        "height": 89.99993896484375
+      }
+    },
+    {
+      "sample": "ui120-font100",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 226.66665649414063,
+        "y": 40.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 227.49998474121094,
+        "y": 43.333332061767578,
+        "width": 1678.333251953125,
+        "height": 127.5
+      },
+      "content": {
+        "x": 227.49998474121094,
+        "y": 170.83332824707031,
+        "width": 1678.333251953125,
+        "height": 884.16668701171875
+      },
+      "footer": {
+        "x": 227.49998474121094,
+        "y": 1055.0,
+        "width": 1678.333251953125,
+        "height": 104.1666259765625
+      }
+    },
+    {
+      "sample": "ui120-font125",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 15.833333015441895,
+        "y": 742.5,
+        "width": 740.0,
+        "height": 441.6666259765625
+      },
+      "header": {
+        "x": 16.666666030883789,
+        "y": 744.1666259765625,
+        "width": 738.33331298828125,
+        "height": 77.5
+      },
+      "content": {
+        "x": 16.666666030883789,
+        "y": 821.6666259765625,
+        "width": 722.49993896484375,
+        "height": 275.8333740234375
+      },
+      "footer": {
+        "x": 16.666666030883789,
+        "y": 1097.5,
+        "width": 738.33331298828125,
+        "height": 85.833251953125
+      }
+    },
+    {
+      "sample": "ui120-font125",
+      "ui_scale": 1.2000000476837158,
+      "font_scale": 1.25,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2133.333251953125,
+        "height": 1200.0
+      },
+      "tile": {
+        "x": 15.833333015441895,
+        "y": 742.5,
+        "width": 740.0,
+        "height": 441.6666259765625
+      },
+      "layers": {
+        "x": 779.99993896484375,
+        "y": 1085.833251953125,
+        "width": 913.33331298828125,
+        "height": 98.3333740234375
+      },
+      "clock": {
+        "x": 1714.9998779296875,
+        "y": 1053.333251953125,
+        "width": 402.5001220703125,
+        "height": 130.8333740234375
+      }
+    },
+    {
+      "sample": "ui120-font125",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 264.16665649414063,
+        "y": 155.83332824707031,
+        "width": 820.0,
+        "height": 925.83331298828125
+      },
+      "header": {
+        "x": 265.0,
+        "y": 157.5,
+        "width": 818.333251953125,
+        "height": 139.16665649414063
+      },
+      "content": {
+        "x": 265.0,
+        "y": 373.33331298828125,
+        "width": 801.6666259765625,
+        "height": 610.0
+      },
+      "footer": {
+        "x": 265.0,
+        "y": 983.33331298828125,
+        "width": 818.333251953125,
+        "height": 97.49993896484375
+      }
+    },
+    {
+      "sample": "ui120-font125",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 226.66665649414063,
+        "y": 40.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 227.49998474121094,
+        "y": 43.333332061767578,
+        "width": 1678.333251953125,
+        "height": 145.83332824707031
+      },
+      "content": {
+        "x": 227.49998474121094,
+        "y": 189.16665649414063,
+        "width": 1678.333251953125,
+        "height": 855.0
+      },
+      "footer": {
+        "x": 227.49998474121094,
+        "y": 1044.1666259765625,
+        "width": 1678.333251953125,
+        "height": 115.0
+      }
+    },
+    {
+      "sample": "ui120-font150",
+      "region": "tile",
+      "management": false,
+      "panel": {
+        "x": 15.833333015441895,
+        "y": 829.1666259765625,
+        "width": 740.0,
+        "height": 355.0
+      },
+      "header": {
+        "x": 16.666666030883789,
+        "y": 830.83331298828125,
+        "width": 738.33331298828125,
+        "height": 85.83331298828125
+      },
+      "content": {
+        "x": 16.666666030883789,
+        "y": 916.6666259765625,
+        "width": 722.49993896484375,
+        "height": 172.5
+      },
+      "footer": {
+        "x": 16.666666030883789,
+        "y": 1089.1666259765625,
+        "width": 738.33331298828125,
+        "height": 94.1666259765625
+      }
+    },
+    {
+      "sample": "ui120-font150",
+      "ui_scale": 1.2000000476837158,
+      "font_scale": 1.5,
+      "root": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2133.333251953125,
+        "height": 1200.0
+      },
+      "tile": {
+        "x": 15.833333015441895,
+        "y": 829.1666259765625,
+        "width": 740.0,
+        "height": 355.0
+      },
+      "layers": {
+        "x": 779.99993896484375,
+        "y": 1075.833251953125,
+        "width": 913.33331298828125,
+        "height": 108.3333740234375
+      },
+      "clock": {
+        "x": 1714.9998779296875,
+        "y": 1045.0,
+        "width": 402.5001220703125,
+        "height": 139.1666259765625
+      }
+    },
+    {
+      "sample": "ui120-font150",
+      "region": "workspace",
+      "management": false,
+      "panel": {
+        "x": 301.66665649414063,
+        "y": 184.16665649414063,
+        "width": 820.0,
+        "height": 897.5
+      },
+      "header": {
+        "x": 302.5,
+        "y": 185.83332824707031,
+        "width": 818.333251953125,
+        "height": 157.49998474121094
+      },
+      "content": {
+        "x": 302.5,
+        "y": 428.33331298828125,
+        "width": 802.5,
+        "height": 546.6666259765625
+      },
+      "footer": {
+        "x": 302.5,
+        "y": 974.9998779296875,
+        "width": 818.333251953125,
+        "height": 105.8333740234375
+      }
+    },
+    {
+      "sample": "ui120-font150",
+      "region": "operation",
+      "management": false,
+      "panel": {
+        "x": 226.66665649414063,
+        "y": 40.0,
+        "width": 1680.0,
+        "height": 1120.0
+      },
+      "header": {
+        "x": 227.49998474121094,
+        "y": 43.333332061767578,
+        "width": 1678.333251953125,
+        "height": 164.16665649414063
+      },
+      "content": {
+        "x": 227.49998474121094,
+        "y": 207.49998474121094,
+        "width": 1662.4998779296875,
+        "height": 822.5
+      },
+      "footer": {
+        "x": 227.49998474121094,
+        "y": 1030.0,
+        "width": 1678.333251953125,
+        "height": 129.1666259765625
+      }
+    },
+    {
+      "sample": "30-management-population",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 54.0,
+        "y": 585.0,
+        "width": 1596.0,
+        "height": 718.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "30-management-population",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 1708.0,
+        "y": 421.0,
+        "width": 766.0,
+        "height": 876.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "30-management-population",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 199.0,
+        "width": 2526.0,
+        "height": 1135.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 2526.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "31-management-resources-filtered-source",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 54.0,
+        "y": 614.0,
+        "width": 1596.0,
+        "height": 662.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "31-management-resources-filtered-source",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 1708.0,
+        "y": 450.0,
+        "width": 766.0,
+        "height": 847.0
+      },
+      "offset": [
+        0.0,
+        140.0
+      ]
+    },
+    {
+      "sample": "31-management-resources-filtered-source",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 267.0,
+        "width": 2526.0,
+        "height": 1067.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 2526.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "33-management-market",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 54.0,
+        "y": 614.0,
+        "width": 1596.0,
+        "height": 689.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "33-management-market",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 1708.0,
+        "y": 450.0,
+        "width": 766.0,
+        "height": 847.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "33-management-market",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 267.0,
+        "width": 2526.0,
+        "height": 1067.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 2526.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "34-management-policy-comparison",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 54.0,
+        "y": 639.0,
+        "width": 1596.0,
+        "height": 726.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "34-management-policy-comparison",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 1708.0,
+        "y": 475.0,
+        "width": 766.0,
+        "height": 911.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "34-management-policy-comparison",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 267.0,
+        "width": 2526.0,
+        "height": 1156.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "35-management-real-construction-queue",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 54.0,
+        "y": 546.0,
+        "width": 1596.0,
+        "height": 757.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "35-management-real-construction-queue",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 1708.0,
+        "y": 382.0,
+        "width": 766.0,
+        "height": 915.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "35-management-real-construction-queue",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 199.0,
+        "width": 2526.0,
+        "height": 1135.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 2526.0,
+        "height": 89.0
+      }
+    },
+    {
+      "sample": "36-management-tasks-current",
+      "region": "management-inner-scroll",
+      "name": "management-development-tasks-list",
+      "viewport": {
+        "x": 54.0,
+        "y": 356.0,
+        "width": 1523.0,
+        "height": 1036.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "36-management-tasks-current",
+      "region": "management-inner-scroll",
+      "name": "management-development-tasks-detail",
+      "viewport": {
+        "x": 1615.0,
+        "y": 356.0,
+        "width": 879.0,
+        "height": 1036.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "36-management-tasks-current",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 199.0,
+        "width": 2526.0,
+        "height": 1224.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "37-management-tasks-three-stage-route",
+      "region": "management-inner-scroll",
+      "name": "management-development-growth-route",
+      "viewport": {
+        "x": 41.0,
+        "y": 283.0,
+        "width": 2478.0,
+        "height": 1122.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "37-management-tasks-three-stage-route",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 199.0,
+        "width": 2526.0,
+        "height": 1224.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "38-management-tasks-saved-results",
+      "region": "management-inner-scroll",
+      "name": "management-development-completed-list",
+      "viewport": {
+        "x": 54.0,
+        "y": 468.0,
+        "width": 1523.0,
+        "height": 924.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "38-management-tasks-saved-results",
+      "region": "management-inner-scroll",
+      "name": "management-development-completed-detail",
+      "viewport": {
+        "x": 1615.0,
+        "y": 468.0,
+        "width": 879.0,
+        "height": 924.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "38-management-tasks-saved-results",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 199.0,
+        "width": 2526.0,
+        "height": 1224.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "39-management-bonus-inventory-target-comparison",
+      "region": "management-inner-scroll",
+      "name": "management-development-bonus-inventory",
+      "viewport": {
+        "x": 54.0,
+        "y": 402.0,
+        "width": 697.0,
+        "height": 990.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "39-management-bonus-inventory-target-comparison",
+      "region": "management-inner-scroll",
+      "name": "management-development-bonus-targets",
+      "viewport": {
+        "x": 789.0,
+        "y": 402.0,
+        "width": 772.0,
+        "height": 990.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "39-management-bonus-inventory-target-comparison",
+      "region": "management-inner-scroll",
+      "name": "management-development-bonus-comparison",
+      "viewport": {
+        "x": 1599.0,
+        "y": 402.0,
+        "width": 895.0,
+        "height": 990.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "39-management-bonus-inventory-target-comparison",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 181.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 199.0,
+        "width": 2526.0,
+        "height": 1224.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "40-management-chronological-records",
+      "region": "management-inner-scroll",
+      "name": "management-development-source-list",
+      "viewport": {
+        "x": 54.0,
+        "y": 468.0,
+        "width": 1014.0,
+        "height": 924.0
+      },
+      "offset": [
+        0.0,
+        150.0
+      ]
+    },
+    {
+      "sample": "40-management-chronological-records",
+      "region": "management-inner-scroll",
+      "name": "management-development-source-detail",
+      "viewport": {
+        "x": 1120.0,
+        "y": 468.0,
+        "width": 1374.0,
+        "height": 924.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "40-management-chronological-records",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 16.0,
+        "y": 16.0,
+        "width": 2528.0,
+        "height": 1408.0
+      },
+      "header": {
+        "x": 17.0,
+        "y": 18.0,
+        "width": 2526.0,
+        "height": 179.0
+      },
+      "content": {
+        "x": 17.0,
+        "y": 265.0,
+        "width": 2526.0,
+        "height": 1158.0
+      },
+      "footer": {
+        "x": 17.0,
+        "y": 1334.0,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "41-management-120-150-population",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 53.333332061767578,
+        "y": 730.0,
+        "width": 1312.4998779296875,
+        "height": 277.49993896484375
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "41-management-120-150-population",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 1422.5,
+        "y": 521.6666259765625,
+        "width": 624.9998779296875,
+        "height": 518.3333740234375
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "41-management-120-150-population",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 15.833333015441895,
+        "y": 15.833333015441895,
+        "width": 2101.666748046875,
+        "height": 1168.333251953125
+      },
+      "header": {
+        "x": 16.666666030883789,
+        "y": 17.5,
+        "width": 2099.999755859375,
+        "height": 231.66665649414063
+      },
+      "content": {
+        "x": 16.666666030883789,
+        "y": 249.16665649414063,
+        "width": 2099.999755859375,
+        "height": 828.3333740234375
+      },
+      "footer": {
+        "x": 16.666666030883789,
+        "y": 1077.5,
+        "width": 2099.999755859375,
+        "height": 105.833251953125
+      }
+    },
+    {
+      "sample": "42-management-120-150-resources",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 53.333332061767578,
+        "y": 771.6666259765625,
+        "width": 1312.4998779296875,
+        "height": 235.83331298828125
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "42-management-120-150-resources",
+      "region": "management-inner-scroll",
+      "name": "",
+      "viewport": {
+        "x": 1422.5,
+        "y": 563.33331298828125,
+        "width": 624.9998779296875,
+        "height": 476.66668701171875
+      },
+      "offset": [
+        0.0,
+        140.0
+      ]
+    },
+    {
+      "sample": "42-management-120-150-resources",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 15.833333015441895,
+        "y": 15.833333015441895,
+        "width": 2101.666748046875,
+        "height": 1168.333251953125
+      },
+      "header": {
+        "x": 16.666666030883789,
+        "y": 17.5,
+        "width": 2099.999755859375,
+        "height": 231.66665649414063
+      },
+      "content": {
+        "x": 16.666666030883789,
+        "y": 334.16665649414063,
+        "width": 2099.999755859375,
+        "height": 743.3333740234375
+      },
+      "footer": {
+        "x": 16.666666030883789,
+        "y": 1077.5,
+        "width": 2099.999755859375,
+        "height": 105.833251953125
+      }
+    },
+    {
+      "sample": "43-management-120-150-growth",
+      "region": "management-inner-scroll",
+      "name": "management-development-growth-route",
+      "viewport": {
+        "x": 40.833332061767578,
+        "y": 350.0,
+        "width": 2037.4998779296875,
+        "height": 815.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "43-management-120-150-growth",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 15.833333015441895,
+        "y": 15.833333015441895,
+        "width": 2101.666748046875,
+        "height": 1168.333251953125
+      },
+      "header": {
+        "x": 16.666666030883789,
+        "y": 17.5,
+        "width": 2099.999755859375,
+        "height": 231.66665649414063
+      },
+      "content": {
+        "x": 16.666666030883789,
+        "y": 249.16665649414063,
+        "width": 2099.999755859375,
+        "height": 934.1666259765625
+      },
+      "footer": {
+        "x": 16.666666030883789,
+        "y": 1077.5,
+        "width": 0.0,
+        "height": 0.0
+      }
+    },
+    {
+      "sample": "44-management-120-150-bonus",
+      "region": "management-inner-scroll",
+      "name": "management-development-bonus-inventory",
+      "viewport": {
+        "x": 53.333332061767578,
+        "y": 497.49996948242188,
+        "width": 571.66668701171875,
+        "height": 655.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "44-management-120-150-bonus",
+      "region": "management-inner-scroll",
+      "name": "management-development-bonus-targets",
+      "viewport": {
+        "x": 661.6666259765625,
+        "y": 497.49996948242188,
+        "width": 634.1666259765625,
+        "height": 655.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "44-management-120-150-bonus",
+      "region": "management-inner-scroll",
+      "name": "management-development-bonus-comparison",
+      "viewport": {
+        "x": 1332.5,
+        "y": 497.49996948242188,
+        "width": 721.66650390625,
+        "height": 655.0
+      },
+      "offset": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "sample": "44-management-120-150-bonus",
+      "region": "workspace",
+      "management": true,
+      "panel": {
+        "x": 15.833333015441895,
+        "y": 15.833333015441895,
+        "width": 2101.666748046875,
+        "height": 1168.333251953125
+      },
+      "header": {
+        "x": 16.666666030883789,
+        "y": 17.5,
+        "width": 2099.999755859375,
+        "height": 231.66665649414063
+      },
+      "content": {
+        "x": 16.666666030883789,
+        "y": 249.16665649414063,
+        "width": 2099.999755859375,
+        "height": 934.1666259765625
+      },
+      "footer": {
+        "x": 16.666666030883789,
+        "y": 1077.5,
+        "width": 0.0,
+        "height": 0.0
+      }
+    }
+  ],
+  "notes": [
+    {
+      "action": "real offered theme selection via synthetic Toolkit button",
+      "theme": "industrial"
+    },
+    {
+      "check": "reward_fixture",
+      "status": "synthetic trigger",
+      "reason": "candidates generated and saved by real Bonus.draw; this is UI coverage, not an earned normal-play reward"
+    },
+    {
+      "check": "visual_button_pointer_probe",
+      "sample": "population management header",
+      "synthetic": true,
+      "scope": "coordinate/pick evidence; no native mouse input generated",
+      "screen_point": [
+        2412.0,
+        1348.0
+      ],
+      "panel_point": [
+        2412.0,
+        92.0
+      ],
+      "picked": "Button#civic-expand.c-button.unity-button.unity-text-element <- VisualElement#.c-row <- VisualElement#civic-workspace-head.c-panel-head <- VisualElement#civic-workspace.c-surface.c-workspace.is-wide <- VisualElement#civic-stage.civic-stage <- UIDocumentRootElement#MET Civic Interface-container.unity-ui-document__root <- PanelRootElement#MET Civic Runtime Panel.",
+      "event_system_hits": [
+        {
+          "object": "MET Civic Runtime Panel",
+          "module": "PanelRaycaster"
+        }
+      ]
+    },
+    {
+      "check": "visual_button_pointer_probe",
+      "sample": "return to exact management list",
+      "synthetic": true,
+      "scope": "coordinate/pick evidence; no native mouse input generated",
+      "screen_point": [
+        340.0,
+        1286.0
+      ],
+      "panel_point": [
+        340.0,
+        154.0
+      ],
+      "picked": "Button#.c-button.is-primary.unity-button.unity-text-element <- VisualElement#civic-map-return.c-map-return <- VisualElement#civic-stage.civic-stage <- UIDocumentRootElement#MET Civic Interface-container.unity-ui-document__root <- PanelRootElement#MET Civic Runtime Panel.",
+      "event_system_hits": [
+        {
+          "object": "MET Civic Runtime Panel",
+          "module": "PanelRaycaster"
+        }
+      ]
+    },
+    {
+      "check": "visual_button_pointer_probe",
+      "sample": "actual HUD tooltip anchor",
+      "synthetic": true,
+      "scope": "coordinate/pick evidence; no native mouse input generated",
+      "screen_point": [
+        967.0,
+        1384.0
+      ],
+      "panel_point": [
+        967.0,
+        56.0
+      ],
+      "picked": "Label#.c-text.c-number.unity-label.unity-text-element <- VisualElement#.c-column.c-grow <- Button#hud-food.c-button.c-resource.unity-button.unity-text-element <- VisualElement#civic-top.c-surface.c-top <- VisualElement#civic-stage.civic-stage <- UIDocumentRootElement#MET Civic Interface-container.unity-ui-document__root <- PanelRootElement#MET Civic Runtime Panel.",
+      "event_system_hits": [
+        {
+          "object": "MET Civic Runtime Panel",
+          "module": "PanelRaycaster"
+        }
+      ]
+    },
+    {
+      "check": "tooltip_readability",
+      "input": "synthetic PointerOver; no native hover generated",
+      "contrast_ratio": 17.019136249334565,
+      "foreground": [
+        0.93725490570068359,
+        0.9686274528503418,
+        0.9686274528503418,
+        1.0
+      ],
+      "background": [
+        0.027450980618596077,
+        0.08235294371843338,
+        0.11764705926179886,
+        1.0
+      ],
+      "bounds": {
+        "x": 1799.0,
+        "y": 732.0,
+        "width": 249.0,
+        "height": 273.0
+      }
+    }
+  ],
+  "errors": []
+}

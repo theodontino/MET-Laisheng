@@ -44,7 +44,7 @@ public sealed partial class CityInterface {
   var footer=Row(card,"Reward actions",footerHeight);Stretch(footer,24,800-footerHeight-24,24,24);
   RefreshModalOwnership(true);return body;
  }
- void OpenRewardModal(string rid){
+ void OpenRewardModal(string rid){if(CivicEnabled){OpenCivicReward(rid);return;}
   var queue=Bonus.pending(G);if(queue.Count==0||queue[0]["reward_id"].Text!=rid){ShowMessage("请按保存顺序领取，奖励队列已刷新。");RenderPage();return;}
   var reward=queue[0];var kind=reward.Get("kind","copy").Text;_rewardSelections.TryGetValue(rid,out var chosen);chosen=chosen??"";
   var body=RewardModalBody("选择奖励",BlueprintRewardSource(reward)+" · "+reward["choices"].Count+" 选 1 · 按保存顺序领取");
@@ -66,7 +66,7 @@ public sealed partial class CityInterface {
    AddDeskTip(row.gameObject,Stat(effect.Get("label","规则").Text),()=>"这是规则参数，不是保证的实际月产。安装前按同一步模拟实际收益。\n"+Bonus.card(G,bid)["stacking_note"].Text+"\n规则来源："+effect.Get("rule_id",bid).Text);
   }
  }
- void ShowRewardReceipt(string bid){
+ void ShowRewardReceipt(string bid){if(CivicEnabled){CivicRewardReceipt(bid);return;}
   var name=bid=="__currency__"?"通货补偿":G.c.bonuses[bid].Get("name",bid).Text;
   var body=RewardModalBody("奖励已领取",name+" · 已保存真实领取结果");BlueprintArt(body,bid,150);V3DevText(body,bid=="__currency__"?"补偿已入账，可继续经营与查看任务。":"领取结果已保存。可继续处理任务，或前往 Bonus 查看库存、蓝图与安装目标。",Green);
   var footer=_confirm.transform.Find("Reward independent operation/Reward actions");Button(footer,"留在任务",()=>{DismissConfirm();Navigate("tasks_home");});Button(footer,"前往 Bonus 使用",()=>{DismissConfirm();_v3BonusFilter="all";_blueprintQuery="";Navigate("bonus_home");},true);

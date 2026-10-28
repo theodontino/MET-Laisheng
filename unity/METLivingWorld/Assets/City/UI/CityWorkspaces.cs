@@ -35,7 +35,7 @@ public sealed partial class CityInterface {
  string PageStateKey=>_cityIdentity+"/"+_page+"/"+_pageContext+(_advancedWorkspace?"/advanced":"/compact");
  string PageScopeLabel(){var scope=CurrentPageLayout.Scope;return scope=="街区"?"街区 · "+S["block"].Get("display_name","当前街区").Text:scope;}
  string PageSubtitle=>PageScopeLabel()+"  /  "+NavigationTrail()+"  ·  已暂停";
- void RememberWorkspace(){
+ void RememberWorkspace(){if(CivicEnabled){_civic.Remember("workspace");return;}
   if(_renderedPageKey=="")return;var values=new Dictionary<string,float>();
   if(_archiveScroll!=null)values["body"]=_archiveScroll.GetComponent<ScrollRect>().verticalNormalizedPosition;
   foreach(var pair in _workspaceScrolls)if(pair.Value!=null)values[pair.Key]=pair.Value.verticalNormalizedPosition;

@@ -38,7 +38,7 @@ public sealed partial class CityInterface {
   if(!S["projects"].Has(id))return;
   Runtime.Flush();BeginConstructionWindow("upgrade",id,S["projects"][id]["tile"].Text);
  }
- void BeginConstructionWindow(string mode,string id,string tile){
+ void BeginConstructionWindow(string mode,string id,string tile){if(CivicEnabled){BeginCivicConstruction(mode,id,tile);return;}
   CancelDeskTipsForPanel();DismissMapInspection();EndConstructionIntent();
   BuildConstructionWindow();
   var key=mode+":"+id+":"+tile;
@@ -52,7 +52,7 @@ public sealed partial class CityInterface {
   SelectionChanged?.Invoke(SelectedTile,SelectedBuilding);
  }
  public void CloseConstructionWindow(){
-  if(!_constructionOpen)return;
+  if(!_constructionOpen)return;if(CivicEnabled){CloseCivicConstruction();return;}
   CancelDeskTipsForPanel();_constructionOpen=false;_constructionSubmitting=false;
   _constructionScroll.StopMovement();_constructionShield.SetActive(false);
   // The retained draft is deliberately untouched: close / Esc never charges or redraws offers.
@@ -98,7 +98,7 @@ public sealed partial class CityInterface {
   _constructionTrack.anchorMin=new Vector2(1,0);_constructionTrack.anchorMax=new Vector2(1,1);_constructionTrack.pivot=new Vector2(1,.5f);_constructionTrack.offsetMin=new Vector2(-22,bottom);_constructionTrack.offsetMax=new Vector2(-16,-top);
  }
  public void RefreshConstructionWindow(){
-  if(!_constructionOpen||_constructionSubmitting)return;
+  if(!_constructionOpen||_constructionSubmitting)return;if(CivicEnabled){RenderCivicConstruction();return;}
   float scroll=_constructionResetScroll?1:_constructionScroll.verticalNormalizedPosition;
   Clear(_constructionHeader);Clear(_constructionBody);Clear(_constructionFooter);RefreshConstructionWindowLayout();
   if(_constructionMode=="build")RenderConstructionOffers();else RenderConstructionUpgrades();

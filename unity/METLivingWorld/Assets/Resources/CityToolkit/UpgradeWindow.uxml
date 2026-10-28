@@ -5,7 +5,7 @@
       <ui:VisualElement class="window-header">
         <ui:VisualElement class="header-eyebrow">
           <ui:Label text="建筑改造" class="eyebrow" />
-          <ui:Label text="G0 · 现有升级规则" class="text-small muted" />
+          <ui:Label text="建筑改造 · 比较方案" class="text-small muted" />
           <ui:Button name="upgrade-close" text="关闭 ×" class="close-button text-small" />
         </ui:VisualElement>
         <ui:VisualElement class="header-title-line">

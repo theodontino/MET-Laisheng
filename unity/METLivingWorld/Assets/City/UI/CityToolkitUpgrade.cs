@@ -12,7 +12,7 @@ public sealed partial class CityInterface {
  GameObject _toolkitPreviousFocus;
  public bool ToolkitUpgradeOpen=>WildStarOpen||(_toolkitUpgrade!=null&&_toolkitUpgrade.IsOpen);
  public UpgradeToolkitView ToolkitUpgradeView=>_toolkitUpgrade;
- public bool ToolkitUpgradeEnabled=>Runtime.DisplaySettings.Get("toolkit_upgrade",false).Bool;
+ public bool ToolkitUpgradeEnabled=>CivicEnabled||Runtime.DisplaySettings.Get("toolkit_upgrade",false).Bool;
  public void SetToolkitUpgradeEnabled(bool enabled){Runtime.SetDisplaySetting("toolkit_upgrade",enabled);}
 
  public void OpenToolkitUpgrade(string id){

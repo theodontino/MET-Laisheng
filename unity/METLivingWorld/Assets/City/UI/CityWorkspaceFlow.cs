@@ -16,13 +16,13 @@ public sealed partial class CityInterface {
  bool ObjectDrawerVisible=>ObjectDrawerOpen&&!_objectDrawerSuspended;
  float ObjectDrawerWidth=>570;
 
- bool ReleaseTextInput(){
+ bool ReleaseTextInput(){if(CivicEnabled&&_civic.ReleaseText())return true;
   var selected=EventSystem.current?.currentSelectedGameObject;
   var input=selected!=null?selected.GetComponentInParent<InputField>():null;
   if(input==null||!input.isFocused)return false;
   input.DeactivateInputField();EventSystem.current.SetSelectedGameObject(null);return true;
  }
- void OpenObjectDrawer(string page,string context){
+ void OpenObjectDrawer(string page,string context){if(CivicEnabled){OpenCivicDrawer(page,context);return;}
   if(page!="building"||!S["projects"].Has(context))return;
   CancelDeskTipsForPanel();DismissMapInspection();
   bool changed=_objectContext!=context;
@@ -41,7 +41,7 @@ public sealed partial class CityInterface {
   _objectDrawer.gameObject.SetActive(true);RefreshObjectDrawer();if(changed)_objectScroll.verticalNormalizedPosition=1;
   if(_archiveOpen)LayoutArchive();else LayoutObjectDrawer();RefreshModalOwnership(true);
  }
- void RefreshObjectDrawer(){
+ void RefreshObjectDrawer(){if(CivicEnabled){RefreshCivicDrawer();return;}
   if(!ObjectDrawerOpen||_objectDrawer==null)return;
   if(!S["projects"].Has(_objectContext)){CloseObjectDrawer();return;}
   var scroll=_objectScroll.verticalNormalizedPosition;Clear(_objectBody);Clear(_objectActions);
@@ -55,7 +55,7 @@ public sealed partial class CityInterface {
   foreach(var button in _objectActions.GetComponentsInChildren<Button>()){var text=button.GetComponentInChildren<Text>();HudFont(text,14);var size=button.GetComponent<LayoutElement>();size.minWidth=0;size.preferredWidth=0;size.flexibleWidth=1;Height((RectTransform)button.transform,56*TextScale);}
   LayoutObjectDrawer();Canvas.ForceUpdateCanvases();_objectScroll.StopMovement();_objectScroll.verticalNormalizedPosition=scroll;
  }
- void LayoutObjectDrawer(){
+ void LayoutObjectDrawer(){if(CivicEnabled){SyncCivicVisibility();return;}
   if(_objectDrawer==null)return;
   _objectDrawer.gameObject.SetActive(ObjectDrawerVisible);
   if(!ObjectDrawerOpen)return;
@@ -70,7 +70,7 @@ public sealed partial class CityInterface {
   if(!ObjectDrawerOpen)return;
   CancelDeskTipsForPanel();_objectPage="";_objectContext="";
   if(_objectDrawer!=null){_objectDrawer.gameObject.SetActive(false);Clear(_objectBody);Clear(_objectActions);}
-  Runtime.SetDecisionOpen(_archiveOpen||ConstructionWindowOpen);
+  Runtime.SetDecisionOpen(_archiveOpen||ConstructionWindowOpen||ToolkitUpgradeOpen||CivicOperationOpen);if(CivicEnabled){_civic.Remember("drawer");if(_advancedWorkspace)_civic.Q("civic-workspace").style.right=16;SyncCivicVisibility();}
   if(layout){if(_archiveOpen)LayoutArchive();RefreshModalOwnership(true);RefreshContext();}
  }
 

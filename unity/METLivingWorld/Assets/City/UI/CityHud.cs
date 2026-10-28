@@ -208,7 +208,7 @@ public sealed partial class CityInterface {
         RefreshHudGeometry();
         RenderPlanningStatus();
     }
-    void RefreshHudGeometry(){
+    void RefreshHudGeometry(){if(CivicEnabled){ApplyCivicDisplay();SyncCivicVisibility();return;}
         if(_planningTop==null)return;
         float ui=Mathf.Clamp((float)Runtime.DisplaySettings.Get("ui_scale",1).Double,.8f,1.2f);
         float width=_root.rect.width>100?_root.rect.width:2560/ui,height=_root.rect.height>100?_root.rect.height:1440/ui;

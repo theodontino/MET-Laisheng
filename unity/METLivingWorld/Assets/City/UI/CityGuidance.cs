@@ -87,7 +87,7 @@ public sealed partial class CityInterface {
 
  public void RunCityGuidanceAction(){
   var current=CityGuidanceView();
-  if(!_archiveOpen){
+  if(!_archiveOpen&&!CivicEnabled){
    var changed=!GuidanceMatchesHud(current)||(_guidancePointerPressed&&_pressedGuidanceKey!=GuidanceActionKey(current));
    _guidancePointerPressed=false;_pressedGuidanceKey="";
    if(changed){RefreshPlanningObjective();ShowMessage("城市状态已变化，请再确认下一步。");return;}

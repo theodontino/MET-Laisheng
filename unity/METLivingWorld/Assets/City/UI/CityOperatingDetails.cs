@@ -7,7 +7,7 @@ namespace MET.City {
 public sealed partial class CityInterface {
  bool OperatingSettled=>S.Get("simulation_tick",0).Long>0;
  string _operatingResidentView="buildings",_operatingResidentSort="population",_operatingHomeChoice="";
- string OperatingProjectIdentity(string id){var p=S["projects"].Get(id,V.Map());return G.project_name(id)+(p.Get("tile","").Text!=""?" · "+p["tile"].Text:p.Count==0?" · "+id:"");}
+ string OperatingProjectIdentity(string id){var p=S["projects"].Get(id,V.Map());var tile=p.Get("tile","").Text;return G.project_name(id)+(S["cells"].Has(tile)?" · "+tile:p.Count==0?" · "+id:"");}
  RectTransform OperatingTableRow(Transform parent,string name,string[] cells,float[] weights=null,bool header=false){
   var row=Row(parent,name,(header?34:46)*TextScale);Height(row,(header?34:46)*TextScale);row.GetComponent<HorizontalLayoutGroup>().spacing=8;row.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
   for(int i=0;i<cells.Length;i++){if(header&&i==cells.Length-1&&cells[i]==""){OperatingTableActionCell(row);continue;}var label=Label(row,cells[i],header?12:14,header?Muted:Ink,(header?34:46)*TextScale);label.alignment=i==0?TextAnchor.MiddleLeft:TextAnchor.MiddleRight;var size=label.GetComponent<LayoutElement>();size.minWidth=0;size.preferredWidth=0;size.flexibleWidth=weights!=null?weights[i]:1;}

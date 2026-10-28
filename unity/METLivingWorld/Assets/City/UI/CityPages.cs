@@ -52,7 +52,7 @@ public sealed partial class CityInterface {
  readonly Dictionary<string,string> _residentFilterChoices=new Dictionary<string,string>();
  string ResidentHostName(string host)=>host=="homeless"?"待安置住户":G.project_name(host);
  void PopulationPage(){OperatingPopulationDetailPage();}
- void RenderStatus(){RenderPlanningStatus();}
- void RefreshContext(){RefreshTilePanel();}
+ void RenderStatus(){if(CivicEnabled){if(!PointerBusy)RefreshCivicGuide();return;}RenderPlanningStatus();}
+ void RefreshContext(){if(CivicEnabled){RefreshCivicTile();return;}RefreshTilePanel();}
 }
 }

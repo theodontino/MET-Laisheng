@@ -1,0 +1,38 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+ <Style src="CivicShell.uss" />
+ <ui:VisualElement name="civic-stage" class="civic-stage" picking-mode="Ignore">
+  <ui:VisualElement name="civic-top" class="c-top c-surface" />
+  <ui:VisualElement name="civic-nav" class="c-nav c-surface" />
+  <ui:VisualElement name="civic-guide" class="c-guide c-surface" />
+  <ui:VisualElement name="civic-notices" class="c-notices c-surface" />
+  <ui:VisualElement name="civic-map-return" class="c-map-return" />
+  <ui:VisualElement name="civic-tile" class="c-tile c-surface">
+   <ui:VisualElement name="civic-tile-head" class="c-panel-head" />
+   <ui:ScrollView name="civic-tile-scroll" class="c-scroll"><ui:VisualElement name="civic-tile-body" class="c-body" /></ui:ScrollView>
+   <ui:VisualElement name="civic-tile-actions" class="c-actions" />
+  </ui:VisualElement>
+  <ui:VisualElement name="civic-layers" class="c-layers c-surface" />
+  <ui:VisualElement name="civic-clock" class="c-clock c-surface" />
+  <ui:VisualElement name="civic-toast" class="c-toast c-surface" picking-mode="Ignore" />
+  <ui:VisualElement name="civic-workspace-shade" class="c-shade" />
+  <ui:VisualElement name="civic-workspace" class="c-workspace c-surface">
+   <ui:VisualElement name="civic-workspace-head" class="c-panel-head" />
+   <ui:VisualElement name="civic-workspace-tabs" class="c-tabs" />
+   <ui:ScrollView name="civic-workspace-scroll" class="c-scroll"><ui:VisualElement name="civic-workspace-body" class="c-body" /></ui:ScrollView>
+   <ui:VisualElement name="civic-management-body" class="c-management" />
+   <ui:VisualElement name="civic-workspace-actions" class="c-actions" />
+  </ui:VisualElement>
+  <ui:VisualElement name="civic-drawer" class="c-drawer c-surface">
+   <ui:VisualElement name="civic-drawer-head" class="c-panel-head" />
+   <ui:ScrollView name="civic-drawer-scroll" class="c-scroll"><ui:VisualElement name="civic-drawer-body" class="c-body" /></ui:ScrollView>
+   <ui:VisualElement name="civic-drawer-actions" class="c-actions" />
+  </ui:VisualElement>
+  <ui:VisualElement name="civic-operation-shade" class="c-operation-shade">
+   <ui:VisualElement name="civic-operation" class="c-operation c-surface">
+    <ui:VisualElement name="civic-operation-head" class="c-panel-head" />
+    <ui:ScrollView name="civic-operation-scroll" class="c-scroll"><ui:VisualElement name="civic-operation-body" class="c-body" /></ui:ScrollView>
+    <ui:VisualElement name="civic-operation-actions" class="c-actions" />
+   </ui:VisualElement>
+  </ui:VisualElement>
+ </ui:VisualElement>
+</ui:UXML>

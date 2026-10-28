@@ -92,7 +92,7 @@ public sealed partial class CityInterface {
  string FormatEffect(V effect,double value){var mode=effect.Get("mode","").Text;return mode=="multiply"?"×"+F(value,3):mode=="fraction"?F(value*100,1)+"%":F(value,3)+effect.Get("unit","").Text;}
  void ClaimBlueprint(string rid,string bid){
   if(_blueprintBusy)return;var pending=Bonus.pending(G);if(pending.Count==0||pending[0]["reward_id"].Text!=rid){ShowMessage("这份提案已处理，队列已刷新。");RenderPage();return;}
-  _blueprintBusy=true;var error=Runtime.Execute(g=>Bonus.choose(g,rid,bid));if(error!=""){_blueprintBusy=false;RenderPage();return;}_rewardSelections.Remove(rid);if(_confirm!=null)DismissConfirm();HideDeskTip();_inventoryChoice=bid=="__currency__"?"":bid;_blueprintSlot="";_installView=V.Map();RenderPage();RefreshBucket();StartCoroutine(BlueprintReceipt(bid));
+  _blueprintBusy=true;var error=Runtime.Execute(g=>Bonus.choose(g,rid,bid));if(error!=""){_blueprintBusy=false;RenderPage();return;}_rewardSelections.Remove(rid);if(_confirm!=null)DismissConfirm();HideDeskTip();_inventoryChoice=bid=="__currency__"?"":bid;_blueprintSlot="";_installView=V.Map();RenderPage();RefreshBucket();if(CivicEnabled)CivicRewardReceipt(bid);else StartCoroutine(BlueprintReceipt(bid));
  }
  IEnumerator BlueprintReceipt(string bid){
   _receiptSkip=false;_receipt=Surface("Approved Blueprint Flight",_root,BlueprintBlue);Pin(_receipt,new Vector2(.5f,.5f),new Vector2(.5f,.5f),Vector2.zero,new Vector2(260,286));
