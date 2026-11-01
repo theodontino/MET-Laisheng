@@ -2776,6 +2776,39 @@
       "excludes": [],
       "status": "implemented",
       "weight": 1.0
+    },
+    "W01": {
+      "id": "W01",
+      "name": "农闲整备",
+      "slot": "Organization",
+      "allowed_slots": [
+        "Organization"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "条件满足时本建筑食物产出增加15%。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.15,
+          "id": "W01.1",
+          "priority": 0,
+          "when": {
+            "wild_no_upgrade": true
+          }
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 0.0
     }
   },
   "operators": {

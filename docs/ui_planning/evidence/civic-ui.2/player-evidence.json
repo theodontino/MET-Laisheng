@@ -1,0 +1,1575 @@
+{
+  "ok": true,
+  "scope": "Actual Unity Player original city; synthetic NavigationSubmit events and declared isolated fixture supplies; direct Sim.tick CP advancement. Not OS mouse/human acceptance, normal-play pacing or hope-city trade evidence.",
+  "resolution": "2560x1440",
+  "fullscreen": true,
+  "graphics": "Apple M5 Max",
+  "save_root": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/star-integration-20261101/player/save",
+  "seed": 20261026,
+  "origin": "free",
+  "building": "B000001",
+  "fixture_supplies": {
+    "food": 80,
+    "material": 40,
+    "debug_used": true
+  },
+  "checks": [
+    {
+      "name": "explicit isolated save root nested under evidence output",
+      "passed": true
+    },
+    {
+      "name": "original city renderer ready",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2K fixture baseline",
+      "passed": true
+    },
+    {
+      "name": "ordinary startup without Wild mode",
+      "passed": true
+    },
+    {
+      "name": "begin isolated district",
+      "passed": true
+    },
+    {
+      "name": "choose actual offered origin",
+      "passed": true
+    },
+    {
+      "name": "ordinary existing city has no implicit Wild conversion",
+      "passed": true
+    },
+    {
+      "name": "ordinary city exposes star integration entry",
+      "passed": true
+    },
+    {
+      "name": "opening integration confirmation does not enable Wild",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 00-existing-city-star-confirmation",
+      "passed": true
+    },
+    {
+      "name": "cancelling integration preserves ordinary city",
+      "passed": true
+    },
+    {
+      "name": "confirming integration enables real rules and opens star",
+      "passed": true
+    },
+    {
+      "name": "declare engineering fixture supplies",
+      "passed": true
+    },
+    {
+      "name": "isolated Wild fixture paused",
+      "passed": true
+    },
+    {
+      "name": "opening farm has 2 DP actual=2 expected=2",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 01-wild-map-fixture",
+      "passed": true
+    },
+    {
+      "name": "star owns map and keyboard and stops runtime",
+      "passed": true
+    },
+    {
+      "name": "opening star preserves live city and RNG",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 02-wild-star",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-node-housing",
+      "passed": true
+    },
+    {
+      "name": "locked housing selectable for explanation without confirmation",
+      "passed": true
+    },
+    {
+      "name": "candidate selection preserves live state",
+      "passed": true
+    },
+    {
+      "name": "measured star window at 0.8 / 1",
+      "passed": true
+    },
+    {
+      "name": "star window within panel at 0.8 / 1",
+      "passed": true
+    },
+    {
+      "name": "footer controls inside window",
+      "passed": true
+    },
+    {
+      "name": "footer stays outside scroll content",
+      "passed": true
+    },
+    {
+      "name": "both panes retain usable viewport",
+      "passed": true
+    },
+    {
+      "name": "inspector scrolls vertically",
+      "passed": true
+    },
+    {
+      "name": "Chinese title font loaded and measured",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: compound",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: housing",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: production",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: organization",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: link",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: fusion",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: apartment",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: agriculture",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-status",
+      "passed": true
+    },
+    {
+      "name": "display setting leaves simulation untouched",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 03-layout-ui80-font100",
+      "passed": true
+    },
+    {
+      "name": "measured star window at 0.8 / 1.25",
+      "passed": true
+    },
+    {
+      "name": "star window within panel at 0.8 / 1.25",
+      "passed": true
+    },
+    {
+      "name": "footer controls inside window",
+      "passed": true
+    },
+    {
+      "name": "footer stays outside scroll content",
+      "passed": true
+    },
+    {
+      "name": "both panes retain usable viewport",
+      "passed": true
+    },
+    {
+      "name": "inspector scrolls vertically",
+      "passed": true
+    },
+    {
+      "name": "Chinese title font loaded and measured",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: compound",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: housing",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: production",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: organization",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: link",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: fusion",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: apartment",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: agriculture",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-status",
+      "passed": true
+    },
+    {
+      "name": "display setting leaves simulation untouched",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 03-layout-ui80-font125",
+      "passed": true
+    },
+    {
+      "name": "measured star window at 1 / 1",
+      "passed": true
+    },
+    {
+      "name": "star window within panel at 1 / 1",
+      "passed": true
+    },
+    {
+      "name": "footer controls inside window",
+      "passed": true
+    },
+    {
+      "name": "footer stays outside scroll content",
+      "passed": true
+    },
+    {
+      "name": "both panes retain usable viewport",
+      "passed": true
+    },
+    {
+      "name": "inspector scrolls vertically",
+      "passed": true
+    },
+    {
+      "name": "Chinese title font loaded and measured",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: compound",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: housing",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: production",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: organization",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: link",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: fusion",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: apartment",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: agriculture",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-status",
+      "passed": true
+    },
+    {
+      "name": "display setting leaves simulation untouched",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 03-layout-ui100-font100",
+      "passed": true
+    },
+    {
+      "name": "measured star window at 1 / 1.25",
+      "passed": true
+    },
+    {
+      "name": "star window within panel at 1 / 1.25",
+      "passed": true
+    },
+    {
+      "name": "footer controls inside window",
+      "passed": true
+    },
+    {
+      "name": "footer stays outside scroll content",
+      "passed": true
+    },
+    {
+      "name": "both panes retain usable viewport",
+      "passed": true
+    },
+    {
+      "name": "inspector scrolls vertically",
+      "passed": true
+    },
+    {
+      "name": "Chinese title font loaded and measured",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: compound",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: housing",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: production",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: organization",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: link",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: fusion",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: apartment",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: agriculture",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-status",
+      "passed": true
+    },
+    {
+      "name": "display setting leaves simulation untouched",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 03-layout-ui100-font125",
+      "passed": true
+    },
+    {
+      "name": "measured star window at 1.2 / 1",
+      "passed": true
+    },
+    {
+      "name": "star window within panel at 1.2 / 1",
+      "passed": true
+    },
+    {
+      "name": "footer controls inside window",
+      "passed": true
+    },
+    {
+      "name": "footer stays outside scroll content",
+      "passed": true
+    },
+    {
+      "name": "both panes retain usable viewport",
+      "passed": true
+    },
+    {
+      "name": "inspector scrolls vertically",
+      "passed": true
+    },
+    {
+      "name": "Chinese title font loaded and measured",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: compound",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: housing",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: production",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: organization",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: link",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: fusion",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: apartment",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: agriculture",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-status",
+      "passed": true
+    },
+    {
+      "name": "display setting leaves simulation untouched",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 03-layout-ui120-font100",
+      "passed": true
+    },
+    {
+      "name": "measured star window at 1.2 / 1.25",
+      "passed": true
+    },
+    {
+      "name": "star window within panel at 1.2 / 1.25",
+      "passed": true
+    },
+    {
+      "name": "footer controls inside window",
+      "passed": true
+    },
+    {
+      "name": "footer stays outside scroll content",
+      "passed": true
+    },
+    {
+      "name": "both panes retain usable viewport",
+      "passed": true
+    },
+    {
+      "name": "inspector scrolls vertically",
+      "passed": true
+    },
+    {
+      "name": "Chinese title font loaded and measured",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: compound",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: compound / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: housing",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: housing / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: production",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: production / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: organization",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: organization / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: link",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: link / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: fusion",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: fusion / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: apartment",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: apartment / node-status",
+      "passed": true
+    },
+    {
+      "name": "node inside scroll canvas: agriculture",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-title",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-subtitle",
+      "passed": true
+    },
+    {
+      "name": "node text inside card: agriculture / node-status",
+      "passed": true
+    },
+    {
+      "name": "display setting leaves simulation untouched",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 03-layout-ui120-font125",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-cancel",
+      "passed": true
+    },
+    {
+      "name": "back to city releases ownership",
+      "passed": true
+    },
+    {
+      "name": "cancel preview leaves city and RNG unchanged",
+      "passed": true
+    },
+    {
+      "name": "cancel retains selected tile",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-node-compound",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-confirm",
+      "passed": true
+    },
+    {
+      "name": "confirmed start closes modal",
+      "passed": true
+    },
+    {
+      "name": "start reserves one DP actual=1 expected=1",
+      "passed": true
+    },
+    {
+      "name": "material is scheduled and not prepaid actual=40 expected=40",
+      "passed": true
+    },
+    {
+      "name": "node joins actual construction queue",
+      "passed": true
+    },
+    {
+      "name": "pending node gives no housing benefit actual=10 expected=10",
+      "passed": true
+    },
+    {
+      "name": "pending node gives no food benefit actual=14.5 expected=14.5",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 04-compound-started",
+      "passed": true
+    },
+    {
+      "name": "pending card cannot submit twice",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 05-compound-pending",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: compound",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: compound",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: compound",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: compound",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: compound",
+      "passed": true
+    },
+    {
+      "name": "real CP queue completes compound",
+      "passed": true
+    },
+    {
+      "name": "completion committed compound",
+      "passed": true
+    },
+    {
+      "name": "construction ledger consumes 10 material: compound actual=10 expected=10",
+      "passed": true
+    },
+    {
+      "name": "construction ledger consumes 1 CP: compound actual=1 expected=1",
+      "passed": true
+    },
+    {
+      "name": "completed compound adds housing 10 percent actual=11 expected=11",
+      "passed": true
+    },
+    {
+      "name": "completed compound adds food 10 percent with terrain retained actual=15.95 expected=15.95",
+      "passed": true
+    },
+    {
+      "name": "completed compound rendered",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-node-housing",
+      "passed": true
+    },
+    {
+      "name": "housing unlocked after real completion",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 06-housing-unlocked",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-confirm",
+      "passed": true
+    },
+    {
+      "name": "second start reserves final DP actual=2 expected=2",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: housing",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: housing",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: housing",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: housing",
+      "passed": true
+    },
+    {
+      "name": "engineering Sim.tick: housing",
+      "passed": true
+    },
+    {
+      "name": "real CP queue completes housing",
+      "passed": true
+    },
+    {
+      "name": "completion committed housing",
+      "passed": true
+    },
+    {
+      "name": "construction ledger consumes 10 material: housing actual=10 expected=10",
+      "passed": true
+    },
+    {
+      "name": "construction ledger consumes 1 CP: housing actual=1 expected=1",
+      "passed": true
+    },
+    {
+      "name": "housing percentages additive actual=12 expected=12",
+      "passed": true
+    },
+    {
+      "name": "housing branch leaves food percentage unchanged actual=15.95 expected=15.95",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-node-compound",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 07-two-completed-nodes",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-remove",
+      "passed": true
+    },
+    {
+      "name": "dependency removal asks for confirmation",
+      "passed": true
+    },
+    {
+      "name": "removal preview leaves domain state unchanged",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 08-cascade-removal-confirmation",
+      "passed": true
+    },
+    {
+      "name": "enabled Toolkit control: wild-remove-yes",
+      "passed": true
+    },
+    {
+      "name": "cascade returns both design points actual=0 expected=0",
+      "passed": true
+    },
+    {
+      "name": "spent materials not refunded actual=20.5498820738442 expected=20.5498820738442",
+      "passed": true
+    },
+    {
+      "name": "cascade removes housing descendant",
+      "passed": true
+    },
+    {
+      "name": "cancel removes housing effects actual=10 expected=10",
+      "passed": true
+    },
+    {
+      "name": "cancel removes food effects actual=14.5 expected=14.5",
+      "passed": true
+    },
+    {
+      "name": "removal returns to star for continued planning",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 09-capacity-returned",
+      "passed": true
+    },
+    {
+      "name": "final close releases input",
+      "passed": true
+    },
+    {
+      "name": "complete city state validates",
+      "passed": true
+    },
+    {
+      "name": "fullscreen 2560x1440 capture: 10-final-map",
+      "passed": true
+    }
+  ],
+  "captures": [
+    "00-existing-city-star-confirmation.png",
+    "01-wild-map-fixture.png",
+    "02-wild-star.png",
+    "03-layout-ui80-font100.png",
+    "03-layout-ui80-font125.png",
+    "03-layout-ui100-font100.png",
+    "03-layout-ui100-font125.png",
+    "03-layout-ui120-font100.png",
+    "03-layout-ui120-font125.png",
+    "04-compound-started.png",
+    "05-compound-pending.png",
+    "06-housing-unlocked.png",
+    "07-two-completed-nodes.png",
+    "08-cascade-removal-confirmation.png",
+    "09-capacity-returned.png",
+    "10-final-map.png"
+  ],
+  "layouts": [
+    {
+      "ui_scale": 0.800000011920929,
+      "text_scale": 1.0,
+      "panel": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 3200.0,
+        "height": 1800.0
+      },
+      "window": {
+        "x": 650.0,
+        "y": 350.0,
+        "width": 1900.0,
+        "height": 1100.0
+      },
+      "confirm": {
+        "x": 2355.0,
+        "y": 1366.25,
+        "width": 160.0,
+        "height": 62.5
+      },
+      "graph_viewport": {
+        "x": 675.0,
+        "y": 643.75,
+        "width": 1197.5,
+        "height": 640.0
+      },
+      "inspector_viewport": {
+        "x": 1886.25,
+        "y": 576.25,
+        "width": 662.5,
+        "height": 768.75
+      }
+    },
+    {
+      "ui_scale": 0.800000011920929,
+      "text_scale": 1.25,
+      "panel": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 3200.0,
+        "height": 1800.0
+      },
+      "window": {
+        "x": 650.0,
+        "y": 350.0,
+        "width": 1900.0,
+        "height": 1100.0
+      },
+      "confirm": {
+        "x": 2338.75,
+        "y": 1356.25,
+        "width": 176.25,
+        "height": 71.25
+      },
+      "graph_viewport": {
+        "x": 675.0,
+        "y": 690.0,
+        "width": 1173.75,
+        "height": 562.5
+      },
+      "inspector_viewport": {
+        "x": 1886.25,
+        "y": 612.5,
+        "width": 638.75,
+        "height": 721.25
+      }
+    },
+    {
+      "ui_scale": 1.0,
+      "text_scale": 1.0,
+      "panel": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2560.0,
+        "height": 1440.0
+      },
+      "window": {
+        "x": 330.0,
+        "y": 170.0,
+        "width": 1900.0,
+        "height": 1100.0
+      },
+      "confirm": {
+        "x": 2035.0,
+        "y": 1189.0,
+        "width": 160.0,
+        "height": 61.0
+      },
+      "graph_viewport": {
+        "x": 355.0,
+        "y": 463.0,
+        "width": 1198.0,
+        "height": 640.0
+      },
+      "inspector_viewport": {
+        "x": 1566.0,
+        "y": 395.0,
+        "width": 663.0,
+        "height": 774.0
+      }
+    },
+    {
+      "ui_scale": 1.0,
+      "text_scale": 1.25,
+      "panel": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2560.0,
+        "height": 1440.0
+      },
+      "window": {
+        "x": 330.0,
+        "y": 170.0,
+        "width": 1900.0,
+        "height": 1100.0
+      },
+      "confirm": {
+        "x": 2020.0,
+        "y": 1178.0,
+        "width": 175.0,
+        "height": 70.0
+      },
+      "graph_viewport": {
+        "x": 355.0,
+        "y": 509.0,
+        "width": 1174.0,
+        "height": 566.0
+      },
+      "inspector_viewport": {
+        "x": 1566.0,
+        "y": 432.0,
+        "width": 639.0,
+        "height": 723.0
+      }
+    },
+    {
+      "ui_scale": 1.2000000476837158,
+      "text_scale": 1.0,
+      "panel": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2133.333251953125,
+        "height": 1200.0
+      },
+      "window": {
+        "x": 116.66666412353516,
+        "y": 59.999996185302734,
+        "width": 1900.0,
+        "height": 1080.0
+      },
+      "confirm": {
+        "x": 1821.6666259765625,
+        "y": 1060.0,
+        "width": 160.0,
+        "height": 60.0
+      },
+      "graph_viewport": {
+        "x": 141.66665649414063,
+        "y": 353.33331298828125,
+        "width": 1174.1666259765625,
+        "height": 636.6666259765625
+      },
+      "inspector_viewport": {
+        "x": 1352.5,
+        "y": 285.83331298828125,
+        "width": 663.333251953125,
+        "height": 753.33331298828125
+      }
+    },
+    {
+      "ui_scale": 1.2000000476837158,
+      "text_scale": 1.25,
+      "panel": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 2133.333251953125,
+        "height": 1200.0
+      },
+      "window": {
+        "x": 116.66666412353516,
+        "y": 59.999996185302734,
+        "width": 1900.0,
+        "height": 1080.0
+      },
+      "confirm": {
+        "x": 1807.4998779296875,
+        "y": 1048.333251953125,
+        "width": 174.166748046875,
+        "height": 69.166748046875
+      },
+      "graph_viewport": {
+        "x": 141.66665649414063,
+        "y": 399.16665649414063,
+        "width": 1174.1666259765625,
+        "height": 545.833251953125
+      },
+      "inspector_viewport": {
+        "x": 1352.5,
+        "y": 321.66665649414063,
+        "width": 639.1666259765625,
+        "height": 703.3333740234375
+      }
+    }
+  ],
+  "engineering_advances": [
+    {
+      "node": "compound",
+      "method": "direct Sim.tick through Runtime.Execute in paused isolated engineering fixture",
+      "steps": 5,
+      "step_months": 0.02,
+      "local_months": 0.1,
+      "cp": 1.0,
+      "material": 10.0
+    },
+    {
+      "node": "housing",
+      "method": "direct Sim.tick through Runtime.Execute in paused isolated engineering fixture",
+      "steps": 5,
+      "step_months": 0.02,
+      "local_months": 0.099999999999999978,
+      "cp": 1.0,
+      "material": 10.0
+    }
+  ],
+  "errors": []
+}

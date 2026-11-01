@@ -12,6 +12,14 @@ public sealed partial class CityInterface {
  GameObject _wildPreviousFocus;
  public WildStarView WildStarWindow=>_wildStar;
  public bool WildStarOpen=>_wildStar!=null&&_wildStar.IsOpen;
+ bool CanStartWildStar(string id)=>!WildDesign.Enabled(G)&&S["projects"].Has(id)&&G.c.wild["forms"].Has(S["projects"][id].Get("def",""));
+ void OfferWildStar(string id){
+  Confirm("启用建筑星图？","为当前街区启用 Wild 构筑：保留现有建筑与城市记录，为农居建立设计档案，并发放一次开局低级工业品。基础施工能力改为每月 10 CP；新节点通过实际施工生效。",()=>{
+   var error=Runtime.ExecuteWorld(city=>city.EnableWild());
+   if(error!=""){ShowMessage(error);return;}
+   _civicTileKey="";RefreshContext();OpenWildStar(id);
+  });
+ }
  public void OpenWildStar(string id) {
   if(!S["projects"].Has(id)||!WildDesign.IsFarm(G,S["projects"][id])||ConstructionWindowOpen||_confirm!=null)return;
   Runtime.Flush();CancelDeskTipsForPanel();DismissMapInspection();EndConstructionIntent();

@@ -74,6 +74,7 @@ public static class Rules {
     }
     public static bool condition(V s,string id,V when,string source="",string provider="") {
         var p=s["projects"][id];var traits=semantic_traits(s,id);
+        if(when.Get("wild_no_upgrade",false).Bool && s["projects"].Values.Any(project=>project.Get("upgrade_job",V.Map()).Count>0))return false;
         foreach(var t in when.Get("traits",V.Arr()))if(!traits.Contains(t))return false;
         if(!any_trait(traits,when.Get("any_traits",V.Arr())))return false;
         var tile=s["cells"].Get(p["tile"],V.Map());

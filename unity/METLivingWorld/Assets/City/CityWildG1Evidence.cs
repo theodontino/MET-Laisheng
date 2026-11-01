@@ -75,9 +75,25 @@ public sealed class CityWildG1Evidence : MonoBehaviour {
   Require(GetComponent<CityWorld>().Failure=="","original city renderer ready");
   Require(Screen.width==2560&&Screen.height==1440&&Screen.fullScreen,"fullscreen 2K fixture baseline");
   // A reproducible new city replaces only the explicitly isolated fixture save.
-  _runtime.NewCity(20261026);Command(_runtime.ExecuteWorld(city=>city.BeginDistrict(0,"balanced","Wild G1 工程验收")),"begin isolated district");
+  _runtime.NewCity(20261026);Command(_runtime.ExecuteWorld(city=>{city.s["wild_mode"]=false;return "";}),"ordinary startup without Wild mode");Command(_runtime.ExecuteWorld(city=>city.BeginDistrict(0,"balanced","Wild G1 工程验收")),"begin isolated district");
   _origin=G.s["origin_choices"][0].Text;Command(_runtime.Execute(g=>g.choose_origin(_origin)),"choose actual offered origin");
-  Command(_runtime.ExecuteWorld(city=>city.EnableWild()),"explicitly enable Wild");_runtime.SetPaused(true);
+  _runtime.SetPaused(true);
+  _building=G.playable_ids().First(id=>G.s["projects"][id]["def"].Text=="homestead").Text;
+  _tile=G.s["projects"][_building]["tile"].Text;_ui.SelectTile(_tile);yield return Frames();
+  Require(!WildDesign.Enabled(G),"ordinary existing city has no implicit Wild conversion");
+  var entry=_ui.CivicView.Root.Query<Button>().ToList().FirstOrDefault(b=>b.text=="启用建筑星图");
+  Require(entry!=null&&entry.enabledInHierarchy,"ordinary city exposes star integration entry");
+  using(var submit=NavigationSubmitEvent.GetPooled()){submit.target=entry;entry.SendEvent(submit);}yield return Frames();
+  Require(!WildDesign.Enabled(G),"opening integration confirmation does not enable Wild");
+  yield return Capture("00-existing-city-star-confirmation");
+  typeof(CityInterface).GetMethod("DismissConfirm",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).Invoke(_ui,null);yield return Frames();
+  Require(!WildDesign.Enabled(G),"cancelling integration preserves ordinary city");
+  entry=_ui.CivicView.Root.Query<Button>().ToList().First(b=>b.text=="启用建筑星图");
+  using(var submit=NavigationSubmitEvent.GetPooled()){submit.target=entry;entry.SendEvent(submit);}yield return Frames();
+  var accept=_ui.CivicView.Root.Query<Button>().ToList().First(b=>b.text=="确认"&&b.enabledInHierarchy);
+  using(var submit=NavigationSubmitEvent.GetPooled()){submit.target=accept;accept.SendEvent(submit);}yield return Frames();
+  Require(WildDesign.Enabled(G)&&_ui.WildStarOpen,"confirming integration enables real rules and opens star");
+  _ui.CloseToolkitUpgrade();yield return Frames();
   // Two 10-material jobs exceed the normal opening stock. This declared fixture
   // supply keeps engineering checks independent of a normal-play waiting loop.
   Command(_runtime.Execute(g=>{var inventory=g.s["projects"]["municipal"]["inventory"];var prior=inventory.Duplicate(true);inventory["food"]=80;inventory["material"]=40;g.s["debug_used"]=true;g.log_event("wild_g1_engineering_fixture",V.Map("before",prior,"after",inventory,"reason","isolated scripted UI/CP acceptance; not ordinary-play resource or pacing evidence"),"隔离 G1 工程验收补给：食物80、材料40；不作为正常游玩证据。");g.refresh_metrics();return "";}),"declare engineering fixture supplies");

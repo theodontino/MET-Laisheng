@@ -145,5 +145,42 @@
       "to": "agriculture",
       "bypass": true
     }
+  ],
+  "housing_design_ii": {
+    "required_exports": 20,
+    "cost": 90
+  },
+  "milestones": [
+    {
+      "id": "wild:hope-design-ii:v1",
+      "name": "掌握住房设计 II",
+      "requirements": {
+        "housing_levels": 2,
+        "material_exported": 20
+      },
+      "choices": [
+        {
+          "id": "material",
+          "kind": "resource",
+          "resource": "material",
+          "amount": 10,
+          "name": "材料 ×10"
+        },
+        {
+          "id": "goods",
+          "kind": "resource",
+          "resource": "goods",
+          "amount": 1,
+          "name": "基础制成品 ×1"
+        },
+        {
+          "id": "W01",
+          "kind": "bonus",
+          "bonus_id": "W01",
+          "amount": 1,
+          "name": "农闲整备 ×1（库存，手动装配）"
+        }
+      ]
+    }
   ]
 }

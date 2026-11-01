@@ -107,7 +107,7 @@ public sealed partial class CitySession {
         string error=ValidateEnvelope(c,state);if(error!="")return error;
         var replacement=new Dictionary<string,Game>(StringComparer.Ordinal);foreach(var pair in state["blocks"].Pairs){var g=new Game(c,storageRoot);g.s=pair.Value["state"].Duplicate(true);g.s["block"]["city_context"]=true;g.world_managed=true;g.compiled=g.s["projects"].Count>0?Rules.compile(g):V.Map();replacement[pair.Key]=g;}
         s=MetadataSnapshot(state);if(!s["legacy"].Has("build_results"))s["legacy"]["build_results"]=V.Map();Games.Clear();foreach(var pair in replacement)Games[pair.Key]=pair.Value;
-        bootstrap=new Game(c);bootstrap.new_game(s["seed"].Long,s["last_seen_utc"].Double);WorldEnsure();ScienceEnsure();ApplyWorldEffects();return "";
+        bootstrap=new Game(c);bootstrap.new_game(s["seed"].Long,s["last_seen_utc"].Double);WorldEnsure();ScienceEnsure();MigrateWildReward();ApplyWorldEffects();return "";
     }
     public string Save()=>CityStore.write(this,CityStore.path(storageRoot));
     public string Load(){var result=CityStore.read(c,CityStore.path(storageRoot));return result["ok"].Bool?Restore(result["state"]):result["error"].Text;}

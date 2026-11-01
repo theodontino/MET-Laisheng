@@ -88,7 +88,7 @@ public sealed partial class CitySession {
         foreach(var pair in s["links"].Pairs){var link=pair.Value;if(!link.IsMap||link.Get("id",pair.Key).Text!=pair.Key||!s["blocks"].Has(link.Get("from","").Text)||!s["blocks"].Has(link.Get("to","").Text)||link["from"]==link["to"])return "物流边归属损坏。";if(!link.Get("enabled").IsBool||!link.Get("cross_district").IsBool||!V.Arr("food","material","goods","advanced_components").Contains(link.Get("resource","").Text)||link["cross_district"].Bool!=(s["blocks"][link["from"].Text]["district_id"]!=s["blocks"][link["to"].Text]["district_id"]))return "物流资源或地区尺度损坏。";foreach(var field in link.Pairs)if(field.Value.IsNumber&&!Number(field.Value,0))return "物流边数值损坏。";}
         string networkError=ValidateWorldEnvelope(s);if(networkError!="")return networkError;
         string scienceError=ValidateScienceEnvelope(s);if(scienceError!="")return scienceError;
-        string wildError=ValidateWildEnvelope(s);if(wildError!="")return wildError;
+        string wildError=ValidateWildEnvelope(c,s);if(wildError!="")return wildError;
         if(s["next_id"].Long<=greatestId)return "整城 ID 游标会重用已存在身份。";
         return "";
     }
