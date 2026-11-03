@@ -1,0 +1,968 @@
+{
+  "status": "passed",
+  "unity_version": "6000.6.5f1",
+  "application_version": "0.6.0-content.1-local",
+  "platform": "OSXPlayer",
+  "graphics_device": "Apple M5 Max",
+  "graphics_api": "Metal",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "checks": [
+    {
+      "name": "isolated_save_root",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "runtime_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_import",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "content_catalog_44_cards_21_events_17_blueprints",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_fullscreen_baseline",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_earned_report_exists_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_normal_chain_industrial",
+      "passed": true,
+      "detail": [
+        "real_earned_deployed_P06",
+        "real_industrial_theme_completed",
+        "real_earned_deployed_P09",
+        "real_DT0_running_deployed_circular_industry",
+        "real_source_chooses_once",
+        "real_successor_debits_full_quote",
+        "real_successor_debits_food",
+        "real_successor_debits_material",
+        "real_successor_debits_goods",
+        "real_landmark_stays_original_block",
+        "real_rogue_city_roundtrip_no_reissue"
+      ]
+    },
+    {
+      "name": "content_restore_offered:industrial_byproducts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_offered:industrial_byproducts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_event_three_choices_industrial_byproducts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_industrial_byproducts_heat",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_industrial_byproducts_recovery",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_industrial_byproducts_decline",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-event-industrial_byproducts.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-event-industrial_byproducts.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_选择 · 近邻供热",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_actual_payment_industrial_byproducts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_actual_stock_industrial_byproducts_material",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_persisted_industrial_byproducts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_offered:industrial_layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_offered:industrial_layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_event_three_choices_industrial_layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_industrial_layout_cluster",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_industrial_layout_buffer",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_industrial_layout_decline",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-event-industrial_layout.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-event-industrial_layout.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_选择 · 集中装配",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_actual_payment_industrial_layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_actual_stock_industrial_layout_material",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_persisted_industrial_layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_industrial_ending",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_industrial_ending",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_real_zero_and_candidate_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-industrial-ending.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-industrial-ending.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_正式挂牌 · 领取定型建筑",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_循环材料工艺",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_one_result_after_ui_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-industrial-result.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-industrial-result.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_page_is_read_only_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_industrial_startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_industrial_startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_工业",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_循环材料工艺",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_real_startup_quote_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-industrial-startup.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-industrial-startup.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_支付启动投入 · 登陆",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_startup_debits_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确立起源 · 安顿居民",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_target_paid_charter_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_native_export_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_native_load_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_native_reload_valid_industrial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_earned_report_exists_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_normal_chain_civic",
+      "passed": true,
+      "detail": [
+        "real_earned_deployed_P06",
+        "real_earned_deployed_B10",
+        "real_civic_theme_completed",
+        "real_DT0_running_deployed_learning_neighborhood",
+        "real_source_chooses_once",
+        "real_successor_debits_full_quote",
+        "real_successor_debits_food",
+        "real_successor_debits_material",
+        "real_successor_debits_goods",
+        "real_landmark_stays_original_block",
+        "real_rogue_city_roundtrip_no_reissue"
+      ]
+    },
+    {
+      "name": "content_restore_offered:civic_shared_space",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_offered:civic_shared_space",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_event_three_choices_civic_shared_space",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_civic_shared_space_care",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_civic_shared_space_school",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_civic_shared_space_decline",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-event-civic_shared_space.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-event-civic_shared_space.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_选择 · 建立照护网络",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_actual_payment_civic_shared_space",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_actual_stock_civic_shared_space_food",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_persisted_civic_shared_space",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_offered:civic_density_review",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_offered:civic_density_review",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_event_three_choices_civic_density_review",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_civic_density_review_density",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_civic_density_review_care",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_available_and_cost_civic_density_review_decline",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-event-civic_density_review.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-event-civic_density_review.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_选择 · 研究近邻照护",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_actual_payment_civic_density_review",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_actual_stock_civic_density_review_goods",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_branch_persisted_civic_density_review",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_civic_ending",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_civic_ending",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_real_zero_and_candidate_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-civic-ending.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-civic-ending.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_正式挂牌 · 领取定型建筑",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_居住学园",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_one_result_after_ui_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-civic-result.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-civic-result.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_page_is_read_only_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_civic_startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_civic_startup",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_科研",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_居住学园",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_real_startup_quote_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_content-civic-startup.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_content-civic-startup.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_支付启动投入 · 登陆",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_startup_debits_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确立起源 · 安顿居民",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_ui_target_paid_charter_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_native_export_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_native_load_civic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_native_reload_valid_civic",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "errors": [],
+  "frame_intervals_ms": {
+    "samples": 0,
+    "median": 0.0,
+    "p95": 0.0
+  },
+  "resource_sample": {},
+  "growth_fixtures": [],
+  "hillside_buildings": {},
+  "forecast_geography": {},
+  "visible_river_boundary_picks": [],
+  "rogue_content": [
+    {
+      "route": "industrial",
+      "scope": "normal commands, fresh city; no injected resources, completed themes or ending eligibility",
+      "normal_checks": [
+        "real_earned_deployed_P06",
+        "real_industrial_theme_completed",
+        "real_earned_deployed_P09",
+        "real_DT0_running_deployed_circular_industry",
+        "real_source_chooses_once",
+        "real_successor_debits_full_quote",
+        "real_successor_debits_food",
+        "real_successor_debits_material",
+        "real_successor_debits_goods",
+        "real_landmark_stays_original_block",
+        "real_rogue_city_roundtrip_no_reissue"
+      ],
+      "profile": "circular_industry",
+      "source_evidence": {
+        "version": "rogue-content.1",
+        "eligible_theme": "industrial",
+        "locked_local_seconds": 258164400.01543298,
+        "simulation_tick": 2011,
+        "metrics": {
+          "population": 70.877662232995959,
+          "housed": 64.0,
+          "homeless": 6.8776622329959665,
+          "food_demand": 12.757979201939273,
+          "food": 1.0,
+          "medical": 0.0,
+          "education": 0.90296431885144524,
+          "commercial": 0.0,
+          "entertainment": 0.0,
+          "health": 76.254200649179253,
+          "happiness": 52.934931431532725,
+          "commercial_people": 0.0,
+          "currency": 1548.8575034160158,
+          "energy": 1.0,
+          "goods_rate": 9.3540914285714276,
+          "food_rate": 18.820999999999998,
+          "food_self_sufficiency": 1.4752361642417877,
+          "food_stock_months": 26.254305142593278,
+          "food_surplus": 6.0630207980607249,
+          "vacancies": 0.0,
+          "industrial_labor": 14.146269284992407,
+          "industrial_usage": 0.55,
+          "commercial_usage": 0.0,
+          "heat_used": 0.0,
+          "pollution_recycled": 1.5391428571428571
+        },
+        "bonus_evidence": [
+          {
+            "bonus_id": "P06",
+            "name": "高级回收",
+            "host_type": "building",
+            "host_id": "B000001",
+            "provider": "commons",
+            "count": 1,
+            "level": 2,
+            "operating_projects": [
+              "B000001"
+            ],
+            "instances": [
+              "I000030"
+            ],
+            "strength": 1.0,
+            "rules": [
+              {
+                "op": "modify",
+                "phase": "spatial",
+                "field": "maintenance",
+                "targets": "self",
+                "mode": "multiply",
+                "value": 1.5,
+                "id": "P06.1",
+                "priority": 0
+              },
+              {
+                "op": "field_convert",
+                "phase": "environment",
+                "input_type": "pollution",
+                "amount": 10,
+                "output": {
+                  "material": 3.6,
+                  "goods": 3.6
+                },
+                "rate": 1.0,
+                "id": "P06.2",
+                "priority": 0
+              }
+            ],
+            "contributions": {
+              "circular_industry": [
+                {
+                  "rule": "P06.2",
+                  "source_project": "B000001",
+                  "target": "B000001",
+                  "kind": "pollution_recycled",
+                  "amount": 0.001187625502923585
+                }
+              ]
+            }
+          },
+          {
+            "bonus_id": "P09",
+            "name": "近邻装配",
+            "host_type": "building",
+            "host_id": "B000003",
+            "provider": "steel",
+            "count": 1,
+            "level": 0,
+            "operating_projects": [
+              "B000003"
+            ],
+            "instances": [
+              "I001185"
+            ],
+            "strength": 1.0,
+            "rules": [
+              {
+                "op": "modify",
+                "phase": "spatial",
+                "field": "output.material",
+                "mode": "multiply",
+                "value": 1.15,
+                "targets": "adjacent",
+                "when": {
+                  "traits": [
+                    "building.industrial"
+                  ],
+                  "same_provider": true
+                },
+                "id": "P09.1",
+                "priority": 0
+              },
+              {
+                "op": "modify",
+                "phase": "spatial",
+                "field": "output.goods",
+                "mode": "multiply",
+                "value": 1.2,
+                "targets": "adjacent",
+                "when": {
+                  "traits": [
+                    "building.industrial"
+                  ],
+                  "same_provider": true
+                },
+                "id": "P09.2",
+                "priority": 0
+              },
+              {
+                "op": "modify",
+                "phase": "spatial",
+                "field": "energy_demand",
+                "mode": "multiply",
+                "value": 1.15,
+                "targets": "self",
+                "id": "P09.3",
+                "priority": 0
+              },
+              {
+                "op": "modify",
+                "phase": "spatial",
+                "field": "pollution",
+                "mode": "multiply",
+                "value": 1.1,
+                "targets": "self",
+                "id": "P09.4",
+                "priority": 0
+              }
+            ]
+          }
+        ],
+        "blueprint_levels": {
+          "P06": 2
+        },
+        "candidates": [
+          {
+            "id": "circular_industry",
+            "profile_id": "circular_industry",
+            "name": "循环材料工艺",
+            "grade": 2,
+            "signal": "pollution_recycled",
+            "minimum": 0.2,
+            "observed": 1.5391428571428571,
+            "source_bonus_ids": [
+              "P06"
+            ]
+          }
+        ]
+      },
+      "earned_checkpoints_reused": true
+    },
+    {
+      "route": "civic",
+      "scope": "normal commands, fresh city; no injected resources, completed themes or ending eligibility",
+      "normal_checks": [
+        "real_earned_deployed_P06",
+        "real_earned_deployed_B10",
+        "real_civic_theme_completed",
+        "real_DT0_running_deployed_learning_neighborhood",
+        "real_source_chooses_once",
+        "real_successor_debits_full_quote",
+        "real_successor_debits_food",
+        "real_successor_debits_material",
+        "real_successor_debits_goods",
+        "real_landmark_stays_original_block",
+        "real_rogue_city_roundtrip_no_reissue"
+      ],
+      "profile": "learning_neighborhood",
+      "source_evidence": {
+        "version": "rogue-content.1",
+        "eligible_theme": "civic",
+        "locked_local_seconds": 503886000.015433,
+        "simulation_tick": 3913,
+        "metrics": {
+          "population": 115.6810306845729,
+          "housed": 115.6810306845729,
+          "homeless": 0.0,
+          "food_demand": 20.822585523223122,
+          "food": 1.0,
+          "medical": 0.66942695394161378,
+          "education": 0.83670985101698048,
+          "commercial": 0.66942695394161378,
+          "entertainment": 0.78356478550827346,
+          "health": 85.018905310451274,
+          "happiness": 72.846625150025289,
+          "commercial_people": 77.44,
+          "currency": 2156.8710990847076,
+          "energy": 0.98633874048311776,
+          "goods_rate": 16.31033612127522,
+          "food_rate": 53.973195875611673,
+          "food_self_sufficiency": 2.5920555543219059,
+          "food_stock_months": 21.068229169616195,
+          "food_surplus": 33.150610352388554,
+          "vacancies": 18.078969315427088,
+          "industrial_labor": 15.24375404639861,
+          "industrial_usage": 0.98525393613865531,
+          "commercial_usage": 0.98525393613865531,
+          "heat_used": 0.0,
+          "pollution_recycled": 1.8209104768557862
+        },
+        "bonus_evidence": [
+          {
+            "bonus_id": "B10",
+            "name": "街坊夜校",
+            "host_type": "block",
+            "host_id": "block:1",
+            "provider": "civic",
+            "count": 1,
+            "level": 2,
+            "operating_projects": [
+              "B000001",
+              "B000003",
+              "B000006",
+              "B000008",
+              "B000032",
+              "B000105",
+              "B000386",
+              "B000619",
+              "B000860",
+              "B001112",
+              "B001361",
+              "B001365",
+              "B001369",
+              "B001372",
+              "B001450"
+            ],
+            "instances": [
+              "I001429"
+            ],
+            "strength": 1.0,
+            "rules": [
+              {
+                "op": "capacity_convert",
+                "phase": "spatial",
+                "from": "housing",
+                "to": "service.education",
+                "fraction": 0.12,
+                "id": "B10.1",
+                "priority": 0
+              },
+              {
+                "op": "modify",
+                "phase": "spatial",
+                "field": "population_maintenance",
+                "mode": "multiply",
+                "value": 1.08,
+                "targets": "self",
+                "id": "B10.2",
+                "priority": 0
+              }
+            ],
+            "contributions": {
+              "learning_neighborhood": [
+                {
+                  "rule": "B10.1",
+                  "source_project": "B000001",
+                  "target": "B000001",
+                  "kind": "delivered_education",
+                  "amount": 7.5667502295448728
+                },
+                {
+                  "rule": "B10.1",
+                  "source_project": "B000006",
+                  "target": "B000006",
+                  "kind": "delivered_education",
+                  "amount": 2.8375313360793273
+                },
+                {
+                  "rule": "B10.1",
+                  "source_project": "B001450",
+                  "target": "B001450",
+                  "kind": "delivered_education",
+                  "amount": 7.5667502295448728
+                }
+              ]
+            }
+          },
+          {
+            "bonus_id": "P06",
+            "name": "高级回收",
+            "host_type": "building",
+            "host_id": "B000001",
+            "provider": "commons",
+            "count": 1,
+            "level": 0,
+            "operating_projects": [
+              "B000001"
+            ],
+            "instances": [
+              "I000030"
+            ],
+            "strength": 1.0,
+            "rules": [
+              {
+                "op": "modify",
+                "phase": "spatial",
+                "field": "maintenance",
+                "targets": "self",
+                "mode": "multiply",
+                "value": 1.5,
+                "id": "P06.1",
+                "priority": 0
+              },
+              {
+                "op": "field_convert",
+                "phase": "environment",
+                "input_type": "pollution",
+                "amount": 10,
+                "output": {
+                  "material": 3,
+                  "goods": 3
+                },
+                "rate": 1.0,
+                "id": "P06.2",
+                "priority": 0
+              }
+            ]
+          }
+        ],
+        "blueprint_levels": {
+          "B10": 2
+        },
+        "candidates": [
+          {
+            "id": "learning_neighborhood",
+            "profile_id": "learning_neighborhood",
+            "name": "居住学园",
+            "grade": 2,
+            "signal": "education",
+            "minimum": 0.75,
+            "observed": 0.83670985101698048,
+            "source_bonus_ids": [
+              "B10"
+            ]
+          }
+        ]
+      },
+      "earned_checkpoints_reused": true
+    }
+  ],
+  "measurement_scope": "Native content UI callbacks and fresh earned command-chain checkpoints; no injected eligibility and no human play or GPU performance acceptance."
+}

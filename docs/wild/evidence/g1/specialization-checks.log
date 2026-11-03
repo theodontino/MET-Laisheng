@@ -1,0 +1,148 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Specialization.Checks.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS Unity bundled building catalog matches source
+PASS residence preview retains half output.food
+PASS start real upgrade to residence
+PASS construction completes residence
+PASS residence compiled side capacity remains active output.food
+PASS start real upgrade to advanced_residence
+PASS construction completes advanced_residence
+PASS advanced_residence fully specializes output.food
+PASS advanced_residence retains actual upgrade lineage
+PASS agriculture preview retains half housing
+PASS start real upgrade to agriculture
+PASS construction completes agriculture
+PASS agriculture compiled side capacity remains active housing
+PASS start real upgrade to modern_agriculture
+PASS construction completes modern_agriculture
+PASS modern_agriculture fully specializes housing
+PASS modern_agriculture retains actual upgrade lineage
+PASS public_center preview retains half service.medical
+PASS public_center preview retains half service.education
+PASS start real upgrade to public_center
+PASS construction completes public_center
+PASS public_center compiled side capacity remains active service.medical
+PASS public_center compiled side capacity remains active service.education
+PASS public_center retains source-aware service.medical access
+PASS public_center retains source-aware service.education access
+PASS public_center side service enters allocation pool service.medical
+PASS public_center side service enters allocation pool service.education
+PASS start real upgrade to commercial_center
+PASS construction completes commercial_center
+PASS commercial_center fully specializes service.medical
+PASS commercial_center fully specializes service.education
+PASS commercial_center retains actual upgrade lineage
+PASS public_center preview retains half service.medical
+PASS public_center preview retains half service.education
+PASS start real upgrade to public_center
+PASS construction completes public_center
+PASS public_center compiled side capacity remains active service.medical
+PASS public_center compiled side capacity remains active service.education
+PASS public_center retains source-aware service.medical access
+PASS public_center retains source-aware service.education access
+PASS public_center side service enters allocation pool service.medical
+PASS public_center side service enters allocation pool service.education
+PASS start real upgrade to garden
+PASS construction completes garden
+PASS garden fully specializes service.medical
+PASS garden fully specializes service.education
+PASS garden retains actual upgrade lineage
+PASS medical_clinic preview retains half service.education
+PASS medical_clinic preview retains half service.entertainment
+PASS medical_clinic preview retains half service.commercial
+PASS start real upgrade to medical_clinic
+PASS construction completes medical_clinic
+PASS medical_clinic compiled side capacity remains active service.education
+PASS medical_clinic compiled side capacity remains active service.entertainment
+PASS medical_clinic compiled side capacity remains active service.commercial
+PASS medical_clinic retains source-aware service.education access
+PASS medical_clinic retains source-aware service.entertainment access
+PASS medical_clinic retains source-aware service.commercial access
+PASS medical_clinic side service enters allocation pool service.education
+PASS medical_clinic side service enters allocation pool service.entertainment
+PASS medical_clinic side service enters allocation pool service.commercial
+PASS start real upgrade to hospital
+PASS construction completes hospital
+PASS hospital fully specializes service.education
+PASS hospital fully specializes service.entertainment
+PASS hospital fully specializes service.commercial
+PASS hospital retains actual upgrade lineage
+PASS primary_school preview retains half service.medical
+PASS primary_school preview retains half service.entertainment
+PASS primary_school preview retains half service.commercial
+PASS start real upgrade to primary_school
+PASS construction completes primary_school
+PASS primary_school compiled side capacity remains active service.medical
+PASS primary_school compiled side capacity remains active service.entertainment
+PASS primary_school compiled side capacity remains active service.commercial
+PASS primary_school retains source-aware service.medical access
+PASS primary_school retains source-aware service.entertainment access
+PASS primary_school retains source-aware service.commercial access
+PASS primary_school side service enters allocation pool service.medical
+PASS primary_school side service enters allocation pool service.entertainment
+PASS primary_school side service enters allocation pool service.commercial
+PASS start real upgrade to secondary_school
+PASS construction completes secondary_school
+PASS secondary_school fully specializes service.medical
+PASS secondary_school fully specializes service.entertainment
+PASS secondary_school fully specializes service.commercial
+PASS secondary_school retains actual upgrade lineage
+PASS power_station preview retains half output.material
+PASS power_station preview retains half output.goods
+PASS start real upgrade to power_station
+PASS construction completes power_station
+PASS power_station compiled side capacity remains active output.material
+PASS power_station compiled side capacity remains active output.goods
+PASS start real upgrade to power_plant
+PASS construction completes power_plant
+PASS power_plant fully specializes output.material
+PASS power_plant fully specializes output.goods
+PASS power_plant retains actual upgrade lineage
+PASS extraction preview retains half output.goods
+PASS extraction preview retains half output.energy
+PASS start real upgrade to extraction
+PASS construction completes extraction
+PASS extraction compiled side capacity remains active output.goods
+PASS extraction compiled side capacity remains active output.energy
+PASS start real upgrade to material_factory
+PASS construction completes material_factory
+PASS material_factory fully specializes output.goods
+PASS material_factory fully specializes output.energy
+PASS material_factory retains actual upgrade lineage
+PASS yard preview retains half output.energy
+PASS start real upgrade to yard
+PASS construction completes yard
+PASS yard compiled side capacity remains active output.energy
+PASS start real upgrade to manufacturing
+PASS construction completes manufacturing
+PASS manufacturing fully specializes output.energy
+PASS manufacturing retains actual upgrade lineage
+PASS yard preview retains half output.goods
+PASS yard preview retains half output.energy
+PASS start real upgrade to yard
+PASS construction completes yard
+PASS yard compiled side capacity remains active output.goods
+PASS yard compiled side capacity remains active output.energy
+PASS start real upgrade to freight
+PASS construction completes freight
+PASS freight fully specializes output.goods
+PASS freight fully specializes output.energy
+PASS freight retains actual upgrade lineage
+PASS yard T2 retains half secondary goods before manufacturing becomes primary
+PASS start real upgrade to agriculture
+PASS construction completes agriculture
+PASS agriculture retains twelve actual residents after rehouse
+PASS start real upgrade to modern_agriculture
+PASS construction completes modern_agriculture
+PASS modern agriculture relocates residents when housing reaches zero
+PASS residence main capacity unchanged
+PASS agriculture main capacity unchanged
+PASS power_station main capacity unchanged
+PASS extraction main capacity unchanged
+PASS yard main capacity unchanged
+PASS manufacturing main capacity unchanged
+PASS public_center main service unchanged
+PASS public_center main service unchanged
+PASS medical_clinic main service unchanged
+PASS primary_school main service unchanged
+SPECIALIZATION PASS 145 assertions; isolated construction fixtures, no Player acceptance.

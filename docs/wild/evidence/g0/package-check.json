@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "version": "0.7.0-wild-g0.1",
+  "architecture": "x86_64 arm64",
+  "signature": "deep strict ad-hoc verified after ZIP extraction; not Developer ID or notarized",
+  "zip_bytes": 72517848,
+  "executable_permissions_preserved": true,
+  "pristine_fixture_included": true,
+  "no_playtest_progress_in_archive": true,
+  "launcher_syntax": "passed",
+  "player": "111 assertions and seven screenshots in actual macOS Player; synthetic control events, not human input acceptance"
+}

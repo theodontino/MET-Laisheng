@@ -1,0 +1,10 @@
+{
+  "op": "modify",
+  "phase": "spatial",
+  "field": "output.food",
+  "targets": "self",
+  "mode": "multiply",
+  "value": 1.15,
+  "id": "candidate.effect.only",
+  "priority": 0
+}

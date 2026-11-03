@@ -20,13 +20,21 @@ public sealed class CityBootstrap : MonoBehaviour {
         World.SetFabricSources(Runtime.Game.c.projects, Runtime.Game.compiled.Get("stats", MET.Core.V.Map()));
         World.Initialize(() => Interface.MapSnapshot, Interface.SelectTile,
             () => Interface.KeyboardOwned, Interface.PointerOwned,
-            () => !Interface.MapViewing && !Interface.IsModal);
+            () => Interface.MapInteractionAvailable);
+        Interface.AttachMapInspection(World);
+        World.TryInspectClick = Interface.TryLockMapInspection;
         World.SetSourcePhase(Interface.MapSourcePhase);
         World.SetLayer(Interface.Layer);
         Interface.DisplayChanged += Display;
         Display(Runtime.DisplaySettings);
         if (World.Failure != "") Interface.ShowMessage("地图资源导入失败：" + World.Failure);
-        if (CityEvidence.Requested()) gameObject.AddComponent<CityEvidence>();
+        if (CityMemoryEvidence.Requested() || CityEvidence.Requested() || CityWildG0Evidence.Requested() || CityWildG1Evidence.Requested() || CityCivicEvidence.Requested()) Application.runInBackground = true;
+        if(System.Array.IndexOf(System.Environment.GetCommandLineArgs(),"--manual-ui-evidence")>=0)gameObject.AddComponent<CityMouseEvidence>();
+        if (CityCivicEvidence.Requested()) gameObject.AddComponent<CityCivicEvidence>();
+        else if (CityWildG1Evidence.Requested()) gameObject.AddComponent<CityWildG1Evidence>();
+        else if (CityWildG0Evidence.Requested()) gameObject.AddComponent<CityWildG0Evidence>();
+        else if (CityMemoryEvidence.Requested()) gameObject.AddComponent<CityMemoryEvidence>();
+        else if (CityEvidence.Requested()) gameObject.AddComponent<CityEvidence>();
     }
 
     void Present(MET.Core.V snapshot) {
@@ -43,6 +51,8 @@ public sealed class CityBootstrap : MonoBehaviour {
         Interface.SelectionChanged -= Select;
         Interface.LayerChanged -= World.SetLayer;
         World.LayerChanged -= Interface.SetLayer;
+        World.TryInspectClick = null;
+        Interface.DismissMapInspection();
         Interface.DisplayChanged -= Display;
     }
 }

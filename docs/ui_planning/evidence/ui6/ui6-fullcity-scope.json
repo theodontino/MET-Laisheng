@@ -1,0 +1,8 @@
+{
+  "executed": true,
+  "source_report": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/ui6-evidence/city-arc-fixture.json",
+  "blocks": 4,
+  "districts": 2,
+  "autonomous_district": "D000123",
+  "scope": "Earned whole-city restore, city/governance/network and autonomous-district UI browsing. Snapshot equality includes wallets, RNG, projects, source records and focused block; no map-focus or government command invoked."
+}

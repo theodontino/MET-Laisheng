@@ -1,0 +1,9 @@
+{
+  "version": "0.7.0-ui.9",
+  "architectures": "x86_64 arm64",
+  "zip_bytes": 72277522,
+  "zip_integrity": "pass",
+  "unity_build": "succeeded",
+  "signing": "ad-hoc; not notarized",
+  "player_acceptance": "user-owned; not performed by agent"
+}

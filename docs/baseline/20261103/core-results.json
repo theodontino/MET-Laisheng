@@ -1,0 +1,57 @@
+[
+  {
+    "suite": "Core",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/Core/run.log"
+  },
+  {
+    "suite": "CityGovernance",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/CityGovernance/run.log"
+  },
+  {
+    "suite": "CityNetwork",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/CityNetwork/run.log"
+  },
+  {
+    "suite": "CityArc",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/CityArc/run.log"
+  },
+  {
+    "suite": "WildG0",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/WildG0/run.log"
+  },
+  {
+    "suite": "WildG1",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/WildG1/run.log"
+  },
+  {
+    "suite": "WildTrade",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/WildTrade/run.log"
+  },
+  {
+    "suite": "WildContent",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/WildContent/run.log"
+  },
+  {
+    "suite": "RogueContent",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/RogueContent/run.log"
+  },
+  {
+    "suite": "Specialization",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/Specialization/run.log"
+  },
+  {
+    "suite": "UI15",
+    "exit_code": 0,
+    "log": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/UI15/run.log"
+  }
+]

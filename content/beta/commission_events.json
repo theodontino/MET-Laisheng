@@ -236,5 +236,262 @@
       "agricultural",
       "logistics"
     ]
+  },
+  {
+    "id": "industrial_byproducts",
+    "theme": "industrial",
+    "name": "副产物流向议案",
+    "description": "热量可以服务近邻，也可以留给本地回收。不同工艺、住区位置与电力缺口改变这两份合同的价值。",
+    "trigger": {
+      "milestone": 1,
+      "industrial_labor_min": 8
+    },
+    "weight": 1,
+    "choices": [
+      {
+        "id": "heat",
+        "label": "近邻供热",
+        "description": "候选方案副本：热量管理、市政暖气、厂区防护缓冲。具体容量、距离与维护取舍沿用所选方案的实际规则。",
+        "currency": 45,
+        "resources": {
+          "material": 4
+        },
+        "bonus_ids": [
+          "P05",
+          "B02",
+          "R19"
+        ],
+        "reward_kind": "copy"
+      },
+      {
+        "id": "recovery",
+        "label": "本地回收",
+        "description": "候选方案副本：高级回收、污染产业园、中转仓。具体容量、距离与维护取舍沿用所选方案的实际规则。",
+        "currency": 55,
+        "resources": {
+          "material": 6
+        },
+        "bonus_ids": [
+          "P06",
+          "B08",
+          "L05"
+        ],
+        "reward_kind": "copy"
+      }
+    ]
+  },
+  {
+    "id": "industrial_layout",
+    "theme": "industrial",
+    "name": "厂区与工人社区",
+    "description": "集中装配需要同运营者近邻；防护缓冲需要工业与住宅近邻。两者都会增加工厂日常负担。",
+    "trigger": {
+      "milestone": 1,
+      "production_slot": true
+    },
+    "weight": 1,
+    "choices": [
+      {
+        "id": "cluster",
+        "label": "集中装配",
+        "description": "候选方案副本：近邻装配、企业内部协同、内部供应链。具体容量、距离与维护取舍沿用所选方案的实际规则。",
+        "currency": 50,
+        "resources": {
+          "material": 5
+        },
+        "bonus_ids": [
+          "P09",
+          "G01",
+          "G02"
+        ],
+        "reward_kind": "copy"
+      },
+      {
+        "id": "buffer",
+        "label": "保护工人住区",
+        "description": "候选方案副本：厂区防护缓冲、邻里照护网络、社区诊所。具体容量、距离与维护取舍沿用所选方案的实际规则。",
+        "currency": 40,
+        "resources": {
+          "goods": 3
+        },
+        "bonus_ids": [
+          "R19",
+          "O08",
+          "R05"
+        ],
+        "reward_kind": "copy"
+      }
+    ]
+  },
+  {
+    "id": "industrial_tech_review",
+    "theme": "industrial",
+    "name": "工艺研究拨款",
+    "description": "有限材料和通货只能投入一个研究方向，研究奖励不会直接变成免费安装或新库存。",
+    "trigger": {
+      "milestone": 2,
+      "research": true
+    },
+    "weight": 1,
+    "choices": [
+      {
+        "id": "recover",
+        "label": "研究回收工艺",
+        "description": "可研究蓝图：高级回收、近邻装配、厂区防护缓冲。需要已拥有可继续升级的方案，先处理前序研究奖励。",
+        "currency": 65,
+        "resources": {
+          "material": 8
+        },
+        "bonus_ids": [
+          "P06",
+          "P09",
+          "R19"
+        ],
+        "reward_kind": "research"
+      },
+      {
+        "id": "heat",
+        "label": "研究余热利用",
+        "description": "可研究蓝图：热量管理。需要已拥有可继续升级的方案，先处理前序研究奖励。",
+        "currency": 45,
+        "resources": {
+          "goods": 4
+        },
+        "bonus_ids": [
+          "B02",
+          "P05",
+          "B09"
+        ],
+        "reward_kind": "research"
+      }
+    ]
+  },
+  {
+    "id": "civic_shared_space",
+    "theme": "civic",
+    "name": "街坊公共空间议案",
+    "description": "同一批居民提出照护站与夜校两种用途。照护照顾近邻，夜校会挤占住房容量。",
+    "trigger": {
+      "milestone": 1,
+      "service_building": true
+    },
+    "weight": 1,
+    "choices": [
+      {
+        "id": "care",
+        "label": "建立照护网络",
+        "description": "候选方案副本：邻里照护网络、社区诊所、研究型医院。具体容量、距离与维护取舍沿用所选方案的实际规则。",
+        "currency": 40,
+        "resources": {
+          "food": 4
+        },
+        "bonus_ids": [
+          "O08",
+          "R05",
+          "P02"
+        ],
+        "reward_kind": "copy"
+      },
+      {
+        "id": "school",
+        "label": "留作街坊夜校",
+        "description": "候选方案副本：街坊夜校、义务教师、开放大学。具体容量、距离与维护取舍沿用所选方案的实际规则。",
+        "currency": 55,
+        "resources": {
+          "goods": 3
+        },
+        "bonus_ids": [
+          "B10",
+          "O05",
+          "O04"
+        ],
+        "reward_kind": "copy"
+      }
+    ]
+  },
+  {
+    "id": "civic_density_review",
+    "theme": "civic",
+    "name": "住区扩容听证",
+    "description": "选择更多住房或改良照护。高密度提升容量，也会放大污染与短缺反馈。",
+    "trigger": {
+      "milestone": 2
+    },
+    "weight": 1,
+    "choices": [
+      {
+        "id": "density",
+        "label": "研究密集住区",
+        "description": "可研究蓝图：密集住宅、街坊夜校。需要已拥有可继续升级的方案，先处理前序研究奖励。",
+        "currency": 55,
+        "resources": {
+          "material": 6
+        },
+        "bonus_ids": [
+          "O03",
+          "O05",
+          "B10"
+        ],
+        "reward_kind": "research"
+      },
+      {
+        "id": "care",
+        "label": "研究近邻照护",
+        "description": "可研究蓝图：邻里照护网络、社区诊所、研究型医院。需要已拥有可继续升级的方案，先处理前序研究奖励。",
+        "currency": 45,
+        "resources": {
+          "goods": 4
+        },
+        "bonus_ids": [
+          "O08",
+          "R05",
+          "P02"
+        ],
+        "reward_kind": "research"
+      }
+    ]
+  },
+  {
+    "id": "agricultural_reserve_plan",
+    "theme": "agricultural",
+    "name": "粮储与播种计划",
+    "description": "用库存建设缓冲，或把当期粮食投入生产工艺；两份方案都需要真实投入。",
+    "trigger": {
+      "milestone": 1,
+      "food_min": 0.85
+    },
+    "weight": 1,
+    "choices": [
+      {
+        "id": "reserve",
+        "label": "建设储粮缓冲",
+        "description": "候选方案副本：中转仓、战略储备、研究型医院。具体容量、距离与维护取舍沿用所选方案的实际规则。",
+        "currency": 40,
+        "resources": {
+          "material": 5
+        },
+        "bonus_ids": [
+          "L05",
+          "B05",
+          "P02"
+        ],
+        "reward_kind": "copy"
+      },
+      {
+        "id": "yield",
+        "label": "投入下一轮播种",
+        "description": "候选方案副本：精耕小农、都市农业、公共厨房。具体容量、距离与维护取舍沿用所选方案的实际规则。",
+        "currency": 30,
+        "resources": {
+          "food": 10
+        },
+        "bonus_ids": [
+          "R15",
+          "R10",
+          "R18"
+        ],
+        "reward_kind": "copy"
+      }
+    ]
   }
 ]

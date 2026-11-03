@@ -1,0 +1,3 @@
+Unity edit-mode: TILE PANEL CHECKS PASS 122 actual panel renders; empty/occupied/water and editable/read-only.
+SPECIALIZATION PASS 145 assertions; isolated construction fixtures, no Player acceptance.
+Player acceptance: user-owned, not performed.

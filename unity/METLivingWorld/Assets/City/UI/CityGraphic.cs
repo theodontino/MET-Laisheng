@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace MET.City {
 /// <summary>Original vector marks and measured charts; no gameplay access.</summary>
+[RequireComponent(typeof(CanvasRenderer))]
 public sealed class CityGraphic : MaskableGraphic {
  public string Kind="building";public float Ratio=1;
  static readonly Color Muted=new Color(.24f,.34f,.33f,1);

@@ -1,0 +1,89 @@
+{
+  "scope": "Independent fresh Player processes, same copied four-Block city, 1920x1080 Metal at 60FPS. Normal phases exclude forced GC and asset unloading. Historical 878MiB walkthrough process is not a controlled comparator. Single runs, not a long-session leak study.",
+  "measurements": [
+    {
+      "build": "0.6.0-visual.1-local",
+      "label": "first candidate",
+      "phase": "paused_10_seconds",
+      "seconds": 10.0093217,
+      "rss_mib": 677.78125,
+      "managed_mib": 269.88671875,
+      "heap_mib": 311.609375,
+      "median_ms": 16.667375341057777,
+      "p95_ms": 17.00829155743122,
+      "cpu_one_core_percent": 34.83228039318589,
+      "autosave_writes": 1,
+      "autosave_skips": 2
+    },
+    {
+      "build": "0.6.0-visual.1-local",
+      "label": "first candidate",
+      "phase": "active_normal_30_seconds",
+      "seconds": 30.0001745,
+      "rss_mib": 759.96875,
+      "managed_mib": 374.5,
+      "heap_mib": 388.1875,
+      "median_ms": 16.667835414409637,
+      "p95_ms": 18.004747107625008,
+      "cpu_one_core_percent": 65.07019450836862,
+      "autosave_writes": 7,
+      "autosave_skips": 2
+    },
+    {
+      "build": "0.6.0-visual.3-local",
+      "label": "intermediate streaming build",
+      "phase": "paused_10_seconds",
+      "seconds": 10.005950499999999,
+      "rss_mib": 541.890625,
+      "managed_mib": 116.03515625,
+      "heap_mib": 150.25,
+      "median_ms": 16.667289659380913,
+      "p95_ms": 17.158418893814087,
+      "cpu_one_core_percent": 34.02556208927878,
+      "autosave_writes": 1,
+      "autosave_skips": 2
+    },
+    {
+      "build": "0.6.0-visual.3-local",
+      "label": "intermediate streaming build",
+      "phase": "active_normal_30_seconds",
+      "seconds": 30.0137289,
+      "rss_mib": 603.859375,
+      "managed_mib": 140.125,
+      "heap_mib": 208.8125,
+      "median_ms": 16.668502241373062,
+      "p95_ms": 18.351629376411438,
+      "cpu_one_core_percent": 60.69456467969896,
+      "autosave_writes": 7,
+      "autosave_skips": 2
+    },
+    {
+      "build": "0.6.0-visual.6-local",
+      "label": "final visual candidate",
+      "phase": "paused_10_seconds",
+      "seconds": 10.0066822,
+      "rss_mib": 608.609375,
+      "managed_mib": 151.6875,
+      "heap_mib": 173.015625,
+      "median_ms": 16.667332500219345,
+      "p95_ms": 17.101792618632317,
+      "cpu_one_core_percent": 39.869999069221954,
+      "autosave_writes": 1,
+      "autosave_skips": 2
+    },
+    {
+      "build": "0.6.0-visual.6-local",
+      "label": "final visual candidate",
+      "phase": "active_normal_30_seconds",
+      "seconds": 30.003665299999998,
+      "rss_mib": 663.578125,
+      "managed_mib": 102.6796875,
+      "heap_mib": 229.421875,
+      "median_ms": 16.66753739118576,
+      "p95_ms": 17.598455771803856,
+      "cpu_one_core_percent": 51.732339181906546,
+      "autosave_writes": 7,
+      "autosave_skips": 2
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/CityArc.Checks.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS project_rejects_missing_prerequisites
+PASS research_rejects_missing_prerequisites
+PASS science_project_views_are_read_only
+PASS research_without_operating_education_does_not_progress
+PASS real_research_precision_engineering
+PASS advanced_without_operating_factory_does_not_progress
+PASS real_research_superconductors
+PASS real_research_fusion_physics
+PASS advanced_components_are_independent_stock
+PASS block_startup_withdraws_real_source
+PASS district_handover_preserves_autonomy
+PASS real_supply_crisis_retires_and_preserves_district
+PASS real_supply_crisis_retires_and_preserves_district
+PASS real_supply_crisis_retires_and_preserves_district
+PASS cross_district_advanced_stock_arrives_with_real_freight_cost
+PASS project_delivery_withdraws_real_stock
+PASS project_no_advanced_delivery_no_progress
+PASS city_cp_reserve_cannot_double_spend_local_queue
+PASS city_and_local_construction_share_actual_capacity
+PASS return_pays_actual_organization_cost
+PASS same_city_endless_after_tokamak
+PASS advanced_production_stock_transport_project_are_conserved
+PASS advanced_actual_material_goods_money_energy_costs
+PASS completed_city_keeps_operating
+PASS project_feedback_completes_once
+PASS repeated_science_callback_cannot_mint_or_spend_twice
+PASS whole_city_science_project_roundtrip
+CITY ARC PASS 27 checks

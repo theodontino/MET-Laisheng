@@ -1,0 +1,20 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/UI15.Checks.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS real city opens from deterministic catalogue fixture
+PASS unowned catalogue card produces an inspection
+PASS inspection applies actual P01 output rules to detached target
+PASS inspection contains real same-step baseline and proposal
+PASS inspection reports zero copies before and after
+PASS both returned forecasts retain empty actual wallets
+PASS hypothetical installed instance supplies real rule provenance
+PASS owned command forecast still rejects zero-copy install
+PASS catalogue and rejected command forecasts leave all original state and compiled rules unchanged
+PASS catalogue forecasts preserve original RNG and empty inventory
+PASS real city opens from deterministic catalogue fixture
+PASS replacement fixture consumes a real existing P01 copy
+PASS compatible zero-copy replacement inspection succeeds: B09
+PASS replacement proposal actually replaces occupied slot with candidate instance
+PASS replacement preview fabricates no candidate wallet or copies
+PASS replacement still rejects agricultural card on industrial target
+PASS valid and rejected replacements preserve live installed source, state and RNG
+UI15 CORE PASS 17 assertions; no Player visual/input acceptance performed.

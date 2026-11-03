@@ -1,0 +1,285 @@
+{
+  "name": "MET Civic",
+  "version": "1.0",
+  "grid": 32,
+  "stroke": 1.9,
+  "safeInset": 2,
+  "license": "LicenseRef-MET-Project-Original",
+  "icons": [
+    {
+      "id": "dt",
+      "name": "加速预算",
+      "group": "资源"
+    },
+    {
+      "id": "population",
+      "name": "人口",
+      "group": "资源"
+    },
+    {
+      "id": "food",
+      "name": "粮食",
+      "group": "资源"
+    },
+    {
+      "id": "material",
+      "name": "材料",
+      "group": "资源"
+    },
+    {
+      "id": "goods",
+      "name": "制成品",
+      "group": "资源"
+    },
+    {
+      "id": "currency",
+      "name": "通货",
+      "group": "资源"
+    },
+    {
+      "id": "energy",
+      "name": "电力",
+      "group": "资源"
+    },
+    {
+      "id": "stock",
+      "name": "仓储",
+      "group": "资源"
+    },
+    {
+      "id": "city",
+      "name": "城市",
+      "group": "经营"
+    },
+    {
+      "id": "home",
+      "name": "住房",
+      "group": "经营"
+    },
+    {
+      "id": "employment",
+      "name": "就业与岗位",
+      "group": "经营"
+    },
+    {
+      "id": "build",
+      "name": "建造力",
+      "group": "经营"
+    },
+    {
+      "id": "crew",
+      "name": "临时施工队",
+      "group": "经营"
+    },
+    {
+      "id": "medical",
+      "name": "医疗",
+      "group": "服务"
+    },
+    {
+      "id": "education",
+      "name": "教育",
+      "group": "服务"
+    },
+    {
+      "id": "entertainment",
+      "name": "娱乐",
+      "group": "服务"
+    },
+    {
+      "id": "commercial",
+      "name": "消费",
+      "group": "服务"
+    },
+    {
+      "id": "health",
+      "name": "健康",
+      "group": "服务"
+    },
+    {
+      "id": "terrain",
+      "name": "地貌",
+      "group": "环境"
+    },
+    {
+      "id": "pollution",
+      "name": "污染",
+      "group": "环境"
+    },
+    {
+      "id": "heat",
+      "name": "余热",
+      "group": "环境"
+    },
+    {
+      "id": "water",
+      "name": "水域",
+      "group": "环境"
+    },
+    {
+      "id": "forest",
+      "name": "林地",
+      "group": "环境"
+    },
+    {
+      "id": "task",
+      "name": "任务",
+      "group": "发展"
+    },
+    {
+      "id": "bonus",
+      "name": "Bonus",
+      "group": "发展"
+    },
+    {
+      "id": "license",
+      "name": "许可",
+      "group": "发展"
+    },
+    {
+      "id": "reward",
+      "name": "奖励",
+      "group": "发展"
+    },
+    {
+      "id": "upgrade",
+      "name": "升级",
+      "group": "发展"
+    },
+    {
+      "id": "archive",
+      "name": "档案",
+      "group": "系统"
+    },
+    {
+      "id": "market",
+      "name": "市场",
+      "group": "经营"
+    },
+    {
+      "id": "policy",
+      "name": "政策",
+      "group": "经营"
+    },
+    {
+      "id": "route",
+      "name": "物流",
+      "group": "经营"
+    },
+    {
+      "id": "location",
+      "name": "地图定位",
+      "group": "操作"
+    },
+    {
+      "id": "link",
+      "name": "来源关系",
+      "group": "操作"
+    },
+    {
+      "id": "filter",
+      "name": "筛选",
+      "group": "操作"
+    },
+    {
+      "id": "search",
+      "name": "搜索",
+      "group": "操作"
+    },
+    {
+      "id": "settings",
+      "name": "设置",
+      "group": "系统"
+    },
+    {
+      "id": "save",
+      "name": "保存",
+      "group": "系统"
+    },
+    {
+      "id": "load",
+      "name": "读取",
+      "group": "系统"
+    },
+    {
+      "id": "clock",
+      "name": "时间",
+      "group": "系统"
+    },
+    {
+      "id": "warning",
+      "name": "警告",
+      "group": "状态"
+    },
+    {
+      "id": "info",
+      "name": "说明",
+      "group": "状态"
+    },
+    {
+      "id": "check",
+      "name": "完成",
+      "group": "操作"
+    },
+    {
+      "id": "plus",
+      "name": "添加",
+      "group": "操作"
+    },
+    {
+      "id": "close",
+      "name": "关闭",
+      "group": "操作"
+    },
+    {
+      "id": "back",
+      "name": "返回",
+      "group": "操作"
+    },
+    {
+      "id": "chevron",
+      "name": "下一项",
+      "group": "操作"
+    },
+    {
+      "id": "expand",
+      "name": "展开详表",
+      "group": "操作"
+    },
+    {
+      "id": "collapse",
+      "name": "收回侧栏",
+      "group": "操作"
+    },
+    {
+      "id": "pause",
+      "name": "暂停",
+      "group": "操作"
+    },
+    {
+      "id": "play",
+      "name": "继续",
+      "group": "操作"
+    },
+    {
+      "id": "speed",
+      "name": "加速",
+      "group": "操作"
+    }
+  ],
+  "aliases": {
+    "service": "medical",
+    "residents": "population",
+    "housing": "home",
+    "power": "energy",
+    "cp": "build",
+    "construction": "build",
+    "finance": "currency",
+    "money": "currency",
+    "materials": "material",
+    "inventory": "stock",
+    "tasks": "task",
+    "archives": "archive",
+    "consumption": "commercial"
+  }
+}

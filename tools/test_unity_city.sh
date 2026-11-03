@@ -14,7 +14,7 @@ mkdir -p "$MET_UNITY_RUN_DIR"
 unity_step() {
   local label=$1
   shift
-  "$UNITY_EDITOR" -projectPath "$ROOT/unity/METLivingWorld" -buildTarget OSXUniversal \
+  "$UNITY_EDITOR" -projectPath "$ROOT/unity/METLivingWorld" -buildTarget OSXUniversal -asset-garbage-collectors 1 \
     -logFile "$MET_UNITY_RUN_DIR/$label.log" "$@"
 }
 case "${1:-core}" in
@@ -30,6 +30,18 @@ case "${1:-core}" in
       "$ROOT/content" "$MET_UNITY_RUN_DIR/core-records" "$MET_UNITY_RUN_DIR/godot-parity.json" \
       | tee "$MET_UNITY_RUN_DIR/core-checks.log"
     ;;
+  city-core)
+    export DOTNET_ROOT="$ROOT/.toolcache/dotnet"
+    export DOTNET_CLI_HOME="$ROOT/.toolcache/dotnet-home"
+    export DOTNET_CLI_TELEMETRY_OPTOUT=1
+    export NUGET_PACKAGES="$ROOT/.toolcache/nuget"
+    for suite in CityGovernance CityNetwork; do
+      "$DOTNET_ROOT/dotnet" run --project "tools/unity_core/$suite.Checks.csproj" --no-restore -- \
+        "$ROOT/content" "$MET_UNITY_RUN_DIR" | tee "$MET_UNITY_RUN_DIR/$suite.log"
+    done
+    "$DOTNET_ROOT/dotnet" run --project tools/unity_core/CityArc.Checks.csproj --no-restore -- \
+      "$ROOT/content" "$MET_UNITY_RUN_DIR/city-core-journey.json" | tee "$MET_UNITY_RUN_DIR/CityArc.log"
+    ;;
   editor)
     python3 tools/sync_unity_content.py
     unity_step prepare -batchmode -nographics -executeMethod MET.City.Editor.CityProject.PrepareURP
@@ -37,6 +49,11 @@ case "${1:-core}" in
     ;;
   mac)
     unity_step build -batchmode -nographics -executeMethod MET.City.Editor.CityProject.BuildMac
+    # The dedicated Wild package starts its own save directory. Keep this marker
+    # in the exported application, never in the shared project's StreamingAssets.
+    if [[ "${MET_UNITY_WILD_BUILD:-0}" == "1" ]]; then
+      printf '%s\n' 'Wild G1 native farm progression' > "$MET_UNITY_MAC_OUTPUT/Contents/Resources/Data/StreamingAssets/WildG1.txt"
+    fi
     python3 tools/sign_unity_mac.py "$MET_UNITY_MAC_OUTPUT"
     ;;
   native)
@@ -46,8 +63,8 @@ with open(sys.argv[1],'rb') as f: print(plistlib.load(f)['CFBundleExecutable'])
 PY
 )
     "$MET_UNITY_MAC_OUTPUT/Contents/MacOS/$executable" --validate-city --capture-city \
-      -screen-fullscreen 1 -screen-width 1920 -screen-height 1080 \
+      -screen-fullscreen 1 -screen-width 2560 -screen-height 1440 \
       -logFile "$MET_UNITY_RUN_DIR/player.log"
     ;;
-  *) printf '%s\n' 'Usage: tools/test_unity_city.sh [core|editor|mac|native]' >&2; exit 2 ;;
+  *) printf '%s\n' 'Usage: tools/test_unity_city.sh [core|city-core|editor|mac|native]' >&2; exit 2 ;;
 esac

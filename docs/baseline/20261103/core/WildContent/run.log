@@ -1,0 +1,179 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS start original district
+PASS choose existing origin
+PASS old city remains outside Wild until explicit enable
+PASS disabled Wild view is read only
+PASS explicitly enable focused Wild block
+PASS repeat enable succeeds
+PASS repeat enable does not duplicate stock or history
+PASS starter cannot bypass existing freight requirement
+PASS purchase blocked before actual exports
+PASS legacy level0 reload without II or reward fields
+PASS legacy zero stays zero (0 / 0)
+PASS legacy zero gets no task reward
+PASS II requires I
+PASS open noncrossing Hope order
+PASS unfilled order does not grant eligibility (0 / 0)
+PASS cancel unfilled order
+PASS cancelled order does not grant eligibility (0 / 0)
+PASS ordinary market export
+PASS ordinary market export actually fills (2 / 2)
+PASS untagged market exports do not count for Hope (0 / 0)
+PASS other counterparty material export
+PASS other counterparty export actually fills (2 / 2)
+PASS other counterparty does not count for Hope (0 / 0)
+PASS Hope goods export
+PASS Hope goods export actually fills (1 / 1)
+PASS other resource exports do not count (0 / 0)
+PASS Hope material import
+PASS Hope import actually fills (1 / 1)
+PASS imports do not count (0 / 0)
+PASS real Hope material sell
+PASS partial fill counts only actual shipped quantity (3 / 3)
+PASS partial fill withdraws material once (3 / 3)
+PASS partial fill below requirement stays locked
+PASS actual history identifies Hope counterparty
+PASS real-time network receipt identifies Hope counterparty
+PASS restore partial export city
+PASS post-restore fill accumulates exact remaining exports (10 / 10)
+PASS threshold produces one retained eligibility record (1 / 1)
+PASS eligible Wild view does not mutate live state
+PASS eligible purchase still requires actual currency
+PASS buy HousingDesignI with 60 actual currency
+PASS purchase charges exactly 60 currency (140 / 140)
+PASS purchase does not re-deduct exported material (87 / 87)
+PASS city owns one housing technology level (1 / 1)
+PASS existing block receives city technology projection (1 / 1)
+PASS duplicate purchase refused
+PASS duplicate purchase changes no wallet or history
+PASS repeated projection does not stack technology levels (1 / 1)
+PASS existing building receives exactly two city DP (4 / 4)
+PASS future building derives two DP from city technology (2 / 2)
+PASS future block pays normal startup
+PASS choose existing origin
+PASS explicitly enable future Wild block
+PASS future block inherits city projection (1 / 1)
+PASS future block building receives shared technology (2 / 2)
+PASS restore purchased city
+PASS restore keeps purchased technology (1 / 1)
+PASS restore keeps cumulative export eligibility (10 / 10)
+PASS complete purchased city validates
+PASS focus source
+PASS second real export order
+PASS second order actually ships ten material (10 / 10)
+PASS II cumulative actual exports (20 / 20)
+PASS II insufficient currency
+PASS invalid config blocks II before spending
+PASS bad II config all state unchanged
+PASS bad config II view agrees
+PASS config threshold fixture
+PASS II view configured price (45 / 45)
+PASS configured II threshold purchase
+PASS historical configured threshold survives catalog changes
+PASS receipt retains historical threshold (15 / 15)
+PASS buy II
+PASS II charges90 (110 / 110)
+PASS II capacity6 (6 / 6)
+PASS II no duplicate
+PASS duplicate II preserves wallet stock receipt reward
+PASS legacy single reward migrates
+PASS legacy field retired
+PASS legacy exact offer preserved
+PASS both views detached read only
+PASS multiple configured milestones generate
+PASS two distinct persisted offers (2 / 2)
+PASS repeat generation
+PASS generation idempotent
+PASS removed config preserves offers
+PASS removed config no reroll on load
+PASS claim removed definition saved amount
+PASS saved amount authoritative (3 / 3)
+PASS claimed removed config reload
+PASS duplicate milestone claim rejected
+PASS duplicate all state unchanged
+PASS changed config pending reload
+PASS pending offer not rerolled (10 / 10)
+PASS bad configured choice refused kind
+PASS bad config generation pure
+PASS bad configured choice refused amount
+PASS bad config generation pure
+PASS bad configured choice refused amount
+PASS bad config generation pure
+PASS bad configured choice refused amount
+PASS bad config generation pure
+PASS bad configured choice refused amount
+PASS bad config generation pure
+PASS bad configured choice refused amount
+PASS bad config generation pure
+PASS bad configured choice refused resource
+PASS bad config generation pure
+PASS bad configured choice refused id
+PASS bad config generation pure
+PASS bad configured choice refused name
+PASS bad config generation pure
+PASS duplicate milestones rejected
+PASS duplicate options rejected
+PASS bonus multiple amount rejected
+PASS unknown bonus rejected
+PASS noncanonical reward id rejected
+PASS claimed legacy migration
+PASS claimed legacy ensure
+PASS claimed legacy cannot claim again
+PASS claimed legacy no reroll
+PASS nonplay view disables claim
+PASS malformed saved choice rejected kind
+PASS malformed saved choice rejected resource
+PASS malformed saved choice rejected id
+PASS malformed saved choice rejected amount
+PASS source ownership fixture
+PASS focus other source
+PASS wrong source cannot claim
+PASS wrong source command pure
+PASS wrong source view disables claim
+PASS II restore
+PASS stable offer
+PASS reload repeated projection stays six DP (6 / 6)
+PASS unclaimed resource branch material
+PASS full storage refuses material
+PASS failed reward preserves snapshot material
+PASS claim material
+PASS exact resource grant material (10 / 10)
+PASS claimed resource reload material
+PASS reload refuses resource duplicate material
+PASS duplicate resource preserves state material
+PASS unclaimed resource branch goods
+PASS full storage refuses goods
+PASS failed reward preserves snapshot goods
+PASS claim goods
+PASS exact resource grant goods (1 / 1)
+PASS claimed resource reload goods
+PASS reload refuses resource duplicate goods
+PASS duplicate resource preserves state goods
+PASS claim bonus to inventory
+PASS exact one W01 charge (1 / 1)
+PASS claim does not auto install (0 / 0)
+PASS claimed W01 restore
+PASS reload refuses W01 duplicate
+PASS duplicate W01 preserves all state
+PASS start manual slot route compound
+PASS construction simulation compound
+PASS queue completes compound
+PASS start manual slot route housing
+PASS construction simulation housing
+PASS queue completes housing
+PASS start manual slot route organization
+PASS construction simulation organization
+PASS queue completes organization
+PASS manually install W01 into completed Organization slot
+PASS manual install consumes exactly one charge (0 / 0)
+PASS installed W01 applies fifteen percent food (18.342499999999998 / 18.342499999999998)
+PASS idle condition
+PASS unfinished upgrade disables
+PASS upgrade removes food bonus dynamically (15.95 / 15.95)
+PASS paused unfinished upgrade still disables
+PASS finished upgrade restores bonus (18.342499999999998 / 18.342499999999998)
+PASS dedicated Wild launcher begins normal district onboarding
+PASS choose existing origin
+PASS dedicated Wild mode enables only after actual origin
+PASS later ordinary local commands do not duplicate Wild opening grant
+WILD CONTENT CHECKS 177 passed

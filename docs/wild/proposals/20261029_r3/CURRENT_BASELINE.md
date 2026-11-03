@@ -1,0 +1,334 @@
+# 当前基线
+采集 UTC 2026-10-28T17:32:36.522101+00:00
+分支 codex/met-beta-v3
+HEAD 72aee5bcbf2f80d78823f76ff21ba66e59f375b8
+HEAD不是完整脏树。baseline_hashes.json记录 tracked 与非忽略 untracked 文件，不是备份；忽略的构建和存档不在此清单。
+
+```
+ M AGENTS.md
+ M README.md
+ M content/040/buildings.json
+ M content/beta/bonus_upgrades.json
+ M content/beta/commission_events.json
+ M content/beta/commission_themes.json
+ M content/beta/parameters.json
+ M content/core020.json
+ M core/commission_theme.gd
+ M docs/unity_port/CITY_COMMUNITY_ASSETS.md
+ M docs/unity_port/FULL_MIGRATION.md
+ M tools/sync_unity_content.py
+ M tools/test_unity_city.sh
+ M tools/unity_core/ProgressionFocusedChecks.cs
+ M unity/METLivingWorld/Assets/City/CityBootstrap.cs
+ M unity/METLivingWorld/Assets/City/CityEvidence.cs
+ M unity/METLivingWorld/Assets/City/Runtime/CityRuntime.cs
+ M unity/METLivingWorld/Assets/City/UI/CityBuildings.cs
+ M unity/METLivingWorld/Assets/City/UI/CityGraphic.cs
+ M unity/METLivingWorld/Assets/City/UI/CityInterface.cs
+ M unity/METLivingWorld/Assets/City/UI/CityManagement.cs
+ M unity/METLivingWorld/Assets/City/UI/CityPages.cs
+ M unity/METLivingWorld/Assets/City/UI/CityProgression.cs
+ M unity/METLivingWorld/Assets/City/UI/CityRecords.cs
+ M unity/METLivingWorld/Assets/City/UI/CityRefresh.cs
+ M unity/METLivingWorld/Assets/City/World/CityCamera.cs
+ M unity/METLivingWorld/Assets/City/World/CityFoliage.cs
+ M unity/METLivingWorld/Assets/City/World/CityWorld.Fabric.cs
+ M unity/METLivingWorld/Assets/City/World/CityWorld.Landscape.cs
+ M unity/METLivingWorld/Assets/City/World/CityWorld.cs
+ M unity/METLivingWorld/Assets/City/World/Shaders/CityLandscapeVertex.shader
+ M unity/METLivingWorld/Assets/Editor/CityProject.cs
+ M unity/METLivingWorld/Assets/MetCore/Economy/Construction.cs
+ M unity/METLivingWorld/Assets/MetCore/Economy/Development.cs
+ M unity/METLivingWorld/Assets/MetCore/Economy/Draft.cs
+ M unity/METLivingWorld/Assets/MetCore/Economy/Market.cs
+ M unity/METLivingWorld/Assets/MetCore/Engine/Clock.cs
+ M unity/METLivingWorld/Assets/MetCore/Engine/Game.Validation.cs
+ M unity/METLivingWorld/Assets/MetCore/Engine/Game.cs
+ M unity/METLivingWorld/Assets/MetCore/Engine/Sim.cs
+ M unity/METLivingWorld/Assets/MetCore/Foundation/Catalog.cs
+ M unity/METLivingWorld/Assets/MetCore/Foundation/Hex.cs
+ M unity/METLivingWorld/Assets/MetCore/Foundation/V.cs
+ M unity/METLivingWorld/Assets/MetCore/Presentation/Planning.cs
+ M unity/METLivingWorld/Assets/MetCore/Progression/Block.cs
+ M unity/METLivingWorld/Assets/MetCore/Progression/Commissions.cs
+ M unity/METLivingWorld/Assets/MetCore/Progression/Themes.cs
+ M unity/METLivingWorld/Assets/MetCore/Rules/Alloc.cs
+ M unity/METLivingWorld/Assets/MetCore/Rules/Rules.cs
+ D unity/METLivingWorld/Assets/Resources/CityFonts/NotoSansSC-VF.ttf
+ D unity/METLivingWorld/Assets/Resources/CityFonts/NotoSansSC-VF.ttf.meta
+ M unity/METLivingWorld/Assets/Resources/Rendering/CityLandscapeVertex.mat
+ M unity/METLivingWorld/Assets/Resources/Rendering/CityOverlay.mat
+ M unity/METLivingWorld/Assets/Resources/Rendering/CityRiverVertex.mat
+ M unity/METLivingWorld/Assets/Resources/Rendering/CitySurface.mat
+ M unity/METLivingWorld/Assets/Scenes/City.unity
+ M unity/METLivingWorld/Assets/Settings/CityURP.asset
+ M unity/METLivingWorld/Assets/StreamingAssets/MetContent/040/buildings.json
+ M unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/bonus_upgrades.json
+ M unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/commission_events.json
+ M unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/commission_themes.json
+ M unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/parameters.json
+ M unity/METLivingWorld/Assets/StreamingAssets/MetContent/core020.json
+ M unity/METLivingWorld/Assets/UniversalRenderPipelineGlobalSettings.asset
+ M unity/METLivingWorld/ProjectSettings/ProjectAuditorSettings.asset
+ M unity/METLivingWorld/ProjectSettings/ProjectSettings.asset
+ M unity/METLivingWorld/ProjectSettings/ShaderGraphSettings.asset
+ M unity/METLivingWorld/README.md
+?? assets/ui/
+?? content/beta/city_arc.json
+?? content/beta/rogue_content.json
+?? content/beta/wild.json
+?? docs/city_arc/
+?? docs/rogue_content/
+?? docs/ui_planning/
+?? docs/unity_port/CIV6_LOCAL_REFERENCE.md
+?? docs/unity_port/NATURE_ASSETS.md
+?? docs/unity_port/evidence/visual-quality-v12/
+?? docs/unity_port/evidence/visual-quality-v13/
+?? docs/unity_port/evidence/visual-quality-v14/
+?? docs/unity_port/evidence/visual-quality-v16/
+?? docs/unity_port/evidence/visual-quality-v9/
+?? docs/unity_port/evidence/visual-quality/
+?? docs/wild/
+?? prototypes/
+?? tools/build_city_font.py
+?? tools/build_city_icons.mjs
+?? tools/build_city_surface_styles.py
+?? tools/run_wild_g0.command
+?? tools/unity_core/CityArc.Checks.csproj
+?? tools/unity_core/CityArcProgram.cs
+?? tools/unity_core/CityGovernance.Checks.csproj
+?? tools/unity_core/CityGovernanceProgram.cs
+?? tools/unity_core/CityNetwork.Checks.csproj
+?? tools/unity_core/CityNetworkProgram.cs
+?? tools/unity_core/Json.Checks.csproj
+?? tools/unity_core/JsonProgram.cs
+?? tools/unity_core/RogueContent.Checks.csproj
+?? tools/unity_core/RogueContentProgram.cs
+?? tools/unity_core/Specialization.Checks.csproj
+?? tools/unity_core/SpecializationProgram.cs
+?? tools/unity_core/UI11Map.Checks.csproj
+?? tools/unity_core/UI11MapProgram.cs
+?? tools/unity_core/UI15.Checks.csproj
+?? tools/unity_core/UI15Program.cs
+?? tools/unity_core/UI8.Checks.csproj
+?? tools/unity_core/UI8Program.cs
+?? tools/unity_core/WildG0.Checks.csproj
+?? tools/unity_core/WildG0Program.cs
+?? tools/unity_core/WildG1.Checks.csproj
+?? tools/unity_core/WildG1Program.cs
+?? tools/unity_core/WildTrade.Checks.csproj
+?? tools/unity_core/WildTradeProgram.cs
+?? unity/METLivingWorld/Assets/City/CityCivicEvidence.cs
+?? unity/METLivingWorld/Assets/City/CityCivicEvidence.cs.meta
+?? unity/METLivingWorld/Assets/City/CityEvidence.Blueprints.cs
+?? unity/METLivingWorld/Assets/City/CityEvidence.Blueprints.cs.meta
+?? unity/METLivingWorld/Assets/City/CityEvidence.Construction.cs
+?? unity/METLivingWorld/Assets/City/CityEvidence.Construction.cs.meta
+?? unity/METLivingWorld/Assets/City/CityEvidence.Content.cs
+?? unity/METLivingWorld/Assets/City/CityEvidence.Content.cs.meta
+?? unity/METLivingWorld/Assets/City/CityEvidence.Ui4.cs
+?? unity/METLivingWorld/Assets/City/CityEvidence.Ui4.cs.meta
+?? unity/METLivingWorld/Assets/City/CityEvidence.Ui5.cs
+?? unity/METLivingWorld/Assets/City/CityEvidence.Ui5.cs.meta
+?? unity/METLivingWorld/Assets/City/CityEvidence.Ui6.cs
+?? unity/METLivingWorld/Assets/City/CityEvidence.Ui6.cs.meta
+?? unity/METLivingWorld/Assets/City/CityEvidence.Ui7.cs
+?? unity/METLivingWorld/Assets/City/CityEvidence.Ui7.cs.meta
+?? unity/METLivingWorld/Assets/City/CityMemoryEvidence.cs
+?? unity/METLivingWorld/Assets/City/CityMemoryEvidence.cs.meta
+?? unity/METLivingWorld/Assets/City/CityMouseEvidence.cs
+?? unity/METLivingWorld/Assets/City/CityMouseEvidence.cs.meta
+?? unity/METLivingWorld/Assets/City/CityWildG0Evidence.cs
+?? unity/METLivingWorld/Assets/City/CityWildG0Evidence.cs.meta
+?? unity/METLivingWorld/Assets/City/CityWildG1Evidence.cs
+?? unity/METLivingWorld/Assets/City/CityWildG1Evidence.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityArcPages.cs
+?? unity/METLivingWorld/Assets/City/UI/CityArcPages.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityBlueprintArt.cs
+?? unity/METLivingWorld/Assets/City/UI/CityBlueprintArt.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityBlueprintDesk.cs
+?? unity/METLivingWorld/Assets/City/UI/CityBlueprintDesk.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityBlueprintMotion.cs
+?? unity/METLivingWorld/Assets/City/UI/CityBlueprintMotion.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityBuildingPortrait.cs
+?? unity/METLivingWorld/Assets/City/UI/CityBuildingPortrait.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityCapacityHud.cs
+?? unity/METLivingWorld/Assets/City/UI/CityCapacityHud.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityCivicConstruction.cs
+?? unity/METLivingWorld/Assets/City/UI/CityCivicConstruction.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityCivicManagementDevelopment.cs
+?? unity/METLivingWorld/Assets/City/UI/CityCivicManagementDevelopment.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityCivicManagementOperating.cs
+?? unity/METLivingWorld/Assets/City/UI/CityCivicManagementOperating.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityCivicOperating.cs
+?? unity/METLivingWorld/Assets/City/UI/CityCivicOperating.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityCivicRecords.cs
+?? unity/METLivingWorld/Assets/City/UI/CityCivicRecords.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityCivicShell.cs
+?? unity/METLivingWorld/Assets/City/UI/CityCivicShell.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityCivicTile.cs
+?? unity/METLivingWorld/Assets/City/UI/CityCivicTile.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityConstructionDecision.cs
+?? unity/METLivingWorld/Assets/City/UI/CityConstructionDecision.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityConstructionManagement.cs
+?? unity/METLivingWorld/Assets/City/UI/CityConstructionManagement.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityConstructionWindow.cs
+?? unity/METLivingWorld/Assets/City/UI/CityConstructionWindow.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityContentPages.cs
+?? unity/METLivingWorld/Assets/City/UI/CityContentPages.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityDeskMaterials.cs
+?? unity/METLivingWorld/Assets/City/UI/CityDeskMaterials.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityDeskTooltip.cs
+?? unity/METLivingWorld/Assets/City/UI/CityDeskTooltip.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityDevelopmentFlow.cs
+?? unity/METLivingWorld/Assets/City/UI/CityDevelopmentFlow.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityGuidance.cs
+?? unity/METLivingWorld/Assets/City/UI/CityGuidance.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityHoverProgress.cs
+?? unity/METLivingWorld/Assets/City/UI/CityHoverProgress.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityHud.cs
+?? unity/METLivingWorld/Assets/City/UI/CityHud.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityHudIcon.cs
+?? unity/METLivingWorld/Assets/City/UI/CityHudIcon.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityIconCatalog.cs
+?? unity/METLivingWorld/Assets/City/UI/CityIconCatalog.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityIllustrationCatalog.cs
+?? unity/METLivingWorld/Assets/City/UI/CityIllustrationCatalog.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityIllustrations.cs
+?? unity/METLivingWorld/Assets/City/UI/CityIllustrations.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityMapInspection.cs
+?? unity/METLivingWorld/Assets/City/UI/CityMapInspection.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityMapLegend.cs
+?? unity/METLivingWorld/Assets/City/UI/CityMapLegend.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityMaterialStyle.cs
+?? unity/METLivingWorld/Assets/City/UI/CityMaterialStyle.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityMilestones.cs
+?? unity/METLivingWorld/Assets/City/UI/CityMilestones.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityNavigationModel.cs
+?? unity/METLivingWorld/Assets/City/UI/CityNavigationModel.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityNavigationPages.cs
+?? unity/METLivingWorld/Assets/City/UI/CityNavigationPages.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityOperatingDetails.cs
+?? unity/METLivingWorld/Assets/City/UI/CityOperatingDetails.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityTaskDetails.cs
+?? unity/METLivingWorld/Assets/City/UI/CityTaskDetails.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityTilePanel.cs
+?? unity/METLivingWorld/Assets/City/UI/CityTilePanel.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityTileTables.cs
+?? unity/METLivingWorld/Assets/City/UI/CityTileTables.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityToolkitUpgrade.cs
+?? unity/METLivingWorld/Assets/City/UI/CityToolkitUpgrade.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityTopbarSummary.cs
+?? unity/METLivingWorld/Assets/City/UI/CityTopbarSummary.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityV3Development.cs
+?? unity/METLivingWorld/Assets/City/UI/CityV3Development.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityV3Operating.cs
+?? unity/METLivingWorld/Assets/City/UI/CityV3Operating.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityV3Workspace.cs
+?? unity/METLivingWorld/Assets/City/UI/CityV3Workspace.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityWildStar.cs
+?? unity/METLivingWorld/Assets/City/UI/CityWildStar.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityWildTrade.cs
+?? unity/METLivingWorld/Assets/City/UI/CityWildTrade.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityWorkspaceFlow.cs
+?? unity/METLivingWorld/Assets/City/UI/CityWorkspaceFlow.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/CityWorkspaces.cs
+?? unity/METLivingWorld/Assets/City/UI/CityWorkspaces.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/HoverIntent.cs
+?? unity/METLivingWorld/Assets/City/UI/HoverIntent.cs.meta
+?? unity/METLivingWorld/Assets/City/UI/Toolkit.meta
+?? unity/METLivingWorld/Assets/City/UI/Toolkit/
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Nature.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Nature.cs.meta
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Palette.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Palette.cs.meta
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Placement.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Placement.cs.meta
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Ring.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Ring.cs.meta
+?? unity/METLivingWorld/Assets/City/World/CityWorld.RoadEvidence.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.RoadEvidence.cs.meta
+?? unity/METLivingWorld/Assets/City/World/CityWorld.RoadLayout.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.RoadLayout.cs.meta
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Settlement.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Settlement.cs.meta
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Site.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.Site.cs.meta
+?? unity/METLivingWorld/Assets/City/World/CityWorld.SurfaceStyles.cs
+?? unity/METLivingWorld/Assets/City/World/CityWorld.SurfaceStyles.cs.meta
+?? unity/METLivingWorld/Assets/City/World/Shaders/CityCanopy.shader
+?? unity/METLivingWorld/Assets/City/World/Shaders/CityCanopy.shader.meta
+?? unity/METLivingWorld/Assets/City/World/Shaders/CityRoadSurface.shader
+?? unity/METLivingWorld/Assets/City/World/Shaders/CityRoadSurface.shader.meta
+?? unity/METLivingWorld/Assets/Editor/CityIconChecks.cs
+?? unity/METLivingWorld/Assets/Editor/CityIconChecks.cs.meta
+?? unity/METLivingWorld/Assets/Editor/CityNatureAssets.cs
+?? unity/METLivingWorld/Assets/Editor/CityNatureAssets.cs.meta
+?? unity/METLivingWorld/Assets/Editor/CitySurfaceStyles.cs
+?? unity/METLivingWorld/Assets/Editor/CitySurfaceStyles.cs.meta
+?? unity/METLivingWorld/Assets/Editor/CityToolkitAssets.cs
+?? unity/METLivingWorld/Assets/Editor/CityToolkitAssets.cs.meta
+?? unity/METLivingWorld/Assets/Editor/TilePanelChecks.cs
+?? unity/METLivingWorld/Assets/Editor/TilePanelChecks.cs.meta
+?? unity/METLivingWorld/Assets/Editor/UI15WorkspaceChecks.cs
+?? unity/METLivingWorld/Assets/Editor/UI15WorkspaceChecks.cs.meta
+?? unity/METLivingWorld/Assets/Editor/V3WorkspaceChecks.cs
+?? unity/METLivingWorld/Assets/Editor/V3WorkspaceChecks.cs.meta
+?? unity/METLivingWorld/Assets/MetCore/City.meta
+?? unity/METLivingWorld/Assets/MetCore/City/
+?? unity/METLivingWorld/Assets/MetCore/Engine/Game.CityContext.cs
+?? unity/METLivingWorld/Assets/MetCore/Engine/Game.CityContext.cs.meta
+?? unity/METLivingWorld/Assets/MetCore/Presentation/BlueprintPreview.cs
+?? unity/METLivingWorld/Assets/MetCore/Presentation/BlueprintPreview.cs.meta
+?? unity/METLivingWorld/Assets/MetCore/Presentation/MapInspection.cs
+?? unity/METLivingWorld/Assets/MetCore/Presentation/MapInspection.cs.meta
+?? unity/METLivingWorld/Assets/MetCore/Presentation/TileSummary.cs
+?? unity/METLivingWorld/Assets/MetCore/Presentation/TileSummary.cs.meta
+?? unity/METLivingWorld/Assets/MetCore/Progression/RogueContent.cs
+?? unity/METLivingWorld/Assets/MetCore/Progression/RogueContent.cs.meta
+?? unity/METLivingWorld/Assets/MetCore/Progression/WildDesign.cs
+?? unity/METLivingWorld/Assets/MetCore/Progression/WildDesign.cs.meta
+?? unity/METLivingWorld/Assets/Resources/CityFonts/NotoSansSC.ttf
+?? unity/METLivingWorld/Assets/Resources/CityFonts/NotoSansSC.ttf.meta
+?? unity/METLivingWorld/Assets/Resources/CityIcons.meta
+?? unity/METLivingWorld/Assets/Resources/CityIcons/
+?? unity/METLivingWorld/Assets/Resources/CityNature.meta
+?? unity/METLivingWorld/Assets/Resources/CityNature/
+?? unity/METLivingWorld/Assets/Resources/CityTerrain/HandpaintedGrass-v1.png
+?? unity/METLivingWorld/Assets/Resources/CityTerrain/HandpaintedGrass-v1.png.meta
+?? unity/METLivingWorld/Assets/Resources/CityTerrain/HandpaintedRock-v1.png
+?? unity/METLivingWorld/Assets/Resources/CityTerrain/HandpaintedRock-v1.png.meta
+?? unity/METLivingWorld/Assets/Resources/CityTerrain/SurfaceStyles.meta
+?? unity/METLivingWorld/Assets/Resources/CityTerrain/SurfaceStyles/
+?? unity/METLivingWorld/Assets/Resources/CityToolkit.meta
+?? unity/METLivingWorld/Assets/Resources/CityToolkit/
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityCanopy_Leaves_NormalTree.mat
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityCanopy_Leaves_NormalTree.mat.meta
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityCanopy_Leaves_Pine.mat
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityCanopy_Leaves_Pine.mat.meta
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityCanopy_Leaves_TwistedTree.mat
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityCanopy_Leaves_TwistedTree.mat.meta
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityRoadDirt.mat
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityRoadDirt.mat.meta
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityRoadGravel.mat
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityRoadGravel.mat.meta
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityRoadStone.mat
+?? unity/METLivingWorld/Assets/Resources/Rendering/CityRoadStone.mat.meta
+?? unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/city_arc.json
+?? unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/city_arc.json.meta
+?? unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/rogue_content.json
+?? unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/rogue_content.json.meta
+?? unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/wild.json
+?? unity/METLivingWorld/Assets/StreamingAssets/MetContent/beta/wild.json.meta
+?? unity/METLivingWorld/Assets/StreamingAssets/ThirdPartyNotices/Quaternius-Stylized-Nature-License_Standard.txt
+?? unity/METLivingWorld/Assets/StreamingAssets/ThirdPartyNotices/Quaternius-Stylized-Nature-License_Standard.txt.meta
+?? unity/METLivingWorld/ProjectSettings/URPProjectSettings.asset
+```
+
+content/beta/wild.json: SHA256 05b704f19c95036d047563b7edc97115d8a396dcaac7159264ef026459abe7f7, mtime_ns 1793069752381009147
+unity/METLivingWorld/Assets/MetCore/City/CityWild.cs: SHA256 a0e23110d14a75c1bc60b524d6aa3b9ce15b5a25006d0ccc9dc73babff1d0aa3, mtime_ns 1793027273104682951
+unity/METLivingWorld/Assets/MetCore/Progression/WildDesign.cs: SHA256 868d66f71f7940da67cad4013f4e3c5b50f0a131eb2875c4c005e328b316b8bd, mtime_ns 1793069752381162557
+unity/METLivingWorld/Assets/MetCore/Rules/Rules.cs: SHA256 cf242e6918a40a374ddd155db98f0fc981361c47a6d2e57be8c1dee78582301f, mtime_ns 1793026326178804589
+unity/METLivingWorld/Assets/MetCore/Progression/Bonus.cs: SHA256 5a5bf087702e782079ae7933598d6df319074c94a3c6a605c297269a9f7ce821, mtime_ns 1791905300598363949
+unity/METLivingWorld/Assets/MetCore/Foundation/Catalog.cs: SHA256 8b8af014e044731fbda60c8367fc54d2331fca82a5d51fcdc509df2f3e0d9d0d, mtime_ns 1793025899092812946
+tools/sync_unity_content.py: SHA256 0b0681a120f12576b75e062906fbc6b2d9bf3f07f7c839900759b1607a02e4c2, mtime_ns 1791940686493089300

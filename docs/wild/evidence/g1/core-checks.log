@@ -1,0 +1,6 @@
+2026-10-27 route-rule implementation verification
+WildG1: PASS 241 checks
+WildG0 regression: PASS 33 assertions
+WildTrade regression: PASS 59 checks
+Commands used the repository .toolcache/dotnet runtime and tools/unity_core projects.
+Results were observed in the implementation agent console; full console traces were not archived.

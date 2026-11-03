@@ -1,0 +1,17 @@
+{
+  "version": "0.6.0-city-arc.1-local",
+  "source_base": "72aee5b",
+  "source_state": "local uncommitted changes",
+  "branch": "codex/met-beta-v3",
+  "archive": "build/MET-City-Arc-0.6.0-local-macOS-universal.zip",
+  "archive_mib": 61.16698360443115,
+  "zip_crc_check": "passed",
+  "actual_ditto_extract": "passed",
+  "executable_unicode_name": "MET 来生 Unity Beta",
+  "executable_permission": "passed",
+  "architectures": "x86_64 arm64",
+  "codesign_deep_strict": "passed",
+  "signing": "ad-hoc",
+  "notarized": false,
+  "remote_published": false
+}

@@ -1,0 +1,5 @@
+{
+  "source_report": "/Users/lizhirui/Developer/MET_0.3.2_Source/.toolcache/rogue-content/industrial-normal.json",
+  "archived_world_report": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/ui6-evidence/city-arc-fixture.json",
+  "scope": "UI7 native fullscreen Player, actual rendered screenshots, earned fixture restores, uGUI callback navigation and synthetic pointer/focus events with real unscaled dwell. No OS mouse/keyboard or human usability claim; fixtures never alter stock, eligibility, RNG or goal counters for presentation."
+}

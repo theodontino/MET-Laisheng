@@ -1,0 +1,44 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS empty city semantic validation
+PASS nonnull bootstrap
+PASS first district
+PASS origin
+PASS initial city semantic validation
+PASS unique active
+PASS insufficient real startup funds rejected
+PASS paid second block
+PASS startup deducts actual source once
+PASS origin
+PASS origin cannot restore initial free cash or stock
+PASS startup receipt not repeated
+PASS two-block city validation
+PASS detached envelope validation
+PASS runtime metadata has no stale state
+PASS snapshot takes replaced latest Game.s
+PASS focus round trip changes no simulation
+PASS snapshot nested mutation leaves live state and metadata unchanged
+PASS fixture license
+PASS portable consumes actual unused license
+PASS one transferred license
+PASS cannot transfer consumed license again
+PASS fixture Local license
+PASS Local stays in source
+PASS history capture idempotent
+PASS whole city roundtrip
+PASS restore exact owner graph
+PASS reload history not replayed
+PASS RNG preserved
+PASS restore preserves every city and block metadata field without local state
+PASS restored local state and metadata detach from source envelope
+PASS duplicate block ownership rejected
+PASS bad actual local inventory rejected
+PASS semantic city save
+PASS semantic backup save
+PASS semantic corrupt main falls back to valid backup
+PASS resume records offline only
+PASS actual shortage and bankruptcy retire district
+PASS crisis preserves old entities and games
+PASS paid return
+PASS return costs money and opens new term
+PASS governance history semantic roundtrip
+GOVERNANCE CHECKS 42 PASS; fixture scenarios, not no-injection full arc

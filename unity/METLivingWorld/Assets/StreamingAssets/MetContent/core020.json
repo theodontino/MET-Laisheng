@@ -2526,6 +2526,289 @@
         "邻接住宅共用厨房，覆盖者省20%口粮",
         "每处最多服务24人，维护增加1/小时"
       ]
+    },
+    "P09": {
+      "name": "近邻装配",
+      "slot": "Production",
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "相邻同运营者的材料产能×1.15、制成品产能×1.20；本厂耗电×1.15、污染×1.10。独立散置时仍付代价。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.material",
+          "mode": "multiply",
+          "value": 1.15,
+          "targets": "adjacent",
+          "when": {
+            "traits": [
+              "building.industrial"
+            ],
+            "same_provider": true
+          },
+          "id": "P09.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.goods",
+          "mode": "multiply",
+          "value": 1.2,
+          "targets": "adjacent",
+          "when": {
+            "traits": [
+              "building.industrial"
+            ],
+            "same_provider": true
+          },
+          "id": "P09.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "energy_demand",
+          "mode": "multiply",
+          "value": 1.15,
+          "targets": "self",
+          "id": "P09.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "pollution",
+          "mode": "multiply",
+          "value": 1.1,
+          "targets": "self",
+          "id": "P09.4",
+          "priority": 0
+        }
+      ],
+      "player_highlights": [
+        "相邻同运营者工业才获得协作收益",
+        "选择产业集中，承担本厂额外用电与污染"
+      ],
+      "id": "P09",
+      "allowed_slots": [
+        "Production"
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0
+    },
+    "R19": {
+      "name": "厂区防护缓冲",
+      "slot": "Operations",
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.industrial"
+      ],
+      "summary": "相邻住宅污染暴露×0.80；本厂耗电×1.15、维护×1.20。保护近邻，不消除排放，也不保护远处住宅。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "exposure_multiplier",
+          "mode": "multiply",
+          "value": 0.8,
+          "targets": "adjacent",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "id": "R19.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "energy_demand",
+          "mode": "multiply",
+          "value": 1.15,
+          "targets": "self",
+          "id": "R19.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "mode": "multiply",
+          "value": 1.2,
+          "targets": "self",
+          "id": "R19.3",
+          "priority": 0
+        }
+      ],
+      "player_highlights": [
+        "工业和住区邻接时获得防护",
+        "保护暴露，并不凭空消除污染"
+      ],
+      "id": "R19",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0
+    },
+    "O08": {
+      "name": "邻里照护网络",
+      "slot": "Operations",
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.medical"
+      ],
+      "summary": "相邻住宅污染暴露×0.85、短缺敏感度×0.90；本站医疗容量×0.85、维护×1.20。用近邻照护换集中容量。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "exposure_multiplier",
+          "mode": "multiply",
+          "value": 0.85,
+          "targets": "adjacent",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "id": "O08.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "shortage_multiplier",
+          "mode": "multiply",
+          "value": 0.9,
+          "targets": "adjacent",
+          "when": {
+            "traits": [
+              "building.residential"
+            ]
+          },
+          "id": "O08.2",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "service.medical",
+          "mode": "multiply",
+          "value": 0.85,
+          "targets": "self",
+          "id": "O08.3",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "maintenance",
+          "mode": "multiply",
+          "value": 1.2,
+          "targets": "self",
+          "id": "O08.4",
+          "priority": 0
+        }
+      ],
+      "player_highlights": [
+        "密集住区的近邻更耐污染和短缺",
+        "本站容量减少，分散住区可能更需要集中医疗"
+      ],
+      "id": "O08",
+      "allowed_slots": [
+        "Operations"
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0
+    },
+    "B10": {
+      "name": "街坊夜校",
+      "slot": null,
+      "hosts": [
+        "block"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "把住宅容量的8%转换为教育容量；人口维护×1.08。减少可住房位换真实教育供给，升级进一步扩大取舍。",
+      "rules": [
+        {
+          "op": "capacity_convert",
+          "phase": "spatial",
+          "from": "housing",
+          "to": "service.education",
+          "fraction": 0.08,
+          "id": "B10.1",
+          "priority": 0
+        },
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "population_maintenance",
+          "mode": "multiply",
+          "value": 1.08,
+          "targets": "self",
+          "id": "B10.2",
+          "priority": 0
+        }
+      ],
+      "player_highlights": [
+        "住房容量转换为教育，不复制同一容量",
+        "住房紧缺时需先补房，升级也会占用更多住房"
+      ],
+      "id": "B10",
+      "allowed_slots": [],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 1.0
+    },
+    "W01": {
+      "id": "W01",
+      "name": "农闲整备",
+      "slot": "Organization",
+      "allowed_slots": [
+        "Organization"
+      ],
+      "hosts": [
+        "building"
+      ],
+      "traits": [
+        "building.residential"
+      ],
+      "summary": "条件满足时本建筑食物产出增加15%。",
+      "rules": [
+        {
+          "op": "modify",
+          "phase": "spatial",
+          "field": "output.food",
+          "targets": "self",
+          "mode": "multiply",
+          "value": 1.15,
+          "id": "W01.1",
+          "priority": 0,
+          "when": {
+            "wild_no_upgrade": true
+          }
+        }
+      ],
+      "excludes": [],
+      "status": "implemented",
+      "weight": 0.0
     }
   },
   "operators": {

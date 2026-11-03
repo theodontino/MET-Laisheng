@@ -1,0 +1,597 @@
+{
+  "ok": true,
+  "checks": [
+    "project_rejects_missing_prerequisites",
+    "research_rejects_missing_prerequisites",
+    "science_project_views_are_read_only",
+    "research_without_operating_education_does_not_progress",
+    "real_research_precision_engineering",
+    "advanced_without_operating_factory_does_not_progress",
+    "real_research_superconductors",
+    "real_research_fusion_physics",
+    "advanced_components_are_independent_stock",
+    "block_startup_withdraws_real_source",
+    "district_handover_preserves_autonomy",
+    "real_supply_crisis_retires_and_preserves_district",
+    "real_supply_crisis_retires_and_preserves_district",
+    "real_supply_crisis_retires_and_preserves_district",
+    "cross_district_advanced_stock_arrives_with_real_freight_cost",
+    "project_delivery_withdraws_real_stock",
+    "project_no_advanced_delivery_no_progress",
+    "city_cp_reserve_cannot_double_spend_local_queue",
+    "city_and_local_construction_share_actual_capacity",
+    "return_pays_actual_organization_cost",
+    "same_city_endless_after_tokamak",
+    "advanced_production_stock_transport_project_are_conserved",
+    "advanced_actual_material_goods_money_energy_costs",
+    "completed_city_keeps_operating",
+    "project_feedback_completes_once",
+    "repeated_science_callback_cannot_mint_or_spend_twice",
+    "whole_city_science_project_roundtrip"
+  ],
+  "districts": 2,
+  "blocks": 4,
+  "external_seconds": 316871999.9999998,
+  "elapsed_seconds": 149.6490186,
+  "advance_calls": 817,
+  "committed_slices": 4241,
+  "note": "实际玩家命令与经济结算的逻辑时间验收；不是数月真人游玩或原生引擎验收",
+  "source_world_summary": {
+    "city_id": "city:20261014",
+    "active_district_id": "D000002",
+    "districts": {
+      "D000002": {
+        "id": "D000002",
+        "name": "河谷工业地区",
+        "status": "active",
+        "run_history": [
+          {
+            "term": 1,
+            "started_external": 0.0,
+            "ended_external": 157852800.0,
+            "kind": "handover",
+            "reason": "达成地区稳定承诺后主动交班",
+            "record_id": "H000122",
+            "support": 82.92147813605088,
+            "mandate": 82.56807862035498
+          }
+        ],
+        "block_ids": [
+          "K000003",
+          "K000113"
+        ],
+        "support": 80.14602194567222,
+        "mandate": 99.99991823710093,
+        "institutions": {
+          "D000002:industrial": {
+            "id": "D000002:industrial",
+            "kind": "industrial",
+            "source_blocks": [
+              "K000003"
+            ],
+            "record_id": "H000109"
+          }
+        },
+        "crisis": {
+          "active": false,
+          "reason": "",
+          "bad_months": 0.0
+        },
+        "term": 2,
+        "term_started_external": 286545599.9999998,
+        "promises": {
+          "stable_blocks": 2
+        },
+        "identity": {
+          "population": 100.04201345485697,
+          "industry": 2,
+          "agriculture": 3,
+          "services": 1,
+          "blocks": 2,
+          "institutions": 1,
+          "label": "农业地区"
+        },
+        "last_readings": {
+          "district_id": "D000002",
+          "status": "active",
+          "support": 80.14291157103136,
+          "mandate": 99.99991741537013,
+          "population": 100.04201345485697,
+          "food": 1.0,
+          "services": 0.21324374226993942,
+          "pollution": 0.0,
+          "currency": 4304.569812657026,
+          "cashflow": 50.116395130800484,
+          "stable_blocks": 2,
+          "play_blocks": 2,
+          "promises": {
+            "stable_blocks": 2
+          },
+          "crisis": {
+            "active": false,
+            "reason": "",
+            "bad_months": 0.0
+          },
+          "sources": [
+            {
+              "block_id": "K000003",
+              "population": 76.8292884742575,
+              "food": 1.0,
+              "services": 0.27767188473288157,
+              "pollution": 0,
+              "cashflow": 35.63498191866312
+            },
+            {
+              "block_id": "K000113",
+              "population": 23.212724980599468,
+              "food": 1.0,
+              "services": 0.0,
+              "pollution": 0,
+              "cashflow": 14.481413212137362
+            }
+          ]
+        }
+      },
+      "D000123": {
+        "id": "D000123",
+        "name": "高地学园地区",
+        "status": "autonomous",
+        "run_history": [
+          {
+            "term": 1,
+            "started_external": 164462400.0,
+            "ended_external": 205286399.99999985,
+            "kind": "crisis",
+            "reason": "持续口粮短缺，治理权转入自治",
+            "record_id": "H000181",
+            "support": 54.01871589475043,
+            "mandate": 58.14926636719559
+          },
+          {
+            "term": 2,
+            "started_external": 217339200.0,
+            "ended_external": 234575999.99999997,
+            "kind": "crisis",
+            "reason": "持续口粮短缺，治理权转入自治",
+            "record_id": "H000192",
+            "support": 50.64817327292621,
+            "mandate": 56.0040822712156
+          },
+          {
+            "term": 3,
+            "started_external": 237945600.0,
+            "ended_external": 247494848.8801518,
+            "kind": "crisis",
+            "reason": "持续口粮短缺，治理权转入自治",
+            "record_id": "H000206",
+            "support": 44.93215414378984,
+            "mandate": 49.25359600223877
+          },
+          {
+            "term": 4,
+            "started_external": 254275199.99999985,
+            "ended_external": 286545599.9999998,
+            "kind": "handover",
+            "reason": "达成地区稳定承诺后主动交班",
+            "record_id": "H000245",
+            "support": 82.49717148218436,
+            "mandate": 81.69712256621807
+          }
+        ],
+        "block_ids": [
+          "K000124",
+          "K000236"
+        ],
+        "support": 81.21526477434328,
+        "mandate": 98.23692704398158,
+        "institutions": {
+          "D000123:research": {
+            "id": "D000123:research",
+            "kind": "research",
+            "source_blocks": [
+              "K000124"
+            ],
+            "record_id": "H000229"
+          }
+        },
+        "crisis": {
+          "active": false,
+          "reason": "",
+          "bad_months": 0.0
+        },
+        "term": 4,
+        "term_started_external": 254275199.99999985,
+        "promises": {
+          "stable_blocks": 2
+        },
+        "identity": {
+          "population": 73.56728953940883,
+          "industry": 2,
+          "agriculture": 4,
+          "services": 1,
+          "blocks": 2,
+          "institutions": 1,
+          "label": "农业地区"
+        },
+        "last_readings": {
+          "district_id": "D000123",
+          "status": "autonomous",
+          "support": 81.21570987883808,
+          "mandate": 98.21920786619204,
+          "population": 73.56728953940883,
+          "food": 1.0,
+          "services": 0.24755121754818454,
+          "pollution": 0.0,
+          "currency": 981.1886798428789,
+          "cashflow": 38.11548918055456,
+          "stable_blocks": 2,
+          "play_blocks": 2,
+          "promises": {
+            "stable_blocks": 2
+          },
+          "crisis": {
+            "active": false,
+            "reason": "",
+            "bad_months": 0.0
+          },
+          "sources": [
+            {
+              "block_id": "K000124",
+              "population": 54.63501629160144,
+              "food": 1.0,
+              "services": 0.3333333333333333,
+              "pollution": 0,
+              "cashflow": 26.54418572874301
+            },
+            {
+              "block_id": "K000236",
+              "population": 18.932273247807395,
+              "food": 1.0,
+              "services": 0.0,
+              "pollution": 0,
+              "cashflow": 11.571303451811554
+            }
+          ]
+        }
+      }
+    },
+    "startup_sources": {
+      "K000003": {
+        "kind": "initial_charter",
+        "source_block": "",
+        "district_start": true,
+        "settled": true,
+        "cost": {}
+      },
+      "K000113": {
+        "kind": "paid_transfer",
+        "source_block": "K000003",
+        "district_start": false,
+        "settled": true,
+        "cost": {
+          "money": 133.0,
+          "stock": {
+            "food": 12.0,
+            "material": 9.0,
+            "goods": 2.0
+          }
+        }
+      },
+      "K000124": {
+        "kind": "paid_transfer",
+        "source_block": "K000003",
+        "district_start": true,
+        "settled": true,
+        "cost": {
+          "money": 190.0,
+          "stock": {
+            "food": 12.0,
+            "material": 10.0,
+            "goods": 2.0
+          }
+        }
+      },
+      "K000236": {
+        "kind": "paid_transfer",
+        "source_block": "K000124",
+        "district_start": false,
+        "settled": true,
+        "cost": {
+          "money": 126.0,
+          "stock": {
+            "food": 12.0,
+            "material": 10.0,
+            "goods": 2.0
+          }
+        }
+      }
+    },
+    "science": {
+      "technologies": {
+        "precision_engineering": {
+          "block_id": "K000003",
+          "district_id": "D000002",
+          "completed_tick": 1033,
+          "investment": {
+            "id": "precision_engineering",
+            "block_id": "K000003",
+            "status": "complete",
+            "progress": 1.0,
+            "knowledge": 2.0,
+            "currency": 44.999999999999986,
+            "material": 6.0,
+            "elapsed_months": 3.2500000000000013,
+            "last_tick": 1033,
+            "reason": "完成"
+          }
+        },
+        "superconductors": {
+          "block_id": "K000003",
+          "district_id": "D000002",
+          "completed_tick": 1084,
+          "investment": {
+            "id": "superconductors",
+            "block_id": "K000003",
+            "status": "complete",
+            "progress": 1.0,
+            "knowledge": 4.0,
+            "currency": 79.99999999999996,
+            "material": 9.999999999999995,
+            "elapsed_months": 4.000000000000003,
+            "last_tick": 1084,
+            "reason": "完成"
+          }
+        },
+        "fusion_physics": {
+          "block_id": "K000003",
+          "district_id": "D000002",
+          "completed_tick": 1156,
+          "investment": {
+            "id": "fusion_physics",
+            "block_id": "K000003",
+            "status": "complete",
+            "progress": 1.0,
+            "knowledge": 5.999999999999996,
+            "currency": 120.00000000000013,
+            "material": 15.000000000000016,
+            "elapsed_months": 5.999999999999996,
+            "last_tick": 1156,
+            "reason": "完成"
+          }
+        }
+      },
+      "research": {
+        "precision_engineering": {
+          "id": "precision_engineering",
+          "block_id": "K000003",
+          "status": "complete",
+          "progress": 1.0,
+          "knowledge": 2.0,
+          "currency": 44.999999999999986,
+          "material": 6.0,
+          "elapsed_months": 3.2500000000000013,
+          "last_tick": 1033,
+          "reason": "完成"
+        },
+        "superconductors": {
+          "id": "superconductors",
+          "block_id": "K000003",
+          "status": "complete",
+          "progress": 1.0,
+          "knowledge": 4.0,
+          "currency": 79.99999999999996,
+          "material": 9.999999999999995,
+          "elapsed_months": 4.000000000000003,
+          "last_tick": 1084,
+          "reason": "完成"
+        },
+        "fusion_physics": {
+          "id": "fusion_physics",
+          "block_id": "K000003",
+          "status": "complete",
+          "progress": 1.0,
+          "knowledge": 5.999999999999996,
+          "currency": 120.00000000000013,
+          "material": 15.000000000000016,
+          "elapsed_months": 5.999999999999996,
+          "last_tick": 1156,
+          "reason": "完成"
+        }
+      },
+      "production": {
+        "K000003": {
+          "advanced_components": 0.08333333333321835,
+          "material": 0.1666666666664367,
+          "goods": 0.08333333333321835,
+          "currency": 0.24999999999965505,
+          "energy": 0.1666666666664367,
+          "months": 0.08333333333321835,
+          "reason": "实际制造投入与剩余供电",
+          "knowledge_institution_bonus": 0.0,
+          "tick": 4241
+        },
+        "K000113": {
+          "advanced_components": 0.0,
+          "material": 0.0,
+          "goods": 0.0,
+          "currency": 0.0,
+          "energy": 0.0,
+          "months": 0.08333333333321835,
+          "reason": "制造运行、材料、制成品、通货、剩余供电或库容不足",
+          "knowledge_institution_bonus": 0.0,
+          "tick": 3004
+        },
+        "K000124": {
+          "advanced_components": 0.0,
+          "material": 0.0,
+          "goods": 0.0,
+          "currency": 0.0,
+          "energy": 0.0,
+          "months": 0.08333333333321835,
+          "reason": "制造运行、材料、制成品、通货、剩余供电或库容不足",
+          "knowledge_institution_bonus": 0.004551983545182816,
+          "tick": 2941
+        },
+        "K000236": {
+          "advanced_components": 0.0,
+          "material": 0.0,
+          "goods": 0.0,
+          "currency": 0.0,
+          "energy": 0.0,
+          "months": 0.08333333333321835,
+          "reason": "制造运行、材料、制成品、通货、剩余供电或库容不足",
+          "knowledge_institution_bonus": 0.0,
+          "tick": 492
+        }
+      },
+      "production_totals": {
+        "K000003": {
+          "advanced_components": 44.13327395643893,
+          "material": 88.26654791287785,
+          "goods": 44.13327395643893,
+          "currency": 132.39982186931928,
+          "energy": 88.26654791287785,
+          "knowledge_institution_bonus": 0.0
+        },
+        "K000113": {
+          "advanced_components": 0.0,
+          "material": 0.0,
+          "goods": 0.0,
+          "currency": 0.0,
+          "energy": 0.0,
+          "knowledge_institution_bonus": 0.0
+        },
+        "K000124": {
+          "advanced_components": 0.0,
+          "material": 0.0,
+          "goods": 0.0,
+          "currency": 0.0,
+          "energy": 0.0,
+          "knowledge_institution_bonus": 1.4770475957762632
+        },
+        "K000236": {
+          "advanced_components": 0.0,
+          "material": 0.0,
+          "goods": 0.0,
+          "currency": 0.0,
+          "energy": 0.0,
+          "knowledge_institution_bonus": 0.0
+        }
+      }
+    },
+    "projects": {
+      "tokamak_crown": {
+        "id": "tokamak_crown",
+        "name": "托卡马克之冠",
+        "status": "complete",
+        "work": 96.0,
+        "delivered": {
+          "material": 120.0,
+          "advanced_components": 30.0
+        },
+        "consumed": {
+          "material": 120.0,
+          "advanced_components": 30.0
+        },
+        "deliveries": [
+          {
+            "block_id": "K000124",
+            "district_id": "D000123",
+            "resource": "material",
+            "amount": 10.0,
+            "local_month": 69.77,
+            "tick": 2255
+          },
+          {
+            "block_id": "K000124",
+            "district_id": "D000123",
+            "resource": "advanced_components",
+            "amount": 4.639999999900659,
+            "local_month": 70.02,
+            "tick": 2262
+          },
+          {
+            "block_id": "K000003",
+            "district_id": "D000002",
+            "resource": "material",
+            "amount": 110.0,
+            "local_month": 184.2499999999999,
+            "tick": 3773
+          },
+          {
+            "block_id": "K000003",
+            "district_id": "D000002",
+            "resource": "advanced_components",
+            "amount": 20.0,
+            "local_month": 184.2499999999999,
+            "tick": 3773
+          },
+          {
+            "block_id": "K000003",
+            "district_id": "D000002",
+            "resource": "advanced_components",
+            "amount": 1.2432739565639368,
+            "local_month": 185.4999999999999,
+            "tick": 3803
+          },
+          {
+            "block_id": "K000003",
+            "district_id": "D000002",
+            "resource": "advanced_components",
+            "amount": 1.2499999999982756,
+            "local_month": 186.7499999999999,
+            "tick": 3833
+          },
+          {
+            "block_id": "K000003",
+            "district_id": "D000002",
+            "resource": "advanced_components",
+            "amount": 1.2499999999982756,
+            "local_month": 187.9999999999999,
+            "tick": 3863
+          },
+          {
+            "block_id": "K000003",
+            "district_id": "D000002",
+            "resource": "advanced_components",
+            "amount": 1.2499999999982756,
+            "local_month": 189.2499999999999,
+            "tick": 3893
+          },
+          {
+            "block_id": "K000003",
+            "district_id": "D000002",
+            "resource": "advanced_components",
+            "amount": 0.3667260435405737,
+            "local_month": 190.4999999999999,
+            "tick": 3923
+          }
+        ],
+        "contributors": [
+          "D000123",
+          "D000002"
+        ],
+        "cp_ticks": {
+          "K000003": 4235,
+          "K000113": 2998,
+          "K000124": 2935,
+          "K000236": 486
+        },
+        "cp_sources": {
+          "K000003": 28.79999999999972,
+          "K000113": 19.199999999999932,
+          "K000124": 28.79999999999972,
+          "K000236": 19.199999999999932
+        },
+        "reason": "托卡马克之冠建成；同一城市进入无限经营"
+      }
+    },
+    "unclaimed_rewards_by_block": {
+      "K000003": 0,
+      "K000113": 8,
+      "K000124": 2,
+      "K000236": 1
+    },
+    "history_events": 263
+  }
+}

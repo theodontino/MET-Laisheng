@@ -69,15 +69,15 @@ public sealed partial class Game {
     public V create_building(string def_id,string tile,string operator_org,bool ready=false) {
         var def=c.projects[def_id];string id=uid("B"),site=uid("S");
         var p=V.Map("id",id,"def",def_id,"tile",tile,"site",site,"traits",def["traits"].Duplicate(),"labels",V.Arr(),"operator_org",operator_org,"special",false,"inventory",V.Map("food",0.0,"material",0.0,"goods",0.0),"slots",V.Map(),"slot_types",V.Map(),"work_priority",0,"level",0,"status",ready?"running":"construction","paused",false,"job",V.Map(),"usage",ready?1.0:0.0,"bottleneck","尚未运行","next_heat_bonus",0.0,"next_heat_credit",0.0,"outputs_last",V.Map(),"history",V.Arr(),"effective_hours",0.0,"size_scale",1.0);
-        if(!ready)p["job"]=V.Map("work",def["construction_required"].Double,"total",def["construction_required"].Double,"material",def["material"].Double,"energy",0.5,"cp",true);
-        Development.ensure_project(this,p);s["projects"][id]=p;s["sites"][site]=V.Map("id",site,"cells",V.Arr(tile),"project_ids",V.Arr(id),"zone",def["zone"]);
+        if(!ready)p["job"]=V.Map("work",WildDesign.BuildCP(this,def_id),"total",WildDesign.BuildCP(this,def_id),"material",def["material"].Double,"energy",0.5,"cp",true);
+        Development.ensure_project(this,p);WildDesign.InitializeBuilding(this,p);s["projects"][id]=p;s["sites"][site]=V.Map("id",site,"cells",V.Arr(tile),"project_ids",V.Arr(id),"zone",def["zone"]);
         s["cells"][tile]["building"]=id;s["cells"][tile]["site"]=site;s["cells"][tile]["zone"]=def["zone"];
         if(ready)s["totals"]["built"]=s["totals"]["built"].Long+1;return p;
     }
     public V playable_ids(){var result=V.Arr();foreach(string id in Ids(s["projects"]))if(!s["projects"][id]["special"].Bool)result.Add(id);return result;}
     public string project_name(string id) {
         var p=s["projects"].Get(id,V.Map());if(p.Count==0){if(s["cells"].Has(id))return "地块 "+id;if(s["groups"].Has(id))return "人群 "+id;if(c.operators.Has(id))return c.operators[id]["name"].Text;if(id==s["block"]["id"].Text)return s["block"].Get("display_name","河谷地区").Text;return "已移除";}
-        return p.Get("name",c.projects.Get(p["def"],V.Map()).Get("name",id)).Text;
+        return p.Get("name",WildDesign.IsFarm(this,p)?c.wild["forms"][p["def"]]["name"]:c.projects.Get(p["def"],V.Map()).Get("name",id)).Text;
     }
     public string create_tender(V cells,string @base)=>Draft.open_build(this,cells,@base);
     public string create_refit(string id,string slot)=>Draft.open_refit(this,id,slot);

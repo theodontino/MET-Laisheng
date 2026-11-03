@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "application_version": "0.6.0-visual.6-local",
+  "archive": "build/MET-Visual-Quality-0.6.0-visual.6-local-macOS-universal.zip",
+  "archive_bytes": 71375274,
+  "architectures": "x86_64 arm64",
+  "executable_permissions": true,
+  "actual_archive_extraction": true,
+  "ad_hoc_signature_verified": true,
+  "developer_id_signed": false,
+  "notarized": false,
+  "mac_hardware_run": "Apple M5 Max / Metal; Intel hardware not run"
+}

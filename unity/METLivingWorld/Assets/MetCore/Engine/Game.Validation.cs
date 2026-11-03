@@ -3,6 +3,7 @@ namespace MET.Core {
 public sealed partial class Game {
     // Same-version state checks retained from game.gd; these also guard transaction commits.
     public string validate_state(V value) {
+        string wildError=WildDesign.Validate(this,value);if(wildError!="")return wildError;
         string journal=Civic.validate(value);if(journal!="")return journal;
         if(value.Get("schema",0).Long!=6)return "这是其他 pre-alpha 版本的存档，请开始新游戏。";
         foreach(string k in new[]{"projects","groups","fields","authored_fields","bonus_instances","organizations","block","cells","rng","metrics","totals","draft","settings"})if(!value.Get(k).IsMap)return "存档缺少对象："+k;
@@ -18,6 +19,13 @@ public sealed partial class Game {
         if(!cy.Get("population_stability").IsMap)return "人口里程碑记录损坏。";
         foreach(var elapsed in cy["population_stability"].Values)if(!is_num(elapsed)||elapsed.Double<0)return "人口持续时间损坏。";
         foreach(var grade in value["block"].Get("blueprint_levels",V.Map()).Values)if(!is_num(grade)||grade.Double<0||grade.Double>2||grade.Double!=Math.Floor(grade.Double))return "蓝图等级损坏。";
+        if(value["block"].Has("city_trade_totals")) {
+            if(!value["block"]["city_trade_totals"].IsMap)return "城市贸易累计记录损坏。";
+            foreach(var row in value["block"]["city_trade_totals"].Values) {
+                foreach(var key in new[]{"buy","sell","adverse_exports"})if(!is_num(row.Get(key))||row[key].Double<0)return "城市贸易累计数量损坏。";
+                if(!is_num(row.Get("currency_delta")))return "城市贸易累计资金损坏。";
+            }
+        }
         var ids=V.Map();var sources=V.Map();
         foreach(var reward in value["block"].Get("reward_choices",V.Arr())) {
             if(!reward.IsMap||!reward.Get("choices").IsArray)return "奖励记录损坏。";
@@ -39,7 +47,7 @@ public sealed partial class Game {
         foreach(string bid in value["block"]["bonus_wallet"].Keys){var entry=value["block"]["bonus_wallet"][bid];if(!c.bonuses.Has(bid)||!entry.IsMap||!is_num(entry.Get("charges"))||entry["charges"].Double<0)return "方案许可记录损坏。";}
         foreach(var p in value["projects"].Values) {
             if(p.Get("special",false).Bool)continue;if(!p.Get("upgrade_job").IsMap||!p.Get("slot_track").IsArray)return "建筑成长记录损坏。";
-            if(p["upgrade_job"].Count>0){if(!c.projects.Get(p.Get("def",""),V.Map()).Get("upgrades",V.Arr()).Contains(p.Get("upgrade_choice","")))return "升级方向损坏。";foreach(string k in new[]{"work","total","material"})if(!is_num(p["upgrade_job"].Get(k))||p["upgrade_job"][k].Double<0)return "升级施工记录损坏。";}
+            if(p["upgrade_job"].Count>0){if(!p["upgrade_job"].Has("wild_node")&&!c.projects.Get(p.Get("def",""),V.Map()).Get("upgrades",V.Arr()).Contains(p.Get("upgrade_choice","")))return "升级方向损坏。";foreach(string k in new[]{"work","total","material"})if(!is_num(p["upgrade_job"].Get(k))||p["upgrade_job"][k].Double<0)return "升级施工记录损坏。";}
         }
         foreach(string oid in value["organizations"].Keys)if(!c.operators.Has(oid))return "未知运营组织。";
         if(value["phase"].Text=="play"||value["phase"].Text=="failed")foreach(string id in new[]{"homeless","municipal"})if(!value["projects"].Has(id))return "缺少市政/待安置容器。";
@@ -51,7 +59,7 @@ public sealed partial class Game {
             if(!value["organizations"].Has(p.Get("operator_org","").Text))return "未知运营者。";
             if(p.Get("status","").Text!="construction"&&p.Get("status","").Text!="running")return "建筑状态损坏。";
             if(!p.Get("special",false).Bool){if(!c.projects.Has(p.Get("def","").Text)||!value["cells"].Has(p.Get("tile","").Text))return "建筑类型或位置损坏。";if(value["cells"][p["tile"]].Get("building","").Text!=id)return "地块与建筑引用不一致。";}
-            if(p.Has("slot_types")){if(!p["slot_types"].IsMap)return "槽位类型损坏。";foreach(string slot in p["slots"].Keys)if(Array.IndexOf(new[]{"Production","Logistics","Operations","Flex"},p["slot_types"].Get(slot,slot.Split(':')[0]).Text)<0)return "未知方案槽类型。";}
+            if(p.Has("slot_types")){if(!p["slot_types"].IsMap)return "槽位类型损坏。";foreach(string slot in p["slots"].Keys)if(Array.IndexOf(new[]{"Production","Logistics","Operations","Flex","Organization","Link","Fusion"},p["slot_types"].Get(slot,slot.Split(':')[0]).Text)<0)return "未知方案槽类型。";}
             if(p.Has("work_priority")&&(!is_num(p["work_priority"])||p["work_priority"].Double< -1||p["work_priority"].Double>1))return "用工优先级损坏。";
             foreach(var amount in p["inventory"].Values)if(!is_num(amount)||amount.Double< -0.000001)return "库存不能为负。";
             if(p["status"].Text=="construction")foreach(string k in new[]{"work","total","material"})if(!is_num(p["job"].Get(k))||p["job"][k].Double<0)return "施工数据损坏。";

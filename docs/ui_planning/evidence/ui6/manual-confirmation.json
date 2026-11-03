@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-23",
+  "build": "0.7.0-ui.6",
+  "tester": "user",
+  "method": "Human-operated mouse confirmation in the delivered native fullscreen Player; separate from programmatic Unity callback checks.",
+  "checks": [
+    "经营 → 市场与订单：报价列表滚轮速度",
+    "返回经营和点击命中",
+    "顶部材料约2秒悬停与进度条"
+  ],
+  "user_response": "都正常",
+  "tool_limitation": "CUA mouse coordinates were not reflected in Unity Input.mousePosition, so no automatic OS mouse pass is claimed."
+}

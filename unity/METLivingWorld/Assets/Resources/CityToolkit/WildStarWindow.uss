@@ -1,0 +1,73 @@
+.wild-root { color: rgb(224, 236, 236); font-size: 24px; -unity-font-style: normal; }
+.wild-root Label { margin: 0; padding: 0; }
+.wild-backdrop { position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(2, 8, 12, 0.86); align-items: center; justify-content: center; }
+.wild-window { width: 1900px; height: 1100px; max-width: 90%; max-height: 90%; background-color: rgb(12, 25, 32); border-width: 1px; border-color: rgb(64, 105, 113); border-top-width: 3px; border-top-color: rgb(105, 211, 189); border-radius: 9px; overflow: hidden; }
+.wild-header { flex-shrink: 0; padding: 18px 30px 20px 30px; background-color: rgb(19, 36, 43); border-bottom-width: 1px; border-bottom-color: rgb(49, 77, 87); }
+.wild-heading-line { flex-direction: row; align-items: center; margin-bottom: 5px; }
+.wild-eyebrow { color: rgb(116, 214, 194); -unity-font-style: bold; margin-right: 20px; }
+.wild-title { margin-bottom: 4px; }
+.wild-close { margin-left: auto; background-color: transparent; border-width: 0; padding: 5px 12px; color: rgb(176, 199, 205); }
+.wild-close:hover { background-color: rgb(37, 62, 70); }
+.wild-capacity-line { flex-direction: row; align-items: center; margin-top: 15px; }
+.wild-capacity-track { width: 270px; height: 8px; margin-left: 18px; margin-right: 15px; background-color: rgb(35, 55, 63); border-radius: 4px; overflow: hidden; }
+.wild-capacity-fill { height: 100%; background-color: rgb(102, 211, 184); }
+#wild-stock { margin-left: 30px; flex-shrink: 1; }
+.wild-main { flex-direction: row; flex-grow: 1; flex-shrink: 1; min-height: 0; }
+.wild-map-pane { width: 65%; flex-shrink: 0; padding: 20px 12px 16px 24px; }
+.wild-map-heading { flex-direction: row; align-items: center; justify-content: space-between; padding: 0 12px 8px 6px; }
+.wild-graph-scroll { flex-grow: 1; min-height: 0; }
+.wild-graph { flex-shrink: 0; position: relative; }
+.wild-graph-lines { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.wild-node { position: absolute; align-items: center; justify-content: center; margin: 0; padding: 12px 14px; border-width: 1px; border-color: rgb(65, 96, 109); border-radius: 8px; color: rgb(217, 234, 234); background-color: rgb(22, 42, 51); white-space: normal; }
+.wild-node:hover { background-color: rgb(29, 58, 66); border-color: rgb(127, 194, 192); }
+.wild-node .node-title { -unity-font-style: bold; -unity-text-align: middle-center; white-space: normal; }
+.wild-node .node-subtitle { color: rgb(153, 184, 191); -unity-text-align: middle-center; white-space: normal; margin-top: 4px; }
+.wild-node .node-status { color: rgb(169, 190, 198); margin-top: 6px; -unity-text-align: middle-center; white-space: normal; }
+.wild-node.is-completed { background-color: rgb(22, 54, 54); border-color: rgb(73, 140, 126); }
+.wild-node.is-completed .node-status { color: rgb(123, 222, 188); }
+.wild-node.is-pending { background-color: rgb(52, 48, 33); border-color: rgb(153, 125, 76); }
+.wild-node.is-pending .node-status { color: rgb(232, 193, 125); }
+.wild-node.is-locked { background-color: rgb(19, 32, 40); border-color: rgb(53, 70, 82); color: rgb(141, 166, 178); }
+.wild-node.is-selected { border-width: 3px; border-color: rgb(151, 238, 217); background-color: rgb(32, 73, 75); }
+.wild-node.is-selected .node-title { color: rgb(233, 255, 244); }
+.wild-legend { flex-direction: row; justify-content: center; padding-top: 7px; flex-shrink: 0; }
+.wild-legend > Label { margin-right: 24px; }
+.wild-inspector { width: 35%; border-left-width: 1px; border-left-color: rgb(47, 74, 85); background-color: rgb(17, 32, 40); }
+.wild-inspector .unity-scroll-view__content-container { padding: 25px 28px; }
+#wild-selected-title { margin-top: 10px; margin-bottom: 8px; }
+.wild-description { margin-top: 18px; }
+.wild-inspector-section { margin-top: 24px; padding-top: 20px; border-top-width: 1px; border-top-color: rgb(43, 65, 76); }
+.wild-inspector-section > Label { margin-bottom: 10px; }
+.wild-remove { margin-top: 20px; padding: 12px; border-width: 1px; border-color: rgb(123, 95, 71); background-color: rgb(48, 38, 33); color: rgb(231, 185, 142); }
+.wild-removal { margin-top: 15px; padding: 16px; background-color: rgb(48, 37, 31); border-width: 1px; border-color: rgb(139, 108, 68); border-radius: 5px; }
+.wild-removal > Label { margin-bottom: 12px; }
+.wild-removal-actions { flex-direction: row; justify-content: flex-end; flex-wrap: wrap; }
+.wild-footer { flex-direction: row; align-items: center; flex-shrink: 0; padding: 17px 30px; background-color: rgb(19, 36, 43); border-top-width: 1px; border-top-color: rgb(55, 83, 94); }
+.wild-footer-summary { flex-grow: 1; flex-shrink: 1; margin-right: 24px; }
+.wild-footer-summary > Label { margin-bottom: 3px; }
+.wild-button { min-width: 160px; min-height: 58px; margin-left: 12px; padding: 12px 22px; border-width: 1px; border-radius: 5px; -unity-font-style: bold; color: rgb(225, 239, 239); }
+.secondary { background-color: rgb(29, 49, 58); border-color: rgb(70, 101, 113); }
+.primary { background-color: rgb(37, 111, 100); border-color: rgb(113, 216, 189); }
+.primary:hover { background-color: rgb(47, 137, 119); }
+.danger { background-color: rgb(106, 64, 43); border-color: rgb(205, 151, 97); }
+.wild-button:disabled { background-color: rgb(36, 51, 58); border-color: rgb(57, 77, 87); color: rgb(125, 148, 159); }
+.wild-root Button:focus { border-width: 2px; border-color: rgb(234, 252, 226); }
+.wild-root .text-hero { font-size: 36px; -unity-font-style: bold; }
+.wild-root .text-heading { font-size: 27px; -unity-font-style: bold; }
+.wild-root .text-small { font-size: 22px; }
+.wild-root .text-micro { font-size: 18px; }
+.wild-muted { color: rgb(153, 180, 190); }
+.wild-accent { color: rgb(120, 219, 192); }
+.wild-warm { color: rgb(234, 190, 124); }
+.wild-dim { color: rgb(131, 155, 168); }
+.wrap { white-space: normal; }
+.wild-root .unity-scroller { background-color: transparent; }
+.wild-root .unity-scroller__low-button, .wild-root .unity-scroller__high-button { display: none; }
+.wild-root .unity-base-slider__tracker { background-color: rgb(25, 44, 53); }
+.wild-root .unity-base-slider__dragger { background-color: rgb(67, 111, 121); border-radius: 5px; }
+.high-contrast .wild-window { background-color: rgb(4, 15, 22); border-color: rgb(155, 230, 215); }
+.high-contrast .wild-muted { color: rgb(200, 221, 227); }
+.high-contrast .wild-node { border-color: rgb(122, 165, 179); }
+.high-contrast .wild-node.is-selected { border-color: rgb(179, 255, 229); }
+
+.wild-bypass-label { position: absolute; color: rgb(133, 173, 181); background-color: rgb(12, 25, 32); -unity-text-align: middle-center; padding: 3px 5px; white-space: normal; }

@@ -1,0 +1,1039 @@
+{
+  "scope": "G0 engineering current-game baseline; deterministic scripted input, not human gameplay acceptance or future Wild mechanics",
+  "seed": 20261026,
+  "utc": 0,
+  "landing": 0,
+  "specialization": "balanced",
+  "origin": "free",
+  "initial_save": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/wild-g0/initial/met_city_v1.json",
+  "final_save": "/Users/lizhirui/Developer/MET_0.3.2_Source/build/wild-g0/final/met_city_v1.json",
+  "speed": "advance",
+  "acceleration": 25920.0,
+  "active_seconds": 720.0,
+  "earth_seconds_per_month": 1555200,
+  "earth_seconds_per_dt": 1244160.0,
+  "dt_spent": 14.999421296296077,
+  "simulation_steps": 147,
+  "submitted_segments": 144,
+  "seconds_with_cash_for_all_three_base_types_sampled_at_segment_end": 720.0,
+  "seconds_with_nonempty_construction_queue_sampled_at_segment_end": 115.0,
+  "opportunity_observations": [
+    {
+      "observed_active_second": 600.0,
+      "kind": "pending_reward_count_changed",
+      "before": 0,
+      "after": 1,
+      "pending": [
+        {
+          "reward_id": "R000101",
+          "source": "population:32",
+          "tags": [],
+          "options": {
+            "kind": "copy"
+          },
+          "requested_kind": "copy",
+          "choices": [
+            {
+              "bonus_id": "R16",
+              "name": "家庭作坊",
+              "scope": "building",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "production"
+              ],
+              "deployable_now": true,
+              "near_future": false,
+              "preview_reason": "现在可部署",
+              "suggested_host": {
+                "type": "building",
+                "id": "B000001",
+                "slot": "Production"
+              },
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [
+                {
+                  "label": "岗位",
+                  "before": 0.0,
+                  "after": 2.0,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.1"
+                },
+                {
+                  "label": "材料投入",
+                  "before": 0.0,
+                  "after": 0.5,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.2"
+                },
+                {
+                  "label": "制成品产出",
+                  "before": 0.0,
+                  "after": 0.8,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.3"
+                },
+                {
+                  "label": "污染",
+                  "before": 0.0,
+                  "after": 1.0,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.4"
+                },
+                {
+                  "label": "维护",
+                  "before": 0.0,
+                  "after": 0.6,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.5"
+                }
+              ],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            },
+            {
+              "bonus_id": "P06",
+              "name": "高级回收",
+              "scope": "building",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "production"
+              ],
+              "deployable_now": true,
+              "near_future": false,
+              "preview_reason": "现在可部署",
+              "suggested_host": {
+                "type": "building",
+                "id": "B000001",
+                "slot": "Production"
+              },
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [
+                {
+                  "label": "维护",
+                  "before": 1.0,
+                  "after": 1.5,
+                  "unit": "倍",
+                  "mode": "multiply",
+                  "rule_id": "P06.1"
+                },
+                {
+                  "label": "配方吞吐强度",
+                  "before": 0.0,
+                  "after": 1.0,
+                  "unit": "倍",
+                  "mode": "rate",
+                  "rule_id": "P06.2"
+                },
+                {
+                  "label": "每批产出材料",
+                  "before": 3.0,
+                  "after": 3.0,
+                  "unit": "",
+                  "mode": "recipe_output",
+                  "rule_id": "P06.2"
+                },
+                {
+                  "label": "每批产出低级制成品",
+                  "before": 3.0,
+                  "after": 3.0,
+                  "unit": "",
+                  "mode": "recipe_output",
+                  "rule_id": "P06.2"
+                }
+              ],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            },
+            {
+              "bonus_id": "R08",
+              "name": "社区商业",
+              "scope": "building",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "logistics"
+              ],
+              "deployable_now": false,
+              "near_future": true,
+              "preview_reason": "升级后可能部署",
+              "suggested_host": {},
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [
+                {
+                  "label": "商业容量",
+                  "before": 1.0,
+                  "after": 1.5,
+                  "unit": "倍",
+                  "mode": "multiply",
+                  "rule_id": "R08.2"
+                }
+              ],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            }
+          ],
+          "created_tick": 123,
+          "created_at": 10.0,
+          "claimed": false,
+          "chosen_bonus": "",
+          "kind": "copy"
+        }
+      ]
+    },
+    {
+      "observed_active_second": 720.0,
+      "kind": "pending_reward_count_changed",
+      "before": 1,
+      "after": 2,
+      "pending": [
+        {
+          "reward_id": "R000101",
+          "source": "population:32",
+          "tags": [],
+          "options": {
+            "kind": "copy"
+          },
+          "requested_kind": "copy",
+          "choices": [
+            {
+              "bonus_id": "R16",
+              "name": "家庭作坊",
+              "scope": "building",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "production"
+              ],
+              "deployable_now": true,
+              "near_future": false,
+              "preview_reason": "现在可部署",
+              "suggested_host": {
+                "type": "building",
+                "id": "B000001",
+                "slot": "Production"
+              },
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [
+                {
+                  "label": "岗位",
+                  "before": 0.0,
+                  "after": 2.0,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.1"
+                },
+                {
+                  "label": "材料投入",
+                  "before": 0.0,
+                  "after": 0.5,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.2"
+                },
+                {
+                  "label": "制成品产出",
+                  "before": 0.0,
+                  "after": 0.8,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.3"
+                },
+                {
+                  "label": "污染",
+                  "before": 0.0,
+                  "after": 1.0,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.4"
+                },
+                {
+                  "label": "维护",
+                  "before": 0.0,
+                  "after": 0.6,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "R16.5"
+                }
+              ],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            },
+            {
+              "bonus_id": "P06",
+              "name": "高级回收",
+              "scope": "building",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "production"
+              ],
+              "deployable_now": true,
+              "near_future": false,
+              "preview_reason": "现在可部署",
+              "suggested_host": {
+                "type": "building",
+                "id": "B000001",
+                "slot": "Production"
+              },
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [
+                {
+                  "label": "维护",
+                  "before": 1.0,
+                  "after": 1.5,
+                  "unit": "倍",
+                  "mode": "multiply",
+                  "rule_id": "P06.1"
+                },
+                {
+                  "label": "配方吞吐强度",
+                  "before": 0.0,
+                  "after": 1.0,
+                  "unit": "倍",
+                  "mode": "rate",
+                  "rule_id": "P06.2"
+                },
+                {
+                  "label": "每批产出材料",
+                  "before": 3.0,
+                  "after": 3.0,
+                  "unit": "",
+                  "mode": "recipe_output",
+                  "rule_id": "P06.2"
+                },
+                {
+                  "label": "每批产出低级制成品",
+                  "before": 3.0,
+                  "after": 3.0,
+                  "unit": "",
+                  "mode": "recipe_output",
+                  "rule_id": "P06.2"
+                }
+              ],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            },
+            {
+              "bonus_id": "R08",
+              "name": "社区商业",
+              "scope": "building",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "logistics"
+              ],
+              "deployable_now": false,
+              "near_future": true,
+              "preview_reason": "升级后可能部署",
+              "suggested_host": {},
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [
+                {
+                  "label": "商业容量",
+                  "before": 1.0,
+                  "after": 1.5,
+                  "unit": "倍",
+                  "mode": "multiply",
+                  "rule_id": "R08.2"
+                }
+              ],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            }
+          ],
+          "created_tick": 123,
+          "created_at": 10.0,
+          "claimed": false,
+          "chosen_bonus": "",
+          "kind": "copy"
+        },
+        {
+          "reward_id": "R000127",
+          "source": "annual:1",
+          "tags": [],
+          "options": {
+            "kind": "copy"
+          },
+          "requested_kind": "copy",
+          "choices": [
+            {
+              "bonus_id": "B02",
+              "name": "市政暖气",
+              "scope": "block",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "operations"
+              ],
+              "deployable_now": true,
+              "near_future": false,
+              "preview_reason": "现在可部署",
+              "suggested_host": {
+                "type": "block",
+                "id": "block:1",
+                "slot": ""
+              },
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [
+                {
+                  "label": "heat_service",
+                  "before": 0.0,
+                  "after": 0.05,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "B02.1"
+                }
+              ],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            },
+            {
+              "bonus_id": "B05",
+              "name": "战略储备",
+              "scope": "block",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "operations"
+              ],
+              "deployable_now": true,
+              "near_future": false,
+              "preview_reason": "现在可部署",
+              "suggested_host": {
+                "type": "block",
+                "id": "block:1",
+                "slot": ""
+              },
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [
+                {
+                  "label": "municipal_storage",
+                  "before": 1.0,
+                  "after": 2.0,
+                  "unit": "倍",
+                  "mode": "multiply",
+                  "rule_id": "B05.1"
+                },
+                {
+                  "label": "分配优先级",
+                  "before": 0.0,
+                  "after": 1.0,
+                  "unit": "",
+                  "mode": "add",
+                  "rule_id": "B05.2"
+                }
+              ],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            },
+            {
+              "bonus_id": "O02",
+              "name": "工厂家属区",
+              "scope": "building",
+              "persistence": "Local",
+              "tags": [
+                "community",
+                "operations"
+              ],
+              "deployable_now": false,
+              "near_future": true,
+              "preview_reason": "升级后可能部署",
+              "suggested_host": {},
+              "copies": 0,
+              "blueprint_level": 0,
+              "grade": "基础",
+              "effects": [],
+              "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+              "kind": "copy"
+            }
+          ],
+          "created_tick": 147,
+          "created_at": 12.0,
+          "claimed": false,
+          "chosen_bonus": "",
+          "kind": "copy"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "active_second": 0.0,
+      "command": "create_tender + accept_offer[0]",
+      "base": "homestead",
+      "tile": "-1,1",
+      "offer": {
+        "id": "offer:0",
+        "base": "homestead",
+        "operator_org": "farmers",
+        "provider_org": "farmers",
+        "slot_track": [
+          "Production",
+          "Production",
+          "Operations"
+        ]
+      },
+      "quote": {
+        "currency": 70.0,
+        "material": 8.0,
+        "cp": 2.4,
+        "hours": 0.6
+      },
+      "error": "",
+      "project_id": "B000006",
+      "currency_before": 700.0,
+      "currency_after": 630.0,
+      "material_before": 59.0,
+      "material_after": 59.0
+    },
+    {
+      "active_second": 180.0,
+      "command": "create_tender + accept_offer[0]",
+      "base": "workshop",
+      "tile": "-1,2",
+      "offer": {
+        "id": "offer:0",
+        "base": "workshop",
+        "operator_org": "circular",
+        "provider_org": "circular",
+        "slot_track": [
+          "Production",
+          "Logistics",
+          "Operations"
+        ]
+      },
+      "quote": {
+        "currency": 75.0,
+        "material": 8.0,
+        "cp": 2.8,
+        "hours": 0.7
+      },
+      "error": "",
+      "project_id": "B000009",
+      "currency_before": 661.4522606912179,
+      "currency_after": 586.4522606912179,
+      "material_before": 59.24513747458761,
+      "material_after": 59.24513747458761
+    },
+    {
+      "active_second": 360.0,
+      "command": "create_tender + accept_offer[0]",
+      "base": "neighborhood",
+      "tile": "0,2",
+      "offer": {
+        "id": "offer:0",
+        "base": "neighborhood",
+        "operator_org": "civic",
+        "provider_org": "civic",
+        "slot_track": [
+          "Production",
+          "Logistics",
+          "Operations"
+        ]
+      },
+      "quote": {
+        "currency": 75.0,
+        "material": 8.0,
+        "cp": 2.8,
+        "hours": 0.7
+      },
+      "error": "",
+      "project_id": "B000049",
+      "currency_before": 628.0619666477703,
+      "currency_after": 553.0619666477703,
+      "material_before": 68.22860416736144,
+      "material_after": 68.22860416736144
+    }
+  ],
+  "completion_observations": [
+    {
+      "project_id": "B000006",
+      "base": "homestead",
+      "observed_active_second": 40.0,
+      "local_months": 0.6666666666666666,
+      "sampling_resolution_seconds": 5
+    },
+    {
+      "project_id": "B000009",
+      "base": "workshop",
+      "observed_active_second": 225.0,
+      "local_months": 3.75,
+      "sampling_resolution_seconds": 5
+    },
+    {
+      "project_id": "B000049",
+      "base": "neighborhood",
+      "observed_active_second": 405.0,
+      "local_months": 6.75,
+      "sampling_resolution_seconds": 5
+    }
+  ],
+  "minute_trace": [
+    {
+      "active_second": 0.0,
+      "local_months": 0.0,
+      "dt": 75.0,
+      "currency": 700.0,
+      "stock": {
+        "food": 37.0,
+        "material": 59.0,
+        "goods": 0.0
+      },
+      "flows_per_month": {},
+      "population": 18.0,
+      "housing": 24.0,
+      "energy_supply": 0,
+      "energy_demand": 0,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": true
+    },
+    {
+      "active_second": 60.0,
+      "local_months": 1.0,
+      "dt": 73.75004822530866,
+      "currency": 640.453863168791,
+      "stock": {
+        "food": 40.93833033767299,
+        "material": 53.74949032467683,
+        "goods": 0.6
+      },
+      "flows_per_month": {
+        "food": 6.4426759308145165,
+        "material": 2.748982768168702,
+        "goods": 0.6000000000000005,
+        "advanced_components": 0.0
+      },
+      "population": 18.044392855901485,
+      "housing": 48.0,
+      "energy_supply": 6.0,
+      "energy_demand": 1.8430963837946308,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 120.0,
+      "local_months": 2.0,
+      "dt": 72.50009645061732,
+      "currency": 650.937914038334,
+      "stock": {
+        "food": 47.376669813382236,
+        "material": 56.49787080741422,
+        "goods": 1.2000000000000004
+      },
+      "flows_per_month": {
+        "food": 6.434667153621774,
+        "material": 2.7478704380030194,
+        "goods": 0.6000000000000005,
+        "advanced_components": 0.0
+      },
+      "population": 18.088895196561584,
+      "housing": 48.0,
+      "energy_supply": 6.0,
+      "energy_demand": 1.846481831032699,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 180.0,
+      "local_months": 3.0,
+      "dt": 71.25014467592598,
+      "currency": 586.4522606912179,
+      "stock": {
+        "food": 53.806989817030626,
+        "material": 59.24513747458761,
+        "goods": 1.800000000000001
+      },
+      "flows_per_month": {
+        "food": 6.4266386246239335,
+        "material": 2.746755364531083,
+        "goods": 0.6000000000000005,
+        "advanced_components": 0.0
+      },
+      "population": 24.133507291999255,
+      "housing": 48.0,
+      "energy_supply": 6.0,
+      "energy_demand": 1.8498751995087428,
+      "queue": [
+        {
+          "id": "B000009",
+          "name": "作坊",
+          "upgrade": false,
+          "work": 2.8,
+          "total": 2.8,
+          "material": 8.0,
+          "priority": 0,
+          "paused": false
+        }
+      ],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 240.0,
+      "local_months": 4.0,
+      "dt": 70.00019290123464,
+      "currency": 600.2816552044937,
+      "stock": {
+        "food": 59.14803244586948,
+        "material": 55.0411156174819,
+        "goods": 2.5799999999999996
+      },
+      "flows_per_month": {
+        "food": 5.33614893871254,
+        "material": 6.595298463710037,
+        "goods": 1.200000000000001,
+        "advanced_components": 0.0
+      },
+      "population": 24.19302703153321,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 2.3343086356341884,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 300.0,
+      "local_months": 5.0,
+      "dt": 68.7502411265433,
+      "currency": 614.1515013842381,
+      "stock": {
+        "food": 64.47836728064298,
+        "material": 61.635606566755996,
+        "goods": 3.7799999999999976
+      },
+      "flows_per_month": {
+        "food": 5.325411167446987,
+        "material": 6.59380710658985,
+        "goods": 1.200000000000001,
+        "advanced_components": 0.0
+      },
+      "population": 24.252693562801632,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 2.338846384481491,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 360.0,
+      "local_months": 6.0,
+      "dt": 67.50028935185196,
+      "currency": 553.0619666477703,
+      "stock": {
+        "food": 69.79795000500212,
+        "material": 68.22860416736144,
+        "goods": 4.979999999999996
+      },
+      "flows_per_month": {
+        "food": 5.314646913940692,
+        "material": 6.592312071380661,
+        "goods": 1.2000000000000064,
+        "advanced_components": 0.0
+      },
+      "population": 30.312507247832535,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 2.3433947505480908,
+      "queue": [
+        {
+          "id": "B000049",
+          "name": "邻里中心",
+          "upgrade": false,
+          "work": 2.8,
+          "total": 2.8,
+          "material": 8.0,
+          "priority": 0,
+          "paused": false
+        }
+      ],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 420.0,
+      "local_months": 7.0,
+      "dt": 66.25033757716062,
+      "currency": 570.0978458109397,
+      "stock": {
+        "food": 73.98051140298674,
+        "material": 66.66993213930375,
+        "goods": 6.179999999999994
+      },
+      "flows_per_month": {
+        "food": 4.071414756486263,
+        "material": 6.440474271734274,
+        "goods": 1.1999999999999957,
+        "advanced_components": 0.0
+      },
+      "population": 30.387266068180637,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 3.2315802930176556,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 480.0,
+      "local_months": 8.0,
+      "dt": 65.00038580246928,
+      "currency": 587.1845336451487,
+      "stock": {
+        "food": 78.04462344687263,
+        "material": 73.10939214539901,
+        "goods": 7.37999999999999
+      },
+      "flows_per_month": {
+        "food": 4.057927750002989,
+        "material": 6.438601076389261,
+        "goods": 1.1999999999999957,
+        "advanced_components": 0.0
+      },
+      "population": 30.46220926394757,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 3.249140529663671,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 540.0,
+      "local_months": 9.0,
+      "dt": 63.75043402777794,
+      "currency": 604.3222404322521,
+      "stock": {
+        "food": 82.09523047381585,
+        "material": 79.54697645469668,
+        "goods": 8.579999999999986
+      },
+      "flows_per_month": {
+        "food": 4.044407480923155,
+        "material": 6.436723261239422,
+        "goods": 1.1999999999999957,
+        "advanced_components": 0.0
+      },
+      "population": 36.537337289852864,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 3.2665321707580843,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 0,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 600.0,
+      "local_months": 10.0,
+      "dt": 62.5004822530866,
+      "currency": 625.5957018720705,
+      "stock": {
+        "food": 85.05107891621697,
+        "material": 85.83251096058572,
+        "goods": 9.779999999999982
+      },
+      "flows_per_month": {
+        "food": 2.9484125108175476,
+        "material": 6.284501737613596,
+        "goods": 1.1999999999999957,
+        "advanced_components": 0.0
+      },
+      "population": 36.62744822037133,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 3.7647907630611854,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 1,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 660.0,
+      "local_months": 11.0,
+      "dt": 61.25053047839526,
+      "currency": 646.9305079779703,
+      "stock": {
+        "food": 87.99068906465527,
+        "material": 92.11579014786885,
+        "goods": 10.979999999999977
+      },
+      "flows_per_month": {
+        "food": 2.93215587784141,
+        "material": 6.2822438719224465,
+        "goods": 1.1999999999999957,
+        "advanced_components": 0.0
+      },
+      "population": 36.71778138875388,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 3.782983890685326,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 1,
+      "pause_reason": "",
+      "city_paused": false
+    },
+    {
+      "active_second": 720.0,
+      "local_months": 12.0,
+      "dt": 60.00057870370392,
+      "currency": 668.3268100424473,
+      "stock": {
+        "food": 90.91402087111726,
+        "material": 98.39680845432193,
+        "goods": 12.179999999999973
+      },
+      "flows_per_month": {
+        "food": 2.9158591516224988,
+        "material": 6.279980437725385,
+        "goods": 1.1999999999999957,
+        "advanced_components": 0.0
+      },
+      "population": 42.808337343099055,
+      "housing": 48.0,
+      "energy_supply": 9.0,
+      "energy_demand": 3.801021136973738,
+      "queue": [],
+      "affordable_base_types": [
+        "homestead",
+        "neighborhood",
+        "workshop"
+      ],
+      "pending_rewards": 2,
+      "pause_reason": "annual",
+      "city_paused": true
+    }
+  ],
+  "checks": [
+    "begin current balanced river district",
+    "choose first offered origin free",
+    "write isolated initial save",
+    "read and restore current CityStore format",
+    "current save roundtrip preserves complete city",
+    "write isolated roundtrip save",
+    "existing real-engine construction preview succeeds",
+    "preview preserves live state compiled rules inventory and RNG",
+    "quote fixture opens tender",
+    "quote reading preserves state and RNG",
+    "cancel retains current quote",
+    "reopen retained tender",
+    "retained quote and reopening preserve offer identities and RNG",
+    "close quote fixture",
+    "restore pristine initial fixture before replay",
+    "script tender opens homestead",
+    "script construction accepted homestead",
+    "quote cash matches accepted charge homestead",
+    "material is not prepaid at acceptance homestead",
+    "select existing advance speed",
+    "script tender opens workshop",
+    "script construction accepted workshop",
+    "quote cash matches accepted charge workshop",
+    "material is not prepaid at acceptance workshop",
+    "script tender opens neighborhood",
+    "script construction accepted neighborhood",
+    "quote cash matches accepted charge neighborhood",
+    "material is not prepaid at acceptance neighborhood",
+    "replay submits exactly 720 active seconds",
+    "advance mode reaches twelve existing local months",
+    "three scripted real constructions finish",
+    "final current city validates",
+    "write isolated final save"
+  ],
+  "human_acceptance": "pending; automated affordability is not a meaningful-choice or fun verdict"
+}

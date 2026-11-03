@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+ <Style src="WildStarWindow.uss" />
+ <ui:VisualElement name="wild-backdrop" class="wild-root wild-backdrop">
+  <ui:VisualElement name="wild-window" class="wild-window">
+   <ui:VisualElement class="wild-header">
+    <ui:VisualElement class="wild-heading-line"><ui:Label text="WILD / 建筑构筑" class="wild-eyebrow text-small" /><ui:Button name="wild-close" text="关闭 ×" class="wild-close text-small" /></ui:VisualElement>
+    <ui:Label name="wild-title" class="text-hero wild-title" />
+    <ui:Label name="wild-subtitle" class="text-small wild-muted wrap" />
+    <ui:VisualElement class="wild-capacity-line"><ui:Label text="设计容量" class="text-small wild-muted" /><ui:VisualElement class="wild-capacity-track"><ui:VisualElement name="wild-capacity-fill" class="wild-capacity-fill" /></ui:VisualElement><ui:Label name="wild-capacity" class="text-small wild-accent" /><ui:Label name="wild-stock" class="text-small wild-muted" /></ui:VisualElement>
+   </ui:VisualElement>
+   <ui:VisualElement class="wild-main">
+    <ui:VisualElement class="wild-map-pane">
+     <ui:VisualElement class="wild-map-heading"><ui:Label text="生长路径" class="text-heading" /><ui:Label text="选择节点查看效果与投入" class="text-small wild-muted" /></ui:VisualElement>
+     <ui:ScrollView name="wild-graph-scroll" mode="VerticalAndHorizontal" class="wild-graph-scroll"><ui:VisualElement name="wild-graph" class="wild-graph" /></ui:ScrollView>
+     <ui:VisualElement class="wild-legend"><ui:Label text="● 已完成" class="text-micro wild-accent" /><ui:Label text="○ 施工中" class="text-micro wild-warm" /><ui:Label text="◇ 可选" class="text-micro wild-muted" /><ui:Label text="× 未解锁" class="text-micro wild-dim" /></ui:VisualElement>
+    </ui:VisualElement>
+    <ui:ScrollView name="wild-inspector" mode="Vertical" class="wild-inspector">
+     <ui:Label text="节点详情" class="wild-eyebrow text-small" /><ui:Label name="wild-selected-title" class="text-hero wrap" />
+     <ui:Label name="wild-status" class="wild-accent text-small wrap" /><ui:Label name="wild-description" class="text-small wrap wild-description" />
+     <ui:VisualElement class="wild-inspector-section"><ui:Label text="建造投入" class="text-heading" /><ui:Label name="wild-resources" class="text-small wrap" /><ui:Label name="wild-available" class="text-small wild-muted wrap" /><ui:Label name="wild-dp" class="text-small wrap" /><ui:Label name="wild-dp-free" class="text-small wild-muted wrap" /><ui:Label name="wild-cp" class="text-small wrap" /></ui:VisualElement>
+     <ui:VisualElement class="wild-inspector-section"><ui:Label text="前置与约束" class="text-heading" /><ui:Label name="wild-prerequisites" class="text-small wild-muted wrap" /><ui:Label name="wild-constraint" class="text-small wild-warm wrap" /></ui:VisualElement>
+     <ui:Button name="wild-remove" text="取消此节点" class="wild-remove text-small" />
+     <ui:VisualElement name="wild-remove-confirmation" class="wild-removal"><ui:Label text="确认取消？" class="text-heading wild-warm" /><ui:Label name="wild-removal-description" class="text-small wrap" /><ui:Label text="已支付的资源不会返还。" class="text-small wild-warm wrap" /><ui:VisualElement class="wild-removal-actions"><ui:Button name="wild-keep" text="保留" class="wild-button secondary text-small" /><ui:Button name="wild-remove-yes" text="确认取消" class="wild-button danger text-small" /></ui:VisualElement></ui:VisualElement>
+    </ui:ScrollView>
+   </ui:VisualElement>
+   <ui:VisualElement class="wild-footer"><ui:VisualElement class="wild-footer-summary"><ui:Label text="本次投入" class="text-micro wild-muted" /><ui:Label name="wild-costs" class="text-small wrap" /></ui:VisualElement><ui:Button name="wild-cancel" text="返回城市" class="wild-button secondary" /><ui:Button name="wild-confirm" text="确认建造" class="wild-button primary" /></ui:VisualElement>
+  </ui:VisualElement>
+ </ui:VisualElement>
+</ui:UXML>

@@ -268,7 +268,7 @@ public static class Themes {
         t["last_metrics"] = metrics;
         V history = g.s["block"].Get("trade_history",V.Arr());
         int cursor = Math.Min(history.Count, Math.Max(0,(int)t["trade_cursor"].Long));
-        V trades = V.From(history.Items.Skip(cursor));
+        V trades = g.world_managed?g.s["metrics"].Get("market_trades",V.Arr()):V.From(history.Items.Skip(cursor));
         t["trade_cursor"] = V.From(history.Count);
         if (((t["id"].Text != "") && !(t["completed"].Bool))) {
             foreach (var row in trades) { t["counters"]["trade"] = V.From((t["counters"].Get("trade",0).Double + Math.Max(0,row.Get("amount",0).Double))); }
@@ -448,12 +448,41 @@ public static class Themes {
         }
         return V.Map();
     }
+    public static V _event_choice_definition(V definition,string choiceId) {
+        foreach(var choice in definition.Get("choices",V.Arr())) {
+            if(choice["id"].Text!=choiceId)continue;
+            var selected=definition.Duplicate(true);selected.Remove("choices");
+            foreach(var key in choice.Keys)if(key!="id"&&key!="label")selected[key]=choice[key].Duplicate(true);
+            selected["name"]=definition["name"].Text+" · "+choice["label"].Text;
+            selected["choice_id"]=choiceId;selected["choice_label"]=choice["label"];
+            return selected;
+        }
+        return V.Map();
+    }
+    public static V _effective_event_definition(Game g,V evt) {
+        var definition=_event_definition(g,evt["id"].Text);
+        return evt.Get("choice_id","").Text==""?definition:_event_choice_definition(definition,evt["choice_id"].Text);
+    }
+    public static string _event_cost_text(V definition) {
+        var parts=new System.Collections.Generic.List<string>{definition.Get("description","").Text};
+        double money=definition.Get("currency",0).Double,deposit=definition.Get("deposit",0).Double;
+        if(money+deposit>0)parts.Add(string.Format(System.Globalization.CultureInfo.InvariantCulture,"即时支付 {0:F1} 通货{1}。",money+deposit,deposit>0?string.Format(System.Globalization.CultureInfo.InvariantCulture,"（其中保证金 {0:F1}，成功退还）",deposit):""));
+        foreach(var resource in definition.Get("resources",V.Map()).Keys)parts.Add(string.Format(System.Globalization.CultureInfo.InvariantCulture,"扣除 {0:F1} {1}。",definition["resources"][resource].Double,Catalog.RESOURCE_NAMES.Get(resource,resource).Text));
+        if(definition.Get("deadline_months",0).Double>0)parts.Add(string.Format(System.Globalization.CultureInfo.InvariantCulture,"接受后限期 {0:F1} 来生月。",definition["deadline_months"].Double));
+        if(definition.Get("cash_reward",0).Double>0)parts.Add(string.Format(System.Globalization.CultureInfo.InvariantCulture,"完成奖励 {0:F1} 通货。",definition["cash_reward"].Double));
+        if(definition.Get("reward_kind","").Text!="")parts.Add(definition["reward_kind"].Text=="research"?"完成后领取一项蓝图研究。":"完成后领取一张方案副本。");
+        return string.Join(" ",parts.Where(p=>p!=""));
+    }
+    public static string _event_unavailable_reason(Game g,V definition) {
+        if(definition.Get("reward_kind","").Text!="research")return "";
+        if(Bonus.pending(g).Any(reward=>reward.Get("kind","").Text=="research"))return "先领取已有蓝图研究奖励，再决定这条付费研究分支。";
+        return Bonus.research_candidates(g,_event_pool(g,definition)).Count==0?"尚未拥有这条分支可升级的方案；先取得副本、选择其他分支或免费婉拒。":"";
+    }
     public static string choose_event(Game g, string event_id, string choice_id) {
         ensure(g);
         if ((g.s.Get("phase","") != "play")) { return "当前不能处理事件。"; }
         V evt = _find_event(g,event_id);
         if (((evt.Count == 0) || (evt.Get("status","").Text != "offered"))) { return "该事件已经处理或不存在。"; }
-        if ((!V.Arr("accept", "decline").Contains(choice_id))) { return "未知事件选择。"; }
         if ((choice_id == "decline")) {
             evt["status"] = V.From("declined");
             _record(g,"event_declined",V.Map("id", event_id));
@@ -461,6 +490,7 @@ public static class Themes {
             return "";
         }
         if (evt.Get("token",false).Bool) {
+            if(choice_id!="accept")return "未知事件选择。";
             g.s["block"]["theme"]["reforge_tokens"] = V.From(((int)g.s["block"]["theme"]["reforge_tokens"].Long + 1));
             evt["status"] = V.From("completed");
             _record(g,"reforge_token",V.Map("id", event_id, "use_dt_cost", _reforge_cost(g)));
@@ -469,6 +499,11 @@ public static class Themes {
         }
         V definition = _event_definition(g,event_id);
         if ((definition.Count == 0)) { return "事件定义不存在。"; }
+        bool branched=definition.Get("choices",V.Arr()).Count>0;
+        if(branched)definition=_event_choice_definition(definition,choice_id);
+        else if(choice_id!="accept")return "未知事件选择。";
+        if(definition.Count==0)return "未知事件选择。";
+        if(branched){var unavailable=_event_unavailable_reason(g,definition);if(unavailable!="")return unavailable;}
         double baseline = _metrics(g).Get(definition.Get("metric","").Text,0).Double;
         if ((definition.Has("improve") && ((baseline + definition["improve"].Double) > 1.000001))) {
             return "当前覆盖率已较高，无法再提高合同要求的百分点；可以免费婉拒。";
@@ -480,14 +515,18 @@ public static class Themes {
         }
         g.s["currency"] = V.From((g.s["currency"].Double - cost));
         foreach (var r in definition.Get("resources",V.Map())) { _audit_delivery(g,r.Text,definition["resources"][r].Double,("event:" + event_id)); }
+        if(branched)evt["choice_id"]=choice_id;
         evt["status"] = V.From("active");
         evt["accepted_seconds"] = V.From(_now(g));
         evt["deposit"] = V.From(definition.Get("deposit",0).Double);
         evt["deadline_at"] = V.From(((definition.Get("deadline_months",0).Double > 0) ? (_now(g) + (definition.Get("deadline_months",0).Double * MONTH_SECONDS)) : -(1.0)));
         evt["trade_cursor"] = V.From(g.s["block"].Get("trade_history",V.Arr()).Count);
+        if(g.world_managed)evt["city_trade_tick"]=g.s.Get("simulation_tick",0);
         evt["progress"] = V.From(0.0);
         evt["baseline"] = V.From(baseline);
-        _record(g,"event_accepted",V.Map("id", event_id, "currency_cost", cost));
+        var receipt=V.Map("id", event_id, "currency_cost", cost);
+        if(branched){receipt["choice_id"]=choice_id;receipt["choice_label"]=definition["choice_label"];receipt["resources"]=definition.Get("resources",V.Map()).Duplicate(true);}
+        _record(g,"event_accepted",receipt);
         if (definition.Has("arrival_people")) {
             double due = ((Math.Floor((_now(g) / MONTH_SECONDS)) + 1.0) * MONTH_SECONDS);
             g.s["block"]["theme"]["arrivals"].Add(V.Map("event_id", event_id, "people", definition["arrival_people"].Double, "due_seconds", due, "arrived", false));
@@ -524,7 +563,7 @@ public static class Themes {
     public static void _update_events(Game g, V metrics, double local_seconds) {
         foreach (var evt in g.s["block"]["theme"]["events"]) {
             if ((evt.Get("status","").Text != "active")) { continue; }
-            V definition = _event_definition(g,evt["id"].Text);
+            V definition = _effective_event_definition(g,evt);
             if ((definition.Count == 0)) { continue; }
             double deadline = evt.Get("deadline_at",-(1)).Double;
             if (((deadline >= 0) && (_now(g) > (deadline + 0.0001)))) {
@@ -533,12 +572,14 @@ public static class Themes {
             }
             if (definition.Has("trade_amount")) {
                 V history = g.s["block"].Get("trade_history",V.Arr());
-                foreach (var row in V.From(history.Items.Skip(Math.Min(history.Count, Math.Max(0,(int)evt.Get("trade_cursor",0).Long))))) {
+                var fresh=g.world_managed?(g.s["simulation_tick"].Long>evt.Get("city_trade_tick",-1).Long?g.s["metrics"].Get("market_trades",V.Arr()):V.Arr()):V.From(history.Items.Skip(Math.Min(history.Count, Math.Max(0,(int)evt.Get("trade_cursor",0).Long))));
+                foreach (var row in fresh) {
                     if ((definition.Has("trade_side") && (row.Get("side","").Text != definition["trade_side"].Text))) { continue; }
                     if ((definition.Has("trade_resource") && (row.Get("resource","").Text != definition["trade_resource"].Text))) { continue; }
                     evt["progress"] = V.From((evt["progress"].Double + Math.Max(0,row.Get("amount",0).Double)));
                 }
                 evt["trade_cursor"] = V.From(history.Count);
+                if(g.world_managed)evt["city_trade_tick"]=g.s["simulation_tick"];
             }
             if (definition.Has("person_months")) { evt["progress"] = V.From((evt["progress"].Double + ((metrics["commercial_people"].Double * local_seconds) / MONTH_SECONDS))); }
             bool done = false;
@@ -562,7 +603,7 @@ public static class Themes {
     }
     public static string _deliver_event(Game g, string id, double amount) {
         V evt = _find_event(g,id);
-        V definition = _event_definition(g,id);
+        V definition = _effective_event_definition(g,evt);
         if (((evt.Count == 0) || (evt.Get("status","").Text != "active") || !(definition.Has("delivery_resource")))) { return "没有可主动交付的事件合同。"; }
         if (((evt.Get("deadline_at",-(1)).Double >= 0) && (_now(g) > (evt["deadline_at"].Double + 0.0001)))) { return "该合同已经超过本地时间期限。"; }
         string resource = definition["delivery_resource"].Text;
@@ -613,7 +654,7 @@ public static class Themes {
     }
     public static V _event_view(Game g, V evt) {
         bool token = evt.Get("token",false).Bool;
-        V definition = _event_definition(g,evt["id"].Text);
+        V definition = _effective_event_definition(g,evt);
         V row = V.Map("id", evt["id"].Text, "name", (token ? "委任重铸权" : definition.Get("name",evt["id"]).Text), "status", evt.Get("status","").Text, "description", (token ? string.Format(System.Globalization.CultureInfo.InvariantCulture,"获得一次重铸权；使用仍需{0:F2} DT，完成主题后不可更换。",_reforge_cost(g)) : definition.Get("description","").Text), "deadline_seconds", ((evt.Get("deadline_at",-(1)).Double >= 0) ? Math.Max(0,(evt.Get("deadline_at",-(1)).Double - _now(g))) : -(1.0)), "progress", evt.Get("progress",0).Double, "target", definition.Get("delivery_amount",definition.Get("trade_amount",definition.Get("person_months",0))).Double, "choices", V.Arr(), "delivery_resource", definition.Get("delivery_resource","").Text, "delivery_remaining", Math.Max(0,(definition.Get("delivery_amount",0).Double - evt.Get("progress",0).Double)));
         if (definition.Has("metric")) {
             row["progress"] = V.From(_metrics(g).Get(definition["metric"].Text,0).Double);
@@ -622,8 +663,14 @@ public static class Themes {
             row["description"] += V.From(string.Format(System.Globalization.CultureInfo.InvariantCulture," 目标实际覆盖：{0:F0}%。",(row["target"].Double * 100.0)));
         }
         if ((row["status"] == "offered")) {
-            row["choices"] = V.Arr(V.Map("id", "accept", "label", "接受", "cost_text", row["description"]), V.Map("id", "decline", "label", "婉拒", "cost_text", "不支付代价，不附加惩罚。"));
+            foreach(var choice in definition.Get("choices",V.Arr())) {
+                var selected=_event_choice_definition(definition,choice["id"].Text);string reason=_event_unavailable_reason(g,selected);
+                row["choices"].Add(V.Map("id",choice["id"],"label",choice["label"],"cost_text",_event_cost_text(selected)+(reason==""?"":" "+reason),"available",reason=="","reason",reason));
+            }
+            if(row["choices"].Count==0)row["choices"].Add(V.Map("id","accept","label","接受","cost_text",token?row["description"]:_event_cost_text(definition)));
+            row["choices"].Add(V.Map("id","decline","label","婉拒","cost_text","不支付代价，不附加惩罚。"));
         }
+        row["definition"]=definition.Duplicate(true);
         return row;
     }
     public static V _history_view(Game g, V entry) {
@@ -631,6 +678,7 @@ public static class Themes {
         string id = row.Get("id","").Text;
         string kind = row.Get("kind","").Text;
         V evt = _event_definition(g,id);
+        if(row.Get("choice_id","").Text!="")evt=_event_choice_definition(evt,row["choice_id"].Text);
         V parts = V.From(id.Split(":".ToCharArray()));
         V theme = (!((parts.Count == 0)) ? _definition(g,parts[0].Text) : V.Map());
         row["name"] = V.From(evt.Get("name",theme.Get("name",id)).Text);
@@ -653,11 +701,35 @@ public static class Themes {
         else if ((kind == "reforge_token")) { row["reason"] = V.From(string.Format(System.Globalization.CultureInfo.InvariantCulture,"使用仍需{0:F2} DT；获得重铸权不等于免费换向。",row.Get("use_dt_cost",0).Double)); }
         return row;
     }
+    // Detached presentation data: future counters start at zero, and saved completion
+    // comes only from the milestone history, never a forecast against today's city.
+    public static V stage_view(Game g, string theme_id, int number) => _stage_view(g,theme_id,number,_metrics(g));
+    static V _stage_view(Game g, string theme_id, int number, V metrics) {
+        V t = g.s.Get("block",V.Map()).Get("theme",V.Map());
+        V definition = _definition(g,theme_id);
+        if (definition.Count == 0) return V.Map();
+        V stage = definition["stages"][number-1];
+        string milestone = theme_id + ":M" + number;
+        bool saved = t.Get("history",V.Arr()).Any(entry => entry.Get("kind","").Text == "milestone" && entry.Get("id","").Text == milestone);
+        bool current = theme_id == t.Get("id","").Text && number == t.Get("stage",1).Long && !t.Get("completed",false).Bool && !saved;
+        V row = V.Map("id",milestone,"number",number,"name",stage["name"].Text,"saved",saved,"current",current,
+            "hold_months",stage.Get("hold_months",0).Double,"held_months",current?t.Get("steady_seconds",0).Double/MONTH_SECONDS:0,
+            "reward_kind",number==1?"copy":"research","goals",V.Arr());
+        foreach (var goal in stage["goals"]) {
+            bool state = goal["kind"].Text == "state";
+            double value = state ? metrics.Get(goal["metric"].Text,0).Double : current ? t.Get("counters",V.Map()).Get(goal["metric"].Text,0).Double : 0;
+            double target = goal.Get("min",goal.Get("max",0)).Double;
+            row["goals"].Add(V.Map("id",goal["metric"].Text,"label",goal["label"].Text,"value",value,"target",target,
+                "unit",goal["unit"].Text,"kind",goal["kind"].Text,"comparison",goal.Has("max")?"max":"min",
+                "met",_met(value,goal),"missing",Math.Max(0,goal.Has("max")?value-target:target-value)));
+        }
+        return row;
+    }
     public static V view(Game g) {
         V t = g.s.Get("block",V.Map()).Get("theme",V.Map());
         string id = t.Get("id","").Text;
         V definition = _definition(g,id);
-        V row = V.Map("id", id, "name", definition.Get("name","尚未选择发展主题").Text, "stage", (int)t.Get("stage",1).Long, "completed", t.Get("completed",false).Bool, "stage_name", "", "goals", V.Arr(), "steady_seconds", t.Get("steady_seconds",0).Double, "steady_required_seconds", 0.0, "reforge_tokens", (int)t.Get("reforge_tokens",0).Long, "reforge_dt_cost", _reforge_cost(g), "reforge_opportunity_chance", _token_chance(g), "can_reforge", ((id != "") && !(t.Get("completed",false).Bool) && ((int)t.Get("reforge_tokens",0).Long > 0) && (g.s.Get("dt",0).Double >= _reforge_cost(g))), "choices", V.Arr(), "events", V.Arr(), "history", V.Arr());
+        V row = V.Map("id", id, "name", definition.Get("name","尚未选择发展主题").Text, "stage", (int)t.Get("stage",1).Long, "completed", t.Get("completed",false).Bool, "stage_name", "", "goals", V.Arr(), "steady_seconds", t.Get("steady_seconds",0).Double, "steady_required_seconds", 0.0, "reforge_tokens", (int)t.Get("reforge_tokens",0).Long, "reforge_dt_cost", _reforge_cost(g), "reforge_opportunity_chance", _token_chance(g), "can_reforge", ((id != "") && !(t.Get("completed",false).Bool) && ((int)t.Get("reforge_tokens",0).Long > 0) && (g.s.Get("dt",0).Double >= _reforge_cost(g))), "choices", V.Arr(), "events", V.Arr(), "history", V.Arr(), "stages", V.Arr());
         foreach (var entry in t.Get("history",V.Arr())) { row["history"].Add(_history_view(g,entry)); }
         foreach (var item in _themes(g)) { row["choices"].Add(V.Map("id", item["id"].Text, "name", item["name"].Text, "description", item["description"].Text)); }
         if (!((definition.Count == 0))) {
@@ -665,10 +737,8 @@ public static class Themes {
             row["stage_name"] = V.From(stage["name"].Text);
             row["steady_required_seconds"] = V.From((stage.Get("hold_months",0).Double * MONTH_SECONDS));
             V metrics = _metrics(g);
-            foreach (var goal in stage["goals"]) {
-                double value = ((goal["kind"].Text == "state") ? metrics.Get(goal["metric"].Text,0).Double : t.Get("counters",V.Map()).Get(goal["metric"].Text,0).Double);
-                row["goals"].Add(V.Map("id", goal["metric"].Text, "label", goal["label"].Text, "value", value, "target", goal.Get("min",goal.Get("max",0)).Double, "unit", goal["unit"].Text, "met", _met(value,goal), "comparison", (goal.Has("max") ? "max" : "min"), "kind", goal["kind"].Text));
-            }
+            for (int number=1;number<=3;number++) row["stages"].Add(_stage_view(g,id,number,metrics));
+            row["goals"] = row["stages"][(int)row["stage"].Long-1]["goals"].Duplicate(true);
         }
         foreach (var evt in t.Get("events",V.Arr())) {
             if ((V.Arr("offered", "active").Contains(evt.Get("status","").Text))) { row["events"].Add(_event_view(g,evt)); }

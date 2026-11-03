@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "exact_output_checks": 196,
+  "parse_value_type_order_exception_checks": 62,
+  "allocations": [
+    {
+      "payload": "actual four-Block save",
+      "pretty": true,
+      "sorted": false,
+      "characters": 3534961,
+      "old_thread_allocated_bytes": 52560312,
+      "direct_thread_allocated_bytes": 16620264,
+      "reduction_percent": 68.3786808571456
+    },
+    {
+      "payload": "actual four-Block save",
+      "pretty": false,
+      "sorted": true,
+      "characters": 1919483,
+      "old_thread_allocated_bytes": 51573912,
+      "direct_thread_allocated_bytes": 15633824,
+      "reduction_percent": 69.68656556438845
+    },
+    {
+      "payload": "actual catalog",
+      "pretty": true,
+      "sorted": false,
+      "characters": 86533,
+      "old_thread_allocated_bytes": 1490976,
+      "direct_thread_allocated_bytes": 381128,
+      "reduction_percent": 74.43768377224046
+    },
+    {
+      "payload": "actual catalog",
+      "pretty": false,
+      "sorted": true,
+      "characters": 51795,
+      "old_thread_allocated_bytes": 1490760,
+      "direct_thread_allocated_bytes": 380912,
+      "reduction_percent": 74.44846923716761
+    }
+  ],
+  "parse_allocations": [
+    {
+      "payload": "actual four-Block save",
+      "characters": 1919483,
+      "old_thread_allocated_bytes": 61185624,
+      "direct_thread_allocated_bytes": 23912416,
+      "reduction_percent": 60.91824445559303
+    },
+    {
+      "payload": "actual catalog",
+      "characters": 51795,
+      "old_thread_allocated_bytes": 1847208,
+      "direct_thread_allocated_bytes": 719616,
+      "reduction_percent": 61.043044421635244
+    }
+  ],
+  "scope": "Single-thread .NET serialization/parsing allocations; identical output and parsed values, scalar types, property order and exception classes. These values are not Player RSS."
+}

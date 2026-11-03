@@ -1,0 +1,1128 @@
+FILE content/beta/wild.json
+{
+  "version": 1,
+  "family": "farm",
+  "base_construction_cp": 10,
+  "base_cp_per_month": 10,
+  "initial_dp": 2,
+  "technology_dp_per_level": 2,
+  "inherited_dp_per_tier": 2,
+  "progression_dp": 2,
+  "ordinary_material": 10,
+  "slot_dp": [
+    3,
+    9,
+    27
+  ],
+  "slot_goods": 1,
+  "progression_cp": 2,
+  "progression_low_industrial": 1,
+  "opening_low_industrial": 2,
+  "forms": {
+    "homestead": {
+      "name": "农居",
+      "tier": 1,
+      "housing": 10,
+      "food": 10
+    },
+    "agriculture": {
+      "name": "农场",
+      "tier": 2,
+      "housing": 5,
+      "food": 20
+    },
+    "residence": {
+      "name": "公寓",
+      "tier": 2,
+      "housing": 20,
+      "food": 5
+    }
+  },
+  "nodes": {
+    "compound": {
+      "name": "复合强化",
+      "kind": "ordinary",
+      "dp": 1,
+      "housing_pct": 0.1,
+      "food_pct": 0.1
+    },
+    "housing": {
+      "name": "住房强化",
+      "kind": "ordinary",
+      "dp": 1,
+      "housing_pct": 0.1
+    },
+    "production": {
+      "name": "生产强化",
+      "kind": "ordinary",
+      "dp": 1,
+      "food_pct": 0.1
+    },
+    "organization": {
+      "name": "组织槽",
+      "kind": "slot",
+      "slot": "Organization"
+    },
+    "link": {
+      "name": "联系槽",
+      "kind": "slot",
+      "slot": "Link"
+    },
+    "fusion": {
+      "name": "融合槽",
+      "kind": "slot",
+      "slot": "Fusion"
+    },
+    "apartment": {
+      "name": "公寓",
+      "kind": "progression",
+      "target": "residence"
+    },
+    "agriculture": {
+      "name": "农场",
+      "kind": "progression",
+      "target": "agriculture"
+    }
+  },
+  "node_cp_fraction": 0.1,
+  "routes": [
+    {
+      "from": "compound",
+      "to": "housing",
+      "bypass": false
+    },
+    {
+      "from": "compound",
+      "to": "production",
+      "bypass": false
+    },
+    {
+      "from": "housing",
+      "to": "organization",
+      "bypass": false
+    },
+    {
+      "from": "housing",
+      "to": "link",
+      "bypass": false
+    },
+    {
+      "from": "production",
+      "to": "link",
+      "bypass": false
+    },
+    {
+      "from": "production",
+      "to": "fusion",
+      "bypass": false
+    },
+    {
+      "from": "organization",
+      "to": "apartment",
+      "bypass": false
+    },
+    {
+      "from": "link",
+      "to": "apartment",
+      "bypass": false
+    },
+    {
+      "from": "link",
+      "to": "agriculture",
+      "bypass": false
+    },
+    {
+      "from": "fusion",
+      "to": "agriculture",
+      "bypass": false
+    },
+    {
+      "from": "housing",
+      "to": "apartment",
+      "bypass": true
+    },
+    {
+      "from": "production",
+      "to": "agriculture",
+      "bypass": true
+    }
+  ]
+}
+
+
+FILE unity/METLivingWorld/Assets/MetCore/City/CityWild.cs
+using System;
+namespace MET.Core {
+public sealed partial class CitySession {
+    public const string WildHopeCounterparty="hope";
+    public const double WildHousingRequiredExports=10;
+    public const double WildHousingCost=60;
+    public string EnableWild() {
+        if(!CanEditFocused||FocusedGame.s.Get("phase","").Text!="play")return "先进入可经营的街区。";
+        string error=WildDesign.Enable(FocusedGame);if(error!="")return error;
+        if(!s.Get("wild_technology").IsMap) {
+            s["wild_technology"]=V.Map("enabled",true,"material_exported",0.0,"housing_levels",0,"eligibility_history",V.Arr(),"purchase",V.Map());
+            Record("wild_enabled",V.Map("block_id",FocusedBlockId),"wild:enabled");
+        }
+        ApplyWorldEffects();return "";
+    }
+    // This consumes the exact settlement receipt, before ledger compaction. No
+    // history cursor or order amount is reused to infer completed exports.
+    void RecordWildTrade(V trade) {
+        var tech=s.Get("wild_technology",V.Map());
+        if(!tech.Get("enabled",false).Bool||trade.Get("counterparty","").Text!=WildHopeCounterparty||trade.Get("resource","").Text!="material"||trade.Get("side","").Text!="sell")return;
+        double before=tech["material_exported"].Double;tech["material_exported"]=before+trade["amount"].Double;
+        if(before+1e-6<WildHousingRequiredExports&&tech["material_exported"].Double+1e-6>=WildHousingRequiredExports) {
+            var receipt=V.Map("technology","HousingDesignI","counterparty",WildHopeCounterparty,"material_exported",tech["material_exported"],"required_exports",WildHousingRequiredExports,"block_id",trade["block_id"],"trade_id",trade["id"],"order_id",trade["order_id"],"external_seconds",trade["external_seconds"]);
+            receipt["record_id"]=RecordId("wild_housing_eligible",receipt,"wild:HousingDesignI:eligible");tech["eligibility_history"].Add(receipt);
+        }
+    }
+    public V WildView() {
+        var tech=s.Get("wild_technology",V.Map());bool enabled=tech.Get("enabled",false).Bool,purchased=tech.Get("housing_levels",0).Long>0;
+        double exported=tech.Get("material_exported",0).Double,currency=FocusedGame.s.Get("currency",0).Double;
+        string reason=!enabled?"Wild 设计尚未启用。":purchased?"住房设计 I 已购入，全城建筑设计容量 +2。":!CanEditFocused||FocusedGame.s.Get("phase","").Text!="play"?"先进入可经营的街区。":exported+1e-6<WildHousingRequiredExports?"向希望城实际出口累计 10 材料后开放购买。":currency<WildHousingCost?"购买需要 60 通货。":"可以购买；已出口的材料不会再次扣除。";
+        bool can=enabled&&!purchased&&CanEditFocused&&FocusedGame.s.Get("phase","").Text=="play"&&exported+1e-6>=WildHousingRequiredExports&&currency>=WildHousingCost;
+        return V.Map("enabled",enabled,"technology","HousingDesignI","name","住房设计 I","counterparty",WildHopeCounterparty,"counterparty_name","希望城","material_exported",exported,"required_exports",WildHousingRequiredExports,"cost",WildHousingCost,"purchased",purchased,"housing_levels",tech.Get("housing_levels",0),"can_purchase",can,"reason",reason,"currency",currency,"capacity_bonus",2*tech.Get("housing_levels",0).Long,"freight_capacity_per_hour",Games.ContainsKey(FocusedBlockId)?Market._total_capacity(FocusedGame):0,"eligibility_history",tech.Get("eligibility_history",V.Arr()).Duplicate(true),"purchase",tech.Get("purchase",V.Map()).Duplicate(true));
+    }
+    public string BuyWildHousing() {
+        var view=WildView();if(!view["can_purchase"].Bool)return view["reason"].Text;
+        var g=FocusedGame;g.s["currency"]-=WildHousingCost;g.s["totals"]["currency_spent"]+=WildHousingCost;
+        var tech=s["wild_technology"];tech["housing_levels"]=1;
+        var purchase=V.Map("technology","HousingDesignI","counterparty",WildHopeCounterparty,"cost",WildHousingCost,"material_exported",tech["material_exported"],"source_block",FocusedBlockId,"external_seconds",s["external_seconds"],"capacity_bonus",2);
+        purchase["record_id"]=RecordId("wild_housing_purchased",purchase,"wild:HousingDesignI:purchase");tech["purchase"]=purchase;
+        g.log_event("wild_technology_bought",purchase,"购入住房设计 I，全城建筑设计容量 +2。");ApplyWorldEffects();return "";
+    }
+    static string ValidateWildEnvelope(V state) {
+        if(!state.Has("wild_technology"))return "";
+        var tech=state["wild_technology"];
+        if(!tech.IsMap||!tech.Get("enabled").IsBool||!Number(tech.Get("material_exported"),0)||!V.Arr(0,1).Contains(tech.Get("housing_levels"))||!tech.Get("eligibility_history").IsArray||!tech.Get("purchase").IsMap)return "Wild 城市技术状态损坏。";
+        if(tech["housing_levels"].Long>0&&(tech["material_exported"].Double+1e-6<WildHousingRequiredExports||tech["purchase"].Get("technology","").Text!="HousingDesignI"||!state["blocks"].Has(tech["purchase"].Get("source_block","").Text)))return "住房设计 I 缺少出口或购买来源。";
+        return "";
+    }
+}
+}
+
+
+FILE unity/METLivingWorld/Assets/MetCore/Progression/WildDesign.cs
+using System;
+using System.Linq;
+namespace MET.Core {
+/// <summary>Farm-family Wild construction. Queries are detached; benefits commit through the CP queue.</summary>
+public static class WildDesign {
+ static V Config(Game g)=>g.c.wild;
+ public static bool Enabled(Game g)=>g.s.Get("wild",V.Map()).Get("enabled",false).Bool;
+ public static bool IsFarmBuild(Game g,string def)=>Enabled(g)&&def=="homestead";
+ public static double BuildCP(Game g,string def)=>Enabled(g)&&g.c.projects[def]["tier"].Long==1?Config(g)["base_construction_cp"].Double:g.c.projects[def]["construction_required"].Double;
+ public static V BuildQuote(Game g,string def){var d=g.c.projects[def];double cp=BuildCP(g,def);return V.Map("currency",d["cost"],"material",d["material"],"cp",cp,"hours",cp/Math.Max(.01,Construction.capacity(g)),"cp_source",Enabled(g)&&d["tier"].Long==1?"Wild T1 建造基础 CP":"现行建筑目录 CP","price_source","沿用现行建筑目录通货与材料价格");}
+ public static bool IsFarm(Game g,V p)=>Enabled(g)&&p.Get("wild_design",V.Map()).Get("family","").Text=="farm";
+ static V Initial(Game g,V p)=>V.Map("family","farm","entry_tier",Config(g)["forms"][p["def"]]["tier"],"inherited_points",0,"progression_points",0,"nodes",V.Map());
+ public static string Enable(Game g) {
+  if(g.s.Get("phase","").Text!="play")return "进入可游玩的地区后才能开始 Wild。";
+  if(Enabled(g))return "";
+  g.s["block"]["construction_capacity"]=Config(g)["base_cp_per_month"];
+  g.s["wild"]=V.Map("enabled",true,"opening_granted",true,"stock",V.Map("low_industrial",Config(g)["opening_low_industrial"]),"unlocked_forms",V.Arr());
+  foreach(var id in g.playable_ids())InitializeBuilding(g,g.s["projects"][id]);
+  g.log_event("wild_started",V.Map("low_industrial",Config(g)["opening_low_industrial"],"base_cp_per_month",Config(g)["base_cp_per_month"]),"Wild 农居构筑开始；获得开局低级工业品，基础施工供给为每月10 CP。");g.refresh_metrics();Population.rehouse(g);return "";
+ }
+ public static void InitializeBuilding(Game g,V p) {
+  if(!Enabled(g)||p.Get("special",false).Bool||!Config(g)["forms"].Has(p.Get("def",""))||p.Has("wild_design"))return;
+  p["wild_design"]=Initial(g,p);
+  // Existing operator/slot records remain history. New farms receive no legacy free slots.
+  if(p.Get("history",V.Arr()).Count==0&&p.Get("slots",V.Map()).Values.All(x=>x.Text=="")){
+   p["slots"]=V.Map();p["slot_types"]=V.Map();p["unlocked_slots"]=0;p["wild_design"]["legacy_slots_suppressed"]=true;
+  }
+  if(p["status"].Text=="construction") {p["job"]["work"]=BuildCP(g,p["def"].Text);p["job"]["total"]=BuildCP(g,p["def"].Text);}
+ }
+ static V Design(Game g,V p)=>p.Get("wild_design",Initial(g,p));
+ static V Nodes(Game g,V p)=>Design(g,p)["nodes"];
+ static bool Done(V nodes,string id)=>nodes.Get(id,V.Map()).Get("state","").Text=="complete";
+ static V Incoming(Game g,string node)=>V.Arr(Config(g)["routes"].Where(route=>route["to"].Text==node).Select(route=>route["from"]).ToArray());
+ static bool Prerequisites(Game g,V nodes,string node) {
+  var incoming=Incoming(g,node);return incoming.Count==0||incoming.Any(predecessor=>Done(nodes,predecessor.Text));
+ }
+ static double Used(V nodes)=>nodes.Values.Sum(n=>n.Get("dp",0).Double);
+ static V Capacity(Game g,V p,V nodes=null) {
+  var design=Design(g,p);var cfg=Config(g);double basis=design["entry_tier"].Long==1?cfg["initial_dp"].Double:0;
+  double technology=Math.Max(0,g.world_effects.Get("wild_housing_levels",0).Double)*cfg["technology_dp_per_level"].Double;
+  double inherited=design.Get("inherited_points",0).Double;double total=basis+technology+inherited,used=Used(nodes??design["nodes"]);
+  return V.Map("base",basis,"technology",technology,"inherited",inherited,"total",total,"used",used,"free",total-used);
+ }
+ public static V Quote(Game g,string id,string node) {
+  var result=V.Map("ok",false,"node",node,"error","");
+  if(!g.s.Get("projects",V.Map()).Has(id)||!IsFarm(g,g.s["projects"][id])){result["error"]="此建筑未启用 Wild 农居构筑。";return result;}
+  var p=g.s["projects"][id];var cfg=Config(g);if(!cfg["nodes"].Has(node)){result["error"]="该节点尚未定义。";return result;}
+  var def=cfg["nodes"][node];var kind=def["kind"].Text;var nodes=Nodes(g,p);var existing=nodes.Get(node,V.Map());double dp=0,cp=0,material=0,goods=0,industrial=0;int ordinal=0;
+  if(kind=="ordinary"){dp=def["dp"].Double;material=cfg["ordinary_material"].Double;cp=cfg["base_construction_cp"].Double*cfg["node_cp_fraction"].Double*dp;}
+  if(kind=="slot"){ordinal=nodes.Keys.Count(k=>cfg["nodes"][k]["kind"].Text=="slot");dp=cfg["slot_dp"][Math.Min(ordinal,2)].Double;goods=cfg["slot_goods"].Double;cp=cfg["base_construction_cp"].Double*cfg["node_cp_fraction"].Double*dp;}
+  if(kind=="progression"){dp=cfg["progression_dp"].Double;cp=cfg["progression_cp"].Double;industrial=cfg["progression_low_industrial"].Double;}
+  if(existing.Count>0){dp=existing["dp"].Double;ordinal=(int)existing.Get("ordinal",1).Long-1;cp=kind=="progression"?cfg["progression_cp"].Double:cfg["base_construction_cp"].Double*cfg["node_cp_fraction"].Double*dp;}
+  result.Merge(V.Map("name",def["name"],"kind",kind,"dp",dp,"cp",cp,"construction_required",cp,"material",material,"goods",goods,"low_industrial",industrial,"cost",0,"ordinal",ordinal+1,"capacity",Capacity(g,p),"pricing_known",p["tier"].Long==1||existing.Count>0,"state",existing.Get("state","available"),"routes_in",Incoming(g,node),"requires",V.Arr(),"requires_any",Incoming(g,node)),true);
+  string error="";
+  if(g.s["phase"].Text!="play")error="当前不能施工。";
+  else if(existing.Count>0)error="该节点已经取得或正在施工。";
+  else if(p["tier"].Long!=1)error="当前切片只定义农居 T1 星图；高级形态后续节点报价未知。";
+  else if(p["status"].Text!="running"||p.Get("upgrade_job",V.Map()).Count>0)error="请等当前施工完成。";
+  else if(!Prerequisites(g,nodes,node))error="请先完成一条相连路线的前置节点。";
+  else if(Capacity(g,p)["free"].Double<dp)error="设计容量不足。";
+  else if(g.inventory_total("goods")<goods)error="基础制成品不足。";
+  else if(g.s["wild"]["stock"].Get("low_industrial",0).Double<industrial)error="低级工业品不足。";
+  result["error"]=error;result["ok"]=error=="";return result;
+ }
+ public static V View(Game g,string id) {
+  if(!g.s.Get("projects",V.Map()).Has(id)||!IsFarm(g,g.s["projects"][id]))return V.Map("ok",false,"error","此建筑未启用 Wild 农居构筑。");
+  var p=g.s["projects"][id];var nodes=V.Arr();foreach(var node in Config(g)["nodes"].Keys)nodes.Add(Quote(g,id,node));
+  return V.Map("ok",true,"id",id,"form",p["def"],"name",Config(g)["forms"][p["def"]]["name"],"tier",p["tier"],"capacity",Capacity(g,p),"nodes",nodes,"routes",Config(g)["routes"].Duplicate(true),"design",Design(g,p).Duplicate(true),"job",p.Get("upgrade_job",V.Map()).Duplicate(true),"direct_quote_known",p["tier"].Long==1);
+ }
+ public static string Start(Game g,string id,string node) {
+  var quote=Quote(g,id,node);if(!quote["ok"].Bool)return quote["error"].Text;
+  var p=g.s["projects"][id];var nodes=Nodes(g,p);if(quote["goods"].Double>0)g.withdraw_stock("goods",quote["goods"].Double);
+  g.s["wild"]["stock"]["low_industrial"]-=quote["low_industrial"].Double;
+  nodes[node]=V.Map("state","construction","dp",quote["dp"],"ordinal",quote["ordinal"],"started_at",g.s["local_hours"]);
+  p["upgrade_choice"]="";p["upgrade_job"]=V.Map("wild_node",node,"work",quote["cp"],"total",quote["cp"],"material",quote["material"],"cp",true);
+  g.log_event("wild_node_started",V.Map("project",id,"node",node,"dp",quote["dp"],"cp",quote["cp"],"material_scheduled",quote["material"],"goods_spent",quote["goods"],"low_industrial_spent",quote["low_industrial"]),quote["name"].Text+"开始施工。");g.refresh_metrics();return "";
+ }
+ public static void Complete(Game g,string id) {
+  var p=g.s["projects"][id];string node=p["upgrade_job"]["wild_node"].Text;var def=Config(g)["nodes"][node];var design=p["wild_design"];design["nodes"][node]["state"]="complete";
+  if(def["kind"].Text=="progression") {
+   string target=def["target"].Text;var d=g.c.projects[target];p["history"].Add(V.Map("kind","wild_progression","from",p["def"],"to",target,"h",g.s["local_hours"]));
+   p["def"]=target;p["node_id"]=target;p["tier"]=d["tier"];p["traits"]=d["traits"].Duplicate();p["retained_storage"]=p["inventory"].Duplicate(true);
+   design["inherited_points"]+=Config(g)["inherited_dp_per_tier"].Double;design["progression_points"]+=Config(g)["progression_dp"].Double;
+   g.s["sites"][p["site"]]["zone"]=d["zone"];g.s["cells"][p["tile"]]["zone"]=d["zone"];
+   if(!g.s["wild"]["unlocked_forms"].Contains(target))g.s["wild"]["unlocked_forms"].Add(target);
+  } else if(def["kind"].Text=="slot") {string slot="wild:"+node;p["slots"][slot]="";p["slot_types"][slot]=def["slot"];}
+  p["history"].Add(V.Map("kind","wild_node","node",node,"h",g.s["local_hours"]));p["upgrade_job"]=V.Map();p["upgrade_choice"]="";
+  g.log_event("wild_node_completed",V.Map("project",id,"node",node),def["name"].Text+"施工完成。");
+ }
+ static void Reprice(Game g,V nodes) {
+  int ordinal=0;foreach(var node in nodes.Keys.Where(k=>Config(g)["nodes"][k]["kind"].Text=="slot").OrderBy(k=>nodes[k]["ordinal"].Long).ToArray()) {nodes[node]["dp"]=Config(g)["slot_dp"][ordinal];nodes[node]["ordinal"]=++ordinal;}
+ }
+ public static V CancelPreview(Game g,string id,string node) {
+  var result=V.Map("ok",false,"error","","removed",V.Arr(),"refund_dp",0,"resource_refund",0);
+  if(!g.s.Get("projects",V.Map()).Has(id)||!IsFarm(g,g.s["projects"][id])){result["error"]="此建筑未启用 Wild 农居构筑。";return result;}
+  var p=g.s["projects"][id];var nodes=Nodes(g,p).Duplicate(true);
+  if(!nodes.Has(node)){result["error"]="该节点尚未取得。";return result;}
+  if(Config(g)["nodes"][node]["kind"].Text=="progression"&&Done(nodes,node)){result["error"]="已完成的 Tier 进阶不可撤销。";return result;}
+  if(p.Get("upgrade_job",V.Map()).Count>0){result["error"]="当前存在未完工施工；请先等候完工再撤销构筑。";return result;}
+  double before=Used(nodes);nodes.Erase(node);result["removed"].Add(node);bool changed=true;
+  while(changed){changed=false;foreach(var current in nodes.Keys){if(Config(g)["nodes"][current]["kind"].Text=="progression"&&Done(nodes,current))continue;if(Prerequisites(g,nodes,current))continue;nodes.Erase(current);result["removed"].Add(current);changed=true;}}
+  Reprice(g,nodes);result["refund_dp"]=before-Used(nodes);result["capacity_after"]=Capacity(g,p,nodes);result["remaining_nodes"]=nodes;result["ok"]=true;return result;
+ }
+ public static string Cancel(Game g,string id,string node) {
+  if(g.s.Get("phase","").Text!="play")return "当前不可撤销。";var preview=CancelPreview(g,id,node);if(!preview["ok"].Bool)return preview["error"].Text;var p=g.s["projects"][id];
+  foreach(var removed in preview["removed"]){string slot="wild:"+removed.Text;if(p["slots"].Has(slot)){string instance=p["slots"][slot].Text;if(instance!=""&&g.s["bonus_instances"].Has(instance)){string bid=g.s["bonus_instances"][instance]["bonus_id"].Text;g._unmount(instance);Bonus.grant(g,bid,"wild_cancel:"+instance);}p["slots"].Erase(slot);p["slot_types"].Erase(slot);}
+   if(p.Get("upgrade_job",V.Map()).Get("wild_node","").Text==removed.Text){p["upgrade_job"]=V.Map();p["upgrade_choice"]="";}}
+  p["wild_design"]["nodes"]=preview["remaining_nodes"].Duplicate(true);g.log_event("wild_node_cancelled",V.Map("project",id,"removed",preview["removed"],"refund_dp",preview["refund_dp"]),"构筑已撤销；返还设计容量，已用资源不返还。");g.refresh_metrics();Population.rehouse(g);return "";
+ }
+ public static void ApplyStats(Game g,V p,V stats) {
+  if(!IsFarm(g,p))return;var form=Config(g)["forms"][p["def"]];double housing=0,food=0;
+  foreach(var node in Nodes(g,p).Keys)if(Done(Nodes(g,p),node)){var def=Config(g)["nodes"][node];housing+=def.Get("housing_pct",0).Double;food+=def.Get("food_pct",0).Double;}
+  stats["housing"]=form["housing"].Double*(1+housing);stats["output.food"]=form["food"].Double*(1+food);
+ }
+ public static string Validate(Game g,V state) {
+  if(!state.Has("wild"))return "";var wild=state["wild"];if(!wild.IsMap||!wild.Get("stock").IsMap||!wild.Get("unlocked_forms").IsArray)return "Wild 状态损坏。";
+  foreach(var amount in wild["stock"].Values)if(!Game.is_num(amount)||amount.Double<0)return "Wild 库存损坏。";
+  foreach(var form in wild["unlocked_forms"])if(!Config(g)["forms"].Has(form))return "Wild 形态记录损坏。";
+  foreach(var p in state["projects"].Values)if(p.Has("wild_design")){var d=p["wild_design"];if(!d.IsMap||d.Get("family","").Text!="farm"||!d.Get("nodes").IsMap||!Config(g)["forms"].Has(p.Get("def","")))return "Wild 建筑记录损坏。";
+   foreach(var node in d["nodes"].Keys){var n=d["nodes"][node];if(!Config(g)["nodes"].Has(node)||!Game.is_num(n.Get("dp"))||n["dp"].Double<0||Array.IndexOf(new[]{"complete","construction"},n.Get("state","").Text)<0)return "Wild 节点记录损坏。";}
+   if(p.Get("upgrade_job",V.Map()).Has("wild_node")){string node=p["upgrade_job"]["wild_node"].Text;if(!d["nodes"].Has(node)||d["nodes"][node]["state"].Text!="construction")return "Wild 施工引用损坏。";}
+  }return "";
+ }
+}
+}
+
+
+FILE unity/METLivingWorld/Assets/MetCore/Rules/Rules.cs
+using System;
+using System.Globalization;
+using System.Linq;
+namespace MET.Core {
+/// <summary>Stable-world rule collection followed by deterministic reduction. Port of core/rules.gd.</summary>
+public static class Rules {
+    public static readonly string[] SUPPORTED={"modify","configure","capacity_convert","capacity_copy","grant_recipe","field_convert","emit","relate","slot_add"};
+    // Catalog owns immutable content loaded from the caller's content root.
+    public static V bonus_content(Game g)=>g.c.bonus_upgrades;
+    public static double copy_strength(Game g,int count,string bonus_id="") {
+        if(count<=0)return 0;
+        var coefficient=bonus_content(g).Get("subsequent_copy_weight",1.0/3.0).Double;
+        if(g.c.beta.IsMap)coefficient=g.c.beta.Get("bonus",V.Map()).Get("subsequent_copy_weight",coefficient).Double;
+        if(g.c.bonuses.Has(bonus_id))coefficient=g.c.bonuses[bonus_id].Get("subsequent_copy_weight",coefficient).Double;
+        return 1.0+(count-1)*Math.Max(0,coefficient);
+    }
+    public static double _weighted(double value,string mode,double strength,V maximum=null) {
+        var result=mode=="add"?value*strength:1.0+(value-1.0)*strength;
+        if(mode=="multiply")result=Math.Max(0,result);
+        if(maximum!=null&&!maximum.IsNull)result=Math.Min(maximum.Double,result);
+        return result;
+    }
+    public static V bonus_rules(Game g,string bonus_id,int count=1,int level_override=-1) {
+        if(!g.c.bonuses.Has(bonus_id))return V.Arr();
+        var content=bonus_content(g);
+        var level=Math.Max(0,Math.Min(2,(int)g.s.Get("block",V.Map()).Get("blueprint_levels",V.Map()).Get(bonus_id,0).Long));
+        if(level_override>=0)level=Math.Max(0,Math.Min(2,level_override));
+        var patches=content.Get("upgrades",V.Map()).Get(bonus_id,V.Map());
+        var policies=content.Get("rule_policies",V.Map());
+        var strength=copy_strength(g,count,bonus_id);var result=V.Arr();
+        foreach(var original in g.c.bonuses[bonus_id].Get("rules",V.Arr())) {
+            var rule=original.Duplicate(true);var rule_id=rule.Get("id","").Text;
+            foreach(var key in patches.Get(rule_id,V.Map()).Keys) {
+                var levels=patches[rule_id][key];var replacement=levels[Math.Min(level,levels.Count-1)];
+                rule[key]=replacement.IsMap?replacement.Duplicate(true):replacement;
+            }
+            var policy=policies.Get(rule_id,V.Map());
+            if(rule.Get("op","").Text=="modify"&&(rule.Get("mode","").Text=="add"||rule.Get("mode","").Text=="multiply"))
+                rule["value"]=_weighted(rule["value"].Double,rule["mode"].Text,strength);
+            else if(policy.Has("value_mode"))rule["value"]=_weighted(rule["value"].Double,policy["value_mode"].Text,strength,policy.Get("maximum"));
+            else if(policy.Has("dictionary_values")) {
+                foreach(var key in policy["dictionary_values"].Keys)rule["value"][key]=_weighted(rule["value"][key].Double,policy["dictionary_values"][key].Text,strength);
+            } else if(policy.Has("strength_field")) {
+                var field=policy["strength_field"].Text;
+                rule[field]=_weighted(rule.Get(field,1.0).Double,"add",strength,policy.Get("maximum"));
+            }
+            result.Add(rule);
+        }
+        return result;
+    }
+    public static bool duplicate_has_benefit(Game g,string bonus_id,int existing_count) {
+        if(existing_count<=0)return true;
+        var benefit_ids=bonus_content(g).Get("benefit_rules",V.Map()).Get(bonus_id,V.Arr());
+        var before=bonus_rules(g,bonus_id,existing_count);var after=bonus_rules(g,bonus_id,existing_count+1);
+        for(int i=0;i<Math.Min(before.Count,after.Count);i++)if(benefit_ids.Contains(before[i].Get("id",""))&&before[i]!=after[i])return true;
+        return false;
+    }
+    public static V ids(V d)=>V.From(d.Keys.OrderBy(x=>x,StringComparer.Ordinal).ToArray());
+    public static int near(V s,string a,string b) {
+        if(!s["projects"].Has(a)||!s["projects"].Has(b))return 999;
+        var x=s["projects"][a]["tile"].Text;var y=s["projects"][b]["tile"].Text;
+        if(!s["cells"].Has(x)||!s["cells"].Has(y))return 999;
+        return Hex.distance(x,y);
+    }
+    public static bool any_trait(V have,V want) {
+        if(want.Count==0)return true;
+        foreach(var t in want)if(have.Contains(t))return true;
+        return false;
+    }
+    public static V semantic_traits(V s,string id) {
+        var ts=s["projects"][id]["traits"].Duplicate();
+        if(s["projects"][id].Get("labels",V.Arr()).Contains("use.commercial")&&!ts.Contains("building.commercial"))ts.Add("building.commercial");
+        return ts;
+    }
+    public static bool condition(V s,string id,V when,string source="",string provider="") {
+        var p=s["projects"][id];var traits=semantic_traits(s,id);
+        foreach(var t in when.Get("traits",V.Arr()))if(!traits.Contains(t))return false;
+        if(!any_trait(traits,when.Get("any_traits",V.Arr())))return false;
+        var tile=s["cells"].Get(p["tile"],V.Map());
+        foreach(var t in when.Get("tile_traits",V.Arr()))if(!tile.Get("traits",V.Arr()).Contains(t))return false;
+        if(when.Get("same_provider",false).Bool&&(provider==""||provider!=p["operator_org"].Text))return false;
+        foreach(var k in when.Get("field_min",V.Map()).Keys)
+            if(aggregate(tile.Get("fields",V.Map()).Get(k,V.Arr()),"sum")<when["field_min"][k].Double)return false;
+        return true;
+    }
+    public static double aggregate(V contributions,string mode="sum") {
+        if(contributions.Count==0)return 0;
+        var values=contributions.Items.Select(x=>x["value"].Double).ToArray();
+        switch(mode) {
+            case "max":return values.Max();case "min":return values.Min();
+            case "product":return values.Aggregate(1.0,(v,x)=>v*x);
+            case "mean": { double total=0;foreach(var value in values)total+=value;return total/values.Length; }
+            default: { double total=0;foreach(var value in values)total+=value;return total; }
+        }
+    }
+    public static V reduce_number(double basis,V modifiers) {
+        double add=0,mult=1,lo=double.NegativeInfinity,hi=double.PositiveInfinity;
+        var chosen=V.Map();var trail=V.Arr();
+        var ordered=modifiers.Items.OrderBy(x=>x["uid"].Text,StringComparer.Ordinal);
+        foreach(var m in ordered) {
+            var value=m["value"].Double;
+            switch(m["mode"].Text) {
+                case "add":add+=value;break;case "multiply":mult*=value;break;
+                case "floor":lo=Math.Max(lo,value);break;case "cap":hi=Math.Min(hi,value);break;
+                case "override":if(chosen.Count==0||wins(m,chosen))chosen=m;break;
+            }
+            trail.Add(V.Map("source",m["source"],"rule",m["uid"],"mode",m["mode"],"value",value));
+        }
+        var result=(basis+add)*mult;if(lo>hi)lo=hi;result=Math.Max(lo,Math.Min(hi,result));
+        if(chosen.Count>0)result=chosen["value"].Double;
+        return V.Map("value",result,"base",basis,"add",add,"multiply",mult,"cap",double.IsInfinity(hi)?null:(object)hi,"floor",double.IsInfinity(lo)?null:(object)lo,"override",chosen.Get("source",""),"rules",trail);
+    }
+    public static bool wins(V a,V b) {
+        if(a["specificity"].Long!=b["specificity"].Long)return a["specificity"].Long>b["specificity"].Long;
+        if(a["priority"].Long!=b["priority"].Long)return a["priority"].Long>b["priority"].Long;
+        return StringComparer.Ordinal.Compare(a["uid"].Text,b["uid"].Text)<0;
+    }
+    public static V selections(V s,V context,V rule) {
+        var sources=V.Arr();var ht=context["host_type"].Text;var host=context["host"].Text;
+        if(ht=="building") { if(s["projects"].Has(host))sources.Add(host); }
+        else foreach(var id in ids(s["projects"])) {
+            var p=s["projects"][id];
+            if(p.Get("special",false).Bool&&!rule.Get("include_special",false).Bool)continue;
+            if(ht=="organization"&&(p["operator_org"].Text!=host||p.Get("operator_unresolved",false).Bool||p.Has("wild_design")))continue;
+            if(any_trait(semantic_traits(s,id.Text),context.Get("eligibility",V.Arr())))sources.Add(id);
+        }
+        var result=V.Map();var shape=rule.Get("targets","self").Text;
+        foreach(var source in sources) {
+            if(!any_trait(semantic_traits(s,source.Text),context.Get("eligibility",V.Arr())))continue;
+            if(shape=="self")result[source]=source;
+            else {
+                if(s["projects"][source]["status"].Text!="running"||s["projects"][source]["paused"].Bool)continue;
+                foreach(var target in ids(s["projects"])) {
+                    if(s["projects"][target].Get("special",false).Bool&&!rule.Get("include_special",false).Bool)continue;
+                    var distance=near(s,source.Text,target.Text);
+                    if(shape=="adjacent"&&distance!=1)continue;
+                    if(shape=="radius"&&distance>rule.Get("radius",2).Long)continue;
+                    result[target]=source;
+                }
+            }
+        }
+        var rows=V.Arr();
+        foreach(var target in ids(result))if(!(ht=="organization"&&s["projects"][target].Has("wild_design"))&&condition(s,target.Text,rule.Get("when",V.Map()),result[target].Text,context.Get("provider","").Text))rows.Add(V.Map("id",target,"source_id",result[target]));
+        return rows;
+    }
+    public static V compile(Game g) {
+        var s=g.s;var c=g.c;var contexts=V.Arr();var stats=V.Map();var configs=V.Map();var recipes=V.Map();var emitters=V.Map();var trace=V.Map();var numeric=V.Map();var transforms=V.Map();var options=V.Map();
+        foreach(var id in ids(s["projects"])) {
+            var p=s["projects"][id];stats[id]=c.projects.Has(p["def"])?c.projects[p["def"]]["stats"].Duplicate(true):p["base_stats"].Duplicate(true);
+            WildDesign.ApplyStats(g,p,stats[id]);
+            if(p.Get("upgrade_job",V.Map()).Count>0) {
+                var factor=c.v040["progression"]["upgrade_operation_factor"].Double;stats[id]["efficiency"]*=factor;
+                foreach(var key in stats[id].Keys)if(key.StartsWith("service.",StringComparison.Ordinal)||key=="output.energy")stats[id][key]*=factor;
+            }
+            if(g.world_managed) {
+                var def=p.Get("def","").Text;
+                var advanced=id.Text=="municipal"?20.0:def=="freight"?80.0:def=="manufacturing"?20.0:0.0;
+                if(advanced>0)stats[id]["storage.advanced_components"]=advanced;
+            }
+            configs[id]=V.Map();recipes[id]=V.Arr();emitters[id]=V.Arr();trace[id]=V.Map();numeric[id]=V.Map();transforms[id]=V.Arr();
+            if(WildDesign.IsFarm(g,p))foreach(var key in new[]{"housing","output.food"})trace[id][key]=V.Map("base",c.wild["forms"][p["def"]][key=="housing"?"housing":"food"],"value",stats[id][key],"rules",V.Arr(V.Map("source","Wild 当前形态基础值与已完成百分比构筑","mode","additive_percentage","value",stats[id][key])));
+            foreach(var r in p.Get("retained_storage",V.Map()).Keys)stats[id]["retained_storage."+r]=p["retained_storage"][r].Double;
+        }
+        contexts.Add(V.Map("host_type","block","host",s["block"]["id"],"rules",c.data["world_rules"],"specificity",0,"name","基础世界","provider","","uid","world","eligibility",V.Arr()));
+        if(g.world_managed)foreach(var source in ids(g.world_effects.Get("sources",V.Map()))) {
+            var effect=g.world_effects["sources"][source];
+            contexts.Add(V.Map("host_type","block","host",s["block"]["id"],"rules",effect["rules"],"specificity",10,"name",effect["name"],"provider","","uid",source,"eligibility",V.Arr()));
+        }
+        foreach(var slot in ids(s["block"]["policies"])) {
+            var policy=c.policies[s["block"]["policies"][slot]];
+            contexts.Add(V.Map("host_type","block","host",s["block"]["id"],"rules",policy["rules"],"specificity",10,"name",policy["name"],"provider","","uid","policy:"+policy["id"].Text,"eligibility",V.Arr()));
+        }
+        foreach(var org_id in ids(s["organizations"])) {
+            var org=c.operators[org_id];
+            contexts.Add(V.Map("host_type","organization","host",org_id,"rules",org["rules"],"specificity",20,"name",org["name"],"provider",org_id,"uid","org:"+org_id.Text,"eligibility",V.Arr()));
+        }
+        var capstone=s["block"].Get("capstone",V.Map());
+        if(capstone.Count>0&&capstone.Get("rules").IsArray)contexts.Add(V.Map("host_type","block","host",s["block"]["id"],"rules",capstone["rules"],"specificity",10,"name",capstone.Get("name","主题地标"),"provider","","uid",capstone.Get("id","capstone"),"eligibility",V.Arr()));
+        // Copies collapse before reduction; blueprint changes apply before copy weighting.
+        var bonus_groups=V.Map();
+        foreach(var instance_id in ids(s["bonus_instances"])) {
+            var instance=s["bonus_instances"][instance_id];
+            if(!instance.Get("active",false).Bool||!c.bonuses.Has(instance.Get("bonus_id","")))continue;
+            var key=instance["host_type"].Text+"|"+instance["host_id"].Text+"|"+instance["bonus_id"].Text;
+            if(!bonus_groups.Has(key))bonus_groups[key]=V.Map("instance",instance,"uid",instance_id,"count",0);
+            bonus_groups[key]["count"]+=1;
+        }
+        foreach(var key in ids(bonus_groups)) {
+            var group=bonus_groups[key];var instance=group["instance"];var def=c.bonuses[instance["bonus_id"]];
+            var level=Math.Max(0,Math.Min(2,(int)s["block"].Get("blueprint_levels",V.Map()).Get(instance["bonus_id"],0).Long));var label=def["name"].Text;
+            if(level>0)label+=" · "+bonus_content(g)["grades"][level].Text;
+            if(group["count"].Long>1)label+=" ×"+group["count"].Long.ToString(CultureInfo.InvariantCulture)+"（合成强度 "+copy_strength(g,(int)group["count"].Long,instance["bonus_id"].Text).ToString("F3",CultureInfo.InvariantCulture)+"；数值下限0，比例上限1）";
+            contexts.Add(V.Map("host_type",instance["host_type"],"host",instance["host_id"],"rules",bonus_rules(g,instance["bonus_id"].Text,(int)group["count"].Long),"specificity",V.Map("building",30,"organization",20,"block",10)[instance["host_type"]],"name",label,"provider",instance.Get("contract_org",instance.Get("provider_org","")),"uid",group["uid"],"eligibility",instance["host_type"].Text=="building"?V.Arr():def["traits"]));
+        }
+        foreach(var ctx in contexts)foreach(var rule in ctx["rules"]) {
+            var op=rule["op"].Text;
+            if(!SUPPORTED.Contains(op))throw new InvalidOperationException("Unsupported Rule operator: "+op);
+            var selected=selections(s,ctx,rule);
+            if(op=="configure"&&ctx["host_type"].Text=="block") {
+                var contender=V.Map("value",rule["value"],"specificity",ctx["specificity"],"priority",rule.Get("priority",0).Long,"uid",ctx["uid"].Text+":"+rule["id"].Text,"source",ctx["name"]);
+                if(!options.Has(rule["key"])||wins(contender,options[rule["key"]]))options[rule["key"]]=contender;
+            }
+            foreach(var sel in selected) {
+                var id=sel["id"];
+                var meta=V.Map("specificity",ctx["specificity"].Long+(rule.Get("when",V.Map()).Count>0?1:0),"priority",rule.Get("priority",0).Long,"uid",ctx["uid"].Text+":"+rule["id"].Text+":"+id.Text,"source",ctx["name"]);
+                if(op=="modify") {
+                    var fields=V.Arr();var field=rule["field"].Text;
+                    if(field.EndsWith("*",StringComparison.Ordinal)) {
+                        foreach(var k in stats[id].Keys)if(k.StartsWith(field.Substring(0,field.Length-1),StringComparison.Ordinal))fields.Add(k);
+                    } else fields.Add(field);
+                    foreach(var k in fields) {
+                        if(!numeric[id].Has(k))numeric[id][k]=V.Arr();var mod=meta.Duplicate();mod["mode"]=rule["mode"];mod["value"]=rule["value"];numeric[id][k].Add(mod);
+                    }
+                } else if(op=="configure") {
+                    var value=meta.Duplicate();value["value"]=rule["value"];
+                    if(!configs[id].Has(rule["key"])||wins(value,configs[id][rule["key"]]))configs[id][rule["key"]]=value;
+                } else if(op=="grant_recipe") {
+                    var entry=rule.Duplicate(true);entry["uid"]=meta["uid"];entry["source"]=ctx["name"];entry["source_id"]=sel["source_id"];recipes[id].Add(entry);
+                } else if(op=="emit") {
+                    var entry=rule.Duplicate(true);entry["uid"]=meta["uid"];entry["source"]=ctx["name"];emitters[id].Add(entry);
+                } else {
+                    var entry=rule.Duplicate(true);entry["meta"]=meta;entry["source_id"]=sel["source_id"];transforms[id].Add(entry);
+                }
+            }
+        }
+        foreach(var id in ids(stats)) {
+            foreach(var k in ids(numeric[id])) {
+                var result=reduce_number(stats[id].Get(k,0).Double,numeric[id][k]);if(WildDesign.IsFarm(g,s["projects"][id])&&trace[id].Has(k))result["wild_basis"]=trace[id][k].Duplicate(true);stats[id][k]=result["value"];trace[id][k]=result;
+            }
+            foreach(var k in ids(configs[id]))configs[id][k]=configs[id][k]["value"];
+            foreach(var r in transforms[id])switch(r["op"].Text) {
+                case "capacity_convert":case "capacity_copy":
+                    var value=stats[id].Get(r["from"],0).Double*r["fraction"].Double;
+                    if(r["op"].Text=="capacity_convert")stats[id][r["from"]]-=value;
+                    stats[id][r["to"]]=stats[id].Get(r["to"],0).Double+value;
+                    trace[id][r["to"]]=V.Map("base",c.projects.Get(s["projects"][id]["def"],V.Map()).Get("stats",V.Map()).Get(r["to"],0),"value",stats[id][r["to"]],"rules",V.Arr(V.Map("source",r["meta"]["source"],"mode",r["op"],"value",value)));break;
+                case "field_convert":configs[id]["field_conversion"]=r;break;
+                case "relate":configs[id][r["relation"]]=true;break;
+                case "slot_add":configs[id]["slot_added"]=r;break;
+            }
+            double count=0;var contributors=V.Arr();
+            foreach(var other in ids(stats)) {
+                if(near(s,id.Text,other.Text)!=1||s["projects"][other]["status"].Text!="running"||s["projects"][other]["paused"].Bool)continue;
+                var t=semantic_traits(s,other.Text);var own=semantic_traits(s,id.Text);
+                var compatible=(own.Contains("building.industrial")&&t.Contains("building.industrial"))||(own.Contains("building.commercial")&&t.Contains("building.industrial"));
+                if((configs[id].Get("medical_commercial_relation",false).Bool&&t.Contains("building.commercial"))||(configs[other].Get("medical_commercial_relation",false).Bool&&own.Contains("building.commercial")))compatible=true;
+                var amount=compatible?.1:.1*configs[id].Get("universal_adjacency",0).Double;
+                if(compatible&&own.Contains("building.industrial")&&s["projects"][id]["operator_org"]==s["projects"][other]["operator_org"])amount*=stats[id].Get("synergy.same_industrial",1).Double;
+                if(compatible&&own.Contains("building.commercial")&&t.Contains("building.industrial"))amount*=configs[id].Get("industrial_adjacency",1).Double;
+                count+=amount;if(amount!=0)contributors.Add(V.Map("source_id",other,"tile",s["projects"][other]["tile"],"amount",amount,"compatible",compatible));
+            }
+            if(count>0) {
+                stats[id]["efficiency"]*=1+count;
+                trace[id]["spatial_synergy"]=V.Map("base",1.0,"value",1+count,"contributors",contributors,"rules",V.Arr(V.Map("source","相邻建筑关系","mode","multiply","value",1+count)));
+            }
+            if(!s["projects"][id].Get("special",false).Bool&&!WildDesign.IsFarm(g,s["projects"][id])&&g.cohesion(id.Text)["active"].Bool) {
+                var reward=c.operators[s["projects"][id]["operator_org"]].Get("cohesion_efficiency",.03).Double;stats[id]["efficiency"]*=1+reward;
+                trace[id]["cohesion"]=V.Map("base",1.0,"value",1+reward,"rules",V.Arr(V.Map("source","整套自营方案","mode","multiply","value",1+reward)));
+            }
+            var heat_bonus=s["projects"][id].Get("next_heat_bonus",0).Double;stats[id]["efficiency"]*=1+heat_bonus;
+            if(heat_bonus>0)trace[id]["heat"]=V.Map("base",1.0,"value",1+heat_bonus,"rules",V.Arr(V.Map("source","上周期实际收到的余热","mode","multiply","value",1+heat_bonus)));
+            foreach(var k in stats[id].Keys)if(double.IsNaN(stats[id][k].Double)||double.IsInfinity(stats[id][k].Double))Console.Error.WriteLine("Non-finite compiled stat "+id.Text+":"+k);
+        }
+        foreach(var k in options.Keys)options[k]=options[k]["value"];
+        return V.Map("stats",stats,"config",configs,"recipes",recipes,"emitters",emitters,"trace",trace,"options",options);
+    }
+}
+}
+
+
+FILE unity/METLivingWorld/Assets/MetCore/Progression/Bonus.cs
+using System;
+using System.Linq;
+namespace MET.Core {
+public static class Bonus {
+    public static void _ensure(Game g) {
+        if (!((g.s.Get("block").IsMap))) {
+            g.s["block"] = V.Map("id", "block:1");
+        }
+        V b = g.s["block"];
+        if (!((b.Get("bonus_wallet").IsMap))) { b["bonus_wallet"] = V.Map(); }
+        if (!((b.Get("deployed_bonuses").IsMap))) { b["deployed_bonuses"] = V.Map(); }
+        if (!((b.Get("reward_choices").IsArray))) { b["reward_choices"] = V.Arr(); }
+        if (!((b.Get("blueprint_levels").IsMap))) { b["blueprint_levels"] = V.Map(); }
+        if (!((g.s.Get("rng").IsMap))) { g.s["rng"] = V.Map(); }
+        if (!(g.s["rng"].Has("reward"))) {
+            long seed_value = g.s.Get("seed",1).Long;
+            g.s["rng"]["reward"] = V.From((((((seed_value * 48271) + 104729) % 2147483646 + 2147483646) % 2147483646) + 1));
+        }
+    }
+    public static V _metadata(Game g, string bonus_id) {
+        V all = g.c.v040.Get("bonus_economy",V.Map()).Get("metadata",V.Map());
+        if ((all.Get(bonus_id).IsMap)) { return all[bonus_id]; }
+        V definition = g.c.bonuses.Get(bonus_id,V.Map());
+        if ((definition.Count == 0)) { return V.Map(); }
+        string scope = "building";
+        foreach (var host in definition.Get("hosts",V.Arr())) {
+            if ((V.Arr("organization", "block").Contains(host))) { scope = host.Text; break; }
+        }
+        return V.Map("scope", scope, "persistence", "Local", "tags", V.Arr(), "max_deployments", 1);
+    }
+    public static bool _tags_match(V meta, V requested) {
+        if ((requested.Count == 0)) { return true; }
+        V tags = meta.Get("tags",V.Arr());
+        foreach (var tag in requested) {
+            if ((tags.Contains(tag.Text))) { return true; }
+        }
+        return false;
+    }
+    public static int _deployed_count(Game g, string bonus_id) {
+        V entry = g.s["block"]["deployed_bonuses"].Get(bonus_id,V.Map());
+        int count = (int)entry.Get("count",0).Long;
+        count = Math.Max(count,((entry.Get("instances").IsArray) ? entry.Get("instances",V.Arr()).Count : 0));
+        return count;
+    }
+    public static V _find_host(Game g, string bonus_id, V meta) {
+        string scope = meta.Get("scope","building").Text;
+        if (!(g.c.bonuses.Has(bonus_id))) { return V.Map(); }
+        V definition = g.c.bonuses[bonus_id];
+        if ((scope == "building")) {
+            V projects = g.playable_ids();
+            projects.Items.Sort((a,b)=>StringComparer.Ordinal.Compare(a.Text,b.Text));
+            foreach (var id in projects) {
+                V p = g.s["projects"][id];
+                V slots = V.From(p.Get("slots",V.Map()).Keys);
+                slots.Items.Sort((a,b)=>StringComparer.Ordinal.Compare(a.Text,b.Text));
+                foreach (var slot in slots) {
+                    if (_eligible(g,bonus_id,"building",id.Text,slot.Text)) {
+                        return V.Map("type", "building", "id", id.Text, "slot", slot.Text);
+                    }
+                }
+            }
+        }
+        else if ((scope == "organization")) {
+            V organizations = V.From(g.s.Get("organizations",V.Map()).Keys);
+            organizations.Items.Sort((a,b)=>StringComparer.Ordinal.Compare(a.Text,b.Text));
+            foreach (var id in organizations) {
+                if (_eligible(g,bonus_id,"organization",id.Text,"")) {
+                    return V.Map("type", "organization", "id", id.Text, "slot", "");
+                }
+            }
+        }
+        else if ((scope == "block")) {
+            string block_id = g.s["block"].Get("id","").Text;
+            if (((block_id != "") && _eligible(g,bonus_id,"block",block_id,""))) {
+                return V.Map("type", "block", "id", block_id, "slot", "");
+            }
+        }
+        return V.Map();
+    }
+    public static bool _eligible(Game g, string bonus_id, string host_type, string host_id, string slot) {
+        string replacing = ((host_type == "building") ? g.s["projects"].Get(host_id,V.Map()).Get("slots",V.Map()).Get(slot,"").Text : "");
+            return (g.bonus_eligible(bonus_id,host_type,host_id,slot,replacing) == "");
+    }
+    public static bool _future_host(Game g, string bonus_id, V meta) {
+        if ((meta.Get("scope","building").Text != "building")) { return false; }
+        if (!(g.c.bonuses.Has(bonus_id))) { return false; }
+        V bonus = g.c.bonuses[bonus_id];
+        V gate = bonus.Get("install_gate",bonus.Get("gate",V.Map()));
+        V wanted = bonus.Get("traits",V.Arr());
+        V allowed = bonus.Get("allowed_slots",V.Arr());
+        foreach (var id in g.playable_ids()) {
+            V p = g.s["projects"][id];
+            if (((int)p.Get("tier",1).Long >= 3)) { continue; }
+            V current = g.c.projects.Get(p.Get("node_id",p.Get("def","")).Text,V.Map());
+            foreach (var next_id in current.Get("upgrades",V.Arr())) {
+                V next = g.c.projects.Get(next_id.Text,V.Map());
+                if (((next.Count == 0) || !(Rules.any_trait(next.Get("traits",V.Arr()),wanted)))) { continue; }
+                int next_tier = (int)next.Get("tier",((int)p.Get("tier",1).Long + 1)).Long;
+                V track = p.Get("slot_track",V.Arr());
+                if (((next_tier < 1) || (next_tier > track.Count))) { continue; }
+                string slot_type = track[(next_tier - 1)].Text;
+                if ((slot_type == "Flex")) {
+                    if (!((V.Arr("Production", "Logistics").Contains(bonus.Get("slot","").Text)))) { continue; }
+                }
+                else if (!((allowed.Contains(slot_type)))) { continue; }
+                bool fits = true;
+                V next_traits = next.Get("traits",V.Arr());
+                foreach (var required_trait in gate.Get("traits",V.Arr())) {
+                    if (!((next_traits.Contains(required_trait)))) { fits = false; }
+                }
+                if (!(Rules.any_trait(next_traits,gate.Get("any_traits",V.Arr())))) { fits = false; }
+                V tile = g.s["cells"].Get(p.Get("tile","").Text,V.Map());
+                foreach (var tile_trait in gate.Get("tile_traits",V.Arr())) {
+                    if (!((tile.Get("traits",V.Arr()).Contains(tile_trait)))) { fits = false; }
+                }
+                if (gate.Get("has_inputs",false).Bool) {
+                    bool has_input = false;
+                    foreach (var stat in next.Get("stats",V.Map())) {
+                        if ((stat.Text.StartsWith("input.") && (next["stats"][stat].Double > 0))) { has_input = true; }
+                    }
+                    if (!(has_input)) { fits = false; }
+                }
+                foreach (var field in gate.Get("field_min",V.Map())) {
+                    double amount = Rules.aggregate(tile.Get("fields",V.Map()).Get(field,V.Arr()),"sum");
+                    if ((amount < gate["field_min"][field].Double)) { fits = false; }
+                }
+                if (fits) { return true; }
+            }
+        }
+        return false;
+    }
+    public static V _card(Game g, string bonus_id) {
+        V meta = _metadata(g,bonus_id);
+        V definition = g.c.bonuses.Get(bonus_id,V.Map());
+        V host = (!((definition.Count == 0)) ? _find_host(g,bonus_id,meta) : V.Map());
+        bool now = !((host.Count == 0));
+        bool future = (now ? false : _future_host(g,bonus_id,meta));
+        string reason = (now ? "现在可部署" : (future ? "升级后可能部署" : "当前城市尚不适用"));
+        return V.Map("bonus_id", bonus_id, "name", definition.Get("name",bonus_id).Text, "scope", meta.Get("scope","building").Text, "persistence", "Local", "tags", meta.Get("tags",V.Arr()).Duplicate(true), "deployable_now", now, "near_future", future, "preview_reason", reason, "suggested_host", host, "copies", (int)g.s.Get("block",V.Map()).Get("bonus_wallet",V.Map()).Get(bonus_id,V.Map()).Get("charges",0).Long, "blueprint_level", blueprint_level(g,bonus_id), "grade", Rules.bonus_content(g)["grades"][blueprint_level(g,bonus_id)].Text, "effects", effect_rows(g,bonus_id,0,1), "stacking_note", "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。");
+    }
+    public static V _pick(Game g, V rows) {
+        if ((rows.Count == 0)) { return V.Map(); }
+        V ids = V.Arr();
+        V weights = V.Arr();
+        foreach (var row in rows) {
+            ids.Add(row["bonus_id"].Text);
+            weights.Add(Math.Max(0.01,g.c.bonuses.Get(row["bonus_id"],V.Map()).Get("weight",1).Double));
+        }
+        V selected = Rng.pick_weighted(g.s,"reward",ids,weights);
+        foreach (var row in rows) {
+            if ((row["bonus_id"].Text == selected.Text)) { return row; }
+        }
+        return rows[0];
+    }
+    public static V card(Game g, string bonus_id) {
+        return _card(g,bonus_id);
+    }
+    public static int blueprint_level(Game g, string bonus_id) {
+        return Math.Min(2, Math.Max(0,(int)g.s.Get("block",V.Map()).Get("blueprint_levels",V.Map()).Get(bonus_id,0).Long));
+    }
+    public static int active_count(Game g, string bonus_id, string host_type = "", string host_id = "", string excluding = "") {
+        int count = 0;
+        foreach (var instance_id in g.s.Get("bonus_instances",V.Map())) {
+            V instance = g.s["bonus_instances"][instance_id];
+            if (((instance_id.Text == excluding) || !(instance.Get("active",false).Bool))) { continue; }
+            if ((instance.Get("bonus_id","").Text != bonus_id)) { continue; }
+            if (((host_type != "") && (instance.Get("host_type","").Text != host_type))) { continue; }
+            if (((host_id != "") && (instance.Get("host_id","").Text != host_id))) { continue; }
+            count += 1;
+        }
+        return count;
+    }
+    public static string duplicate_error(Game g, string bonus_id, string host_type, string host_id, string replacing = "") {
+        if (((replacing != "") && (g.s.Get("bonus_instances",V.Map()).Get(replacing,V.Map()).Get("bonus_id","").Text == bonus_id))) {
+            return "这个槽已有同名方案；原位替换没有新增效果，不消耗副本。";
+        }
+        int count = active_count(g,bonus_id,host_type,host_id,replacing);
+        if (((count > 0) && !(Rules.duplicate_has_benefit(g,bonus_id,count)))) {
+            return "同名结构效果不叠加，或数值已达上限；没有新增收益，不消耗副本。";
+        }
+        return "";
+    }
+    public static V duplicate_preview(Game g, string bonus_id, string host_type, string host_id) {
+        int count = active_count(g,bonus_id,host_type,host_id);
+        bool can_add = Rules.duplicate_has_benefit(g,bonus_id,count);
+        return V.Map("count", count, "strength", Rules.copy_strength(g,count,bonus_id), "next_strength", Rules.copy_strength(g,(count + 1),bonus_id), "can_add", can_add, "effects", effect_rows(g,bonus_id,count,(count + 1)), "note", (can_add ? "追加数值为首份的33⅓%；副作用同时增加。" : "同名结构幂等或数值已达上限；无新增收益，不消耗副本。"));
+    }
+    public static V effect_rows(Game g, string bonus_id, int before_count, int after_count, int before_level = -(1), int after_level = -(1)) {
+        V before = Rules.bonus_rules(g,bonus_id,Math.Max(1,before_count),before_level);
+        V after = Rules.bonus_rules(g,bonus_id,Math.Max(1,after_count),after_level);
+        V result = V.Arr();
+        V labels = V.Map("input.*", "全部原料投入", "input.material", "材料投入", "energy_demand", "能源需求", "pollution", "污染", "output.goods", "制成品产出", "output.food", "食物产出", "efficiency", "建筑效率", "personnel_mult", "人员效率", "maintenance", "维护", "housing", "住房", "service_decay", "服务衰减", "service.medical", "医疗容量", "service.commercial", "商业容量", "service.entertainment", "娱乐容量", "storage.*", "全部库容", "jobs", "岗位", "exposure_multiplier", "污染暴露", "shortage_multiplier", "短缺敏感度", "population_maintenance", "人口维护", "allocation_priority", "分配优先级", "synergy.same_industrial", "同组织工业邻接", "heat_service", "余热服务", "heat_discount", "余热节能");
+        for (int index = 0; index < after.Count; index++) {
+            V a = after[index];
+            V b = before[index];
+            if (((a.Get("op","").Text == "modify") && (V.Arr("add", "multiply").Contains(a.Get("mode","").Text)))) {
+                string mode = a["mode"].Text;
+                double start = ((before_count > 0) ? b["value"].Double : ((mode == "multiply") ? 1.0 : 0.0));
+                result.Add(V.Map("label", labels.Get(a["field"].Text,a["field"].Text).Text, "before", start, "after", a["value"].Double, "unit", ((mode == "multiply") ? "倍" : ""), "mode", mode, "rule_id", a["id"].Text));
+            }
+            else if (a.Has("fraction")) {
+                result.Add(V.Map("label", ((a["op"] == "capacity_convert") ? "容量转换比例" : "容量复制比例"), "before", ((before_count > 0) ? b["fraction"].Double : 0.0), "after", a["fraction"].Double, "unit", "比例", "mode", "fraction", "rule_id", a["id"].Text));
+            }
+            else if (a.Has("rate")) {
+                result.Add(V.Map("label", "配方吞吐强度", "before", ((before_count > 0) ? b["rate"].Double : 0.0), "after", a["rate"].Double, "unit", "倍", "mode", "rate", "rule_id", a["id"].Text));
+                if ((a.Get("output").IsMap)) {
+                    foreach (var resource in a["output"]) {
+                        result.Add(V.Map("label", ("每批产出" + Catalog.RESOURCE_NAMES.Get(resource,resource).Text), "before", b["output"][resource].Double, "after", a["output"][resource].Double, "unit", "", "mode", "recipe_output", "rule_id", a["id"].Text));
+                    }
+                }
+            }
+            else if (((a.Get("value").IsNumber) || (a.Get("value").IsInteger))) {
+                V policy = Rules.bonus_content(g).Get("rule_policies",V.Map()).Get(a.Get("id","").Text,V.Map());
+                if (policy.Has("value_mode")) {
+                    string mode = policy["value_mode"].Text;
+                    result.Add(V.Map("label", a.Get("key",a.Get("field","数值规则")).Text, "before", ((before_count > 0) ? b["value"].Double : ((mode == "multiply") ? 1.0 : 0.0)), "after", a["value"].Double, "unit", ((mode == "multiply") ? "倍" : ""), "mode", mode, "rule_id", a["id"].Text));
+                }
+            }
+        }
+        return result;
+    }
+    public static bool _owned(Game g, string bonus_id) {
+        return (((int)g.s.Get("block",V.Map()).Get("bonus_wallet",V.Map()).Get(bonus_id,V.Map()).Get("charges",0).Long > 0) || (active_count(g,bonus_id) > 0));
+    }
+    public static V research_candidates(Game g, V bonus_ids = null, V tags = null) {
+        bonus_ids ??= V.Arr();
+        tags ??= V.Arr();
+        V result = V.Arr();
+        V ids = (!((bonus_ids.Count == 0)) ? bonus_ids.Duplicate() : V.From(Rules.bonus_content(g).Get("upgrades",V.Map()).Keys));
+        ids.Items.Sort((a,b)=>StringComparer.Ordinal.Compare(a.Text,b.Text));
+        V seen = V.Map();
+        foreach (var raw_id in ids) {
+            string bid = raw_id.Text;
+            if ((seen.Has(bid) || !(g.c.bonuses.Has(bid)))) { continue; }
+            seen[bid] = V.From(true);
+            if ((!(Rules.bonus_content(g).Get("upgrades",V.Map()).Has(bid)) || (blueprint_level(g,bid) >= 2) || !(_owned(g,bid)))) { continue; }
+            if (!(_tags_match(_metadata(g,bid),tags))) { continue; }
+            V choice = _card(g,bid);
+            choice["kind"] = V.From("research");
+            choice["target_level"] = V.From((blueprint_level(g,bid) + 1));
+            choice["target_grade"] = V.From(Rules.bonus_content(g)["grades"][choice["target_level"]].Text);
+            choice["effects"] = effect_rows(g,bid,1,1,blueprint_level(g,bid),(int)choice["target_level"].Long);
+            choice["preview_reason"] = V.From((("本Block全部同名副本升级为" + choice["target_grade"].Text) + "；不消耗库存副本，不改变部署尺度。"));
+            result.Add(choice);
+        }
+        return result;
+    }
+    public static V _reward_pool(Game g, V tags, V options) {
+        V ids = options.Get("bonus_ids",V.From(g.c.bonuses.Keys)).Duplicate();
+        ids.Items.Sort((a,b)=>StringComparer.Ordinal.Compare(a.Text,b.Text));
+        V all = V.Arr();
+        V matching = V.Arr();
+        V seen = V.Map();
+        foreach (var raw_id in ids) {
+            string bid = raw_id.Text;
+            if ((seen.Has(bid) || !(g.c.bonuses.Has(bid)) || (_metadata(g,bid).Count == 0))) { continue; }
+            seen[bid] = V.From(true);
+            V choice = _card(g,bid);
+            choice["kind"] = V.From("copy");
+            all.Add(choice);
+            if (_tags_match(_metadata(g,bid),tags)) { matching.Add(choice); }
+        }
+        if (options.Has("bonus_ids")) { return all; }
+        return (!((matching.Count == 0)) ? matching : all);
+    }
+    public static V _choose_cards(Game g, V pool) {
+        V immediate = V.Arr();
+        V future = V.Arr();
+        foreach (var choice in pool) {
+            if (choice.Get("deployable_now",false).Bool) { immediate.Add(choice); }
+            else if (choice.Get("near_future",false).Bool) { future.Add(choice); }
+        }
+        V result = V.Arr();
+        if (((immediate.Count >= 2) && !((future.Count == 0)))) {
+            for (int i = 0; i < 2; i++) {
+                V picked = _pick(g,immediate);
+                result.Add(picked);
+                immediate.Erase(picked);
+            }
+            result.Add(_pick(g,future));
+        }
+        else {
+            V remaining = pool.Duplicate(true);
+            while (((result.Count < 3) && !((remaining.Count == 0)))) {
+                V picked = _pick(g,remaining);
+                result.Add(picked);
+                remaining.Erase(picked);
+            }
+        }
+        return result;
+    }
+    public static void _set_candidates(Game g, V record) {
+        V options = record.Get("options",V.Map());
+        string kind = options.Get("kind","copy").Text;
+        V tags = record.Get("tags",V.Arr());
+        V pool = V.Arr();
+        if ((kind == "research")) {
+            if ((!(options.Has("bonus_ids")) || !((options["bonus_ids"].Count == 0)))) {
+                pool = research_candidates(g,options.Get("bonus_ids",V.Arr()),(options.Has("bonus_ids") ? V.Arr() : tags));
+            }
+            if ((pool.Count == 0)) { kind = "copy"; }
+        }
+        if ((kind == "copy")) { pool = _reward_pool(g,tags,options); }
+        record["kind"] = V.From(kind);
+        record["choices"] = _choose_cards(g,pool);
+        if ((record["choices"].Count == 0)) {
+            record["kind"] = V.From("currency");
+            record["compensation"] = V.From(Rules.bonus_content(g).Get("fallback_currency",30).Double);
+            record["choices"] = V.Arr(V.Map("bonus_id", "__currency__", "name", "城市发展补助", "kind", "currency", "compensation", record["compensation"], "preview_reason", string.Format(System.Globalization.CultureInfo.InvariantCulture,"没有候选方案，领取{0:F0}通货；不恢复DT。",record["compensation"])));
+        }
+    }
+    public static V draw(Game g, string source, V tags = null, V options = null) {
+        tags ??= V.Arr();
+        options ??= V.Map();
+        _ensure(g);
+        string source_id = source.Trim();
+        if ((source_id == "")) { return V.Map(); }
+        foreach (var existing_record in g.s["block"]["reward_choices"]) {
+            if ((existing_record.Get("source","").Text == source_id)) { return existing_record.Duplicate(true); }
+        }
+        V record = V.Map("reward_id", g.uid("R"), "source", source_id, "tags", tags.Duplicate(true), "options", options.Duplicate(true), "requested_kind", options.Get("kind","copy").Text, "choices", V.Arr(), "created_tick", (int)g.s.Get("simulation_tick",0).Long, "created_at", g.s.Get("local_hours",0).Double, "claimed", false, "chosen_bonus", "");
+        _set_candidates(g,record);
+        g.s["block"]["reward_choices"].Add(record);
+        return record.Duplicate(true);
+    }
+    public static V pending(Game g) {
+        V result = V.Arr();
+        foreach (var record in g.s.Get("block",V.Map()).Get("reward_choices",V.Arr())) {
+            if (!(record.Get("claimed",false).Bool)) { result.Add(record.Duplicate(true)); }
+        }
+        return result;
+    }
+    public static V _all_reward_cards(Game g) {
+        return _reward_pool(g,V.Arr(),V.Map());
+    }
+    public static string grant(Game g, string bonus_id, string source) {
+        _ensure(g);
+        string bid = bonus_id;
+        if (!(g.c.bonuses.Has(bid))) { return "未知方案。"; }
+        string source_id = source.Trim();
+        if ((source_id == "")) { return "许可来源缺失。"; }
+        V wallet = g.s["block"]["bonus_wallet"];
+        V entry = wallet.Get(bid,V.Map());
+        if ((!((entry.Count == 0)) && (entry.Get("grant_sources",V.Arr()).Contains(source_id)))) { return "这份许可已经领取。"; }
+        V meta = _metadata(g,bid);
+        if ((meta.Count == 0)) { return "方案许可信息缺失。"; }
+        if ((entry.Count == 0)) {
+            entry = V.Map("charges", 0, "acquired_from", source_id, "grant_sources", V.Arr(), "scope", meta.Get("scope","building").Text, "persistence", "Local");
+        }
+        V sources = entry.Get("grant_sources",V.Arr()).Duplicate(true);
+        if ((sources.Contains(source_id))) { return "这份许可已经领取。"; }
+        sources.Add(source_id);
+        entry["grant_sources"] = sources;
+        entry["charges"] = V.From(((int)entry.Get("charges",0).Long + 1));
+        entry["acquired_from"] = ((sources.Count == 1) ? V.From(source_id) : entry.Get("acquired_from",source_id));
+        entry["scope"] = V.From(meta.Get("scope","building").Text);
+        entry["persistence"] = V.From("Local");
+        wallet[bid] = entry;
+        return "";
+    }
+    public static string choose(Game g, string reward_id, string bonus_id) {
+        _ensure(g);
+        int record_index = -(1);
+        for (int i = 0; i < g.s["block"]["reward_choices"].Count; i++) {
+            if ((g.s["block"]["reward_choices"][i].Get("reward_id","").Text == reward_id)) {
+                record_index = i;
+                break;
+            }
+        }
+        if ((record_index < 0)) { return "找不到这份奖励。"; }
+        V record = g.s["block"]["reward_choices"][record_index];
+        if (record.Get("claimed",false).Bool) { return "这份奖励已经领取。"; }
+        for (int i = 0; i < record_index; i++) {
+            if (!(g.s["block"]["reward_choices"][i].Get("claimed",false).Bool)) { return "请先领取队列前面的奖励。"; }
+        }
+        bool allowed = false;
+        foreach (var choice in record.Get("choices",V.Arr())) {
+            if ((choice.Get("bonus_id","").Text == bonus_id)) { allowed = true; }
+        }
+        if (!(allowed)) { return "请选择这份奖励中的方案。"; }
+        string kind = record.Get("kind","copy").Text;
+        if ((kind == "currency")) {
+            g.s["currency"] = V.From((g.s.Get("currency",0).Double + record.Get("compensation",30).Double));
+        }
+        else if ((kind == "research")) {
+            if (((blueprint_level(g,bonus_id) >= 2) || !(_owned(g,bonus_id)))) {
+                _set_candidates(g,record);
+                g.s["block"]["reward_choices"][record_index] = record;
+                return "蓝图已满级或不再持有；奖励已保存为当前合法研究或主题副本，请重新选择。";
+            }
+            g.s["block"]["blueprint_levels"][bonus_id] = V.From((blueprint_level(g,bonus_id) + 1));
+            record["applied_level"] = g.s["block"]["blueprint_levels"][bonus_id];
+        }
+        else {
+            string error = grant(g,bonus_id,reward_id);
+            if ((error != "")) { return error; }
+        }
+        record["claimed"] = V.From(true);
+        record["chosen_bonus"] = V.From(bonus_id);
+        g.s["block"]["reward_choices"][record_index] = record;
+        V commissions = g.s["block"].Get("commissions",V.Map());
+        if ((commissions.Get("pending_reward","").Text == reward_id)) { commissions["pending_reward"] = V.From(""); }
+        if (!((commissions.Count == 0))) { g.s["block"]["commissions"] = commissions; }
+        if (kind == "research") { g.refresh_metrics(); }
+        return "";
+    }
+    public static string install(Game g, string bonus_id, string host_type, string host, string slot = "") {
+        _ensure(g);
+        if ((g.s.Get("phase","").Text != "play")) { return "当前不能部署方案。"; }
+        string bid = bonus_id;
+        if (!(g.c.bonuses.Has(bid))) { return "未知方案。"; }
+        V meta = _metadata(g,bid);
+        if ((meta.Count == 0)) { return "方案许可信息缺失。"; }
+        if ((meta.Get("scope","building").Text != host_type)) { return "方案部署尺度不匹配。"; }
+        V wallet = g.s["block"]["bonus_wallet"];
+        V license = wallet.Get(bid,V.Map());
+        if (((license.Count == 0) || ((int)license.Get("charges",0).Long < 1))) { return "没有可用的部署许可。"; }
+        string replacing = ((host_type == "building") ? g.s["projects"].Get(host,V.Map()).Get("slots",V.Map()).Get(slot,"").Text : "");
+        string repeat_error = duplicate_error(g,bid,host_type,host,replacing);
+        if ((repeat_error != "")) { return repeat_error; }
+
+        V before_ids = V.From(g.s.Get("bonus_instances",V.Map()).Keys);
+        string provider = "civic";
+        if (((host_type == "building") && g.s["projects"].Has(host))) { provider = g.s["projects"][host].Get("operator_org",provider).Text; }
+        else if ((host_type == "organization")) { provider = host; }
+        string error = g._install_bonus(bid,host_type,host,provider,slot);
+        if ((error != "")) { return error; }
+        license["charges"] = V.From(((int)license.Get("charges",0).Long - 1));
+        wallet[bid] = license;
+        V entry = g.s["block"]["deployed_bonuses"].Get(bid,V.Map());
+        if (!((entry.Get("instances").IsArray))) { entry["instances"] = V.Arr(); }
+        if (!((entry.Get("history").IsArray))) { entry["history"] = V.Arr(); }
+        string instance_id = "";
+        V keys = V.From(g.s["bonus_instances"].Keys);
+        keys.Items.Sort((a,b)=>StringComparer.Ordinal.Compare(a.Text,b.Text));
+        foreach (var iid in keys) {
+            if ((before_ids.Contains(iid))) { continue; }
+            V instance = g.s["bonus_instances"][iid];
+            if (((instance.Get("bonus_id","") == bid) && (instance.Get("host_type","") == host_type) && (instance.Get("host_id","") == host))) {
+                instance_id = iid.Text;
+                break;
+            }
+        }
+        V stamp = V.Map("instance_id", instance_id, "host_type", host_type, "host", host, "slot", slot, "installed_at", g.s.Get("local_hours",0).Double, "installed_tick", (int)g.s.Get("simulation_tick",0).Long);
+        entry["count"] = V.From(((int)entry.Get("count",0).Long + 1));
+        entry["instances"].Add(instance_id);
+        entry["history"].Add(stamp);
+        g.s["block"]["deployed_bonuses"][bid] = entry;
+        return "";
+    }
+}
+}
+
+
+FILE unity/METLivingWorld/Assets/MetCore/Foundation/Catalog.cs
+using System;
+using System.IO;
+using System.Linq;
+namespace MET.Core {
+public sealed class Catalog {
+ public readonly string contentRoot;
+ public V data,balance,projects,bonuses,operators,policies,origins,v040,beta;
+ public V bonus_upgrades,commission_themes,commission_events,capstones,rogue_content,wild,contents;
+ public static readonly V SLOT_NAMES=V.Map("Production","生产方案","Logistics","物流方案","Operations","运营方案","Flex","弹性方案");
+ public static readonly V RESOURCE_NAMES=V.Map("food","食物","material","材料","goods","低级制成品","energy","能源");
+ public static readonly V SERVICE_NAMES=V.Map("medical","医疗","education","教育","entertainment","娱乐","commercial","消费");
+ public Catalog(string contentRoot){this.contentRoot=contentRoot;contents=V.Map();data=Read("core020.json");balance=data["balance"];projects=data["buildings"];bonuses=data["bonuses"];operators=data["operators"];policies=data["policies"];origins=V.Map();foreach(var o in data["original_origins"])origins[o["id"]]=o;v040=V.Map();foreach(var name in new[]{"buildings","progression","operators","bonus_economy","commissions","market","policies"})v040[name]=Read("040/"+name+".json");projects=v040["buildings"];data["city_goals"]=v040["progression"]["goals"];foreach(var id in v040["operators"].Keys)operators[id].Merge(v040["operators"][id],true);foreach(var id in v040["policies"].Keys)policies[id].Merge(v040["policies"][id],true);foreach(var bonus in bonuses.Values)bonus["install_gate"]=bonus.Get("gate",V.Map()).Duplicate(true);beta=Read("beta/parameters.json");bonus_upgrades=Read("beta/bonus_upgrades.json");commission_themes=Read("beta/commission_themes.json");commission_events=Read("beta/commission_events.json");capstones=Read("beta/capstones.json");rogue_content=Read("beta/rogue_content.json");wild=Read("beta/wild.json");balance["initial_dt"]=beta["time"]["initial_dt"].Double;balance["dt_cap"]=balance["initial_dt"];balance["offline_dt_per_hour"]=0.0;balance["initial_people"]=beta["economy_candidates"]["initial_people"].Long;balance["arrival_count"]=beta["economy_candidates"]["arrival_people"].Long;balance["birth_per_hour"]=Math.Log(1+beta["economy_candidates"]["natural_growth_per_year"].Double)/12;v040["progression"]["construction_capacity"]=beta["economy_candidates"]["base_construction_cp_per_month"].Double;var domains=V.Arr();foreach(var building in projects.Values){string domain=building.Get("domain","public").Text;if(!domains.Contains(domain))domains.Add(domain);}foreach(var op in operators.Values)foreach(var domain in domains)if(!op["domain_weights"].Has(domain))op["domain_weights"][domain]=2.0;data["build"]="0.5.0-beta.2";}
+ V Read(string path){var value=V.Parse(File.ReadAllText(Path.Combine(contentRoot,path)));contents[path]=value;return value;}
+ static readonly V TagNames=V.Map("building.industrial","工业","building.residential","住宅","building.medical","医疗","building.education","教育","building.agricultural","农业","building.producer","生产","building.service","服务","building.public_service","公共服务","building.commercial","商业","building.green","绿色","building.energy","能源","building.extractive","开采","building.logistics","物流","building.road","道路接入","tile.waterfront","水岸","tile.fertile","肥沃","tile.forest","森林","tile.highland","高地","tile.wet","湿地","tile.water","水域");
+ public string tag_name(string tag)=>TagNames.Get(tag,tag).Text;
+ public string tags_text(V tags)=>string.Join(" · ",tags.Select(t=>tag_name(t.Text)));
+}
+}
+
+
+FILE tools/sync_unity_content.py
+#!/usr/bin/env python3
+"""Copy the source catalog and original licensed media into the Unity Player."""
+from pathlib import Path
+import shutil
+
+ROOT = Path(__file__).resolve().parents[1]
+ASSETS = ROOT / "unity/METLivingWorld/Assets"
+
+
+def copy(source: Path, target: Path):
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if not target.exists() or source.read_bytes() != target.read_bytes():
+        shutil.copy2(source, target)
+    assert source.read_bytes() == target.read_bytes(), target
+
+
+def main():
+    files = [ROOT / "content/core020.json"]
+    files += sorted((ROOT / "content/040").glob("*.json"))
+    files += sorted((ROOT / "content/beta").glob("*.json"))
+    for source in files:
+        copy(source, ASSETS / "StreamingAssets/MetContent" / source.relative_to(ROOT / "content"))
+    # The checked-in static Regular instance is built by build_city_font.py.
+    # Copying the upstream variable font back into Resources packages every
+    # weight and restores the old Thin default when referenced accidentally.
+    copy(ROOT / "assets/fonts/OFL-NotoSansSC.txt", ASSETS / "Resources/CityFonts/OFL-NotoSansSC.txt")
+    assert (ASSETS / "Resources/CityFonts/NotoSansSC.ttf").is_file(), "Run tools/build_city_font.py first"
+    for source in sorted((ROOT / "assets/audio030").glob("*.wav")):
+        copy(source, ASSETS / "Resources/CityAudio" / source.name)
+    notices = ASSETS / "StreamingAssets/ThirdPartyNotices"
+    copy(ROOT / "assets/fonts/OFL-NotoSansSC.txt", notices / "NotoSansSC-OFL.txt")
+    packages = ROOT / "unity/METLivingWorld/Packages"
+    for name in ("LICENSE.md", "MET_PATCHES.md"):
+        source = packages / "com.monitor1394.xcharts" / name
+        if source.exists():
+            copy(source, notices / ("XCharts-" + name))
+    cache = ROOT / "unity/METLivingWorld/Library/PackageCache"
+    for package in ("com.unity.cloud.gltfast", "com.unity.nuget.newtonsoft-json", "com.unity.render-pipelines.universal", "com.unity.render-pipelines.core", "com.unity.ugui"):
+        for folder in sorted(cache.glob(package + "*")):
+            for license_file in folder.glob("*LICENSE*"):
+                if license_file.is_file() and not license_file.name.endswith(".meta"):
+                    copy(license_file, notices / (package + "-" + license_file.name))
+    print(f"Unity content synchronized: {len(files)} JSON files, licensed Chinese font, 6 original sounds.")
+
+
+if __name__ == "__main__":
+    main()

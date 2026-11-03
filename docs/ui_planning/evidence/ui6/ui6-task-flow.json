@@ -1,0 +1,102 @@
+{
+  "executed": true,
+  "scope": "Earned full-city world; paid tender/accept command adds a real workshop, normal clock commits build it and complete M1/M2, then actual UI callbacks deliver real M3 stock, save milestone and claim its earned reward. No injected stock, goal counters, eligibility or RNG.",
+  "committed_slices": 121,
+  "workshop": "B001850",
+  "reward_id": "R001855",
+  "milestones": [
+    "industrial:M1",
+    "industrial:M2",
+    "industrial:M3"
+  ],
+  "deliveries": [
+    {
+      "source": "theme:industrial:M3",
+      "resource": "material",
+      "amount": 24.0,
+      "local_seconds": 324647999.99999982
+    },
+    {
+      "source": "theme:industrial:M3",
+      "resource": "goods",
+      "amount": 18.0,
+      "local_seconds": 324647999.99999982
+    }
+  ],
+  "claimed_reward": {
+    "reward_id": "R001855",
+    "source": "theme:industrial:M3",
+    "tags": [
+      "industrial"
+    ],
+    "options": {
+      "kind": "research",
+      "bonus_ids": [
+        "P01",
+        "P05",
+        "P06",
+        "P08",
+        "L03",
+        "B08",
+        "B09",
+        "G01",
+        "G02",
+        "M01",
+        "P09",
+        "R19"
+      ]
+    },
+    "requested_kind": "research",
+    "choices": [
+      {
+        "bonus_id": "P05",
+        "name": "热量管理",
+        "scope": "building",
+        "persistence": "Local",
+        "tags": [
+          "industrial",
+          "production"
+        ],
+        "deployable_now": true,
+        "near_future": false,
+        "preview_reason": "本Block全部同名副本升级为改良I；不消耗库存副本，不改变部署尺度。",
+        "suggested_host": {
+          "type": "building",
+          "id": "B000003",
+          "slot": "Production"
+        },
+        "copies": 1,
+        "blueprint_level": 0,
+        "grade": "基础",
+        "effects": [
+          {
+            "label": "redirect_product_heat",
+            "before": 0.1,
+            "after": 0.13,
+            "unit": "",
+            "mode": "add",
+            "rule_id": "P05.1"
+          },
+          {
+            "label": "redirect_pollution_heat",
+            "before": 0.4,
+            "after": 0.46,
+            "unit": "",
+            "mode": "add",
+            "rule_id": "P05.2"
+          }
+        ],
+        "stacking_note": "首份100%，以后每份33⅓%；数值代价同时缩放；乘数不低于0、转换比例不高于1。结构效果不重复，无新增收益不消耗副本。",
+        "kind": "research",
+        "target_level": 1,
+        "target_grade": "改良I"
+      }
+    ],
+    "created_tick": 4362,
+    "created_at": 208.74999999999989,
+    "claimed": true,
+    "chosen_bonus": "P05",
+    "kind": "research",
+    "applied_level": 1
+  }
+}

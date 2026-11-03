@@ -1,0 +1,10 @@
+LicenseRef-MET-Project-Original
+
+MET Civic / 01 — original MET project UI assets, 2026.
+
+These icons were drawn as original SVG geometry for the MET project. The pack
+contains no third-party icon font, purchased game artwork, or copied CK/Vic
+assets. It may be reused and modified within MET and its interface prototypes.
+This notice does not designate the assets as CC0, public domain, or a general
+third-party open-source icon library. External redistribution or licensing is
+a separate decision of the project owner.

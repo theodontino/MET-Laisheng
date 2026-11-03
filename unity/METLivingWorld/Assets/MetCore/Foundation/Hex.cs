@@ -4,8 +4,11 @@ namespace MET.Core {
 public readonly struct HexCoord { public readonly int x,y;public HexCoord(int q,int r){x=q;y=r;} }
 public static class Hex {
  public static readonly HexCoord[] DIRS={new HexCoord(1,0),new HexCoord(1,-1),new HexCoord(0,-1),new HexCoord(-1,0),new HexCoord(-1,1),new HexCoord(0,1)};
- static readonly Dictionary<string,HexCoord> coordinateCache=new Dictionary<string,HexCoord>();
- static readonly Dictionary<string,Dictionary<string,int>> distanceCache=new Dictionary<string,Dictionary<string,int>>();static int entries;
+ [ThreadStatic] static Dictionary<string,HexCoord> coordinates;
+ [ThreadStatic] static Dictionary<string,Dictionary<string,int>> distances;
+ [ThreadStatic] static int entries;
+ static Dictionary<string,HexCoord> coordinateCache=>coordinates??(coordinates=new Dictionary<string,HexCoord>());
+ static Dictionary<string,Dictionary<string,int>> distanceCache=>distances??(distances=new Dictionary<string,Dictionary<string,int>>());
  public static void clear_math_cache(){coordinateCache.Clear();distanceCache.Clear();entries=0;}
  public static string key(int q,int r)=>q.ToString(System.Globalization.CultureInfo.InvariantCulture)+","+r.ToString(System.Globalization.CultureInfo.InvariantCulture);
  public static HexCoord coords(string k){if(coordinateCache.TryGetValue(k,out var p))return p;var s=k.Split(',');p=new HexCoord(int.Parse(s[0],System.Globalization.CultureInfo.InvariantCulture),int.Parse(s[1],System.Globalization.CultureInfo.InvariantCulture));if(coordinateCache.Count>=4096)coordinateCache.Clear();coordinateCache[k]=p;return p;}

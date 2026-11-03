@@ -1,0 +1,14 @@
+{
+  "scope": "Actual four-Block earned world, active normal1:1 clock, fullscreen1920x1080,300frames",
+  "median_ms": 16.667375341057777,
+  "p95_ms": 19.367879256606102,
+  "cpu_percent_one_core": 60.368725320802163,
+  "resident_mb": 779.78125,
+  "world_blocks": 4,
+  "frame_limit": 60,
+  "focused": true,
+  "screen": [
+    1920,
+    1080
+  ]
+}

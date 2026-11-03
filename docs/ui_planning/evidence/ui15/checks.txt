@@ -1,0 +1,7 @@
+2026-10-26 · Unity 6000.6.5f1 · isolated engineering checks
+UI15 WORKSPACE CHECKS PASS: 47 targeted renders, 3020 assertions, 15 isolated fixture PNGs. Report: /Users/lizhirui/Developer/MET_0.3.2_Source/build/ui15-checks/ui15-workspace-checks.json. No Player/mouse acceptance.
+V3 WORKSPACE CHECKS PASS: 185 actual page renders, 4365 assertions. Isolated session; 2560x1440 reference canvas at UI 80/100/120%; compact/advanced navigation, map return, and visible control geometry. No Player/mouse/screenshot acceptance.
+UI15 CORE PASS 17 assertions; no Player visual/input acceptance performed.
+No Player or real input acceptance.
+macOS universal native BuildPipeline succeeded; x86_64 + arm64; app version 0.7.0-ui.15.
+ZIP roundtrip, executable mode and deep/strict ad-hoc signature passed; 72,409,982 bytes.

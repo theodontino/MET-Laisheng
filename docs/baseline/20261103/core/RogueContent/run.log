@@ -1,0 +1,300 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/RogueContent.Checks.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS fixture grant P09
+PASS fixture real install P09
+PASS fixture actual constrained electricity simulation P09
+PASS fixture actual constrained electricity simulation P09
+PASS fixture extra electricity lowers actual limited supply ratio P09
+PASS fixture P09 adjacent same operator improves remote stays baseline
+PASS fixture P09 electric cost survives dispersed layout
+PASS fixture P09 neighbor different operator no gain
+PASS fixture second copy P09
+PASS fixture append same object P09
+PASS fixture 1/3 additional strength P09
+PASS fixture research offers owned P09 1
+PASS fixture claim research P09 1
+PASS fixture blueprint upgrade no extra copies P09 1
+PASS fixture research offers owned P09 2
+PASS fixture claim research P09 2
+PASS fixture blueprint upgrade no extra copies P09 2
+PASS fixture grant R19
+PASS fixture real install R19
+PASS fixture actual constrained electricity simulation R19
+PASS fixture actual constrained electricity simulation R19
+PASS fixture extra electricity lowers actual limited supply ratio R19
+PASS fixture R19 protection electricity maintenance tradeoff
+PASS fixture second copy R19
+PASS fixture append same object R19
+PASS fixture 1/3 additional strength R19
+PASS fixture research offers owned R19 1
+PASS fixture claim research R19 1
+PASS fixture blueprint upgrade no extra copies R19 1
+PASS fixture research offers owned R19 2
+PASS fixture claim research R19 2
+PASS fixture blueprint upgrade no extra copies R19 2
+PASS fixture grant O08
+PASS fixture real install O08
+PASS fixture O08 shortage protection trades real medical capacity
+PASS fixture second copy O08
+PASS fixture append same object O08
+PASS fixture 1/3 additional strength O08
+PASS fixture research offers owned O08 1
+PASS fixture claim research O08 1
+PASS fixture blueprint upgrade no extra copies O08 1
+PASS fixture research offers owned O08 2
+PASS fixture claim research O08 2
+PASS fixture blueprint upgrade no extra copies O08 2
+PASS fixture grant B10
+PASS fixture real install B10
+PASS fixture B10 education housing resident maintenance tradeoff
+PASS fixture second copy B10
+PASS fixture append same object B10
+PASS fixture 1/3 additional strength B10
+PASS fixture research offers owned B10 1
+PASS fixture claim research B10 1
+PASS fixture blueprint upgrade no extra copies B10 1
+PASS fixture research offers owned B10 2
+PASS fixture claim research B10 2
+PASS fixture blueprint upgrade no extra copies B10 2
+PASS fixture initial district
+PASS fixture origin
+PASS fixture source deployed P05
+PASS fixture install real heat use
+PASS fixture actual source operation heat_neighborhood
+PASS fixture DT0 locks real simulated operation evidence heat_neighborhood
+PASS fixture original landmark heat_neighborhood
+PASS fixture choose one build result heat_neighborhood
+PASS fixture single source one choice heat_neighborhood
+PASS fixture zero callback evidence frozen heat_neighborhood
+PASS fixture paid successor heat_neighborhood
+PASS fixture real startup debit heat_neighborhood
+PASS fixture real startup stock heat_neighborhood food
+PASS fixture real startup stock heat_neighborhood material
+PASS fixture real startup stock heat_neighborhood goods
+PASS fixture successor origin
+PASS fixture source grade rules and cost retained heat_neighborhood
+PASS fixture landmark stays original block heat_neighborhood
+PASS fixture startup applied once heat_neighborhood
+PASS fixture legacy full city roundtrip heat_neighborhood
+PASS fixture source effects records preserved no reissue heat_neighborhood
+PASS fixture old ending has no retrospective qualification heat_neighborhood
+PASS fixture initial district
+PASS fixture origin
+PASS fixture source deployed P06
+PASS fixture actual source operation circular_industry
+PASS fixture DT0 locks real simulated operation evidence circular_industry
+PASS fixture original landmark circular_industry
+PASS fixture choose one build result circular_industry
+PASS fixture single source one choice circular_industry
+PASS fixture zero callback evidence frozen circular_industry
+PASS fixture paid successor circular_industry
+PASS fixture real startup debit circular_industry
+PASS fixture real startup stock circular_industry food
+PASS fixture real startup stock circular_industry material
+PASS fixture real startup stock circular_industry goods
+PASS fixture successor origin
+PASS fixture source grade rules and cost retained circular_industry
+PASS fixture landmark stays original block circular_industry
+PASS fixture startup applied once circular_industry
+PASS fixture legacy full city roundtrip circular_industry
+PASS fixture source effects records preserved no reissue circular_industry
+PASS fixture old ending has no retrospective qualification circular_industry
+PASS fixture initial district
+PASS fixture origin
+PASS fixture source deployed O08
+PASS fixture actual source operation care_neighborhood
+PASS fixture DT0 locks real simulated operation evidence care_neighborhood
+PASS fixture original landmark care_neighborhood
+PASS fixture choose one build result care_neighborhood
+PASS fixture single source one choice care_neighborhood
+PASS fixture zero callback evidence frozen care_neighborhood
+PASS fixture paid successor care_neighborhood
+PASS fixture real startup debit care_neighborhood
+PASS fixture real startup stock care_neighborhood food
+PASS fixture real startup stock care_neighborhood material
+PASS fixture real startup stock care_neighborhood goods
+PASS fixture successor origin
+PASS fixture source grade rules and cost retained care_neighborhood
+PASS fixture landmark stays original block care_neighborhood
+PASS fixture startup applied once care_neighborhood
+PASS fixture legacy full city roundtrip care_neighborhood
+PASS fixture source effects records preserved no reissue care_neighborhood
+PASS fixture old ending has no retrospective qualification care_neighborhood
+PASS fixture initial district
+PASS fixture origin
+PASS fixture source deployed B10
+PASS fixture actual source operation learning_neighborhood
+PASS fixture DT0 locks real simulated operation evidence learning_neighborhood
+PASS fixture original landmark learning_neighborhood
+PASS fixture choose one build result learning_neighborhood
+PASS fixture single source one choice learning_neighborhood
+PASS fixture zero callback evidence frozen learning_neighborhood
+PASS fixture paid successor learning_neighborhood
+PASS fixture real startup debit learning_neighborhood
+PASS fixture real startup stock learning_neighborhood food
+PASS fixture real startup stock learning_neighborhood material
+PASS fixture real startup stock learning_neighborhood goods
+PASS fixture successor origin
+PASS fixture source grade rules and cost retained learning_neighborhood
+PASS fixture landmark stays original block learning_neighborhood
+PASS fixture paid learning install B10
+PASS fixture paid learning install P02
+PASS fixture paid learning install O05
+PASS fixture ordinary education capacity real operation
+PASS fixture paid learning capacity real operation
+PASS fixture paid B10 P02 O05 combined actual final education capacity improves
+PASS fixture paid learning real housing cost retained
+PASS fixture startup applied once learning_neighborhood
+PASS fixture legacy full city roundtrip learning_neighborhood
+PASS fixture source effects records preserved no reissue learning_neighborhood
+PASS fixture old ending has no retrospective qualification learning_neighborhood
+PASS fixture choose theme industrial_byproducts
+PASS fixture branch command industrial_byproducts/heat
+PASS fixture exact money industrial_byproducts/heat
+PASS fixture exact real resource industrial_byproducts/heat material
+PASS fixture immediate branch complete industrial_byproducts/heat
+PASS fixture branch reward source and kind industrial_byproducts/heat
+PASS fixture branch own candidate pool industrial_byproducts/heat
+PASS fixture claim normal reward industrial_byproducts/heat
+PASS fixture branch retry no repayment or reward industrial_byproducts/heat
+PASS fixture saved branch re-read cannot reaward industrial_byproducts/heat
+PASS fixture choose theme industrial_byproducts
+PASS fixture branch command industrial_byproducts/recovery
+PASS fixture exact money industrial_byproducts/recovery
+PASS fixture exact real resource industrial_byproducts/recovery material
+PASS fixture immediate branch complete industrial_byproducts/recovery
+PASS fixture branch reward source and kind industrial_byproducts/recovery
+PASS fixture branch own candidate pool industrial_byproducts/recovery
+PASS fixture claim normal reward industrial_byproducts/recovery
+PASS fixture branch retry no repayment or reward industrial_byproducts/recovery
+PASS fixture saved branch re-read cannot reaward industrial_byproducts/recovery
+PASS fixture choose theme industrial_layout
+PASS fixture branch command industrial_layout/cluster
+PASS fixture exact money industrial_layout/cluster
+PASS fixture exact real resource industrial_layout/cluster material
+PASS fixture immediate branch complete industrial_layout/cluster
+PASS fixture branch reward source and kind industrial_layout/cluster
+PASS fixture branch own candidate pool industrial_layout/cluster
+PASS fixture claim normal reward industrial_layout/cluster
+PASS fixture branch retry no repayment or reward industrial_layout/cluster
+PASS fixture saved branch re-read cannot reaward industrial_layout/cluster
+PASS fixture choose theme industrial_layout
+PASS fixture branch command industrial_layout/buffer
+PASS fixture exact money industrial_layout/buffer
+PASS fixture exact real resource industrial_layout/buffer goods
+PASS fixture immediate branch complete industrial_layout/buffer
+PASS fixture branch reward source and kind industrial_layout/buffer
+PASS fixture branch own candidate pool industrial_layout/buffer
+PASS fixture claim normal reward industrial_layout/buffer
+PASS fixture branch retry no repayment or reward industrial_layout/buffer
+PASS fixture saved branch re-read cannot reaward industrial_layout/buffer
+PASS fixture choose theme industrial_tech_review
+PASS fixture branch command industrial_tech_review/recover
+PASS fixture exact money industrial_tech_review/recover
+PASS fixture exact real resource industrial_tech_review/recover material
+PASS fixture immediate branch complete industrial_tech_review/recover
+PASS fixture branch reward source and kind industrial_tech_review/recover
+PASS fixture branch own candidate pool industrial_tech_review/recover
+PASS fixture claim normal reward industrial_tech_review/recover
+PASS fixture branch retry no repayment or reward industrial_tech_review/recover
+PASS fixture saved branch re-read cannot reaward industrial_tech_review/recover
+PASS fixture choose theme industrial_tech_review
+PASS fixture branch command industrial_tech_review/heat
+PASS fixture exact money industrial_tech_review/heat
+PASS fixture exact real resource industrial_tech_review/heat goods
+PASS fixture immediate branch complete industrial_tech_review/heat
+PASS fixture branch reward source and kind industrial_tech_review/heat
+PASS fixture branch own candidate pool industrial_tech_review/heat
+PASS fixture claim normal reward industrial_tech_review/heat
+PASS fixture branch retry no repayment or reward industrial_tech_review/heat
+PASS fixture saved branch re-read cannot reaward industrial_tech_review/heat
+PASS fixture choose theme civic_shared_space
+PASS fixture branch command civic_shared_space/care
+PASS fixture exact money civic_shared_space/care
+PASS fixture exact real resource civic_shared_space/care food
+PASS fixture immediate branch complete civic_shared_space/care
+PASS fixture branch reward source and kind civic_shared_space/care
+PASS fixture branch own candidate pool civic_shared_space/care
+PASS fixture claim normal reward civic_shared_space/care
+PASS fixture branch retry no repayment or reward civic_shared_space/care
+PASS fixture saved branch re-read cannot reaward civic_shared_space/care
+PASS fixture choose theme civic_shared_space
+PASS fixture branch command civic_shared_space/school
+PASS fixture exact money civic_shared_space/school
+PASS fixture exact real resource civic_shared_space/school goods
+PASS fixture immediate branch complete civic_shared_space/school
+PASS fixture branch reward source and kind civic_shared_space/school
+PASS fixture branch own candidate pool civic_shared_space/school
+PASS fixture claim normal reward civic_shared_space/school
+PASS fixture branch retry no repayment or reward civic_shared_space/school
+PASS fixture saved branch re-read cannot reaward civic_shared_space/school
+PASS fixture choose theme civic_density_review
+PASS fixture branch command civic_density_review/density
+PASS fixture exact money civic_density_review/density
+PASS fixture exact real resource civic_density_review/density material
+PASS fixture immediate branch complete civic_density_review/density
+PASS fixture branch reward source and kind civic_density_review/density
+PASS fixture branch own candidate pool civic_density_review/density
+PASS fixture claim normal reward civic_density_review/density
+PASS fixture branch retry no repayment or reward civic_density_review/density
+PASS fixture saved branch re-read cannot reaward civic_density_review/density
+PASS fixture choose theme civic_density_review
+PASS fixture branch command civic_density_review/care
+PASS fixture exact money civic_density_review/care
+PASS fixture exact real resource civic_density_review/care goods
+PASS fixture immediate branch complete civic_density_review/care
+PASS fixture branch reward source and kind civic_density_review/care
+PASS fixture branch own candidate pool civic_density_review/care
+PASS fixture claim normal reward civic_density_review/care
+PASS fixture branch retry no repayment or reward civic_density_review/care
+PASS fixture saved branch re-read cannot reaward civic_density_review/care
+PASS fixture choose theme agricultural_reserve_plan
+PASS fixture branch command agricultural_reserve_plan/reserve
+PASS fixture exact money agricultural_reserve_plan/reserve
+PASS fixture exact real resource agricultural_reserve_plan/reserve material
+PASS fixture immediate branch complete agricultural_reserve_plan/reserve
+PASS fixture branch reward source and kind agricultural_reserve_plan/reserve
+PASS fixture branch own candidate pool agricultural_reserve_plan/reserve
+PASS fixture claim normal reward agricultural_reserve_plan/reserve
+PASS fixture branch retry no repayment or reward agricultural_reserve_plan/reserve
+PASS fixture saved branch re-read cannot reaward agricultural_reserve_plan/reserve
+PASS fixture choose theme agricultural_reserve_plan
+PASS fixture branch command agricultural_reserve_plan/yield
+PASS fixture exact money agricultural_reserve_plan/yield
+PASS fixture exact real resource agricultural_reserve_plan/yield food
+PASS fixture immediate branch complete agricultural_reserve_plan/yield
+PASS fixture branch reward source and kind agricultural_reserve_plan/yield
+PASS fixture branch own candidate pool agricultural_reserve_plan/yield
+PASS fixture claim normal reward agricultural_reserve_plan/yield
+PASS fixture branch retry no repayment or reward agricultural_reserve_plan/yield
+PASS fixture saved branch re-read cannot reaward agricultural_reserve_plan/yield
+PASS fixture far R19 install
+PASS fixture far O08 install
+PASS fixture far cards actually operate
+PASS fixture remote R19 O08 cannot borrow unrelated hospital coverage
+PASS fixture negative shortage O03 install
+PASS fixture O03 actually operate
+PASS fixture O03 worsening shortage is not beneficial care evidence
+PASS fixture prior slice before newly deployed O08
+PASS fixture newly deployed O08
+PASS fixture newly deployed unoperated card cannot qualify
+PASS fixture level zero O08 actual operation
+PASS fixture actual operated level zero qualifies
+PASS fixture newly upgraded unoperated blueprint cannot raise grade
+PASS fixture upgraded O08 actual operation
+PASS fixture next actual operation can raise grade
+PASS fixture R05 real card install
+PASS fixture R05 real medical operation
+PASS fixture R05 beneficial priority and decay have real medical receipts despite capacity penalty
+PASS fixture pooled B10 install
+PASS fixture pooled B10 actual service
+PASS fixture small actual B10 pool member qualifies with contributed education receipts
+PASS fixture unowned research rejects without pay or fallback industrial_tech_review/recover
+PASS fixture unowned research rejects without pay or fallback industrial_tech_review/heat
+PASS fixture unowned research rejects without pay or fallback civic_density_review/density
+PASS fixture unowned research rejects without pay or fallback civic_density_review/care
+PASS fixture queued earlier research prevents paid duplicate upgrade without spend
+PASS fixture claim prior research through normal command
+PASS fixture paid research becomes available after prior claim
+PASS fixture queued resolve then one paid legitimate research
+ROGUE FIXTURE PASS 297

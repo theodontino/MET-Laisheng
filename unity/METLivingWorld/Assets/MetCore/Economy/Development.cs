@@ -8,11 +8,12 @@ public static class Development {
   p["slot_track"]=g.c.operators[p["operator_org"]]["slot_track"].Duplicate();p["unlocked_slots"]=0;p["slots"]=V.Map();p["slot_types"]=V.Map();if(p["status"].Text=="running")unlock(p);
  }
  public static void unlock(V p) {
+  if(p.Has("wild_design"))return;
   while(p["unlocked_slots"].Long<p["tier"].Long) {var index=(int)p["unlocked_slots"].Long;var type=p["slot_track"][index].Text;var key=type;var suffix=2;
    while(p["slots"].Has(key)){key=type+":"+suffix;suffix++;}p["slots"][key]="";p["slot_types"][key]=type;p["unlocked_slots"]=index+1;
   }
  }
- public static V choices(Game g,string id)=>!g.s["projects"].Has(id)?V.Arr():g.c.projects.Get(g.s["projects"][id]["def"],V.Map()).Get("upgrades",V.Arr()).Duplicate();
+ public static V choices(Game g,string id)=>!g.s["projects"].Has(id)||WildDesign.IsFarm(g,g.s["projects"][id])?V.Arr():g.c.projects.Get(g.s["projects"][id]["def"],V.Map()).Get("upgrades",V.Arr()).Duplicate();
  public static V preview(Game g,string id,string node) {
   if(!choices(g,id).Contains(node))return V.Map("ok",false,"error","这不是该建筑的升级方向。");
   var p=g.s["projects"][id];var d=g.c.projects[node];var old=g.c.projects[p["def"]];var gains=V.Arr();var losses=V.Arr();var keys=old["stats"].Keys;
@@ -31,6 +32,7 @@ public static class Development {
  }
  public static void complete(Game g,string id) {
   var p=g.s["projects"][id];
+  if(p.Get("upgrade_job",V.Map()).Has("wild_node")){WildDesign.Complete(g,id);return;}
   if(p["upgrade_job"].Count!=0){var previous=p["def"];var d=g.c.projects[p["upgrade_choice"]];
    p["history"].Add(V.Map("kind","upgrade","from",previous,"to",d["id"],"h",g.s["local_hours"]));p["def"]=d["id"];p["node_id"]=d["id"];p["tier"]=d["tier"].Long;p["traits"]=d["traits"].Duplicate();p["upgrade_choice"]="";p["upgrade_job"]=V.Map();
    p["retained_storage"]=p["inventory"].Duplicate(true);g.s["sites"][p["site"]]["zone"]=d["zone"];g.s["cells"][p["tile"]]["zone"]=d["zone"];

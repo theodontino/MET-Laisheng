@@ -252,6 +252,18 @@ public static class Sim {
         fiscal.Add(V.Map("kind","income","source_id","municipal","name",V.Map("head","人头税","production","有效生产税","trade","消费税").Get(taxmode,"税收"),"rate",tax/h));
         if(rent>0)fiscal.Add(V.Map("kind","income","source_id","municipal","name","用地收入","rate",rent/h));
         if(pollution_tax>0)fiscal.Add(V.Map("kind","income","source_id","municipal","name","计源排污收入","rate",pollution_tax/h));
+        // Explanatory source receipts are separate from the single aggregate tax settlement above.
+        var fiscal_sources=V.Arr();
+        foreach(var bid in Rules.ids(s["projects"])) {
+            double basis=0;
+            if(taxmode=="head")foreach(var group in s["groups"].Values){if(group["host"]==bid)basis+=group["count"].Double;}
+            else if(taxmode=="production")foreach(var row in ledger[bid]){if(row["kind"].Text=="output"&&row["resource"].Text!="energy")basis+=row.Get("kept",0).Double;}
+            else if(taxmode=="trade"&&!s["projects"][bid]["special"].Bool)basis=service["delivered"].Get(bid.Text+"|commercial",0).Double*stats[bid].Get("commercial_tax_multiplier",1).Double+service["delivered"].Get(bid.Text+"|medical",0).Double*config[bid].Get("medical_activity",0).Double;
+            var coefficient=taxmode=="head"?g.c.balance.Get("head_tax",.85).Double:taxmode=="production"?g.c.balance.Get("production_tax",1.35).Double:taxmode=="trade"?g.c.balance.Get("trade_tax",.85).Double:0.0;
+            if(basis!=0)fiscal_sources.Add(V.Map("kind","income","source_id",bid,"name",V.Map("head","人头税来源","production","有效生产税来源","trade","消费税来源").Get(taxmode,"税源"),"basis",basis,"rate",basis*coefficient,"aggregate","tax"));
+            if(!s["projects"][bid]["special"].Bool&&compiled["options"].Get("land_rent",0).Double>0)fiscal_sources.Add(V.Map("kind","income","source_id",bid,"name","用地收入来源","rate",compiled["options"]["land_rent"],"aggregate","land_rent"));
+        }
+        foreach(var budget in env["budgets"].Values)if(budget["type"].Text=="pollution"&&budget["total"].Double>0&&compiled["options"].Get("pollution_fee",0).Double>0)fiscal_sources.Add(V.Map("kind","income","source_id",budget["source_id"],"name","计源排污收入来源","rate",budget["total"].Double/h*compiled["options"]["pollution_fee"].Double,"aggregate","pollution_fee"));
         next["currency"]=next["currency"].Double+tax+rent+pollution_tax-maintenance;
         foreach(var id in Rules.ids(inventories)) {
             next["projects"][id]["inventory"]=inventories[id];
@@ -277,19 +289,34 @@ public static class Sim {
             if(Math.Abs(audit["resources"][r]["error"].Double)>.00001)return "资源守恒失败："+r;
         }
         if(recycled>env["pollution_produced"].Double+.00001||heat_used>env["heat_produced"].Double+.00001)return "Field额度重复结算。";
+        if(g.world_managed) {
+            double advancedBefore=0,advancedAfter=0;
+            foreach(var p in s["projects"].Values)advancedBefore+=p["inventory"].Get("advanced_components",0).Double;
+            foreach(var inventory in inventories.Values)advancedAfter+=inventory.Get("advanced_components",0).Double;
+            audit["resources"]["advanced_components"]=V.Map("before",advancedBefore,"produced",0.0,"consumed",0.0,"lost",0.0,"after",advancedAfter,"error",advancedBefore-advancedAfter);
+            flows["advanced_components"]=(advancedAfter-advancedBefore)/h;
+        }
         next["audit"]=audit;
         next["metrics"]=V.Map("flows",flows,"income",(tax+rent+pollution_tax)/h,"upkeep",maintenance/h,"cashflow",(tax+rent+pollution_tax-maintenance)/h,"energy",energy_supplied,"energy_need",energy_need,
             "service_links",service["links"],"exposure_links",V.Arr(),"employment_links",labor["links"],"allocation",receipt["receipts"],"stock_movements",movements,"spilled",spilled,"utilization",activity,
             "service_pools",service["pools"],"service_covered",service["covered"],"pollution_recycled",recycled/h,"heat_used",heat_used/h,"heat_receipts",heat_receipts,
-            "activity_ledger",ledger,"fiscal_ledger",fiscal,"population_energy",population_energy,"energy_sources",energy_sources,"energy_requests",energy_requests,"requested",V.Map(),"energy_ratio",energy_ratio,"reconcile_rounds",reserved.Get("reconcile_rounds",0),
+            "activity_ledger",ledger,"fiscal_ledger",fiscal,"fiscal_sources",fiscal_sources,"population_energy",population_energy,"energy_sources",energy_sources,"energy_requests",energy_requests,"requested",V.Map(),"energy_ratio",energy_ratio,"reconcile_rounds",reserved.Get("reconcile_rounds",0),
             "tax_basis",V.Map("mode",taxmode,"people",people,"production",production/h,"trade",trade/h,"pollution_fee",pollution_tax/h,"land_rent",rent/h));
+        if(g.world_managed) {
+            var operated=V.Map();
+            foreach(var item in s["bonus_instances"].Pairs)if(item.Value.Get("active",false).Bool) {
+                var instance=item.Value;string bonus=instance["bonus_id"].Text;
+                operated[item.Key]=V.Map("bonus_id",bonus,"host_type",instance["host_type"],"host_id",instance["host_id"],"level",s["block"]["blueprint_levels"].Get(bonus,0));
+            }
+            next["metrics"]["bonus_operations"]=operated;
+        }
         foreach(var cid in Rules.ids(claims))foreach(var r in claims[cid]["needs"].Keys)next["metrics"]["requested"][r]=next["metrics"]["requested"].Get(r,0).Double+claims[cid]["needs"][r].Double/h;
         foreach(var used in receipt["receipts"]) {
             var owner=claims[used["consumer"]]["owner"];
-            ledger[owner].Add(V.Map("kind","input","resource",used["resource"],"rate",used["used"].Double/h,"source",g.project_name(used["source"].Text),"source_id",used["source"],"consumer",used["consumer"]));
+            ledger[owner].Add(V.Map("kind","input","resource",used["resource"],"rate",used["used"].Double/h,"source",g.project_name(used["source"].Text),"source_id",used["source"],"consumer",used["consumer"],"category",used["consumer"].Text.StartsWith("pop:",StringComparison.Ordinal)?"resident":"building"));
         }
-        foreach(var bid in energy_requests.Keys)if(energy_requests[bid].Double>0)ledger[bid].Add(V.Map("kind","input","resource","energy","rate",energy_requests[bid].Double*energy_ratio,"source","地区供电（见账本）"));
-        foreach(var gid in population_energy.Keys)if(population_energy[gid].Double>0)ledger[s["groups"][gid]["host"]].Add(V.Map("kind","input","resource","energy","rate",population_energy[gid].Double*energy_ratio,"source","住户用电"));
+        foreach(var bid in energy_requests.Keys)if(energy_requests[bid].Double>0)ledger[bid].Add(V.Map("kind","input","resource","energy","rate",energy_requests[bid].Double*energy_ratio,"source","地区供电（见账本）","category","building"));
+        foreach(var gid in population_energy.Keys)if(population_energy[gid].Double>0)ledger[s["groups"][gid]["host"]].Add(V.Map("kind","input","resource","energy","rate",population_energy[gid].Double*energy_ratio,"source","住户用电","category","resident"));
         foreach(var gid in Rules.ids(next["groups"])) {
             var home=next["groups"][gid]["host"];
             foreach(var f in env["tiles"].Get(next["projects"][home]["tile"],V.Map()).Get("pollution",V.Arr()))next["metrics"]["exposure_links"].Add(V.Map("home",home,"source",f["source_id"],"pollution",f["value"],"noise",0.0));

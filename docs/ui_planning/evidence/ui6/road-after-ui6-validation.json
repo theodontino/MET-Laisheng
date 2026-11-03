@@ -1,0 +1,1067 @@
+{
+  "status": "passed",
+  "unity_version": "6000.6.5f1",
+  "application_version": "0.7.0-ui.6",
+  "platform": "OSXPlayer",
+  "graphics_device": "Apple M5 Max",
+  "graphics_api": "Metal",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "checks": [
+    {
+      "name": "isolated_save_root",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "runtime_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world_import",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ui6_fullscreen",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-new-city.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-new-city.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_earned_fixture_exists",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_earned",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_返回地图",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-all.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-all.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-steps-only.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-steps-only.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-roads-lanes-only.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-roads-lanes-only.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_road_camera_unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_road_access",
+      "passed": true,
+      "detail": {
+        "terrain_policy": "natural_surface_local_supports",
+        "primary_sites": 9,
+        "slope_repositioned_sites": 0,
+        "slope_supported_sites": 1,
+        "max_footprint_relief": 0.042966187000274658,
+        "min_floor_clearance": 0.015999972820281982,
+        "access_terminal_count": 23,
+        "access_reached_count": 23,
+        "unreachable_access_terminals": 0,
+        "unreachable_details": {}
+      }
+    },
+    {
+      "name": "ui6_entries_inside_ring",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-overview.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-overview.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_overview_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-economy_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-economy_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_economy_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_economy_home_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-bonus_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-bonus_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_bonus_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonus_home_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-tasks_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-tasks_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_tasks_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_tasks_home_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-archive_home.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-archive_home.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_archive_home",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_archive_home_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-resources.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-resources.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_resources",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_resources_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_resources_Resource balance workspace viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_resources_Resource balance workspace viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_resources_Resource balance workspace viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-population.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-population.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_population",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_population_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_population_Population master detail viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_population_Population master detail viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-construction.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-construction.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_construction",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_construction_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-building.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-building.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_building",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_building_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-upgrades.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-upgrades.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_upgrades",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_upgrades_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_upgrades_Upgrade current candidate comparison viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_upgrades_Upgrade current candidate comparison viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-market.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-market.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_market",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_market_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_market_Market quotes orders editor viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_market_Market quotes orders editor viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_market_Market quotes orders editor viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-policies.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-policies.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_policies",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_policies_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_policies_Policy current candidate comparison viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_policies_Policy current candidate comparison viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-bonuses.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-bonuses.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_bonuses",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonuses_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonuses_Bonus deployment workspace viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonuses_Bonus deployment workspace viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_bonuses_Bonus deployment workspace viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-blueprints.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-blueprints.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_blueprints",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_blueprints_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_blueprints_Saved reward candidates viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_blueprints_Saved reward candidates viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_blueprints_Saved reward candidates viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-themes.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-themes.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_themes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_themes_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_themes_Current city matters viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_themes_Current city matters viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-milestones.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-milestones.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_milestones",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_milestones_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_milestones_Growth route viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_milestones_Growth route viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-settlement.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-settlement.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_settlement",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settlement_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settlement_Saved reward candidates viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settlement_Saved reward candidates viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settlement_Saved reward candidates viewport 2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-city.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-city.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_city",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_Permanent city hierarchy viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_Permanent city hierarchy viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-governance.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-governance.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_governance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_governance_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_governance_District promises and problems viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_governance_District promises and problems viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-network.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-network.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_network",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_network_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_network_Regional links and editor viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_network_Regional links and editor viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-science.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-science.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_science",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_science_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_science_Technology relations and research viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_science_Technology relations and research viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-city_project.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-city_project.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_city_project",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_project_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_project_City project stages and contributions viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_city_project_City project stages and contributions viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-records.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-records.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_records",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_records_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_records_City records viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_records_City records viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-heritage.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-heritage.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_heritage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_heritage_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_heritage_City history and portable licenses viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_heritage_City history and portable licenses viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-content.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-content.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_content",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_content_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_content_City content catalogue viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_content_City content catalogue viewport 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-settings.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-settings.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_settings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settings_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_settings_Settings display viewport 0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-page-sources.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-page-sources.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_browse_readonly_sources",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_scroll_sources_Archive Scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_resource_direct_context",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_brand_opens_settings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-scale-80.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-scale-80.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-scale-100.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-scale-100.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-scale-120.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-scale-120.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-font-125.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-font-125.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-font-150.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-font-150.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_actual_DTzero_before_claim",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_actual_DTzero_before_claim",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-state-actual_DTzero_before_claim.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-state-actual_DTzero_before_claim.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_paid_before_successor",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_paid_before_successor",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-state-paid_before_successor.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-state-paid_before_successor.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_bonus_check",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_bonus_check",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_reward_preselect_does_not_claim",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_确认领取",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_reward_claim_advances_saved_queue",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-bonus-comparison.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-bonus-comparison.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_安装 · 消耗1份",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_install_consumes_exactly_one_copy",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_install_valid_city",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture_size_ui6-bonus-installed.png",
+      "passed": true,
+      "detail": "1920x1080"
+    },
+    {
+      "name": "capture_pixels_ui6-bonus-installed.png",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_restore_ui6_manual_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "content_world_valid_ui6_manual_ready",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "active_callback_返回地图",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ui6_save_export",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "errors": [],
+  "frame_intervals_ms": {
+    "samples": 0,
+    "median": 0.0,
+    "p95": 0.0
+  },
+  "resource_sample": {},
+  "growth_fixtures": [],
+  "hillside_buildings": {},
+  "forecast_geography": {},
+  "visible_river_boundary_picks": [],
+  "rogue_content": [],
+  "blueprint_ui": [],
+  "ui4_revision": {},
+  "construction_ux": {},
+  "ui5_headless": {},
+  "measurement_scope": "UI6 native fullscreen Player screenshots, read-only page browsing and programmatic callbacks on an earned checkpoint. OS input and performance are separate acceptance."
+}

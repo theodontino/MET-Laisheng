@@ -1,0 +1,5 @@
+Unity 6000.6.5f1 macOS Universal build: Success.
+CITY ICON CHECKS PASS: 52 imported textures; 1304 geometry/import/semantic checks.
+V3 WORKSPACE CHECKS PASS: 185 page renders; 4040 checks; UI80/100/120% × font100/125/150%.
+No missing-icon warnings. Original SVG preview inspected; PNG alpha bounds contained.
+Player visuals and real input remain user acceptance; no new Player screenshot or mouse acceptance claimed.

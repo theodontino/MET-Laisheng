@@ -1,0 +1,71 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <Style src="UpgradeWindow.uss" />
+  <ui:VisualElement name="upgrade-backdrop" class="upgrade-root upgrade-backdrop">
+    <ui:VisualElement name="upgrade-window" class="upgrade-window">
+      <ui:VisualElement class="window-header">
+        <ui:VisualElement class="header-eyebrow">
+          <ui:Label text="建筑改造" class="eyebrow" />
+          <ui:Label text="建筑改造 · 比较方案" class="text-small muted" />
+          <ui:Button name="upgrade-close" text="关闭 ×" class="close-button text-small" />
+        </ui:VisualElement>
+        <ui:VisualElement class="header-title-line">
+          <ui:Label name="upgrade-title" class="text-hero building-title" />
+          <ui:Label name="upgrade-tier" class="tier-badge text-small" />
+          <ui:Label name="upgrade-subtitle" class="muted text-small wrap building-subtitle" />
+        </ui:VisualElement>
+      </ui:VisualElement>
+      <ui:ScrollView name="upgrade-body" mode="Vertical" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Auto" class="upgrade-body">
+        <ui:VisualElement class="body-section choices-section">
+          <ui:VisualElement class="section-heading">
+            <ui:Label text="选择改造方向" class="text-heading" />
+            <ui:Label text="专精特性 · 槽位" class="muted text-small" />
+          </ui:VisualElement>
+          <ui:VisualElement name="upgrade-candidates" class="candidate-list" />
+        </ui:VisualElement>
+        <ui:VisualElement class="body-section decision-grid">
+          <ui:VisualElement class="selected-section">
+            <ui:VisualElement class="section-heading">
+              <ui:Label text="所选方案" class="eyebrow text-small" />
+              <ui:Label name="upgrade-selected-title" class="text-heading" />
+            </ui:VisualElement>
+            <ui:Label name="upgrade-selected-summary" class="wrap muted text-small summary" />
+            <ui:VisualElement class="stat-header text-small muted">
+              <ui:Label text="实际变化" class="stat-label" />
+              <ui:Label text="不升级" class="stat-before" />
+              <ui:Label text="假定完工" class="stat-after" />
+              <ui:Label text="差值" class="stat-delta" />
+              <ui:Label text="单位" class="stat-unit" />
+            </ui:VisualElement>
+            <ui:VisualElement name="upgrade-primary-rows" />
+          </ui:VisualElement>
+          <ui:VisualElement class="constraint-section">
+            <ui:Label text="投入与约束" class="text-heading" />
+            <ui:VisualElement class="constraint-grid">
+              <ui:VisualElement class="constraint-item"><ui:Label text="现金投入" class="muted text-small" /><ui:Label name="upgrade-cost" class="wrap text-small" /></ui:VisualElement>
+              <ui:VisualElement class="constraint-item"><ui:Label text="施工材料" class="muted text-small" /><ui:Label name="upgrade-material" class="wrap text-small" /></ui:VisualElement>
+              <ui:VisualElement class="constraint-item"><ui:Label text="施工与供电" class="muted text-small" /><ui:Label name="upgrade-power" class="wrap text-small" /></ui:VisualElement>
+            </ui:VisualElement>
+          </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Foldout name="upgrade-city-comparison" text="完整城市对比 · 同一步快照" value="false" class="city-comparison body-section">
+          <ui:VisualElement class="stat-header text-small muted">
+            <ui:Label text="城市指标" class="stat-label" /><ui:Label text="基线" class="stat-before" /><ui:Label text="方案" class="stat-after" /><ui:Label text="差值" class="stat-delta" /><ui:Label text="单位" class="stat-unit" />
+          </ui:VisualElement>
+          <ui:VisualElement name="upgrade-city-rows" />
+        </ui:Foldout>
+      </ui:ScrollView>
+      <ui:VisualElement class="window-footer">
+        <ui:VisualElement class="footer-balance">
+          <ui:VisualElement class="footer-balance-row">
+            <ui:Label text="支付后余额" class="muted text-small" />
+            <ui:Label name="upgrade-balance" class="text-heading wrap" />
+          </ui:VisualElement>
+          <ui:Label name="upgrade-pay-now" class="text-small wrap" />
+          <ui:Label name="upgrade-disabled-reason" class="warning text-small wrap" />
+        </ui:VisualElement>
+        <ui:Button name="upgrade-cancel" text="取消" class="footer-button secondary" />
+        <ui:Button name="upgrade-confirm" text="确认改造" class="footer-button primary" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

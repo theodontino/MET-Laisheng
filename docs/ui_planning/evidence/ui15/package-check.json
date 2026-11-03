@@ -1,0 +1,13 @@
+{
+  "version": "0.7.0-ui.15",
+  "architectures": [
+    "x86_64",
+    "arm64"
+  ],
+  "zip_bytes": 72409982,
+  "zip_integrity": "passed",
+  "unpacked_executable_mode": "passed",
+  "unpacked_signature": "ad-hoc deep strict verified",
+  "player_launched": false,
+  "real_input_acceptance": "user-owned"
+}

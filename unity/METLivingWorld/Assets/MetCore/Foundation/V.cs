@@ -47,10 +47,23 @@ public sealed class V : IEnumerable<V>, IEquatable<V> {
     public static V Map(params object[] pairs) { var r=new V(new Dictionary<string,V>(StringComparer.Ordinal));for(int i=0;i<pairs.Length;i+=2)r[From(pairs[i]).Text]=From(pairs[i+1]);return r; }
     public static V Arr(params object[] items)=>new V(items.Select(From).ToList());
     public static V From(object item) { if(item==null)return Null;if(item is V v)return v;if(item is JToken t)return FromToken(t);if(item is string||item is bool)return new V(item);if(item is float||item is double||item is decimal)return new V(Convert.ToDouble(item,CultureInfo.InvariantCulture));if(item is byte||item is short||item is int||item is long||item is uint||item is ushort)return new V(Convert.ToInt64(item));if(item is IDictionary dict){var r=Map();foreach(DictionaryEntry p in dict)r[Convert.ToString(p.Key,CultureInfo.InvariantCulture)]=From(p.Value);return r;}if(item is IEnumerable list){var r=Arr();foreach(var x in list)r.Add(x);return r;}throw new ArgumentException("Unsupported MET value: "+item.GetType()); }
-    public static V Parse(string json){using(var reader=new JsonTextReader(new System.IO.StringReader(json))){reader.DateParseHandling=DateParseHandling.None;return FromToken(JToken.ReadFrom(reader));}}
+    public static V Parse(string json){using(var reader=new JsonTextReader(new System.IO.StringReader(json))){reader.DateParseHandling=DateParseHandling.None;if(!reader.Read())throw new JsonReaderException("Error reading JSON value.");return ReadJson(reader);}}
+    static V ReadJson(JsonReader reader) {
+        if(reader.TokenType==JsonToken.StartObject){var result=Map();while(reader.Read()){if(reader.TokenType==JsonToken.EndObject)return result;if(reader.TokenType==JsonToken.Comment)continue;if(reader.TokenType!=JsonToken.PropertyName)throw new JsonReaderException("Expected JSON property name.");var key=(string)reader.Value;do{if(!reader.Read())throw new JsonReaderException("Unexpected end of JSON object.");}while(reader.TokenType==JsonToken.Comment);result[key]=ReadJson(reader);}throw new JsonReaderException("Unexpected end of JSON object.");}
+        if(reader.TokenType==JsonToken.StartArray){var result=Arr();while(reader.Read()){if(reader.TokenType==JsonToken.EndArray)return result;if(reader.TokenType!=JsonToken.Comment)result.Add(ReadJson(reader));}throw new JsonReaderException("Unexpected end of JSON array.");}
+        switch(reader.TokenType){case JsonToken.Integer:case JsonToken.Float:case JsonToken.String:case JsonToken.Boolean:case JsonToken.Null:case JsonToken.Undefined:case JsonToken.Comment:return From(reader.Value);default:return FromToken(JToken.ReadFrom(reader));}
+    }
     static V FromToken(JToken t) { if(t is JObject o){var r=Map();foreach(var p in o.Properties())r[p.Name]=FromToken(p.Value);return r;}if(t is JArray a){var r=Arr();foreach(var x in a)r.Add(FromToken(x));return r;}if(t.Type==JTokenType.Null)return Null;return From(((JValue)t).Value); }
     public JToken ToToken(bool sortKeys=false) { if(IsMap){var o=new JObject();IEnumerable<string> keys=Keys;if(sortKeys)keys=keys.OrderBy(x=>x,StringComparer.Ordinal);foreach(var k in keys)o[k]=this[k].ToToken(sortKeys);return o;}if(IsArray)return new JArray(Items.Select(x=>x.ToToken(sortKeys)));return value==null?JValue.CreateNull():new JValue(value); }
-    public string ToJson(bool pretty=false,bool sortKeys=false)=>ToToken(sortKeys).ToString(pretty?Formatting.Indented:Formatting.None);
+    public string ToJson(bool pretty=false,bool sortKeys=false) {
+        using(var output=new System.IO.StringWriter(CultureInfo.InvariantCulture))
+        using(var writer=new JsonTextWriter(output)){writer.Formatting=pretty?Formatting.Indented:Formatting.None;WriteJson(writer,sortKeys);writer.Flush();return output.ToString();}
+    }
+    void WriteJson(JsonWriter writer,bool sortKeys) {
+        if(IsMap){writer.WriteStartObject();IEnumerable<string> keys=keyOrder;if(sortKeys)keys=keys.OrderBy(x=>x,StringComparer.Ordinal);foreach(var key in keys){writer.WritePropertyName(key);Dict[key].WriteJson(writer,sortKeys);}writer.WriteEndObject();}
+        else if(IsArray){writer.WriteStartArray();foreach(var item in Items)item.WriteJson(writer,sortKeys);writer.WriteEndArray();}
+        else if(value==null)writer.WriteNull();else writer.WriteValue(value);
+    }
     public IEnumerator<V> GetEnumerator()=>IsMap?Keys.Select(x=>From(x)).GetEnumerator():Items.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator()=>GetEnumerator();
     public bool Equals(V other) { if(ReferenceEquals(this,other))return true;if(ReferenceEquals(other,null))return IsNull;if(IsNumber&&other.IsNumber)return Double==other.Double;if(IsMap&&other.IsMap)return Count==other.Count&&Pairs.All(p=>other.Has(p.Key)&&p.Value.Equals(other[p.Key]));if(IsArray&&other.IsArray)return Items.SequenceEqual(other.Items);return object.Equals(value,other.value); }

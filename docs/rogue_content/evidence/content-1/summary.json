@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "version": "0.6.0-content.1-local",
+  "new_content": {
+    "new_bonus_ids": [
+      "P09",
+      "R19",
+      "O08",
+      "B10"
+    ],
+    "new_events": 6,
+    "branch_options": 12,
+    "permanent_profiles": 4,
+    "bonus_total": 44,
+    "blueprint_families": 17,
+    "event_total": 21
+  },
+  "new_fixtures": 297,
+  "fresh_normal_routes": {
+    "industrial": 11,
+    "civic": 11
+  },
+  "core_regression": 174,
+  "godot_csharp_complete_state_checkpoints": 88,
+  "city_regressions": {
+    "governance": 42,
+    "network": 102,
+    "city_arc": 27
+  },
+  "native_content_checks": 107,
+  "native_errors": [],
+  "native_hardware": "Apple M5 Max / Metal / 1920x1080 fullscreen",
+  "native_scope": "Native content UI callbacks and fresh earned command-chain checkpoints; no injected eligibility and no human play or GPU performance acceptance.",
+  "source": "existing codex/met-beta-v3 checkout based on 72aee5b plus preserved working changes; local only",
+  "limitations": [
+    "Automated logical-time command routes and native UI callbacks, not human balance/session acceptance.",
+    "No new long-session CPU/RSS or GPU benchmark; no human OS-focus-switch acceptance.",
+    "No cross-engine save compatibility; old endings without captured evidence receive no retrospective qualification."
+  ]
+}

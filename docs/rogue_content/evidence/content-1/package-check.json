@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "version": "0.6.0-content.1-local",
+  "archive": "build/MET-Laisheng-0.6.0-content.1-local-macOS-universal.zip",
+  "archive_bytes": 72120369,
+  "actual_extraction": ".toolcache/rogue-content/package-content-1-strfqu1t",
+  "architectures": [
+    "x86_64",
+    "arm64"
+  ],
+  "executable_permission": true,
+  "deep_strict_ad_hoc_signature": true,
+  "packaged_content_matches_source": true,
+  "signing_scope": "ad-hoc; no Developer ID or notarization",
+  "intel_execution": "not tested on Intel hardware",
+  "all_source_json_files_checked": 15
+}

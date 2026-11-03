@@ -1,8 +1,12 @@
-# 完整 MET 来生 Unity 迁移
+# MET Unity 主游戏
 
-当前使用 **Unity 6000.6.5f1**、URP **17.6.0**、uGUI **2.6.0**，场景为 `Assets/Scenes/City.unity`。原生 C# 核心、完整管理 UI 与动态 61 格城市继续同一套 Beta 玩法；原 Godot 项目保留。Unity 存档独立，无跨引擎导入要求。
+当前开发基线为 **v0.7.0-baseline.1**，接续 Civic UI.2，包含本地 UI、农居星图、希望城技术贸易及现有奖励内容。完整状态与已知缺口见 [当前开发基线](../../docs/CURRENT_BASELINE.md)。
 
-从仓库根目录用 `bash tools/test_unity_city.sh editor` 进行两阶段导入，`mac` 构建 macOS，`native` 运行隔离存档的原生验证。编辑器必须合法激活。174 项核心检查、88 个完整状态对照已通过；Unity 原生画面和操作证据以 [完整迁移记录](../../docs/unity_port/FULL_MIGRATION.md) 的实际结果为准。
+用 Unity **6000.6.5f1** 打开本目录，运行 **Assets/Scenes/City.unity**。默认 2560×1440 全屏；UI 缩放与字号独立设置。普通旧城市可在农居面板选择“启用建筑星图”，确认后进入；已启用时直接选择“建筑星图”。
+
+普通 Editor 启动与 Wild 专用安装包的默认存档目录不同；显式 `MET_UNITY_SAVE_ROOT` 优先。测试必须使用独立存档路径，具体命令见基线文档。
+
+从仓库根目录运行 `bash tools/test_unity_city.sh mac` 构建，设置 `MET_UNITY_WILD_BUILD=1` 为导出包加入 Wild 专用启动标记。编辑器须合法激活，工程检查不等于真人试玩验收。
 
 以下为早期固定 Hero 切片说明，原 6.0 锁定和证据保留历史含义。
 

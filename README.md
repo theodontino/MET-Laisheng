@@ -1,5 +1,16 @@
 # MET · 来生 0.5.0-beta.2
 
+当前主线为 **Unity Civic + Wild**，开发基线 **`v0.7.0-baseline.1`（2026-11-03）**，接续已发布 `v0.7.0-civic-ui.2`。当前功能、启动方式、存档位置、检查结果与剩余范围集中见 [当前开发基线](docs/CURRENT_BASELINE.md)。
+
+使用 Unity **6000.6.5f1** 打开 `unity/METLivingWorld`，运行 `Assets/Scenes/City.unity`；当前桌面全屏基准为 **2560×1440**。农居面板显示“启用建筑星图”或“建筑星图”。原 Godot 项目和网页 UI 原型保留。
+
+下面的内容版、Godot Beta 与视觉实验说明是各阶段的历史记录，其版本、数值及验收范围不替代当前基线。
+
+<!-- rogue-content-1 -->
+Unity 本地内容版 `0.6.0-content.1-local`：四张新方案、六组付费议案与首次归零成果—同城接续规约已完成；[实际验收与本地包](docs/rogue_content/ACCEPTANCE.md)。
+
+2026-10-14 本地 Unity 分支已接入永久 City / District / Block 发展弧。其授权、范围和本机验收见[城市发展弧](docs/city_arc/CONTRACT.md)与[当前验收](docs/city_arc/ACCEPTANCE.md)。本轮只在本地构建，不发布；下文单 Block 描述保留为 Godot / 已发布 Beta 的历史基线。
+
 MET 是一款关于“把一个地方慢慢养成城市”的游戏：土地给你条件，居民给你需求，资源给你限制，委托给你机会，Bonus 给你特殊办法，而你之前做过的每个决定，都会改变下一步什么才值得做。
 
 愿景与长期原则见[项目宪法](docs/PROJECT_CONSTITUTION.md)，本轮实施依据为 [Beta v3 设计包](docs/beta/design-v3/00_READ_FIRST.md)。设计目标、已经实现的规则、实际测试结果分别记录；设计文档不代表所有体验目标已经得到验证。
@@ -12,7 +23,7 @@ Beta.2 重置界面与地图呈现：常驻状态收敛为四项，选中建筑�
 
 最新 macOS 通用应用包与准确源码／校验值见[下载与交付记录](docs/beta/MACOS_DELIVERY.md)。设置齿轮点击失败的修复和真实入口验证见[设置入口验收](docs/beta/SETTINGS_FIX_ACCEPTANCE.md)。
 
-## 开始运行
+## 保留的 Godot 版本运行入口
 
 需要 **Godot 4.7.2 Standard**，无需 .NET。打开仓库的 `project.godot`，等待首次资源导入后运行。默认桌面全屏，最低支持 **1920×1080**；整个 pre-1.0 不安排小窗口或不同分辨率适配验收。已有运行资源随源码提供；普通运行和核心测试不需要 Blender。
 
@@ -42,9 +53,9 @@ Living World3D 是与 Beta 2D 路径并列的只读视觉纵轴。默认启动�
 
 renderer 和 driver 覆写只作用于本次进程，`project.godot` 默认仍为 `gl_compatibility`。当前云环境的 Vulkan Forward+ 使用软件 Vulkan / lavapipe，不能据此宣称硬件 GPU 性能。完整模块、资产边界、复核步骤和验收状态见 [Living World3D 架构与迁移说明](docs/living_world/ARCHITECTURE.md) 与 [V1 验收记录](docs/living_world/ACCEPTANCE.md)。
 
-### Unity 移植验证
+### Unity 移植历史验证（当前入口见页首）
 
-用户已授权完整迁移，当前 [Unity 工程](unity/METLivingWorld/README.md) 使用 **6000.6.5f1**，保留同一套 Beta 内容与玩法，存档独立。原生 C# 核心已有 **174/174** 专项检查与 **88/88** Godot/C# 完整状态对照通过；最新 macOS 通用 Player `0.5.0-beta.2-unity.3` 在 Apple M5 Max / Metal、1920×1080 下 **152/152** 原生检查通过，已接入种子地理、连续林带、真实状态驱动的邻格肌理及增量对象更新。首版画面被用户否定后，已修正不限帧、重复 UI 重建和地表/透明图层，默认稳定 60 帧；这仍是迁移测试版美术。原 Godot 游戏保留。运行、画面与交付证据见 [完整 Unity 迁移记录](docs/unity_port/FULL_MIGRATION.md)，早期固定 Hero 切片仍按[历史验收](docs/unity_port/ACCEPTANCE.md)阅读。
+用户已授权完整迁移，当前 [Unity 工程](unity/METLivingWorld/README.md) 使用 **6000.6.5f1**，保留同一套 Beta 内容与玩法，存档独立。原生 C# 核心 **174/174**、已有 Godot/C# 完整状态对照 **88/88** 通过。当前本地 macOS 通用候选为 `0.6.0-visual.16-local`，接续 City 发展弧，采用用户认可的中等尺度建筑群、更广的用途墙色、四种地表风格和三种道路材质。新原型为每栋主楼绘制完整贴地圆角环路，按六边方向接出紧密联系道路，并在本格避让附楼、田块与自然物；天然丘陵保留，建筑使用坡肩选址和局部支撑。Apple M5 Max / Metal、1920×1080 下 **241/241** 原生检查通过。同一四街区存档的新进程短测，暂停 RSS 约 **590 MiB**、常速约 **615 MiB**，常速帧间隔 p95 **17.63 ms**，默认限帧 60 FPS。当前是环路简单版本，尚不宣称与 Civ6 等质；候选只在本地交付。实际画面、占用范围及历史版本见 [完整 Unity 迁移记录](docs/unity_port/FULL_MIGRATION.md)，本机 Civ6 原始配置的调研见[参考报告](docs/unity_port/CIV6_LOCAL_REFERENCE.md)。原 Godot 游戏保留，早期固定 Hero 切片仍按[历史验收](docs/unity_port/ACCEPTANCE.md)阅读。
 
 ## 一局怎样推进
 

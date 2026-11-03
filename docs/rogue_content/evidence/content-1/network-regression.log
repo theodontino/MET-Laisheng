@@ -1,0 +1,105 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/CityNetwork.Checks.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS create first real-stock link
+PASS create second competing link
+PASS dispatch conserves source+buffer+inflight (470 / 470)
+PASS two links share one source freight capacity (120 / 120)
+PASS dispatch creates saved in-flight cargo
+PASS arrival conserves all real network stock (470 / 470)
+PASS arrival reaches real target warehouse
+PASS paid delivery transfers freight fee to city treasury (120 / 120)
+PASS network shipment conservation validates
+PASS real in-flight/buffer envelope restores
+PASS restore keeps all network stock (470 / 470)
+PASS place outside order
+PASS place outside order
+PASS all Blocks share finite single outside stock (1 / 1)
+PASS outside stock withdraws once (0 / 0)
+PASS network and outside orders share endpoint capacity (120 / 120)
+PASS capacity used by link is unavailable to outside trade (0 / 0)
+PASS clone managed world for time comparison
+PASS normal and accelerated shared ticks commit
+PASS normal uses External 1:1 (30 / 30)
+PASS Local acceleration cannot accelerate shared world (30 / 30)
+PASS only authorized focus accelerates Local economy
+PASS other Block stays External 1:1 (1.9290123456790126E-05 / 1.9290123456790123E-05)
+PASS Local speed does not mint outside food (120.1 / 120.1)
+PASS Local speed does not mint outside material (120.1 / 120.1)
+PASS Local speed does not mint outside goods (120.1 / 120.1)
+PASS finite DT spent only by excess Local time
+PASS offline does not advance world (30 / 30)
+PASS offline does not refill finite DT (74.37502411265433 / 74.37502411265433)
+PASS prior valid shared slice commits
+PASS invalid conservation aborts entire candidate slice
+PASS failed slice restores every Block plus world clock and inventory
+PASS failed candidate retains earlier committed slices (30 / 30)
+PASS managed advanced stock baseline commits
+PASS advanced parts are independent network inventory
+PASS advanced components conserve through in-flight and arrival (10 / 10)
+PASS advanced components reach actual target warehouse (10 / 10)
+PASS advanced network receipt closes resource audit (0 / 0)
+PASS advanced network receipt closes resource audit (0 / 0)
+PASS autonomous city continues during next District choice
+PASS autonomous focus cannot use Local acceleration (60 / 60)
+PASS autonomous focus does not spend DT (75 / 75)
+PASS autonomous economy preserves existing reward queue (1 / 1)
+PASS autonomous saved decisions do not freeze economy
+PASS cross District fixture pays actual old sponsor startup
+PASS real link connects two different Districts
+PASS disable stops new freight dispatch
+PASS inter District cargo retains actual longer travel delay (2 / 2)
+PASS inter District delivery conserves actual stock (80 / 80)
+PASS already dispatched freight arrives after link disabled (5 / 5)
+PASS inter District delivered freight pays configured doubled cost (10 / 10)
+PASS disabled edge does not withdraw another shipment (5 / 5)
+PASS full cross District freight envelope validates
+PASS world effect projection is idempotent and does not mint stock
+PASS legacy Game keeps autonomous Market ownership
+PASS detached forecast preserves city ownership
+PASS 1200 half-second dispatches retain only minute cargo buckets
+PASS micro dispatch retains exact actual shipped quantity (0.16666666666666238 / 0.16666666666666666)
+PASS micro batches conserve source plus in-flight stock (80.00000000000584 / 80)
+PASS micro settlement stores minute ledger entries
+PASS last_tick remains an exact micro receipt (0.5 / 0.5)
+PASS minute ledger preserves summed dispatch amounts (0.16666666666666632 / 0.16666666666666238)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS fixed cargo bucket has no rolling delay beyond sixty seconds
+PASS merged cargo retains source allocation amount (0.01666666666666663 / 0.01666666666666663)
+PASS batched cargo cannot arrive before fixed sixty-second collection deadline (12 / 12)
+PASS fixed first cargo batch arrives at recorded deadline
+PASS micro batch delivery pays exact per-unit freight fee (2.0833333337577642E-05 / 2.0833333333403203E-05)
+PASS minute cargo invariant validates after arrival
+PASS managed microfill adverse export order accepted
+PASS managed trade theme begins after earlier fills
+PASS managed trade event captures actual acceptance boundary
+PASS event acceptance cannot replay previous exact receipt (0 / 0)
+PASS equivalent batch clones accepted trade consumer state
+PASS equivalent external batch commits
+PASS 1200 compacted microfills all reach managed theme counter (4.000000000000065 / 4)
+PASS managed event counts each microfill once across save reload (4.000000000000065 / 4)
+PASS long commission uses actual adverse-export totals beyond archived row cursors (4.000000000000043 / 4)
+PASS micro and equivalent batch preserve theme delivered amount (4.000000000000065 / 4)
+PASS micro and equivalent batch preserve event delivered amount (4.000000000000065 / 4)
+PASS managed histories grow by minute rather than settlement count
+PASS compacted history amount equals actual order fills (4.200000000000007 / 4.200000000000043)
+PASS compacted weighted price preserves exact settlement cash (-10.079999991453725 / -10.079999991453727)
+PASS same committed tick cannot replay managed trade consumers
+PASS saved managed aggregate counters validate
+CITY NETWORK CHECKS 102 passed

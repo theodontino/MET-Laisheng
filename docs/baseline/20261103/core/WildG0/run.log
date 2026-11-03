@@ -1,0 +1,35 @@
+/Users/lizhirui/Developer/MET_0.3.2_Source/tools/unity_core/Met.Core.csproj : warning NU1900: Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.
+PASS begin current balanced river district
+PASS choose first offered origin free
+PASS write isolated initial save
+PASS read and restore current CityStore format
+PASS current save roundtrip preserves complete city
+PASS write isolated roundtrip save
+PASS existing real-engine construction preview succeeds
+PASS preview preserves live state compiled rules inventory and RNG
+PASS quote fixture opens tender
+PASS quote reading preserves state and RNG
+PASS cancel retains current quote
+PASS reopen retained tender
+PASS retained quote and reopening preserve offer identities and RNG
+PASS close quote fixture
+PASS restore pristine initial fixture before replay
+PASS script tender opens homestead
+PASS script construction accepted homestead
+PASS quote cash matches accepted charge homestead
+PASS material is not prepaid at acceptance homestead
+PASS select existing advance speed
+PASS script tender opens workshop
+PASS script construction accepted workshop
+PASS quote cash matches accepted charge workshop
+PASS material is not prepaid at acceptance workshop
+PASS script tender opens neighborhood
+PASS script construction accepted neighborhood
+PASS quote cash matches accepted charge neighborhood
+PASS material is not prepaid at acceptance neighborhood
+PASS replay submits exactly 720 active seconds
+PASS advance mode reaches twelve existing local months
+PASS three scripted real constructions finish
+PASS final current city validates
+PASS write isolated final save
+WILD G0 PASS 33 assertions; evidence /Users/lizhirui/Developer/MET_0.3.2_Source/build/baseline-20261103/core/WildG0/evidence.json

@@ -1,12 +1,16 @@
+## Current verified development baseline (2026-11-03)
+
+Use [current baseline](docs/CURRENT_BASELINE.md) and tag `v0.7.0-baseline.1` for the current Unity Civic/Wild implementation and new evidence. This snapshot preserves the local source and integrates Civic UI.2 history on the existing `codex/met-beta-v3` checkout. Earlier UI5/G0 documents remain historical, and proposals are not approved rules. Default full-screen baseline remains 2560×1440. See the baseline document for actual save directories and verification limits.
+
 # MET Laisheng Beta continuation contract
 
 ## Current presentation contract
 
-The latest authorized presentation contract is [UI and map reset](docs/beta/UI_RESET.md), which supersedes earlier HUD/inspector layout requirements. Preserve the four layers: L0 only DT/population/food/time, L1 bounded alerts/theme progress/active legend, L2 contextual graphics and one primary action, L3 full management and records. Keep all underlying gameplay and source-backed information reachable.
+The latest authorized presentation contract is [Modern strategy HUD](docs/ui_planning/CONTRACT.md), based on the user-approved 2026-10-15 Stellaris-reference concept (`libfile_25717c339e688191a18ed99c487e2ffe`). It supersedes the earlier paper/wood/leather presentation. Keep the existing 3D city central, compact icon resource strip and top-right time controls, left global navigation, right grouped/collapsible overview and prioritized notifications, lower-left local building/slots/actions, and bottom map layers. Use dark translucent surfaces, thin borders, restrained teal accents, coherent icons and short Chinese labels. Keep complete management/source records reachable. Actual Player screenshots and real mouse/keyboard interaction validate presentation; callback checks alone do not establish visual completion. No unresolved app-access approval is bypassed by launching another app or input method.
 
 The mainline construction comparison uses same-step baseline/proposal snapshots, current inventory, monthly resource flows, electricity supply/demand capacity and environment changes. Preserve independent UI scale (80/100/120%), map zoom and font size, `L`/`Shift+L` layer cycling, keyboard ownership in text fields/modal/desks, and source labels when comparing map forecasts. Environment area graphics use all city tiles as their denominator. Read [construction impact acceptance](docs/beta/UI_IMPACTS_ACCEPTANCE.md) for actual evidence; do not treat a design requirement or an old screenshot as new acceptance.
 
-Throughout pre-1.0, the game defaults to desktop fullscreen with a minimum supported resolution of **1920×1080**. The user explicitly excludes testing different window sizes. Validate this fullscreen baseline; do not reintroduce small-window or mobile layout work as an acceptance requirement.
+User update, 2026-10-25: the game defaults to desktop fullscreen **2560×1440 (2K)**. Use this as the current UI baseline; previous 1920×1080 evidence remains historical. The user explicitly excludes testing different window sizes. Validate this fullscreen baseline; do not reintroduce small-window or mobile layout work as an acceptance requirement.
 
 ## Project vision and scope
 

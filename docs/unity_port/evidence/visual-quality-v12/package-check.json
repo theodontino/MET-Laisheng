@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "application_version": "0.6.0-visual.12-local",
+  "zip": "build/MET-Visual-Quality-0.6.0-visual.12-local-macOS-universal.zip",
+  "zip_bytes": 71381742,
+  "actual_extraction": ".toolcache/unity-native/visual-quality/package-check-v12.9wlo5d7y",
+  "architectures": [
+    "x86_64",
+    "arm64"
+  ],
+  "executable_permission": true,
+  "deep_strict_signature_verified": true,
+  "signature_scope": "ad-hoc, no Developer ID signing or notarization",
+  "native_test_platform": "Apple M5 Max / Metal; Intel binary was not run",
+  "source": "codex/met-beta-v3 based on 72aee5b with uncommitted working changes; no source push or release"
+}
